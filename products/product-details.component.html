@@ -37,7 +37,7 @@
 				<div class="images-product relative">
 					<div class="product-img center">
 						<span *ngIf="product"><img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"></span>
-						<!-- <a class="wishlist tooltipped relative" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" onclick="Materialize.toast('Add Your Favorite', 4000)"><i class="material-icons">favorite</i></a> -->
+						<a class="wishlist tooltipped relative" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" onclick="Materialize.toast('Add Your Favorite', 4000)"><i class="material-icons">star</i></a>
                         <div class="xzoom-thumbs left" *ngIf="thumbs">
                             <ul>
                                 <li *ngFor="let item of thumbs;">
@@ -342,7 +342,7 @@
 				<h1 class="center font600 text-orange">Available Packs</h1>
 				<span class="chip green white-text">Please Select Your Basic Pack</span>
 			</div>
-			<ul class="collapsible" data-collapsible="accordion">
+			<ul class="collapsible" data-collapsible="expandable">
 				<li *ngFor="let packs of channels_packs" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_down</i></div>
 					<div class="collapsible-body">
