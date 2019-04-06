@@ -70,52 +70,11 @@
         	</div>
         	<!-- End Here -->
         	<!-- Second Line -->
-          <div class="card second-line">
-            <div class="card-content black-text padd-only no-margin">
-            	<div class="row no-margin">
-            		<div class="col s1 number center margin-top-cart1">
-            			<span>2</span>
-            		</div>
-            		<div class="col s8 my-cart" >
-            			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
-            			<!-- <span class="font600 naam2">{{this.todoservice.get_user_name()}}</span>&nbsp; -->
-            			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
-            			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
-            		</div>
-            		<div class="col s3 right-align margin-top-cart chng">
-            			<a href="javascript:" class="btn btn-flat right chngs2 hide">Change</a>
-            		</div>
-            	</div>
-            </div>
-          </div>          
-          <!-- End Here -->
-          <!-- Login Checkout -->
-        	<div class="row no-margin login-checkout checkout_2">
-        		<div class="col s10 m10 offset-m1">
-        			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
-                        <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
-        				<ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template>
-        				<ng-template #unchecked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/></ng-template>
-      					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
-									&nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp;
-									<a href="javascript:" (click)="remove_address(row.id)"> Remove</a>
-									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
-        			</div>        			
-								</div>
-								<div class="col s10 m10 offset-m1">
-								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_orders()">DELIVER HERE</button>
-								</div>
-								<div class="add-new-address col s12">
-            	<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a new address</a>
-            </div>
-        	</div>
-        	<!-- End Here -->
-        	<!-- Third Line -->
           <div class="card third-line">
             <div class="card-content black-text padd-only no-margin">
             	<div class="row no-margin">
             		<div class="col s1 number center margin-top-cart1">
-            			<span>3</span>
+            			<span>2</span>
             		</div>
             		<div class="col s8 my-cart">
             			<span class="font-size-change1 inline-block margin-checkout left grey-text">ORDER SUMMARY <i class="material-icons grey-text">check</i></span><br><br>
@@ -173,6 +132,47 @@
 				</div>
           	</form>
           	<div class="divider"></div>
+        	</div>
+					<!-- End Here -->					
+        	<!-- Third Line -->
+          <div class="card second-line">
+            <div class="card-content black-text padd-only no-margin">
+            	<div class="row no-margin">
+            		<div class="col s1 number center margin-top-cart1">
+            			<span>3</span>
+            		</div>
+            		<div class="col s8 my-cart" >
+            			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
+            			<!-- <span class="font600 naam2">{{this.todoservice.get_user_name()}}</span>&nbsp; -->
+            			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
+            			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
+            		</div>
+            		<div class="col s3 right-align margin-top-cart chng">
+            			<a href="javascript:" class="btn btn-flat right chngs2 hide">Change</a>
+            		</div>
+            	</div>
+            </div>
+          </div>          
+          <!-- End Here -->
+          <!-- Login Checkout -->
+        	<div class="row no-margin login-checkout checkout_2">
+        		<div class="col s10 m10 offset-m1">
+        			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
+                        <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
+        				<ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template>
+        				<ng-template #unchecked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/></ng-template>
+      					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
+									&nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp;
+									<a href="javascript:" (click)="remove_address(row.id)"> Remove</a>
+									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
+        			</div>        			
+								</div>
+								<div class="col s10 m10 offset-m1">
+								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_orders()">DELIVER HERE</button>
+								</div>
+								<div class="add-new-address col s12">
+            	<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a new address</a>
+            </div>
         	</div>
         	<!-- End Here -->
           <!-- Fourth Line -->
