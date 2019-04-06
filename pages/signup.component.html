@@ -1,0 +1,148 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	bdColor="rgba(255,255,255,0.8)"
+	size="default"
+	color="#ec9737"
+	loadingText="Loading..."
+	type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+<!-- Header End Here -->
+<div class="work" *ngIf="verify==0;then signup else otpverify"></div>
+
+<ng-template #signup>
+	<div class="row">
+		<div class="col s12 m12 l6 no-padding login-side-image">
+			<img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images">
+		</div>
+		<div class="col s12 m12 l6 margin-high">
+			<div class="card user-type" *ngIf="!user_type_enabled">
+				<div class="user-retailer margin-top center" id="stepep1">
+					<div class="col s12 border-every">
+						<a href="javascript:" class="black-text become-user" (click)="set_user_type(1)">
+							<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
+							<span class="font-size-change1 font600">Become a User</span>
+						</a>
+					</div>
+					<div class="col s12  center or-for-span">
+						<span class="font-size-change relative">OR</span>
+					</div>
+					<div class="col s12  border-every">
+						<a href="javascript:" class="black-text become-user" (click)="set_user_type(2)">
+							<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
+							<span class="font-size-change1 font600">Become a Retailer</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>  
+	</div>
+
+	<section class="login-page no-padding" *ngIf="user_type_enabled">
+		<div class="row">
+			<div class="col s12 m12 l6 no-padding login-side-image">
+				<img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images">
+			</div>
+			<div class="col s12 m12 l6 margin-high">
+				<div class="card">
+					<div class="card-content">
+						<div class="upper-text center">
+							<h3 class="orange-text strong">Create MyDthShop Account</h3>
+						</div>
+						<div *ngIf="signupverify == 0">
+							<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix margin-top-cart2">person</i>
+										<input id="name" type="text"  minlength = '3' class="validate" formControlName="name">
+										<label for="name">Enter Name</label>
+										<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
+											<span class="red-text ">*Name is Required.</span>
+										</div>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix margin-top-cart2">phone</i>
+										<input id="phn_number" type="text" class="validate" formControlName="phone" minlength="10" maxlength="10">
+										<label for="phn_number">Enter Phone Number</label>
+										<div class="center" *ngIf="signupgroup.controls['phone'].required && signupgroup.controls['phone'].touched">
+											<span class="red-text"> Phone is Required.</span>
+										</div>
+										<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
+											<span class="red-text"> Phone Number is not valid.</span>
+										</div>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix margin-top-cart2">lock</i>
+										<input id="enter_passcode" type="password" class="validate" formControlName="password">
+										<label for="enter_passcode">Enter Password</label>
+										<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
+											<span class="red-text">Password is Required.</span> 
+										</div>
+									</div>
+									<div class="input-field col s12">
+										<i class="material-icons prefix margin-top-cart2">lock</i>
+										<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword">
+										<label for="confirm_passcode">Confirm Password</label>
+										<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
+											<span class="red-text">Check Confirm Password.</span>
+										</div>
+									</div>
+									<div class="col s12 center margin-top">
+										<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="back_signup_form()"> << Back</a>
+										<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid">Sign up</button>
+									</div>
+								</div>
+							</form>
+						</div>	
+					</div>
+				</div>			
+			</div>
+		</div>
+	</section>
+</ng-template>
+
+<ng-template #otpverify>
+	<section class="login-page">
+		<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
+
+			<div class="container">	
+				<div class="row">
+					<div class="col s12 m6 offset-m3">
+						<div class="card">
+							<div class="card-content">
+								<div class="center">
+									<div class="col s12">
+										<img src="{{this.todoservice.base_url}}assets/images/logo.png" class="responsive-img" alt="MyDthShop-logo">
+									</div>
+									<div class="col s12">
+										<div class="upper-text">
+											<h3>Your Mobile Number is <span class="orange-text">{{phone}}</span></h3>
+											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s12 center otp-inputa" id="inputs">
+											<input type="number" id="opt1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
+											<input type="number" id="opt2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
+											<input type="number" id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
+											<input type="number" id="opt4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
+										</div>
+										<div class="col s12 center margin-top">
+											<span class="font-size-change1">Don't recieve OTP <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+										</div>			
+									</div>
+									<div class="row">
+										<div class="col s12 center">
+											<button type="Submit" class="btn orange waves-effect waves-light">Submit</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</ng-template>

@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+        <ngx-spinner
+          bdColor="rgba(255,255,255,0.8)"
+          size="default"
+          color="#ec9737"
+          loadingText="Loading..."
+          type="ball-clip-rotate">
+        </ngx-spinner>
+    </div>
+	<!-- End Here -->
+	<section class="hero">
+		<div class="container"> 
+			<h2 class="center font600 white-text margin-top" *ngIf="this.todoservice.page_data">{{this.todoservice.get_page().title}}</h2>
+		</div>
+	</section>
+	<main class="container" *ngIf="this.todoservice.get_page()">
+		<div class="row">  
+			<div class="col s12 m10 l8 offset-m1 offset-l2" id="page-content">
+			</div>
+		</div>
+  </main>
+  <app-footer></app-footer>

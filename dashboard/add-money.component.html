@@ -1,0 +1,228 @@
+<app-header></app-header>
+<section class="flash-deal">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m3">
+                <div class="card">
+              <div class="card-content user-content">
+                  <div class="user-image">
+                      <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50">
+                  </div>
+                  <div class="user-name">
+                      <span>Welcome,</span><br>
+                      <span class="font-size-change font600">{{this.todoservice.get_user_name()}}</span>
+                  </div>
+              </div>
+            </div>
+                <app-side-nav></app-side-nav>			    
+            </div>
+            <div class="col s12 m9">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="font600 inline-block">Add Money</h3>
+                        <div class="row sec-7">
+                            <div class="col s12 m7">
+                                <form #addmoneyform = "ngForm" (ngSubmit)="add_money(addmoneyform.value)">
+                              <div class="row">
+                                <div class="input-field col s12 m10">
+                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin">
+                                  <label for="enter-amount">Enter Amount*</label>
+                                </div>
+                              </div>
+							  <div class="row"> 
+                                <div class="input-field col s12 m10">
+                                  <select name="paymethod" ngModel id="paymethod" >
+                                    <option value="">Select Payment Method</option>
+                                    <option value="NEFT / RTGS / FUND TRANSFER" selected>NEFT / RTGS / FUND TRANSFER</option>
+                                    <option value="IMPS">IMPS</option>
+                                    <option value="Cash Deposit">Cash Deposit</option>
+                                    <option value="Net Banking">Net Banking</option>
+                                    <option value="Debit Card / Credit Card">Debit Card / Credit Card</option>
+                                    <option value="Others">Others</option>
+                                  </select>
+                                        <label>Select Payment Method</label>
+                                </div>
+                              </div>
+							  <div class="row" >
+                                <div class="input-field col s12 m10">
+                                  <input id="bank-id" name="ref_id" ngModel type="text" class="validate no-margin">
+                                  <label for="bank-id">Bank Reference ID*</label>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12 m10">
+                                  <input id="last_name" type="text" class="validate" value="MYDTH{{this.todoservice.get_user_id()}}" disabled="">
+                                  <label for="last_name" class="active">Distributor Number*</label>
+                                </div>
+                              </div>
+                              
+                              <div class="row" class="change-hide">
+                                <div class="input-field col s12 m10">
+                                  <select name="paybankaccount" [(ngModel)]="paybankaccount" id="paybankaccount">
+                                          <option value="">Please Select Bank</option>
+                                          <option value="HDFC Bank">HDFC Bank</option>
+                                          <option value="Axis Bank">Axis Bank</option>
+                                          <option value="SBI Bank">SBI Bank</option>
+                                        </select>
+                                        <label>MYDTH Bank Name</label>
+                                </div>
+                              </div>
+                              <div class="row" class="change-hide">
+							  
+                                <div class="input-field col s12 m10" >
+                                  <select name="yourbankname" [(ngModel)]="yourbankname" id="yourbankname">
+                                    <option value="">Select Bank Name</option>
+                                    <option value="HDFC Bank">HDFC Bank</option>
+                                    <option value="Axis Bank">Axis Bank</option>
+                                    <option value="SBI Bank">SBI Bank</option>
+                                  </select>
+                                  <label>Your Bank Name</label>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12 m10 center">
+                                  <button type="submit" class="btn btn-large orange white-text">Send Payment Details</button>
+                                </div>
+                              </div>
+                            </form>
+                            </div>
+                            <div class="col s12 m5 axis-bank">
+                                <h3 class="orange white-text padd no-margin"><i class="fa fa-edit"></i> AXIS BANK</h3>
+                                <table class="responsive-table bordered striped">
+                            <tbody>
+                              <tr>
+                                <td>Account Name</td>
+                                <td>Libanz International</td>
+                              </tr>
+                              <tr>
+                                <td>Account Number</td>
+                                <td>916030086552043</td>
+                              </tr>
+                              <tr>
+                                <td>IFSC Code</td>
+                                <td>UTIB0001813</td>
+                              </tr>
+                              <tr>
+                                <td>Branch</td>
+                                <td>Sec-7 Rohini</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="card no-box-shadow payment-m">
+                                    <div class="card-content no-padding">
+                                        <span class="font600 font-size-change">[DEBIT/CREDIT CARD/NET BANKING]</span>
+                                        <form class="margin-top-cart1">
+                                      <div class="row no-margin">
+                                        <div class="input-field col s12">
+                                          <input id="amonut" type="number" name="amount" class="validate">
+                                          <label for="amount">Enter Amount</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                          <select>
+                                                  <option value="1">Debit Card / Credit Card</option>
+                                                  <option value="2">Net Banking Online</option>
+                                                </select>
+                                                <label>Payment Method</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                          <button type="submit" class="btn orange">Continue</button>
+                                        </div>
+                                        <div class="input-field col s12">
+                                          <span class="grey-text">Payment Gateway Charge will be apply*</span>
+                                        </div>
+                                      </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="view-more" class="modal complaint-modal">
+    <div class="modal-content">
+      <h3 class="font600">Order Invoice</h3>
+      <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+      <div class="row">
+      	<div class="col s12 m6">
+      		<span class="font-size-change">Order #1001777269</span>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Order : </span>
+      			<span>375a6dabd574214</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Order Date : </span>
+      			<span>28-Jan-2018, <time>04:24:13 PM</time></span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Payment Status : </span>
+      			<span>Failed</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Recharge Status : </span>
+      			<span>Failed</span>
+      		</div>
+      	</div>
+      	<div class="col s12 m6">
+      		<span class="font-size-change">User Detail</span>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Name : </span>
+      			<span>JAIN TELECOM</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Email : </span>
+      			<span>anantjain296@gmail.com</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Contact No : </span>
+      			<span>9911811317</span>
+      		</div>
+      	</div>
+      </div>
+      <hr>
+      <div class="row">
+      	<div class="col s12">
+      		<table class="responsive-table bordered striped highlight">
+		        <thead>
+		          <tr>
+	              <th>Subscriber/Customer No.</th>
+	              <th>Operator</th>
+	              <th>Recharge Amount</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <tr>
+		            <td>1234567890</td>
+		            <td>Tata Sky</td>
+		            <td class="center"><i class="fa fa-inr"></i>20</td>
+		          </tr>
+		        </tbody>
+		      </table>
+      	</div>
+      </div>
+      <hr>
+      <div class="row margin-top">
+      	<div class="col s12 right-align">
+      		<span>Order Totals</span>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Grand Total : </span>
+      			<span><i class="fa fa-inr"></i> 98</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Use Wallet Amount : </span>
+      			<span><i class="fa fa-inr"></i> 98</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Total Amount : </span>
+      			<span><i class="fa fa-inr"></i> 0</span>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+  <app-footer-min></app-footer-min>

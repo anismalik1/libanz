@@ -1,0 +1,172 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+  <ngx-spinner
+    bdColor="rgba(255,255,255,0.8)"
+    size="default"
+    color="#ec9737"
+    loadingText="Loading..."
+    type="ball-clip-rotate">
+  </ngx-spinner>
+</div>
+<!-- End Here -->
+<section class="flash-deal">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m3">
+                <div class="card">
+              <div class="card-content user-content">
+                  <div class="user-image">
+                      <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50">
+                  </div>
+                  <div class="user-name">
+                      <span>Welcome,</span><br>
+                      <span class="font-size-change font600">{{this.todoservice.get_user_name()}}</span>
+                  </div>
+              </div>
+            </div>
+            <app-side-nav></app-side-nav>
+            </div>
+            <div class="col s12 m9">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="font600 inline-block">Account Dashboard </h3>
+                        <a href="javascript:" class="font-size-change inline-block margin-left1 edit-click" (click)="edituser()">Edit</a>
+                        <a href="#change-password" class="font-size-change modal-trigger inline-block margin-left1">Change Password</a>
+                        <form #manageform1 = "ngForm" (ngSubmit)="update_details(manageform1.value)">
+                            <div class="row edit-acc no-margin">
+                                <div class="input-field col s12 m6 l8">
+                                  <input placeholder="Name" id="name" name="name" value="{{userinfo.name}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.name" [disabled]="!isvalid">
+                                </div>
+                              </div>  
+                          
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Distrbutor No." id="distributer_id" value="MYDTH{{userinfo.id}}" type="text" class="validate no-margin" disabled>
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Primary Mobile Number" id="phone" value="{{userinfo.phone}}" type="number" class="validate no-margin" disabled>
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="City" id="city" name="city" value="{{userinfo.city}}" type="text" class="validate no-margin" ngModel [disabled]="!isvalid">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Pincode" id="pincode" name="pincode" value="{{userinfo.pincode}}" type="number" class="validate no-margin" [(ngModel)]="userinfo.pincode" [disabled]="!isvalid">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="State" id="state" name="state" value="{{userinfo.state}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.state" [disabled]="!isvalid">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Enter Email" id="email" name="email" value="{{userinfo.email}}" type="email" class="validate no-margin" [(ngModel)]="userinfo.email" [disabled]="!isvalid">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m12 l8">
+                          <textarea id="textarea1" [disabled]="!isvalid" [(ngModel)]="userinfo.shipping_address" name="shipping_address" class="materialize-textarea" placeholder="C.S.C No.-1, Unit No.-9,10,11, 1st Floor Sector-3, Rohini, New Delhi-110085">{{userinfo.shipping_address}}</textarea>
+                        </div>
+                      </div>
+                      <div class="row edit-acc">
+                        <span class="left grey-text margin-left1 margin-right font600">Your Gender</span>
+                        <p class="inline">
+                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" class="with-gap" type="radio" value="1" id="male" [disabled]="!isvalid">
+                              <label for="male">Male</label>
+                            </p>
+                            <p class="inline">
+                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" class="with-gap" type="radio" id="female" value="2" [disabled]="!isvalid">
+                              <label for="female">Female</label>
+                            </p>
+                      </div>
+                      <div class="row edit-acc">
+                          <div class="col s12 m12 l8 center">
+                              <button type="Submit" class="btn orange btn-large" [disabled]="!isvalid">Update Details</button>
+                          </div>
+                      </div>
+                    </form>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="font600 inline-block">Update KYC </h3>
+                        <form #kycform = "ngForm" (ngSubmit)="update_kyc(kyc.value)">
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l8">
+                          <input placeholder="Enter Name" id="kname" name="name" type="text" class="validate no-margin">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Aadhar Card No." id="Aadhar" name="Aadhar" type="text" class="validate no-margin" maxlength="12">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Pan Card No." id="pan" name="pan" type="number" class="validate no-margin">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="GST No." id="gst" name="gst" type="number" class="validate no-margin">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Phone No." id="phn" name="phn" type="number" class="validate no-margin">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Enter Pincode" id="kpincode" name="pincode" type="text" class="validate no-margin">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Enter Email" id="kemail" name="email" type="email" class="validate no-margin">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m12 l8">
+                          <textarea id="textarea11" class="materialize-textarea" placeholder="C.S.C No.-1, Unit No.-9,10,11, 1st Floor Sector-3, Rohini, New Delhi-110085"></textarea>
+                        </div>
+                      </div>
+                      <div class="row edit-acc">
+                          <div class="col s12 m12 l8 center">
+                              <button type="Submit" class="btn orange btn-large">Update KYC</button>
+                          </div>
+                      </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end here -->
+<div id="change-password" class="modal">
+  <div class="modal-content nopadding">
+    <span class="modal-close close-then"><i class="material-icons font-size-change1">close</i></span>
+    <form method="post" class="p-v-xs padd11" #updatepassform = "ngForm" (ngSubmit)="update_password(updatepassform.value)">
+      <div class="row">
+        <div class="col s12 m6">
+          <span class="font600 font-size-change">Your new password must:</span>
+          <ul class="list-password">
+            <li>Be at least 4 characters in length</li>
+            <li>Not be same as your current password</li>
+            <li>Not contain common passwords.</li>
+          </ul>
+        </div>
+        <div class="col s12 m6">
+          <h4 class="font600">Change Password</h4>
+          <div class="input-field sec-7">
+            <input type="password" name="cpassword" ngModel id="password">
+            <label for="password">Type Current Password</label>
+          </div>	
+          <div class="input-field sec-7">
+            <input type="password" name="newpassword" ngModel id="new-password">
+            <label for="new-password">Type New Password</label>
+          </div>	
+          <div class="input-field sec-7">
+            <input type="password" name="cnewpassword"ngModel id="re-password">
+            <label for="re-password">Re-type New Password</label>
+          </div>						
+          <button type="Submit" name="change-password" class="modal-action margin-top orange btn-large">Change Password</button>
+        </div>																												
+      </div>
+    </form>	
+   </div>
+</div>
+<app-footer-min></app-footer-min>

@@ -1,0 +1,145 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	  bdColor="rgba(255,255,255,0.8)"
+	  size="default"
+	  color="#ec9737"
+	  loadingText="Loading..."
+	  type="ball-clip-rotate">
+	</ngx-spinner>
+</div>
+<section class="flash-deal">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m3">
+                <div class="card">
+              <div class="card-content user-content">
+                  <div class="user-image">
+                      <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50">
+                  </div>
+                  <div class="user-name">
+                      <span>Welcome,</span><br>
+                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user().name}}</span>
+                  </div>
+              </div>
+            </div>
+                <app-side-nav></app-side-nav>			    
+            </div>
+            <div class="col s12 m9">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="font600 inline-block">Commision Structure</h3>
+                  <ul class="tabs commision">
+                    <li class="tab col s12 m4"><a href="#test1" class="black-text">DTH</a></li>
+                    <li class="tab col s12 m4"><a href="#test2" class="black-text">Recharge &amp; Bill Payments </a></li>
+                    <li class="tab col s12 m4"><a href="#test3" class="black-text">MyDthShop Values</a></li>
+                  </ul>
+                    <div id="test1" class="margin-top">
+                        <table id="datatable" class="display responsive-table datatable-example">
+                                <thead>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody *ngIf="dthcommissions">
+                                    <tr *ngFor="let commission of dthcommissions;let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{commission.title}}</td>
+                                        <td>{{commission.commission}}</td>
+                                        <td *ngIf="commission.commission_type=='1'">Commission</td>
+                                        <td *ngIf="commission.commission_type=='2'">Surcharge</td>
+                                        <td *ngIf="commission.commission_type=='3'">Cashback</td>
+                                        <td *ngIf="commission.amount_type=='1'">Percent</td>
+                                        <td *ngIf="commission.amount_type=='2'">Cashback</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                    </div>
+                    <div id="test2" class="margin-top">
+                        <table id="datatable1" class="display responsive-table datatable-example">
+                                <thead>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody *ngIf="billcommissions">
+                                    <tr *ngFor="let commission of billcommissions;let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{commission.title}}</td>
+                                        <td>{{commission.commission}}</td>
+                                        <td *ngIf="commission.commission_type=='1'">Commission</td>
+                                        <td *ngIf="commission.commission_type=='2'">Surcharge</td>
+                                        <td *ngIf="commission.commission_type=='3'">Cashback</td>
+                                        <td *ngIf="commission.amount_type=='1'">Percent</td>
+                                        <td *ngIf="commission.amount_type=='2'">Cashback</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                    </div>
+                    <div id="test3" class="margin-top">
+                        <table id="datatable2" class="display responsive-table datatable-example">
+                                <thead>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator Code</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator Code</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>0PC</td>
+                                        <td>MYDTHSHOP VALUE</td>
+                                        <td>0</td>
+                                        <td>Commission</td>
+                                        <td>p</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer-min></app-footer-min>

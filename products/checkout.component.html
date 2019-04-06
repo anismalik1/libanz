@@ -1,0 +1,522 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+    <ngx-spinner
+        bdColor="rgba(255,255,255,0.8)"
+        size="default"
+        color="#ec9737"
+        loadingText="Loading..."
+        type="ball-clip-rotate">
+    </ngx-spinner>
+</div>
+	<!-- Flash Deal section -->
+	<div class="work" *ngIf="order_placed==false;then checkout else thankssection"></div>
+	<ng-template #checkout>
+	<section class="flash-deal checkout-page">
+		<div class="container">
+			<div class="row no-margin">
+				<div class="col s12 m8">
+					<!-- First Line -->
+					<div class="card first-line">
+            <div class="card-content black-text padd-only no-margin">
+            	<div class="row no-margin">
+            		<div class="col s1 number center margin-top-cart1">
+            			<span>1</span>
+            		</div>
+            		<div class="col s8 my-cart">
+            			<span class="font-size-change1 inline-block margin-checkout left grey-text white-rec">LOGIN <i class="material-icons grey-text white-rec">check</i></span><br><br>
+            			<span class="font600 naam1">{{this.todoservice.get_user_name()}}</span>&nbsp;
+            			<span class="grey-text email1">{{this.todoservice.get_user_email()}}</span>
+            		</div>
+            		<div class="col s3 right-align margin-top-cart chng">
+            			<a href="javascript:" class="btn btn-flat right chngs1">Change</a>
+            		</div>
+            	</div>
+            </div>
+          </div>
+          <!-- End Here -->
+          <!-- Address Checkout -->
+        	<div class="row no-margin login-checkout hide checkout_1">
+        		<div class="col s6 m5 offset-m1">
+        			<div class="name margin-top-cart">
+        				<span class="inline-block grey-text margin-right">Name</span>
+        				<span class="inline-block font600">{{this.todoservice.get_user_name()}}</span>
+        			</div>
+        			<div class="name margin-top-cart">
+        				<span class="inline-block grey-text margin-right">Email</span>
+        				<span class="inline-block font600">{{this.todoservice.get_user_email()}}</span>
+        			</div>
+        			<div class="name margin-top-cart">
+        				<a href="javascript:" routerLink="/logout" class="font600">Logout &amp; Sign in to another account</a>
+        			</div>
+        			<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_address()">PROCEED</button>
+        		</div>
+        		<div class="col s6 m6">
+        			<div class="name margin-top-cart">
+        				<span class="inline-block grey-text margin-right">Advantages of our secure login</span>
+        			</div>
+        			<div class="name margin-top-cart">
+        				<span class="inline-block grey-text margin-right"><i class="fa fa-truck orange-text" aria-hidden="true"></i></span>
+        				<span class="inline-block"> Free Home Delivery </span>
+        			</div>
+        			<div class="name margin-top-cart">        				
+        				<span class="inline-block grey-text margin-right"><i class="fa fa-bell orange-text" aria-hidden="true"></i></span>
+        				<span class="inline-block"> Get Relevant Alerts and Recommenadtions </span>
+        			</div>
+        			<div class="name margin-top-cart">        				
+        				<span class="inline-block grey-text margin-right"><i class="fa fa-star orange-text" aria-hidden="true"></i></span>
+        				<span class="inline-block"> Wishlists, Reviews, Ratings and more. </span>
+        			</div>
+        		</div>
+        	</div>
+        	<!-- End Here -->
+        	<!-- Second Line -->
+          <div class="card second-line">
+            <div class="card-content black-text padd-only no-margin">
+            	<div class="row no-margin">
+            		<div class="col s1 number center margin-top-cart1">
+            			<span>2</span>
+            		</div>
+            		<div class="col s8 my-cart" >
+            			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
+            			<!-- <span class="font600 naam2">{{this.todoservice.get_user_name()}}</span>&nbsp; -->
+            			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
+            			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
+            		</div>
+            		<div class="col s3 right-align margin-top-cart chng">
+            			<a href="javascript:" class="btn btn-flat right chngs2 hide">Change</a>
+            		</div>
+            	</div>
+            </div>
+          </div>          
+          <!-- End Here -->
+          <!-- Login Checkout -->
+        	<div class="row no-margin login-checkout checkout_2">
+        		<div class="col s10 m10 offset-m1">
+        			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
+                        <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
+        				<ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template>
+        				<ng-template #unchecked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/></ng-template>
+      					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
+									&nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp;
+									<a href="javascript:" (click)="remove_address(row.id)"> Remove</a>
+									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
+        			</div>        			
+								</div>
+								<div class="col s10 m10 offset-m1">
+								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_orders()">DELIVER HERE</button>
+								</div>
+								<div class="add-new-address col s12">
+            	<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a new address</a>
+            </div>
+        	</div>
+        	<!-- End Here -->
+        	<!-- Third Line -->
+          <div class="card third-line">
+            <div class="card-content black-text padd-only no-margin">
+            	<div class="row no-margin">
+            		<div class="col s1 number center margin-top-cart1">
+            			<span>3</span>
+            		</div>
+            		<div class="col s8 my-cart">
+            			<span class="font-size-change1 inline-block margin-checkout left grey-text">ORDER SUMMARY <i class="material-icons grey-text">check</i></span><br><br>
+            			<span class="font600 naam3">{{this.productservice.cartItemsCount()}} Items</span>&nbsp;
+            		</div>
+            		<div class="col s3 right-align margin-top-cart chng">
+            			<a href="javascript:" class="btn btn-flat right chngs3 hide">Change</a>
+            		</div>
+            	</div>
+            </div>
+          </div>
+          <!-- End Here -->          
+          <!-- Login Checkout -->
+        	<div class="row no-margin white login-checkout hide checkout_3">
+        		<form>
+          		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
+          			<div class="col s12 m3 center">
+          				<div class="cart-product-image"> 
+          					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
+          					<div class="product-quantity less-add-btn">
+								<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
+					            <span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
+					            <button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
+					          </div>
+          				</div>
+          			</div>
+          			<div class="col s12 m5 margin-top" id="item-detail-section-{{i}}">
+          				<a href="#" class="black-text">
+          					<h4 class="font600">{{item.title}}</h4>
+          					<span class="font-size-change grey-text">Seller : MyDthShop</span><br>
+          					<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
+          					<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
+          					<span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span>
+									</a>
+									<div class="green-text" *ngIf="item.product.tsk_kit">
+										<span id="tsk-applied" class="green-text">Congratulations! One Coupon is Applied to your purchase.</span>
+										<!-- <a href="javascript:" (click)="show_coupon(i)">Change</a> -->
+										<div class="coupon-area" style="display:none;">
+											<input id="coupon-code-{{item.product.id}}" placeholder="Enter Coupon Code" type="text" class="validate">
+										</div>
+									</div>
+        					<span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i>{{item.quantity*item.product.offer_price}}&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
+        					<br>
+      						<a href="javascript:" class="font-size-change margin-top inline-block black-text"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
+          			</div>
+          			<div class="col s12 m4 margin-top padd">
+          				<strong class="font600">Free delivery with Cash on Delivery and Same day installation</strong><br>
+          				<span class="grey-text">Faster delivery options available at checkout 10 Days Replacement Policy</span>
+          			</div>
+          		</div>
+          		<div class="divider"></div>
+          		<div class="col s12 margin-top-cart">
+          			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
+					<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_pay()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
+				</div>
+          	</form>
+          	<div class="divider"></div>
+        	</div>
+        	<!-- End Here -->
+          <!-- Fourth Line -->
+          <div class="card fourth-line">
+            <div class="card-content black-text padd-only no-margin">
+            	<div class="row no-margin">
+            		<div class="col s1 number center margin-top-cart1">
+            			<span>4</span>
+            		</div>
+            		<div class="col s8 my-cart">
+            			<span class="font-size-change1 inline-block margin-checkout left grey-text">PAYMENT OPTIONS <i class="material-icons grey-text">check</i></span><br><br>
+            			<span class="font600 naam4">Wallet</span>&nbsp;
+            		</div>
+            		<div class="col s3 right-align margin-top-cart chng">
+            			<a href="javascript:" class="btn btn-flat right chngs4 hide">Change</a>
+            		</div>
+            	</div>
+            </div>
+          </div>
+          <!-- End Here -->                    
+          <!-- Login Checkout -->
+        	<div class="row white no-margin hide login-checkout checkout_4" id="wallet-type">
+        		<form class="margin-top">
+          		<div class="row">
+                <div class="col s12 m10 offset-m1">
+                  <input name="wallet_type" value="wallet" class="with-gap" type="radio" id="wallet" (change)="cod_apply()" checked/>
+                  <label for="wallet" class="font-size-change black-text">Wallet</label>
+                </div>
+              </div>
+              <div class="row">
+          			<div class="col s12 m10 offset-m1">
+          				<input name="wallet_type" class="with-gap" value="paytm" type="radio" id="paytm" (change)="cod_apply()" />
+    							<label for="paytm" class="font-size-change black-text">Paytm</label>
+				        </div>
+          		</div>
+          		<div class="row" *ngIf="this.productservice.cod_invalid == false">
+          			<div class="col s12 m10 offset-m1">
+          				<input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.cod_invalid"/>
+						<label for="cod" class="font-size-change black-text">Cash on Delivery</label>
+					</div>
+          		</div>
+          		<!-- Credit Card -->
+          		<div class="row">
+          			<div class="col s12 m10 offset-m1">
+          				<input name="wallet_type" class="with-gap" value="card" type="radio" id="card" (change)="cod_apply()"/>
+    							<label for="card" class="font-size-change black-text">Cards & Netbanking</label>
+				        </div>
+          		</div>
+          
+          		<!-- End Here -->
+          		<!-- Net Banking -->
+          		<div class="row hide">
+          			<div class="col s12 m10 offset-m1">
+          				<input name="group1" class="with-gap" type="radio" name="wallet_type" id="net" value="net_banking"/>
+    							<label for="net" class="font-size-change black-text">Net Banking</label>
+				        </div>
+          		</div>
+				      <div class="row popular-bank hide" id="popular-banks">
+				      	<div class="col s12 pop">
+				      		<span class="font600 font-size-change">Popular Banks</span>
+				      	</div>
+				      	<div class="col s3 hdfc margin-top-cart">
+				      		<input name="group1" class="with-gap" type="radio" id="hdfc" />
+    							<label for="hdfc" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/download.svg" class="responsive-img vertical-align-middle" alt="HDFC">&nbsp; HDFC Bank</label>
+				      	</div>
+				      	<div class="col s3 margin-top-cart">
+				      		<input name="group1" class="with-gap" type="radio" id="icici" />
+    							<label for="icici" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/icici.svg" class="responsive-img vertical-align-middle" alt="ICICI">&nbsp; ICICI Bank</label>
+				      	</div>
+				      	<div class="col s3 margin-top-cart">
+				      		<input name="group1" class="with-gap" type="radio" id="sbi" />
+    							<label for="sbi" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/sbi.svg" class="responsive-img vertical-align-middle" alt="ICICI">&nbsp; SBI Bank</label>
+				      	</div>
+				      	<div class="col s3 hdfc margin-top">
+				      		<input name="group1" class="with-gap" type="radio" id="axis" />
+    							<label for="axis" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/axis.svg" class="responsive-img vertical-align-middle" alt="ICICI">&nbsp; Axis Bank</label>
+				      	</div>
+				      	<div class="col s3 margin-top">
+				      		<input name="group1" class="with-gap" type="radio" id="kotak" />
+    							<label for="kotak" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/kotak.svg" class="responsive-img vertical-align-middle" alt="ICICI">&nbsp; Kotak Bank</label>
+				      	</div>
+          		<div class="col s12 pop margin-top">
+				      		<span class="font600 font-size-change">Other Banks</span>
+				      	</div>
+          			<div class="col s12 m4 input-field hdfc">
+          				<select>
+							      <option value="" disabled selected>Select Bank</option>
+							      <option value="1">Allahabad Bank</option>
+							      <option value="2">Andhra Bank</option>
+							      <option value="3">Bandhan Bank</option>
+							      <option value="4">Bank of Baroda</option>
+							      <option value="5">Bank of India</option>
+							      <option value="6">Bank of Maharashtra</option>
+							      <option value="7">Canara Bank</option>
+							      <option value="8">Central Bank</option>
+							      <option value="9">City Union Bank</option>
+							      <option value="10">Corporation Bank</option>
+							    </select>
+          			</div>
+          			<div class="col s12 pop margin-top location-add">
+          				<button type="Submit" class="btn-large orange no-box-shadow">Pay <i class="fa fa-inr"></i>1600</button>
+          			</div>
+          		</div>
+          		<!-- End Here -->
+				</form>
+				<div class="col s12 m10 offset-m1">
+					<div class="name margin-checkout" *ngIf="cod == false">
+						<span *ngIf="this.todoservice.get_user_wallet_amount() > this.productservice.calculateCartAmount()"><a href="javascript:" class="btn orange btn-large ctn-che1" (click)="checkout_items(1)">Continue Checkout</a></span>
+						<span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a></span>
+					</div>
+					<div class="name margin-checkout" *ngIf="cod == true">
+						<span><a href="javascript:" class="btn orange btn-large cod-check" (click)="checkout_items(2)">Continue Checkout</a></span>
+					</div>
+				</div>
+        	</div>
+        	<!-- End Here -->
+				</div>
+				<div class="col s12 m4 order-summary">
+					<div class="card">
+            <div class="card-content black-text no-padding">
+            	<span class="card-title inline-block">Order Summary</span>
+				<hr>
+				
+				<div class="subtotal" *ngFor="let item of this.productservice.cart_items;let i = index;">
+					<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
+					<p class="inline-block font600">{{i+1}}: Product : <span class="grey-text font500">{{item.product.title}}</span></p>
+					<ng-template #kitblock>
+						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
+						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{item.product.offer_price }}</p>
+					</ng-template>
+					<ng-template #nokitblock>
+						<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
+					</ng-template>
+					<br/>
+					<div *ngFor="let pack of item.product.pack_selected">
+						<p class="font600 left">Pack : <span class="grey-text font500">{{pack.title}}</span></p>
+						<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
+						<div class="clearfix"></div>
+					</div>
+					<hr class="horizontal">
+				</div>
+            	<div class="subtotal">
+            		<p class="inline-block font600">Subtotal :</p>
+            		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}}</p>
+            	</div>
+            	<div class="subtotal">
+            		<p class="inline-block font600">Delivery Charges :</p>
+            		<p class="inline-block green-text right font-size-change"> Free </p>
+							</div>
+							<div class="subtotal" *ngIf="">
+            		<p class="inline-block font600">TSK Kit :</p>
+            		<p class="inline-block green-text right font-size-change"> Free </p>
+            	</div>
+            	<hr class="horizontal">
+            	<div class="subtotal payable margin-top">
+            		<p class="inline-block font600">Amount Payable :</p>
+            		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}} </p>
+            	</div>
+            	<hr>
+            	<div class="subtotal">
+            		<p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.calculateCartAmountWithoutOffer() - this.productservice.calculateCartAmount()}}</p>
+                </div>
+                
+            </div>
+          </div>
+          <div class="security1">
+          	<ul>
+          		<li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}assets/images/shield.png" class="responsive-img" alt="shield" width="40px"></li>
+          		<li class="shield-text inline-block"><span class="no-padding grey-text">Safe and Secure Payments. Easy returns. 100% Authentic products.</span></li>
+          	</ul>
+          </div>
+				</div>
+			</div>
+		</div>
+    </section>
+    
+    <ul id="slide-out" class="side-nav">
+            <div class="user-view no-padding">
+                  <li class="inline-block"><a href="javascript:" routerLink="/login" class="logup">Login</a></li>
+              <li class="inline-block"><a href="#" class="signup">Sign Up</a></li>
+            </div>
+            <li><div class="divider"></div></li>
+          <li><a href="javascript:" routerLink="/home" class="active">Home</a></li>
+          <li><a href="javascript:" routerLink="/about-us">About Us</a></li>
+          <li><a href="javascript:" routerLink="/home">Cash On Delivery</a></li>
+          <li><a href="javascript:" routerLink="/home">Free Shipping</a></li>
+          <li><a href="javascript:" routerLink="/home">Best Selling</a></li>
+          <li><a href="javascript:" routerLink="/contact-us">Contact Us</a></li>
+        </ul>
+        <!-- End Here -->
+        <!-- Modal Structure --> 
+        <div id="add-new-address" class="modal">
+					<form class="margin-top location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
+			<div class="modal-content no-padding">
+					<div class="add-add border-bottom">
+						<h4 class="inline-block">Add a new address</h4>
+						<!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
+					</div>
+							<div class="row no-margin">
+							<div class="input-field col s12 m6">
+								<input name="name" id="name" type="text" class="validate" ngModel>
+								<label for="name">Name</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="phn-no" name="contact" type="text" class="validate" ngModel>
+								<label for="phn-no">Phone Number</label>
+							</div>
+						</div>
+						<div class="row no-margin">
+							<div class="input-field col s12 m6">
+								<input name="pincode" id="pincode" maxlength="6" type="number" class="validate" ngModel>
+								<label for="pincode">Pincode</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="locality" name="locality" type="text" class="validate" ngModel>
+								<label for="locality">Locality</label>
+							</div>
+						</div>
+						<div class="row no-margin">
+							<div class="input-field col s12 m6">
+								<input name="city" id="city" type="text" class="validate" ngModel>
+								<label for="city">City/District/Town</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<mat-form-field>
+									<mat-select placeholder="Choose your State" (change)="changeState($event.value)" name="state" ngModel>
+										<mat-option [value]="Delhi">Delhi</mat-option>
+										<mat-option [value]="Mumbai">Mumbai</mat-option>
+										<mat-option [value]="Chennai">Chennai</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row no-margin">
+							<div class="input-field col s12">
+								<input name="address" id="land" type="text" class="validate" ngModel>
+								<label for="land">Address (Area and street) (Optional)</label>
+							</div>
+						</div>
+			</div>
+			<div class="modal-footer">
+				<button type="Submit" class="modal-action btn orange btn-large">Save and Delivery Here</button>
+				<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
+			</div>
+	</form>
+	</div>
+      <div id="add-address" class="modal">
+            <form class="margin-top location-add1" #addnewaddress = "ngForm" (ngSubmit)="edit_addr(addnewaddress.value)">
+        <div class="modal-content no-padding" *ngIf="edit == true">
+            <div class="add-add border-bottom">
+              <h4 class="inline-block">Edit Address</h4>
+              <!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
+            </div>
+                <div class="row no-margin">
+                <div class="input-field col s12 m6">
+                  <input name="name" id="name" type="text" class="validate" value="{{editaddress.name}}" [(ngModel)]="editaddress.name">
+                  <label for="name" class="active" *ngIf="editaddress.name != ''">Name</label>
+                  <label for="name" *ngIf="editaddress.name == ''">Name</label>
+                </div>
+                <div class="input-field col s12 m6">
+                  <input id="phn-no" name="contact" type="text" class="validate" ngModel value="{{editaddress.contact}}" [(ngModel)]="editaddress.contact">
+                  <label for="phn-no" class="active" *ngIf="editaddress.contact != ''">Phone Number</label>
+                  <label for="phn-no" *ngIf="editaddress.contact == ''">Phone Number</label>
+                </div>
+              </div>
+              <div class="row no-margin">
+                <div class="input-field col s12 m6">
+                  <input name="pincode" id="pincode" maxlength="6" type="number" class="validate" value="{{editaddress.pin}}" [(ngModel)]="editaddress.pin">
+                  <label for="pincode" class="active" *ngIf="editaddress.pin != ''">Pincode</label>
+                  <label for="pincode" *ngIf="editaddress.pin == ''">Pincode</label>
+                </div>
+                <div class="input-field col s12 m6">
+                  <input id="locality" name="locality" type="text" class="validate" value="{{editaddress.locality}}" [(ngModel)]="editaddress.locality">
+                  <label for="locality" class="active" *ngIf="editaddress.locality != ''">Locality</label>
+                  <label for="locality" *ngIf="editaddress.locality == ''">Locality</label>
+                </div>
+              </div>
+              <div class="row no-margin">
+                <div class="input-field col s12 m6">
+                  <input name="city" id="city" type="text" class="validate" value="{{editaddress.city}}" [(ngModel)]="editaddress.city">
+                  <label for="city" class="active" *ngIf="editaddress.city != ''">City/District/Town</label>
+                  <label for="city" *ngIf="editaddress.city != ''">City/District/Town</label>
+                </div>
+                <div class="input-field col s12 m6">
+                        <mat-form-field>
+                            <mat-select placeholder="Choose your State" (change)="changeState($event.value)" name="state" [(ngModel)]="editaddress.state">
+                                <mat-option [value]="Delhi">Delhi</mat-option>
+                                <mat-option [value]="Mumbai">Mumbai</mat-option>
+                                <mat-option [value]="Chennai">Chennai</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                </div>
+              </div>
+              <div class="row no-margin">
+                <div class="input-field col s12">
+                  <input name="address" id="land" type="text" class="validate" value="{{editaddress.address}}" [(ngModel)]="editaddress.address">
+                  <label for="land" class="active" *ngIf="editaddress.address != ''">Address (Area and street) (Optional)</label>
+                  <label for="land" *ngIf="editaddress.address == ''">Address (Area and street) (Optional)</label>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="Submit" class="modal-action btn orange btn-large">Save and Delivery Here</button>
+          <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
+        </div>
+    </form>
+		</div>
+</ng-template>	
+<div id="kit-modal" class="modal">
+	<div class="modal-content">
+		<h3 class="font600">Pay for OTF Margin <span class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Advance Payment for TSK 999."><i class="material-icons">error_outline</i></span></h3>
+		<span class="modal-close close-modal-span"><i class="material-icons font-size-change1">close</i></span>
+			<div class="kit-images margin-top-order">
+				<div class=" inline-block">
+					<span class="multiply">{{otfquantity}}</span>
+					<span class="multiply-sign"><i class="material-icons">close</i></span>
+					<img src="https://mydthshop.com/web-app/assets/images/banner/999kit.png">
+				</div>
+				<div class="otf-margin inline-block">
+					<span *ngIf="otf_margin">{{otf_margin.option_value}}</span>
+					<span><i class="material-icons">close</i></span>
+					<span *ngIf="otfquantity">{{otfquantity}}</span>
+					<span><i class="material-icons">drag_handle</i></span>
+					<span *ngIf="otf_margin">{{otfquantity * otf_margin.option_value}}</span>
+				</div>
+			</div>
+				<div class="margin-top">
+					<div *ngIf="otf_margin">
+						<div class="cod1" *ngIf="this.todoservice.get_user_wallet_amount() >= otfquantity * otf_margin.option_value">
+							<input type="radio" id="cod-2" name="payment_type" class="with-gap" value="wallet" checked/>
+							<label for="cod-2" class="black-text">Use Wallet</label>
+						</div>
+					</div>
+					<div class="uwa margin-top">
+						<input type="radio" id="uwa" name="payment_type" class="with-gap" value="paytm"/>
+						<label for="uwa" class="black-text">Paytm</label>
+					</div>
+				</div>
+			</div>
+		<div class="modal-footer right-align">
+			<button type="submit" class="btn orange" (click)="check_for_tsk()">Proceed</button>
+			<!-- <h4 class="left red-text" *ngIf="this.todoservice.get_user_wallet() < selected_item.display_price && selected_item.cod_available != 1">Sorry! You do not have sufficient balance in your wallet.</h4> -->
+		</div>
+</div>
+	<span id="kit-modal-a" data-target="kit-modal" class="modal-trigger"></span>
+	<ng-template #thankssection></ng-template>
+	<app-footer></app-footer>	

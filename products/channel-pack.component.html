@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+		bdColor="rgba(255,255,255,0.8)"
+		size="default"
+		color="#ec9737"
+		loadingText="Loading..."
+		type="ball-clip-rotate">
+	</ngx-spinner>
+</div>
+
+<section class="channels-basic">
+	<div class="container center">
+		<h1>{{product_pack_info.title}}</h1>
+		<p class="font-size-change1 font600">{{channel_count}} channels & services*</p>
+		<span class="font-size-change1"><i class="icon-inr"></i> {{product_pack_info.price}} / per month</span><br>
+	</div>
+</section>
+
+<section class="list-base white padd-rem">
+	<div class="container">
+		<div class="bse-prc row">
+			<ul id="product-pack">
+			</ul>
+		</div>
+	</div>
+</section>
+
+
+
+
+<app-footer></app-footer>	

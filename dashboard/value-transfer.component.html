@@ -1,0 +1,88 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	  bdColor="rgba(255,255,255,0.8)"
+	  size="default"
+	  color="#ec9737"
+	  loadingText="Loading..."
+	  type="ball-clip-rotate">
+	</ngx-spinner>
+</div>
+<section class="flash-deal">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m3">
+                <div class="card">
+              <div class="card-content user-content">
+                  <div class="user-image">
+                      <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50">
+                  </div>
+                  <div class="user-name">
+                      <span>Welcome,</span><br>
+                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
+                  </div>
+              </div>
+            </div>
+            <app-side-nav></app-side-nav>
+            </div>
+            <div class="col s12 m9">
+                <div class="card inline-block">
+                    <div class="card-content inline-block no-padding">
+                        <h3 class="font600 center">Value Transfer</h3>
+                        <div class="value-transfer grey lighten-3 col s12 m12 l6 margin-top">
+                            <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/value-transfer.png" class="responsive-img" alt="value-transfer">
+                        </div>
+                        <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
+                        <ng-template #transfertemp>
+                        <div class="value-transfer grey lighten-4 col s12 m12 l6 margin-top">
+                                <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
+                            <table class="responsive-table striped bordered">
+                                <tbody> 
+                                    <tr>
+                                        <td><span class="font600 font-size-change">Name</span></td>
+                                    <td><span class="font-size-change">{{fetch_user.name}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="font600 font-size-change">Phone No.</span></td>
+                                        <td><span class="font-size-change">{{fetch_user.phone}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="font600 font-size-change">Enter Amount</span></td>
+                                        <td>
+                                        <div class="input-field">
+                                            <input id="amount" type="text" class="validate" maxlength="6" name="amount" ngModel>
+                                            <label for="amount">Enter amount to be transfered</label>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2"><button type="Submit" class="btn orange">Transfer Now</button>
+                                        <button type="button" class="btn orange" (click)="cancel()">Cancel</button></td>
+                                    </tr>
+                                </tbody>    
+                                </table>
+                            </form>
+                        </div>
+                    </ng-template>
+                    <ng-template #fetchtemp>
+                        <div class="value-transfer grey lighten-4 col s12 m12 l6 margin-top">
+                            <form class="padd" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
+                                <div class="row">
+                                <div class="input-field col s12">
+                                <input id="first_name" type="number" class="validate" name="phone" ngModel>
+                                <label for="first_name">Partner Phone</label>
+                                </div>
+                                <div class="input-field col s12 center">
+                                    <button type="submit" class="btn btn-large white-text value-sub orange">Submit</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer-min></app-footer-min>

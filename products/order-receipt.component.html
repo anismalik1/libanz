@@ -1,0 +1,77 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	bdColor="rgba(255,255,255,1)"
+	size="default"
+	color="#ec9737"
+	loadingText="Loading..."
+	type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+<!-- End Here -->
+<section class="middle white">
+	<div class="row no-margin">
+		<div class="col s12 m10 l6 offset-l3">
+			<div class="card no-margin">
+				<div class="card-content" *ngIf="orders">
+						<div class="order-list" *ngFor="let order of orders">
+							<div class="row no-margin border-on-bottom padd-bottom">
+								<div class="col s8 no-padding">
+									<span class="font-size-change1">Order Number</span><br>
+									<span class="font-size-change-order font600">{{order.id}}</span><br>
+									<span class="font-size-change1 grey-text">{{order.formated_date}}</span>
+								</div>
+								<div class="col s4 right-align">
+									<span class="font-size-change1">Amount</span><br>
+									<span class="font-size-change-order font600"><i class="icon-inr"></i><span id="total-amount"></span>{{calculate_amount(order)}}</span><br>
+									<span [innerHTML]="pack_list(order.pack_selected)"></span>
+									
+								</div>
+							</div>
+							<div class="row border-on-bottom padd-bottom margin-top">						
+								<div class="col s12 m2" >
+									<a href="javascript:">
+										<span *ngIf="order.title.includes('TATA')"><img src="https://mydthshop.com/web-app/assets/images/recharge-icon/tata-sky.png" class="responsive-img vertical-align-middle border" alt="Tata sky logo"></span>
+									</a>
+									<a href="javascript:">
+										<span *ngIf="order.title.includes('VIDEO')"><img src="https://mydthshop.com/web-app/assets/images/recharge-icon/videocon-dth.png" class="responsive-img vertical-align-middle border" alt="Videocon D2H logo"></span>
+									</a>
+									<a href="javascript:">
+										<span *ngIf="order.title.includes('AIRTEL')"><img src="https://mydthshop.com/web-app/assets/images/recharge-icon/airtel.png" class="responsive-img vertical-align-middle border" alt="Airtel logo"></span>
+									</a>
+									<a href="javascript:">
+										<span *ngIf="order.title.includes('DISH')"><img src="https://mydthshop.com/web-app/assets/images/recharge-icon/dish-tv.png" class="responsive-img vertical-align-middle border" alt="Dish TV Logo"></span>
+									</a>
+								</div>
+								<div class="col s12 m6 no-padding">
+									<a href="javascript:" class="black-text"><span class="font600 font-size-change-order">{{order.title}}</span></a><br>
+									<span class="font-size-change-order font600">Setup Box</span>
+									<div class="package-section grey-text" *ngIf="order.tsk_type">
+										<div class="tsk-item " *ngIf="order.tsk_type == 1"><span class="font-size-change">TSK</span> <span class="font-size-change ">99</span></div>
+										<div class="tsk-item" *ngIf="order.tsk_type == 2"><span class="font-size-change ">TSK</span> <span class="font-size-change ">599</span></div>
+										<div class="tsk-item" *ngIf="order.tsk_type == 3"><span class="font-size-change ">TSK</span> <span class="font-size-change ">999</span></div>
+										<div class="tsk-item" *ngIf="order.tsk_type == 3"><span class="font-size-change ">TSK Payment</span> <span class="font-size-change " *ngIf="order.tsk_paid == 0">Pending</span><span class="font-size-change-order font600" *ngIf="order.tsk_paid == 1">Paid</span> <!--<a href="javascript:" class="btn tsk-paynow-btn">Pay Now</a>--></div>
+										<div class="clearfix"></div>
+										<div class="tsk-item"><span class="font-size-change ">Package</span> <span class="font-size-change " *ngIf="order.package_type">{{order.package_type}} Month</span></div>
+										<div class="month-item"></div>
+									</div>
+								</div>
+								<div class="col s12 m4 right-align">
+									<a href="#" class="green white-text font-size-change success" *ngIf="order.payment_status == 1">Success</a>
+									<a href="#" class="orange white-text font-size-change success" *ngIf="order.payment_status == 3">Pending...</a>
+									<a href="#" class="red darken-1 white-text font-size-change success" *ngIf="order.payment_status == 2">Failed</a>
+								</div>
+								<div class="clearfix"></div>
+								
+								<div class="clearfix"></div>
+								<span class="card-title margin-top">Your Order Status is {{order.status}}</span>
+
+							</div> 
+						</div>
+						<p class="red-text">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+<!-- Middle Section End Here -->

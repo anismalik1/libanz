@@ -1,0 +1,92 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	bdColor="rgba(255,255,255,0.8)"
+	size="default"
+	color="#ec9737"
+	loadingText="Loading..."
+	type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+<section class="hero">
+		<div class="container">
+			<h2 class="center font600 white-text margin-top">Contact Us</h2>
+		</div>
+	</section>
+	<main class="container no-box-shadow">
+		<div class="row">
+			<div class="col s12 center" id="page-content"></div>
+		</div>
+		<div class="row no-margin">
+			<div class="col s12 m6 l5">
+				<div class="card">
+					<div class="card-content">
+						<div class="contact-detail">
+							<span class="font600 fonnt-size-change inline-block span-width"><i class="fa fa-phone font-size-change" aria-hidden="true"></i>&nbsp; Phone No.</span>
+							<span class="font-size-change inline-block right">+ 91-11-43513713</span>
+						</div>
+						<div class="contact-detail">
+							<span class="font600 fonnt-size-change inline-block span-width"><i class="fa fa-envelope-o font-size-change" aria-hidden="true"></i>&nbsp; Email</span>
+							<span class="font-size-change inline-block right">help@mydthshop.com</span>
+						</div>
+						<div class="contact-detail">
+							<span class="font600 fonnt-size-change inline-block span-width"><i class="fa fa-clock-o font-size-change" aria-hidden="true"></i>&nbsp; Office Timings</span>
+							<span class="font-size-change inline-block right">Mon to Sun 10:00Am to 7:00Pm</span>
+						</div>
+						<div class="contact-detail">
+							<span class="font600 fonnt-size-change inline-block span-width"><i class="fa fa-bell" aria-hidden="true"></i>&nbsp; 24X7 Care:</span>
+							<span class="font-size-change inline-block right">Happy to help 24X7.</span>
+						</div>
+						<div class="contact-detail">
+							<span class="font600 fonnt-size-change inline-block span-width"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; Address</span>
+							<span class="font-size-change inline-block right">
+								<strong class="font600 right">MyDthShop</strong><br>
+								<span class="grey-text right">Libanz International</span><br>
+								<span class="grey-text">C.S.C No.-1, Unit No.-9,10,11, 1st Floor <br>Sector-3, Rohini, New Delhi-110085</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m6 l7">
+				<div class="card">
+					<div class="card-content">
+						<h3 class="center">Leave us your Info<br><small>and we will get back to you.</small></h3>
+						<form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">
+				      <div class="row sec-7">
+				        <div class="input-field col s12 m6">
+				          <input id="name" name="name" type="text" class="validate" formControlName="name">
+									<label for="name">Name*</label>
+									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['name'].valid && contactgroup.controls['name'].touched">Enter Name*.</div>
+				        </div>
+				        <div class="input-field col s12 m6">
+				          <input id="my-email" name="email" type="email" class="validate" formControlName="email">
+									<label for="email">Email*</label>
+									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['email'].valid && contactgroup.controls['email'].touched">Enter Email*.</div>
+				        </div>
+				      </div> 
+				      <div class="row sec-7">
+				        <div class="input-field col s12 m12">
+				          <input id="subject" name="subject" type="text" class="validate" formControlName="subject">
+									<label for="subject">Subject</label>
+									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['subject'].valid && contactgroup.controls['subject'].touched">Enter Subject*.</div>
+				        </div>
+				        <div class="input-field col s12 m12">
+				          <textarea id="textarea1" class="materialize-textarea" formControlName="message"></textarea>
+									<label for="textarea1">Message</label>
+									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['message'].valid && contactgroup.controls['message'].touched">Enter Message*.</div>
+				        </div>
+				        <div class="input-field col s12 m12 center">
+				          <button type="submit" class="btn orange" [disabled]="!contactgroup.valid">Submit</button>
+				        </div>
+				      </div>
+				    </form>						
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m12 margin-top">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.388362404817!2d77.10404291446814!3d28.707937587416268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0150bb2aafcb%3A0xa0b0cf6e0a570b0d!2sMy+DTH+Shop+%7C+DTH+Set+Top+Box+%26+Accessories+%7C+Online+Recharge+%26+Bill+Payments!5e0!3m2!1sen!2sin!4v1525245043672" width="100%" height="425" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</main>
+	<app-footer></app-footer>

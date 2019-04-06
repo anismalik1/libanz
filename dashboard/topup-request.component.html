@@ -1,0 +1,134 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	  bdColor="rgba(255,255,255,0.8)"
+	  size="default"
+	  color="#ec9737"
+	  loadingText="Loading..."
+	  type="ball-clip-rotate">
+	</ngx-spinner>
+</div>
+<section class="flash-deal">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m3">
+                <div class="card">
+              <div class="card-content user-content">
+                  <div class="user-image">
+                      <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50">
+                  </div>
+                  <div class="user-name">
+                      <span>Welcome,</span><br>
+                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
+                  </div>
+              </div>
+            </div>
+            <app-side-nav></app-side-nav>
+            </div>
+            <div class="col s12 m9">
+                <div class="card export-and-import">
+                    <div class="card-content">
+                        <form class="date-export">
+                            <div class="row no-margin">
+                                <!-- <div class="input-field no-margin col s12 m3">
+                                <select>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Send Recharge</option>
+                                    <option value="2">Pending</option>
+                                    <option value="3">Failed</option>
+                                </select>
+                                </div> -->
+                                <div class="col s12 m3">
+                                    <input type="text" class="no-margin" placeholder="Remark">
+                                </div>
+                                <div class="col s12 m2">
+                                    <button type="Search" class="btn orange no-box-shadow">Submit</button>
+                                </div>
+                                <div class="col s12 m2 right-align">
+                                    <a class='btn orange inline-block' href='javascript:' (click)="fetch_topup(1)">Sent Topup</a>
+                                </div>
+                                <div class="col s12 m2 right-align">
+                                    <a class='btn orange inline-block' href='javascript:' (click)="fetch_topup(0)">Pending Topup</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="font600 inline-block">Topup Request</h3>
+                        <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a>
+                        <div class="overflow-scroll">
+                            <table id="datatable" class="display responsive-table datatable-example">
+                                <thead>
+                                    <tr>
+                                        <th width="35px" nowrap="nowrap"> 
+                                            <input type="checkbox" id="all" class="select-all"/>
+                                      <label for="all"></label>
+                                  </th>
+                                        <th width="60px" nowrap="nowrap">S.No.</th>
+                                        <th width="80px" nowrap="nowrap">Order Id</th>
+                                        <th width="100px" nowrap="nowrap">Order Date</th>
+                                        <!-- <th width="100px" nowrap="nowrap">Name</th>
+                                        <th width="100px" nowrap="nowrap">Contact No.</th> -->
+                                        <th width="80px" nowrap="nowrap">Amount</th>
+                                        <th width="125px" nowrap="nowrap">Payment Type</th>
+                                        <th width="105px" nowrap="nowrap">Bank Name</th>
+                                        <th nowrap="nowrap">Bank ref.</th>
+                                        <th nowrap="nowrap">Status</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th width="35px" nowrap="nowrap"> 
+                                            <input type="checkbox" id="all" class="select-all"/>
+                                      <label for="all"></label>
+                                  </th>
+                                        <th width="60px" nowrap="nowrap">S.No.</th>
+                                        <th width="80px" nowrap="nowrap">Order Id</th>
+                                        <th width="100px" nowrap="nowrap">Order Date</th>
+                                        <!-- <th width="100px" nowrap="nowrap">Name</th>
+                                        <th width="100px" nowrap="nowrap">Contact No.</th> -->
+                                        <th width="80px" nowrap="nowrap">Amount</th>
+                                        <th width="125px" nowrap="nowrap">Payment Type</th> 
+                                        <th width="105px" nowrap="nowrap">Bank Name</th>
+                                        <th nowrap="nowrap">Bank ref.</th>
+                                        <th nowrap="nowrap">Status</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody *ngIf="topup_counts > 0">			
+									<tr *ngFor="let topup of topups | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: topup_counts };let i = index">
+                                        <td nowrap="nowrap"> 
+                                            <input type="checkbox" id="{{i+1}}" />
+										<label for="{{i+1}}"></label>
+										</td>
+                                        <td nowrap="nowrap">{{i+1}}</td>
+                                        <td nowrap="nowrap">{{topup.id}}</td>
+                                        <td nowrap="nowrap">{{topup.date | date: date:'dd M, Y'}}<br><time>{{topup.date | date:'HH:mm a'}}</time></td>
+                                        <!-- <td nowrap="nowrap">{{topup.name}}</td>
+                                        <td nowrap="nowrap">{{topup.phone}}</td> -->
+                                        <td nowrap="nowrap"><i class="icon-inr"></i>{{topup.amount}}</td>
+                                        <td nowrap="nowrap">{{topup.paymethod}}</td>
+                                        <td nowrap="nowrap">{{topup.paybankaccount}}</td>
+                                        <td nowrap="nowrap">{{topup.ref_id}}</td>
+                                        <td nowrap="nowrap"><span class="green white-text padd1" *ngIf="topup.sent==1">Success</span><span class="orange white-text padd1" *ngIf="topup.sent==0">Pending</span></td>
+                                    </tr>  
+                                </tbody>
+                                <tbody *ngIf="topup_counts == 0">
+                                    <tr>
+                                        <td colspan="12">No Topup Request</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+							<div class="has-text-centered right-align">
+								<pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end here -->
+<app-footer-min></app-footer-min>

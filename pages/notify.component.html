@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	bdColor="rgba(255,255,255,0.8)"
+	size="default"
+	color="#ec9737"
+	loadingText="Loading..."
+	type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+<div class="wrapper">
+	<div class="logo"><img src="https://www.mydthshop.com/web-app/assets/images/logo.png" alt="MYDTHSHOP"></div>
+	<h1>MyDth Retailer Setup is Coming Soon!</h1>
+	<div id="canvas"></div>
+	<div class="row">
+	<div class="fifty col s12 m6 offset-m3">
+		<span class="mail">Subscribe to our mailing list to stay up to date!</span>
+		<form [formGroup]="usergroup" class="margin-top sec-7" #userinfoform = "ngForm" (ngSubmit)="user_submit(userinfoform.value)">
+			<input type="text" formControlName="name" class="formStyle" placeholder="Enter You Name (required)" required />
+			<div class="red-text accent-4" *ngIf="!usergroup.controls['name'].valid && usergroup.controls['name'].touched">Enter Name*.</div>
+			<input type="tel" formControlName="phone" class="formStyle" placeholder="Enter Your Mobile No.  (required)" required />
+			<div class="red-text accent-4" *ngIf="!usergroup.controls['phone'].valid && usergroup.controls['phone'].touched">Enter Phone Number*.</div>
+			<input type="email" formControlName="email" class="formStyle" placeholder="Enter Your Email (Required)" required />
+			<div class="red-text accent-4" *ngIf="!usergroup.controls['email'].valid && usergroup.controls['email'].touched">Enter Email*.</div>
+			<button type="submit" class="formButton">Subscribe</button>
+		</form>
+	</div>
+	</div>
+</div>

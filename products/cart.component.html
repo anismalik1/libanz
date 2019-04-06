@@ -1,0 +1,221 @@
+<app-header></app-header>
+<section class="flash-deal border-bottom">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m12 l8">
+                <div class="card">
+                    <div class="card-content black-text padd-only no-margin">
+                            <div class="row no-margin">
+                                <div class="col s12 border-bottom my-cart">
+                                    <span class="font-size-change1 margin-top-cart inline-block">My Cart ({{this.productservice.cartItemsCount()}})</span>
+                                    <!-- <form class="right inline-block coupon">
+                                        <div class="input-field no-margin">
+                                        <input placeholder="Enter Refferal Code" maxlength="6" id="code" type="text" class="validate" name="Code">
+                                        <button type="Submit" class="btn btn-flat  waves-effect waves-light"><i class="material-icons font-size-change1 orange-text">send</i></button>
+                                        </div>
+                                    </form> -->
+                                </div>
+                            </div>
+                        </div>
+				<div class="content-wrapper" *ngIf="this.productservice.cart_items">        
+                    <div class="card-content black-text padd-only no-margin" *ngFor="let item of this.productservice.cart_items;">
+                        <div class="row">
+                                <div class="col s12 m3 center">
+                                    <div class="cart-product-image">
+                                        <img src="https://www.mydthshop.com/accounts/assets/img/product-img/{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
+                                        <div class="product-quantity less-add-btn">
+                                                        <button type="button" class="count-down" (click)="change_count(item.product.id,'minus');" id="lessButton"><i class="material-icons">remove</i></button>
+                                            <span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
+                                            <button type="button" class="count-up" id="addButton" (click)="change_count(item.product.id,'add');"><i class="material-icons">add</i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s12 m5 margin-top">
+                                    <a href="#" class="black-text">
+                                        <h4 class="font600"><a [routerLink]="['/product/'+item.product.url]" class="black-text">{{item.product.title}}</a></h4>
+                                        <span class="font-size-change grey-text">Seller : MyDthShop</span><br>
+										<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
+										<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
+          					<span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span>
+                                    </a>
+                                    <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i>{{item.product.offer_price}}&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
+                                    <span class="font-size-change1 black-text inline-block margin-top-cart">Included Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
+									
+									<br>
+                                    <!-- <a href="javascript:" class="font-size-change margin-top inline-block black-text"  onclick="Materialize.toast('Product add to whishlist', 4000)">Add to Whislist</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                        <a href="javascript:" class="font-size-change margin-top inline-block black-text" (click)="this.productservice.removeItem(item.product.id);"  onclick="Materialize.toast('Product remove to cart ', 4000)">Remove</a><br>
+                                        <!-- <a href="#promocode-modal" class="font-size-change margin-top modal-trigger inline-block blue-text">Apply Any Promocode</a> -->
+                                </div>
+                                <div class="col s12 m4 margin-top padd">
+                                    <strong class="font600">Free delivery with Cash on Delivery and Same day installation</strong><br>
+                                    <span class="grey-text">Faster delivery options available at checkout 10 Days Replacement Policy</span>
+                                </div>
+                            </div>
+                            <div class="divider"></div> 
+					</div>
+				</div>										
+				
+                <div class="card-content black-text padd-only no-margin" *ngIf="this.productservice.cartItemsCount() == 0">
+					<div class="center">
+						<img src="{{this.todoservice.base_url}}assets/images/empty-cart.png" class="responsive-img" width="200px">
+						<br>
+						<p class="font-size-change1">Your Shopping Cart is empty</p>
+						<br>
+						<a [routerLink]="['/']" class="font-size-change"><i class="material-icons">add</i> Add Some Items</a>
+					</div>
+				</div>
+				<div class="card-action right-align cart-card-padd" *ngIf="this.productservice.cartItemsCount() > 0">
+						<a href="javascript:" [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
+						<a href="javasctipt:" routerLink="/product/checkout" class="btn sign orange btn-large font-size-change waves-effect waves-light"> Place Order</a>
+					</div>
+                </div>
+            </div>
+            <div class="col s12 m12 l4 order-summary" *ngIf="this.productservice.cartItemsCount() > 0">
+                <div class="card">
+                    <div class="card-content black-text no-padding">
+                        <span class="card-title inline-block">Order Summary</span>
+                        <hr>
+                        <div *ngFor="let item of this.productservice.cart_items;let i = index;">
+							<div class="subtotal">
+								<p class="inline-block font600">{{i+1}}: Product : <span class="grey-text font500">{{item.product.title}}</span></p>
+								<p class="inline-block right font-size-change green-text" > <i class="icon-inr"></i> {{item.product.offer_price}}</p>
+							</div>
+							<div class="subtotal" *ngFor="let pack of item.product.pack_selected;">
+								<p class="inline-block font600">{{pack.title}} :</p>
+								<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{pack.price}} </p>
+							</div>
+							<hr class="horizontal"> 
+						</div>
+						
+                        <div class="subtotal">
+                            <p class="inline-block font600">Delivery Charges :</p>
+                            <p class="inline-block green-text right font-size-change"> Free </p>
+                        </div>
+                        <hr class="horizontal">
+                        <div class="subtotal payable margin-top">
+                            <p class="inline-block font600">Amount Payable :</p>
+                            <p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}} </p>
+                        </div>
+                        <hr>
+                        <div class="subtotal">
+                            <p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.calculateCartAmountWithoutOffer()-this.productservice.calculateCartAmount()}} </p>
+                        </div>
+                        <hr class="horizontal"> 
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="security">
+                    <ul>
+                        <li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}assets/images/shield.png" class="responsive-img vertical-align-middle" alt="shield" width="40px"></li>
+                        <li class="shield-text inline-block"><span class="no-padding grey-text">Safe and Secure Payments. Easy returns. 100% Authentic products.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="promocode" class="modal lucky7">
+    <div class="modal-content">
+      <h4>7 users every hour will get 100% Cashback* and additional Cashback of<br> Rs. 30 on Paying through Paytm UPI. Conditions apply!</h4>
+      <span class="modal-close promo-abslt"><i class="material-icons font-size-change2 grey-text">close</i></span>
+      <input type="text" size="7" value="LUCKY7" readonly="" class="lucky-input no-margin">
+      <a class="btn orange copy-click" onclick="Materialize.toast('Promo Code Applied', 4000)">Apply</a>
+      <div class="promo-modal-terms">
+      	<span class="font-size-change">Terms &amp; Conditions:</span>
+      	<ul>
+      		<li>*User needs to do at least one recharge/bill payment transaction using code LUCKY7 on Paytm to be eligible to win 100% cashback. </li>
+      		<li>*Click "Proceed to Recharge/Pay Bill" and enter "LUCKY7" in "Have a Promocode?" section.  </li>
+      		<li>*7 lucky winners every hour will be awarded 100% cashback.</li>
+      		<li>*7 lucky winners every hour will be awarded 100% cashback.</li>
+      		<li>*7 lucky winners every hour will be awarded 100% cashback.</li>
+      		<li>* If you are a lucky customer, you will get cashback as per below slabs:<br> 
+						(a) If you transact for Rs.10, you will receive 100% cashback ie. Rs.10. <br>
+						(b) If you transact for Rs.150, you will receive 100% cashback ie. Rs.150. <br>
+						(c) If you transact for Rs.200, you will receive maximum cashback ie. Rs.150.
+					</li>
+      	</ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Promocode modal -->
+	<div id="promocode-modal" class="modal permo-code">
+	  <div class="modal-content">
+	  	<section class="border-bottom-px no-padding">
+		  	<div class="container">
+			  	<div class="row no-margin">
+						<div class="col s11">
+				    	<h4 class="font600">Enter Promocode</h4>
+						</div>
+				  	<div class="col s1 slide-out-nav no-padding">
+						  <a href="javascript:" class="modal-close right"><i class="material-icons font-size-change1 grey-text">close</i></a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="row">
+				<div class="col s12 no-padding promocode-input">
+		    	<div class="card padd no-box-shadow">
+	          <div class="card-content no-padding">
+	        		<div class="row no-margin">
+		            <form>
+					      	<div class="input-field col s9">
+					          <input id="promocode" type="text" class="validate font-size-change">
+					          <label for="promocode">Have a promocode? Enter Here</label>
+					        </div>
+					        <div class="col s3 margin-top2">
+					          <button type="Submit" class="btn apply-hide-btn select-btn margin-top">Apply</button>
+					        </div>
+					      </form>
+				    	</div>
+	          </div>
+	        </div>
+		    </div>
+		    <div class="col s12 grey lighten-4 padd2 center">
+		    	<span class="grey-text font-size-change">Choose from other below</span>
+		    </div>
+		  </div>
+		  <div class="row grey lighten-4 fixed-for-reason">
+		  	<div class="col s12 no-padding border-bottom-px">
+		  		<div class="card padd">
+	          <div class="card-content no-padding">
+		  				<h4>LA10</h4>
+		  				<div class="apply-btn full-width left margin-bottom1">
+		  					<span class="grey-text font-size-change no-margin">LA10 - Get flat 10% cashback on shopping order COD is not avaliable on applying this promocode. </span>
+		  					<button type="Submit" class="btn select-btn"  onclick="Materialize.toast('Promocode Applied', 4000)">Apply</button>
+		  				</div>
+		  				<br>
+		  				<a href="#terms-condtion" class="font-size-change modal-trigger">*T&amp;C</a>
+		  			</div>
+		  		</div>
+		  	</div>
+		  	<div class="col s12 no-padding border-bottom-px">
+		  		<div class="card padd">
+	          <div class="card-content no-padding">
+		  				<h4>LA10</h4>
+		  				<div class="apply-btn full-width left margin-bottom1">
+		  					<span class="grey-text font-size-change no-margin">LA10 - Get flat 10% cashback on shopping order COD is not avaliable on applying this promocode. </span>
+		  					<button type="Submit" class="btn select-btn"  onclick="Materialize.toast('Promocode Applied', 4000)">Apply</button>
+		  				</div>
+		  				<br>
+		  				<a href="#terms-condtion" class="font-size-change modal-trigger">*T&amp;C</a>
+		  			</div>
+		  		</div>
+		  	</div>
+		  	<div class="col s12 no-padding border-bottom-px">
+		  		<div class="card padd">
+	          <div class="card-content no-padding">
+		  				<h4>LA10</h4>
+		  				<div class="apply-btn full-width left margin-bottom1">
+		  					<span class="grey-text font-size-change no-margin">LA10 - Get flat 10% cashback on shopping order COD is not avaliable on applying this promocode. </span>
+		  					<button type="Submit" class="btn select-btn"  onclick="Materialize.toast('Promocode Applied', 4000)">Apply</button>
+		  				</div>
+		  				<br>
+		  				<a href="#terms-condtion" class="font-size-change modal-trigger">*T&amp;C</a>
+		  			</div>
+		  		</div>
+		  	</div>
+		  </div>
+	  </div>
+	</div>
+  

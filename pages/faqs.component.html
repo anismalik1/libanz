@@ -1,0 +1,114 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+  <ngx-spinner
+  bdColor="rgba(255,255,255,1)"
+  size="default"
+  color="#ec9737"
+  loadingText="Loading..."
+  type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+<section class="hero">
+  <div class="container">
+    <h2 class="center font600 white-text margin-top">FAQS</h2>
+  </div>
+</section>
+<section class="container">
+  <div class="row">
+    <div class="col s12 m7 offset-m1 margin-top faq1">
+      <h3 class="center">FAQS</h3>
+      <ul class="collapsible no-box-shadow" data-collapsible="accordion">
+        <li class="search-accordin relative">
+          <input placeholder="Search Your Answer" id="first_name" type="text" class="validate">
+          <button type="Submit" class="btn-flat"><i class="material-icons orange-text font-size-change2">search</i></button>
+        </li>
+        <li class="faq">
+          <div class="collapsible-header"><span>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><a href="javascript:" class="btn">Show Answer</a></div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+          </div>
+        </li>
+        <li class="faq">
+          <div class="collapsible-header"><span>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><a href="javascript:" class="btn">Show Answer</a></div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+          </div>
+        </li>
+        <li class="faq">
+          <div class="collapsible-header"><span>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><a href="javascript:" class="btn">Show Answer</a></div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+          </div>
+        </li>
+        <li class="faq">
+          <div class="collapsible-header"><span>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><a href="javascript:" class="btn">Show Answer</a></div>
+          <div class="collapsible-body">
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col s12 m4 ask-question">
+      <div class="card grey lighten-2">
+        <div class="card-content grey lighten-2 center">
+          <span class="card-title">Ask Your Questions</span>
+          <form id="contact-form" [formGroup]="faqsgroup" #faqsform = "ngForm" (ngSubmit)="faqs_submit(faqsform.value)">
+            <div class="row no-margin">
+              <div class="input-field col s12">
+                <input id="name" type="text" class="validate" formControlName="name">
+                <label for="name">Name*</label>
+                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['name'].valid && faqsgroup.controls['name'].touched">Enter Name*.</div>
+              </div>
+              <div class="input-field col s12">
+                <input id="memail" type="email" class="validate" formControlName="email">
+                <label for="email">Email*</label>
+                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
+              </div>
+              <div class="input-field col s12">
+                <textarea id="textarea1" class="materialize-textarea" formControlName="message"></textarea>
+                <label for="textarea1">Type Your Question*</label>
+                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
+              </div>
+              <div class="col s12 center">
+                <button type="Submit" class="btn orange" [disabled]="!faqsgroup.valid">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="container thank-you-page">
+	<div class="row">
+		<div class="col s12 m10 l6 offset-l3">
+			<div class="card">
+        <div class="card-content">
+    		  <div class="logo-email center">
+    		  	<img src="https://mydthshop.com/web-app/assets/images/logo.png" class="responive-img" alt="mydthshop">
+    		  </div>
+          <h3 class="margin-top1 center">
+          	<span class="t">T</span>
+        		<span class="h">H</span>
+      			<span class="a">A</span>
+    	  		<span class="n">N</span>
+        		<span class="k">K</span><br>
+        		<span class="s"><i class="material-icons">star</i></span>
+      		 	<span class="y">Y</span>
+    			  <span class="o">O</span>
+      		 	<span class="u">U</span>
+        		<span class="r"><i class="material-icons">star</i></span>
+    		  </h3>
+    		  <p class="margin-top1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    		  <p class="margin-top">For any queries or assistance, please contact us a <a href="maito:">help@mydthshop.com</a></p>
+    		  <p class="margin-top1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    		  <p class="margin-top">Best Regards</p>
+    		  <span>Team Mydthshop</span><br>
+    		  <a href="https://www.mydthshop.com/" target="_blank">https://www.mydthshop.com</a>
+    		  <p class="margin-top"><span class="font600">Security Alert</span> - on the off chance that you get a suspicious mail from anybody professing to be a customer of Mydthshop, requesting your own data or some cash by claiming to offer you an occupation kindly don't react to such sends and convey it to the quick notice of mydthshop.com by keeping in touch with us at help@mydthshop.com. It would be ideal if you take note of that such offers/messages are an infringement of our Terms and Conditions, and mydthshop.com does not support such correspondence with competitors.</p>
+        </div>
+      </div>
+		</div>
+	</div>
+</section>
+<app-footer></app-footer>

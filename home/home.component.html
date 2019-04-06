@@ -1,0 +1,902 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	bdColor="rgba(255,255,255,1)"
+	size="default"
+	color="#ec9737"
+	loadingText="Loading..."
+	type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+
+<section class="recharge-section hide-on-med-and-down" *ngIf="recharge_ini == 1">
+	<div class="container">
+		<div class="row mar-row">
+			<div class="col s12">
+				<ul class="tabs center" id="select-item" style="display:none">
+					<li class="tab"><a class="active" href="#mobile"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/mobile-phone2.png" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
+
+					<li class="tab"><a href="#dth"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/satellite-tv.png" class="responsive-img" alt="1"><br><span>DTH</span></a></li>
+
+					<li class="tab"><a href="#electricity"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/plug.png" class="responsive-img" alt="1"><br><span>Electricity</span></a></li>
+
+					<li class="tab"><a href="#water"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/water-drop.png" class="responsive-img" alt="1"><br><span>Water</span></a></li>					
+
+					<li class="tab"><a href="#gas"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/flame.png" class="responsive-img" alt="1"><br><span>Gas</span></a></li>
+
+					<li class="tab"><a href="#broadband"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/wifi.png" class="responsive-img" alt="1"><br><span>Broadband</span></a></li>
+
+					<li class="tab"><a href="#cable-tv" ><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/television.png" class="responsive-img" alt="1"><br><span>Cable Tv</span></a></li>
+
+					<li class="tab"><a href="#data-card"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/usb.png" class="responsive-img" alt="1"><br><span>Data Card</span></a></li>
+
+					<li class="tab"><a href="#landline"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/old-typical-phone.png" class="responsive-img" alt="1"><br><span>Landline</span></a></li>
+
+					<!-- <li class="tab dropdown-more-click"><p class="no-margin"><img src="{{this.params.base_url}}assets/images/recharge-icon/plus.png" class="responsive-img more-clik" alt="1"><br><span class="white-text more-clik">More</span></p></li>
+					<ul class='dropdown-more' style="display:none;">
+						<div class="row no-margin">
+							<div class="col s12 m4">
+								<li class="tab"><a href="#play-store" ><img src="{{this.params.base_url}}assets/images/recharge-icon/play-store.png" class="responsive-img" alt="1"><br><span class="white-text">Play Store</span></a></li>
+							</div>
+							<div class="col s12 m4">
+								<li class="tab"><a href="#delhi-metro"><img src="{{this.params.base_url}}assets/images/recharge-icon/delhi-metro.png" class="responsive-img" alt="1"><br><span class="white-text">Delhi Metro</span></a></li>
+							</div>
+							<div class="col s12 m4">
+								<li class="tab"><a href="#insurance"><img src="{{this.params.base_url}}assets/images/recharge-icon/insurance.png" class="responsive-img" alt="1"><br><span class="white-text">Insurance</span></a></li>
+							</div>
+						</div>
+					</ul>	 	         -->
+				</ul>
+				<div id="mobile" class="col s12 mobile" style="display:none">
+					<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m12 l2 border-right">
+								<input placeholder="Enter Mobile Number" formControlName="recharge_id" maxlength="10" minlength="10" type="text" class="validate no-margin" (keyup)="next_to('mobile','recharge_id',$event)">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Mobile Number" id="mobid" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>  
+							</div>
+							<div class="col s12 m12 l2 margin-top1 border-right">
+								<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="width" checked (change)="change_list(1)" value="1"/>
+								<label for="width">Prepaid</label>
+								<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="test2" (change)="change_list(2)" value="2"/>
+								<label for="test2">Postpaid</label>
+							</div>
+							<div class="input-field col s12 m12 l2 border-right" id="prepaid-list">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #operator>
+										<span *ngFor="let item of operators.MOBILEPREPAID;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span> 
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Opreater" id="opid-1" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span> 
+							</div>
+							<div class="input-field col s12 m12 l2 border-r0ight hide" id="postpaid-list">
+								<mat-form-field >
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator>
+										<span *ngFor="let item of operators.MOBILEPOSTPAID;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Circle" id="opid-2" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span>
+							</div>
+							<div class="input-field col s12 m12 l2 border-right">
+								<mat-form-field>
+									<mat-select placeholder="Select Circle" #mcircle>
+										<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
+											<span class="operator-name">{{ item.circle_name }}</span>
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>  
+							<div class="input-field col s12 m12 l2">
+								<input placeholder="Enter Amount" formControlName="amount" maxlength="5" type="number" pattern="[0-9]+" class="validate no-margin" minlength="2">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Amount" id="amid" *ngIf="!mobilegroup.controls['amount'].valid && mobilegroup.controls['amount'].touched"><i class="material-icons">close</i></span>    
+							</div>
+							<div class="col s12 m12 l2 continue no-padding orange">
+								<button type="submit" class="btn-flat white-text">Proceed to Recharge</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="dth" class="col s12 mobile">
+					<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m3 border-right">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
+										<span *ngFor="let item of operators.DTH;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option> 
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!dthgroup.controls['operator'].valid && dthgroup.controls['operator'].touched"><i class="material-icons">close</i></span> 
+							</div>
+							<div class="input-field col s12 m4 border-right">
+								<input placeholder="Enter Your Viewing Card Number" name="recharge_id" maxlength="{{dthmaxlength}}" minlength="{{dthminlength}}" id="amount" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('dth','recharge_id',$event)">
+								<span class="orange-text ca-num-count" *ngIf="viewrange == 1">Enter {{dthminlength}} digits long Id.</span>
+								<a href="javascript:" class="wrong-detail" id="mobid" *ngIf="!dthgroup.controls['recharge_id'].valid && dthgroup.controls['recharge_id'].touched"><i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator">close</i></a>
+							</div>
+							<div class="input-field col s12 m3">
+								<input placeholder="Enter Amount" maxlength="5" type="number" pattern="[0-9]+" class="validate no-margin" formControlName="amount">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!dthgroup.controls['amount'].valid && dthgroup.controls['amount'].touched"><i class="material-icons">close</i></span>
+							</div>
+							<div class="col s12 m2 continue no-padding orange">
+								<button type="submit" class="btn-flat white-text">Proceed to Recharge</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="data-card" class="col s12 mobile">
+					<form method="post" [formGroup]="datacardgroup" #datacardform = "ngForm" (ngSubmit)="recharge_init('datacard',datacardform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m12 l2">
+								<input placeholder="Enter Data Card Number" formControlName="recharge_id" maxlength="10" minlength="10" id="mobile-no" type="text" class="validate no-margin" (keyup)="next_to('datacard','recharge_id',$event)">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span> 
+							</div>
+							<div class="col s12 m12 l2 margin-top1 bill-type">
+								<input name="group1" class="with-gap data-card-type" type="radio" id="width-1" checked value="1"/>
+								<label for="width-1" (click)="change_list(3)">Prepaid</label>
+								<input name="group1" class="with-gap data-card-type" type="radio" id="width2" value="2"/>
+								<label for="width2" (click)="change_list(4)">Postpaid</label>
+							</div>
+							<div class="input-field col s12 m12 l2 border-left">
+								<div class="" id="pre-datacard-list">        
+									<mat-form-field>
+										<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'card')" formControlName="operator" #predataoperator>
+											<span *ngFor="let item of operators.DATACARDS;">
+												<mat-option [value]="item.id">
+													<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												</mat-option>
+											</span>
+										</mat-select>
+									</mat-form-field>
+									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span> 
+								</div>
+								<div class="hide" id="post-datacard-list">        
+									<mat-form-field>
+										<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'card')" formControlName="operator" #postdataoperator>
+											<span *ngFor="let item of operators.DATACARDS;">
+												<mat-option [value]="item.id">
+													<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												</mat-option>
+											</span>
+										</mat-select>
+									</mat-form-field>
+									<span class="wrong-detail" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number">close</i></span> 
+								</div>  
+							</div>
+							<div class="input-field col s12 m12 l2 border-right">
+								<mat-form-field>
+									<mat-select placeholder="Select Circle" #dcircle>
+										<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
+											<span class="operator-name">{{ item.circle_name }}</span>
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div> 
+							<div class="input-field col s12 m12 l2 border-left">
+								<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Amount" id="mobid" *ngIf="!datacardgroup.controls['amount'].valid && datacardgroup.controls['amount'].touched"><i class="material-icons">close</i></span> 
+							</div>
+							<div class="col s12 m12 l2 continue no-padding orange">
+								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="landline" class="col s12 mobile">
+					<form method="post" [formGroup]="landlinegroup" #landlineform = "ngForm" (ngSubmit)="recharge_init('landline',landlineform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m5 border-right electric-cls1">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'landline')" formControlName="operator">
+										<span *ngFor="let item of operators.LANDLINECAT;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail" id="mobid" *ngIf="!landlinegroup.controls['operator'].valid && landlinegroup.controls['operator'].touched"><i class="material-icons">close</i></span> 
+							</div>
+							<div class="input-field col s12 m5 border-right electric-cls2">
+								<input placeholder="Telephone Number (With ISD Code)" formControlName="recharge_id" pattern="[0-9]+" type="number" class="validate no-margin">
+								<span class="orange-text" *ngIf="showstd == 1">Use STD Codes as 011 for Delhi etc.</span>      
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Telephone Number (With ISD Code)" id="mobid" *ngIf="!landlinegroup.controls['recharge_id'].valid && landlinegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
+							</div>
+
+							<div class="col s12 m2 right continue no-padding orange electric-cls-btn" >
+								<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('landline');">Proceed to Pay</button>
+							</div>
+
+							<span class="hide electric-cls3">
+								<div class="input-field col s12 m3">
+									<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!landlinegroup.controls['amount'].valid && landlinegroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
+									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+								</div>
+								<div class="col s12 m2 continue no-padding orange">
+									<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+								</div>
+							</span>
+						</div>
+					</form>
+				</div>
+				<div id="broadband" class="col s12 mobile">
+					<form method="post" [formGroup]="broadbandgroup" #broadbandform = "ngForm" (ngSubmit)="recharge_init('broadband',broadbandform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m3 border-right">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'broadband')" formControlName="operator">
+										<span *ngFor="let item of operators.BROADCAT;">
+											<mat-option [value]="+item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['operator'].valid && broadbandgroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="input-field col s12 m4 border-right">
+								<input placeholder="Telephone Number (With ISD Code)" formControlName="recharge_id" pattern="[0-9]+"  type="text" class="validate no-margin">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['recharge_id'].valid && broadbandgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="input-field col s12 m3">
+								<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['amount'].valid && broadbandgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="col s12 m2 continue no-padding orange">
+								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="electricity" class="col s12 mobile">
+					<form method="post" [formGroup]="electricitygroup" #electricityform = "ngForm" (ngSubmit)="recharge_init('electricity',electricityform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m5 border-right electric-cls1" >
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'electricity')" formControlName="operator">
+										<span *ngFor="let item of operators.ELECTRICITY;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['operator'].valid && electricitygroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="input-field col s12 m5 border-right electric-cls2">
+								<input placeholder="Customer Account Number" formControlName="recharge_id" type="text" class="validate no-margin"> 
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['recharge_id'].valid && electricitygroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="col s12 m2 right continue no-padding orange electric-cls-btn" >
+								<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('electricity');">Proceed to Pay</button>
+							</div>
+							<span class="hide electric-cls3">
+								<div class="input-field col s12 m3">
+									<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['amount'].valid && electricitygroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
+									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+								</div>
+								<div class="col s12 m2 continue no-padding orange">
+									<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+								</div>
+							</span>
+						</div>
+					</form>
+				</div>
+				<div id="gas" class="col s12 mobile">
+					<form method="post" [formGroup]="gasgroup" #gasform = "ngForm" (ngSubmit)="recharge_init('gas',gasform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m5 border-right electric-cls1">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'gas')" formControlName="operator">
+										<span *ngFor="let item of operators.GAS;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!gasgroup.controls['operator'].valid && gasgroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="input-field col s12 m5 border-right electric-cls2">
+								<input placeholder="Customer Account Number" formControlName="recharge_id" type="text" class="validate no-margin">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Customer Account Number" id="mobid" *ngIf="!gasgroup.controls['recharge_id'].valid && gasgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
+							</div>
+
+							<div class="col s12 m2 right continue no-padding orange electric-cls-btn" >
+								<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('gas');">Proceed to Pay</button>
+							</div>
+
+							<span class="hide electric-cls3">
+								<div class="input-field col s12 m3">
+									<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!gasgroup.controls['amount'].valid && gasgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
+									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+								</div>
+								<div class="col s12 m2 continue no-padding orange">
+									<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+								</div>
+							</span>
+						</div>
+					</form>
+				</div>
+				<div id="water" class="col s12 mobile">
+					<form method="post" [formGroup]="watergroup" #waterform = "ngForm" (ngSubmit)="recharge_init('water',waterform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m5 border-right electric-cls1">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'water')" formControlName="operator">
+										<span *ngFor="let item of operators.WATER;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!watergroup.controls['operator'].valid && watergroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="input-field col s12 m5 border-right electric-cls2">
+								<input placeholder="K NO" formControlName="recharge_id"  type="text" class="validate no-margin">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter K NO" id="mobid" *ngIf="!watergroup.controls['recharge_id'].valid && watergroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
+							</div>
+							<div class="col s12 m2 right continue no-padding orange electric-cls-btn" >
+								<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('water');">Proceed to Pay</button>
+							</div>
+
+							<span class="hide electric-cls3">
+								<div class="input-field col s12 m3">
+									<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!watergroup.controls['amount'].valid && watergroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
+									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+								</div>
+								<div class="col s12 m2 continue no-padding orange">
+									<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+								</div>
+							</span>
+						</div>
+					</form>
+				</div>
+				<div id="cable-tv" class="col s12 mobile">
+					<form method="post"  #cableform = "ngForm" (ngSubmit)="recharge_init('cable-tv',cableform.value)">
+						<div class="row no-margin">
+							<div class="input-field col s12 m3 border-right">
+								<mat-form-field>
+									<mat-select placeholder="Select Operator">
+										<span *ngFor="let item of operators.ELECTRICITY;">
+											<mat-option [value]="item.id">
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											</mat-option>
+										</span>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="input-field col s12 m4 border-right">
+								<input placeholder="Customer ID" name="recharge_id" type="text" class="validate no-margin">
+							</div>
+							<div class="input-field col s12 m3">
+								<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin">
+							</div>
+							<div class="col s12 m2 continue no-padding orange">
+								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>			
+			<!-- <div id="play-store" class="col s12 mobile">
+				<form method="post" action="#">
+					<div class="row no-margin">
+						<div class="input-field col s12 m3 border-right">
+							<mat-form-field>
+								<mat-select placeholder="Select Operator">
+									<mat-option value="">
+										Coming Soon
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div class="input-field col s12 m4 border-right">
+							<input placeholder="Email ID" name="recharge_id" type="email" class="validate no-margin">
+						</div>
+						<div class="input-field col s12 m3">
+							<input placeholder="Enter Amount (100 - 1500)" name="amount" maxlength="4" type="text" class="validate no-margin">
+						</div>
+						<div class="col s12 m2 continue no-padding orange">
+							<button type="submit" class="btn-flat white-text" (click)="recharge_init('play-store')">Continue</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="delhi-metro" class="col s12 mobile">
+				<form method="post" action="#">
+					<div class="row no-margin">
+						<div class="input-field col s12 m3 border-right">
+							<mat-form-field>
+								<mat-select placeholder="Select Operator">
+									<mat-option value="">
+										Coming Soon
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div class="input-field col s12 m4 border-right">
+							<input placeholder="Cad Number" name="recharge_id" maxlength="12" type="number" class="validate no-margin">
+						</div>
+						<div class="input-field col s12 m3">
+							<input placeholder="Enter Amount (100 - 1500)" name="amount" maxlength="4" type="text" class="validate no-margin">
+						</div>
+						<div class="col s12 m2 continue no-padding orange">
+							<button type="submit" class="btn-flat orange white-text" (click)="recharge_init('delhi-metro')">Continue</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="insurance" class="col s12 mobile">
+				<form method="post" action="#">
+					<div class="row no-margin">
+						<div class="input-field col s12 m3 border-right">
+							<mat-form-field>
+								<mat-select placeholder="Select Operator">
+									<mat-option value="">
+										Coming Soon
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div class="input-field col s12 m4 border-right">
+							<input placeholder="Policy Number" name="recharge_id" maxlength="12" type="number" class="validate no-margin">
+						</div>
+						<div class="input-field col s12 m3">
+							<input placeholder="Date Of Birth (DD-MM-YY)" name="dob" id="dob" type="text" class="validate no-margin datepicker">
+						</div>
+						<div class="col s12 m2 continue no-padding orange">
+							<button type="submit" class="btn-flat orange white-text" (click)="recharge_init('insurance')">Continue</button>
+						</div>
+					</div>
+				</form>
+			</div> -->
+		</div>
+	</div>
+</section>
+<section class="recharge-section show-on-medium-and-down hide-on-med-and-up">
+	<div class="container">
+		<div class="row">
+			<div class="col s12">				
+				<ul class="center" id="select-item">
+					<div class="row">
+						<div class="col s4">
+							<li class="tab"><a class="active" href="#mobile"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/mobile-phone2.png" class="responsive-img" alt="1"><br><span class="black-text">Mobile</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a href="#dth"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/satellite-tv.png" class="responsive-img" alt="1"><br><span class="black-text">DTH</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a href="#electricity"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/plug.png" class="responsive-img" alt="1"><br><span class="black-text">Electricity</span></a></li>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s4">
+							<li class="tab"><a href="#water"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/water-drop.png" class="responsive-img" alt="1"><br><span class="black-text">Water</span></a></li>					
+						</div>
+						<div class="col s4">
+							<li class="tab"><a href="#gas"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/flame.png" class="responsive-img" alt="1"><br><span class="black-text">Gas</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a href="#broadband"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/wifi.png" class="responsive-img" alt="1"><br><span class="black-text">Broadband</span></a></li>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s4">
+							<li class="tab"><a href="#cable-tv" ><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/television.png" class="responsive-img" alt="1"><br><span class="black-text">Cable Tv</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a href="#data-card"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/usb.png" class="responsive-img" alt="1"><br><span class="black-text">Data Card</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a href="#landline"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/old-typical-phone.png" class="responsive-img" alt="1"><br><span class="black-text">Landline</span></a></li>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<section *ngIf="recharge_ini == 3">
+	<div class="row no-margin">
+		<div class="col s12 m10 l7 offset-l2">
+			<div class="card no-margin">
+				<div class="card-content" *ngIf="order">
+					<span class="card-title">Payment of RS. {{order.amount}} recevied by MyDthShop!</span>
+					<div class="row border-on-bottom padd-bottom">
+						<div class="col s8 no-padding">
+							<span class="font-size-change">Order Number</span>&nbsp;
+							<span class="font-size-change1 font600">{{order.order_id}}</span>&nbsp;
+						</div>
+						<div class="col s4 right-align">
+							<span class="font-size-change">Amount</span><br>
+							<span class="font-size-change font600">&#x20B9; {{order.amount}}</span><br>
+						</div>
+					</div>
+					<div class="row no-margin border-on-bottom padd-bottom">
+						<div class="col s9  no-padding" >
+							<span class="font-size-change" *ngIf="order.recharge_status == 1">Your Order is Successful</span>
+							<span class="font-size-change" *ngIf="order.recharge_status == 2">Your Order is Failed</span>
+							<span class="font-size-change" *ngIf="order.recharge_status == 3">Your Order is Pending</span>
+						</div>
+						<div class="col s3 right right-align">
+							<!-- <span class="font-size-change1 font600"><i class="fa fa-inr" aria-hidden="true"></i> {{order.wallet_amount}}</span><br> -->
+							<a *ngIf="order.payment_status == 3" href="javascript:" class="orange-text font-size-change no-box-shadow success">Pending</a>
+							<a *ngIf="order.payment_status == 2"href="javascript:" class="red-text font-size-change no-box-shadow success">Refunded</a>
+							<a *ngIf="order.payment_status == 1"href="javascript:" class="green-text no-box-shadow font-size-change success">Successful</a>
+						</div>
+					</div>		        
+				</div>
+				<div class="card-action right-align">
+					<a href="javascript:" (click)="continue_back()" class="btn orange">Continue</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section *ngIf="recharge_ini == 2">
+	<div class="container">
+		<div class="row mar-row responsive-kro">
+			<a class="modal-close recharge-close" href="javascript:" (click)="back_to_recharge()"><i class="material-icons">close</i></a>
+			<div class="col s12 m12 l6">
+				<img src="https://mydthshop.com/media/uploads/api_catimages/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
+				<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
+				<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
+			</div>
+			<div class="col s12 m12 l4">
+				<div class="payment-method" *ngIf="pay_step==1">
+
+					<p class="inline-block margin-right fast-forwad relative">
+						<input type="radio" class="with-gap" id="instant-recharge"  name="payment_type" value="wallet" checked/>
+						<label for="instant-recharge" class="black-text"><span class="fast"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
+					</p>
+					<p class="inline-block margin-right">
+						<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
+						<label for="other-option" class="black-text">Other</label>
+					</p>
+				</div>
+				<div class="payment-method1"  *ngIf="pay_step==2">
+					<p class="inline-block margin-right ">
+						<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
+						<label for="paytm" class="black-text">Paytm</label>
+					</p>
+					<p class="inline-block margin-right ">
+						<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card"/>
+						<label for="credit-card" class="black-text">Cards & Netbanking</label>
+					</p>
+					<p class="inline-block margin-right ">
+						<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
+					</p>
+				</div>                                                                                                      
+
+			</div>
+			<div class="col s12 m12 l2">
+				<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount}}</button>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Here -->
+<!-- Flash Deal New Design -->
+<section class="flash-deal slider-flash-deal">
+	<div class="container-fluid">
+		<div class="row no-margin">
+			<div class="col s12 m8 no-padding-right">
+				<div class="card no-margin">
+					<div class="card-content no-padding">
+						<ul class="flash-deal-slider">
+							<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
+								<a href="javascript:">
+									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
+								</a>
+							</li>
+
+						</ul>
+						<ul class="tabs" id="select-slide" *ngIf="filter_banners('main-banner')">
+							<li class="tab hide"><a href="javascript:"></a></li>
+							<li class="tab" *ngFor="let item of filter_banners('main-banner');let i = index"><span class="data-slide hide">{{i+1}}</span><a [class.active]="i==0" href="javascript:"><p class="font-size-change1 font600 black-text" title="{{item.title}}">{{item.title}}</p><span class="grey-text" title="{{item.description}}">{{item.description}}</span></a></li>		
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4 no-padding-left images-height" *ngIf="filter_banners('main-side-banner')">
+				<div class="card no-margin">
+					<div class="card-content no-padding">
+						<a href="javascript:" *ngFor="let item of filter_banners('main-side-banner')">
+							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img" alt="flah-deal" title="DTH Deals Offers">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Here -->
+<!-- Tata Sky section -->
+<section class="flash-deal white margin-top">
+	<h2 class="center padd border-bottom font600">Tata Sky Products</h2>
+	<div class="container">
+		<div class="row no-margin new-design-card">
+			<div class="col s12 m4">
+				<div class="card" style="box-shadow: 0px 3px 23.22px 3.78px rgba(0, 0, 0, 0.16) !important;">
+					<div class="card-image center" *ngIf="tata_slides">
+						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{tata_slides[0].image}}" class="responsive-img tata-sky-card-img" alt="tata-sky-banner" width="100%">
+					</div>
+					<div class="card-content" *ngIf="tata_slides">
+						<span class="card-title white-text">{{tata_slides[0].title}}</span>
+						<ul class="no-margin">
+							<li [innerHTML]="tata_slides[0].description | nl2pbr"></li>
+						</ul>
+						<div class="mrp-price">
+								<h2 class="no-margin del-pri">	
+									MRP: <span><i class="icon-inr"></i> {{tata_slides[0].price}}</span>
+								</h2>
+								<h1 class="font600 no-margin"><i class="icon-inr"></i> {{tata_slides[0].offer_price}}</h1>
+								<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+							</div>
+						<div class="btn-new center">
+							<a [routerLink]="['/product/'+tata_slides[0].url]" target="_blank" class="btn">Book Now</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col s12 m8">
+				<div class="row no-margin">
+					<div *ngFor="let item of tata_slides;let i = index">
+						<div class="col s12 m6" *ngIf="i > 0">
+						<div class="card horizontal">
+							<div class="card-image padd">
+								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
+							</div>
+							<div class="card-stacked">
+								<div class="card-content no-padding">
+									<span class="card-title white-text font-size-change1">{{item.title}}</span>
+									<!-- <ul class="no-margin">
+										<li [innerHTML]="item.description | nl2pbr"></li>
+									</ul> -->
+									<div class="mrp-price">
+										<h2 class="no-margin del-pri">	
+											MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
+										</h2>
+										<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
+										<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+									</div>
+									<div class="btn-new1 center">
+										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="col s12 m12" *ngIf="i > 2">
+							<div class="card horizontal">
+								<div class="card-image padd">
+									<img src="https://mydthshop.com/media/uploads/products/tata-sky1.png" class="responsive-img"  alt="images">
+								</div>
+								<div class="card-stacked">
+									<div class="card-content no-padding">
+										<span class="card-title white-text font-size-change1">{{item.title}}</span>
+										<ul class="no-margin">
+											<li [innerHTML]="item.description | nl2pbr"></li>
+										</ul>
+										<div class="mrp-price">
+											<h2 class="no-margin del-pri">	
+												MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
+											</h2>
+											<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
+											 <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> 
+										</div>
+										<div class="btn-new1 center">
+											<a [routerLink]="['/product/'+item.url]" class="btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end here -->
+<!-- Dish Tv Section -->
+<section class="flash-deal white margin-top">
+	<h2 class="border-bottom font600 padd center">Dish Tv DTH Products</h2>
+	<div class="container">
+		<div class="row no-margin new-design-card">
+			<div class="col s12 m4" *ngFor="let item of dishtv_slides">
+				<div class="card">
+					<div class="card-image center">
+						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="tata-sky-banner" width="100%">
+					</div>
+					<div class="card-content">
+						<span class="card-title white-text">{{item.title}}</span>
+						<ul class="no-margin">
+							<li [innerHTML]="item.description | nl2pbr"></li>
+						</ul>
+						<div class="mrp-price">
+							<h2 class="no-margin del-pri">	
+								MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
+							</h2>
+							<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
+							<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+						</div>
+						<div class="btn-new center">
+							<span class="orange-text" >Cash On Delivery</span><br>
+							<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</section>
+<!-- end here -->
+<!-- Airtel Dish section -->
+<section class="flash-deal white margin-top">
+	<h2 class="border-bottom font600 padd center">Airtel DTH Products</h2>
+	<div class="container">
+		<div class="row no-margin new-design-card">
+			<div class="col s12 m4">
+				<div class="card" style="box-shadow: 0px 3px 23.22px 3.78px rgba(0, 0, 0, 0.16) !important;">
+					<div class="card-image center" *ngIf="airtel_slides">
+						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{airtel_slides[0].image}}" class="responsive-img airtel-card-image" alt="tata-sky-banner" width="100%">
+					</div>
+					<div class="card-content" *ngIf="airtel_slides">
+						<span class="card-title white-text">{{airtel_slides[0].title}}</span>
+						<ul class="no-margin">
+							<li [innerHTML]="airtel_slides[0].description | nl2pbr"></li>
+						</ul>
+						<div class="mrp-price">
+							<h2 class="no-margin del-pri">	
+								MRP: <span><i class="icon-inr"></i> {{airtel_slides[0].price}}</span>
+							</h2>
+							<h1 class="font600 no-margin"><i class="icon-inr"></i> {{airtel_slides[0].offer_price}}</h1>
+							<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+						</div>
+						<div class="btn-new center">
+							<span class="orange-text">Cash On Delivery</span><br>
+							<a  [routerLink]="['/product/'+airtel_slides[0].url]" target="_blank" class="btn">Book Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m8">
+				<div class="row">
+					<div *ngFor="let item of airtel_slides;let i = index">
+					<div class="col s12 m6 padd-left" *ngIf="i > 0 && i < 3">
+						<div class="card horizontal">
+							<div class="card-image padd">
+								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
+							</div>
+							<div class="card-stacked">
+								<div class="card-content no-padding">
+									<span class="card-title white-text font-size-change1">{{item.title}}</span>
+									<!-- <ul class="no-margin">
+										<li>Enjoy 241 SD + 55 HD Channels and Services</li>
+										<li>Enjoy 241 SD + 55 HD Channels and Services</li>
+										<li>Enjoy 241 SD + 55 HD Channels and Services</li>
+									</ul> -->
+									<div class="mrp-price1">
+										<h2 class="no-margin del-pri1">	
+											MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
+										</h2>
+										<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
+										<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+									</div>
+									<div class="btn-new1 center">
+										<span class="orange-text">Cash On Delivery</span><br>
+										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m12 card-design-change" *ngIf=" i >= 3">
+						<div class="card horizontal">
+							<div class="card-image padd">
+								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
+							</div>
+							<div class="card-stacked">
+								<div class="card-content no-padding">
+									<span class="card-title white-text font-size-change1 no-margin">{{item.title}}</span>
+									<ul class="no-margin">
+										<li [innerHTML]="item.description | nl2pbr"></li>
+									</ul>
+									<div class="mrp-price1">
+										<h2 class="no-margin del-pri1 inline-block">	
+											MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
+										</h2>
+										<h1 class="font600 no-margin inline-block"><i class="icon-inr"></i> {{item.offer_price}}</h1>
+										<!-- <h2 class="inline-block">Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+									</div>
+									<div class="btn-new1 center-align">
+										<span class="orange-text">Cash On Delivery</span><br>
+										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+		</div>
+		</div>
+	</div>
+</section>
+<!-- end here -->
+<!-- Videocon D2H section -->
+<section class="flash-deal white margin-top">
+	<h2 class="border-bottom font600 padd center">Videocon D2H Products</h2>
+	<div class="container">
+		<div class="row no-margin new-design-card">
+			<div class="col s12 m6 l3" *ngFor="let item of videcone_slides;let i = index">
+				<div class="card">
+					<div class="card-image center">
+						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="tata-sky-banner" width="100%">
+					</div>
+					<div class="card-content">
+						<span class="card-title white-text">{{item.title}}</span>
+						<ul class="no-margin">
+							<li [innerHTML]="item.description | nl2pbr"></li>
+						</ul>
+						<div class="mrp-price">
+							<h2 class="no-margin del-pri">	
+								MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
+							</h2>
+							<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
+							<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+						</div>
+						<div class="btn-new center">
+							<span class="orange-text">Cash On Delivery</span><br>
+							<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end here -->
+<section class="retailer-section grey lighten-3 no-padding">
+	<div class="container-fluid">
+		<div class="row no-margin">
+			<ul class="retailer-slider">
+				<li *ngFor="let banner of filter_banners('user-type')">
+					<div class="row no-margin">
+						<div class="col s12 m5 no-padding">
+							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%">
+						</div>
+						<div class="col s12 m7 no-padding">
+							<div class="registration-here-page padd-rem2">
+								<h1 class="uppercase font600">{{banner.title}}</h1>
+								<p  class="font-size-change1">{{banner.description}}</p>
+								<a [routerLink]="[banner.imageurl]"  target="_blank" class="btn orange margin-top1">Register Here</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</section>
+<!--JavaScript at end of body for optimized loading-->
+<app-footer [baseUrl]="this.params.base_url"></app-footer>
