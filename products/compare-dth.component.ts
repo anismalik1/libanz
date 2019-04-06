@@ -28,7 +28,7 @@ export class CompareDthComponent implements OnInit {
     script.id = `init-page-script`;
     script.type = `text/javascript`;
     script.text = `
-       console.log(1)
+      $('.modal').modal();
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
