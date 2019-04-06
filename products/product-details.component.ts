@@ -674,7 +674,6 @@ export class ProductDetailsComponent implements OnInit{
       if(this.fta_pack.id)
         this.pack_selected = [this.fta_pack];
       this.pack_selected.push(pack);
-
     }
     else
     {
