@@ -348,7 +348,7 @@ export class ProductDetailsComponent implements OnInit{
         this.filter_channel_subpack();
         this.product = data.PRODUCTDATA;
         this.circles = data.circles;
-        if(data.PROMOS.length > 0)
+        if(data.PROMOS && data.PROMOS.length > 0)
         {
           this.promos = data.PROMOS[0];
           this.product.promos = this.promos;

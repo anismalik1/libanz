@@ -37,7 +37,7 @@ export class ProductService {
       for(var i =0;i<Object.keys(cart).length; i++)
       {
         let item = JSON.parse(cart[i]);
-        if(Number(item.product.cod_available) == 0)
+        if(item.product.cod_available && Number(item.product.cod_available) == 0)
         {
           cod_count = cod_count + 1;
         }

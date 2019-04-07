@@ -84,6 +84,11 @@
 								<p class="inline-block font600">{{pack.title}} :</p>
 								<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{pack.price}} </p>
 							</div>
+							<div class="subtotal" *ngIf="item.product.promos">
+								<p class="inline-block font600">Congrates! Promocode {{item.product.promos.unique_code}} is applied  :</p>
+								<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
+								<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
+							</div>
 							<hr class="horizontal"> 
 						</div>
 						
