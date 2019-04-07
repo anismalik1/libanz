@@ -402,6 +402,11 @@
 					<p class="inline-block font600">{{item.title}} :</p>
 					<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{item.price}} </p>
 				</div>
+				<div class="subtotal" *ngIf="this.promos">
+					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
+					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
+					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
+				</div>
 			</div>
 			<hr class="horizontal">
 			<div class="subtotal payable margin-top">

@@ -24,4 +24,5 @@ export class Product {
     is_otf : number;
     otf_pay_type : number;
     pack_selected : any;
+    promos : any;
 }

@@ -49,6 +49,7 @@ export class ProductDetailsComponent implements OnInit{
   monthdata : any;
   packages : Package[];
   product_mpackages : Package[];
+  promos : any;
   thumbs : any;
   constructor(
     private _renderer2: Renderer2, 
@@ -77,7 +78,7 @@ export class ProductDetailsComponent implements OnInit{
 
     this.cat_id = this.todoservice.get_param('cat_id');
     //this.product_id = this.todoservice.get_param('id');
-    this.fetch_product_data(this.p_id,this.cat_id);
+    //this.fetch_product_data(this.p_id,this.cat_id);
     // Observable.interval(100 * 60).subscribe(x => {
     //   //this.track_record();
     // });
@@ -342,19 +343,16 @@ export class ProductDetailsComponent implements OnInit{
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
         this.spinner.hide();
         let b = this.htmlToPlaintext(JSON.stringify(data));
-        b =  b.replace(/\\/g, '');
-        b =  b.replace(/&amp;/g, '');
-        //b =  data.replace(/"/g, '\'');
-        data =  JSON.parse(b.replace(/&nbsp;/g, ''));
-        //this.channels = JSON.parse(data.PRODUCTDATA.channel_packages.replace(/'/g, '"'));
-        //this.all_packs = data.CHANNEL_PACKAGES;
         this.channels_packs = data.package;
         this.fta_pack = {};
         this.filter_channel_subpack();
-        //console.log(this.channels_packs);
-        // this.filter_channel_pack(JSON.parse(data.PRODUCTDATA.channel_packages.replace(/'/g, '"')));
         this.product = data.PRODUCTDATA;
         this.circles = data.circles;
+        if(data.PROMOS.length > 0)
+        {
+          this.promos = data.PROMOS[0];
+          this.product.promos = this.promos;
+        }
         if(this.circles)
         {
           if(!this.productservice.get_region())
@@ -707,6 +705,13 @@ export class ProductDetailsComponent implements OnInit{
       amount = amount + Number(this.product.price) - 1000;
     else
       amount = amount + Number(this.product.offer_price);  
+    if(this.promos)
+    {
+      if(this.promos.discount <= this.promos.max_discount)
+      {
+        amount = amount - Number(this.promos.discount);
+      }
+    }  
     return amount;
   }
   
