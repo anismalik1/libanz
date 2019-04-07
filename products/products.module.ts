@@ -16,6 +16,7 @@ import { OrderReceiptComponent } from './order-receipt.component';
 import { OffersComponent } from './offers.component';
 import { ChannelPackComponent } from './channel-pack.component';
 import { CompareDthComponent } from './compare-dth.component';
+import { MultiComponent } from './multi.component';
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
   { path: 'listing', component: ProductsComponent },
@@ -25,8 +26,8 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: ':name', component: ProductDetailsComponent },
-  { path: ':name/multi', component: ProductDetailsComponent },
-  { path: ':name/multi/:name', component: ProductDetailsComponent },
+  { path: 'multi/:name', component: MultiComponent },
+ // { path: ':name/multi/:name', component: ProductDetailsComponent },
 ];
 
 @NgModule({
@@ -40,7 +41,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule
   ],
-  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, OffersComponent, ChannelPackComponent, CompareDthComponent],
+  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, OffersComponent, ChannelPackComponent, CompareDthComponent, MultiComponent],
   providers : [ProductService]
 })
 
