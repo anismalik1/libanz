@@ -189,6 +189,13 @@ export class ProductService {
         amount += Number(item.product.pack_selected[0].price);
       if(item.product.pack_selected[1])
         amount += Number(item.product.pack_selected[1].price);
+      if(item.product.promos)
+      {
+        if(item.product.promos.discount <= item.product.promos.max_discount)
+        {
+          amount = amount - Number(item.product.promos.discount);
+        }
+      }  
     }
     return amount; 
   }
@@ -211,6 +218,14 @@ export class ProductService {
           amount += 599;
         if(item.product.tsk_kit == 3)
           amount += 999; 
+      }
+      //console.log(item.product.promos)
+      if(item.product.promos)
+      {
+        if(item.product.promos.discount <= item.product.promos.max_discount)
+        {
+          amount = amount - Number(item.product.promos.discount);
+        }
       }
     }
     return amount;
