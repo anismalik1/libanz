@@ -18,6 +18,7 @@ import { BookDthOrderComponent } from './book-dth-order.component';
 import { BookedOrderListComponent } from './booked-order-list.component';
 import { FooterMinComponent } from '../shared/footer/footer-min.component';
 import { NgxPaginationModule} from 'ngx-pagination';
+import { BookDthOrdersComponent } from './book-dth-orders.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'commission-structure', component: CommissionStructureComponent },
   { path: 'transactions', component: TransactionHistoryComponent },
   { path: 'edit-profile', component: EditAccountComponent },
+  { path: 'book-dth-orders', component: BookDthOrdersComponent },
   { path: 'book-dth-order', component: BookDthOrderComponent },
   { path: 'booked-order-list', component: BookedOrderListComponent },
 ];
@@ -42,7 +44,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule
   ],
-  declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent],
+  declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent],
   providers : [ExcelService]
 })
 export class DashboardModule { }

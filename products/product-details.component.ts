@@ -504,6 +504,7 @@ export class ProductDetailsComponent implements OnInit{
       this.toastr.error("Please Login to proceed", 'Failed! ');
       return false;
     }
+  
     if(!this.productservice.if_exist_in_cart(p_id))
     {
       this.productservice.addto_cart(p_id);
@@ -543,49 +544,18 @@ export class ProductDetailsComponent implements OnInit{
     script.id = `init-page-script`;
     script.type = `text/javascript`;
     script.text = `
-        $('.modal').modal();
-        $('.dropdown-button').dropdown({
-          inDuration: 300,
-          outDuration: 225,
-          constrainWidth: true, // Does not change width of dropdown to that of the activator
-          hover: false, // Activate on hover
-          gutter: 0, // Spacing from edge
-          belowOrigin: false, // Displays dropdown below the button
-          alignment: 'left'
-        });
         $('.collapsible').collapsible();
-        $('.slider-6').lightSlider({
-          item: 4,
-          auto: false,
-          pauseOnHover: true,
-          loop: false,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:4
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:2
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        }); 
         $(document).ready(function(){
+          $('.modal').modal();
+          $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: true, // Does not change width of dropdown to that of the activator
+            hover: false, // Activate on hover
+            gutter: 0, // Spacing from edge
+            belowOrigin: false, // Displays dropdown below the button
+            alignment: 'left'
+          });
           $('#login-modal').modal();
           $('.logup.modal-trigger').click(function(){
             $('#login-modal').modal('open');
@@ -705,7 +675,7 @@ export class ProductDetailsComponent implements OnInit{
       amount = amount + Number(this.product.price) - 1000;
     else
       amount = amount + Number(this.product.offer_price);  
-    if(this.promos)
+    if(this.product.promos)
     {
       if(this.promos.discount <= this.promos.max_discount)
       {
@@ -788,11 +758,15 @@ export class ProductDetailsComponent implements OnInit{
       $('#cashback-item').hide();
       this.otf_margin = true;
       $('#offer-price').text(this.monthdata[0].package_price - 1000 );
+      delete this.product.promos;  
+      this.calculate_amount();
     }
     else
     {
       $('#offer-price').text(this.monthdata[0].offer_price );
       $('#cashback-item').show();
+      this.product.promos = this.promos;
+      this.calculate_amount();
     }
   }
   

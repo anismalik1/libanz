@@ -37,7 +37,7 @@
 				<div class="images-product relative">
 					<div class="product-img center">
 						<span *ngIf="product"><img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"></span>
-						<a class="wishlist tooltipped relative" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" onclick="Materialize.toast('Add Your Favorite', 4000)"><i class="material-icons">star</i></a>
+						<!-- <a class="wishlist tooltipped relative" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" onclick="Materialize.toast('Add Your Favorite', 4000)"><i class="material-icons">star</i></a> -->
                         <div class="xzoom-thumbs left" *ngIf="thumbs">
                             <ul>
                                 <li *ngFor="let item of thumbs;">
@@ -402,7 +402,7 @@
 					<p class="inline-block font600">{{item.title}} :</p>
 					<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{item.price}} </p>
 				</div>
-				<div class="subtotal" *ngIf="this.promos">
+				<div class="subtotal" *ngIf="this.product && this.product.promos">
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>

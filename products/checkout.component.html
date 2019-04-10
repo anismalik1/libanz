@@ -48,7 +48,7 @@
         			<div class="name margin-top-cart">
         				<a href="javascript:" routerLink="/logout" class="font600">Logout &amp; Sign in to another account</a>
         			</div>
-        			<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_address()">PROCEED</button>
+        			<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_orders()">PROCEED</button>
         		</div>
         		<div class="col s6 m6">
         			<div class="name margin-top-cart">
@@ -88,9 +88,8 @@
           </div>
           <!-- End Here -->          
           <!-- Login Checkout -->
-        	<div class="row no-margin white login-checkout hide checkout_3">
-        		<form>
-          		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
+        	<div class="row no-margin white login-checkout checkout_3">
+        		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
           			<div class="col s12 m3 center">
           				<div class="cart-product-image"> 
           					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
@@ -128,9 +127,9 @@
           		<div class="divider"></div>
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-					<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_pay()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
+					<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_address()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
 				</div>
-          	</form>
+          	
           	<div class="divider"></div>
         	</div>
 					<!-- End Here -->					
@@ -155,7 +154,7 @@
           </div>          
           <!-- End Here -->
           <!-- Login Checkout -->
-        	<div class="row no-margin login-checkout checkout_2">
+        	<div class="row no-margin login-checkout hide checkout_2">
         		<div class="col s10 m10 offset-m1">
         			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
                         <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
@@ -168,7 +167,7 @@
         			</div>        			
 								</div>
 								<div class="col s10 m10 offset-m1">
-								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_orders()">DELIVER HERE</button>
+								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_pay()">DELIVER HERE</button>
 								</div>
 								<div class="add-new-address col s12">
             	<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a new address</a>
@@ -224,13 +223,13 @@
           
           		<!-- End Here -->
           		<!-- Net Banking -->
-          		<div class="row hide">
+          		<!-- <div class="row hide">
           			<div class="col s12 m10 offset-m1">
           				<input name="group1" class="with-gap" type="radio" name="wallet_type" id="net" value="net_banking"/>
     							<label for="net" class="font-size-change black-text">Net Banking</label>
 				        </div>
-          		</div>
-				      <div class="row popular-bank hide" id="popular-banks">
+          		</div> -->
+				      <!-- <div class="row popular-bank hide" id="popular-banks">
 				      	<div class="col s12 pop">
 				      		<span class="font600 font-size-change">Popular Banks</span>
 				      	</div>
@@ -275,13 +274,13 @@
           			<div class="col s12 pop margin-top location-add">
           				<button type="Submit" class="btn-large orange no-box-shadow">Pay <i class="fa fa-inr"></i>1600</button>
           			</div>
-          		</div>
+          		</div> -->
           		<!-- End Here -->
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout" *ngIf="cod == false">
 						<span *ngIf="this.todoservice.get_user_wallet_amount() > this.productservice.calculateCartAmount()"><a href="javascript:" class="btn orange btn-large ctn-che1" (click)="checkout_items(1)">Continue Checkout</a></span>
-						<span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a></span>
+						<span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a> <span class="red-text">!Insufficient Balance.</span> <a class="blue-text" [routerLink]="['/dashboard/add-money']">Add Money</a></span>
 					</div>
 					<div class="name margin-checkout" *ngIf="cod == true">
 						<span><a href="javascript:" class="btn orange btn-large cod-check" (click)="checkout_items(2)">Continue Checkout</a></span>
@@ -301,13 +300,13 @@
 					<p class="inline-block font600">{{i+1}}: Product : <span class="grey-text font500">{{item.product.title}}</span></p>
 					<ng-template #kitblock>
 						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
-						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{item.product.offer_price }}</p>
+						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{item.product.price - 1000 }}</p>
 					</ng-template>
 					<ng-template #nokitblock>
 						<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
 					</ng-template>
 					<br/>
-					<div *ngFor="let pack of item.product.pack_selected">
+					<div style="padding: 10px 0;" *ngFor="let pack of item.product.pack_selected">
 						<p class="font600 left">Pack : <span class="grey-text font500">{{pack.title}}</span></p>
 						<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
 						<div class="clearfix"></div>

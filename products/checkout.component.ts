@@ -99,6 +99,7 @@ ngOnInit() {
       $('.fourth-line').removeClass('white');	
       $('.chngs2').addClass('hide');				
       $('.chngs3').addClass('hide');				
+      $('.chngs1').removeClass('hide');				
       $('.chngs4').addClass('hide');	
   });
   $('body').delegate('.ctn-che1','click', function(){
@@ -118,7 +119,7 @@ ngOnInit() {
       $('.second-line').addClass('white');
       $('.third-line').removeClass('white');
       $('.fourth-line').removeClass('white');
-      $('.chngs3').addClass('hide');				
+      //$('.chngs3').addClass('hide');				
       $('.chngs4').addClass('hide');
  });
   $('body').delegate('.ctn-che2','click',function() {
@@ -133,8 +134,10 @@ ngOnInit() {
   });
   $('body').delegate('.chngs3','click', function() {
     $('.modal').modal();
-      $('.checkout_3').removeClass('hide');									
+      $('.checkout_3').removeClass('hide');	
+      $('.chngs2').addClass('hide');								
       $('.checkout_4').addClass('hide');									
+      $('.checkout_2').addClass('hide');									
       $('.naam3').addClass('hide');									
       $('.third-line').addClass('white');									
       $('.fourth-line').removeClass('white');									
@@ -356,25 +359,25 @@ goto_orders()
     this.toastr.error("Please Add a New Address.");
     return false;
   }
-  $('.checkout_2').addClass('hide');
+  $('.checkout_1').addClass('hide');
   $('.checkout_3').removeClass('hide');
-  $('.chngs2').removeClass('hide');
+  $('.chngs1').removeClass('hide');
   $('.second-line').removeClass('white');
   $('.third-line').addClass('white');
 }
 goto_pay()
 {
-  $('.checkout_3').addClass('hide');
+  $('.checkout_2').addClass('hide');
   $('.checkout_4').removeClass('hide');
-  $('.chngs3').removeClass('hide');
+  $('.chngs2').removeClass('hide');
   $('.third-line').removeClass('white');
   $('.fourth-line').addClass('white');
 }
 goto_address()
 {
-  $('.checkout_1').addClass('hide');
+  $('.checkout_3').addClass('hide');
   $('.checkout_2').removeClass('hide');
-  $('.chngs1').removeClass('hide');
+  $('.chngs3').removeClass('hide');
   $('.first-line').removeClass('white');
   $('.second-line').addClass('white');
 }

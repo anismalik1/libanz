@@ -23,7 +23,7 @@
 								</div>
 								<div class="col s4 right-align">
 									<span class="font-size-change1">Amount</span><br>
-									<span class="font-size-change-order font600"><i class="icon-inr"></i><span id="total-amount"></span>{{calculate_amount(order)}}</span><br>
+									<span class="font-size-change-order font600"><i class="icon-inr"></i><span id="total-amount"></span>{{order.final_price}}</span><br>
 									<span [innerHTML]="pack_list(order.pack_selected)"></span>
 									
 								</div>
