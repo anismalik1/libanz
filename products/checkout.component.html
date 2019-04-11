@@ -92,7 +92,7 @@
         		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
           			<div class="col s12 m3 center">
           				<div class="cart-product-image"> 
-          					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
+          					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
           					<div class="product-quantity less-add-btn">
 								<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
 					            <span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
@@ -109,13 +109,13 @@
           					<span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span>
 									</a>
 									<div class="green-text" *ngIf="item.product.tsk_kit">
-										<span id="tsk-applied" class="green-text">Congratulations! One Coupon is Applied to your purchase.</span>
+										<span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
 										<!-- <a href="javascript:" (click)="show_coupon(i)">Change</a> -->
 										<div class="coupon-area" style="display:none;">
 											<input id="coupon-code-{{item.product.id}}" placeholder="Enter Coupon Code" type="text" class="validate">
 										</div>
 									</div>
-        					<span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i>{{item.quantity*item.product.offer_price}}&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
+        					<span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.quantity*(item.product.price -1000)}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
         					<br>
       						<a href="javascript:" class="font-size-change margin-top inline-block black-text"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
           			</div>
