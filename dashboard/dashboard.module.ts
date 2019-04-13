@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditAccountComponent },
   { path: 'book-dth-orders', component: BookDthOrdersComponent },
   { path: 'book-dth-order', component: BookDthOrderComponent },
-  { path: 'booked-order-list', component: BookedOrderListComponent },
+  { path: 'booked-order-list', component: BookedOrderListComponent }, 
 ];
 @NgModule({
   imports: [

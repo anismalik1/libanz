@@ -646,7 +646,8 @@
 									MRP: <span><i class="icon-inr"></i> {{tata_slides[0].price}}</span>
 								</h2>
 								<h1 class="font600 no-margin"><i class="icon-inr"></i> {{tata_slides[0].offer_price}}</h1>
-								<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+								<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="tata_slides[0].wallet_tsk_2 != null">{{tata_slides[0].wallet_tsk_2}}</span><span *ngIf="tata_slides[0].wallet_tsk_2 == null">{{tata_slides[0].partner_cashback_wallet}}</span> &amp;</h2>
+								<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i> {{tata_slides[0].user_cashback_wallet}} &amp;</h2>
 							</div>
 						<div class="btn-new center">
 							<a [routerLink]="['/product/'+tata_slides[0].url]" target="_blank" class="btn">Book Now</a>
@@ -674,8 +675,8 @@
 											MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
 										</h2>
 										<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
-										<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
-									</div>
+										<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="item.wallet_tsk_2 != null">{{item.wallet_tsk_2}}</span><span *ngIf="item.wallet_tsk_2 == null">{{item.partner_cashback_wallet}}</span> &amp;</h2>
+										<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}  &amp;</h2></div>
 									<div class="btn-new1 center">
 										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 									</div>
@@ -683,31 +684,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="col s12 m12" *ngIf="i > 2">
-							<div class="card horizontal">
-								<div class="card-image padd">
-									<img src="https://mydthshop.com/media/uploads/products/tata-sky1.png" class="responsive-img"  alt="images">
-								</div>
-								<div class="card-stacked">
-									<div class="card-content no-padding">
-										<span class="card-title white-text font-size-change1">{{item.title}}</span>
-										<ul class="no-margin">
-											<li [innerHTML]="item.description | nl2pbr"></li>
-										</ul>
-										<div class="mrp-price">
-											<h2 class="no-margin del-pri">	
-												MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
-											</h2>
-											<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
-											 <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> 
-										</div>
-										<div class="btn-new1 center">
-											<a [routerLink]="['/product/'+item.url]" class="btn">Book Now</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
 					</div>
 				</div>
 			</div>
@@ -735,10 +711,10 @@
 								MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
 							</h2>
 							<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
-							<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
-						</div>
+							<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="item.amount != null">{{item.amount}}</span><span *ngIf="item.wallet_tsk_2 == null">{{item.partner_cashback_wallet}}</span> &amp;</h2>
+							<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}  &amp;</h2></div></div>
 						<div class="btn-new center">
-							<span class="orange-text" >Cash On Delivery</span><br>
+							<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
 							<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 						</div>
 					</div>
@@ -769,10 +745,11 @@
 								MRP: <span><i class="icon-inr"></i> {{airtel_slides[0].price}}</span>
 							</h2>
 							<h1 class="font600 no-margin"><i class="icon-inr"></i> {{airtel_slides[0].offer_price}}</h1>
-							<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+							<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="airtel_slides[0].amount != null">{{airtel_slides[0].amount}}</span><span *ngIf="airtel_slides[0].wallet_tsk_2 == null">{{airtel_slides[0].partner_cashback_wallet}}</span> &amp;</h2>
+							<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{airtel_slides[0].user_cashback_wallet}}  &amp;</h2></div></div>
 						</div>
 						<div class="btn-new center">
-							<span class="orange-text">Cash On Delivery</span><br>
+							<span class="orange-text" *ngIf="airtel_slides[0].cod_available == 1">Cash On Delivery</span><br>
 							<a  [routerLink]="['/product/'+airtel_slides[0].url]" target="_blank" class="btn">Book Now</a>
 						</div>
 					</div>
@@ -789,20 +766,16 @@
 							<div class="card-stacked">
 								<div class="card-content no-padding">
 									<span class="card-title white-text font-size-change1">{{item.title}}</span>
-									<!-- <ul class="no-margin">
-										<li>Enjoy 241 SD + 55 HD Channels and Services</li>
-										<li>Enjoy 241 SD + 55 HD Channels and Services</li>
-										<li>Enjoy 241 SD + 55 HD Channels and Services</li>
-									</ul> -->
 									<div class="mrp-price1">
 										<h2 class="no-margin del-pri1">	
 											MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
 										</h2>
 										<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
-										<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+										<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="item.amount != null">{{item.amount}}</span><span *ngIf="item.wallet_tsk_2 == null">{{item.partner_cashback_wallet}}</span> &amp;</h2>
+										<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}  &amp;</h2></div></div>
 									</div>
 									<div class="btn-new1 center">
-										<span class="orange-text">Cash On Delivery</span><br>
+										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
 										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 									</div>
 								</div>
@@ -825,10 +798,11 @@
 											MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
 										</h2>
 										<h1 class="font600 no-margin inline-block"><i class="icon-inr"></i> {{item.offer_price}}</h1>
-										<!-- <h2 class="inline-block">Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+										<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="item.amount != null">{{item.amount}}</span><span *ngIf="item.wallet_tsk_2 == null">{{item.partner_cashback_wallet}}</span> &amp;</h2>
+										<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}  &amp;</h2></div></div>
 									</div>
 									<div class="btn-new1 center-align">
-										<span class="orange-text">Cash On Delivery</span><br>
+										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
 										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 									</div>
 								</div>
@@ -862,10 +836,11 @@
 								MRP: <span><i class="icon-inr"></i> {{item.price}}</span>
 							</h2>
 							<h1 class="font600 no-margin"><i class="icon-inr"></i> {{item.offer_price}}</h1>
-							<!-- <h2>Cash Back: <i class="icon-inr"></i> 200 &amp; <span>(42% off)</span></h2> -->
+							<h2 *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="item.amount != null">{{item.amount}}</span><span *ngIf="item.wallet_tsk_2 == null">{{item.partner_cashback_wallet}}</span> &amp;</h2>
+							<h2 *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}  &amp;</h2></div></div>
 						</div>
 						<div class="btn-new center">
-							<span class="orange-text">Cash On Delivery</span><br>
+							<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
 							<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 						</div>
 					</div>
