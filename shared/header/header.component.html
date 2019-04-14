@@ -28,13 +28,13 @@
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">{{this.productservice.cartItemsCount()}}</span></a>
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">0</span></a>
 				</li>
-				<!-- <li class="craft relative">
+				<li class="craft relative">
 					<a href="javascript:"><i class="material-icons grey-text">star</i><span class="badge">1</span></a>
-				</li> -->
+				</li>
 					</ul>
 			  <ul id="nav-mobile" class="inline-block log-sig right">
 				<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Login & Register</a></li>
-				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><p class="no-margin blnc font-size-change right-align">MyDth Wallet</p><p class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"><img src="https://mydthshop.com/web-app/assets/images/wallet.png" class="responsive-img wallet-img" alt="Mydthshop Wallet"> <span>RS</span> {{this.todoservice.get_user_wallet()}}</p></a></li>
+				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><p class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"><img src="https://mydthshop.com/web-app/assets/images/wallet.png" class="responsive-img wallet-img" alt="Mydthshop Wallet"> <span>RS</span> {{this.todoservice.get_user_wallet()}}</p></a></li>
 				<li id="user-nav"><a href="javascript:" data-activates="slide-out" class="button-collapse no-margin"><img src="{{this.todoservice.base_url}}assets/images/menu-icon.png" class="responsive-img vertical-align-middle" alt="menu-icon"></a></li>
 			  </ul>
 			</div>
