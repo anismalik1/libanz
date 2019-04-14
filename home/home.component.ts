@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
   package_item : Package;
   packages : Package[];
   product_mpackages : Package[];
+  user_cashback : any ;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -311,6 +312,7 @@ export class HomeComponent implements OnInit {
               this.meta.addTag({ name: 'keywords', content: page_data.metaKeyword });
               this.title.setTitle(page_data.metaTitle);
             }
+            this.user_cashback = data.cashback;
             this.banners          = data.banners;
             this.tata_slides      = this.filter_product('tata',data.products); 
             this.airtel_slides    = this.filter_product('airtel',data.products);  
@@ -326,6 +328,17 @@ export class HomeComponent implements OnInit {
           this.spinner.hide();
         }
       )  
+  }
+
+  check_cashback(product_id)
+  {
+    let exist = this.user_cashback.filter(x => x.services_id == product_id);
+    if(exist.length > 0 )
+    {
+      //console.log(exist);
+      return exist;
+    }
+    return false;
   }
 
   filter_product(key,categories)
