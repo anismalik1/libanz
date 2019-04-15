@@ -182,6 +182,8 @@ export class ProductDetailsComponent implements OnInit{
   filter_channel_subpack()
   { 
     this.pack_selected = [];
+    if(!this.channels_packs)
+     return false;
     for(var i=0;i<this.channels_packs.length ;i++)
       {
         if( this.channels_packs[i].title.includes("FTA") || this.channels_packs[i].title.includes('All-India'))
