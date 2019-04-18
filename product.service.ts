@@ -219,24 +219,46 @@ export class ProductService {
     {
       let item :Item = JSON.parse(cart[i]);
       amount += item.product.price * item.quantity;
-      if(item.product.tsk_kit)
+      
+    }
+    return amount;
+  }
+
+  total_savings()
+  {
+    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let index : number = -1;
+    let amount : number = 0;
+    let mrp_amount : number = 0;
+    let offer_amount : number = 0;
+    if(cart == null) 
+    {
+      return amount;
+    }
+    for(var i =0;i< Object.keys(cart).length;i++)
+    {
+      let item :Item = JSON.parse(cart[i]);
+      mrp_amount += item.product.price * item.quantity;
+      if(item.product.tsk_kit && item.product.tsk_kit == 3)
       {
-        if(item.product.tsk_kit == 2)
-          amount += 599;
-        if(item.product.tsk_kit == 3)
-          amount += 999; 
+        offer_amount += (item.product.price -1000) * item.quantity
       }
-      //console.log(item.product.promos)
+      else
+      {
+        offer_amount += item.product.offer_price * item.quantity;
+      }
+      
       if(item.product.promos)
       {
         if(item.product.promos.discount <= item.product.promos.max_discount)
         {
-          amount = amount - Number(item.product.promos.discount);
+          offer_amount = offer_amount - Number(item.product.promos.discount);
         }
-      }
+      }  
     }
-    return amount;
+    return (mrp_amount - offer_amount); 
   }
+
   clear_cart()
   {
     localStorage.removeItem('cart');
