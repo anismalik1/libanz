@@ -78,7 +78,7 @@
                         <hr>
                         <div *ngFor="let item of this.productservice.cart_items;let i = index;">
 							<div class="subtotal">
-								<p class="inline-block font600">{{i+1}}: Product : <span class="grey-text font500">{{item.product.title}}</span></p>
+								<p class="inline-block font600">Product : <span class="grey-text font500">{{item.product.title}}</span></p>
 								<p class="inline-block right font-size-change green-text" > <i class="icon-inr"></i> <span class="no-padding" *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.product.price -1000}}</span><span class="no-padding" *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.product.offer_price}}</span></p>
 							</div>
 							<div class="subtotal" *ngFor="let pack of item.product.pack_selected;">
