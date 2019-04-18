@@ -120,8 +120,8 @@
       						<a href="javascript:" class="font-size-change margin-top inline-block black-text"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
           			</div>
           			<div class="col s12 m4 margin-top padd">
-          				<strong class="font600">Free delivery with Cash on Delivery and Same day installation</strong><br>
-          				<span class="grey-text">Faster delivery options available at checkout 10 Days Replacement Policy</span>
+          				<strong class="font600">Free delivery and Same day installation</strong><br>
+          				<!-- <span class="grey-text">Faster delivery options available at checkout 10 Days Replacement Policy</span> -->
           			</div>
           		</div>
           		<div class="divider"></div>
@@ -295,9 +295,9 @@
             	<span class="card-title inline-block">Order Summary</span>
 				<hr>
 				
-				<div class="subtotal" *ngFor="let item of this.productservice.cart_items;let i = index;">
+				<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
 					<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
-					<p class="inline-block font600">{{i+1}}: Product : <span class="grey-text font500">{{item.product.title}}</span></p>
+					<p class="inline-block font600"> Product : <span class="grey-text font500">{{item.product.title}}</span></p>
 					<ng-template #kitblock>
 						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
 						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{item.product.price - 1000 }}</p>
@@ -306,7 +306,7 @@
 						<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
 					</ng-template>
 					<br/>
-					<div style="padding: 10px 0;" *ngFor="let pack of item.product.pack_selected">
+					<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
 						<p class="font600 left">Pack : <span class="grey-text font500">{{pack.title}}</span></p>
 						<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
 						<div class="clearfix"></div>

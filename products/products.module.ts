@@ -17,6 +17,7 @@ import { OffersComponent } from './offers.component';
 import { ChannelPackComponent } from './channel-pack.component';
 import { CompareDthComponent } from './compare-dth.component';
 import { MultiComponent } from './multi.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';  
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
   { path: 'listing', component: ProductsComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: ':name', component: ProductDetailsComponent },
   { path: 'multi/:name', component: MultiComponent },
+  
  // { path: ':name/multi/:name', component: ProductDetailsComponent },
 ];
 
@@ -36,6 +38,7 @@ const routes: Routes = [
     SharedCommonModule,
     NgxSpinnerModule,
     RouterModule.forChild(routes),
+    NgxImageZoomModule.forRoot(),
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,

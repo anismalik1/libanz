@@ -186,9 +186,9 @@ export class ProductDetailsComponent implements OnInit{
      return false;
     for(var i=0;i<this.channels_packs.length ;i++)
       {
-        if( this.channels_packs[i].title.includes("FTA") || this.channels_packs[i].title.includes('All-India'))
+        if( this.channels_packs[i].title.includes("FTA") || this.channels_packs[i].title.includes('All-India') || this.channels_packs[i].title.includes('Airtel Internet') )
         {
-          //console.log(this.channels_packs[i].child[0])
+         // console.log(this.channels_packs[i])
           if(this.channels_packs[i].child[0])
           {
             this.fta_pack = this.channels_packs[i].child[0];
@@ -199,7 +199,6 @@ export class ProductDetailsComponent implements OnInit{
             {
               this.pack_selected.push(this.fta_pack); 
             }
-           break;
           }
            
         }

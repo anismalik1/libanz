@@ -28,9 +28,9 @@
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">{{this.productservice.cartItemsCount()}}</span></a>
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">0</span></a>
 				</li>
-				<li class="craft relative">
+				<!-- <li class="craft relative">
 					<a href="javascript:"><i class="material-icons grey-text">star</i><span class="badge">1</span></a>
-				</li>
+				</li> -->
 					</ul>
 			  <ul id="nav-mobile" class="inline-block log-sig right">
 				<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Login & Register</a></li>

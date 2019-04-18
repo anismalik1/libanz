@@ -9,11 +9,11 @@
 </ngx-spinner>
 </div>
 <div class="wrapper">	
-	<h1>MyDth Retailer Setup is Coming Soon!</h1>
+	<h1 id="page-content"></h1>
 	<div id="canvas"></div>
 	<div class="row no-margin">
 	<div class="fifty col s12 m6 offset-m3">
-		<span class="mail">Subscribe to our mailing list to stay up to date!</span>
+		<span class="mail" id="page-shortcontent"></span>
 		<form [formGroup]="usergroup" class="margin-top sec-7" #userinfoform = "ngForm" (ngSubmit)="user_submit(userinfoform.value)">
 			<input type="text" formControlName="name" class="formStyle" placeholder="Enter You Name (required)" required />
 			<div class="red-text accent-4" *ngIf="!usergroup.controls['name'].valid && usergroup.controls['name'].touched">Enter Name*.</div>

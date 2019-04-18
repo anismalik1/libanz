@@ -15,6 +15,7 @@ import * as $ from 'jquery';
 export class NotifyComponent implements OnInit {
   usergroup : FormGroup;
   user_type : Number;
+  page: any;
   constructor(
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
@@ -24,6 +25,8 @@ export class NotifyComponent implements OnInit {
     private toastr : ToastsManager,
     private activatedroute: ActivatedRoute,
     private authservice : AuthService,
+    private meta: Meta,
+    private title: Title
   ) { 
     this.usergroup = fb.group({
       'name' : [null,Validators.compose([Validators.required])],
@@ -35,7 +38,35 @@ export class NotifyComponent implements OnInit {
   ngOnInit() {
     this.init();
     this.user_type = this.activatedroute.snapshot.params['id'];
+    this.page = 'notification/user-notify/'+this.user_type;
+    this.fetch_page_data();
   }
+
+  fetch_page_data()
+ {
+  let page = {page : this.page}; 
+  if(page.page == '')
+  {
+      return false;
+  }
+  this.todoservice.fetch_page_data(page)
+    .subscribe(
+      data => 
+      {
+        if(data.PAGEDATA)
+        {
+          this.todoservice.set_page_data(data.PAGEDATA[0]);
+           $('#page-content').html(this.todoservice.get_page().description);
+           $('#page-shortcontent').html(this.todoservice.get_page().shortDescription);
+          this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+          this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+          this.title.setTitle(this.todoservice.get_page().metaTitle);
+          window.scroll(0,0); 
+        }
+        this.spinner.hide();  
+      }
+    ) 
+ }
 
   init()
   {
