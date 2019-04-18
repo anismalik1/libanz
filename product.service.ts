@@ -259,6 +259,21 @@ export class ProductService {
     return (mrp_amount - offer_amount); 
   }
 
+  check_cashon_delivery()
+  {
+    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    var index = false;
+    for(var i =0;i< Object.keys(cart).length;i++)
+    {
+      let item :Item = JSON.parse(cart[i]);
+      if(item.product.cod_available != 1)
+      {
+        index = true;
+      } 
+    }
+    //console.log(index);
+    return index;
+  }
   clear_cart()
   {
     localStorage.removeItem('cart');

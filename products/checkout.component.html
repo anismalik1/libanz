@@ -209,7 +209,7 @@
           		</div>
           		<div class="row" *ngIf="this.productservice.cod_invalid == false">
           			<div class="col s12 m10 offset-m1">
-          				<input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.cod_invalid"/>
+          				<input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.check_cashon_delivery()"/>
 						<label for="cod" class="font-size-change black-text">Cash on Delivery</label>
 					</div>
           		</div>
@@ -311,7 +311,7 @@
 						<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
 						<div class="clearfix"></div>
 					</div>
-					<div *ngIf="item.product.promos">
+					<div style="padding-top: 10px;" *ngIf="item.product.promos">
 						<p class="inline-block font600">Congrates! Promocode {{item.product.promos.unique_code}} is applied  :</p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
