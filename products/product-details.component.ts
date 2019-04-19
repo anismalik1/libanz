@@ -348,6 +348,22 @@ export class ProductDetailsComponent implements OnInit{
         this.fta_pack = {};
         this.filter_channel_subpack();
         this.product = data.PRODUCTDATA;
+        if(data.cashback.length > 0 )
+        {
+          let user_cashback = this.check_cashback(data.cashback);
+          if(this.product.category_id == 1)
+          {
+             this.product.partnerwalletamount = user_cashback[0].wallet_tsk_2;
+          }
+          else
+          {
+            this.product.partnerwalletamount = user_cashback[0].amount;
+          }
+        }
+        else
+        {
+          this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet;
+        }
         this.circles = data.circles;
         if(data.PROMOS && data.PROMOS.length > 0)
         {
@@ -408,7 +424,15 @@ export class ProductDetailsComponent implements OnInit{
       }
 		  )  
   }
-
+  check_cashback(cashback)
+  {
+    let exist = cashback.filter(x => x.services_id == this.product.id);
+    if(exist.length > 0 )
+    {
+      return exist;
+    }
+    return false;
+  }
   circle_selected(circle)
   {
     this.region = circle;

@@ -15,7 +15,7 @@ export class Product {
     metaDesc : string;
     metaKeyword : string;
     metaTitle : string;
-    partnerwalletamount : number;
+    partnerwalletamount : number;  
     recharge_for_ots : number;
     urlKey : string;
     tsk_kit : number;
