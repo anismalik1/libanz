@@ -348,7 +348,7 @@ export class ProductDetailsComponent implements OnInit{
         this.fta_pack = {};
         this.filter_channel_subpack();
         this.product = data.PRODUCTDATA;
-        if(data.cashback.length > 0 )
+        if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
           if(this.product.category_id == 1)
