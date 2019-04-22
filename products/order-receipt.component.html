@@ -14,8 +14,16 @@
 		<div class="col s12 m10 l6 offset-l3">
 			<div class="card no-margin">
 				<div class="card-content" *ngIf="orders">
-						<div class="order-list" *ngFor="let order of orders">
+						<div class="order-list" *ngFor="let order of orders">							
 							<div class="row no-margin border-on-bottom padd-bottom">
+								<div class="col s12 no-padding">									
+									<h2 class="font600">Thank you for shopping with us.</h2>
+									<span class="font-size-change1">We will send you a SMS conformation within 30 mintues.</span>
+									<div class="border padd-rem margin-top-order">
+										<p class="font-size-change1"><span class="font600">1 item will be delivered to Praveen Jain</span> at <span>H-34/157 Sector-3 Rohini, Vishram Chowk, New Delhi, Delhi 110085, India,</span> from Mydthshop</p>
+										<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">22-Apr-2019</span></p>
+									</div>
+								</div>
 								<div class="col s8 no-padding">
 									<span class="font-size-change1">Order Number</span><br>
 									<span class="font-size-change-order font600">{{order.id}}</span><br>
@@ -28,7 +36,7 @@
 									
 								</div>
 							</div>
-							<div class="row border-on-bottom padd-bottom margin-top">						
+							<div class="row padd-bottom margin-checkout">						
 								<div class="col s12 m2" >
 									<a href="javascript:">
 										<span ><img src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{order.image}}" class="responsive-img vertical-align-middle border" alt="Tata sky logo"></span>
@@ -54,13 +62,11 @@
 									<a href="#" class="red darken-1 white-text font-size-change success" *ngIf="order.payment_status == 2">Failed</a>
 								</div> -->
 								<div class="clearfix"></div>
-								
-								<div class="clearfix"></div>
-								<div class="center orange"><span class="card-title margin-top white-text">Your Order Status is {{order.status}}</span></div>
-
+								<div class="center"><span class="card-title margin-top orange-text">Your Order Status is {{order.status}}</span></div>								
 							</div> 
 						</div>
-						<p class="red-text">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
+						<div class="center"><a routerLink="/home" href="javascript:" class="btn orange white-text full-width">Continue Shipping</a></div>
+						<p class="red-text center margin-checkout">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
 					</div>
 				</div>
 			</div>
