@@ -162,7 +162,7 @@
         				<ng-template #unchecked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/></ng-template>
       					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
 									&nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp;
-									<a href="javascript:" (click)="remove_address(row.id)"> Remove</a>
+									<!-- <a href="javascript:" (click)="remove_address(row.id)"> Remove</a> -->
 									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
         			</div>        			
 								</div>
