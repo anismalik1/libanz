@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Headers,Http } from '@angular/http';
 import { AuthService } from './auth.service';
+import {Pages} from './pages';
 import { User} from './user';
-import { Page} from './pages';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -18,12 +18,14 @@ export class TodoService {
   public request_action = "proceed_recharge";
   public current_url : string;
   public footer : boolean = true;
-  public page_data : any;
+  public page_data : Pages;
+  public page : Pages;
+  public footer_data : Pages ;
   public dropdown_add_money = {paymethod: '',paybankaccount:'',yourbankname : '' };
   public login_urls : any = ['/book-order','/booked-order-list','/recharge-status','/order-status',
   '/manage-account','/transaction-history','/commission-structure','/topup-request','/add-money',
   '/complaints','/manage-retailer','/value-transfer','/dashboard','/checkout']; 
-  constructor(private http : Http, public page : Page,public footer_data : Page, private router : Router ,public user : User,private authservice : AuthService)
+  constructor(private http : Http, private router : Router ,public user : User,private authservice : AuthService)
   {
     window.scrollTo(0, 0);
     this.current_url = this.router.url;
@@ -150,23 +152,24 @@ export class TodoService {
 
   set_page_data(data)
   {
-    let b = JSON.stringify(data);
-    this.page.storage =  JSON.parse(b.replace(/\\/g, ''));
+    // let b = JSON.stringify(data);
+    // this.page =  JSON.parse(b.replace(/\\/g, ''));
+    this.page =  data;
   }
 
   set_footer_data(data)
   {
-    this.footer_data.storage =  data
+    this.footer_data =  data;
   }
 
   get_footer_page()
   {
-    return this.footer_data.storage
+    return this.footer_data
   }
 
   get_page()
   {
-    return this.page.storage;  
+    return this.page;  
   }
 
   send_post_request(data) : Observable<any>

@@ -5,8 +5,8 @@ import { LogoutComponent } from './shared/logout.component';
 import { ContactUsComponent } from './pages/contact-us.component';
 import { FaqsComponent } from './pages/faqs.component';
 import { page404Component } from './pages/404.component';
-import { ForgotPasswordComponent } from './pages/forgot-password.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { LoginComponent } from './pages/login.component';
 import { SignupComponent } from './pages/signup.component';
 
@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'recharge/:name', loadChildren: './home/home.module#HomeModule'},
   { path: '', loadChildren: './home/home.module#HomeModule'},
   { path: 'logout', component: LogoutComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '404', component: page404Component },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
   { path: 'product', loadChildren: './products/products.module#ProductsModule'},
@@ -32,7 +31,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule,RouterModule.forRoot(routes)],
+  imports: [CommonModule,RouterModule.forRoot(routes),ToastModule.forRoot()],
   declarations: [
 ],
   exports: [RouterModule,NgxSpinnerModule]

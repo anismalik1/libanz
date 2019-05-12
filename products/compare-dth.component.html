@@ -14,134 +14,104 @@
       <div class="col s12 m12 center">
         <h2 class="font600">Compare Your DTH Box Plans</h2>
       </div>
-      <div class="col s12 m12 center">
-        <ul class="compare-page">
-          <li>
-            <div class="compare-img">
-              <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702501551270412.png" class="img-responsive" alt="Tata Sky">          
-            </div>
-            <div class="compare-text">
-              <span>Tata Sky HD Box</span>
-            </div>
-            <a href="#compare-modal" class="grey-text modal-trigger"><i class="material-icons">close</i></a>
-          </li>
-          <span class="compare-span">VS</span>
-          <li>
-            <div class="compare-img">
-              <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702391550666179.png" class="img-responsive" alt="Tata Sky">          
-            </div>
-            <div class="compare-text">
-              <span>Dish TV HD Box</span>
-            </div>
-            <a href="#compare-modal" class="grey-text modal-trigger"><i class="material-icons">close</i></a>
-          </li>
-          <span class="compare-span">VS</span>
-          <li>
-            <div class="compare-img">
-              <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2704151550666190.jpg" class="img-responsive" alt="Tata Sky">          
-            </div>
-            <div class="compare-text">
-              <span>Airtel HD Box</span>
-            </div>
-            <a href="#compare-modal" class="grey-text modal-trigger"><i class="material-icons">close</i></a>
-          </li>
-          <span class="compare-span">VS</span>
-          <li>
-            <div class="compare-img">
-              <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2705001552991703.png" class="img-responsive" alt="Tata Sky">          
-            </div>
-            <div class="compare-text">
-              <span>Videocon HD Box</span>
-            </div>
-            <a href="#compare-modal" class="grey-text modal-trigger"><i class="material-icons">close</i></a>
-          </li>
-        </ul>
+      <div class="row my-compair">
+          <div class="col l2 m2 my-compair">
+          <div class="compare-table">
+          <table class="table centered bordered ">
+              <tbody>
+                <tr>
+                  <td>
+                      <div class="feature-image-wrapper">
+                        <i class="material-icons">format_list_bulleted</i>
+                        <h3>Feature Options</h3>
+                      </div>
+                  </td>
+                  
+                </tr>
+                <tr *ngFor="let feature of all_specifications;">
+                  <td>
+                    <span title="{{feature.title}}">{{trim_text(feature.title)}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="font-size-change1 font600 grey-text">Channels/Pack</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"> Channel List</span></td>
+                </tr> 
+              </tbody>
+            </table>
+        </div>
       </div>
-      <div class="col s12 compare-table">
-        <table class="table centered bordered">
+
+        <div class="col l2 my-compair" [className]="i == 0 ? 'col l3 my-compair':'col l2 my-compair'" *ngFor="let item of compare_products;let i = index;">
+          
+          <div class="compare-text left">
+            <span>{{item.title}}</span>
+          </div>
+          <a href="javascript:" class="grey-text right croses" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a>
+			<div class="compare-table">
+			<table class="table centered bordered ">
           <tbody>
             <tr>
-              <td><a href="javascript:"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702501551270412.png" class="responsive-img" alt="Tata Sky"></a></td>
-              <td><a href="javascript:"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702391550666179.png" class="responsive-img" alt="Tata Sky"></a></td>
-              <td><a href="javascript:"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2709861552991026.png" class="responsive-img" alt="Tata Sky"></a></td>
-              <td><a href="javascript:"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2705001552991703.png" class="responsive-img" alt="Tata Sky"></a></td>
+              <td>
+                <div class="image-wrapper">
+                    <a [routerLink]="['/product/'+item.url]" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a><br/>
+                    <i class="icon-inr font-size-change1">{{item.offer_price}}</i>
+                    <div class="clearfix"></div>
+                    <div class="btn-new1 center"><a class="btn" [routerLink]="['/product/'+item.url]" target="_blank">Book Now</a></div>
+                </div>
+              </td>
+              
+            </tr>
+			      <tr *ngFor="let feature of to_json(item.specifications);">
+              <td>
+                <span title="{{feature.value}}">{{trim_text(feature.value)}}</span>
+              </td>
             </tr>
             <tr>
-              <td><span class="font-size-change1 font600">Tata Sky HD Box</span></td>
-              <td><span class="font-size-change1 font600">Dish TV Hd Box</span></td>
-              <td><span class="font-size-change1 font600">Airtel HD Box</span></td>
-              <td><span class="font-size-change1 font600">Videocon HD Box</span></td>
-            </tr>
-            <tr>
-              <td><span class="font-size-change1 font600 grey-text">Pack Name</span><br/><span class="font-size-change-order font600 inline-block margin-top-order">FTA Pack</span></td>
-              <td><span class="font-size-change1 font600 grey-text">Pack Name</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"> FTA Pack</span></td>
-              <td><span class="font-size-change1 font600 grey-text">Pack Name</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"> FTA Pack</span></td>
-              <td><span class="font-size-change1 font600 grey-text">Pack Name</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"> FTA Pack</span></td>
-            </tr>
-            <tr>
-              <td><span class="font-size-change1 font600 grey-text">Price</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><i class="icon-inr">451</i></span></td>
-              <td><span class="font-size-change1 font600 grey-text">Price</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><i class="icon-inr">451</i></span></td>
-              <td><span class="font-size-change1 font600 grey-text">Price</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><i class="icon-inr">451</i></span></td>
-              <td><span class="font-size-change1 font600 grey-text">Price</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><i class="icon-inr">451</i></span></td>
-            </tr>
-            <tr>
-              <td><span class="font-size-change1 font600 grey-text">Channels List</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><a href="https://www.mydthshop.com/test-mydthshop/product/channel-pack/14" class="black-text" target="_blank">See Channels List</a></span></td>
-              <td><span class="font-size-change1 font600 grey-text">Channels List</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><a href="https://www.mydthshop.com/test-mydthshop/product/channel-pack/14" class="black-text" target="_blank">See Channels List</a></span></td>
-              <td><span class="font-size-change1 font600 grey-text">Channels List</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><a href="https://www.mydthshop.com/test-mydthshop/product/channel-pack/14" class="black-text" target="_blank">See Channels List</a></span></td>
-              <td><span class="font-size-change1 font600 grey-text">Channels List</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><a href="https://www.mydthshop.com/test-mydthshop/product/channel-pack/14" class="black-text" target="_blank">See Channels List</a></span></td>
-            </tr>
-            <tr>
-              <td><span class="font-size-change1 font600 grey-text">Accessiories</span><br/><span class="font600 inline-block">HDMI Cabel</span>,&nbsp;<span class="font600 inline-block">Antena</span>,&nbsp;<span class="font600 inline-block">10 Meters Cable</span></td>
-              <td><span class="font-size-change1 font600 grey-text">Accessiories</span><br/><span class="font600 inline-block">HDMI Cabel</span>,&nbsp;<span class="font600 inline-block">Antena</span>,&nbsp;<span class="font600 inline-block">10 Meters Cable</span></td>
-              <td><span class="font-size-change1 font600 grey-text">Accessiories</span><br/><span class="font600 inline-block">HDMI Cabel</span>,&nbsp;<span class="font600 inline-block">Antena</span>,&nbsp;<span class="font600 inline-block">10 Meters Cable</span></td>
-              <td><span class="font-size-change1 font600 grey-text">Accessiories</span><br/><span class="font600 inline-block">HDMI Cabel</span>,&nbsp;<span class="font600 inline-block">Antena</span>,&nbsp;<span class="font600 inline-block">10 Meters Cable</span></td>
-            </tr>
+              <td><span class="font-size-change1 font600 grey-text">Channels/Pack</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><a [routerLink]="['/product/'+item.url]" class="black-text" target="_blank">See Channels List</a></span></td>
+            </tr> 
           </tbody>
         </table>
+		</div>
+  </div>
+          <div class="col m3" *ngIf="!disable_compare">
+              <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Add Set Top Box</a>
+              <ul id='dropdown1' class='dropdown-content'>
+                <li *ngFor="let item of product_category_list;">
+                  <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
+                </li>
+              </ul>
+            </div>
       </div>
     </div>
   </div>
 </section>
 <!-- Compare Modal -->
-<div id="compare-modal" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Choose Setup Box For Compare</h4>
-    <form>
-      <div class="row">
-        <div class="input-field col s12 m4">
-          <select>
-            <option value="" disabled selected>Choose your Product</option>
-            <option value="1">Tata Sky</option>
-            <option value="2">Airtel</option>
-            <option value="3">Dish Tv</option>
-            <option value="3">Videocon</option>
-          </select>
-        </div>
-        <div class="input-field col s12 m4">
-          <select>
-            <option value="" disabled selected>Choose your Set Up Box</option>
-            <option value="1">Tata Sky SD Box</option>
-            <option value="2">Tata Sky HD Box</option>
-            <option value="3">Tata Sky 4K Box</option>
-            <option value="3">Tata Sky Multi Box</option>
-          </select>
-        </div>
-        <div class="input-field col s12 m4">
-          <select>
-            <option value="" disabled selected>Choose Basic Pack</option>
-            <option value="1">FTA Pack</option>
-            <option value="2">FTA Pack</option>
-            <option value="3">FTA Pack</option>
-            <option value="3">FTA Pack</option>
-          </select>
+<div id="tata-sky-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Choose Set Up Box </h4>
+      <div class="row" style="display:flex" *ngIf="product_list">
+        <div class="col s6 m3" *ngFor="let item of product_list">
+          <a href="javascript:" class="black-text modal-close" (click)="continue_to_change(item.url)">
+            <div class="card choose-set-up-box center">
+              <div class="card-image">
+                <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+              </div>
+              <div class="card-content">
+                <span>{{item.title}}</span>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
-    </form>
+      <div class="row" *ngIf="!product_list">
+        Loading Products
+      </div>
+      
+    </div>
+    <div class="modal-footer">
+      <a href="javascript:" class="modal-action btn red modal-close">Close</a>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="submit" class="modal-action btn orange">Continue</button>
-  </div>
-</div>
 <app-footer></app-footer>
 
 

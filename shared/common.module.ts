@@ -9,7 +9,6 @@ import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { page404Component } from '../pages/404.component';
 import { SideNavComponent } from '../shared/side-nav/side-nav.component';
-import { ForgotPasswordComponent } from '../pages/forgot-password.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -26,9 +25,8 @@ import { ForgotPasswordComponent } from '../pages/forgot-password.component';
     FooterComponent,
     LogoutComponent,
     SideNavComponent,
-    page404Component,
-    ForgotPasswordComponent
+    page404Component
 ],
-  exports: [HeaderComponent,FooterComponent,LogoutComponent,SideNavComponent,page404Component,ForgotPasswordComponent]
+  exports: [HeaderComponent,FooterComponent,LogoutComponent,SideNavComponent,page404Component]
 })
 export class SharedCommonModule { }

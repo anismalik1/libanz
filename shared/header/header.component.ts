@@ -247,17 +247,11 @@ export class HeaderComponent implements OnInit{
     search_me(event)
     {
       let data :any = {};
-      if(this.get_token())
-      {
-        data.token = this.get_token();
-      }
       data.search = event;
       this.todoservice.get_search_data(data)
       .subscribe(
         data => 
         {
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
           if(!jQuery.isEmptyObject(data))
           {
             this.filterdList = true;

@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit{
   ///this.fetch_page_data();
     window.scroll(0,0);
     this.toast.setRootViewContainerRef(vcr);
-     if(!this.todoservice.footer_data.storage)
+     if(!this.todoservice.footer_data)
      {
        this.page = 'footer';
        this.fetch_page_data();

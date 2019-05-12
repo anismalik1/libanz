@@ -102,7 +102,7 @@
           			</div>
           			<div class="col s12 m5 margin-top" id="item-detail-section-{{i}}">
           				<a href="#" class="black-text">
-          					<h4 class="font600">{{item.title}}</h4>
+          					<h4 class="font600">{{item.product.title}}</h4>
           					<span class="font-size-change grey-text">Seller : MyDthShop</span><br>
           					<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
           					<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
@@ -157,11 +157,11 @@
         	<div class="row no-margin login-checkout hide checkout_2">
         		<div class="col s10 m10 offset-m1">
         			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
-                        <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
+                <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
         				<ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template>
         				<ng-template #unchecked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/></ng-template>
       					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
-									&nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp;
+									<!-- &nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp; -->
 									<!-- <a href="javascript:" (click)="remove_address(row.id)"> Remove</a> -->
 									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
         			</div>        			

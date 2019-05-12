@@ -4,13 +4,15 @@ import { Meta ,Title} from '@angular/platform-browser';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
+import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({ 
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
-  styles: []
+  styles: [],
+  providers: [TodoService,User,AuthService]
 })
 export class ContactUsComponent implements OnInit {
   contactgroup : FormGroup;

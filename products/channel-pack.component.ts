@@ -36,7 +36,35 @@ export class ChannelPackComponent implements OnInit {
       this.channel_id = params['id']; //log the value of id
       this.fetch_channels(this.channel_id);
     });
+    this.init_script();
   }
+
+  init_script()
+  {
+    if($('#init-page-script'))
+    {
+      $('#init-page-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.id = `init-page-script`;
+    script.type = `text/javascript`;
+    script.text = `
+    $(document).ready(function(){
+      $('.modal').modal();
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: true, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left'
+    });
+    });
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
   fetch_channels(channel)
   {
     this.spinner.show();
@@ -79,6 +107,30 @@ export class ChannelPackComponent implements OnInit {
       }
       );
   }
+  share_pack_to_mail()
+  {
+    var email = $("#sendmail-modal #pack-email").val();
+    if(email == '' )
+    {
+      return false;
+    }  
+      this.productservice.share_pack_to_mail({channel:this.channel_id,email:email,pack:this.product_pack_info.title})
+     .subscribe(
+       data => 
+       {
+        if(data.status == true)
+        {
+          this.toastr.info(data.msg)
+        }
+        else
+        {
+          this.toastr.info("Something went wrong. Please try later.")
+        } 
+         this.spinner.hide();  
+       }
+     )
+  }
+
   get_token()
   {
     return this.authservice.auth_token();

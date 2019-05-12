@@ -1,6 +1,5 @@
 import {Component} from "@angular/core";
 import {Router, NavigationEnd} from "@angular/router";
-import {TodoService} from "./todo.service"; 
 declare var ga: Function;
 @Component({
   selector: 'app-root',
@@ -10,11 +9,10 @@ declare var ga: Function;
 export class AppComponent {
   title = '';
  
-  constructor(public router: Router , private todoservice : TodoService) {
+  constructor(public router: Router ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { 
         ga('set', 'page', event.urlAfterRedirects);
-        ga('set', 'userId', this.todoservice.get_user_id());
         ga('send', 'pageview'); 
       }
     });

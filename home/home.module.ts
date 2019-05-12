@@ -9,7 +9,6 @@ import { HttpModule } from '@angular/http';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
-import { Page } from '../pages';
 import { Params } from '../shared/config/params.service';
 import { HomeComponent } from './home.component';
 import { RechargeStatusComponent } from './recharge-status.component';
@@ -36,7 +35,7 @@ const routes: Routes = [
     SharedCommonModule
   ],
   declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe],
-  providers : [TodoService,AuthService,User,Page,Params,RechargeType]
+  providers : [TodoService,AuthService,User,Params,RechargeType]
 
 })
 export class HomeModule { }

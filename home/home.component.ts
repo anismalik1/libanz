@@ -332,6 +332,8 @@ export class HomeComponent implements OnInit {
 
   check_cashback(product_id)
   {
+    if(!this.user_cashback)
+      return true;
     let exist = this.user_cashback.filter(x => x.services_id == product_id);
     if(exist.length > 0 )
     {
@@ -510,7 +512,118 @@ toTimestamp(strDate){
     script.type = `text/javascript`;
     script.id = `init-page-script`;
     script.text = `
-        $(document).ready(function(){ $('[href="#mobile"]').click();})
+        $(document).ready(function(){ $('[href="#mobile"]').click();
+        $('.slider-5').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          pause: 3000,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:2
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+        $('.slider-6').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          pause: 3000,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:2
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+        $('.slider-7').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:2
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+        $('.slider-8').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:2
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+      })
         
         $(document).on("click",".recharge-section",function($event) {
           var x = $event.target.nodeName;
@@ -560,37 +673,7 @@ toTimestamp(strDate){
           var child = $(this).find('.data-slide').text();
           flashdeal.goToSlide(Number(child));
         });
-        $('.slider-5').lightSlider({
-          item: 4,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:3
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:2
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
+        
         $('.retailer-slider').lightSlider({
           item: 1,
           auto: true,
@@ -622,161 +705,7 @@ toTimestamp(strDate){
           }
           ]
         });
-        $('.slider-6').lightSlider({
-          item: 3,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:3
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:2
-            }
-          },
-          {
-            breakpoint:425,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-        $('.slider-7').lightSlider({
-          item: 6,
-          auto: false,
-          pauseOnHover: true,
-          loop: true,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:2	
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-        $('.slider-8').lightSlider({
-          item: 6,
-          auto: false,
-          pauseOnHover: true,
-          loop: false,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:2	
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-        $('.slider-9').lightSlider({
-          item: 6,
-          auto: false,
-          pauseOnHover: true,
-          loop: true,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:2	
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });         
-        $('.slider-10').lightSlider({
-          item: 1,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 3000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:1	
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });       
+             
       // Hide sideNav
       $('.button-collapse1').on('click', function () {
         $('.side-nav').sideNav('hide');

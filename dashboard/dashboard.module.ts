@@ -19,6 +19,10 @@ import { BookedOrderListComponent } from './booked-order-list.component';
 import { FooterMinComponent } from '../shared/footer/footer-min.component';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { BookDthOrdersComponent } from './book-dth-orders.component';
+import { AuthService } from '../auth.service';
+import { TodoService } from '../todo.service';
+import { ProductService } from '../product.service';
+import { User } from '../user';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -45,6 +49,6 @@ const routes: Routes = [
     MatSelectModule
   ],
   declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent],
-  providers : [ExcelService]
+  providers : [ExcelService,AuthService,TodoService,User,ProductService]
 })
 export class DashboardModule { }

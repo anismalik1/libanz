@@ -22,9 +22,11 @@ export class ProductDetailsComponent implements OnInit{
   fta_pack : any = {};
   all_packs : any = [];
   channels_packs : any;
+  multi_list : any;
   circles : any;
   channels : any;
   product_category_list : any;
+  product_features : any;
   product_list : any;
   multienable : boolean = false;
   display : number = 0;
@@ -342,6 +344,7 @@ export class ProductDetailsComponent implements OnInit{
 			data => 
 			{
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
+        this.product_features = data.features;
         this.spinner.hide();
         let b = this.htmlToPlaintext(JSON.stringify(data));
         this.channels_packs = data.package;
@@ -424,6 +427,54 @@ export class ProductDetailsComponent implements OnInit{
       }
 		  )  
   }
+
+  fetch_all_multi(category_id)
+  {
+    this.spinner.show() 
+    this.productservice.fetch_all_multi({category_id: category_id})
+    .subscribe(
+    data => 
+    {
+      this.spinner.hide() 
+      this.multi_list = data.MULTI;
+    }
+    ) 
+  }
+  continue_to_select(multi)
+  {
+    if(!this.productservice.if_exist_in_cart(this.product.id))
+    {
+      this.add_to_cart(this.product.id);
+    }
+
+    if(!this.productservice.if_exist_in_cart(multi.id))
+    {
+      if(this.product.category_id == 1)
+      {
+        if(this.pack_selected[1])
+        {
+          multi.pack_selected = this.pack_selected;
+          multi.pack_selected[0].price = 0;
+          multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
+        }
+        else
+        {
+          multi.pack_selected = this.product.pack_selected;
+        }  
+      }
+      else
+      {
+        multi.pack_selected[0].price =  this.pack_selected[0].multi_price;
+        if(this.pack_selected[1])
+          multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
+        
+      }
+      multi.month_pack = this.product.month_pack;
+      this.productservice.addto_cart(multi.id,multi);
+    } 
+    this.productservice.loadCart();
+    this.route.navigate(['/product/checkout']);
+  }
   check_cashback(cashback)
   {
     let exist = cashback.filter(x => x.services_id == this.product.id);
@@ -497,6 +548,10 @@ export class ProductDetailsComponent implements OnInit{
 
   buyNow(p_id)
   {
+    if(!this.product.title.includes("multi"))
+    {
+      
+    }
     if(this.multienable)
       this.product.subscriber_id = $('[name="subscriber_id"]').val();
     if(this.pack_selected)
@@ -532,7 +587,7 @@ export class ProductDetailsComponent implements OnInit{
   
     if(!this.productservice.if_exist_in_cart(p_id))
     {
-      this.productservice.addto_cart(p_id);
+      this.productservice.addto_cart(p_id,this.product);
       this.productservice.loadCart();
     } 
     this.route.navigate(['product/checkout']);
@@ -597,6 +652,8 @@ export class ProductDetailsComponent implements OnInit{
           return elementBottom > viewportTop && elementTop < viewportBottom;
       };
       $(window).scroll(function (event) {
+    
+        if($(window).width() >767){
         var scroll = $(window).scrollTop();
         if(scroll >= 132)
         {
@@ -633,6 +690,7 @@ export class ProductDetailsComponent implements OnInit{
         {
           $('.images-product').css('position','relative');
         }
+      }
     });
     $(window).on('load', function(){ 
 			$('.religon-overlay').css('display', 'block');
@@ -694,7 +752,14 @@ export class ProductDetailsComponent implements OnInit{
       return 0;
     for(var i = 0;i < this.pack_selected.length;i++)
     {
-      amount = amount + Number(this.pack_selected[i].price);
+      if(this.multienable)
+      {
+        amount = amount + Number(this.pack_selected[i].multi_price);
+      }
+      else
+      {
+        amount = amount + Number(this.pack_selected[i].price);
+      }
     }
     if(this.kit == 3)
       amount = amount + Number(this.product.price) - 1000;
@@ -806,7 +871,7 @@ export class ProductDetailsComponent implements OnInit{
     this.product.pack_selected = this.pack_selected;
     this.product.offer_price = Number($('#offer-price').text());
     this.product.price = Number($('#mrp-price').text());
-    this.productservice.addto_cart(id);
+    this.productservice.addto_cart(id,this.product);
     this.toastr.info("Your Item is Added to the Cart");
   }
 
@@ -839,6 +904,11 @@ export class ProductDetailsComponent implements OnInit{
       //return false;
     }
     var monthdata = this.package_month.filter(pack => pack.id === this.month);
+  }
+
+  convert_to_json(string)
+  {
+    return $.parseJSON(string);
   }
 
   show_box()

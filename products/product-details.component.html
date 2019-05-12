@@ -79,9 +79,10 @@
 						</a>
                   	<br/>
                   	<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
-                  	<p class="font-size-change1 margin-top"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash on delivery option available on selected pin codes only</p>
-                  	<p class="font-size-change1 margin-top"><i class="material-icons orange-text font-size-change1">loyalty</i> Same Day Installation</p>
-                  	<p class="font-size-change1 margin-top"><i class="material-icons orange-text font-size-change1">loyalty</i> Free Home Delivery</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
                   	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}</p>								
                   	
                   	<div class="descripetion-detail margin-top1">
@@ -119,6 +120,15 @@
                   		</li>
 					  </ul>
 					<br/>
+					<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable">
+						<li>
+							<span class="font-size-change1 font600 grey-text">Add Multi</span>
+						</li>
+						<li>
+							<a href="#multi-add-modal" class="modal-trigger white btn black-text" (click)="fetch_all_multi(product.category_id)">Select</a>
+						</li>
+					</ul>
+				<br/>
 					  <div class="clearfix"></div>
 					  <div class="col m4 no-padding" *ngIf="circles">
 							<mat-form-field>
@@ -145,74 +155,28 @@
 						</li>
 					</ul>
 					<div class="review-ratings">
-                  		<p class="font-size-change1 font600">In The Box</p>
-                  		<span class="font-size-change1">HD Set-top-box, Antenna, Universal Remote, HDMI Cable, Digicard, 10 meter cable .</span>
-                  		<div class="margin-top1">
-                  			<p class="font-size-change1 font600">General</p>
+                  		<div>
+							<h2>Specifications</h2>
                   			<ul>
-                  				<div class="brand">
-                  					<li><span class="font-size-change1 font600 grey-text">Brand</span></li>
-                  					<li><span class="font-size-change font600">{{product.main_cat}}</span></li>
-                  				</div>
-                  				<div class="brand">
-                  					<li><span class="font-size-change1 font600 grey-text">Type</span></li>
-                  					<li><span class="font-size-change font600">{{product.cat_title}}</span></li>
-                  				</div>										
-											<!-- <div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Offer</span></li>
-												<li><span class="font-size-change font600">with 1 Month Dhamaka 199 Pack</span></li>
-											</div>																				 -->
-											<!-- <div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Display Resolution</span></li>
-												<li><span class="font-size-change font600">1080i Resolution</span></li>
-											</div> -->
+                  				<li *ngFor="let feature of convert_to_json(product.specifications)">
+									<div class="row">
+										<div class="col m4 s12">
 											<div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Remote Features</span></li>
-												<li><span class="font-size-change font600">Universal Remote with batteries</span></li>
+												<span class="font-size-change1 font600 grey-text">{{feature.title}}</span>
 											</div>
-											<div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Technology</span></li>
-												<li><span class="font-size-change font600">DVB S2, HEVC, MPEG4 decoder</span></li>
-											</div>
-											<div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Connectivity</span></li>
-												<li><span class="font-size-change font600">HDMI & CVBS out</span></li>
-											</div>
-											<!-- <div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Aspect Ratio</span></li>
-												<li><span class="font-size-change font600">16:09</span></li>
-											</div>
-											<div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Weight</span></li>
-												<li><span class="font-size-change font600">485g</span></li>
-											</div> -->
-										</ul>
+										</div>
+										<div class="col m8 s12">
+											<span class="font-size-change">{{feature.value}}</span>
+										</div>
 									</div>
-									<p class="font-size-change1 font600">Additional Features</p>
-									<span class="font-size-change">{{product.shortDescription}}</span>
-									<div class="margin-top1">
-										<p class="font-size-change1 font600">Warranty</p>
-										<ul>
-											<!-- <div class="brand">
-												<li><span class="font-size-change1 font600 grey-text">Warranty Summary</span></li>
-												<li><span class="font-size-change font600">On site - Servicing at customer location. Please call the 
-													service provider toll free number for any assistance.</span></li>
-												</div> -->
-												<div class="brand">
-													<li><span class="font-size-change1 font600 grey-text">Service Type</span></li>
-													<li><span class="font-size-change font600">Repair</span></li>
-												</div>										
-												<div class="brand">
-													<li><span class="font-size-change1 font600 grey-text">Covered in Warranty</span></li>
-													<li><span class="font-size-change font600">Set top box</span></li>
-												</div>																				
-												<div class="brand">
-													<li><span class="font-size-change1 font600 grey-text">Not Covered in Warranty</span></li>
-													<li><span class="font-size-change font600">ANTENNA,UNIVERSAL REMOTE, LNB</span></li>
-												</div>
-											</ul>
-										</div>	
-									</div>																				
+								</li>
+                  					
+							</ul>
+						</div>
+						<h2 *ngIf="product.short_description != ''">Additional Features</h2>
+						<span class="font-size-change" [innerHTML] ="product.short_description"></span>
+							
+					</div>																				
 			<div class="review-ratings margin-top1">
               	<div class="row rew-sta-rat">
               		<div class="col s12 m8">
@@ -361,7 +325,7 @@
 									<div class="card-content center">
 										<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
-										<span class="card-title"><i class="icon-inr"></i> {{item.price}} / <small>Month</small></span>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 										<a [routerLink]="['/product/channel-pack/'+item.id]" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)">Channels</a>
 									</div>
@@ -372,7 +336,7 @@
 									<div class="card-content center" >
 										<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
-										<span class="card-title"><i class="icon-inr"></i> {{item.price}} / <small>Month</small></span>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 										<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)">Channels</a></span>
 										<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger">Channels</a></span>
@@ -407,7 +371,8 @@
 				</div>
 				<div class="subtotal" *ngFor="let item of pack_selected;">
 					<p class="inline-block font600">{{item.title}} :</p>
-					<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{item.price}} </p>
+					<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
+					<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
 				</div>
 				<div class="subtotal" *ngIf="this.product && this.product.promos">
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
@@ -425,7 +390,8 @@
 				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p>
 			</div>
 			<div class="subtotal inline-block">
-				<a href="javasript:" class="btn orange" (click)="buyNow(product.id)">Checkout</a>
+				<a href="#multi-add-modal" *ngIf="!multienable" class="btn orange modal-trigger"(click)="fetch_all_multi(product.category_id)">Checkout</a>
+				<a href="javascript:" class="btn orange" *ngIf="multienable" (click)="buyNow(product.id)">Checkout </a>
 			</div>				
 		</div>
 	</div>
@@ -580,21 +546,47 @@
 		<a href="javascript:" class="modal-action btn orange modal-close">Cancel</a>
 	</div>
 </div>
-<div class="religon-overlay" *ngIf="circles"> 
-		<div class="religon-modal" >
-			<h3 class="center">Select Region</h3>
-		<div *ngFor="let item of circles;let i = index">
-			<div class="chip" *ngIf="i < 5">
-				<a href="javascript:" class="black-text btn-contu" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
-				</div>
-			<div class="chip more" *ngIf="i == 5">
-				<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
+<div id="multi-add-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h2 class="center">Do You want to include Multi Box With this Pack?</h2>
+		<div class="clearfix"></div>
+		<div class="row" *ngIf="multi_list">
+			<div class="col s6 m3" *ngFor="let item of multi_list">
+				<a href="javascript:" class="black-text modal-close" (click)="continue_to_select(item)">
+					<div class="card choose-set-up-box center">
+							<span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span>
+						<div class="card-image">
+							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+						</div>
+						<div class="card-content">
+							<span>{{item.title}}</span>
+						</div>
+					</div>
+				</a>
 			</div>
-			<div class="chip hide" *ngIf="i >= 5">
-			<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
-			</div>
-		</div>	
-		
 		</div>
+		<div class="clearfix"></div>
 	</div>
+	
+	<div class="modal-footer">
+		<a href="javascript:" class="modal-action red btn modal-close" (click)="buyNow(product.id)">No</a>
+	</div>
+</div>
+<div class="religon-overlay" *ngIf="circles"> 
+	<div class="religon-modal" >
+		<h3 class="center">Select Region</h3>
+	<div *ngFor="let item of circles;let i = index">
+		<div class="chip" *ngIf="i < 5">
+			<a href="javascript:" class="black-text btn-contu" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+			</div>
+		<div class="chip more" *ngIf="i == 5">
+			<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
+		</div>
+		<div class="chip hide" *ngIf="i >= 5">
+		<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
+		</div>
+	</div>	
+	
+	</div>
+</div>
 <app-footer></app-footer>

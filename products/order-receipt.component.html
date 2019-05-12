@@ -20,8 +20,8 @@
 									<h2 class="font600">Thank you for shopping with us.</h2>
 									<span class="font-size-change1">We will send you a SMS conformation within 30 mintues.</span>
 									<div class="border padd-rem margin-top-order">
-										<p class="font-size-change1"><span class="font600">1 item will be delivered to Praveen Jain</span> at <span>H-34/157 Sector-3 Rohini, Vishram Chowk, New Delhi, Delhi 110085, India,</span> from Mydthshop</p>
-										<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">22-Apr-2019</span></p>
+										<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{order.name}}</span> at <span>{{order.address}}, {{order.city}}, {{order.state}} {{order.pin}}</span> from Mydthshop</p>
+										<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{order.formated_date}}</span></p>
 									</div>
 								</div>
 								<div class="col s8 no-padding">

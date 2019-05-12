@@ -6,9 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedCommonModule } from '../shared/common.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductService } from '../product.service';
+import { TodoService } from '../todo.service';
+import { AuthService } from '../auth.service';
 import { MatSelectModule } from '@angular/material';
 import { ProductDetailsComponent } from './product-details.component';
-import { Params } from '../shared/config/params.service';
 import { ProductsComponent } from './products.component';
 import { CheckoutComponent } from './checkout.component';
 import { NgxPaginationModule} from 'ngx-pagination';
@@ -17,7 +18,8 @@ import { OffersComponent } from './offers.component';
 import { ChannelPackComponent } from './channel-pack.component';
 import { CompareDthComponent } from './compare-dth.component';
 import { MultiComponent } from './multi.component';
-import { NgxImageZoomModule } from 'ngx-image-zoom';  
+import { NgxImageZoomModule } from 'ngx-image-zoom'; 
+import { User } from '../user'; 
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
   { path: 'listing', component: ProductsComponent },
@@ -45,7 +47,7 @@ const routes: Routes = [
     MatSelectModule
   ],
   declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, OffersComponent, ChannelPackComponent, CompareDthComponent, MultiComponent],
-  providers : [ProductService]
+  providers : [ProductService,TodoService,User,AuthService]
 })
 
 export class ProductsModule { }

@@ -1,5 +1,16 @@
 <!-- Header Start Here -->
 <header class="navigation header">
+	<div class="header-strip grey lighten-5">
+		<div class="container">
+			<div class="strip-right-text right">
+				<span class="grey-text">Sell on mydth |</span>
+				<span class="grey-text">Retail on mydth |</span>
+				<span class="grey-text">KYC |</span>
+				<span class="grey-text">24x7 support</span>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
 		<div class="container">
 			<nav>
 			<div class="nav-wrapper" id="primary-nav">
@@ -11,11 +22,11 @@
 							<div class="input-field col s12">
 								<button type="submit" class="btn-flat"><i class="material-icons white-text">search</i></button>
 									<mat-form-field class="example-full-width">
-										<input type="text" placeholder="What are you looking for....." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)">
+										<input type="text" placeholder="What are you looking for....." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
 										<mat-autocomplete #auto="matAutocomplete">
 											<span *ngIf="filterdList">
 											<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-												<a href="http://localhost:4200/product/{{option.url}}?cat_id={{option.parent_id}}&id={{option.id}}" class="black-text" target="_blank">{{option.title}}</a>
+												<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url } " class="black-text" target="_blank">{{option.title}}</a>
 											</mat-option>
 										</span>
 										</mat-autocomplete>
@@ -35,7 +46,7 @@
 			  <ul id="nav-mobile" class="inline-block log-sig right">
 				<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Login & Register</a></li>
 				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"><i class="material-icons orange-text left">account_balance_wallet</i> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a></li>
-				<li id="user-nav"><a href="javascript:" data-activates="slide-out" class="button-collapse no-margin"><img src="{{this.todoservice.base_url}}assets/images/menu-icon.png" class="responsive-img vertical-align-middle" alt="menu-icon"></a></li>
+				<li id="user-nav"><a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding"><img src="{{this.todoservice.base_url}}assets/images/menu-icon.png" class="responsive-img vertical-align-middle" alt="menu-icon"></a></li>
 			  </ul>
 			</div>
 		  </nav>		        

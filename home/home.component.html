@@ -592,10 +592,10 @@
 </section>
 <!-- End Here -->
 <!-- Flash Deal New Design -->
-<section class="flash-deal slider-flash-deal pad-btm">
+<section class="flash-deal slider-flash-deal margin-top no-padding">
 	<div class="container-fluid">
 		<div class="row no-margin">
-			<div class="col s12 m8 no-padding-right">
+			<div class="col s12 m12 no-padding">
 				<div class="card no-margin">
 					<div class="card-content no-padding">
 						<ul class="flash-deal-slider">
@@ -613,7 +613,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col s12 m4 no-padding-left images-height" *ngIf="filter_banners('main-side-banner')">
+			<!-- <div class="col s12 m4 no-padding-left images-height" *ngIf="filter_banners('main-side-banner')">
 				<div class="card no-margin">
 					<div class="card-content no-padding">
 						<a href="javascript:" *ngFor="let item of filter_banners('main-side-banner')">
@@ -621,7 +621,7 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </section>
@@ -630,14 +630,14 @@
 <section class="flash-deal white margin-top">
 	<h2 class="center padd border-bottom font600">Tata Sky Products</h2>
 	<div class="container">
-		<div class="row no-margin new-design-card">
-			<div class="col s12 m4">
+		<div class="row no-margin">
+			<!-- <div class="col s12 m4">
 				<div class="card" style="box-shadow: 0px 3px 23.22px 3.78px rgba(0, 0, 0, 0.16) !important;">
 					<div class="card-image center" *ngIf="tata_slides">
 						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{tata_slides[0].image}}" class="responsive-img tata-sky-card-img" alt="tata-sky-banner" width="100%">
 						<h2 class="no-margin">
-							<span class="black-text font600"><i class="icon-inr"></i>{{tata_slides[0].price}}</span>
-							<span class="grey-text del-pri"><i class="icon-inr"></i>{{tata_slides[0].offer_price}}</span>
+							<span class="black-text font600"><i class="icon-inr"></i>{{tata_slides[0].offer_price}}</span>
+							<span class="grey-text del-pri"><i class="icon-inr"></i>{{tata_slides[0].price}}</span>
 						</h2>
 					</div>
 					<div class="card-content" *ngIf="tata_slides">
@@ -651,44 +651,46 @@
 						</div>
 						<div class="btn-new center">
 								<span class="orange-text" *ngIf="tata_slides[0].cod_available == 1">Cash On Delivery</span><br>
+								<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : tata_slides[0].url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><br>
 							<a [routerLink]="['/product/'+tata_slides[0].url]" target="_blank" class="btn">Book Now</a>
 						</div>
 					</div>
 				</div>
 				
-			</div>
-			<div class="col s12 m8">
-				<div class="row no-margin">
-					<div *ngFor="let item of tata_slides;let i = index">
-						<div class="col s12 m6" *ngIf="i > 0">
-						<div class="card horizontal">
+			</div> -->
+			<div class="col s12 m12">
+				<div class="row no-margin home-product-card">
+					<ul class="slider-5">
+						<li *ngFor="let item of tata_slides;let i = index">
+						<div class="card">
 							<div class="card-image padd center">
 								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
-								<div class="clearfix"></div>
 							</div>
+							<div class="clearfix"></div>
 							<div class="card-stacked">
 								<div class="card-content no-padding">
 									<span class="card-title white-text font-size-change1">{{item.title}}</span>
-									<ul class="no-margin">
+									<!-- <ul class="no-margin">
 										<li [innerHTML]="item.description | nl2pbr"></li>
-									</ul>									
+									</ul>									 -->
 								<h2 class="center">
-									<span class="black-text font600"><i class="icon-inr"></i>{{item.price}}</span>
-									<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.offer_price}}</span>
+									<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+									<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
 								</h2>
 									<div class="mrp-price">
 										<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
 										<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
 									</div>
 									<div class="btn-new1 center">
-										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
+										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
+										<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					</div>
+					</li>
+				</ul>	
 				</div>
 			</div>
 		</div>
@@ -699,33 +701,38 @@
 <section class="flash-deal white margin-top">
 	<h2 class="border-bottom font600 padd center">Dishtv Products</h2>
 	<div class="container">
-		<div class="row no-margin new-design-card">
-			<div class="col s12 m4" *ngFor="let item of dishtv_slides">
-				<div class="card" id="list-{{item.id}}">
-					<div class="card-image center">
-						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="tata-sky-banner" width="100%">
-						<h2 class="no-margin">
-							<span class="black-text font600"><i class="icon-inr"></i>{{item.price}}</span>
-							<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.offer_price}}</span>
-						</h2>
+		<div class="row no-margin home-product-card">
+			<ul class="slider-6">
+				<li *ngFor="let item of dishtv_slides;let i = index">
+				<div class="card">
+					<div class="card-image padd center">
+						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
 					</div>
-					<div class="card-content">
-						<span class="card-title white-text">{{item.title}}</span>
-						<ul class="no-margin">
-							<li [innerHTML]="item.description | nl2pbr"></li>
-						</ul>
-						<div class="mrp-price">
-							<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].cashback_amount}}</span><span *ngIf="!check_cashback(item.id) ">{{item.partner_cashback_wallet}}</span></h2>
-							<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
-						<div class="btn-new center">
-							<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
-							<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+					<div class="clearfix"></div>
+					<div class="card-stacked">
+						<div class="card-content no-padding">
+							<span class="card-title white-text font-size-change1">{{item.title}}</span>
+							<!-- <ul class="no-margin">
+								<li [innerHTML]="item.description | nl2pbr"></li>
+							</ul>									 -->
+						<h2 class="center">
+							<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+							<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+						</h2>
+							<div class="mrp-price">
+								<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
+								<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
+							</div>
+							<div class="btn-new1 center">
+								<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
+								<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+								<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-		</div>
+			</li>
+		</ul>
 	</div>
 	</div>
 </section>
@@ -734,128 +741,78 @@
 <section class="flash-deal white margin-top">
 	<h2 class="border-bottom font600 padd center">Airtel DTH Products</h2>
 	<div class="container">
-		<div class="row no-margin new-design-card">
-			<div class="col s12 m4">
-				<div class="card" style="box-shadow: 0px 3px 23.22px 3.78px rgba(0, 0, 0, 0.16) !important;">
-					<div class="card-image center" *ngIf="airtel_slides">
-						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{airtel_slides[0].image}}" class="responsive-img airtel-card-image" alt="tata-sky-banner" width="100%">
-						<h2 class="no-margin">
-						<span class="black-text font600"><i class="icon-inr"></i>{{airtel_slides[0].price}}</span>
-						<span class="grey-text del-pri"><i class="icon-inr"></i>{{airtel_slides[0].offer_price}}</span>
-						</h2>
-					</div>
-					<div class="card-content" *ngIf="airtel_slides" id="list-{{airtel_slides[0].id}}">
-						<span class="card-title white-text">{{airtel_slides[0].title}}</span>
-						<ul class="no-margin">
-							<li [innerHTML]="airtel_slides[0].description | nl2pbr"></li>
-						</ul>
-						<div class="mrp-price">
-							<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(airtel_slides[0].id)">{{check_cashback(airtel_slides[0].id)[0].cashback_amount}}</span><span *ngIf="!check_cashback(airtel_slides[0].id) ">{{airtel_slides[0].partner_cashback_wallet}}</span></h2>
-							<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{airtel_slides[0].user_cashback_wallet}}</h2>
+			<div class="row no-margin home-product-card">
+				<ul class="slider-7">
+					<li *ngFor="let item of airtel_slides;let i = index">
+					<div class="card">
+						<div class="card-image padd center">
+							<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
 						</div>
-						<div class="btn-new center">
-							<span class="orange-text" *ngIf="airtel_slides[0].cod_available == 1">Cash On Delivery</span><br>
-							<a  [routerLink]="['/product/'+airtel_slides[0].url]" target="_blank" class="btn">Book Now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col s12 m8">
-				<div class="row">
-					<div *ngFor="let item of airtel_slides;let i = index">
-					<div class="col s12 m6 padd-left" *ngIf="i > 0 && i < 3">
-						<div class="card horizontal">
-							<div class="card-image padd center">
-								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
-								
-							</div>
-							<div class="card-stacked">
-								<div class="card-content no-padding">
-									<span class="card-title white-text font-size-change1">{{item.title}}</span>
-									<ul class="no-margin">
-										<li [innerHTML]="item.description | nl2pbr"></li>
-									</ul>
-									<h2 class="center">
-										<span class="black-text font600"><i class="icon-inr"></i>{{item.price}}</span>
-										<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.offer_price}}</span>
-										</h2>
-									<div class="mrp-price1">
-										<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].cashback_amount}}</span><span *ngIf="!check_cashback(item.id) ">{{item.partner_cashback_wallet}}</span></h2>
-										<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
-
-									</div>
-									<div class="btn-new1 center">
-										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
-										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
-									</div>
+						<div class="clearfix"></div>
+						<div class="card-stacked">
+							<div class="card-content no-padding">
+								<span class="card-title white-text font-size-change1">{{item.title}}</span>
+								<!-- <ul class="no-margin">
+									<li [innerHTML]="item.description | nl2pbr"></li>
+								</ul>									 -->
+							<h2 class="center">
+								<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+								<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+							</h2>
+								<div class="mrp-price">
+									<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
+									<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
+								</div>
+								<div class="btn-new1 center">
+									<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
+									<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+									<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col s12 m12 card-design-change" *ngIf=" i >= 3">
-						<div class="card horizontal">
-							<div class="card-image padd center">
-								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
-								<h2 class="no-margin">
-								<span class="black-text font600"><i class="icon-inr"></i>{{item.price}}</span>
-								<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.offer_price}}</span>
-								</h2>
-							</div>
-							<div class="card-stacked">
-								<div class="card-content no-padding">
-									<span class="card-title white-text font-size-change1 no-margin">{{item.title}}</span>
-									<ul class="no-margin">
-										<li [innerHTML]="item.description | nl2pbr"></li>
-									</ul>
-									<div class="mrp-price1">
-										<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].cashback_amount}}</span><span *ngIf="!check_cashback(item.id) ">{{item.partner_cashback_wallet}}</span></h2>
-										<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}</h2>
-									</div>
-									<div class="btn-new1 center-align">
-										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
-										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					</div>
-				</div>
+				</li>
+			</ul>
 		</div>
 		</div>
-	</div>
 </section>
 <!-- end here -->
 <!-- Videocon D2H section -->
 <section class="flash-deal white margin-top">
 	<h2 class="border-bottom font600 padd center">Videocon D2H Products</h2>
 	<div class="container">
-		<div class="row no-margin new-design-card">
-			<div class="col s12 m6 l3" *ngFor="let item of videcone_slides;let i = index">
-				<div class="card" id="list-{{item.id}}">
-					<div class="card-image center">
-						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="tata-sky-banner" width="100%">
-						<h2 class="no-margin">
-						<span class="black-text font600"><i class="icon-inr"></i>{{item.price}}</span>
-						<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.offer_price}}</span>
-						</h2>
+		<div class="row no-margin home-product-card">
+			<ul class="slider-8">
+				<li *ngFor="let item of videcone_slides;let i = index">
+				<div class="card">
+					<div class="card-image padd center">
+						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
 					</div>
-					<div class="card-content">
-						<span class="card-title white-text">{{item.title}}</span>
-						<ul class="no-margin">
-							<li [innerHTML]="item.description | nl2pbr"></li>
-						</ul>
-						<div class="mrp-price">
-							<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].cashback_amount}}</span><span *ngIf="!check_cashback(item.id) ">{{item.partner_cashback_wallet}}</span></h2>
-							<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}}</h2>
-						</div>
-						<div class="btn-new center">
-							<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><br>
-							<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+					<div class="clearfix"></div>
+					<div class="card-stacked">
+						<div class="card-content no-padding">
+							<span class="card-title white-text font-size-change1">{{item.title}}</span>
+							<!-- <ul class="no-margin">
+								<li [innerHTML]="item.description | nl2pbr"></li>
+							</ul>									 -->
+						<h2 class="center">
+							<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+							<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+						</h2>
+							<div class="mrp-price">
+								<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
+								<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
+							</div>
+							<div class="btn-new1 center">
+								<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
+								<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+								<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</li>
+		</ul>
 		</div>
 	</div>
 </section>
@@ -865,7 +822,7 @@
 		<div class="row no-margin">
 			<ul class="retailer-slider">
 				<li *ngFor="let banner of filter_banners('user-type')">
-					<div class="row no-margin">
+					<div class="no-margin">
 						<div class="col s12 m8 no-padding">
 							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%">
 						</div>

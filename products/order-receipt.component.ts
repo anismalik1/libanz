@@ -3,7 +3,6 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { User} from '../user';
 
 @Component({
   selector: 'app-order-receipt',
@@ -18,7 +17,7 @@ export class OrderReceiptComponent implements OnInit {
   constructor( public todoservice : TodoService,
     private spinner : NgxSpinnerService,  
     private authservice : AuthService,
-    private router : ActivatedRoute, private user :User) {
+    private router : ActivatedRoute) {
       
      }
 
@@ -43,7 +42,7 @@ export class OrderReceiptComponent implements OnInit {
         //console.log(this.orders)
         this.display = 1;
         this.spinner.hide();
-        this.user.set_user_data(data.user);
+        this.todoservice.set_user_data(data.user)
       }
 		  ) 
   }

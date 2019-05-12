@@ -99,13 +99,13 @@ export class ProductService {
     }
     return true;
   }
-  addto_cart(id : number)
+  addto_cart(id : number,product_item)
   {
     let push_cart_id = id;
       if(push_cart_id)
       {
         var item : Item = {
-          product   : this.product,
+          product   : product_item,
           quantity  : 1
         };
         if( localStorage.getItem('cart') == null )
@@ -207,6 +207,7 @@ export class ProductService {
     return amount; 
   }
 
+  
   calculateCartAmountWithoutOffer() : number{
     let cart :any = JSON.parse(localStorage.getItem('cart'));
     let index : number = -1;
@@ -382,6 +383,22 @@ export class ProductService {
   fetch_products_by_category(data)
   {
     this.request_action = 'fetch_products_by_category';
+    return this.send_post_request(data) ;
+  }
+  fetch_all_multi(data)
+  {
+    this.request_action = 'fetch_all_multi';
+    return this.send_post_request(data) ;
+  }
+
+  compare_urls(data)
+  {
+    this.request_action = 'compare_urls';
+    return this.send_post_request(data) ;
+  } 
+  share_pack_to_mail(data)
+  {
+    this.request_action = 'share_pack_to_mail';
     return this.send_post_request(data) ;
   }
 }
