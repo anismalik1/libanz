@@ -16,6 +16,7 @@ import * as $ from 'jquery';
 })
 export class ProductDetailsComponent implements OnInit{
   fta_price : number;
+  hide : boolean = true;
   region : any;
   fta_title : string;
   pack_selected : any = [];
@@ -705,10 +706,17 @@ export class ProductDetailsComponent implements OnInit{
 			});
 			$('.chip').on('click', function() {
 				$(this).addClass('green');
-			});
+      });
+      
 		});
     `;
     this._renderer2.appendChild(this._document.body, script);
+  }
+
+  unhide()
+  {
+    $('.unhide-link').remove()
+    this.hide = false;
   }
   select_pack(pack)
   {

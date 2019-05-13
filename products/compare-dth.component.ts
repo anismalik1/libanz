@@ -36,7 +36,7 @@ export class CompareDthComponent implements OnInit {
     if(this.todoservice.get_param('urls') != '')
         this.urls = this.todoservice.get_param('urls');
     var arr = this.urls.split('-vs-');
-    if(arr.length > 4)
+    if(arr.length >= 4)
     {
       this.disable_compare = true;
       return true;
@@ -82,6 +82,10 @@ export class CompareDthComponent implements OnInit {
         this.spinner.hide();
         this.all_specifications = data.SPECIFICATIONS;
         this.compare_products = data.compare_products;
+        if(this.compare_products.length >= 4)
+        {
+          this.disable_compare = true;
+        }
         this.meta.addTag({ name: 'description', content: data.compare_content.meta_description });
         this.meta.addTag({ name: 'keywords', content: data.compare_content.meta_keyword });
         this.title.setTitle(data.compare_content.meta_title);
@@ -179,6 +183,19 @@ export class CompareDthComponent implements OnInit {
         belowOrigin: false, // Displays dropdown below the button
         alignment: 'left'
       });
+      $(window).scroll(function (event) {
+      if($(window).width() >767){
+      var scroll = $(window).scrollTop();
+      if(scroll > 368)
+      {
+        $('.compare-top-row').removeClass('hide');
+      }
+      else
+      {
+        $('.compare-top-row').addClass('hide');
+      }
+    }
+  });
     });
     `;
     this._renderer2.appendChild(this._document.body, script);

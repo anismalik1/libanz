@@ -8,15 +8,26 @@
 	type="ball-clip-rotate">
 </ngx-spinner>
 </div>
+
 <section class="compare-dth white">
   <div class="container">
     <div class="row">
+        <div class="compare-top-row hide">
+            <div class="col l2 m2 my-compair"><h3>Feature Options</h3></div>
+            <div [className]="i == 0 ? 'col l3 my-compair':'col l2 my-compair'" *ngFor="let item of compare_products;let i = index;">
+              <div class="compare-text left white-text">
+                <span>{{item.title}}</span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
       <div class="col s12 m12 center">
         <h2 class="font600">Compare Your DTH Box Plans</h2>
       </div>
+      
       <div class="row my-compair">
           <div class="col l2 m2 my-compair">
-          <div class="compare-table">
+          <div class="compare-table features">
           <table class="table centered bordered ">
               <tbody>
                 <tr>
@@ -34,14 +45,14 @@
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="font-size-change1 font600 grey-text">Channels/Pack</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"> Channel List</span></td>
+                  <td><span class="font-size-change-order font600 inline-block margin-top-order"> Channel Available</span></td>
                 </tr> 
               </tbody>
             </table>
         </div>
       </div>
 
-        <div class="col l2 my-compair" [className]="i == 0 ? 'col l3 my-compair':'col l2 my-compair'" *ngFor="let item of compare_products;let i = index;">
+        <div [className]="i == 0 ? 'col l3 my-compair no-padding':'col l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
           
           <div class="compare-text left">
             <span>{{item.title}}</span>
@@ -67,7 +78,7 @@
               </td>
             </tr>
             <tr>
-              <td><span class="font-size-change1 font600 grey-text">Channels/Pack</span><br/><span class="font-size-change-order font600 inline-block margin-top-order"><a [routerLink]="['/product/'+item.url]" class="black-text" target="_blank">See Channels List</a></span></td>
+              <td><span class="font-size-change-order font600 inline-block margin-top-order"><a class="blue-text" [routerLink]="['/product/'+item.url]" target="_blank">See Channel Packs</a></span></td>
             </tr> 
           </tbody>
         </table>
