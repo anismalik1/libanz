@@ -57,7 +57,7 @@
                       </div>
                       <div class="product-btn center">
                       	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-                      	<a href="javascript:" (click)="go_to_channel_section()"  class="btn margin-left red btn-large font-size-change1"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
                       </div>
                     </div>
                   </div>
@@ -71,7 +71,7 @@
 							</li>
 						</ul>
 						<!-- <a href="#chng-base-pack" class="font-size-change1 modal-trigger">Change Basepack</a> -->
-						<a href="javascript:" class="white-text" (click)="go_to_channel_section()">
+						<a href="javascript:" class="white-text" (click)="go_to_channel_section(1)">
 							<div class="chip red white-text right">
 								Scroll Down And Select Your Channel List
 								<i class="material-icons">keyboard_arrow_down</i>
@@ -125,7 +125,7 @@
 							<span class="font-size-change1 font600 grey-text">Add Multi</span>
 						</li>
 						<li>
-							<a href="#multi-add-modal" class="modal-trigger white btn black-text" (click)="fetch_all_multi(product.category_id)">Select</a>
+							<a href="javascript:" class=" white btn black-text" (click)="go_to_channel_section(2)">Select</a>
 						</li>
 					</ul>
 				<br/>
@@ -174,7 +174,7 @@
 								<a class="unhide-link blue-text" href="javascript:" (click)="unhide();">more</a>
 							</ul>
 						</div>
-						<h2 *ngIf="product.short_description != ''">Additional Features</h2>
+						<h2 *ngIf="product.short_description != ''">Terms & Conditions</h2>
 						<span class="font-size-change" [innerHTML] ="product.short_description"></span>
 							
 					</div>																				
@@ -385,13 +385,12 @@
 			<div class="subtotal payable margin-top">
 				<p class="inline-block font600">Amount Payable :</p>
 				<p class="inline-block right font-size-change"> <i class="icon-inr"></i> {{calculate_amount() }}</p>
+				<div class="clearfix"></div>
+				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p>
 			</div>
 			<hr>
 			<div class="subtotal inline-block">
-				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p>
-			</div>
-			<div class="subtotal inline-block">
-				<a href="#multi-add-modal" *ngIf="!multienable" class="btn orange modal-trigger"(click)="fetch_all_multi(product.category_id)">Checkout</a>
+				<a href="#multi-add-modal" *ngIf="!multienable" class="btn orange modal-trigger checkout-with-multi"(click)="fetch_all_multi(product.category_id)">Checkout</a>
 				<a href="javascript:" class="btn orange" *ngIf="multienable" (click)="buyNow(product.id)">Checkout </a>
 			</div>				
 		</div>
@@ -552,18 +551,35 @@
 		<h2 class="center">Do You want to include Multi Box With this Pack?</h2>
 		<div class="clearfix"></div>
 		<div class="row" *ngIf="multi_list">
-			<div class="col s6 m3" *ngFor="let item of multi_list">
-				<a href="javascript:" class="black-text modal-close" (click)="continue_to_select(item)">
+			<div class="col s12 m12" *ngFor="let item of multi_list">
+				
 					<div class="card choose-set-up-box center">
-							<span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span>
-						<div class="card-image">
-							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+						<!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
+						<div class="include-multi-box">
+							<div class="col m3">
+								<div class="card-image">
+									<img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+								</div>
+							</div>
+							<div class="col m6">
+								<div class="card-content">
+									<span>{{item.title}}</span>
+								</div>
+								<div *ngIf="item.category_id == 1">
+									<input type="radio" value="2" name="tskkit-{{item.id}}" id="multi-tsk-1-{{item.id}}" checked (change)="multi_tsk(item.id);">
+									<label for="multi-tsk-1-{{item.id}}">TSK 599</label>
+									<input type="radio" value="3" name="tskkit-{{item.id}}" id="multi-tsk-2-{{item.id}}" (change)="multi_tsk(item.id);">
+									<label for="multi-tsk-2-{{item.id}}">TSK 999</label>
+								</div>
+							</div>
+							<div class="col m3 card-content">
+								<a class="modal-close btn right orange" href="javascript:" (click)="continue_to_select(item)">select</a>
+							</div>
+							<div class="clearfix"></div>
+							
 						</div>
-						<div class="card-content">
-							<span>{{item.title}}</span>
-						</div>
+						
 					</div>
-				</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>

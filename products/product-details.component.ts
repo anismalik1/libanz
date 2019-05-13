@@ -24,6 +24,7 @@ export class ProductDetailsComponent implements OnInit{
   all_packs : any = [];
   channels_packs : any;
   multi_list : any;
+  multi_tsk_kit : number = 2;
   circles : any;
   channels : any;
   product_category_list : any;
@@ -461,13 +462,17 @@ export class ProductDetailsComponent implements OnInit{
         else
         {
           multi.pack_selected = this.product.pack_selected;
-        }  
+        } 
+         multi.tsk_kit = this.multi_tsk_kit;
       }
       else
       {
-        multi.pack_selected[0].price =  this.pack_selected[0].multi_price;
+        multi.pack_selected = [];
+        console.log(this.pack_selected);
+        multi.pack_selected = [this.pack_selected[0]];
         if(this.pack_selected[1])
-          multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
+            multi.pack_selected = [this.pack_selected[0],this.pack_selected[1]];
+         // multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
         
       }
       multi.month_pack = this.product.month_pack;
@@ -883,11 +888,26 @@ export class ProductDetailsComponent implements OnInit{
     this.toastr.info("Your Item is Added to the Cart");
   }
 
-  go_to_channel_section()
+  multi_tsk(id)
+  {
+    if($('[name="tskkit-'+id+'"]:checked').val() == 3)
+    {
+      this.multi_tsk_kit = 3;
+    }
+    else
+    {
+      this.multi_tsk_kit = 2;
+    }
+  }
+  go_to_channel_section(opt)
   {
     $('html, body').animate({
       scrollTop: $("#channel-list").offset().top
     }, 1000);
+    if(opt == 2)
+    {
+      $('.checkout-with-multi').text("Include Multibox");
+    }
   }
 
   apply_package()

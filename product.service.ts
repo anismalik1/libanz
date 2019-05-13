@@ -184,6 +184,7 @@ export class ProductService {
     for(var i =0;i< Object.keys(cart).length;i++)
     {
       let item :Item = JSON.parse(cart[i]);
+      //console.log(item);
       if(item.product.tsk_kit && item.product.tsk_kit == 3)
       {
         amount += (item.product.price -1000) * item.quantity
