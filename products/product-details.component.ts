@@ -468,10 +468,10 @@ export class ProductDetailsComponent implements OnInit{
       else
       {
         multi.pack_selected = [];
-        console.log(this.pack_selected);
+        //console.log(this.pack_selected);
         multi.pack_selected = [this.pack_selected[0]];
         if(this.pack_selected[1])
-            multi.pack_selected = [this.pack_selected[0],this.pack_selected[1]];
+          multi.pack_selected = [this.pack_selected[0],this.pack_selected[1]];
          // multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
         
       }

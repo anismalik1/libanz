@@ -74,11 +74,11 @@
             </tr>
 			      <tr *ngFor="let feature of to_json(item.specifications);">
               <td>
-                <span title="{{feature.value}}">{{trim_text(feature.value)}}</span>
+                <span title="{{feature.value}}"[className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{trim_text(feature.value)}}</span>
               </td>
             </tr>
             <tr>
-              <td><span class="font-size-change-order font600 inline-block margin-top-order"><a class="blue-text" [routerLink]="['/product/'+item.url]" target="_blank">See Channel Packs</a></span></td>
+              <td><span class="font-size-change-order font600 inline-block margin-top-order"><a class="blue-text" [routerLink]="['/product/'+item.url]" target="_blank">View Channel Packs</a></span></td>
             </tr> 
           </tbody>
         </table>
@@ -100,7 +100,7 @@
 <div id="tata-sky-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Choose Set Up Box </h4>
-      <div class="row" style="display:flex" *ngIf="product_list">
+      <div class="row" *ngIf="product_list">
         <div class="col s6 m3" *ngFor="let item of product_list">
           <a href="javascript:" class="black-text modal-close" (click)="continue_to_change(item.url)">
             <div class="card choose-set-up-box center">
