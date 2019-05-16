@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedCommonModule } from '../shared/common.module';
 import { PageViewComponent } from './page-view.component';
 import { ContactUsComponent } from './contact-us.component';
+import { ForgotPasswordComponent } from './forgot-password.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductService } from '../product.service';
 import { FormsModule ,ReactiveFormsModule,} from '@angular/forms';
@@ -18,6 +19,7 @@ import { AuthService } from '../auth.service';
 const routes: Routes = [
   { path: '', component: PageViewComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: 'forgot-password', component: ContactUsComponent },
   { path: 'user-notify/:id', component: NotifyComponent }
   
 ];
@@ -31,7 +33,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, LoginComponent, SignupComponent, NotifyComponent],
+  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 

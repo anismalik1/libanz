@@ -14,16 +14,17 @@
 		<div class="col s12 m10 l6 offset-l3">
 			<div class="card no-margin">
 				<div class="card-content" *ngIf="orders">
+						<div class="col s12 no-padding">									
+							<h2 class="font600">Thank you for shopping with us.</h2>
+							<span class="font-size-change1">We will send you a SMS conformation within 30 mintues.</span>
+							<div class="border padd-rem margin-top-order">
+								<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{order[0].deliver_to}}</span> from Mydthshop</p>
+								<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{order.formated_date}}</span></p>
+							</div>
+						</div>
 						<div class="order-list" *ngFor="let order of orders">							
 							<div class="row no-margin border-on-bottom padd-bottom">
-								<div class="col s12 no-padding">									
-									<h2 class="font600">Thank you for shopping with us.</h2>
-									<span class="font-size-change1">We will send you a SMS conformation within 30 mintues.</span>
-									<div class="border padd-rem margin-top-order">
-										<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{order.name}}</span> at <span>{{order.address}}, {{order.city}}, {{order.state}} {{order.pin}}</span> from Mydthshop</p>
-										<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{order.formated_date}}</span></p>
-									</div>
-								</div>
+								
 								<div class="col s8 no-padding">
 									<span class="font-size-change1">Order Number</span><br>
 									<span class="font-size-change-order font600">{{order.id}}</span><br>
