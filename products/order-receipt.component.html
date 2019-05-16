@@ -18,8 +18,8 @@
 							<h2 class="font600">Thank you for shopping with us.</h2>
 							<span class="font-size-change1">We will send you a SMS conformation within 30 mintues.</span>
 							<div class="border padd-rem margin-top-order">
-								<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{order[0].deliver_to}}</span> from Mydthshop</p>
-								<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{order.formated_date}}</span></p>
+								<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{orders[0].deliver_to}}</span> from Mydthshop</p>
+								<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{orders[0].formated_date}}</span></p>
 							</div>
 						</div>
 						<div class="order-list" *ngFor="let order of orders">							

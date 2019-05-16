@@ -56,74 +56,36 @@ export class ProductsComponent implements OnInit{
   filter_cat()
   {
     var array : any = ''; 
-    var array_type : any = ''; 
-    var array_quality : any = ''; 
-    var array_package : any = ''; 
     $('#brand-category input[type="checkbox"]:checked').each(function(){
       array += $(this).val()+','; 
     });
-    $('#box-type input[type="checkbox"]:checked').each(function(){
-      array_type += $(this).val()+','; 
-    });
-    $('#video-quality input[type="checkbox"]:checked').each(function(){
-      array_quality += $(this).val()+','; 
-    });
-
-    $('#package-type input[type="checkbox"]:checked').each(function(){
-      array_package += $(this).val()+','; 
-    });
+    
 
     if(array != '')
     {
       array = array.slice(0, -1);
     }
-    if(array_type != '')
-    {
-      array_type = array_type.slice(0, -1);
-    }
-    if(array_quality != '')
-    {
-      array_quality = array_quality.slice(0, -1);
-    }
-    if(array_package != '')
-    {
-      array_package = array_package.slice(0, -1);
-    }
-    this.router.navigate(['/product/listing'],{ queryParams: { cat_id:  array,type: array_type,quality: array_quality,package: array_package} });
+
+    this.router.navigate(['/product/listing'],{ queryParams: { cat_id:  array} });
     this.spinner.show();
-    let filter_data : any = { cat_id : array,type: array_type,quality: array_quality,package: array_package};
+    let filter_data : any = { cat_id : array};
     this.todoservice.get_filter_products(filter_data)
       .subscribe(
         data => 
         {
           this.spinner.hide();
-          let b = this.htmlToPlaintext(JSON.stringify(data));
-          data =  JSON.parse(b.replace(/\\/g, ''));
           this.products = data.PRODUCTDATA;
-          if(this.data.page_index == 1)
-          {
-            this.product_counts = data.COUNTS[0].numrows;
-          }
-           
+          this.product_counts = data.COUNTS[0].numrows;
         }
       )  
   }
   apply_product_filter(page)
   {
     var array : any = ''; 
-    var array_type : any = ''; 
-    var array_quality : any = ''; 
-    var array_package : any = ''; 
     if(this.todoservice.get_param('cat_id') != '')
       array = this.todoservice.get_param('cat_id');
-    if(this.todoservice.get_param('type') != '')
-      array_type = this.todoservice.get_param('type');
-    if(this.todoservice.get_param('quality') != '')
-      array_quality = this.todoservice.get_param('quality');
-    if(this.todoservice.get_param('package') != '')
-      array_package = this.todoservice.get_param('package');
 
-    let filter_data : any = { cat_id : array,type: array_type,quality: array_quality,package: array_package};
+    let filter_data : any = { cat_id : array};
     this.data = filter_data;
     this.data.page_index = page;
     this.spinner.show();
@@ -132,14 +94,8 @@ export class ProductsComponent implements OnInit{
         data => 
         {
           this.spinner.hide();
-          let b = this.htmlToPlaintext(JSON.stringify(data));
-          data =  JSON.parse(b.replace(/\\/g, ''));
           this.products = data.PRODUCTDATA;
-          if(this.data.page_index == 1)
-          {
-            this.product_counts = data.COUNTS[0].numrows;
-          }
-           
+          this.product_counts = data.COUNTS[0].numrows;
         }
       )  
   }

@@ -613,51 +613,16 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="col s12 m4 no-padding-left images-height" *ngIf="filter_banners('main-side-banner')">
-				<div class="card no-margin">
-					<div class="card-content no-padding">
-						<a href="javascript:" *ngFor="let item of filter_banners('main-side-banner')">
-							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img" alt="flah-deal" title="DTH Deals Offers">
-						</a>
-					</div>
-				</div>
-			</div> -->
+			
 		</div>
 	</div>
 </section>
 <!-- End Here -->
 <!-- Tata Sky section -->
 <section class="flash-deal white margin-top">
-	<h2 class="center padd border-bottom font600">Tata Sky Products</h2>
+	<h2 class="center padd border-bottom font600">Tata Sky Products <span class="right font-size-change"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 1}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin">
-			<!-- <div class="col s12 m4">
-				<div class="card" style="box-shadow: 0px 3px 23.22px 3.78px rgba(0, 0, 0, 0.16) !important;">
-					<div class="card-image center" *ngIf="tata_slides">
-						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{tata_slides[0].image}}" class="responsive-img tata-sky-card-img" alt="tata-sky-banner" width="100%">
-						<h2 class="no-margin">
-							<span class="black-text font600"><i class="icon-inr"></i>{{tata_slides[0].offer_price}}</span>
-							<span class="grey-text del-pri"><i class="icon-inr"></i>{{tata_slides[0].price}}</span>
-						</h2>
-					</div>
-					<div class="card-content" *ngIf="tata_slides">
-						<span class="card-title white-text">{{tata_slides[0].title}}</span>
-						<ul class="no-margin">
-							<li [innerHTML]="tata_slides[0].description | nl2pbr"></li>
-						</ul>
-						<div class="mrp-price">
-							<div *ngIf="this.todoservice.get_user_type() == 2"><h2 class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(tata_slides[0].id)">{{check_cashback(tata_slides[0].id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(tata_slides[0].id)">{{tata_slides[0].partner_cashback_wallet}}</span></h2> </div>
-							<div *ngIf="this.todoservice.get_user_type() != 2"><h2 class="no-margin">Cash Back: <i class="icon-inr"></i> {{tata_slides[0].user_cashback_wallet}}</h2></div>
-						</div>
-						<div class="btn-new center">
-								<span class="orange-text" *ngIf="tata_slides[0].cod_available == 1">Cash On Delivery</span><br>
-								<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : tata_slides[0].url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><br>
-							<a [routerLink]="['/product/'+tata_slides[0].url]" target="_blank" class="btn">Book Now</a>
-						</div>
-					</div>
-				</div>
-				
-			</div> -->
 			<div class="col s12 m12">
 				<div class="row no-margin home-product-card">
 					<ul class="slider-5">
@@ -699,7 +664,7 @@
 <!-- end here -->
 <!-- Dish Tv Section -->
 <section class="flash-deal white margin-top">
-	<h2 class="border-bottom font600 padd center">Dishtv Products</h2>
+	<h2 class="border-bottom font600 padd center">Dishtv Products <span class="right font-size-change"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 4}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin home-product-card">
 			<ul class="slider-6">
@@ -739,7 +704,7 @@
 <!-- end here -->
 <!-- Airtel Dish section -->
 <section class="flash-deal white margin-top">
-	<h2 class="border-bottom font600 padd center">Airtel DTH Products</h2>
+	<h2 class="border-bottom font600 padd center">Airtel DTH Products <span class="right font-size-change"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 3}" target="_blank">View All</a></span></h2>
 	<div class="container">
 			<div class="row no-margin home-product-card">
 				<ul class="slider-7">
@@ -779,7 +744,7 @@
 <!-- end here -->
 <!-- Videocon D2H section -->
 <section class="flash-deal white margin-top">
-	<h2 class="border-bottom font600 padd center">Videocon D2H Products</h2>
+	<h2 class="border-bottom font600 padd center">Videocon D2H Products <span class="right font-size-change"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 2}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin home-product-card">
 			<ul class="slider-8">
