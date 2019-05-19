@@ -9,12 +9,13 @@ import { Observable} from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Authparams } from '../../authparams';
+import { User } from '../../user';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  providers : [ProductService]
+  providers : [ProductService,TodoService,User]
 })
 export class HeaderComponent implements OnInit{
   myControl = new FormControl();
@@ -106,8 +107,12 @@ export class HeaderComponent implements OnInit{
             this.todoservice.set_user_data(user);
             $('.login-modal-close').click();
             let url = window.location.pathname+window.location.hash
-            if(url == '/home' || url == '')
+            if(url == '/home' || url == '' || url == '/' || url == "/home%23login")
             {
+              this.router.routeReuseStrategy.shouldReuseRoute = function(){
+                return false;
+             }
+            this.router.navigated = false;
               this.router.navigate(['/home#login']);
             }
           }

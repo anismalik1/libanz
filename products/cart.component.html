@@ -37,7 +37,7 @@
                                         <span class="font-size-change grey-text">Seller : MyDthShop</span><br>
 										<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
 										<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
-          					<span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span>
+          							<span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span>
                                     </a>
                                     <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.product.price -1000}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
 									<span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
@@ -74,23 +74,29 @@
             <div class="col s12 m12 l4 order-summary" *ngIf="this.productservice.cartItemsCount() > 0">
                 <div class="card">
                     <div class="card-content black-text no-padding">
-                        <span class="card-title inline-block">Order Summary</span>
+                        <span class="card-title inline-block">Order Summary</span> 
                         <hr>
-                        <div *ngFor="let item of this.productservice.cart_items;let i = index;">
-							<div class="subtotal">
-								<p class="inline-block font600">Product : <span class="grey-text font500">{{item.product.title}}</span></p>
-								<p class="inline-block right font-size-change green-text" > <i class="icon-inr"></i> <span class="no-padding" *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.product.price -1000}}</span><span class="no-padding" *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.product.offer_price}}</span></p>
+                        <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
+							<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
+							<p class="inline-block font600"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
+							<ng-template #kitblock>
+								<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
+								<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{item.product.price - 1000 }}</p>
+							</ng-template>
+							<ng-template #nokitblock>
+								<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
+							</ng-template>
+							<br/>
+							<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
+								<p class="font600 left"> <span class="grey-text font500 pack-title">{{pack.title}} :</span></p>
+								<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
+								<div class="clearfix"></div>
 							</div>
-							<div class="subtotal" *ngFor="let pack of item.product.pack_selected;">
-								<p class="inline-block font600">{{pack.title}} :</p>
-								<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{pack.price}} </p>
-							</div>
-							<div class="subtotal" *ngIf="item.product.promos">
+							<div style="padding-top: 10px;" *ngIf="item.product.promos">
 								<p class="inline-block font600">Congrates! Promocode {{item.product.promos.unique_code}} is applied  :</p>
 								<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
 								<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 							</div>
-							<hr class="horizontal"> 
 						</div>
 						
                         <div class="subtotal">

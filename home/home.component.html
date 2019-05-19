@@ -635,22 +635,26 @@
 							<div class="card-stacked">
 								<div class="card-content no-padding">
 									<span class="card-title white-text font-size-change1">{{item.title}}</span>
-									<!-- <ul class="no-margin">
-										<li [innerHTML]="item.description | nl2pbr"></li>
-									</ul>									 -->
-								<h2 class="center">
-									<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
-									<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
-								</h2>
-									<div class="mrp-price">
-										<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
-										<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
-									</div>
-									<div class="btn-new1 center">
-										<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
-										<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
-										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
-									</div>
+									<div class="row center">
+											<div class="col s12 m6 l6">
+												<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+												<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+											</div>
+											<div class="col s12 m6 l6">
+												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
+												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="col s12 m6 l6 ">
+												<a class="blue-text" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+											</div>
+											<div class="col s12 m6 l6">
+												<span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span><div class="clearfix"></div>
+											</div>
+										</div> 									 
+										<div class="btn-new1 center">
+											<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+										</div>
 								</div>
 							</div>
 						</div>
@@ -667,7 +671,7 @@
 	<h2 class="border-bottom font600 padd center">Dishtv Products <span class="right font-size-change"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 4}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin home-product-card">
-			<ul class="slider-6">
+			<ul class="slider-66">
 				<li *ngFor="let item of dishtv_slides;let i = index">
 				<div class="card">
 					<div class="card-image padd center">
@@ -677,22 +681,26 @@
 					<div class="card-stacked">
 						<div class="card-content no-padding">
 							<span class="card-title white-text font-size-change1">{{item.title}}</span>
-							<!-- <ul class="no-margin">
-								<li [innerHTML]="item.description | nl2pbr"></li>
-							</ul>									 -->
-						<h2 class="center">
-							<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
-							<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
-						</h2>
-							<div class="mrp-price">
-								<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
-								<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
-							</div>
-							<div class="btn-new1 center">
-								<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
-								<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
-								<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
-							</div>
+							<div class="row center">
+									<div class="col s12 m6 l6">
+										<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+										<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+									</div>
+									<div class="col s12 m6 l6">
+										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
+										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="col s12 m6 l6 ">
+										<a class="blue-text" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+									</div>
+									<div class="col s12 m6 l6">
+										<span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span><div class="clearfix"></div>
+									</div>
+								</div> 									 
+								<div class="btn-new1 center">
+									<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -717,22 +725,26 @@
 						<div class="card-stacked">
 							<div class="card-content no-padding">
 								<span class="card-title white-text font-size-change1">{{item.title}}</span>
-								<!-- <ul class="no-margin">
-									<li [innerHTML]="item.description | nl2pbr"></li>
-								</ul>									 -->
-							<h2 class="center">
-								<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
-								<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
-							</h2>
-								<div class="mrp-price">
-									<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
-									<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
-								</div>
-								<div class="btn-new1 center">
-									<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
-									<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
-									<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
-								</div>
+								<div class="row center">
+										<div class="col s12 m6 l6">
+											<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+											<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+										</div>
+										<div class="col s12 m6 l6">
+											<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
+											<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+										</div>
+										<div class="clearfix"></div>
+										<div class="col s12 m6 l6 ">
+											<a class="blue-text" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+										</div>
+										<div class="col s12 m6 l6">
+											<span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span><div class="clearfix"></div>
+										</div>
+									</div> 									 
+									<div class="btn-new1 center">
+										<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+									</div>
 							</div>
 						</div>
 					</div>
@@ -759,20 +771,27 @@
 							<span class="card-title white-text font-size-change1">{{item.title}}</span>
 							<!-- <ul class="no-margin">
 								<li [innerHTML]="item.description | nl2pbr"></li>
-							</ul>									 -->
-						<h2 class="center">
-							<span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
-							<span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
-						</h2>
-							<div class="mrp-price">
-								<h2 *ngIf="this.todoservice.get_user_type() == 2" class="no-margin">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></h2>
-								<h2 *ngIf="this.todoservice.get_user_type() != 2" class="no-margin">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </h2>
-							</div>
-							<div class="btn-new1 center">
-								<span class="orange-text" *ngIf="item.cod_available == 1">Cash On Delivery</span><div class="clearfix"></div>
-								<a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url}" target="_blank" class="blue-text">Add to compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
-								<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
-							</div>
+							</ul>-->
+							<div class="row center">
+									<div class="col s12 m6 l6">
+										<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+										<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+									</div>
+									<div class="col s12 m6 l6">
+										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
+										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="col s12 m6 l6 ">
+										<a class="blue-text" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+									</div>
+									<div class="col s12 m6 l6">
+										<span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span><div class="clearfix"></div>
+									</div>
+								</div> 									 
+								<div class="btn-new1 center">
+									<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+								</div>
 						</div>
 					</div>
 				</div>

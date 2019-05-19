@@ -230,6 +230,7 @@ export class HomeComponent implements OnInit {
     this.pay_step = paystep;
   }
   ngOnInit() {
+    //this.init_page();
     if(this.router.url == '/home#login' || this.router.url == '/home%23login')
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
@@ -291,7 +292,6 @@ export class HomeComponent implements OnInit {
     $('#search').focusout(function(){
       $('.search-result').addClass('hide');
     });
-    
   }
   fetch_home_data()
   {
@@ -332,12 +332,13 @@ export class HomeComponent implements OnInit {
 
   check_cashback(product_id)
   {
+    //console.log(product_id);
+    //console.log(this.user_cashback);
     if(!this.user_cashback)
       return true;
     let exist = this.user_cashback.filter(x => x.services_id == product_id);
     if(exist.length > 0 )
     {
-      //console.log(exist);
       return exist;
     }
     return false;
@@ -436,38 +437,38 @@ toTimestamp(strDate){
  var datum = Date.parse(strDate);
  return datum/1000;
 }
-  tick_deal_timer()
-  {
-    if(this.deal_timer <= 0)
-    {
-      $('#flash-deal-section').hide();
-      return false;
-    }
-    let sec0bj = this.secondsToTime(this.deal_timer);
-    setTimeout(() => {
-      this.tick_deal_timer(); 
-    }, 1000);
-    //let timer = sec0bj.days + '' +sec0bj.hours +''+sec0bj.minutes + ' '+sec0bj.seconds+'';
-    if(sec0bj.days < 10)
-      $('#tiles .days').text('0'+sec0bj.days); 
-    else
-      $('#tiles .days').text(sec0bj.days);
+  // tick_deal_timer()
+  // {
+  //   if(this.deal_timer <= 0)
+  //   {
+  //     $('#flash-deal-section').hide();
+  //     return false;
+  //   }
+  //   let sec0bj = this.secondsToTime(this.deal_timer);
+  //   setTimeout(() => {
+  //     this.tick_deal_timer(); 
+  //   }, 1000);
+  //   //let timer = sec0bj.days + '' +sec0bj.hours +''+sec0bj.minutes + ' '+sec0bj.seconds+'';
+  //   if(sec0bj.days < 10)
+  //     $('#tiles .days').text('0'+sec0bj.days); 
+  //   else
+  //     $('#tiles .days').text(sec0bj.days);
     
-    if(sec0bj.hours < 10)
-      $('#tiles .hours').text('0'+sec0bj.hours); 
-    else
-      $('#tiles .hours').text(sec0bj.hours);
+  //   if(sec0bj.hours < 10)
+  //     $('#tiles .hours').text('0'+sec0bj.hours); 
+  //   else
+  //     $('#tiles .hours').text(sec0bj.hours);
 
-    if(sec0bj.minutes < 10)
-      $('#tiles .mins').text('0'+sec0bj.minutes); 
-    else
-      $('#tiles .mins').text(sec0bj.minutes);
-    if(sec0bj.seconds < 10)
-      $('#tiles .seconds').text('0'+sec0bj.seconds); 
-    else
-      $('#tiles .seconds').text(sec0bj.seconds);     
-    this.deal_timer = this.deal_timer - 1;
-  } 
+  //   if(sec0bj.minutes < 10)
+  //     $('#tiles .mins').text('0'+sec0bj.minutes); 
+  //   else
+  //     $('#tiles .mins').text(sec0bj.minutes);
+  //   if(sec0bj.seconds < 10)
+  //     $('#tiles .seconds').text('0'+sec0bj.seconds); 
+  //   else
+  //     $('#tiles .seconds').text(sec0bj.seconds);     
+  //   this.deal_timer = this.deal_timer - 1;
+  // } 
   
   secondsToTime(mseconds)
   {
@@ -541,7 +542,7 @@ toTimestamp(strDate){
           }
           ]
         });
-        $('.slider-6').lightSlider({
+        $('.slider-66').lightSlider({
           item: 4,
           auto: false,
           loop: false,

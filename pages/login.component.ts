@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TodoService } from '../todo.service';
+import { User } from '../user';
 import { AuthService } from '../auth.service';
 import { Authparams } from '../authparams';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -11,7 +12,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: []
+  styles: [],
+  providers: [TodoService,User,AuthService]
 })
 export class LoginComponent implements OnInit{
   private token_params : Authparams;

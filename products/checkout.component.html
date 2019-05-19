@@ -317,21 +317,17 @@
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 					</div>
 				</div>				
-				<hr class="horizontal">
-            	<div class="subtotal">
+				
+            	<!-- <div class="subtotal">
             		<p class="inline-block font600">Subtotal :</p>
             		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}}</p>
 							</div>							
-					<hr class="horizontal">
+					<hr class="horizontal"> -->
             	<div class="subtotal">
             		<p class="inline-block font600">Delivery Charges :</p>
             		<p class="inline-block green-text right font-size-change"> Free </p>
 							</div>
-							<div class="subtotal" *ngIf="">
-            		<p class="inline-block font600">TSK Kit :</p>
-            		<p class="inline-block green-text right font-size-change"> Free </p>
-            	</div>
-            	<hr class="horizontal">
+							<hr class="horizontal">
             	<div class="subtotal payable margin-top">
             		<p class="inline-block font600">Amount Payable :</p>
             		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}} </p>

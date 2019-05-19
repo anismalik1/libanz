@@ -349,7 +349,7 @@
 					</div>
 				</li>
 			</ul>
- <p>*MYDTHSHOP Not Responsible If any Changes Will Be There Regarding the Channels</p>
+ <p>The Package Price & Channels are subject to change at the discretion of the Service Provider, MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</p>
 </div>
 </div>
 <div class="col s12 m4 order-summary ord-mar">
@@ -565,15 +565,20 @@
 								<div class="card-content">
 									<span>{{item.title}}</span>
 								</div>
-								<div *ngIf="item.category_id == 1">
+								<div *ngIf="item.category_id == 1 && this.todoservice.get_user_type() == 2">
 									<input type="radio" value="2" name="tskkit-{{item.id}}" id="multi-tsk-1-{{item.id}}" checked (change)="multi_tsk(item.id);">
 									<label for="multi-tsk-1-{{item.id}}">TSK 599</label>
 									<input type="radio" value="3" name="tskkit-{{item.id}}" id="multi-tsk-2-{{item.id}}" (change)="multi_tsk(item.id);">
 									<label for="multi-tsk-2-{{item.id}}">TSK 999</label>
 								</div>
 							</div>
-							<div class="col m3 card-content">
-								<a class="modal-close btn right orange" href="javascript:" (click)="continue_to_select(item)">select</a>
+							<div class="col m3">
+								<div class="card-content">
+									<span >Rs. {{item.offer_price}} </span>
+								</div>
+								
+								<div class="clearfix"></div>
+								<a class="modal-close btn right orange" href="javascript:" (click)="continue_to_select(item)">Select</a>
 							</div>
 							<div class="clearfix"></div>
 							

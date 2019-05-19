@@ -48,6 +48,10 @@ export class TodoService {
         }
       )  
     }
+    else
+    {
+      this.authservice.clear_session();
+    }
   }
 
   is_footer_enabled()
@@ -84,30 +88,29 @@ export class TodoService {
 
   get_user_type()
   {
-    if(typeof this.user.storage != 'undefined')
-      return this.user.storage.user_type;
+    if(this.get_user() != null)
+      return this.get_user().user_type;
     else
       return '';  
   }
+
   set_user_data(data)
   {
-    let b = JSON.stringify(data);
-    if(b)
-      this.user.storage =  JSON.parse(b.replace(/\\/g, ''));
+      this.user.storage =  data;
   }
 
   get_user_wallet()
   {
-    if(typeof this.user.storage != 'undefined')
-      return this.user.storage.wallet;
+    if(this.get_user() != null)
+      return this.get_user().wallet;
     else
       return '';
   }
 
   get_user_wallet_amount()
   {
-    if(typeof this.user.storage != 'undefined')
-      return Number(this.user.storage.wallet.replace(/\,/g,""));
+    if(this.get_user() != null)
+      return Number(this.get_user().wallet.replace(/\,/g,""));
     else
       return 0;
   }
@@ -115,15 +118,20 @@ export class TodoService {
 
   get_user_phone()
   {
-    if(typeof this.user.storage != 'undefined')
-      return this.user.storage.phone;
+    if(this.get_user() != null)
+      return this.get_user().phone;
     else
       return '';  
   }
 
   get_user()
   {
-      return this.user.storage;  
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      return data.user; 
+    } 
+    return null; 
   }
 
   get_user_name()

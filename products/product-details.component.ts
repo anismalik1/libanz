@@ -456,25 +456,29 @@ export class ProductDetailsComponent implements OnInit{
         if(this.pack_selected[1])
         {
           multi.pack_selected = this.pack_selected;
-          multi.pack_selected[0].price = 0;
+          multi.pack_selected[0].price = this.pack_selected[1].multi_price;
           multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
         }
         else
         {
-          multi.pack_selected = this.product.pack_selected;
+          multi.pack_selected = this.pack_selected;
+          multi.pack_selected[0].price = this.pack_selected[0].multi_price;
         } 
          multi.tsk_kit = this.multi_tsk_kit;
       }
       else
       {
         multi.pack_selected = [];
-        //console.log(this.pack_selected);
         multi.pack_selected = [this.pack_selected[0]];
         if(this.pack_selected[1])
           multi.pack_selected = [this.pack_selected[0],this.pack_selected[1]];
-         // multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
+        if(this.pack_selected[0])
+          multi.pack_selected[0].price =  this.pack_selected[0].multi_price;
+        if(this.pack_selected[1])
+          multi.pack_selected[1].price =  this.pack_selected[1].multi_price;
         
       }
+      //console.log(multi.pack_selected);
       multi.month_pack = this.product.month_pack;
       this.productservice.addto_cart(multi.id,multi);
     } 

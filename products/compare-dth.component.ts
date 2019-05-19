@@ -14,9 +14,10 @@ export class CompareDthComponent implements OnInit {
 
   private urls : any = '';
   public disable_compare = false;
-  public compare_products : any;
+  public compare_products : any ;
   public product_category_list : any;
   public product_list : any;
+  public referer : any;
   private page: string;
   public all_specifications :any;
   constructor(
@@ -33,6 +34,8 @@ export class CompareDthComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.todoservice.get_param('ref') != '')
+      this.referer = this.todoservice.get_param('ref')
     if(this.todoservice.get_param('urls') != '')
         this.urls = this.todoservice.get_param('urls');
     var arr = this.urls.split('-vs-');
@@ -82,6 +85,10 @@ export class CompareDthComponent implements OnInit {
         this.spinner.hide();
         this.all_specifications = data.SPECIFICATIONS;
         this.compare_products = data.compare_products;
+        if(this.referer != '')
+        {
+          this.filter_to_first();
+        }
         if(this.compare_products.length >= 4)
         {
           this.disable_compare = true;
@@ -98,9 +105,28 @@ export class CompareDthComponent implements OnInit {
         }
         //this.router.navigateByUrl('https://mydthshop.com/product/compare-box?urls='+data.compare_content.url, {skipLocationChange: true});
         if(data.compare_content)
-          this.router.navigate(['/product/compare-box'], { queryParams: { urls: $.trim(data.compare_content.url) } });
+        {
+          if(this.referer != '')
+          {
+            this.router.navigate(['/product/compare-box'], { queryParams: { urls: $.trim(data.compare_content.url) , ref: this.referer } });
+          }
+          else
+          {
+            this.router.navigate(['/product/compare-box'], { queryParams: { urls: $.trim(data.compare_content.url) } });
+          }  
+        } 
       }
 		  ) 
+  }
+
+  filter_to_first()
+  {
+    let matched = this.compare_products.filter(x => x.url == this.referer);
+    let unmatched = this.compare_products.filter(x => x.url != this.referer);
+    if(matched.length > 0)
+    {
+      this.compare_products = matched.concat(unmatched);
+    }
   }
 
   trim_text(text)
@@ -178,6 +204,7 @@ export class CompareDthComponent implements OnInit {
     this.apply_filter(arr);
     this.urls = arr.join("-vs-");
     this.router.navigate(['/product/compare-box'],{ queryParams: { urls: this.urls}});
+    this. init_script();
   }
   init_script()
   {

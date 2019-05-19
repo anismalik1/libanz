@@ -31,7 +31,6 @@ export class CartComponent implements OnInit{
     $('.copy-click').on('click',function(){			
 			$('.copy-click').attr('disabled');
     });
-    console.log(this.productservice.cart_items);
   }
   change_count(p_id,op)
   {
@@ -44,7 +43,6 @@ export class CartComponent implements OnInit{
   }
   convert_to_object(string)
   {
-    console.log(string)
     return JSON.parse(string);
   }
 }

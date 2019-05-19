@@ -120,11 +120,11 @@
                         </div>
                         <div class="card-content">
 							<h5 class="font600">{{product.title}}</h5>
-                                <span class="font-size-change2 black-text"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i>{{product.price}}</small>&nbsp; <i class="icon-inr"></i> {{product.offer_price}} <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>&nbsp; <span class="green white-text stars ng-star-inserted">4.0 <i class="material-icons">star </i></span>
+                                <span class="font-size-change2 black-text"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i>{{product.price}}</small>&nbsp; <i class="icon-inr"></i> {{product.offer_price}} <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>&nbsp;
                                 <!-- <p class="margin-top font-size-change1">{{product.shortDescription}}</p> -->
-                                <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() == 2 && product.partner_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.partner_cashback_wallet}}</p>
-                                <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() != 2 && product.user_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>
-                                
+                                <div class="clearfix"></div>
+                                <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() == 2 && product.partner_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.partner_cashback_wallet}} <span class="right orange-text" *ngIf="product.cod_available == 1">COD Available</span></p>
+                                <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() != 2 && product.user_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.user_cashback_wallet}} <span class="right orange-text" *ngIf="product.cod_available == 1">COD Available</span></p>
                             </div>
                             <div class="card-action padd center">
                                 <a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn red">Book Now</a>
