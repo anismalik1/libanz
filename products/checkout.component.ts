@@ -450,7 +450,7 @@ checkout_items(type)
               this.spinner.hide();
               this.router.navigate(['/product/order-receipt/'+data.order_id]);
             }
-            this.productservice.clear_cart();
+           
             this.productservice.cartItemsCount();
           }
         }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
+import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -17,6 +18,7 @@ export class OrderReceiptComponent implements OnInit {
   constructor( public todoservice : TodoService,
     private spinner : NgxSpinnerService,  
     private authservice : AuthService,
+    private productservice : ProductService,
     private router : ActivatedRoute) {
       
      }
@@ -43,6 +45,7 @@ export class OrderReceiptComponent implements OnInit {
         this.display = 1;
         this.spinner.hide();
         this.todoservice.set_user_data(data.user)
+        this.productservice.clear_cart();
       }
 		  ) 
   }
