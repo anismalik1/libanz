@@ -95,6 +95,7 @@ export class CompareDthComponent implements OnInit {
         }
         if(data.compare_content)
         {
+          $('#compare-title').text(data.compare_content.title);
           this.meta.addTag({ name: 'description', content: data.compare_content.meta_description });
           this.meta.addTag({ name: 'keywords', content: data.compare_content.meta_keyword });
           this.title.setTitle(data.compare_content.meta_title);

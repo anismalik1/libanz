@@ -136,26 +136,26 @@ export class TodoService {
 
   get_user_name()
   {
-    if(typeof this.user.storage != 'undefined')
-      return this.user.storage.name;
+    if(this.get_user() != null)
+      return this.get_user().name;
     else
-      return '';  
+      return ''; 
   }
   
   get_user_email()
   {
-    if(typeof this.user.storage != 'undefined')
-      return this.user.storage.email;
+    if(this.get_user() != null)
+      return this.get_user().email;
     else
-      return ''; 
+      return '';
   }
 
   get_user_id()
   {
-    if(typeof this.user.storage != 'undefined')
-      return this.user.storage.id;
+    if(this.get_user() != null)
+      return this.get_user().id;
     else
-      return 0;  
+      return '';  
   }
 
   set_page_data(data)

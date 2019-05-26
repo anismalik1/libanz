@@ -122,8 +122,8 @@ export class DashboardComponent implements OnInit{
             this.sales_obj.total_sum        = data.SALES[0].sales;
             if(data.RECHARGES[0])
             {
-              this.recharge_obj.total_orders  = data.RECHARGES[0].order_count;
-              this.recharge_obj.total_sum     = data.RECHARGES[0].total_sum;
+              this.recharge_obj.total_orders  = data.RECHARGESALE[0].order_count;
+              this.recharge_obj.total_sum     = data.RECHARGESALE[0].total_sum;
             }
             
             this.products_obj.total_orders  = data.DTHORDERS[0].order_count;

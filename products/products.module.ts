@@ -14,22 +14,18 @@ import { ProductsComponent } from './products.component';
 import { CheckoutComponent } from './checkout.component';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { OrderReceiptComponent } from './order-receipt.component';
-import { OffersComponent } from './offers.component';
 import { ChannelPackComponent } from './channel-pack.component';
 import { CompareDthComponent } from './compare-dth.component';
-import { MultiComponent } from './multi.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom'; 
 import { User } from '../user'; 
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
   { path: 'listing', component: ProductsComponent },
   { path: 'channel-pack/:id', component: ChannelPackComponent },
-  { path: 'offers/:name', component: OffersComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart', component: CartComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: ':name', component: ProductDetailsComponent },
-  { path: 'multi/:name', component: MultiComponent },
   
  // { path: ':name/multi/:name', component: ProductDetailsComponent },
 ];
@@ -46,7 +42,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule
   ],
-  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, OffersComponent, ChannelPackComponent, CompareDthComponent, MultiComponent],
+  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent],
   providers : [ProductService,TodoService,User,AuthService]
 })
 

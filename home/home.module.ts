@@ -15,10 +15,12 @@ import { RechargeStatusComponent } from './recharge-status.component';
 import { RechargeComponent } from './recharge.component';
 import { RechargeType } from '../recharge.type';
 import { Nl2pbrPipe } from './nl2pbr.pipe';
+import { BlogComponent } from './blog.component';
 const routes: Routes = [
   { path: 'recharge/:name', component: RechargeComponent },
   { path: 'recharge/:name/proceed', component: RechargeComponent },
   { path: '', component: HomeComponent },
+  { path: 'blog', component: BlogComponent },
   { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent }
 ];
 @NgModule({
@@ -34,7 +36,7 @@ const routes: Routes = [
     NgxSpinnerModule,
     SharedCommonModule
   ],
-  declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe],
+  declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe, BlogComponent],
   providers : [TodoService,AuthService,User,Params,RechargeType]
 
 })
