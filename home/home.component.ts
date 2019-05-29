@@ -531,7 +531,7 @@ toTimestamp(strDate){
           {
             breakpoint:600,
             settings: {
-              item:2
+              item:1
             }
           },
           {
@@ -559,7 +559,7 @@ toTimestamp(strDate){
           {
             breakpoint:600,
             settings: {
-              item:2
+              item:1
             }
           },
           {
@@ -586,7 +586,7 @@ toTimestamp(strDate){
           {
             breakpoint:600,
             settings: {
-              item:2
+              item:1
             }
           },
           {
@@ -613,7 +613,7 @@ toTimestamp(strDate){
           {
             breakpoint:600,
             settings: {
-              item:2
+              item:1
             }
           },
           {

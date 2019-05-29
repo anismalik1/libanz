@@ -11,7 +11,7 @@ import { LoginComponent } from './pages/login.component';
 import { SignupComponent } from './pages/signup.component';
 
 const routes: Routes = [
-  { path: 'home#login', loadChildren: './home/home.module#HomeModule'},
+  { path: 'home#login', loadChildren: './home/home.module#HomeModule'}, 
   { path: 'home', loadChildren: './home/home.module#HomeModule'},
   { path: 'home/', loadChildren: './home/home.module#HomeModule'},
   { path: 'recharge/:name', loadChildren: './home/home.module#HomeModule'},

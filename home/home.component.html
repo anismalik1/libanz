@@ -592,7 +592,7 @@
 </section>
 <!-- End Here -->
 <!-- Flash Deal New Design -->
-<section class="flash-deal slider-flash-deal margin-top-order no-padding">
+<section class="flash-deal slider-flash-deal margin-top-order no-padding banner-slider1">
 	<div class="container-fluid">
 		<div class="row no-margin">
 			<div class="col s12 m12 no-padding">
@@ -619,7 +619,7 @@
 </section>
 <!-- End Here -->
 <!-- Tata Sky section -->
-<section class="flash-deal white margin-top-order">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="center padd border-bottom font600">Tata Sky Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 1}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin">
@@ -665,7 +665,7 @@
 </section>
 <!-- end here -->
 <!-- Dish Tv Section -->
-<section class="flash-deal white margin-top-order">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="border-bottom font600 padd center">Dishtv Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 4}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin home-product-card">
@@ -707,7 +707,7 @@
 </section>
 <!-- end here -->
 <!-- Airtel Dish section -->
-<section class="flash-deal white margin-top-order">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="border-bottom font600 padd center">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 3}" target="_blank">View All</a></span></h2>
 	<div class="container">
 			<div class="row no-margin home-product-card">
@@ -749,7 +749,7 @@
 </section>
 <!-- end here -->
 <!-- Videocon D2H section -->
-<section class="flash-deal white margin-top-order">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="border-bottom font600 padd center">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing']" [queryParams]= "{cat_id : 2}" target="_blank">View All</a></span></h2>
 	<div class="container">
 		<div class="row no-margin home-product-card">
@@ -793,19 +793,19 @@
 	</div>
 </section>
 <!-- end here -->
-<section class="retailer-section black no-padding margin-top-order">
+<section class="retailer-section white no-padding margin-top-order">
 	<div class="container-fluid">
 		<div class="row no-margin">
 			<ul class="retailer-slider">
 				<li *ngFor="let banner of filter_banners('user-type')">
 					<div class="no-margin">
-						<div class="col s12 m6 l8 no-padding rt-image-box">
+						<div class="col s12 m12 l8 no-padding rt-image-box">
 							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%">
 						</div>
-						<div class="col s12 m6 l4 no-padding">
+						<div class="col s12 m12 l4 no-padding">
 							<div class="registration-here-page center">
-								<h2 class="uppercase font600 white-text">{{banner.title}}</h2>
-								<p  class="font-size-change1 white-text">{{banner.description}}</p>
+								<h2 class="uppercase font600 orange-text">{{banner.title}}</h2>
+								<p  class="font-size-change1 black-text">{{banner.description}}</p>
 								<a [routerLink]="[banner.imageurl]"  target="_blank" class="btn orange margin-top1">Register Here</a>
 							</div>
 						</div>
