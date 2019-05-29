@@ -11,13 +11,13 @@
 <section class="compare-dth white">
   <div class="container">
     <div class="row">
-      <div class="col m12">
+      <div class="col m3 s6" *ngFor="let item of blogs;">
           <div class="card">
               <div class="card-content">
-                <h3><a href="" class="blue-text">Blog Title</a></h3>
-                <div class="blog-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                </div>
+                <img class="img-responsive" src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
+                <h3 class="center"><a href="https://www.mydthshop.com/p/{{item.url}}" class="blue-text">{{item.title}}</a></h3>
+                <div class="blog-desc" [innerHTML]="item.shortDescription"></div>
+                <div class=""><strong class="orange-text">Mydthshop</strong>- <span class="grey-text">{{ item.c_date | date}}</span></div>
               </div>
           </div>      
       </div>

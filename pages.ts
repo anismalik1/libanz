@@ -6,4 +6,5 @@ export class Pages {
  public shortDescription : string;
  public title : string;
  public url : string;
+ public image : string;
 }

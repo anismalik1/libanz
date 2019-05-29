@@ -158,49 +158,46 @@
                                         <tr>
                                             <th nowrap="nowrap" width="57px">S.No.</th>
                                             <th nowrap="nowrap">Order No.</th>
-                                            <th nowrap="nowrap" width="145px">Customer Name</th>
                                             <th nowrap="nowrap" width="125px">Product</th>
-                                            <th nowrap="nowrap" width="137px">Reg. Mobile</th>
                                             <th nowrap="nowrap" width="102px">Order Date</th>
                                             <th nowrap="nowrap" width="140px">Amount</th>
                                             <th nowrap="nowrap" width="130px">Subscriber ID</th>
                                             <th nowrap="nowrap" width="135px">Paymnet Method</th>
+                                            <th nowrap="nowrap" width="135px">Deliver to</th>
                                             <th nowrap="nowrap" width="95px">Status</th>
-                                            <th nowrap="nowrap" width="95px">Action</th>
+                                            <!-- <th nowrap="nowrap" width="95px">Action</th> -->
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th nowrap="nowrap" width="57px">S.No.</th>
                                             <th nowrap="nowrap">Order No.</th>
-                                            <th nowrap="nowrap" width="145px">Customer Name</th>
                                             <th nowrap="nowrap" width="125px">Product</th>
-                                            <th nowrap="nowrap" width="137px">Reg. Mobile</th>
                                             <th nowrap="nowrap" width="102px">Order Date</th>
                                             <th nowrap="nowrap" width="140px">Amount</th>
                                             <th nowrap="nowrap" width="130px">Subscriber ID</th>
                                             <th nowrap="nowrap" width="135px">Paymnet Method</th>
+                                            <th nowrap="nowrap" width="135px">Deliver to</th>
                                             <th nowrap="nowrap" width="95px">Status</th>
-                                            <th nowrap="nowrap" width="95px">Action</th>
+                                            <!-- <th nowrap="nowrap" width="95px">Action</th> -->
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr *ngFor="let item of orders | paginate: { id: 'order-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: o_p, totalItems: order_counts };let i=index">
                                             <td>{{i+1}}</td>
                                             <td>{{item.id}}</td>
-                                            <td>{{item.name}}</td>
-                                            <td>{{item.ptitle}}</td>
-                                            <td>{{item.contact}}</td>
+                                            <td>{{item.title}}</td>
                                             <td>{{item.order_date | date: date:'dd M, Y'}}<br><time>{{item.order_date | date:'hh:mm a' }}</time></td>
                                             <td> <i class="icon-inr"></i>{{item.final_price}}</td>
                                             <td>{{item.subcriber_id}}</td>
                                             <td>{{item.payment}}</td>
+                                            <td>{{item.deliver_to}}</td>
                                             <td *ngIf="item.status == 'Pending'"><span class="orange white-text padd1">Pending</span></td>
                                             <td *ngIf="item.status == 'Failed'"><span class="red white-text padd1">Failed</span></td>
                                             <td *ngIf="item.status != 'Failed' && item.status != 'Pending'"><span class="green white-text padd1">{{item.status}}</span></td>
-                                            <td>
+                                            <!-- <td>
                                                 <a href="#view-more" class="btn tooltipped btn-icon orange modal-trigger" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change">visibility</i></a>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     </tbody>	
                                 </table>

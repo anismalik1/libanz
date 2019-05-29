@@ -79,7 +79,8 @@
                 <div class="card">
                     <div class="card-content">
                         <h3 class="font600 inline-block">Recent Orders</h3>
-												<a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a>
+												<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a> -->
+												<a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" [routerLink]="['/dashboard/transactions']" id="export-order-txt">View All</button></a>
 												<div class="overflow-scroll">
 													<table id="datatable1" class="display responsive-table datatable-example">
 															<thead>
@@ -135,7 +136,8 @@
                 <div class="card">
                     <div class="card-content">
                         <h3 class="font600 inline-block">Recent Recharge Orders</h3>
-												<a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="recharges_to_export()" id="export-recharge-txt">Export All Data</button></a>
+												<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="recharges_to_export()" id="export-recharge-txt">Export All Data</button></a> -->
+												<a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" [routerLink]="['/dashboard/transactions']" id="export-recharge-txt">View All</button></a>
 												<div class="overflow-scroll">
 													<table id="datatable" class="display responsive-table datatable-example">
 															<thead>

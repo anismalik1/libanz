@@ -493,4 +493,10 @@ export class TodoService {
     this.request_action = 'channel_category_by_circle';
     return this.send_post_request(data) ;
   }
+
+  fetch_blogs(data)
+  {
+    this.request_action = 'fetch_blogs';
+    return this.send_post_request(data) ;
+  }
 }

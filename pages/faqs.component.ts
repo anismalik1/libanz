@@ -3,13 +3,15 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
+import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-faqs',
   templateUrl: './faqs.component.html',
-  styles: []
+  styles: [],
+  providers: [TodoService,User,AuthService]
 })
 export class FaqsComponent implements OnInit {
   faqsgroup : FormGroup;
