@@ -15,7 +15,7 @@
           <div class="card">
               <div class="card-content">
                 <img class="img-responsive" src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
-                <h3 class="center"><a href="https://www.mydthshop.com/p/{{item.url}}" class="blue-text">{{item.title}}</a></h3>
+                <h3 class="center"><a [routerLink]="['/blog-detail/'+item.url]" class="blue-text">{{item.title}}</a></h3>
                 <div class="blog-desc" [innerHTML]="item.shortDescription"></div>
                 <div class=""><strong class="orange-text">Mydthshop</strong>- <span class="grey-text">{{ item.c_date | date}}</span></div>
               </div>
