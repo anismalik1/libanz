@@ -1,27 +1,127 @@
 <app-header></app-header>
 <div class="spinner-wrapper">
-	<ngx-spinner
-	bdColor="rgba(255,255,255,1)"
-	size="default"
-	color="#ec9737"
-	loadingText="Loading..."
-	type="ball-clip-rotate">
+<ngx-spinner
+bdColor="rgba(255,255,255,1)"
+size="default"
+color="#ec9737"
+loadingText="Loading..."
+type="ball-clip-rotate">
 </ngx-spinner>
 </div>
-<section class="compare-dth white">
-  <div class="container">
-    <div class="row">
-      <div class="col m3 s6" *ngFor="let item of blogs;">
-          <div class="card">
-              <div class="card-content">
-                <img class="img-responsive" src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
-                <h3 class="center"><a [routerLink]="['/blog-detail/'+item.url]" class="blue-text">{{item.title}}</a></h3>
-                <div class="blog-desc" [innerHTML]="item.shortDescription"></div>
-                <div class=""><strong class="orange-text">Mydthshop</strong>- <span class="grey-text">{{ item.c_date | date}}</span></div>
-              </div>
-          </div>      
-      </div>
-    </div>
-  </div>
-</section>      
+<!-- <section class="compare-dth white">
+<div class="container">
+	<div class="row">
+		<div class="col m3 s6" *ngFor="let item of blogs;">
+				<div class="card">
+						<div class="card-content">
+							<img class="img-responsive" src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
+							<h3 class="center"><a href="https://www.mydthshop.com/p/{{item.url}}" class="blue-text">{{item.title}}</a></h3>
+							<div class="blog-desc" [innerHTML]="item.shortDescription"></div>
+							<div class=""><strong class="orange-text">Mydthshop</strong>- <span class="grey-text">{{ item.c_date | date}}</span></div>
+						</div>
+				</div>      
+		</div>
+	</div>
+</div>
+</section>       -->
+
+<!-- Blog Page New Design -->
+<section class="hero">
+	<div class="container">
+		<h2 class="center font600 white-text margin-top">Blog</h2>
+	</div>
+</section>
+<section class="blog-page grey lighten-3">
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m4">
+				<div class="card">
+					<div class="card-image">
+						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
+					</div>
+					<div class="card-content">
+						<div class="author">
+							<p class="author-name">
+								<span><i class="material-icons">person</i></span>
+								<span>MyDthShop</span>
+							</p>
+							<p class="blog-time">
+								<span><i class="material-icons">access_time</i></span>
+								<time>30-05-2019</time>
+							</p>
+						</div>
+						<div class="blog-content">
+						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
+						<p>I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.</p>
+						</div>
+					</div>
+					<div class="card-action center">
+						<a target="_blank" [routerLink]="['/blog-detail/']" class="orange-text font-size-change1">Read More</a>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4">
+				<div class="card">
+					<div class="card-image">
+						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
+					</div>
+					<div class="card-content">
+						<div class="author">
+							<p class="author-name">
+								<span><i class="material-icons">person</i></span>
+								<span>MyDthShop</span>
+							</p>
+							<p class="blog-time">
+								<span><i class="material-icons">access_time</i></span>
+								<time>30-05-2019</time>
+							</p>
+						</div>
+						<div class="blog-content">
+						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
+						<p>I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.</p>
+						</div>
+					</div>
+					<div class="card-action center">
+						<a target="_blank" [routerLink]="['/blog-detail/']" class="orange-text font-size-change1">Read More</a>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4">
+				<div class="card">
+					<div class="card-image">
+						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
+					</div>
+					<div class="card-content">
+						<div class="author">
+							<p class="author-name">
+								<span><i class="material-icons">person</i></span>
+								<span>MyDthShop</span>
+							</p>
+							<p class="blog-time">
+								<span><i class="material-icons">access_time</i></span>
+								<time>30-05-2019</time>
+							</p>
+						</div>
+						<div class="blog-content">
+						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
+						<p>I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.</p>
+						</div>
+					</div>
+					<div class="card-action center">
+						<a target="_blank" [routerLink]="['/blog-detail/']" class="orange-text font-size-change1">Read More</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <app-footer></app-footer>
