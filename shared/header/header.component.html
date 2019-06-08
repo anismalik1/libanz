@@ -114,13 +114,16 @@
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">{{this.productservice.cartItemsCount()}}</span></a>
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">0</span></a>
 				</li>
-				<!-- <li class="craft relative">
-					<a href="javascript:"><i class="material-icons grey-text">star</i><span class="badge">1</span></a>
-				</li> -->
+				<li class="craft relative">
+					<a href="javascript:"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <span class="badge">1</span></a>
+				</li>				
+				<li class="craft relative">
+					<a href="javascript:"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <span class="badge">1</span></a>
+				</li>
 					</ul>
 			  <ul id="nav-mobile" class="inline-block log-sig right">
 				<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Login & Register</a></li>
-				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"><i class="material-icons orange-text left">account_balance_wallet</i> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a></li>
+				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> <img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a></li>
 				<li id="user-nav"><a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding"><img src="{{this.todoservice.base_url}}assets/images/menu-icon.png" class="responsive-img vertical-align-middle" alt="menu-icon"></a></li>
 			  </ul>
 			</div>
