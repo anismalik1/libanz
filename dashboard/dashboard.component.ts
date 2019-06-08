@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject } from '@angular/core';
+import { DOCUMENT } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ExcelService } from '../export.service';
@@ -17,7 +18,12 @@ export class DashboardComponent implements OnInit{
   sales_obj : any ={total_sum : 0}; 
   orders : any;
   recharges : any;
-  constructor( private excelService: ExcelService, private spinner : NgxSpinnerService, public todoservice : TodoService,private authservice : AuthService,private router : Router) { }
+  constructor( private excelService: ExcelService, 
+    private spinner : NgxSpinnerService, 
+    public todoservice : TodoService,
+    private _renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document, 
+    private authservice : AuthService,private router : Router) { }
   ngOnInit() {
     $('#search').focus(function(){
         $('.search-result').removeClass('hide');
@@ -35,6 +41,21 @@ export class DashboardComponent implements OnInit{
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
     }   
+  }
+
+  init_script()
+  {
+    if($('#init-page-script'))
+    {
+      $('#init-page-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-page-script`;
+    script.text = `
+        $(document).ready(function(){
+          $('.modal').modal();
+        });  `;
   }
   
   orders_to_export()

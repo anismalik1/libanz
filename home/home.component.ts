@@ -715,7 +715,6 @@ toTimestamp(strDate){
       $('.modal-close').on('click', function(){
        $('.modal').modal('close');
       });
-      
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

@@ -421,11 +421,11 @@
 					</div>	
 					<div class="card-content" *ngIf="promo_codes && promo_codes.length > 0">
 						<div class="">
-							<span class="font-size-change1 font600">Promo Code</span>
+							<span class="font-size-change1 font600"><a href="javascript:" (click)="show_tab(1)">Promo Code</a></span>
 							<hr class="hr-promo">
 						</div>
 						<div class="">
-							<span class="font-size-change1 font600" ><a href="javascript:">Circle packages</a></span>
+							<span class="font-size-change1 font600" ><a href="javascript:" (click)="show_tab(2)">Plans</a></span>
 							<hr class="hr-promo">
 						</div>
 						<div id="promo-content">
@@ -441,13 +441,14 @@
 						</div>
 						<div id="circles-content" class="hide">
 							<ul class="promo-ul">
-								<li class="promo-li" *ngFor="let promo of promo_codes;">
+								<li>Recharge Plans</li>
+								<!-- <li class="promo-li" *ngFor="let promo of promo_codes;">
 									<a href="#promo-code-modal" class="modal-trigger" (click)="promoselected(promo)">
 										<h4 class="font600 black-text">{{promo.name}}</h4>
 										<span class="font-size-change1 grey-text"> {{promo.description}}</span>
 										<a href="javascript:" class="right">View detail</a>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>

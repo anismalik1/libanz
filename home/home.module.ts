@@ -18,12 +18,13 @@ import { Nl2pbrPipe } from './nl2pbr.pipe';
 import { BlogComponent } from './blog.component';
 import { BlogDetailComponent } from './blog-detail.component';
 const routes: Routes = [
-  { path: 'recharge/:name', component: RechargeComponent },
-  { path: 'recharge/:name/proceed', component: RechargeComponent },
+  
+  //{ path: 'recharge/:name/proceed', component: RechargeComponent },
   { path: '', component: HomeComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'blog-detail/:name', component: BlogDetailComponent },
-  { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent }
+  { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent },
+  { path: ':name', component: RechargeComponent },
 ];
 @NgModule({
   imports: [

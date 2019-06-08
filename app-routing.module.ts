@@ -11,11 +11,7 @@ import { LoginComponent } from './pages/login.component';
 import { SignupComponent } from './pages/signup.component';
 
 const routes: Routes = [
-  { path: 'home#login', loadChildren: './home/home.module#HomeModule'}, 
-  { path: 'home', loadChildren: './home/home.module#HomeModule'},
-  { path: 'home/', loadChildren: './home/home.module#HomeModule'},
-  { path: 'recharge/:name', loadChildren: './home/home.module#HomeModule'},
-  { path: '', loadChildren: './home/home.module#HomeModule'},
+  
   { path: 'logout', component: LogoutComponent },
   { path: '404', component: page404Component },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
@@ -27,6 +23,11 @@ const routes: Routes = [
   { path: 'p/contact-us/:name', component: ContactUsComponent},
   { path: 'p/faqs', component: FaqsComponent},
   { path: 'p/:name', loadChildren: './pages/pages.module#PagesModule'},
+  { path: 'home#login', loadChildren: './home/home.module#HomeModule'}, 
+  { path: 'home', loadChildren: './home/home.module#HomeModule'},
+  { path: 'home/', loadChildren: './home/home.module#HomeModule'},
+  { path: 'recharge', loadChildren: './home/home.module#HomeModule'},
+  { path: '', loadChildren: './home/home.module#HomeModule'},
   {path: '**', redirectTo: '/404'},
 ];
 

@@ -308,9 +308,19 @@ export class HeaderComponent implements OnInit{
       edge: 'right', // Choose the horizontal origin
       closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
       draggable: true, // Choose whether you can drag to open on touch screens,
-    });
-    
+    }); 
   $('.tabs').tabs();
+  (function () {
+    var options = {
+        whatsapp: "+918010339339", // WhatsApp number
+        call_to_action: "Message us", // Call to action
+        position: "right", // Position may be 'right' or 'left'
+    };
+    var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+    s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+})();
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

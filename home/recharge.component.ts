@@ -229,6 +229,21 @@ export class RechargeComponent implements OnInit {
       }
     ) 
   }
+  show_tab(action)
+  {
+    if(action == 1)
+    {
+      $('#circles-content').addClass('hide');
+      $('#promo-content').removeClass('hide');
+      $('#promo-content').addClass('active')
+    }
+    else
+    {
+      $('#circles-content').removeClass('hide');
+      $('#promo-content').addClass('hide');
+      $('#circles-content').addClass('active')
+    }
+  }
   fetch_navigate_data(page)
   {
     this.todoservice.fetch_page_data({page : page})
