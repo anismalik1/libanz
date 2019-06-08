@@ -13,7 +13,7 @@
   <div class="container">
     <div class="row">
         <div class="compare-top-row hide">
-            <div class="col l2 m2 my-compair feature-image-wrapper">
+            <div class="col s12 l2 m2 my-compair feature-image-wrapper">
                 <i class="material-icons">format_list_bulleted</i>
                 <h3>Feature Options</h3>
               </div>
@@ -28,7 +28,7 @@
                 <div class="btn-new1 center"><a class="btn" [routerLink]="['/product/'+item.url]" target="_blank">Book Now</a></div>
               </div>
             </div>
-            <div class="col m3 padd" *ngIf="!disable_compare">
+            <div class="col s12 m3 padd" *ngIf="!disable_compare">
               <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Add Set Top Box</a>
               <ul id='dropdown1' class='dropdown-content'>
                 <li *ngFor="let item of product_category_list;">
@@ -43,7 +43,7 @@
       </div>
       
       <div class="row my-compair">
-          <div class="col l2 m2 my-compair">
+          <div class="col s12 l2 m2 my-compair">
           <div class="compare-table features">
           <table class="table centered bordered ">
               <tbody>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-        <div [className]="i == 0 ? 'col l3 my-compair no-padding':'col l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
+        <div [className]="i == 0 ? 'col s12 l3 my-compair no-padding':'col s12 l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
           
           <div class="compare-text left">
             <span>{{item.title}}</span>
@@ -101,7 +101,7 @@
         </table>
 		</div>
   </div>
-  <div class="col m3" *ngIf="!disable_compare">
+  <div class="col s12 m3" *ngIf="!disable_compare">
               <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Add Set Top Box</a>
               <ul id='dropdown1' class='dropdown-content'>
                 <li *ngFor="let item of product_category_list;">
