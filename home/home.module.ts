@@ -21,7 +21,7 @@ const routes: Routes = [
   
   //{ path: 'recharge/:name/proceed', component: RechargeComponent },
   { path: '', component: HomeComponent },
-  { path: 'blog', component: BlogComponent },
+  { path: 'blog/:name', component: BlogComponent },
   { path: 'blog-detail/:name', component: BlogDetailComponent },
   { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent },
   { path: ':name', component: RechargeComponent },

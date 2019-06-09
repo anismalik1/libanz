@@ -36,33 +36,24 @@ type="ball-clip-rotate">
   <div class="container">
     <div class="row">
       <div class="col s12 m8">
-        <div class="card no-box-shadow">
+        <div class="card no-box-shadow" *ngIf="post">
 					<div class="card-image">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
+						<img src="https://www.mydthshop.com/accounts/assets/img/cms/{{post[0].image}}" class="responsive-img" alt="{{post[0].title}}">
 					</div>
 					<div class="card-content">
 						<div class="author">
 							<p class="author-name">
 								<span><i class="material-icons">person</i></span>
-								<span>MyDthShop</span>
+								<span>MYDTHSHOP</span>
 							</p>
 							<p class="blog-time">
 								<span><i class="material-icons">access_time</i></span>
-								<time>30-05-2019</time>
+								<time>{{ post[0].c_date | date}}</time>
 							</p>
 						</div>
 						<div class="blog-content">
-						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
-            <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively. I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
+						<span class="blog-title">{{post[0].title}}</span>
+            <p [innerHTML]="post[0].description"></p>
 						</div>
           </div>
           <div class="card-action right-align">
@@ -78,23 +69,30 @@ type="ball-clip-rotate">
             </ul>
           </div>
         </div>
-        <div class="leave-comment">
+        <div class="leave-comment-button">
+          <button class="btn orange" type="Submit" (click)="show_comment_box()" *ngIf="this.todoservice.get_user_name() != ''">Leave Comment</button>
+          <button class="btn orange" type="Submit" *ngIf="this.todoservice.get_user_name() == ''" (click)="show_login()">Login to Comment</button>
+        </div>
+        <div class="leave-comment hide">
           <div class="card grey lighten-4">
             <div class="card-content padd-rem">
               <h2>Leave Comment</h2>
-              <form>
+              <form [formGroup]="commentgroup" #commentform = "ngForm" (ngSubmit)="comment_submit(commentform.value)">
                 <div class="row">
                   <div class="input-field col s12 m6">
-                    <input id="name" name="name" type="text" class="validate">
+                    <input id="name" name="name" type="text" class="validate" formControlName="name">
                     <label for="name">Name</label>
+                    <div class="red-text accent-4" *ngIf="!commentgroup.controls['name'].valid && commentgroup.controls['name'].touched">Enter Name*.</div>
                   </div>
                   <div class="input-field col s12 m6">
-                    <input id="email" type="email" name="email" class="validate">
+                    <input id="email" type="email" name="email" class="validate" formControlName="email">
                     <label for="email">Email</label>
+                    <div class="red-text accent-4" *ngIf="!commentgroup.controls['email'].valid && commentgroup.controls['email'].touched">Enter Email*.</div>
                   </div>
                   <div class="input-field col s12 m12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <textarea id="textarea1" class="materialize-textarea" formControlName="comment"></textarea>
                     <label for="textarea1">Comment</label>
+                    <div class="red-text accent-4" *ngIf="!commentgroup.controls['comment'].valid && commentgroup.controls['comment'].touched">Comment*.</div>
                   </div>
                   <div class="col s12">
                     <button type="Submit" class="btn orange">Submit</button>
@@ -109,53 +107,21 @@ type="ball-clip-rotate">
         <div class="card recnt-post no-box-shadow">
           <h3>Recent Post</h3>
           <ul>
-            <li>
-              <a href="javascrpit:">
+            <li *ngFor="let item of recent_posts;">
+              <a [routerLink]="['/blog-detail/'+item.url]" target="_blank">
                 <div class="post-img">
-                  <img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="">
+                  <img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
                 </div>
                 <div class="post-text">
-                  <p class="font-size-change">I am a very simple card. I am good at containing small bits of information.
-                    I am convenient because I require little markup to use effectively.</p>
+                  <p class="font-size-change" [innerHTML]="item.shortDescription"></p>
                     <p class="author-name font-size-change1 grey-text">
                       <span><i class="material-icons">person</i></span>
-                      <span>MyDthShop</span>
+                      <span>MYDTHSHOP</span>
                     </p>
                 </div>
               </a>
             </li>
-            <li>
-              <a href="javascrpit:">
-                <div class="post-img">
-                  <img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="">
-                </div>
-                <div class="post-text">
-                  <p class="font-size-change">I am a very simple card. I am good at containing small bits of information.
-                    I am convenient because I require little markup to use effectively.</p>
-                    <p class="author-name font-size-change1 grey-text">
-                      <span><i class="material-icons">person</i></span>
-                      <span>MyDthShop</span>
-                    </p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="javascrpit:">
-                <div class="post-img">
-                  <img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="">
-                </div>
-                <div class="post-text">
-                  <p class="font-size-change">I am a very simple card. I am good at containing small bits of information.
-                    I am convenient because I require little markup to use effectively.</p>
-                    <p class="author-name font-size-change1 grey-text">
-                      <span><i class="material-icons">person</i></span>
-                      <span>MyDthShop</span>
-                    </p>
-                </div>
-              </a>
-            </li>
-            <p class="center font-size-change1 padd1"><a href="javascript:">View More+</a></p>
-          </ul>
+            </ul>
         </div>
       </div>
     </div>

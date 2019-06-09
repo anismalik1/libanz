@@ -499,4 +499,19 @@ export class TodoService {
     this.request_action = 'fetch_blogs';
     return this.send_post_request(data) ;
   }
+  fetch_blogs_by_category(data)
+  {
+    this.request_action = 'fetch_blogs_by_category';
+    return this.send_post_request(data) ;
+  }
+  fetch_single_blog(data)
+  {
+    this.request_action = 'fetch_single_blog';
+    return this.send_post_request(data) ;
+  }
+  submit_comment(data)
+  {
+    this.request_action = 'submit_comment';
+    return this.send_post_request(data) ;
+  }
 }

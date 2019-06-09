@@ -52,101 +52,43 @@ type="ball-clip-rotate">
 		<div class="row">
 			<div class="col s12">
 				<ul class="tabs blog-tabs">
-					<li class="tab col s12 m3"><a class="active" href="#">Tata Sky</a></li>
-					<li class="tab col s12 m3"><a href="#">Airtel</a></li>
-					<li class="tab col s12 m3"><a href="#">Videocon</a></li>
-					<li class="tab col s12 m3"><a href="#">Disth TV</a></li>
+					<li class="tab col s12 m3" id="list-item-all"><a [className]="(this.category == 'all')? 'active':''" href="javascript:" (click)="fetch_data('all')">Miscellaneous</a></li>
+					<li class="tab col s12 m3" *ngFor="let item of categories;" id="list-item-{{item.id}}"><a [className]="(this.category == item.id)? 'active':''" href="javascript:" (click)="fetch_data(item.id)">{{item.title}}</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col s12 m4">
+		<div class="row">  
+			<div class="col s12 m4" *ngFor="let item of blogs;">
 				<div class="card">
 					<div class="card-image">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
+						<img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
 					</div>
 					<div class="card-content">
 						<div class="author">
 							<p class="author-name">
 								<span><i class="material-icons">person</i></span>
-								<span>MyDthShop</span>
+								<span>MYDTHSHOP</span>
 							</p>
 							<p class="blog-time">
 								<span><i class="material-icons">access_time</i></span>
-								<time>30-05-2019</time>
+								<time>{{ item.c_date | date}}</time>
 							</p>
 						</div>
 						<div class="blog-content">
-						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
-						<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p>
+						<span class="blog-title">{{item.title}}</span>
+						<p [innerHTML]="item.shortDescription"></p>
 						</div>
 					</div>
 					<div class="card-action center">
-						<a target="_blank" [routerLink]="['/blog-detail/']" class="orange-text font-size-change1">Read More</a>
+						<a target="_blank" [routerLink]="['/blog-detail/'+item.url]" class="orange-text font-size-change1">Read More</a>
 					</div>
 				</div>
 			</div>
-			<div class="col s12 m4">
-				<div class="card">
-					<div class="card-image">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
-					</div>
-					<div class="card-content">
-						<div class="author">
-							<p class="author-name">
-								<span><i class="material-icons">person</i></span>
-								<span>MyDthShop</span>
-							</p>
-							<p class="blog-time">
-								<span><i class="material-icons">access_time</i></span>
-								<time>30-05-2019</time>
-							</p>
-						</div>
-						<div class="blog-content">
-						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
-						<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p>
-						</div>
-					</div>
-					<div class="card-action center">
-						<a target="_blank" [routerLink]="['/blog-detail/']" class="orange-text font-size-change1">Read More</a>
-					</div>
-				</div>
-			</div>
-			<div class="col s12 m4">
-				<div class="card">
-					<div class="card-image">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/IMG-20190406-WA00483.jpg" class="responsive-img" alt="1">
-					</div>
-					<div class="card-content">
-						<div class="author">
-							<p class="author-name">
-								<span><i class="material-icons">person</i></span>
-								<span>MyDthShop</span>
-							</p>
-							<p class="blog-time">
-								<span><i class="material-icons">access_time</i></span>
-								<time>30-05-2019</time>
-							</p>
-						</div>
-						<div class="blog-content">
-						<span class="blog-title">Sell On MyDthShop With Zero efforts.</span>
-						<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p>
-						</div>
-					</div>
-					<div class="card-action center">
-						<a target="_blank" [routerLink]="['/blog-detail/']" class="orange-text font-size-change1">Read More</a>
-					</div>
-				</div>
-			</div>
+			<div class="center" *ngIf="blogs.length == 0">No Records</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="margin-top center" *ngIf="more_display" id="more-display">
+			<a href="javascript:" class="font-size-change1" (click)="load_more_blogs();">View More +</a>
 		</div>
 	</div>
 </section>
