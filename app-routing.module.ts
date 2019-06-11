@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'login/ref/:name', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'p/contact-us', component: ContactUsComponent},
+  { path: 'contact-us', component: ContactUsComponent},
   { path: 'p/contact-us/:name', component: ContactUsComponent},
   { path: 'p/faqs', component: FaqsComponent},
   { path: 'p/:name', loadChildren: './pages/pages.module#PagesModule'},

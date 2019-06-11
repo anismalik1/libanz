@@ -8,8 +8,8 @@ loadingText="Loading..."
 type="ball-clip-rotate">
 </ngx-spinner>
 </div>
-
 <!-- Blog Page New Design -->
+<div id="fb-root"></div>
 <section class="hero">
   <div class="container">
     <h2 class="center font600 white-text margin-top">Blog Detail</h2>
@@ -58,15 +58,21 @@ type="ball-clip-rotate">
           </div>
           <div class="card-action right-align">
             <span>Share On:</span>
-            <a href="#"><img src="https://mydthshop.com/web-app/assets/images/facebook1.png" class="responsive-img"></a>
-            <a href="#"><img src="https://mydthshop.com/web-app/assets/images/linkedin.png" class="responsive-img"></a>
-            <a href="#"><img src="https://mydthshop.com/web-app/assets/images/twitter.png" class="responsive-img"></a>
-            <a href="#"><img src="https://mydthshop.com/web-app/assets/images/google-plus.png" class="responsive-img"></a>
-            <a href="#" class="dropdown-button" data-activates='dropdown1'><img src="https://mydthshop.com/web-app/assets/images/file.png" class="responsive-img"></a>
+            <div class="fb-share-button" style="vertical-align: text-bottom;"
+            data-href="https://www.mydthshop.com/blog-detail/blog" 
+            data-layout="button_count">
+          </div>
+            <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/facebook1.png" class="responsive-img"></a> -->
+            <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/linkedin.png" class="responsive-img"></a> -->
+            <a class="twitter-share-button"
+              href="https://twitter.com/intent/tweet?text=https://www.mydthshop.com/blog-detail/{{post[0].url}}">
+              <img src="https://mydthshop.com/web-app/assets/images/twitter.png" class="responsive-img"></a>
+            <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/google-plus.png" class="responsive-img"></a> -->
+            <!-- <a href="#" class="dropdown-button" data-activates='dropdown1'><img src="https://mydthshop.com/web-app/assets/images/file.png" class="responsive-img"></a>
             <ul id='dropdown1' class='dropdown-content'>
               <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
               <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-            </ul>
+            </ul> -->
           </div>
         </div>
         <div class="leave-comment-button">

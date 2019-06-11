@@ -13,6 +13,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class FooterComponent implements OnInit{
   page : string;
+  navigate : boolean = false;
   @Input() baseUrl;
   constructor( public todoservice : TodoService,
   private toast : ToastsManager,  
@@ -36,13 +37,26 @@ export class FooterComponent implements OnInit{
         return false;
     } 
     this.spinner.show();
-    this.todoservice.fetch_page_data(page)
+    this.todoservice.fetch_page_data(page) 
       .subscribe(
         data => 
         {
-          this.todoservice.set_footer_data(data.PAGEDATA[0]);
-         if(this.todoservice.footer_data)
-            $('#footer-content').html(this.todoservice.get_footer_page().description);
+          if(this.navigate == true)
+          {
+            this.todoservice.set_page_data(data.PAGEDATA[0]);
+            if(this.todoservice.page)
+               $('#page-content').html(this.todoservice.get_page().description);
+            this.navigate = false; 
+            this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+            this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+            this.title.setTitle(this.todoservice.get_page().metaTitle);  
+          }
+          else
+          {
+            this.todoservice.set_footer_data(data.PAGEDATA[0]);
+            if(this.todoservice.footer_data)
+               $('#footer-content').html(this.todoservice.get_footer_page().description);
+          }
           this.spinner.hide();
         }
       ) 
@@ -56,6 +70,7 @@ export class FooterComponent implements OnInit{
   }
   navigate_to(u)
   {
+    this.navigate = true;
     this.page = u;
     this.fetch_page_data();
   }

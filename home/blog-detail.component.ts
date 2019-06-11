@@ -1,4 +1,5 @@
-import { Component, OnInit ,ViewContainerRef} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
+import { DOCUMENT } from "@angular/platform-browser";
 import { Meta,Title } from "@angular/platform-browser";
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { TodoService } from '../todo.service';
@@ -6,7 +7,7 @@ import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-import { Router,ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-blog-detail',
   templateUrl: './blog-detail.component.html',
@@ -19,6 +20,8 @@ export class BlogDetailComponent implements OnInit {
   public post : any;
   public commentgroup : FormGroup;
   constructor(
+    private _renderer2: Renderer2,  
+    @Inject(DOCUMENT) private _document, 
     public todoservice : TodoService,
     private authservice : AuthService,
     private toastr: ToastsManager,
@@ -41,8 +44,29 @@ export class BlogDetailComponent implements OnInit {
     this.router.params.subscribe(params => {
       this.url = params['name']; //log the value of id
      this.fetch_single_blog(this.url);
+     this.init_script();
+     
    });
    
+  }
+
+  init_script()
+  {
+    if($('#fb-script'))
+    {
+      $('#fb-script').remove(); 
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `fb-script`;
+    script.text = `(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));`;
+    this._renderer2.appendChild(this._document.body, script);
   }
 
   fetch_single_blog(url)
@@ -56,6 +80,9 @@ export class BlogDetailComponent implements OnInit {
           this.post = data.post;
           this.recent_posts = data.recent_posts;
           this.spinner.hide();
+          this.meta.addTag({ name: 'description', content: this.post[0].metaDesc });
+          this.meta.addTag({ name: 'keywords', content: this.post[0].metaKeyword });
+          this.title.setTitle(this.post[0].metaTitle);
         }
       )
   }
