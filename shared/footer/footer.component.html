@@ -49,7 +49,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row margin-top">
+			<div class="row margin-top footer-register">
 				<div class="col s12 m3 l3">
 					<span class="font600 font-size-change white-text">REGISTERED ADDRESS</span>
 					<ul>							
@@ -59,14 +59,16 @@
 					</ul>
 				</div>				
 				
-				<div class="col s12 m3 l3">
-					<span class="font600 font-size-change white-text">INFORMATION</span>
-					<ul>
+				<div class="col s12 m3 l4">
+					<span class="font600 font-size-change white-text">INFORMATION</span><br>
+					<ul class="left">
 						<li class="padd-right-left"><a routerLink="/p/about-my-dth-shop-rohini" (click)="navigate_to('about-my-dth-shop-rohini')" class="white-text">About Us</a></li>
 						<li class="padd-right-left"><a routerLink="/p/dth-connection-refund-policy"  (click)="navigate_to('dth-connection-refund-policy')" class="white-text">Refund Policy</a></li>
 						<li class="padd-right-left"><a routerLink="/contact-us" class="white-text">Contact Us</a></li>
 						<li class="padd-right-left"><a routerLink="/p/know-about-my-dth-shop" class="white-text" (click)="navigate_to('know-about-my-dth-shop')">Who We Are</a></li>
 						<li class="padd-right-left"><a routerLink="/p/mydthshop-terms-and-conditions" class="white-text" (click)="navigate_to('mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
+					</ul>
+					<ul class="left side-url">
 						<li class="padd-right-left"><a routerLink="/p/privacy-policy-my-dth-shop" class="white-text" (click)="navigate_to('privacy-policy-my-dth-shop')">Privacy policy</a></li>
 						<li class="padd-right-left"><a routerLink="/p/mydthshop-disclaimer" class="white-text" (click)="navigate_to('mydthshop-disclaimer')">Disclaimer</a></li>
 						<li class="padd-right-left"><a routerLink="/p/download-brochures" class="white-text" (click)="navigate_to('download-brochures')">Download Brochures</a></li>
@@ -75,7 +77,7 @@
 						<li class="padd-right-left"><a routerLink="/p/sitemap" target="_blank"  class="white-text" >Sitemap</a></li>
 					</ul>
 				</div>
-				<div class="col s12 m2 l2">
+				<div class="col s5 m2 l2">
 					<span class="font600 font-size-change white-text">CATEGORIES</span>
 					<ul>
 						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:1}" class="white-text">Tata Sky</a></li>
@@ -83,12 +85,12 @@
 						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:3}" class="white-text">Airtel</a></li>
 						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:4}" class="white-text">Dish Tv</a></li>
 						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:1}" class="white-text">Jio Dth</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:4}" class="white-text">DTH Accessories</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:1}" class="white-text">Big Tv</a></li>
+						<!-- <li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:4}" class="white-text">DTH Accessories</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:1}" class="white-text">Big Tv</a></li> -->
 						<!-- <li class="padd-right-left"><a [routerLink]="['/products']" [queryParams]="{cat_id:1}" class="grey-text">Sun Direct</a></li> -->
 						</ul>
 				</div>
-				<div class="col s12 m2 l2">
+				<div class="col s7 m2 l2">
 					<span class="font600 font-size-change white-text">FOLLOW US</span>
 					<ul>							
 						<li class="padd-right-left"><a href="https://www.facebook.com/mydthshop/" target="_blank" class="white-text">Facebook</a></li>
@@ -101,7 +103,7 @@
 						<li class="padd-right-left"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="white-text">Blogger</a></li>
 					</ul>
 				</div>
-				<div class="col s12 m2 l2">
+				<!-- <div class="col s12 m2 l2">
 					<span class="font600 font-size-change white-text">MISC</span>
 					<ul>							
 						<li class="padd-right-left"><a href="#" class="white-text">Cashback</a></li>
@@ -112,7 +114,7 @@
 						<li class="padd-right-left"><a href="#" class="white-text">Best Selling</a></li>
 						<li class="padd-right-left"><a href="#" class="white-text">Promocode</a></li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>
