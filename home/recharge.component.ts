@@ -179,6 +179,8 @@ export class RechargeComponent implements OnInit {
   
   ini_recharge_tabs(tab)
   {
+    this.plans = [];
+    this.show_tab(1)
     this.spinner.show(); 
     this.recharge_type.mobile = false;
     this.recharge_type.dth = false;
@@ -712,6 +714,12 @@ check_amount(s)
 			data => 
 			{
         this.plans = data;
+        if(this.plans.length > 0 )
+        {
+          this.show_tab(2)
+          this.print_plan(this.plans[0].records,0);
+        }
+          
       }    
 		  );
  } 
