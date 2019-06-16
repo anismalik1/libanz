@@ -420,11 +420,11 @@
 						<div id="short-content"></div>
 					</div>	
 					<div class="card-content" *ngIf="promo_codes && promo_codes.length > 0">
-						<div class="" *ngIf="plans.length > 0">
+						<div class="inline-block promo-chng" *ngIf="plans.length > 0">
 							<span class="font-size-change1 font600" ><a href="javascript:" (click)="show_tab(2)">Plans</a></span>
 							<hr class="hr-promo">
 						</div>
-						<div class="">
+						<div class="inline-block promo-chng">
 							<span class="font-size-change1 font600"><a href="javascript:" (click)="show_tab(1)">Promo Code</a></span>
 							<hr class="hr-promo">
 						</div>
