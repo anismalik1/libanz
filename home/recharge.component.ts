@@ -66,6 +66,7 @@ export class RechargeComponent implements OnInit {
   selected_promo : any;
   region : number = 0;
   operator_id : number = 0;
+  activity : number = 0;
   plans : any;
   constructor(
     private _renderer2: Renderer2, 
@@ -165,8 +166,12 @@ export class RechargeComponent implements OnInit {
     script.text = `
    $(document).ready(function(){
     $('.modal').modal();
-    });
     
+    });
+    function pack_price(price)
+    {
+      $('[ng-reflect-name="amount"]').val(price);
+    }
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
@@ -284,6 +289,7 @@ export class RechargeComponent implements OnInit {
     if(s == 'mobile')
     {
       this.mcircle.open();
+      this.filter_operator_name(this.selectedOperator);
     }
     else if(s == 'dth')
     {
@@ -314,6 +320,7 @@ export class RechargeComponent implements OnInit {
     else if(s == 'card')
     {
       this.dcircle.open();
+      this.filter_operator_name(this.selectedOperator);
     }
     else if(s == 'landline')
     {
@@ -634,14 +641,16 @@ check_amount(s)
        {
          this.region = recharge_data.circle_id;
          this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+         this.selectedOperator = recharge_data.operator_id;
          this.filter_operator_name(recharge_data.operator_id);
          this.filter_circle_name(Number(recharge_data.circle_id));
          if(this.region > 0 && recharge_data.operator_id > 0)
          {
-          if(this.operator_id != recharge_data.operator_api_id)
+          if(this.activity != recharge_data.activity_id)
             this.get_plans(this.region,recharge_data.operator_api_id);
          } 
          this.operator_id = recharge_data.operator_api_id;
+         this.activity = recharge_data.activity_id;
         }
        else
        {
@@ -693,6 +702,11 @@ check_amount(s)
  }
  get_plans(circle,operator)
  {
+   if(operator == 'get')
+   {
+    operator = this.operator_id;
+   }
+    
     this.todoservice.get_plans({circle:circle,operator:operator})
 		.subscribe(
 			data => 
@@ -710,7 +724,7 @@ check_amount(s)
     var plan_list = '';
     for(var i=0;i<data.length;i++)
     {
-      plan_list += '<tr><td>'+data[i].desc+'</td><td>'+data[i].validity+'</td><td>'+data[i].rs+'</td></tr>';
+      plan_list += '<tr><td>'+data[i].desc+'</td><td>'+data[i].validity+'</td><td><a class="pack-price" href="javascript:" onclick="pack_price('+data[i].rs+')">'+data[i].rs+'</a></td></tr>';
     }
     $('#print-data').html(plan_list);
   }
@@ -726,6 +740,7 @@ check_amount(s)
     if(!operator)
     operator = this.operators.MOBILEPOSTPAID.filter(x => x.id == id);
     this.operators.selected = operator;
+    this.operator_id = operator[0].recharge_id;
    }
 
  check_if_not_digits(dig)
