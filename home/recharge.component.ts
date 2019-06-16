@@ -64,6 +64,9 @@ export class RechargeComponent implements OnInit {
   promo_codes : any ;
   url_name : string;
   selected_promo : any;
+  region : number = 0;
+  operator_id : number = 0;
+  plans : any;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -94,7 +97,8 @@ export class RechargeComponent implements OnInit {
     this.mobilegroup = fb.group({
       'amount' : [null,Validators.compose([Validators.required])],
        'operator' : [null,Validators.compose([Validators.required])],
-       'recharge_id' : [null,Validators.compose([Validators.required])]
+       'recharge_id' : [null,Validators.compose([Validators.required])],
+       'circle_area1' : [null,Validators.compose([Validators.required])]
      });
      this.dthgroup = fb.group({
        'amount' : [null,Validators.compose([Validators.required])],
@@ -166,6 +170,8 @@ export class RechargeComponent implements OnInit {
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
+
+  
   ini_recharge_tabs(tab)
   {
     this.spinner.show(); 
@@ -229,6 +235,7 @@ export class RechargeComponent implements OnInit {
       }
     ) 
   }
+  
   show_tab(action)
   {
     if(action == 1)
@@ -606,25 +613,54 @@ check_amount(s)
     alert('Enter a valid Number and Provider');
   }
  }
+ 
  next_to(s,control,e)
  {
-   if(s == 'mobile')
+  if(s == 'mobile')
+  {
+   if( this.check_if_not_digits(e))
    {
-    if( this.check_if_not_digits(e))
-    {
-      this.mobilegroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
-    }
-    if(control == 'recharge_id' && this.mobilegroup.controls[control].valid)
-    {
-      if($('.mobile-recharge-type:checked').val() == 1)
-      {
-        this.moperator.open();
-      }
-      else{
-        this.postoperator.open();
-      }
-    }
+     this.mobilegroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
    }
+   let recharge_id = e.target.value;
+   if(recharge_id.length <= 2)
+     return false;
+   this.todoservice.check_if_recharge_exist({recharge_id: recharge_id})
+   .subscribe(
+     data => 
+     {
+       let recharge_data = data.RECHARGEID;
+       if(!$.isEmptyObject(recharge_data))
+       {
+         this.region = recharge_data.circle_id;
+         this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+         this.filter_operator_name(recharge_data.operator_id);
+         this.filter_circle_name(Number(recharge_data.circle_id));
+         if(this.region > 0 && recharge_data.operator_id > 0)
+         {
+          if(this.operator_id != recharge_data.operator_api_id)
+            this.get_plans(this.region,recharge_data.operator_api_id);
+         } 
+         this.operator_id = recharge_data.operator_api_id;
+        }
+       else
+       {
+         if(control == 'recharge_id' && this.mobilegroup.controls[control].valid && !this.operators.selected)
+         {
+           if($('.mobile-recharge-type:checked').val() == 1)
+           {
+             this.moperator.open();
+           }
+           else{
+             this.postoperator.open();
+           }
+         }
+       }
+       this.spinner.hide();
+     }
+   )  
+   
+  }
    else if(s == 'dth')
    {
     if( this.check_if_not_digits(e))
@@ -655,6 +691,43 @@ check_amount(s)
     
    }  
  }
+ get_plans(circle,operator)
+ {
+    this.todoservice.get_plans({circle:circle,operator:operator})
+		.subscribe(
+			data => 
+			{
+        this.plans = data;
+      }    
+		  );
+ } 
+
+ print_plan(data,id)
+  {
+    
+    $("#circles-content li").removeClass('active');
+    $("#list-"+id).addClass('active');
+    var plan_list = '';
+    for(var i=0;i<data.length;i++)
+    {
+      plan_list += '<tr><td>'+data[i].desc+'</td><td>'+data[i].validity+'</td><td>'+data[i].rs+'</td></tr>';
+    }
+    $('#print-data').html(plan_list);
+  }
+
+ filter_circle_name(id)
+ {
+  this.circles.selected = this.circles.filter(x => x.circle_id == id);
+ } 
+
+ filter_operator_name(id)
+   {
+    let operator = this.operators.MOBILEPREPAID.filter(x => x.id == id);
+    if(!operator)
+    operator = this.operators.MOBILEPOSTPAID.filter(x => x.id == id);
+    this.operators.selected = operator;
+   }
+
  check_if_not_digits(dig)
  {
   let evt = (dig) ? dig : event;

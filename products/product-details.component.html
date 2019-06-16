@@ -100,7 +100,7 @@
                   			<button id="addButton" (click)="change_count(1,'add')"><i class="material-icons">add</i></button>
                   		</div>
                   	</div> -->
-                  	<ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 2 && product.category_id == 1">
+                  	<ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 5 && product.category_id == 1">
                   		<li>
                   			<span class="font-size-change1 font600 grey-text">DTH Kit</span>
                   		</li>
@@ -566,12 +566,12 @@
 								<div class="card-content">
 									<span>{{item.title}}</span>
 								</div>
-								<div *ngIf="item.category_id == 1 && this.todoservice.get_user_type() == 2">
+								<!-- <div *ngIf="item.category_id == 1 && this.todoservice.get_user_type() == 2">
 									<input type="radio" value="2" name="tskkit-{{item.id}}" id="multi-tsk-1-{{item.id}}" checked (change)="multi_tsk(item.id);">
 									<label for="multi-tsk-1-{{item.id}}">TSK 599</label>
 									<input type="radio" value="3" name="tskkit-{{item.id}}" id="multi-tsk-2-{{item.id}}" (change)="multi_tsk(item.id);">
 									<label for="multi-tsk-2-{{item.id}}">TSK 999</label>
-								</div>
+								</div> -->
 							</div>
 							<div class="col s12 m3">
 								<div class="card-content">

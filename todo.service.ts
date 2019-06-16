@@ -180,338 +180,377 @@ export class TodoService {
     return this.page;  
   }
 
-  send_post_request(data) : Observable<any>
+  send_post_request(data,url) : Observable<any>
   {
     var Headers_of_api = new Headers({
       'Content-Type' : 'application/x-www-form-urlencoded'
     });
-    return this.http.post(this.service_url+this.request_action,data,{headers: Headers_of_api})
+    return this.http.post(url,data,{headers: Headers_of_api})
     .map(res => res.json());
   }
   fetch_user_info(data)
   {
-    this.request_action = 'fetch_user_info';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_user_info';
+    return this.send_post_request(data,url) ; 
   }
   fetch_qr_user(data)
   {
-    this.request_action = 'fetch_qr_user_info';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_qr_user_info';
+    return this.send_post_request(data,url) ; 
   }
   
   send_value(data)
   {
-    this.request_action = 'send_value_to_wallet';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/send_value_to_wallet';
+    return this.send_post_request(data,url) ; 
   }
   manage_account_info(data)
   {
-    this.request_action = 'manage_account_info';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/manage_account_info';
+    return this.send_post_request(data,url) ; 
   }
   update_account(data)
   {
-    this.request_action = 'update_account_info';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/update_account_info';
+    return this.send_post_request(data,url) ; 
   }
   update_password(data)
   {
-    this.request_action = 'update_password';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/update_password';
+    return this.send_post_request(data,url) ; 
   }
 
   fetch_commissions(data)
   {
-    this.request_action = 'fetch_commission_listing_by_category';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_commission_listing_by_category';
+    return this.send_post_request(data,url) ; 
   }
   add_topup(data)
   {
-    this.request_action = 'add_topup_request';
-    return this.send_post_request(data) ; 
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/add_topup_request';
+    return this.send_post_request(data,url) ; 
   }
   fetch_topup_request(data)
   {
-	 this.request_action = 'fetch_topup_request';
-    return this.send_post_request(data) ;
+   this.request_action = '';
+   let url = this.server_url+'index.php?/app_services/fetch_topup_request';
+    return this.send_post_request(data,url) ;
   }
   fetch_complaints(data)
   {
-    this.request_action = 'fetch_complaints_listing';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_complaints_listing';
+    return this.send_post_request(data,url) ;
   }
   fetch_complaint_info(data)
   {
-    this.request_action = 'fetch_complaint_info';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_complaint_info';
+    return this.send_post_request(data,url) ;
   }
   fetch_operators(data)
   {
-	  this.request_action = 'fetch_operators';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_operators';
+    return this.send_post_request(data,url) ;
   }
   recharge_init(data)
   {
-    this.service_url = this.server_url+'index.php?/app_recharge/';   
-    this.request_action = 'recharge_init';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_recharge/recharge_init'; 
+    return this.send_post_request(data,url) ;
   }
   recharge_handler(data)
   {
-    this.service_url = this.server_url+'index.php?/app_recharge/';   
-    this.request_action = 'recharge_handler';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_recharge/recharge_handler'; 
+    return this.send_post_request(data,url) ; 
   }
+  
   fetch_history(data)
   {
-    this.request_action = 'fetch_history';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_history';
+    return this.send_post_request(data,url) ;
   }
   dashboard_content(data)
   {
-    this.request_action = 'fetch_dashboard_content';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_dashboard_content';
+    return this.send_post_request(data,url) ;
   }
   paging_wallet_history(data)
   {
-    this.request_action = 'paging_wallet_history';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/paging_wallet_history';
+    return this.send_post_request(data,url) ;
   }
   paging_order_history(data)
   {
-    this.request_action = 'paging_order_history';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/paging_order_history';
+    return this.send_post_request(data,url) ;
   }
   paging_recharge_history(data)
   {
-    this.request_action = 'paging_recharge_history';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/paging_recharge_history';
+    return this.send_post_request(data,url) ;
   }
   fetch_home_data(data)
   {
-    this.request_action = 'fetch_home';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_home';
+    return this.send_post_request(data,url) ;
   }
   get_filter_products(data)
   {
-	  this.request_action = 'get_filter_products';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/get_filter_products';
+    return this.send_post_request(data,url) ;
   }
   fetch_checkout_data(data)
   {
-    this.request_action = 'fetch_checkout_data';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_checkout_data';
+    return this.send_post_request(data,url) ;
   }
   add_new_address(data)
   {
-    this.request_action = 'add_new_address';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/add_new_address';
+    return this.send_post_request(data,url) ;
   }
   edit_address(data)
   {
-    this.request_action = 'edit_address';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/edit_address';
+    return this.send_post_request(data,url) ;
   }
   fetch_edit_address(data)
   {
-    this.request_action = 'fetch_edit_address';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_edit_address';
+    return this.send_post_request(data,url) ;
   }
   fetch_remove_address(data)
   {
-    this.request_action = 'fetch_remove_address';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/fetch_remove_address';
+    return this.send_post_request(data,url) ;
   }
   checkout_items(data)
   {
-    this.request_action = 'checkout_items';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/checkout_items';
+    return this.send_post_request(data,url) ;
   }
   signup(data)
   {
-    this.request_action = 'signup';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/signup';
+    return this.send_post_request(data,url) ; 
   }
   verify_user(data)
   {
-    this.request_action = 'verify_signup';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/verify_signup';
+    return this.send_post_request(data,url) ; 
   }
   check_amount(data)
   {
-    this.service_url = this.server_url+'index.php?/app_recharge/';
-    this.request_action = 'check_amount';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_recharge/check_amount';
+    return this.send_post_request(data,url) ; 
   }
   fetch_order_status(data)
   {
-    this.request_action = 'fetch_order_status';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/fetch_order_status';
+    return this.send_post_request(data,url) ; 
   }
   fetch_recharge_order_status(data)
   {
-    this.request_action = 'fetch_recharge_order_status';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/fetch_recharge_order_status';
+    return this.send_post_request(data,url) ; 
   }
   fetch_product_categories(data)
   {
-    this.request_action = 'fetch_product_categories';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/fetch_product_categories';
+    return this.send_post_request(data,url) ; 
   }
   fetch_product_quality(data)
   {
-    this.request_action = 'fetch_product_quality';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/fetch_product_quality';
+    return this.send_post_request(data,url) ; 
   }
   fetch_products_plans(data)
   {
-    this.request_action = 'fetch_products_plans';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/fetch_products_plans';
+    return this.send_post_request(data,url) ; 
   }
   fetch_products_by_plan(data)
   {
-    this.request_action = 'fetch_products_by_plan';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/fetch_products_by_plan';
+    return this.send_post_request(data,url) ; 
   }
   calculate_tsk_margin(data)
   {
-    this.request_action = 'calculate_tsk_margin';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/calculate_tsk_margin';
+    return this.send_post_request(data,url) ; 
   }
   book_dth_order(data)
   {
-    this.request_action = 'book_dth_order';
-    return this.send_post_request(data) ; 
+    let url = this.server_url+'index.php?/app_services/book_dth_order';
+    return this.send_post_request(data,url) ; 
   }
   fetch_review_data(data)
   {
-    this.request_action = 'fetch_review_data';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/fetch_review_data';
+    return this.send_post_request(data,url) ;
   }
 
   add_product_review(data)
   {
-    this.request_action = 'add_product_review';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/add_product_review';
+    return this.send_post_request(data,url) ; 
   }
 
   fetch_more_reviews(data)
   {
-    this.request_action = 'fetch_more_reviews';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/fetch_more_reviews';
+    return this.send_post_request(data,url) ;
   }
 
   export_all_orders(data)
   {
-    this.request_action = 'export_all_orders';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/export_all_orders';
+    return this.send_post_request(data,url) ; 
   }
   export_all_recharges(data)
   {
-    this.request_action = 'export_all_recharges';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/export_all_recharges';
+    return this.send_post_request(data,url) ; 
   }
   proceed_to_reset(data)
   {
-    this.request_action = 'proceed_to_reset';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/proceed_to_reset';
+    return this.send_post_request(data,url) ; 
   }
   reset_password(data)
   {
-    this.request_action = 'reset_password';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/reset_password';
+    return this.send_post_request(data,url) ; 
   }
   fetch_booked_orders(data)
   {
-    this.request_action = 'fetch_booked_orders';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/fetch_booked_orders';
+    return this.send_post_request(data,url) ; 
   }
   resend_otp(data)
   {
-    this.request_action = 'resend_otp';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/resend_otp';
+    return this.send_post_request(data,url) ; 
   }
   get_search_data(data)
   {
-    this.request_action = 'get_search_data';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/get_search_data';
+    return this.send_post_request(data,url) ; 
   }
   track_record(data)
   {
-    this.request_action = 'track_record';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/track_record';
+    return this.send_post_request(data,url) ; 
   }
   fetch_page_data(data)
   {
-    this.request_action = 'fetch_page_data';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/fetch_page_data';
+    return this.send_post_request(data,url) ; 
   }
   apply_package(data)
   {
-    this.request_action = 'apply_package';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/apply_package';
+    return this.send_post_request(data,url) ; 
   }
 
   save_contact_form (data)
   {
-    this.request_action = 'save_contact_form';
-    return this.send_post_request(data) ; 
+    
+    let url = this.server_url+'index.php?/app_services/save_contact_form';
+    return this.send_post_request(data,url) ; 
   }
   subscribe_newsletters(data)
   {
-    this.request_action = 'subscribe_newsletters';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/subscribe_newsletters';
+    return this.send_post_request(data,url) ;
   }
   save_faqs_form(data)
   {
-    this.request_action = 'save_faqs_form';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/save_faqs_form';
+    return this.send_post_request(data,url) ;
   }
   fetch_promocode(data)
   {
-    this.request_action = 'fetch_promocode';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/fetch_promocode';
+    return this.send_post_request(data,url) ;
   }
   apply_promo_code(data)
   {
-    this.request_action = 'apply_promo_code';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/apply_promo_code';
+    return this.send_post_request(data,url) ;
   }
   check_if_recharge_exist(data)
   {
-    this.request_action = 'check_if_recharge_exist';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/check_if_recharge_exist';
+    return this.send_post_request(data,url) ;
   }
   product_categories()
   {
     let data = {};
-    this.request_action = 'product_categories';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/product_categories';
+    return this.send_post_request(data,url) ;
   }
   channel_category_by_circle(data)
   {
-    this.request_action = 'channel_category_by_circle';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/channel_category_by_circle';
+    return this.send_post_request(data,url) ;
   }
 
   fetch_blogs(data)
   {
-    this.request_action = 'fetch_blogs';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/fetch_blogs';
+    return this.send_post_request(data,url) ;
   }
   fetch_blogs_by_category(data)
   {
-    this.request_action = 'fetch_blogs_by_category';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/fetch_blogs_by_category';
+    return this.send_post_request(data,url) ;
   }
   fetch_single_blog(data)
   {
-    this.request_action = 'fetch_single_blog';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/fetch_single_blog';
+    return this.send_post_request(data,url) ;
   }
   submit_comment(data)
   {
-    this.request_action = 'submit_comment';
-    return this.send_post_request(data) ;
+    
+    let url = this.server_url+'index.php?/app_services/submit_comment';
+    return this.send_post_request(data,url) ;
+  }
+
+  get_plans(data)
+  {
+    let url = this.server_url+'accounts/apis/plan_api/plans';
+    return this.send_post_request(data,url) ;
   }
 }
