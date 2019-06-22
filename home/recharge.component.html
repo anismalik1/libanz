@@ -8,7 +8,7 @@
 	type="ball-clip-rotate">
 </ngx-spinner>
 </div>
-<section class="recharge-section">
+<section class="recharge-section" *ngIf="recharge_ini == 1">
 	<div class="container">
 		<div class="row mar-row"> 
 			<div class="col s12">
@@ -35,54 +35,62 @@
 		</div>
 	</div>
 </section> 
-<section *ngIf="recharge_ini == 2" class="white relative">
+<section *ngIf="recharge_ini == 2" class="relative">
 	<div class="container">
 		<div class="row mar-row responsive-kro">
-			<div class="col s12 m12 l5">
-				<img src="https://mydthshop.com/media/uploads/api_catimages/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
-				<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
-				<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
+			<div class="col m12">
+			<div class="card">
+					<div class="card-content">
+					<div class="col s12 m12 l5">
+						<img src="https://mydthshop.com/media/uploads/api_catimages/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
+						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
+						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
+					</div>
+					<div class="col s12 m12 l5">
+						<div class="payment-method" *ngIf="pay_step==1">
+							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 0">
+								<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
+							</p>
+							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
+								<span class="green-text">Promo Selected</span>
+								<a href="#promo-code-apply" class="modal-trigger">change</a>
+							</p>	
+							<p class="inline-block margin-right fast-forwad relative">
+								<input type="radio" class="with-gap" id="instant-recharge"  name="payment_type" value="wallet" checked/>
+								<label for="instant-recharge" class="black-text"><span class="fast"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
+							</p>
+							<p class="inline-block margin-right">
+								<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
+								<label for="other-option" class="black-text">Other</label>
+							</p>
+						</div>
+						<div class="payment-method1"  *ngIf="pay_step==2">
+							<p class="inline-block margin-right ">
+								<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
+								<label for="credit-card" class="black-text">Cards & Netbanking</label>
+							</p>
+							<p class="inline-block margin-right ">
+								<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
+								<label for="paytm" class="black-text">Paytm</label>
+							</p>
+							<p class="inline-block margin-right ">
+								<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
+							</p>
+						</div>                                                                                                      
+						
+					</div>
+					<div class="col s12 m12 l2">
+						<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount}}</button>
+					</div>
+					<div class="clearfix"></div>
+				</div>	
 			</div>
-			<div class="col s12 m12 l5">
-				<div class="payment-method" *ngIf="pay_step==1">
-					<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 0">
-						<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
-					</p>
-					<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
-						<span class="green-text">Promo Selected</span>
-						<a href="#promo-code-apply" class="modal-trigger">change</a>
-					</p>	
-					<p class="inline-block margin-right fast-forwad relative">
-						<input type="radio" class="with-gap" id="instant-recharge"  name="payment_type" value="wallet" checked/>
-						<label for="instant-recharge" class="black-text"><span class="fast"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
-					</p>
-					<p class="inline-block margin-right">
-						<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
-						<label for="other-option" class="black-text">Other</label>
-					</p>
-				</div>
-				<div class="payment-method1"  *ngIf="pay_step==2">
-					<p class="inline-block margin-right ">
-						<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
-						<label for="credit-card" class="black-text">Cards & Netbanking</label>
-					</p>
-					<p class="inline-block margin-right ">
-						<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-						<label for="paytm" class="black-text">Paytm</label>
-					</p>
-					<p class="inline-block margin-right ">
-						<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
-					</p>
-				</div>                                                                                                      
-				
 			</div>
-			<div class="col s12 m12 l2">
-				<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount}}</button>
-			</div>
+			
 		</div>
 	</div>
 </section>
-<section class="promo-code-section-2">
+<section class="promo-code-section-2" *ngIf="recharge_ini == 1">
 	<div class="container">
 		<div class="row">
 			<div class="col s12 m4 mobile no-margin">
@@ -124,7 +132,7 @@
 						</div>
 						<div class="input-field col s12 m12">
 							<mat-form-field>
-								<mat-select placeholder="Select Circle" #mcircle [(value)]="this.region" formControlName="circle_area1" (change)="get_plans($event.value,'get')">
+								<mat-select placeholder="Select Circle" #mcircle [(value)]="this.region" formControlName="circle_area" (change)="get_plans($event.value,'get')">
 									<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
 										<span class="operator-name">{{ item.name }}</span>
 									</mat-option>
@@ -443,7 +451,7 @@
 						<div id="circles-content" class="hide">
 							<div class="col m4">
 								<ul class="tabs">
-								  <li class="tab" *ngFor="let item of plans" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>
+								  <li [className]="(i == 0)?'tab active':'tab'" *ngFor="let item of plans;let i = index" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>
 								</ul>
 							</div>
 							<div class="col m8">

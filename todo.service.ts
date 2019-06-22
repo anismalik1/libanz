@@ -190,69 +190,73 @@ export class TodoService {
   }
   fetch_user_info(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/fetch_user_info';
     return this.send_post_request(data,url) ; 
   }
+
   fetch_qr_user(data)
   {
-    this.request_action = '';
     let url = this.server_url+'index.php?/app_services/fetch_qr_user_info';
     return this.send_post_request(data,url) ; 
   }
   
+  fetch_user_notifications(data)
+  {
+    let url = this.server_url+'accounts/apis/home/notifications';
+    return this.send_post_request(data,url) ; 
+  }
   send_value(data)
   {
-    this.request_action = '';
     let url = this.server_url+'index.php?/app_services/send_value_to_wallet';
     return this.send_post_request(data,url) ; 
   }
   manage_account_info(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/manage_account_info';
     return this.send_post_request(data,url) ; 
   }
   update_account(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/update_account_info';
     return this.send_post_request(data,url) ; 
   }
   update_password(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/update_password';
     return this.send_post_request(data,url) ; 
   }
 
   fetch_commissions(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/fetch_commission_listing_by_category';
     return this.send_post_request(data,url) ; 
   }
   add_topup(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/add_topup_request';
     return this.send_post_request(data,url) ; 
   }
   fetch_topup_request(data)
   {
-   this.request_action = '';
+   
    let url = this.server_url+'index.php?/app_services/fetch_topup_request';
     return this.send_post_request(data,url) ;
   }
   fetch_complaints(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/fetch_complaints_listing';
     return this.send_post_request(data,url) ;
   }
   fetch_complaint_info(data)
   {
-    this.request_action = '';
+    
     let url = this.server_url+'index.php?/app_services/fetch_complaint_info';
     return this.send_post_request(data,url) ;
   }

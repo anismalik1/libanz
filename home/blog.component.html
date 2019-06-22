@@ -75,8 +75,8 @@ type="ball-clip-rotate">
 							</p>
 						</div>
 						<div class="blog-content">
-						<span class="blog-title">{{item.title}}</span>
-						<p [innerHTML]="item.shortDescription"></p>
+						<span class="blog-title" title="{{item.title}}">{{item.title | slice:0:32}}<span *ngIf="item.title.length>32">...</span></span>
+						<span [innerHTML]="item.shortDescription | truncate : 225 : true : '...'"> </span>
 						</div>
 					</div>
 					<div class="card-action center">

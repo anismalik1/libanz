@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit{
   logingroup : FormGroup;
   signupgroup : FormGroup;
   remember : any = {rm:false,ph:'',pw : ''};
-  private token_params : Authparams;
+    private token_params : Authparams;
     public phone : number;
     public phone1 : string;
     public password : string;
@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit{
     private user_type : number;
     private verify : number;
     public signupverify : number = 0;
+    public notifications : any;
+    public notification_count : Number;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
@@ -62,6 +64,10 @@ export class HeaderComponent implements OnInit{
       this.signupgroup = fb.group({
         'name':[null,Validators.required],
         'phone' : [null,Validators.compose([Validators.required])],
+        'email' : [null,Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+        'user_type':[null],
         'password' : [null,Validators.compose([Validators.required])],
         'cpassword' : [null,Validators.compose([Validators.required])],
       });
@@ -173,9 +179,8 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  signup_form(type)
+  signup_form()
   {
-    this.user_type = type;
     this.signup = 1;
   }
   
@@ -195,7 +200,6 @@ export class HeaderComponent implements OnInit{
         return false;
     }
     this.phone = formdata.phone;
-    formdata.user_type = this.user_type;
     this.todoservice.signup(formdata)
       .subscribe(
         data => 
@@ -273,7 +277,28 @@ export class HeaderComponent implements OnInit{
     ); 
     this.init_page(); 
     this.todoservice.get_user_data();
+    this.user_notification();
   }
+
+  user_notification()
+  {
+    this.todoservice.fetch_user_notifications({token: this.get_token()})
+      .subscribe(
+        data => 
+        {
+          if(!jQuery.isEmptyObject(data))
+          {
+            if(data.status && data.status == 'Invalid Token')
+            {
+              return false;
+            }
+            this.notifications = data.notifications;
+            this.notification_count =  data.notification_count[0];
+          }
+        }
+      )
+  }
+
   private _filter(value: string): object {
     const filterValue = value.toLowerCase();
 
@@ -295,6 +320,17 @@ export class HeaderComponent implements OnInit{
     script.text = `
     $(document).ready(function(){
       $('#login-modal').modal();
+      $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: false, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: true, // Displays dropdown below the button
+        alignment: 'right', // Displays dropdown with edge aligned to the left of button
+        stopPropagation: false // Stops event propagation
+      }
+    );
       $('.logup.modal-trigger').click(function(){
         $('#login-modal').modal('open');
       })

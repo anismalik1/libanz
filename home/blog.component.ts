@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Meta,Title } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -6,6 +6,7 @@ import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { Router,ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-blog',

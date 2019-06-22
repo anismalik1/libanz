@@ -19,6 +19,7 @@ import { AuthService } from '../auth.service';
 const routes: Routes = [
   { path: '', component: PageViewComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: 'recover', component: ForgotPasswordComponent },
   { path: 'forgot-password', component: ContactUsComponent },
   { path: 'user-notify/:id', component: NotifyComponent }
   

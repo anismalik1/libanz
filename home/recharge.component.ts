@@ -99,7 +99,7 @@ export class RechargeComponent implements OnInit {
       'amount' : [null,Validators.compose([Validators.required])],
        'operator' : [null,Validators.compose([Validators.required])],
        'recharge_id' : [null,Validators.compose([Validators.required])],
-       'circle_area1' : [null,Validators.compose([Validators.required])]
+       'circle_area' : [null,Validators.compose([Validators.required])]
      });
      this.dthgroup = fb.group({
        'amount' : [null,Validators.compose([Validators.required])],
@@ -430,7 +430,7 @@ export class RechargeComponent implements OnInit {
       return false;
     }
     this.spinner.show();	
-		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator};
+		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
     this.todoservice.recharge_init(this.rechargeData)
 		.subscribe(
 			data => 
@@ -442,8 +442,6 @@ export class RechargeComponent implements OnInit {
           return false;
 			  //	this.router.navigate(['/login']);
 			  }
-			  let b = JSON.stringify(data);
-			  data =  JSON.parse(b.replace(/\\/g, ''));
 			  if(!$.isEmptyObject(data))
 			  {
 				this.rechargeData.api_img = data.api_img;	
@@ -452,8 +450,7 @@ export class RechargeComponent implements OnInit {
 				this.rechargeData.title = data.title;
         this.recharge_ini = 2;
         this.addto_recharge_cart(this.rechargeData);
-        this.router.navigate(['/recharge/'+this.url_name+'/proceed']);
-        this.todoservice.service_url = this.todoservice.server_url+'index.php?/app_services/'; 				
+        //this.router.navigate(['/recharge/'+this.url_name+'/proceed']);				
 			  }
 			}
 		  );
@@ -643,6 +640,7 @@ check_amount(s)
        {
          this.region = recharge_data.circle_id;
          this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+         this.mobilegroup.controls['circle_area'].setValue(this.region);
          this.selectedOperator = recharge_data.operator_id;
          this.filter_operator_name(recharge_data.operator_id);
          this.filter_circle_name(Number(recharge_data.circle_id));

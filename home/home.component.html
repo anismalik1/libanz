@@ -82,16 +82,17 @@
 										</span>
 									</mat-select>
 								</mat-form-field>
-								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Circle" id="opid-2" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Operator" id="opid-2" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span>
 							</div>
 							<div class="input-field col s12 m12 l2 border-right">
 								<mat-form-field>
-									<mat-select placeholder="Select Circle" #mcircle>
+									<mat-select placeholder="Select Circle" #mcircle  [(value)]="this.region" formControlName="circle_area">
 										<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
 											<span class="operator-name">{{ item.circle_name }}</span>
 										</mat-option>
 									</mat-select>
 								</mat-form-field>
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Circle" id="opid-3" *ngIf="!mobilegroup.controls['circle_area'].valid && mobilegroup.controls['circle_area'].touched"><i class="material-icons">close</i></span>
 							</div>  
 							<div class="input-field col s12 m12 l2">
 								<input placeholder="Enter Amount" formControlName="amount" maxlength="5" type="number" pattern="[0-9]+" class="validate no-margin" minlength="2">

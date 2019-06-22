@@ -62,6 +62,8 @@ export class HomeComponent implements OnInit {
   packages : Package[];
   product_mpackages : Package[];
   user_cashback : any ;
+  region :number = 0;
+  activity : number = 0;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -138,10 +140,12 @@ export class HomeComponent implements OnInit {
         data => 
         {
           let recharge_data = data.RECHARGEID;
+          this.region = Number(recharge_data.circle_id);
           if(!$.isEmptyObject(recharge_data))
           {
             this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
             this.mobilegroup.controls['circle_area'].setValue(Number(recharge_data.circle_id));
+            this.selectedOperator = recharge_data.operator_id;
             this.filter_operator_name(recharge_data.operator_id);
             this.filter_circle_name(Number(recharge_data.circle_id));
            }
@@ -193,6 +197,8 @@ export class HomeComponent implements OnInit {
       
      }  
    } 
+    
+   
   onTap(url)
   {
     this.router.navigate([url]);
@@ -879,7 +885,7 @@ toTimestamp(strDate){
     if(formdata.circle_id)
       circle = formdata.circle_id
     this.spinner.show();	
-		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: circle};
+		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
     this.todoservice.recharge_init(this.rechargeData)
 		.subscribe(
 			data => 

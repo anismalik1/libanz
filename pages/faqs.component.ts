@@ -42,7 +42,11 @@ export class FaqsComponent implements OnInit {
     script.type = `text/javascript`;
     script.id = `collapse-script`;
     script.text = `
-    $('.collapsible').collapsible();
+    $(document).ready(function(){
+      $('.collapsible').collapsible();
+      
+    })
+   
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

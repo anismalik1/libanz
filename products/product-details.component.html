@@ -318,9 +318,9 @@
 			<ul class="collapsible" data-collapsible="expandable">
 				<li *ngFor="let packs of channels_packs" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_down</i></div>
-					<div [className]="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ? 'collapsible-body lSAction' : 'collapsible-body'">
+					<div [className]="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') || packs.title.includes('North-India Super Family') ? 'collapsible-body lSAction' : 'collapsible-body'">
 						<div class="row">
-							<div class="col s12 m4" *ngFor="let item of packs.child">
+							<div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
 							<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div>
 							<ng-template #activeblock>
 								<div class="card">
@@ -336,7 +336,7 @@
 								<ng-template #noactiveblock>
 								<div class="card" >
 									<div class="card-content center" >
-										<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+										<span [className]="(i == 0 && item.title.includes('North-India Super Family')) ? 'when-check':'when-check grey-text'" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
 										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>

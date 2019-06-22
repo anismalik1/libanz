@@ -163,25 +163,9 @@ export class ProductDetailsComponent implements OnInit{
   continue_to_change(url)
   {
     this.kit = 0;
+    this.multienable = false;
     this.route.navigateByUrl('/product/'+url);
   }  
-  // filter_channel_pack(product_pack)
-  // { 
-  //   //console.log(product_pack);
-  //   let temp :any = [];
-  //   let channel_rows = [];
-  //   for(var i=0;i<product_pack.length ;i++)
-  //   {
-  //       temp = product_pack[i];
-  //       let exist_id = this.all_packs.filter(x => x.id == temp);
-  //       if(exist_id.length > 0)
-  //       {
-  //         channel_rows.push(exist_id[0]);
-  //       }
-  //   }  
-  //   this.channels_packs = channel_rows; 
-
-  // }
 
   filter_channel_subpack()
   { 
@@ -203,8 +187,17 @@ export class ProductDetailsComponent implements OnInit{
             {
               this.pack_selected.push(this.fta_pack); 
             }
+            
           }
            
+        }
+        if(this.channels_packs[i].title.includes('North-India Super Family'))
+        {
+          let fta_exist = this.pack_selected.filter(x => x.id == this.channels_packs[i].child[0].id);
+          if(fta_exist.length == 0)
+          {
+            this.pack_selected.push(this.channels_packs[i].child[0]); 
+          }
         }
     }
   }
@@ -730,7 +723,7 @@ export class ProductDetailsComponent implements OnInit{
   select_pack(pack)
   {
     if(this.fta_pack.length > 0)
-      this.pack_selected = [this.fta_pack];
+      this.pack_selected = [this.fta_pack];  
     if($('#check-pack-'+pack.id).hasClass('grey-text'))
     {
       $('.when-check').addClass('grey-text');
@@ -745,6 +738,11 @@ export class ProductDetailsComponent implements OnInit{
     }
     else
     {
+      if(pack.title.includes('Super Family'))
+      {
+        alert("Please Choose atleast One Pack.");
+        return false;
+      }
       $('#check-pack-'+pack.id).addClass('grey-text');
       if(!this.fta_pack)
         this.pack_selected = [];
@@ -767,6 +765,7 @@ export class ProductDetailsComponent implements OnInit{
     let amount : number = 0;
     if(!this.product)
       return 0;
+    //console.log(this.pack_selected)
     for(var i = 0;i < this.pack_selected.length;i++)
     {
       if(this.multienable)
@@ -841,7 +840,7 @@ export class ProductDetailsComponent implements OnInit{
     $('#month-'+month).addClass('active-kp');
     this.product.month_pack = this.month;
     this.monthdata = this.package_month.filter(pack => pack.id === this.month);
-    
+    console.log(this.monthdata)
     $('#mrp-price').text(this.monthdata[0].package_price);
     if(this.kit == 3)
     {
@@ -851,7 +850,6 @@ export class ProductDetailsComponent implements OnInit{
     {
       $('#offer-price').text(this.monthdata[0].offer_price);
     }
-    
   }
 
   select_kit(kit)
