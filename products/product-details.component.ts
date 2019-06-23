@@ -840,7 +840,6 @@ export class ProductDetailsComponent implements OnInit{
     $('#month-'+month).addClass('active-kp');
     this.product.month_pack = this.month;
     this.monthdata = this.package_month.filter(pack => pack.id === this.month);
-    console.log(this.monthdata)
     $('#mrp-price').text(this.monthdata[0].package_price);
     if(this.kit == 3)
     {
@@ -850,8 +849,22 @@ export class ProductDetailsComponent implements OnInit{
     {
       $('#offer-price').text(this.monthdata[0].offer_price);
     }
+    this.fetch_package();
   }
 
+  fetch_package()
+  {
+    this.spinner.show();
+    let data = {month : this.monthdata[0].total_month,circle: this.region,product: this.product_id};
+      this.todoservice.fetch_pack_by_month(data)
+      .subscribe(
+        data => 
+        {
+          this.channels_packs = data.package;
+          this.spinner.hide();
+        }
+      ) 
+  }
   select_kit(kit)
   {
     this.kit = kit;

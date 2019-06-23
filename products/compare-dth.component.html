@@ -111,6 +111,7 @@
 			</div>
 			<!-- Responsive Compare -->
 			<div class="row show-on-medium-and-down">
+				<div class="products-list" *ngFor="let item of compare_products;let i = index;">
 				<div class="col s6 compare-table responsive-compare-table">
 					<table class="table centered bordered">
 						<tbody>
@@ -124,56 +125,9 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<td class="compare-table features">
-										<span>Service Type</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Covered In Warranty</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Not Covered In Warranty</span>
-								</td>
-							</tr>							
-							<tr>
-								<td class="compare-table features">
-									<span>Box Type</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Display</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Sound</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Recording Features</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Enjoy karaoke With All The...</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span>Movie On Demand</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="compare-table features">
-									<span class="font-size-change-order font600 inline-block margin-top-order">
-											Channel Available
-									</span>
+							<tr *ngFor="let feature of all_specifications;">
+								<td>
+									<span title="{{feature.title}}">{{trim_text(feature.title)}}</span>
 								</td>
 							</tr>
 						</tbody>
@@ -185,71 +139,28 @@
 							<tr>
 								<td>
 									<div class="compare-text left">
-										<span>TATA SKY HD SET TOP BOX</span>
+										<span>{{item.title}}</span>
 									</div>
-									<a class="grey-text right croses" href="javascript:"><i class="material-icons">highlight_off</i></a>
+									<a class="grey-text right croses" href="javascript:" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a>
 									<div class="image-wrapper">
-										<a target="_blank" ng-reflect-target="_blank" ng-reflect-router-link="/product/tata-sky-hd-set-top-b" href="/product/tata-sky-hd-set-top-box"><img class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702501551270412.png" alt="TATA SKY HD SET TOP BOX"></a><br>
-										<i class="icon-inr font-size-change1">1199</i>
+										<a target="_blank" ng-reflect-target="_blank"  [routerLink]="['/product/'+item.url]"><img class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" alt="{{item.title}}"></a><br>
+										<i class="icon-inr font-size-change1">{{item.offer_price}}</i>
 										<div class="clearfix"></div>
-										<div class="btn-new1 center"><a class="btn" target="_blank" ng-reflect-target="_blank" ng-reflect-router-link="/product/tata-sky-hd-set-top-b" href="/product/tata-sky-hd-set-top-box">Book Now</a></div>
+										<div class="btn-new1 center"><a class="btn" target="_blank"  [routerLink]="['/product/'+item.url]">Book Now</a></div>
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr *ngFor="let feature of to_json(item.specifications);">
 								<td>
-									<span class="font600 green-text">One Year Repair Warranty*</span>
+									<span title="{{feature.value}}"[className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{trim_text(feature.value)}}</span>
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<span class="font600 green-text">Set Top Box</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font600 green-text">Antenna,Remote,Adapter,LNB,etc.</span>
-								</td>
-							</tr>							
-							<tr>
-								<td>
-									<span class="font600 green-text">High Definaton Box</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font600 green-text">3D Compabilite</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font600 green-text">Dolby Digital Surround</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font600 red-text">Not Avaliable</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font600 red-text">Not Avaliable</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font600 green-text">Avaliable</span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="font-size-change-order font600 inline-block margin-top-order">
-										<a class="blue-text" target="_blank" ng-reflect-target="_blank" ng-reflect-router-link="/product/videocon-d2h-hd-rf-se" href="/product/videocon-d2h-hd-rf-set-top-box">View Channel Packs</a>
-									</span>
-								</td>
+								<td><span class="font-size-change-order font600 inline-block margin-top-order"><a class="blue-text" [routerLink]="['/product/'+item.url]" target="_blank">View Channel Packs</a></span></td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
 				</div>
 				<div class="col s12 m12 center btn-new1" *ngIf="!disable_compare">
 					<a href="#" class="font-size-change1 chng-set dropdown-button btn" data-activates='dropdown1'>Add Set Top Box</a>

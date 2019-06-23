@@ -327,7 +327,7 @@
 									<div class="card-content center">
 										<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
-										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>Month</small></span>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>{{item.month}} Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 										<a [routerLink]="['/product/channel-pack/'+item.id]" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)">Channels</a>
 									</div>
@@ -338,7 +338,7 @@
 									<div class="card-content center" >
 										<span [className]="(i == 0 && item.title.includes('North-India Super Family')) ? 'when-check':'when-check grey-text'" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
-										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>Month</small></span>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>{{item.month}} Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 										<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)">Channels</a></span>
 										<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger">Channels</a></span>
@@ -495,7 +495,7 @@
 							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
 						</div>
 						<div class="card-content">
-							<span>{{item.title}}</span>
+							<span>{{item.title}}</span> 
 						</div>
 					</div>
 				</a>
