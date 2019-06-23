@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="row mar-row"> 
 			<div class="col s12">
-				<ul class="tabs center" id="select-item">
+				<ul class="tabs center new-page-tab" id="select-item">
 					<li class="tab"><a [ngClass]="{'active' : this.recharge_type.mobile}" routerLink="/recharge/mobile" (click)="navigate_to('mobile');"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/mobile-phone2.png" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
 
 					<li class="tab"><a [ngClass]="{'active' : this.recharge_type.dth}" routerLink="/recharge/dth-recharge" (click)="navigate_to('dth-recharge');"><img src="{{this.params.base_url}}assets/images/recharge&bills-payment-icon/satellite-tv.png" class="responsive-img" alt="1"><br><span>DTH</span></a></li>
