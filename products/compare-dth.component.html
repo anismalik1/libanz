@@ -251,8 +251,8 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col s12 m12 center" *ngIf="!disable_compare">
-					<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Add Set Top Box</a>
+				<div class="col s12 m12 center btn-new1" *ngIf="!disable_compare">
+					<a href="#" class="font-size-change1 chng-set dropdown-button btn" data-activates='dropdown1'>Add Set Top Box</a>
 					<ul id='dropdown1' class='dropdown-content'>
 						<li *ngFor="let item of product_category_list;">
 							<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
