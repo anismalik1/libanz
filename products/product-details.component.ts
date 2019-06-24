@@ -738,9 +738,9 @@ export class ProductDetailsComponent implements OnInit{
     }
     else
     {
-      if(pack.title.includes('Super Family'))
+      if(pack.title.includes('Super Family') || this.fta_pack.price == 0)
       {
-        alert("Please Choose atleast One Pack.");
+        alert("There Must be atleast two pack in this Package.");
         return false;
       }
       $('#check-pack-'+pack.id).addClass('grey-text');
@@ -861,6 +861,7 @@ export class ProductDetailsComponent implements OnInit{
         data => 
         {
           this.channels_packs = data.package;
+          this.filter_channel_subpack();
           this.spinner.hide();
         }
       ) 
