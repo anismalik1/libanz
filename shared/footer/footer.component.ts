@@ -14,6 +14,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class FooterComponent implements OnInit{
   page : string;
   navigate : boolean = false;
+  year :  number = new Date().getFullYear();
   @Input() baseUrl;
   constructor( public todoservice : TodoService,
   private toast : ToastsManager,  
