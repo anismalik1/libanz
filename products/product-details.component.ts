@@ -72,7 +72,8 @@ export class ProductDetailsComponent implements OnInit{
    }
   ngOnInit() {
     this.cat_id = this.todoservice.get_param('cat_id');
-    this.month = Number(this.todoservice.get_param('month'));
+    if(this.todoservice.get_param('month'))
+      this.month = Number(this.todoservice.get_param('month'));
     
     this.router.params.subscribe(params => {
       if (this.route.url.includes('multi')) 
@@ -333,6 +334,7 @@ export class ProductDetailsComponent implements OnInit{
       {
         this.region = this.productservice.get_region();
       } 
+      //console.log(this.month)
 		  let data = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month,region: this.region};
 		  this.productservice.fetch_product_data(data)
 		  .subscribe(
@@ -841,11 +843,10 @@ export class ProductDetailsComponent implements OnInit{
     {
       this.kit = 2;
     }
-    this.month = month;
-    $('#monthly-packages a').removeClass('active-kp');
-    $('#month-'+month).addClass('active-kp');
-    this.product.month_pack = this.month;
-    this.monthdata = this.package_month.filter(pack => pack.id === this.month);
+    //$('#monthly-packages a').removeClass('active-kp');
+    //$('#month-'+month.id).addClass('active-kp');
+    this.product.month_pack = month;
+    this.monthdata = this.package_month.filter(pack => pack.id === month);
     $('#mrp-price').text(this.monthdata[0].package_price);
     if(this.kit == 3)
     {
@@ -855,13 +856,14 @@ export class ProductDetailsComponent implements OnInit{
     {
       $('#offer-price').text(this.monthdata[0].offer_price);
     }
+    this.month = this.monthdata[0].total_month;
     this.fetch_package();
   }
 
   fetch_package()
   {
     this.spinner.show();
-    let data = {month : this.monthdata[0].total_month,circle: this.region,product: this.product_id};
+    let data = {month : this.month,circle: this.region,product: this.product_id};
       this.todoservice.fetch_pack_by_month(data)
       .subscribe(
         data => 

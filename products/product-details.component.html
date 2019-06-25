@@ -315,7 +315,7 @@
 				<h1 class="center font600 text-orange">Available Packs</h1>
 				<span class="chip green white-text">Please Select Your Basic Pack</span>
 			</div>
-			<ul class="collapsible" data-collapsible="expandable">
+			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_down</i></div>
 					<div [className]="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') || packs.title.includes('North-India Super Family') || (j == 1 && fta_pack.price == 0) ? 'collapsible-body lSAction' : 'collapsible-body'">
