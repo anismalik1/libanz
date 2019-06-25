@@ -12,9 +12,9 @@ export class Product {
     channel_packages: string;
     cod_available : number;
     description : string;
-    metaDesc : string;
-    metaKeyword : string;
-    metaTitle : string;
+    meta_description : string;
+    meta_keyword : string;
+    meta_title : string;
     partnerwalletamount : number;  
     recharge_for_ots : number;
     urlKey : string;

@@ -47,7 +47,7 @@ export class ProductDetailsComponent implements OnInit{
   avg_rating : DoubleRange;
   all_rating : number;
   grouped_rating : any;
-  month : number;
+  month : number = 1;
   kit : number;
   otf_margin : boolean = false;
   monthdata : any;
@@ -71,6 +71,9 @@ export class ProductDetailsComponent implements OnInit{
     this.product_categories();
    }
   ngOnInit() {
+    this.cat_id = this.todoservice.get_param('cat_id');
+    this.month = Number(this.todoservice.get_param('month'));
+    
     this.router.params.subscribe(params => {
       if (this.route.url.includes('multi')) 
       {  
@@ -80,12 +83,8 @@ export class ProductDetailsComponent implements OnInit{
       this.fetch_product_data(this.p_id,this.cat_id);
     });
 
-    this.cat_id = this.todoservice.get_param('cat_id');
-    //this.product_id = this.todoservice.get_param('id');
-    //this.fetch_product_data(this.p_id,this.cat_id);
-    // Observable.interval(100 * 60).subscribe(x => {
-    //   //this.track_record();
-    // });
+    
+   
     
     $('body').delegate('#stars li','mouseover', function(){
       var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -191,7 +190,8 @@ export class ProductDetailsComponent implements OnInit{
           }
            
         }
-        if(this.channels_packs[i].title.includes('North-India Super Family'))
+        //console.log(this.channels_packs[i])
+        if(this.channels_packs[i].title.includes('North-India Super Family') || this.fta_pack.price == 0)
         {
           let fta_exist = this.pack_selected.filter(x => x.id == this.channels_packs[i].child[0].id);
           if(fta_exist.length == 0)
@@ -333,7 +333,7 @@ export class ProductDetailsComponent implements OnInit{
       {
         this.region = this.productservice.get_region();
       } 
-		  let data = {token : this.get_token(),product_id: p_id,cat_id:cat_id,region: this.region};
+		  let data = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month,region: this.region};
 		  this.productservice.fetch_product_data(data)
 		  .subscribe(
 			data => 
@@ -390,9 +390,9 @@ export class ProductDetailsComponent implements OnInit{
           this.product.tsk_kit = 2;
         }
         this.product_id = this.product.id;
-        this.meta.addTag({ name: 'description', content: this.product.metaDesc });
-        this.meta.addTag({ name: 'keywords', content: this.product.metaKeyword });
-        this.title.setTitle(this.product.metaTitle);
+        this.meta.addTag({ name: 'description', content: this.product.meta_description });
+        this.meta.addTag({ name: 'keywords', content: this.product.meta_keyword });
+        this.title.setTitle(this.product.meta_title + " With "+this.month+ ' Month Pack');
         this.productservice.setItem(this.product);
         //this.recommended  = this.filter_products(data.RECOMMENDED);
         this.reviews      = data.REVIEW;
@@ -411,16 +411,22 @@ export class ProductDetailsComponent implements OnInit{
         if(typeof data.PACKAGEMONTH != 'undefined' )
         {
           this.package_month = data.PACKAGEMONTH;
+          //console.log(this.package_month)
           if(this.package_month)
           {
             this.monthdata = [this.package_month[0]];
-            this.month = this.monthdata[0].total_month;
+            //this.month = this.monthdata[0].total_month;
           }
         }
         this.init_page();
         window.scroll(0,0);
       }
 		  )  
+  }
+
+  to_number(string)
+  {
+    return Number(string);
   }
 
   fetch_all_multi(category_id)
@@ -822,7 +828,7 @@ export class ProductDetailsComponent implements OnInit{
 
   select_month(month)
   {
-
+    
     if($('#kit-packages').length > 0 )
     {
       if( typeof this.kit == 'undefined' )
@@ -860,7 +866,9 @@ export class ProductDetailsComponent implements OnInit{
       .subscribe(
         data => 
         {
+          this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
           this.channels_packs = data.package;
+          this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
           this.filter_channel_subpack();
           this.spinner.hide();
         }
@@ -873,7 +881,6 @@ export class ProductDetailsComponent implements OnInit{
     
     if(this.kit == 3)
     {
-      //console.log(this.monthdata)
       $('#cashback-item').hide();
       this.otf_margin = true;
       $('#offer-price').text(this.monthdata[0].package_price - 1000 );

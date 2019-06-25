@@ -114,10 +114,10 @@
 					<br/>
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
                   		<li>
-                  			<span class="font-size-change1 font600 grey-text">Packages</span>
+                  			<span class="font-size-change1 font600 grey-text">Packages selected{{month}}</span>
                   		</li>
-                  		<li *ngFor="let month of package_month;let i = index">
-                  			<a id="month-{{month.id}}" [className]="(i == 0) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(month.id)">{{month.month_label}}</a>
+                  		<li *ngFor="let item of package_month;let i = index">
+                  			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
                   		</li>
 					  </ul>
 					<br/>
@@ -316,9 +316,9 @@
 				<span class="chip green white-text">Please Select Your Basic Pack</span>
 			</div>
 			<ul class="collapsible" data-collapsible="expandable">
-				<li *ngFor="let packs of channels_packs" class="active">
+				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_down</i></div>
-					<div [className]="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') || packs.title.includes('North-India Super Family') || fta_pack.price == 0 ? 'collapsible-body lSAction' : 'collapsible-body'">
+					<div [className]="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') || packs.title.includes('North-India Super Family') || (j == 1 && fta_pack.price == 0) ? 'collapsible-body lSAction' : 'collapsible-body'">
 						<div class="row">
 							<div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
 							<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div>
@@ -336,7 +336,7 @@
 								<ng-template #noactiveblock>
 								<div class="card" >
 									<div class="card-content center" >
-										<span [className]="((i == 0 && item.title.includes('North-India Super Family')) || fta_pack.price == 0) ? 'when-check':'when-check grey-text'" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+										<span [className]="((i == 0 && item.title.includes('North-India Super Family')) || (j == 1 && i == 0 && fta_pack.price == 0)) ? 'when-check':'when-check grey-text'" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
 										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> / <small>{{item.month}} Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
