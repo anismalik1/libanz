@@ -17,7 +17,7 @@ export class Product {
     meta_title : string;
     partnerwalletamount : number;  
     recharge_for_ots : number;
-    urlKey : string;
+    url : string;
     tsk_kit : number;
     subscriber_id : any;
     month_pack : number;

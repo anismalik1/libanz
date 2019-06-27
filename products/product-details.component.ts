@@ -172,17 +172,16 @@ export class ProductDetailsComponent implements OnInit{
     this.pack_selected = [];
     if(!this.channels_packs)
      return false;
+    //console.log(this.product.url.includes('hd')); 
+    
     for(var i=0;i<this.channels_packs.length ;i++)
       {
         if( this.channels_packs[i].title.includes("FTA") || this.channels_packs[i].title.includes('All-India') || this.channels_packs[i].title.includes('Airtel Internet') )
         {
-         // console.log(this.channels_packs[i])
           if(this.channels_packs[i].child[0])
           {
             this.fta_pack = this.channels_packs[i].child[0];
-
             let fta_exist = this.pack_selected.filter(x => x.id == this.fta_pack.id);
-            //console.log(fta_exist)
             if(fta_exist.length == 0)
             {
               this.pack_selected.push(this.fta_pack); 
@@ -191,8 +190,7 @@ export class ProductDetailsComponent implements OnInit{
           }
            
         }
-        //console.log(this.channels_packs[i])
-        if(this.channels_packs[i].title.includes('North-India Super Family') || this.fta_pack.price == 0)
+        if(this.channels_packs[i].title.includes('North-India Super Family') || (this.fta_pack.price == 0  && this.pack_selected.length < 2))
         {
           let fta_exist = this.pack_selected.filter(x => x.id == this.channels_packs[i].child[0].id);
           if(fta_exist.length == 0)
@@ -200,6 +198,16 @@ export class ProductDetailsComponent implements OnInit{
             this.pack_selected.push(this.channels_packs[i].child[0]); 
           }
         }
+    } 
+    if(this.fta_pack.price == 0 )
+    {
+      for(var i=0;i < this.channels_packs.length ;i++)
+      {
+        if(this.product.url.includes('standard'))
+        {
+          this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == false);
+        } 
+      }
     }
   }
 
@@ -346,8 +354,8 @@ export class ProductDetailsComponent implements OnInit{
         let b = this.htmlToPlaintext(JSON.stringify(data));
         this.channels_packs = data.package;
         this.fta_pack = {};
-        this.filter_channel_subpack();
         this.product = data.PRODUCTDATA;
+        this.filter_channel_subpack();
         if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
@@ -635,8 +643,9 @@ export class ProductDetailsComponent implements OnInit{
     script.id = `init-page-script`;
     script.type = `text/javascript`;
     script.text = `
-        $('.collapsible').collapsible();
+       
         $(document).ready(function(){
+          $('.collapsible').collapsible();
           $('.modal').modal();
           $('.dropdown-button').dropdown({
             inDuration: 300,

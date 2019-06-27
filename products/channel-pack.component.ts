@@ -5,6 +5,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
+import { TodoService } from '../todo.service';
 @Component({
   selector: 'app-channel-pack',
   templateUrl: './channel-pack.component.html',
@@ -16,6 +17,7 @@ export class ChannelPackComponent implements OnInit {
   product_pack_rows : any = [];
   product_pack_info : any = [];
   channel_count : Number = 0;
+  month : number;
   constructor( 
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
@@ -26,12 +28,14 @@ export class ChannelPackComponent implements OnInit {
     private toastr: ToastsManager,
     private authservice : AuthService,
     private productservice : ProductService,
+    private todoservice : TodoService,
     private router : ActivatedRoute, private route : Router
   ) { 
 
   }
 
   ngOnInit() {
+    this.month = Number(this.todoservice.get_param('month'));
     this.router.params.subscribe(params => {
       this.channel_id = params['id']; //log the value of id
       this.fetch_channels(this.channel_id);

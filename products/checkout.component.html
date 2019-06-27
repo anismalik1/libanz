@@ -111,6 +111,7 @@
 									<div class="green-text" *ngIf="item.product.tsk_kit">
 										<span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
 										<!-- <a href="javascript:" (click)="show_coupon(i)">Change</a> -->
+										<span class="font-size-change1 black-text inline-block margin-top-cart">Included Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
 										<div class="coupon-area" style="display:none;">
 											<input id="coupon-code-{{item.product.id}}" placeholder="Enter Coupon Code" type="text" class="validate">
 										</div>
