@@ -16,21 +16,21 @@
 				<ul class="tabs center" id="select-item" style="display:none">
 					<li class="tab"><a class="active" href="#mobile"><img src="{{this.params.base_url}}assets/images/new-icons/2.png" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
 
-					<li class="tab"><a href="#dth"><img src="{{this.params.base_url}}assets/images/new-icons/7.png" class="responsive-img" alt="1"><br><span>DTH</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/dth-recharge']"><img src="{{this.params.base_url}}assets/images/new-icons/7.png" class="responsive-img" alt="1"><br><span>DTH</span></a></li>
 
-					<li class="tab"><a href="#electricity"><img src="{{this.params.base_url}}assets/images/new-icons/3.png" class="responsive-img" alt="1"><br><span>Electricity</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/electricity']"><img src="{{this.params.base_url}}assets/images/new-icons/3.png" class="responsive-img" alt="1"><br><span>Electricity</span></a></li>
 
-					<li class="tab"><a href="#water"><img src="{{this.params.base_url}}assets/images/new-icons/1.png" class="responsive-img" alt="1"><br><span>Water</span></a></li>					
+					<li class="tab"><a [routerLink]="['/recharge/water']"><img src="{{this.params.base_url}}assets/images/new-icons/1.png" class="responsive-img" alt="1"><br><span>Water</span></a></li>					
 
-					<li class="tab"><a href="#gas"><img src="{{this.params.base_url}}assets/images/new-icons/8.png" class="responsive-img" alt="1"><br><span>Gas</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/gas']"><img src="{{this.params.base_url}}assets/images/new-icons/8.png" class="responsive-img" alt="1"><br><span>Gas</span></a></li>
 
-					<li class="tab"><a href="#broadband"><img src="{{this.params.base_url}}assets/images/new-icons/6.png" class="responsive-img" alt="1"><br><span>Broadband</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/broadband']"><img src="{{this.params.base_url}}assets/images/new-icons/6.png" class="responsive-img" alt="1"><br><span>Broadband</span></a></li>
 
-					<li class="tab"><a href="#cable-tv" ><img src="{{this.params.base_url}}assets/images/new-icons/4.png" class="responsive-img" alt="1"><br><span>Cable Tv</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/cable']" ><img src="{{this.params.base_url}}assets/images/new-icons/4.png" class="responsive-img" alt="1"><br><span>Cable Tv</span></a></li>
 
-					<li class="tab"><a href="#data-card"><img src="{{this.params.base_url}}assets/images/new-icons/5.png" class="responsive-img" alt="1"><br><span>Data Card</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/datacard']"><img src="{{this.params.base_url}}assets/images/new-icons/5.png" class="responsive-img" alt="1"><br><span>Data Card</span></a></li>
 
-					<li class="tab"><a href="#landline"><img src="{{this.params.base_url}}assets/images/new-icons/9.png" class="responsive-img" alt="1"><br><span>Landline</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/landline']"><img src="{{this.params.base_url}}assets/images/new-icons/9.png" class="responsive-img" alt="1"><br><span>Landline</span></a></li>
 
 					<!-- <li class="tab dropdown-more-click"><p class="no-margin"><img src="{{this.params.base_url}}assets/images/recharge-icon/plus.png" class="responsive-img more-clik" alt="1"><br><span class="white-text more-clik">More</span></p></li>
 					<ul class='dropdown-more' style="display:none;">
@@ -51,7 +51,16 @@
 					<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)">
 						<div class="row no-margin">
 							<div class="input-field col s12 m12 l2 border-right">
-								<input placeholder="Enter Mobile Number" formControlName="recharge_id" maxlength="10" minlength="10" type="text" class="validate no-margin" (keyup)="next_to('mobile','recharge_id',$event)">
+								<!-- <input placeholder="" formControlName="recharge_id" maxlength="10" minlength="10" type="text" class="validate no-margin" > -->
+								<mat-form-field class="example-full-width">
+									<input type="text" placeholder="Enter Mobile Number" formControlName="recharge_id" class="no-margin black-text" maxlength="10" minlength="10" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="next_to('mobile','recharge_id',$event)"> 
+									<mat-autocomplete #auto="matAutocomplete">
+										<span *ngIf="filterdList">
+										<mat-option *ngFor="let option of filteredOptions" [value]="option.recharge_id" (click)="navigate_to(option)">{{option.recharge_id}}
+										</mat-option>
+									</span>
+									</mat-autocomplete>
+								</mat-form-field>
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Mobile Number" id="mobid" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>  
 							</div>
 							<div class="col s12 m12 l2 margin-top1 border-right">
@@ -86,7 +95,7 @@
 							</div>
 							<div class="input-field col s12 m12 l2 border-right">
 								<mat-form-field>
-									<mat-select placeholder="Select Circle" #mcircle  [(value)]="this.region" formControlName="circle_area">
+									<mat-select placeholder="Select Circle" #mcircle  [(value)]="this.region" formControlName="circle_area" (change)="circle_selected($event.value)">
 										<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
 											<span class="operator-name">{{ item.circle_name }}</span>
 										</mat-option>
@@ -104,7 +113,7 @@
 						</div>
 					</form>
 				</div>
-				<div id="dth" class="col s12 mobile">
+				<!-- <div id="dth" class="col s12 mobile">
 					<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)">
 						<div class="row no-margin">
 							<div class="input-field col s12 m3 border-right">
@@ -133,8 +142,8 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<div id="data-card" class="col s12 mobile">
+				</div> -->
+				<!-- <div id="data-card" class="col s12 mobile">
 					<form method="post" [formGroup]="datacardgroup" #datacardform = "ngForm" (ngSubmit)="recharge_init('datacard',datacardform.value)">
 						<div class="row no-margin">
 							<div class="input-field col s12 m12 l2">
@@ -393,7 +402,7 @@
 						</div>
 					</form>
 				</div>
-			</div>			
+			</div>			 -->
 			<!-- <div id="play-store" class="col s12 mobile">
 				<form method="post" action="#">
 					<div class="row no-margin">
@@ -467,6 +476,7 @@
 				</form>
 			</div> -->
 		</div>
+		</div	>
 	</div>
 </section>
 <section class="recharge-section show-on-medium-and-down hide-on-med-and-up">
@@ -643,7 +653,7 @@
 												<!-- <span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span> -->
 											</div>
 											<div class="col s12 m12">
-												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id)">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
+												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0].wallet_tsk_2">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
 												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
 											</div>
 											<div class="clearfix"></div>

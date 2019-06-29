@@ -5,6 +5,7 @@ import { Headers,Http } from '@angular/http';
 import { AuthService } from './auth.service';
 import {Pages} from './pages';
 import { User} from './user';
+//import { Recharge} from './recharge-entities';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -180,6 +181,20 @@ export class TodoService {
     return this.page;  
   }
 
+  get_recharge()
+  {
+    let data = JSON.parse(localStorage.getItem('recharge_cart'));
+    if(data != null)
+    {
+      return data; 
+    } 
+    return null; 
+  }
+
+  public set_recharge(storage_name,content:Object) {
+    localStorage.setItem(storage_name, JSON.stringify(content));
+  }
+
   send_post_request(data,url) : Observable<any>
   {
     var Headers_of_api = new Headers({
@@ -206,6 +221,13 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/notifications';
     return this.send_post_request(data,url) ; 
   }
+
+  get_operator_api_id(data)
+  {
+    let url = this.server_url+'accounts/apis/home/get_operator_api_id';
+    return this.send_post_request(data,url) ; 
+  }
+
   send_value(data)
   {
     let url = this.server_url+'index.php?/app_services/send_value_to_wallet';

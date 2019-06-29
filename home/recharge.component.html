@@ -97,7 +97,16 @@
 				<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)" *ngIf="this.recharge_type.mobile ">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
-							<input placeholder="Enter Mobile Number"  maxlength="10" minlength="10" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('mobile','recharge_id',$event)">
+							<mat-form-field class="example-full-width">
+								<input type="text" placeholder="Enter Mobile Number" formControlName="recharge_id" class="no-margin black-text" maxlength="10" minlength="10" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="next_to('mobile','recharge_id',$event)"> 
+								<mat-autocomplete #auto="matAutocomplete">
+									<span *ngIf="filterdList">
+									<mat-option *ngFor="let option of filteredOptions" [value]="option.recharge_id" (click)="selected_recharge(option)">{{option.recharge_id}}
+									</mat-option>
+								</span>
+								</mat-autocomplete>
+							</mat-form-field>
+							<!-- <input placeholder="Enter Mobile Number"  maxlength="10" minlength="10" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('mobile','recharge_id',$event)"> -->
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Mobile Number" id="mobid" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>  
 						</div>
 						<div class="col s12 m12 margin-top1">
@@ -132,7 +141,7 @@
 						</div>
 						<div class="input-field col s12 m12">
 							<mat-form-field>
-								<mat-select placeholder="Select Circle" #mcircle [(value)]="this.region" formControlName="circle_area" (change)="get_plans($event.value,'get')">
+								<mat-select placeholder="Select Circle" #mcircle [(value)]="region" formControlName="circle_area" (change)="get_plans($event.value,'get')">
 									<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
 										<span class="operator-name">{{ item.name }}</span>
 									</mat-option>
@@ -428,7 +437,7 @@
 						<div id="short-content"></div>
 					</div>	
 					<div class="card-content" *ngIf="promo_codes && promo_codes.length > 0">
-						<div class="inline-block promo-chng" *ngIf="plans.length > 0">
+						<div class="inline-block promo-chng" *ngIf="plans && this.url_name == 'mobile'">
 							<span class="font-size-change1 font600" ><a href="javascript:" (click)="show_tab(2)">Plans</a></span>
 							<hr class="hr-promo">
 						</div>
@@ -448,7 +457,7 @@
 								</li>
 							</ul>
 						</div>
-						<div id="circles-content" class="hide">
+						<div id="circles-content" class="hide" *ngIf="this.url_name == 'mobile'">
 							<div class="col m4">
 								<ul class="tabs">
 								  <li [className]="(i == 0)?'tab active':'tab'" *ngFor="let item of plans;let i = index" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>

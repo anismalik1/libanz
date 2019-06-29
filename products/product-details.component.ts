@@ -206,6 +206,10 @@ export class ProductDetailsComponent implements OnInit{
         if(this.product.url.includes('standard'))
         {
           this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == false);
+        }
+        else if(this.product.url.includes('hd'))
+        {
+          this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == true);
         } 
       }
     }

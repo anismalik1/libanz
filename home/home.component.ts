@@ -1,10 +1,12 @@
 import { Component, OnInit,ViewChild ,Renderer2,Inject,} from '@angular/core';
 import {Location} from '@angular/common';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms'; 
+import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms'; 
 import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Params } from '../shared/config/params.service';
+import { Observable} from 'rxjs';
+import { map, startWith} from 'rxjs/operators';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
@@ -16,6 +18,7 @@ import * as $ from 'jquery';
 })
 
 export class HomeComponent implements OnInit {
+  myControl = new FormControl();
   @ViewChild('operator') moperator;                                                        
   @ViewChild('postoperator') postoperator;                                                        
   @ViewChild('mcircle') mcircle;                                                        
@@ -64,6 +67,9 @@ export class HomeComponent implements OnInit {
   user_cashback : any ;
   region :number = 0;
   activity : number = 0;
+  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  filteredOptions: Observable<object>;
+  filterdList : boolean = false;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -132,7 +138,8 @@ export class HomeComponent implements OnInit {
       {
         this.mobilegroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
       }
-      let recharge_id = e.target.value;
+       this.rechargeId = e.target.value;
+      let recharge_id = String(this.rechargeId);  
       if(recharge_id.length <= 2)
         return false;
       this.todoservice.check_if_recharge_exist({recharge_id: recharge_id})
@@ -143,11 +150,15 @@ export class HomeComponent implements OnInit {
           this.region = Number(recharge_data.circle_id);
           if(!$.isEmptyObject(recharge_data))
           {
+            this.filterdList = true;
+            this.filteredOptions = recharge_data;
             this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
             this.mobilegroup.controls['circle_area'].setValue(Number(recharge_data.circle_id));
             this.selectedOperator = recharge_data.operator_id;
             this.filter_operator_name(recharge_data.operator_id);
             this.filter_circle_name(Number(recharge_data.circle_id));
+            var url = '';
+          
            }
           else
           {
@@ -197,7 +208,67 @@ export class HomeComponent implements OnInit {
       
      }  
    } 
+   
+   circle_selected(circle_id)
+   {
+    this.todoservice.get_operator_api_id({operator_id: this.selectedOperator})
+    .subscribe(
+      data => 
+      {
+        if(!$.isEmptyObject(data))
+        {
+          var recharge_data :any = {circle_id : circle_id,operator_id : this.selectedOperator , operator_api_id: data.OPERATOR[0].recharge_id,recharge_id: this.rechargeId,title :  'mobile'};
+          console.log(recharge_data);
+          this.navigate_to(recharge_data);
+        }
+        this.spinner.hide();
+      }
+    )  
     
+   }
+
+   navigate_to(recharge_data)
+   {
+      var url ='';
+      if(recharge_data.title.toLowerCase() == 'mobile')
+      {
+        url = 'mobile';
+      }
+      else if(recharge_data.title.toLowerCase() == 'dth-recharge')
+      {
+        url = 'dth-recharge';
+      }
+      else if(recharge_data.title.toLowerCase() == 'electricity')
+      {
+        url = 'electricity';
+      }
+      else if(recharge_data.title.toLowerCase() == 'water')
+      {
+        url = 'water';
+      }
+      else if(recharge_data.title.toLowerCase() == 'gas')
+      {
+        url = 'gas';
+      }
+      else if(recharge_data.title.toLowerCase() == 'broadband')
+      {
+        url = 'broadband';
+      }
+      else if(recharge_data.title.toLowerCase() == 'cable')
+      {
+        url = 'cable';
+      }
+      else if(recharge_data.title.toLowerCase() == 'datacard')
+      {
+        url = 'datacard';
+      }
+      else if(recharge_data.title.toLowerCase() == 'landline')
+      {
+        url = 'landline';
+      }
+      this.todoservice.set_recharge('recharge_cart',recharge_data);
+      this.router.navigate(['/recharge/'+url]);
+   } 
    
   onTap(url)
   {
@@ -236,7 +307,10 @@ export class HomeComponent implements OnInit {
     this.pay_step = paystep;
   }
   ngOnInit() {
-    //this.init_page();
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    ); 
     if(this.router.url == '/home#login' || this.router.url == '/home%23login')
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
@@ -298,6 +372,11 @@ export class HomeComponent implements OnInit {
     $('#search').focusout(function(){
       $('.search-result').addClass('hide');
     });
+  }
+  private _filter(value: string): object {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
   }
   fetch_home_data()
   {

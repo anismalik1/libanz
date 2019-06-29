@@ -1,13 +1,16 @@
 import { Component, OnInit,ViewChild ,Renderer2,Inject,} from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import {Location} from '@angular/common';
 import { Params } from '../shared/config/params.service';
+import { Observable} from 'rxjs';
+import { map, startWith} from 'rxjs/operators';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
 import { RechargeType } from '../recharge.type';
+// import { Recharge } from '../recharge-entities';
 import { Meta ,Title,DOCUMENT} from '@angular/platform-browser';
 import * as $ from 'jquery';
 
@@ -17,6 +20,7 @@ import * as $ from 'jquery';
   styles: []
 })
 export class RechargeComponent implements OnInit {
+  myControl = new FormControl();
   @ViewChild('operator') moperator;                                                        
   @ViewChild('postoperator') postoperator;                                                        
   @ViewChild('mcircle') mcircle;                                                        
@@ -30,6 +34,7 @@ export class RechargeComponent implements OnInit {
   public rechargeAmount : number ;
   public rechargeId : number ;
   public recharge_ini : number = 1;
+  public recharge_cart : any;
   promo_selected : number = 0;
   no_dues = 0;
   bill_amt : number;
@@ -68,6 +73,9 @@ export class RechargeComponent implements OnInit {
   operator_id : number = 0;
   activity : number = 0;
   plans : any;
+  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  filteredOptions: Observable<object>;
+  filterdList : boolean = false;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -82,17 +90,18 @@ export class RechargeComponent implements OnInit {
     public recharge_type : RechargeType,
     private title : Title,
     private meta : Meta
-  ) { 
-    if(this.activatedroute.snapshot.url.length > 2 && this.activatedroute.snapshot.url[2].path != '')
-    {
-      if(localStorage.getItem('recharge_cart') != null)
-      {
-        this.rechargeData = JSON.parse(localStorage.getItem('recharge_cart'));
-        this.recharge_ini = 2;
+  ) {
+    
+    // if(this.activatedroute.snapshot.url.length > 2 && this.activatedroute.snapshot.url[2].path != '')
+    // {
+    //   if(localStorage.getItem('recharge_cart') != null)
+    //   {
+    //     this.rechargeData = JSON.parse(localStorage.getItem('recharge_cart'));
+    //     this.recharge_ini = 2;
 
-      }
+    //   }
       
-    }
+    // }
       this.url_name = this.activatedroute.snapshot.params['name'];
       this.ini_recharge_tabs(this.url_name);
     this.mobilegroup = fb.group({
@@ -138,22 +147,9 @@ export class RechargeComponent implements OnInit {
       });
       
      spinner.show()
-     let data = {token : ''};
-      this.todoservice.fetch_operators(data)
-      .subscribe(
-        data => 
-        {
-            this.operators = data.OPERATORS;
-            this.circles  = data.CIRCLES;
-            spinner.hide();
-        }
-      )
     this.ini_script()   
   }
-  show_circles_package()
-  {
-    
-  }
+
   ini_script()
   {
     if($('#init-script'))
@@ -179,7 +175,7 @@ export class RechargeComponent implements OnInit {
   
   ini_recharge_tabs(tab)
   {
-    this.plans = [];
+    //this.plans = [];
     this.show_tab(1)
     this.spinner.show(); 
     this.recharge_type.mobile = false;
@@ -230,6 +226,7 @@ export class RechargeComponent implements OnInit {
       }
       this.fetch_promocode(tab);
       this.fetch_navigate_data(tab);
+      
   }
   fetch_promocode(tab)
   {
@@ -334,6 +331,35 @@ export class RechargeComponent implements OnInit {
     }
   }
   ngOnInit() {
+    let data = {token : ''};
+      this.todoservice.fetch_operators(data)
+      .subscribe(
+        data => 
+        {
+            this.operators = data.OPERATORS;
+            this.circles  = data.CIRCLES;
+            this.spinner.hide();
+            let recharge_data = this.todoservice.get_recharge();
+            //console.log(recharge_data);
+            this.recharge_cart = recharge_data;
+            this.region        = recharge_data.circle_id;
+            this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+            this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+            this.mobilegroup.controls['circle_area'].setValue(this.region);
+            this.mobilegroup.controls['amount'].setValue(recharge_data.amount);
+            this.selectedOperator = Number(recharge_data.operator_id);
+            this.filter_operator_name(recharge_data.operator_id);
+            this.filter_circle_name(Number(recharge_data.circle_id));
+            if(this.region > 0 && recharge_data.operator_id > 0)
+            {
+            if(this.activity != recharge_data.activity_id)
+              this.get_plans(this.region,recharge_data.operator_api_id);
+            } 
+            this.operator_id = recharge_data.operator_api_id;
+            this.activity = recharge_data.activity_id;
+
+        }
+      )
   }
 
   show_operator(type)
@@ -638,19 +664,9 @@ check_amount(s)
        let recharge_data = data.RECHARGEID;
        if(!$.isEmptyObject(recharge_data))
        {
-         this.region = recharge_data.circle_id;
-         this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
-         this.mobilegroup.controls['circle_area'].setValue(this.region);
-         this.selectedOperator = recharge_data.operator_id;
-         this.filter_operator_name(recharge_data.operator_id);
-         this.filter_circle_name(Number(recharge_data.circle_id));
-         if(this.region > 0 && recharge_data.operator_id > 0)
-         {
-          if(this.activity != recharge_data.activity_id)
-            this.get_plans(this.region,recharge_data.operator_api_id);
-         } 
-         this.operator_id = recharge_data.operator_api_id;
-         this.activity = recharge_data.activity_id;
+        this.filterdList = true;
+        this.filteredOptions = recharge_data;
+        
         }
        else
        {
@@ -700,6 +716,24 @@ check_amount(s)
     
    }  
  }
+ selected_recharge(recharge_data)
+ {
+  this.region        = recharge_data.circle_id;
+  this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+  this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+  this.mobilegroup.controls['circle_area'].setValue(this.region);
+  this.mobilegroup.controls['amount'].setValue(recharge_data.amount);
+  this.selectedOperator = Number(recharge_data.operator_id);
+  this.filter_operator_name(recharge_data.operator_id);
+  this.filter_circle_name(Number(recharge_data.circle_id));
+  if(this.region > 0 && recharge_data.operator_id > 0)
+  {
+  if(this.activity != recharge_data.activity_id)
+    this.get_plans(this.region,recharge_data.operator_api_id);
+  } 
+  this.operator_id = recharge_data.operator_api_id;
+  this.activity = recharge_data.activity_id;
+ }
  get_plans(circle,operator)
  {
    if(operator == 'get')
@@ -714,7 +748,7 @@ check_amount(s)
         this.plans = data;
         if(this.plans.length > 0 )
         {
-          this.show_tab(2)
+          this.show_tab(2);
           this.print_plan(this.plans[0].records,0);
         }
           
@@ -741,13 +775,13 @@ check_amount(s)
  } 
 
  filter_operator_name(id)
-   {
-    let operator = this.operators.MOBILEPREPAID.filter(x => x.id == id);
-    if(!operator)
-    operator = this.operators.MOBILEPOSTPAID.filter(x => x.id == id);
-    this.operators.selected = operator;
-    this.operator_id = operator[0].recharge_id;
-   }
+  {
+  let operator = this.operators.MOBILEPREPAID.filter(x => x.id == id);
+  if(!operator)
+  operator = this.operators.MOBILEPOSTPAID.filter(x => x.id == id);
+  this.operators.selected = operator;
+  this.operator_id = operator[0].recharge_id;
+  }
 
  check_if_not_digits(dig)
  {

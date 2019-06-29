@@ -265,6 +265,7 @@ export class HeaderComponent implements OnInit{
           {
             this.filterdList = true;
             this.filteredOptions = data.searches;
+            //console.log(this.filteredOptions)
           }
         }
       ) 
