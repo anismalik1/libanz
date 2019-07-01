@@ -611,7 +611,7 @@
 					<div class="card-content no-padding">
 						<ul class="flash-deal-slider">
 							<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
-								<a href="javascript:">
+								<a href="{{item.imageurl}}" target="_blank">
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li>
@@ -811,13 +811,13 @@
 				<li *ngFor="let banner of filter_banners('user-type')">
 					<div class="no-margin">
 						<div class="col s12 m12 l8 no-padding rt-image-box">
-							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%">
+							<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%"></a>
 						</div>
 						<div class="col s12 m12 l4 no-padding">
 							<div class="registration-here-page center">
 								<h2 class="uppercase font600 orange-text">{{banner.title}}</h2>
 								<p  class="font-size-change1 black-text">{{banner.description}}</p>
-								<a [routerLink]="[banner.imageurl]"  target="_blank" class="btn orange margin-top1">Register Here</a>
+								<a href="{{banner.imageurl}}"  target="_blank" class="btn orange margin-top1">Register Here</a>
 							</div>
 						</div>
 					</div>

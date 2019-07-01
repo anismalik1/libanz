@@ -779,6 +779,8 @@ check_amount(s)
   let operator = this.operators.MOBILEPREPAID.filter(x => x.id == id);
   if(!operator)
   operator = this.operators.MOBILEPOSTPAID.filter(x => x.id == id);
+  if(operator.length == 0)
+    return false;
   this.operators.selected = operator;
   this.operator_id = operator[0].recharge_id;
   }

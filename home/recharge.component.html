@@ -304,7 +304,7 @@
 						</div>
 					</div>
 				</form>	
-				<form method="post" [formGroup]="electricitygroup" #electricityform = "ngForm" (ngSubmit)="recharge_init('electricity',electricityform.value)" *ngIf="this.recharge_type.electricity">
+				<form id="electricity" method="post" [formGroup]="electricitygroup" #electricityform = "ngForm" (ngSubmit)="recharge_init('electricity',electricityform.value)" *ngIf="this.recharge_type.electricity">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1" >
 							<mat-form-field>
