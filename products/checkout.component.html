@@ -317,6 +317,11 @@
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 					</div>
+					<div style="padding-top: 10px;">
+							<p class="inline-block grey-text">Extra Cashback<i class="red-text"> *</i> :</p>
+							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount}}</p>								
+							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}}</p>
+						</div>
 				</div>				
 				
             	<!-- <div class="subtotal">
@@ -335,7 +340,8 @@
             	</div>
             	<hr>
             	<div class="subtotal">
-            		<p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p>
+            		<p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
+            		<p class="inline-block red-text">*You will get cashback After Product Activation.</p>
                 </div>
                 
             </div>

@@ -3,7 +3,7 @@
 	<div class="header-strip grey lighten-3">
 		<div class="container">
 			<div class="strip-right-text right">
-				<span ><a class="grey-text" [routerLink]="['/p/retailer-on-mydth']" target="_blank">Merchant on Mydth</a> |</span>
+				<span ><a class="grey-text" [routerLink]="['/p/merchant-on-mydth']" target="_blank">Merchant on Mydth</a> |</span>
 				<span> <a class="grey-text" [routerLink]="['/p/notification/user-notify/3']" target="_blank">Partner on Mydth</a> |</span>
 				<span class="grey-text">KYC |</span>
 				<span class="grey-text">24x7 support</span>
@@ -114,7 +114,7 @@
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge">0</span></a>
 				</li>
 				<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
-					<a href="javascript:"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <span class="badge">0</span></a>
+					<a routerLink="/product/favorites"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
 				</li>				
 				<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
 					<a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count">{{notification_count.count}}</span></a>

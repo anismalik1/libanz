@@ -52,7 +52,7 @@
 							></ngx-image-zoom>
 							<!-- <img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"> -->
 						</span>
-						<!-- <a class="wishlist tooltipped relative" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" onclick="Materialize.toast('Add Your Favorite', 4000)"><i class="material-icons">star</i></a> -->
+						<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a></span>
                         
                       </div>
                       <div class="product-btn center">
@@ -83,7 +83,7 @@
                   	<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
                   	<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
                   	<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
-                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partner_cashback_wallet}}</p>								
+                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
                   	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
                   	
                   	<div class="descripetion-detail margin-top1">
@@ -121,7 +121,7 @@
                   		</li>
 					  </ul>
 					<br/>
-					<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable">
+					<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable && fta_pack.price != 0">
 						<li>
 							<span class="font-size-change1 font600 grey-text">Add Multi</span>
 						</li>
@@ -387,18 +387,24 @@
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
 				</div>
+				<!-- <div class="subtotal">
+					<p class="inline-block font600">Cashback<i class="red-text"> *</i> :</p>
+					<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && product"><i class="icon-inr"></i>{{product.partnerwalletamount}}</p>								
+                	<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && product"> <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>
+				</div> -->
 			</div>
 			<hr class="horizontal">
 			<div class="subtotal payable margin-top">
 				<p class="inline-block font600">Amount Payable :</p>
 				<p class="inline-block right font-size-change"> <i class="icon-inr"></i> {{calculate_amount() }}</p>
 				<div class="clearfix"></div>
-				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p>
+				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
+				<p class="inline-block red-text">*Do Wallet Transaction to Avail the Cashback.</p>
 			</div>
 			<hr>
 			<div class="subtotal inline-block">
-				<a href="#multi-add-modal" *ngIf="!multienable" class="btn orange modal-trigger checkout-with-multi"(click)="fetch_all_multi(product.category_id)">Checkout</a>
-				<a href="javascript:" class="btn orange" *ngIf="multienable" (click)="buyNow(product.id)">Checkout </a>
+				<a href="#multi-add-modal" *ngIf="!multienable && fta_pack.price != 0" class="btn orange modal-trigger checkout-with-multi"(click)="fetch_all_multi(product.category_id)">Checkout</a>
+				<a href="javascript:" class="btn orange" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)">Checkout </a>
 			</div>				
 		</div>
 	</div>

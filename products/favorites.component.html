@@ -1,0 +1,82 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+    <ngx-spinner
+    bdColor="rgba(255,255,255,0.8)"
+    size="default"
+    color="#ec9737"
+    loadingText="Loading..."
+    type="ball-clip-rotate">
+  </ngx-spinner>
+  </div>
+<section class="flash-deal border-bottom">
+    <div class="container">
+        <div class="row no-margin">
+            <div class="col s12 m12 l8">
+                <div class="card">
+                    <div class="card-content black-text padd-only no-margin">
+                            <div class="row no-margin">
+                                <div class="col s12 border-bottom my-cart">
+                                    <span class="font-size-change1 margin-top-cart inline-block">My Favorites ({{this.productservice.cartItemsCount()}})</span>
+                                    <!-- <form class="right inline-block coupon">
+                                        <div class="input-field no-margin">
+                                        <input placeholder="Enter Refferal Code" maxlength="6" id="code" type="text" class="validate" name="Code">
+                                        <button type="Submit" class="btn btn-flat  waves-effect waves-light"><i class="material-icons font-size-change1 orange-text">send</i></button>
+                                        </div>
+                                    </form> -->
+                                </div>
+                            </div>
+                        </div>
+				          <div class="content-wrapper" *ngIf="favourites.length > 0">        
+                    <div class="card-content black-text padd-only no-margin" *ngFor="let item of favourites;">
+                        <div class="row">
+                                <div class="col s12 m3 center">
+                                    <div class="cart-product-image">
+										              <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270
+										{{convert_to_object(item.save_json).image}}" class="responsive-img" alt="hd-tata-sky"><br>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col s12 m5 margin-top">
+                                    <a href="#" class="black-text">
+                                        <h4 class="font600"><a [routerLink]="['/product/'+convert_to_object(item.save_json).url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack}" class="black-text">{{convert_to_object(item.save_json).title}}</a></h4>
+                                        <span class="font-size-change grey-text">Seller : MyDthShop</span><br>
+                                        <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available == 1">Cash On Delivery Available</span><br/>
+                                        <span class="font-size-change orange-text" *ngIf="convert_to_object(item.save_json).month_pack">{{convert_to_object(item.save_json).month_pack}} Month Pack</span>
+          							                <span class="font-size-change orange-text" *ngIf="convert_to_object(item.save_json).tsk_kit"><span *ngIf="convert_to_object(item.save_json).tsk_kit == 2">, TSK 559</span><span *ngIf="convert_to_object(item.save_json).tsk_kit == 3">, TSK 999</span></span>
+                                    </a>
+                                    <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="convert_to_object(item.save_json).tsk_kit && convert_to_object(item.save_json).tsk_kit == 3">{{convert_to_object(item.save_json).price -1000}}</span><span *ngIf="!convert_to_object(item.save_json).tsk_kit || convert_to_object(item.save_json).tsk_kit == 2">{{convert_to_object(item.save_json).offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{convert_to_object(item.save_json).price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(convert_to_object(item.save_json).price-convert_to_object(item.save_json).offer_price)*100/convert_to_object(item.save_json).price | number : '1.2-2'}}% Off</p></span>
+                                    <span id="tsk-applied" class="green-text" *ngIf="convert_to_object(item.save_json).promos">Congratulations! Promo {{convert_to_object(item.save_json).promos.unique_code}} is Applied to your purchase.</span>
+                                    <span class="font-size-change1 black-text inline-block margin-top-cart">Included Pack: <span class="font-size-change1 orange-text" *ngIf="convert_to_object(item.save_json).pack_selected[0]">{{convert_to_object(item.save_json).pack_selected[0].title}} <span *ngIf="convert_to_object(item.save_json).pack_selected[1]">, {{convert_to_object(item.save_json).pack_selected[1].title}}</span></span></span>
+									
+									                  <br>
+                                    <!-- <a href="javascript:" class="font-size-change margin-top inline-block black-text"  onclick="Materialize.toast('Product add to whishlist', 4000)">Add to Whislist</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                        <a href="javascript:" class="font-size-change margin-top inline-block black-text" (click)="this.removeItem(convert_to_object(item.save_json).id);" >Remove</a><br>
+                                        <!-- <a href="#promocode-modal" class="font-size-change margin-top modal-trigger inline-block blue-text">Apply Any Promocode</a> -->
+                                </div>
+                                <div class="col s12 m4 margin-top padd">
+                                    <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
+                                </div>
+                            </div>
+                            <div class="divider"></div> 
+					        </div>
+				</div>										
+				
+        <div class="card-content black-text padd-only no-margin" *ngIf="favourites.length == 0">
+					<div class="center">
+						<img src="{{this.todoservice.base_url}}assets/images/empty-cart.png" class="responsive-img" width="200px">
+						<br>
+						<p class="font-size-change1">Your Favorites is empty</p>
+						<br>
+						<a [routerLink]="['/']" class="font-size-change"><i class="material-icons">add</i> Add Some Items</a>
+					</div>
+				</div>
+				<!-- <div class="card-action right-align cart-card-padd" *ngIf="this.productservice.cartItemsCount() > 0">
+						<a href="javascript:" [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
+						<a href="javasctipt:" routerLink="/product/checkout" class="btn sign orange btn-large font-size-change waves-effect waves-light"> Place Order</a>
+					</div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  

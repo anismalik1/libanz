@@ -241,7 +241,7 @@
 						</div>
 					</div>
 				</form>
-				<form method="post" [formGroup]="landlinegroup" #landlineform = "ngForm" (ngSubmit)="recharge_init('landline',landlineform.value)" *ngIf="this.recharge_type.landline">
+				<form method="post" id="landline" [formGroup]="landlinegroup" #landlineform = "ngForm" (ngSubmit)="recharge_init('landline',landlineform.value)" *ngIf="this.recharge_type.landline">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
@@ -337,7 +337,7 @@
 						</span>
 					</div>
 				</form>
-				<form method="post" [formGroup]="gasgroup" #gasform = "ngForm" (ngSubmit)="recharge_init('gas',gasform.value)" *ngIf="this.recharge_type.gas">
+				<form method="post" id="gas" [formGroup]="gasgroup" #gasform = "ngForm" (ngSubmit)="recharge_init('gas',gasform.value)" *ngIf="this.recharge_type.gas">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
@@ -372,7 +372,7 @@
 						</span>
 					</div>
 				</form>
-				<form method="post" [formGroup]="watergroup" #waterform = "ngForm" (ngSubmit)="recharge_init('water',waterform.value)" *ngIf="this.recharge_type.water">
+				<form method="post" id="water" [formGroup]="watergroup" #waterform = "ngForm" (ngSubmit)="recharge_init('water',waterform.value)" *ngIf="this.recharge_type.water">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>

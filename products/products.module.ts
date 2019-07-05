@@ -17,13 +17,15 @@ import { OrderReceiptComponent } from './order-receipt.component';
 import { ChannelPackComponent } from './channel-pack.component';
 import { CompareDthComponent } from './compare-dth.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom'; 
-import { User } from '../user'; 
+import { User } from '../user';
+import { FavoritesComponent } from './favorites.component'; 
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
   { path: 'listing', component: ProductsComponent },
   { path: 'channel-pack/:id', component: ChannelPackComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'favorites', component: FavoritesComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: ':name', component: ProductDetailsComponent },
   
@@ -42,7 +44,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule
   ],
-  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent],
+  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent, FavoritesComponent],
   providers : [ProductService,TodoService,User,AuthService]
 })
 

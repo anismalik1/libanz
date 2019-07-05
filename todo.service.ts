@@ -221,6 +221,16 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/notifications';
     return this.send_post_request(data,url) ; 
   }
+  user_favourites(data)
+  {
+    let url = this.server_url+'accounts/apis/product/user_favourites';
+    return this.send_post_request(data,url) ; 
+  }
+  remove_favourites(data)
+  {
+    let url = this.server_url+'accounts/apis/product/remove_favourites';
+    return this.send_post_request(data,url) ;
+  }
 
   get_operator_api_id(data)
   {

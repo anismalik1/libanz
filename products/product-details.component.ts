@@ -65,7 +65,7 @@ export class ProductDetailsComponent implements OnInit{
     private toastr: ToastsManager,
     public todoservice : TodoService,
     private authservice : AuthService,
-    private productservice : ProductService,
+    public productservice : ProductService,
     private router : ActivatedRoute, private route : Router ) {
     this.toastr.setRootViewContainerRef(vcr);
     this.product_categories();
@@ -207,10 +207,7 @@ export class ProductDetailsComponent implements OnInit{
         {
           this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == false);
         }
-        else if(this.product.url.includes('hd'))
-        {
-          this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == true);
-        } 
+        
       }
     }
   }
@@ -434,8 +431,57 @@ export class ProductDetailsComponent implements OnInit{
         }
         this.init_page();
         window.scroll(0,0);
+        //console.log(this.product)  
       }
-		  )  
+    )
+    
+  }
+
+  add_to_favorite()
+  {
+    $('.wishlist').addClass('active');
+    if(this.pack_selected)
+      this.product.pack_selected = this.pack_selected;
+    if($('#kit-packages').length > 0 )
+    {
+      if( typeof this.kit == 'undefined' )
+      {
+        this.toastr.error("Please Select Kit first");
+        return false;
+      }
+    }
+    else
+    {
+      this.kit = 2;
+    }
+    if(typeof this.month == 'undefined')
+    {
+      this.toastr.error("Please Select Month Package first");
+        return false;
+    }
+    else
+    {
+      this.product.month_pack = this.month;
+    }
+
+    if(!this.get_token())
+    {
+      $('.logup.modal-trigger')[0].click();
+      this.toastr.error("Please Login to proceed", 'Failed! ');
+      return false;
+    }
+
+    this.spinner.show() 
+    this.productservice.add_to_favorite({product : this.product,token : this.get_token()})
+    .subscribe(
+    data => 
+    {
+      this.spinner.hide();
+      this.toastr.error(data.msg);
+      if(data.status == true)
+        localStorage.setItem('favourite', JSON.stringify(data.favourites));
+    }
+    ) 
   }
 
   to_number(string)

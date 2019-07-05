@@ -173,6 +173,41 @@ export class ProductService {
     return 0;
   }
 
+  favorite_count()
+  {
+    if(localStorage.getItem('favourite') != null)
+    {
+      let cart :any = JSON.parse(localStorage.getItem('favourite'));
+      this.cartItems =  Object.keys(cart.items).length;
+      return this.cartItems;
+    }
+    return 0;
+  }
+
+  exist_in_favourite(id) : boolean
+  {
+    //console.log(id);
+    if(localStorage.getItem('favourite') != null)
+    {
+      let index = -1;
+      let cart :any = JSON.parse(localStorage.getItem('favourite'));
+      for(var i =0;i< Object.keys(cart.items).length;i++)
+      {
+        let item = cart.items[i];
+        if(item.prod_id == id)
+        {
+          index = 1;
+          break;
+        } 
+      }
+      if(index == 1)
+        return true;
+      else
+        return false;  
+    }
+    return false;
+  }
+
   calculateCartAmount() : number{
     let cart :any = JSON.parse(localStorage.getItem('cart'));
     let index : number = -1;
@@ -362,44 +397,55 @@ export class ProductService {
     return this.products[this.select_by_id(id)];
   }
 
-  send_post_request(data) : Observable<any>
+  send_post_request(data,url) : Observable<any>
   {
     var Headers_of_api = new Headers({ 
       'Content-Type' : 'application/x-www-form-urlencoded'
     });
-    return this.http.post(this.service_url+this.request_action,data,{headers: Headers_of_api})
+    return this.http.post(url,data,{headers: Headers_of_api})
     .map(res => res.json());
   }
 
   fetch_product_data(data)
   {
-	  this.request_action = 'fetch_product';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_product';
+    return this.send_post_request(data,url) ;
   }
   fetch_channels(data)
   {
-    this.request_action = 'fetch_channels';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_channels';
+    return this.send_post_request(data,url) ;
   }
   fetch_products_by_category(data)
   {
-    this.request_action = 'fetch_products_by_category';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_products_by_category';
+    return this.send_post_request(data,url) ;
   }
   fetch_all_multi(data)
   {
-    this.request_action = 'fetch_all_multi';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/fetch_all_multi';
+    return this.send_post_request(data,url) ;
   }
 
   compare_urls(data)
   {
-    this.request_action = 'compare_urls';
-    return this.send_post_request(data) ;
+    this.request_action = '';
+    let url = this.server_url+'index.php?/app_services/compare_urls';
+    return this.send_post_request(data,url) ;
   } 
   share_pack_to_mail(data)
   {
-    this.request_action = 'share_pack_to_mail';
-    return this.send_post_request(data) ;
+    let url = this.server_url+'index.php?/app_services/share_pack_to_mail';
+    return this.send_post_request(data,url) ;
+  }
+
+  add_to_favorite(data)
+  {
+    let url = this.server_url+'accounts/apis/product/add_to_favorite';
+    return this.send_post_request(data,url) ; 
   }
 }

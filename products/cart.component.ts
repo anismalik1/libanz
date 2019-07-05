@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
-import { Router,ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-cart',

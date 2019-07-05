@@ -39,6 +39,8 @@ export class HeaderComponent implements OnInit{
     public signupverify : number = 0;
     public notifications : any;
     public notification_count : Number;
+    public favourites : any;
+    public favourite_count : number;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
@@ -279,6 +281,7 @@ export class HeaderComponent implements OnInit{
     this.init_page(); 
     this.todoservice.get_user_data();
     this.user_notification();
+    this.user_favourites()
   }
 
   user_notification()
@@ -298,6 +301,36 @@ export class HeaderComponent implements OnInit{
           }
         }
       )
+  }
+
+  user_favourites()
+  {
+    let favourite :string = localStorage.getItem("favourite");
+    if(!favourite)
+    {
+      this.todoservice.user_favourites({token: this.get_token()})
+        .subscribe(
+          data => 
+          {
+            if(!jQuery.isEmptyObject(data))
+            {
+              if(data.status && data.status == 'Invalid Token')
+              {
+                return false;
+              }
+              localStorage.setItem('favourite', JSON.stringify(data.favourites));
+              //this.favourites = data.favourites.items;
+              this.favourite_count =  data.favourite_count;
+            }
+          }
+        )
+    }
+    else
+    {
+      let data = JSON.parse(favourite);
+      this.favourite_count =  data.count;
+      //this.favourites = data.favourites.items;
+    }   
   }
 
   private _filter(value: string): object {
