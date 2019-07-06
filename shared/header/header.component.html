@@ -13,8 +13,7 @@
 	</div>
 		<div class="container">
 			<nav>
-			<div class="nav-wrapper" id="primary-nav">
-					
+			<div class="nav-wrapper" id="primary-nav">					
 					
 			  <a routerLink="/home" href="javascript:" class="brand-logo"><?xml version="1.0" encoding="UTF-8"?>
 				<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
@@ -118,8 +117,24 @@
 				</li>				
 				<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
 					<a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count">{{notification_count.count}}</span></a>
-					<ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
+					<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
 						<li *ngFor="let item of notifications;"><a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
+					</ul> -->
+					<ul id="dropdown-notice" class="dropdown-content notifications-dropdown">
+						<li class="notificatoins-dropdown-container">
+							<ul class="notification-drop-ul">
+								<li>
+									<div class="notification-drop-image">
+										<img src="https://www.mydthshop.com/accounts/assets/img/favicon.png">
+									</div>
+									<div class="notification-drop-text">
+										<p>Product TATA SKY STANDARD SET TOP BOX, Amount Rs. 1152 and Order ID 100015356 is received from <strong class="font600">AMIT TELECOM</strong> through <strong class="font600">COD</strong></p>
+										<time class="grey-text">38 mintues ago</time>
+									</div>
+								</li>							
+								<li><a class="modal-trigger load_more" href="#loadmore" >Load More</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 					</ul>
@@ -372,4 +387,19 @@
 			</div>
 		</div>
 	</div>
-	
+	<div id="loadmore" class="modal" style="height:420px">
+    <div class="modal-content" style="padding:0px">	
+		<i class="fa fa-spinner fa-spin" id="fa_spin"></i>
+		<ul class="dropdown-content">
+			<li>
+				<div class="notification-drop-image">
+					<img src="https://www.mydthshop.com/accounts/assets/img/favicon.png">
+				</div>
+				<div class="notification-drop-text">
+					<p>Product TATA SKY STANDARD SET TOP BOX, Amount Rs. 1152 and Order ID 100015356 is received from <strong class="font600">AMIT TELECOM</strong> through <strong class="font600">COD</strong></p>
+					<time class="grey-text">38 mintues ago</time>
+				</div>
+			</li>
+		</ul>
+    </div>
+  </div>
