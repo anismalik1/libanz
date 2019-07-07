@@ -123,13 +123,13 @@
 					<ul id="dropdown-notice" class="dropdown-content notifications-dropdown">
 						<li class="notificatoins-dropdown-container">
 							<ul class="notification-drop-ul">
-								<li>
+								<li *ngFor="let item of notifications;">
 									<div class="notification-drop-image">
 										<img src="https://www.mydthshop.com/accounts/assets/img/favicon.png">
 									</div>
-									<div class="notification-drop-text">
-										<p>Product TATA SKY STANDARD SET TOP BOX, Amount Rs. 1152 and Order ID 100015356 is received from <strong class="font600">AMIT TELECOM</strong> through <strong class="font600">COD</strong></p>
-										<time class="grey-text">38 mintues ago</time>
+									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
+										<p [innerHTML]="item.comment"></p>
+										<time class="grey-text">{{time_ago(item.history_time)}}</time>
 									</div>
 								</li>							
 								<li><a class="modal-trigger load_more" href="#loadmore" >Load More</a></li>

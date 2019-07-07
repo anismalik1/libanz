@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomeModule'},
   { path: 'home/', loadChildren: './home/home.module#HomeModule'},
   { path: 'recharge', loadChildren: './home/home.module#HomeModule'},
+  { path: 'p/accounts', loadChildren: './pages/pages.module#PagesModule'},
   { path: '', loadChildren: './home/home.module#HomeModule'},
   {path: '**', redirectTo: '/404'},
 ];

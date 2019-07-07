@@ -65,7 +65,6 @@ export class FavoritesComponent implements OnInit {
               localStorage.setItem('favourite', JSON.stringify(data.favourites));
               this.favourites = data.favourites.items;
               this.favourite_count =  data.count;
-              $('#favourite-count').text(this.favourite_count);
             }
           }
         )  

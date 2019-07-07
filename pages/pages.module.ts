@@ -15,9 +15,12 @@ import { NotifyComponent } from './notify.component';
 import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
+import { MerchantComponent } from './merchant.component';
 
 const routes: Routes = [
   { path: '', component: PageViewComponent },
+  { path: 'merchant', component: MerchantComponent },
+  { path: 'partner', component: MerchantComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'recover', component: ForgotPasswordComponent },
   { path: 'forgot-password', component: ContactUsComponent },
@@ -34,7 +37,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent],
+  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent, MerchantComponent],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 

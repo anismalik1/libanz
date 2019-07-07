@@ -98,6 +98,7 @@ login_submit(login)
           this.authService.AccessToken = this.token_params.accessToken;
           this.authService.storage(data);
           this.todoservice.set_user_data(user);
+          this.user_favourites();
           if(this.ref)
           {
             this.router.navigate(['/'+this.ref.replace('#', "/")]); 
@@ -121,6 +122,26 @@ login_submit(login)
         this.spinner.hide();
       }
     )  
+}
+
+user_favourites()
+{
+  this.spinner.show();
+  this.todoservice.user_favourites({token: this.get_token()})
+      .subscribe(
+        data => 
+        {
+          if(!jQuery.isEmptyObject(data))
+          {
+            this.spinner.hide();
+            if(data.status && data.status == 'Invalid Token')
+            {
+              return false;
+            }
+            localStorage.setItem('favourite', JSON.stringify(data.favourites));
+          }
+        }
+      )  
 }
 resend_otp()
 {
