@@ -1,6 +1,7 @@
 import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
 import { User } from '../user';
@@ -15,6 +16,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class FaqsComponent implements OnInit {
   faqsgroup : FormGroup;
+  faqs : any;
+  single : any;
+  searched : any;
   constructor(
     private fb: FormBuilder,
     private todoservice: TodoService,
@@ -23,6 +27,8 @@ export class FaqsComponent implements OnInit {
     private vcr: ViewContainerRef,
     private authservice : AuthService,
     private _renderer2: Renderer2, 
+    private router : ActivatedRoute, 
+    private route : Router,
     @Inject(DOCUMENT) private _document, 
   ) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -34,6 +40,17 @@ export class FaqsComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.router.params.subscribe(params => {
+      let url = params['name']; //log the value of id
+      this.print_faq(url);
+    });
+    
+    this.faqs_list();
+    this.init_script();
+  }
+
+  init_script()
+  {
     if($('#collapse-script'))
     {
       $('#collapse-script').remove();
@@ -44,13 +61,53 @@ export class FaqsComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('.collapsible').collapsible();
-      
     })
    
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
-
+  faqs_list()
+  {
+    this.spinner.show();
+    this.todoservice.faqs_list({token : this.get_token()})
+    .subscribe(
+      data => 
+      {
+        this.spinner.hide();
+        this.faqs = data.faqs;
+        this.init_script();
+      }
+    ) 
+  }
+  search_faqs()
+  {
+    let key = $("#faq_key").val();
+    this.spinner.show();
+    this.todoservice.search_faqs({key : key})
+    .subscribe(
+      data => 
+      {
+        this.spinner.hide();
+        //this.faqs = data.faqs;
+        this.init_script();
+        this.searched = data.faq;
+      }
+    )
+  }
+  print_faq(url)
+  {
+    this.spinner.show();
+    this.todoservice.print_faq({url: url})
+    .subscribe(
+      data => 
+      {
+        this.spinner.hide();
+        this.single = data.faq[0];
+        this.route.navigate(['/p/faqs/'+this.single.url])
+        this.searched = [];
+      }
+    ) 
+  }
   faqs_submit(data)
   {
     if(this.get_token())

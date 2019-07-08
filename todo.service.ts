@@ -590,6 +590,21 @@ export class TodoService {
     return this.send_post_request(data,url) ;
   }
 
+  faqs_list(data)
+  {
+    let url = this.server_url+'accounts/apis/home/faqs_list';
+    return this.send_post_request(data,url) ;
+  }
+  print_faq(data)
+  {
+    let url = this.server_url+'accounts/apis/home/single_faq';
+    return this.send_post_request(data,url) ;
+  }
+  search_faqs(data)
+  {
+    let url = this.server_url+'accounts/apis/home/search_faqs';
+    return this.send_post_request(data,url) ;
+  }
   fetch_pack_by_month(data)
   {
     let url = this.server_url+'accounts/apis/product/fetch_pack_by_month';

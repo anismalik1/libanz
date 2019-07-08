@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent},
   { path: 'p/contact-us/:name', component: ContactUsComponent},
   { path: 'p/faqs', component: FaqsComponent},
+  { path: 'p/faqs/:name', component: FaqsComponent},
   { path: 'p/:name', loadChildren: './pages/pages.module#PagesModule'},
   { path: 'home#login', loadChildren: './home/home.module#HomeModule'}, 
   { path: 'home', loadChildren: './home/home.module#HomeModule'},
