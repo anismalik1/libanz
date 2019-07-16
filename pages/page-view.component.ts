@@ -12,7 +12,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class PageViewComponent implements OnInit {
   page : string;
   page_data : any;
-constructor(private title: Title, public todoservice : TodoService,private spinner: NgxSpinnerService,private router : Router, private meta : Meta, private route : ActivatedRoute) {
+constructor(private title: Title, public todoservice : TodoService,
+  private spinner: NgxSpinnerService,private router : Router,
+   private meta : Meta, private route : ActivatedRoute) {
   this.page = route.snapshot.params['name'];
   this.spinner.show();
   this.fetch_page_data();

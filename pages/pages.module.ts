@@ -19,8 +19,8 @@ import { MerchantComponent } from './merchant.component';
 
 const routes: Routes = [
   { path: '', component: PageViewComponent },
-  { path: 'merchant', component: MerchantComponent },
-  { path: 'partner', component: MerchantComponent },
+  { path: 'merchant-on-mydthshop', component: MerchantComponent },
+  { path: 'partner-on-mydthshop', component: MerchantComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'recover', component: ForgotPasswordComponent },
   { path: 'forgot-password', component: ContactUsComponent },

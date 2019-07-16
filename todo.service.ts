@@ -46,6 +46,7 @@ export class TodoService {
             this.router.navigate(['/login']);
           }
           this.set_user_data(data.USER);
+
         }
       )  
     }
@@ -111,7 +112,7 @@ export class TodoService {
   get_user_wallet_amount()
   {
     if(this.get_user() != null)
-      return Number(this.get_user().wallet.replace(/\,/g,""));
+      return Number(this.get_user_wallet().replace(/\,/g,""));
     else
       return 0;
   }
@@ -127,12 +128,14 @@ export class TodoService {
 
   get_user()
   {
-    let data = JSON.parse(localStorage.getItem('app_token'));
-    if(data != null)
-    {
-      return data.user; 
-    } 
-    return null; 
+    return this.user.storage;
+    // let data = JSON.parse(localStorage.getItem('app_token'));
+    // if(data != null)
+    // {
+    //   console.log(this.user)
+    //   return data.user; 
+    // } 
+    // return null; 
   }
 
   get_user_name()

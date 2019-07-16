@@ -807,7 +807,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       if(pack.title.includes('Super Family') || this.fta_pack.price == 0)
       {
-        alert("There Must be atleast two pack in this Package.");
+        alert("There Must be atleast two packs(FTA + Other) in this Package.");
         return false;
       }
       $('#check-pack-'+pack.id).addClass('grey-text');

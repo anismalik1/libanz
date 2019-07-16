@@ -164,6 +164,7 @@ ngOnInit() {
   `;
   this._renderer2.appendChild(this._document.body, script);
   this.get_checkout_data();
+  this.todoservice.get_user_data();
 }
 cod_apply()
 {

@@ -25,7 +25,7 @@
                 keyboard_arrow_right</i></div>
               <div class="collapsible-body">
                 <ul>
-                  <li><a class="blue-text" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.id)">{{link.question}}</a></li>
+                  <li><a class="blue-text" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)">{{link.question}}</a></li>
                 </ul>
               </div>
             </li>
@@ -53,7 +53,7 @@
         <ul>
           <li *ngFor="let item of searched;">
             <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
-            <p [innerHTML]="single.meta_description"></p>
+            <p [innerHTML]="item.meta_description"></p>
           </li>
         </ul>
       </div>

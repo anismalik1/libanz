@@ -289,7 +289,10 @@ export class HeaderComponent implements OnInit{
             this.todoservice.set_user_data(user);
             $('.login-modal-close').click();
             localStorage.removeItem('favourite');
-            this.user_favourites();
+            setTimeout(()=>{    //<<<---    using ()=> syntax
+              this.user_favourites();
+            }, 2000);
+            
           }
           else
           {
@@ -377,7 +380,7 @@ export class HeaderComponent implements OnInit{
               }
               localStorage.setItem('favourite', JSON.stringify(data.favourites));
               //this.favourites = data.favourites.items;
-              this.favourite_count =  data.favourite_count;
+              //this.favourite_count =  data.favourite_count;
             }
           }
         )
