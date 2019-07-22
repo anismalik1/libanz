@@ -217,23 +217,20 @@
 										<div class="input-field col s12">
 											<i class="material-icons prefix margin-top-cart2">person</i>
 											<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
-											<label for="name">Enter Name</label>
+											<label for="name">Enter Name*</label>
 											<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
 												<span class="red-text ">*Name is Required.</span>
 											</div>
 										</div>
-										<div class="input-field col s12">
+										<div class="input-field col s6">
 											<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="phn_number" type="number" class="validate" formControlName="phone" minlength = '2' maxlength="10" pattern="^[0-9()\-+\s]+$" autocomplete="off">
-											<label for="phn_number">Enter Phone Number</label>
-											<div class="center" *ngIf="signupgroup.controls['phone'].required && signupgroup.controls['phone'].touched">
-												<span class="red-text"> Phone is Required.</span>
-											</div>
+											<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
+											<label for="phn_number">Phone Number*</label>
 											<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
 												<span class="red-text"> Phone Number is not valid.</span>
 											</div>
 										</div>
-										<div class="input-field col s12">
+										<div class="input-field col s6">
 											<i class="material-icons prefix margin-top-cart2">mail</i>
 											<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
 											<label for="enter_email">Enter Email</label>
@@ -241,7 +238,7 @@
 												<span class="red-text"> Email is not valid.</span>
 											</div>
 										</div>
-										<div class="input-field col s12">
+										<div class="input-field col s6">
 											<i class="material-icons prefix margin-top-cart2">lock</i>
 											<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
 											<label for="enter_passcode">Enter Password</label>
@@ -249,7 +246,7 @@
 												<span class="red-text">Password is Required.</span> 
 											</div>
 										</div>
-										<div class="input-field col s12">
+										<div class="input-field col s6">
 											<i class="material-icons prefix margin-top-cart2">lock</i>
 											<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
 											<label for="confirm_passcode">Confirm Password</label>
@@ -260,11 +257,15 @@
 										<div class="col s12">
 											<p>
 												<input name="user_type" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
-												<label for="test1">Become user</label>
+												<label for="test1">Become User</label>
 											</p>
 											<p>
 												<input name="user_type" formControlName="user_type" type="radio" value="2" id="test2"/>
-												<label for="test2">become Merchant</label>
+												<label for="test2">Become Merchant</label>
+											</p>
+											<p>
+												<input name="user_type" formControlName="user_type" type="radio" value="3" id="test3"/>
+												<label for="test3">Become Partner</label>
 											</p>
 										</div>
 										

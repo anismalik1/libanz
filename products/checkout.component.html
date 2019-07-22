@@ -106,12 +106,12 @@
           					<span class="font-size-change grey-text">Seller : MyDthShop</span><br>
           					<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
           					<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
-          					<span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span>
+          					<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
 									</a>
 									<div class="green-text" *ngIf="item.product.tsk_kit">
 										<span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
 										<!-- <a href="javascript:" (click)="show_coupon(i)">Change</a> -->
-										<span class="font-size-change1 black-text inline-block margin-top-cart">Included Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
+										<span class="font-size-change1 black-text inline-block margin-top-cart">Selected Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
 										<div class="coupon-area" style="display:none;">
 											<input id="coupon-code-{{item.product.id}}" placeholder="Enter Coupon Code" type="text" class="validate">
 										</div>
@@ -167,12 +167,15 @@
 									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
         			</div>        			
 								</div>
-								<div class="col s10 m10 offset-m1">
+								<div class="col s10 m10 offset-m1" *ngIf="addresses && addresses.length > 0">
 								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_pay()">DELIVER HERE</button>
 								</div>
-								<div class="add-new-address col s12">
-            	<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a new address</a>
-            </div>
+								<div class="add-new-address col s12" *ngIf="addresses && addresses.length == 0">
+									<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Delivery Address</a>
+								</div>
+								<div class="add-new-address col s12" *ngIf="addresses && addresses.length > 0">
+									<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a New Address</a>
+								</div>
         	</div>
         	<!-- End Here -->
           <!-- Fourth Line -->
@@ -373,56 +376,69 @@
         <!-- End Here -->
         <!-- Modal Structure --> 
         <div id="add-new-address" class="modal">
-					<form class="margin-top location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
+					<form  [formGroup]="addressformgroup" class="margin-top location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
 			<div class="modal-content no-padding">
 					<div class="add-add border-bottom">
-						<h4 class="inline-block">Add a new address</h4>
+						<h4 class="inline-block">Add Delivery Address</h4>
 						<!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
 					</div>
 							<div class="row no-margin">
 							<div class="input-field col s12 m6">
-								<input name="name" id="name" type="text" class="validate" ngModel>
-								<label for="name">Name</label>
+								<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
+								<label for="name">Name*</label>
+								<div class="center" *ngIf="!addressformgroup.controls['name'].valid && addressformgroup.controls['name'].touched">
+									<span class="red-text ">*Name is Required.</span>
+								</div>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="phn-no" name="contact" type="text" class="validate" ngModel>
-								<label for="phn-no">Phone Number</label>
+								<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+								<label for="phn-no">Phone Number*</label>
+								<div class="center" *ngIf="!addressformgroup.controls['contact'].valid && addressformgroup.controls['contact'].touched">
+									<span class="red-text ">*Enter a Valid Phone Number.</span>
+								</div>
 							</div>
 						</div>
 						<div class="row no-margin">
 							<div class="input-field col s12 m6">
-								<input name="pincode" id="pincode" maxlength="6" type="number" class="validate" ngModel>
-								<label for="pincode">Pincode</label>
+								<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off">
+								<label for="pincode">Pincode*</label>
+								<div class="center" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
+									<span class="red-text ">*Enter a Valid Pincode.</span>
+								</div>
 							</div>
 							<div class="input-field col s12 m6">
-								<input id="locality" name="locality" type="text" class="validate" ngModel>
+								<input id="locality" name="locality" type="text" class="validate" formControlName="locality" autocomplete="off">
 								<label for="locality">Locality</label>
 							</div>
 						</div>
 						<div class="row no-margin">
 							<div class="input-field col s12 m6">
-								<input name="city" id="city" type="text" class="validate" ngModel>
-								<label for="city">City/District/Town</label>
+								<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
+								<label for="city">City/District/Town*</label>
+								<div class="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
+									<span class="red-text ">*City is Required.</span>
+								</div>
 							</div>
 							<div class="input-field col s12 m6">
 								<mat-form-field>
-									<mat-select placeholder="Choose your State" (change)="changeState($event.value)" name="state" ngModel>
-										<mat-option [value]="Delhi">Delhi</mat-option>
-										<mat-option [value]="Mumbai">Mumbai</mat-option>
-										<mat-option [value]="Chennai">Chennai</mat-option>
+									<mat-select placeholder="Choose your Circle*" (change)="changeState($event.value)" name="state" formControlName="state">
+										<mat-option [value]="item.name" *ngFor="let item of circles;">{{item.name}}</mat-option>
 									</mat-select>
 								</mat-form-field>
 							</div>
 						</div>
 						<div class="row no-margin">
 							<div class="input-field col s12">
-								<input name="address" id="land" type="text" class="validate" ngModel>
-								<label for="land">Address (Area and street) (Optional)</label>
+								<input name="address" id="land" type="text" class="validate" formControlName="address">
+								<label for="land">Address*</label>
+								<div class="center" *ngIf="!addressformgroup.controls['address'].valid && addressformgroup.controls['address'].touched">
+									<span class="red-text ">*Enter Delivery Address.</span>
+								</div>
 							</div>
 						</div>
 			</div>
 			<div class="modal-footer">
-				<button type="Submit" class="modal-action btn orange btn-large">Save and Delivery Here</button>
+				<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!addressformgroup.valid">Save and Deliver Here</button>
 				<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
 			</div>
 	</form>

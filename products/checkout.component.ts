@@ -1,4 +1,5 @@
 import { Component, OnInit,Renderer2,Inject,ViewContainerRef } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -13,6 +14,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   styles: []
 })
 export class CheckoutComponent implements OnInit{
+  myControl = new FormControl();
+  addressformgroup : FormGroup;
   addresses : any ;
   only_address :number = 0 ;
   state : string ; 
@@ -30,6 +33,7 @@ export class CheckoutComponent implements OnInit{
   otf_margin : any ;
   otfquantity : number = 0;
   cart_items : any;
+  circles : any;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -38,9 +42,18 @@ constructor( public todoservice : TodoService,
   private spinner : NgxSpinnerService,
   private toastr: ToastsManager,
   vcr: ViewContainerRef,
+  private fb: FormBuilder,
   private router : Router) {
     this.toastr.setRootViewContainerRef(vcr);
-    
+    this.addressformgroup = fb.group({
+      'name' : [null,Validators.compose([Validators.required])],
+      'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+      'pincode' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{6}")])],
+      'locality' : [null],
+      'city' : [null,Validators.compose([Validators.required])],
+      'state' : [null,Validators.compose([Validators.required])],
+      'address' : [null,Validators.compose([Validators.required])],
+    });
    }
 ngOnInit() {
   if(!this.get_token())
@@ -204,6 +217,10 @@ get_checkout_data()
         if(data.OTFMARGIN)
         {
           this.otf_margin = data.OTFMARGIN;
+        }
+        if(data.CIRCLES)
+        {
+          this.circles = data.CIRCLES;
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));

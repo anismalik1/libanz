@@ -76,6 +76,8 @@ export class RechargeComponent implements OnInit {
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
+  tab_1 : boolean = false;
+  tab_2 : boolean = false;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -187,10 +189,16 @@ export class RechargeComponent implements OnInit {
     this.recharge_type.cable = false;
     this.recharge_type.datacard = false;
     this.recharge_type.landline = false;
-    
+    this.plans = [];
       if(tab == 'mobile' || tab == 'mobile-postpaid')
       {
         this.recharge_type.mobile = true;
+
+        if(this.operator_id > 0 && this.region > 0)
+        {
+          this.get_plans(this.region,this.operator_id);
+        }
+        
       }
       else if(tab == 'dth-recharge')
       {
@@ -246,13 +254,21 @@ export class RechargeComponent implements OnInit {
     {
       $('#circles-content').addClass('hide');
       $('#promo-content').removeClass('hide');
-      $('#promo-content').addClass('active')
+      $('#promo-content').addClass('active');
+      $("#tab-1").addClass('active');
+      $("#tab-2").removeClass('active');
+      this.tab_1 = true; 
+      this.tab_2 = false; 
     }
     else
     {
       $('#circles-content').removeClass('hide');
       $('#promo-content').addClass('hide');
-      $('#circles-content').addClass('active')
+      $('#circles-content').addClass('active');
+      $("#tab-1").removeClass('active');
+      $("#tab-2").addClass('active');
+      this.tab_1 = false; 
+      this.tab_2 = true; 
     }
   }
   fetch_navigate_data(page)
@@ -750,6 +766,11 @@ check_amount(s)
         {
           this.show_tab(2);
           this.print_plan(this.plans[0].records,0);
+          
+          setTimeout(()=>{    //<<<---    using ()=> syntax
+            if($('#list-0 a'))
+              $('#list-0 a')[0].click();
+       }, 600);
         }
           
       }    

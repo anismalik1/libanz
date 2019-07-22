@@ -140,18 +140,27 @@ export class TodoService {
 
   get_user_name()
   {
-    if(this.get_user() != null)
-      return this.get_user().name;
-    else
-      return ''; 
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      return data.user.name; 
+    } 
+    return ''; 
+
+    // if(this.get_user() != null)
+    //   return this.get_user().name;
+    // else
+    //   return ''; 
   }
   
   get_user_email()
   {
-    if(this.get_user() != null)
-      return this.get_user().email;
-    else
-      return '';
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      return data.user.email; 
+    } 
+    return ''; 
   }
 
   get_user_id()

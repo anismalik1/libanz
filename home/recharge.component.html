@@ -537,17 +537,17 @@
 					<div class="card-content">
 						<div id="short-content"></div>
 					</div>	
-					<div class="card-content" *ngIf="promo_codes && promo_codes.length > 0">
-						<div class="inline-block promo-chng" *ngIf="plans && this.url_name == 'mobile'">
+					<div class="card-content" >
+						<div id="tab-2" [className]="(tab_2 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="plans && plans.length > 0">
 							<span class="font-size-change1 font600" ><a href="javascript:" (click)="show_tab(2)">Plans</a></span>
 							<hr class="hr-promo">
 						</div>
-						<div class="inline-block promo-chng">
+						<div id="tab-1" [className]="(tab_1 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="promo_codes && promo_codes.length > 0">
 							<span class="font-size-change1 font600"><a href="javascript:" (click)="show_tab(1)">Promo Code</a></span>
 							<hr class="hr-promo">
 						</div>
 						
-						<div id="promo-content">
+						<div id="promo-content" [className]="(plans.length > 0) ? 'hide':''">
 							<ul class="promo-ul">
 								<li class="promo-li" *ngFor="let promo of promo_codes;">
 									<a href="#promo-code-modal" class="modal-trigger" (click)="promoselected(promo)">
@@ -558,27 +558,24 @@
 								</li>
 							</ul>
 						</div>
-						<div id="circles-content" class="hide" *ngIf="this.url_name == 'mobile'">
+						<div id="circles-content" *ngIf="plans.length > 0 && this.url_name == 'mobile'">
 							<div class="col m4">
 								<ul class="tabs">
 								  <li [className]="(i == 0)?'tab active':'tab'" *ngFor="let item of plans;let i = index" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>
 								</ul>
 							</div>
 							<div class="col m8">
-									<table class="bordered responsive-table">
-										<thead>
-											<tr>
-												<th>Description</th>
-												<th>Validity </th>
-												<th>Price</th>
-											</tr>
-										</thead>
-										<tbody id="print-data">
-										</tbody>
-									</table>
-								<div class="tab-list" id="tab-print">
-
-								</div>
+								<table class="bordered responsive-table">
+									<thead>
+										<tr>
+											<th>Description</th>
+											<th>Validity </th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody id="print-data">
+									</tbody>
+								</table>
 							</div>
 							
 						</div>
