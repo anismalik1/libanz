@@ -78,6 +78,7 @@ export class RechargeComponent implements OnInit {
   filterdList : boolean = false;
   tab_1 : boolean = false;
   tab_2 : boolean = false;
+  electricity_operators :any;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -177,7 +178,7 @@ export class RechargeComponent implements OnInit {
   
   ini_recharge_tabs(tab)
   {
-    //this.plans = [];
+    this.url_name = tab;
     this.show_tab(1)
     this.spinner.show(); 
     this.recharge_type.mobile = false;
@@ -301,6 +302,7 @@ export class RechargeComponent implements OnInit {
   {
     this.viewrange = 1;
     this.selectedOperator = data;
+    this.mobilegroup.controls['circle_area'].setValue(0);
     if(s == 'mobile')
     {
       this.mcircle.open();
@@ -341,10 +343,6 @@ export class RechargeComponent implements OnInit {
     {
       this.showstd = 1;
     }
-    else if(s == 'broadband')
-    {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-    }
   }
   ngOnInit() {
     let data = {token : ''};
@@ -355,8 +353,12 @@ export class RechargeComponent implements OnInit {
             this.operators = data.OPERATORS;
             this.circles  = data.CIRCLES;
             this.spinner.hide();
-            let recharge_data = this.todoservice.get_recharge();
-            //console.log(recharge_data);
+            let recharge_data  = this.todoservice.get_recharge();
+            if(recharge_data && (!recharge_data.circle_id || !recharge_data.operator_id ))
+            {
+              localStorage.removeItem('recharge_cart');
+              return false;
+            }
             this.recharge_cart = recharge_data;
             this.region        = recharge_data.circle_id;
             this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
@@ -597,6 +599,14 @@ recharge_handle()
 			}
 		  );
   }
+  filter_operator(value)
+  {
+    if(value > 0){
+      $('.inner-electricity').removeClass('hide');
+      this.electricity_operators = this.operators.ELECTRICITY.filter(x => x.circle_id == value);
+    }
+    
+  }
 check_amount(s)
  {
   let v = $('#'+s+' [formControlName="recharge_id"]').val();
@@ -735,6 +745,7 @@ check_amount(s)
  selected_recharge(recharge_data)
  {
   this.region        = recharge_data.circle_id;
+  //console.log(recharge_data);
   this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
   this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
   this.mobilegroup.controls['circle_area'].setValue(this.region);
@@ -752,7 +763,9 @@ check_amount(s)
  }
  get_plans(circle,operator)
  {
-   if(operator == 'get')
+  if(this.url_name != 'mobile')
+    return true; 
+  if(operator == 'get')
    {
     operator = this.operator_id;
    }

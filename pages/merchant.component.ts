@@ -1,8 +1,11 @@
-import { Component, OnInit,Pipe } from '@angular/core';
+import { Component, OnInit,ViewContainerRef } from '@angular/core';
 import { TodoService } from '../todo.service';
+import { AuthService } from '../auth.service';
 import { Router ,ActivatedRoute} from '@angular/router';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'app-merchant',
   templateUrl: './merchant.component.html',
@@ -10,13 +13,25 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class MerchantComponent implements OnInit {
   page : any;
+  contactgroup : FormGroup;
   constructor(private title: Title, public todoservice : TodoService,
-    private spinner: NgxSpinnerService,private router : Router,
-     private meta : Meta, private route : ActivatedRoute) { 
-      this.page = route.snapshot.url[0].path;
+    private spinner: NgxSpinnerService,private router : Router,private fb: FormBuilder,
+     private meta : Meta, private route : ActivatedRoute,
+     private authservice : AuthService,
+     private vcr: ViewContainerRef,
+    private toastr: ToastsManager,) { 
+      this.toastr.setRootViewContainerRef(vcr);
+      this.page = 'accounts/'+route.snapshot.url[0].path;
       this.spinner.show();
       this.fetch_page_data();
       window.scroll(0,0);
+      this.contactgroup = fb.group({
+        'name' : [null,Validators.compose([Validators.required])],
+        'email' : [null,Validators.compose([Validators.email])],
+        'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+        'subject' : [null],
+        'message' : [null],
+      });
      }
 
   ngOnInit() {
@@ -49,5 +64,37 @@ export class MerchantComponent implements OnInit {
          this.spinner.hide();  
        }
      ) 
+  }
+
+  contact_submit(data)
+  {
+    if(this.get_token())
+    {
+      data.token  = this.get_token();
+    }
+    this.spinner.show();
+    if(this.page.includes("merchant"))
+      data.which_form = 3;
+    else 
+      data.which_form = 4; 
+
+    this.todoservice.save_contact_form(data)
+    .subscribe(
+      data => 
+      {
+        let b = JSON.stringify(data);
+        data =  JSON.parse(b.replace(/\\/g, ''));
+        this.spinner.hide();
+        if(data.status == true)
+        {
+          this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+        }
+      }
+    )  
+  }
+
+  get_token()
+  {
+    return this.authservice.auth_token();
   }
 }

@@ -15,38 +15,41 @@
     <h4 class="center text-uppercase font600 why">Register Here!</h4>		
     <div class="row">
       <div class="col s12 m8 offset-m2">
-        <form>
+        <form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="first_name" name="name" type="text" class="validate">
-              <label for="first_name">First Name</label>
+              <input id="first_name" name="name" type="text" class="validate" formControlName="name">
+              <label for="first_name">Name*</label>
+              <div class="red-text accent-4 center" *ngIf="!contactgroup.controls['name'].valid && contactgroup.controls['name'].touched">Enter Name*.</div>
             </div>
             <div class="input-field col s12 m6">
-              <input id="email" name="email" type="email" class="validate">
-              <label for="email">Email</label>
+              <input id="email" name="email" type="email" class="validate"  formControlName="email">
+              <label for="email">Email*</label>
+              <div class="red-text accent-4 center" *ngIf="!contactgroup.controls['email'].valid && contactgroup.controls['email'].touched">Enter a Valid Email*.</div>
             </div>            
             <div class="input-field col s12 m6">
-              <input id="phone" name="phone" type="number" class="validate">
-              <label for="phone">Phone No.</label>
+              <input id="phone" name="phone" type="number" class="validate"  formControlName="phone">
+              <label for="phone">Phone No.*</label>
+              <div class="red-text accent-4 center" *ngIf="!contactgroup.controls['phone'].valid && contactgroup.controls['phone'].touched">Enter a Valid Phone*.</div>
             </div>                        
             <div class="input-field col s12 m6">
-              <input id="company-name" name="company-name" type="text" class="validate">
+              <input id="company-name" name="company-name" type="text" class="validate"  formControlName="subject">
               <label for="company-name">Company Name</label>
             </div>                                    
-            <div class="input-field col s12 m6">
+            <!-- <div class="input-field col s12 m6">
               <input id="company-address" name="company-address" type="text" class="validate">
               <label for="company-address">Company Address</label>
             </div>                                    
             <div class="input-field col s12 m6">
               <input id="company-phone" name="company-phone" type="number" class="validate">
               <label for="company-phone">Company Phone No.</label>
-            </div>            
+            </div>             -->
             <div class="input-field col s12">
-              <input id="home-address" name="home-address" type="text" class="validate">
-              <label for="home-address">Home Address</label>
+              <input id="home-address" name="home-address" type="text" class="validate"  formControlName="message">
+              <label for="home-address">Address</label>
             </div>
             <div class="center col s12">
-              <button type="submit" class="btn-large orange white-text">Register Now <i class="fa fa-angle-double-right vertical	-align-middle right" aria-hidden="true"></i></button>
+              <button type="submit" class="btn-large orange white-text" [disabled]="!contactgroup.valid">Register Now <i class="fa fa-angle-double-right vertical	-align-middle right" aria-hidden="true"></i></button>
             </div>
           </div>
         </form>

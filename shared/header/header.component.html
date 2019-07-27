@@ -3,8 +3,8 @@
 	<div class="header-strip grey lighten-3">
 		<div class="container">
 			<div class="strip-right-text right">
-				<span ><a class="grey-text" [routerLink]="['/p/merchant-on-mydth']" target="_blank">Merchant on Mydth</a> |</span>
-				<span> <a class="grey-text" [routerLink]="['/p/notification/user-notify/3']" target="_blank">Partner on Mydth</a> |</span>
+				<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant on Mydth</a> |</span>
+				<span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span>
 				<span class="grey-text">KYC |</span>
 				<span class="grey-text">24x7 support</span>
 			</div>
@@ -100,7 +100,7 @@
 		</div>
 		<li><div class="divider"></div></li>
 	  <li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-	  <li><a routerLink="/p/about-my-dth-shop-rohini" routerLinkActive="active">About Us</a></li>
+	  <li><a routerLink="/p/about-us-rohini-delhi" routerLinkActive="active">About Us</a></li>
 	  <li><a routerLink="/contact-us" routerLinkActive="active">Contact Us</a></li>
 	  <li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
 	</ul>
