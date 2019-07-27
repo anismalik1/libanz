@@ -134,6 +134,7 @@ export class RechargeComponent implements OnInit {
         'recharge_id' : [null,Validators.compose([Validators.required])]
       });
       this.electricitygroup = fb.group({
+       'circle' : [null],
        'amount' : [null,Validators.compose([Validators.required])],
         'operator' : [null,Validators.compose([Validators.required])],
         'recharge_id' : [null,Validators.compose([Validators.required])]

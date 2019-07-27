@@ -385,7 +385,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1" >
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="filter_operator($event.value)" formControlName="operator">
+								<mat-select placeholder="Select Circle" (change)="filter_operator($event.value)" formControlName="circle">
 									<span *ngFor="let item of circles;">
 										<mat-option [value]="item.id">
 											<span class="operator-name">{{ item.name }}</span>
