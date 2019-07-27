@@ -25,7 +25,8 @@
                 keyboard_arrow_right</i></div>
               <div class="collapsible-body">
                 <ul>
-                  <li><a class="blue-text" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)">{{link.question}}</a></li>
+                  <li><a href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)">{{link.question}} <i class="material-icons">
+                    keyboard_arrow_right</i></a></li>
                 </ul>
               </div>
             </li>
