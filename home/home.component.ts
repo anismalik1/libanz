@@ -598,6 +598,18 @@ toTimestamp(strDate){
     script.type = `text/javascript`;
     script.id = `init-page-script`;
     script.text = `
+      $('.chat-box').on('click', function(){
+        $('.chat-box-msg').css('transform','translate(0,0)');
+        $('.chat-box').addClass('hide');
+      });
+      $('.close-chat').on('click', function(){
+        $('.chat-box-msg').css('transform','translate(0,100%)');
+        $('.chat-box').removeClass('hide');
+      });
+      $('.sub-btn').on('click', function(){
+        $('.suce-msg-chat').removeClass('hide');
+        $('.chat-form').addClass('hide');
+      });
         $(document).ready(function(){ $('[href="#mobile"]').click();
         $('.slider-5').lightSlider({
           item: 4,
