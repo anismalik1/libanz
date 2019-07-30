@@ -68,10 +68,7 @@ export class MerchantComponent implements OnInit {
 
   contact_submit(data)
   {
-    if(this.get_token())
-    {
-      data.token  = this.get_token();
-    }
+    data.token  = this.get_token();
     this.spinner.show();
     if(this.page.includes("merchant"))
       data.which_form = 3;

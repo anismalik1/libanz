@@ -414,6 +414,18 @@ export class HeaderComponent implements OnInit{
     script.id = `side-nav-script`;
     script.text = `
     $(document).ready(function(){
+      $('.chat-box').on('click', function(){
+        $('.chat-box-msg').css('transform','translate(0,0)');
+        $('.chat-box').addClass('hide');
+      });
+      $('.close-chat').on('click', function(){
+        $('.chat-box-msg').css('transform','translate(0,100%)');
+        $('.chat-box').removeClass('hide');
+      });
+      $('.sub-btn').on('click', function(){
+        $('.suce-msg-chat').removeClass('hide');
+        $('.chat-form').addClass('hide');
+      });
       $('#login-modal').modal();
       $('.dropdown-button').dropdown({
         inDuration: 300,
@@ -463,5 +475,7 @@ export class HeaderComponent implements OnInit{
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
+
 }
+
 

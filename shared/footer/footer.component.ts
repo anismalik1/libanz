@@ -97,5 +97,10 @@ export class FooterComponent implements OnInit{
       this.toast.error("Error! Please Enter Email.");
     }
   }
+  
+  search_query()
+  {
+
+  }
 }
 
