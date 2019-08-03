@@ -18,14 +18,14 @@
     <div class="col s12 m3">
       <div class="card side-nav-faqs grey lighten-2">
         <div class="card-content" *ngIf="faqs">
-            <span class="card-title center">Category</span>
+            <span class="card-title center">Queries</span>
           <ul class="collapsible" data-collapsible="accordion">
             <li *ngFor="let item of faqs.list;">
-              <div class="collapsible-header active">{{item.title}} <i class="material-icons">
+              <div class="collapsible-header font600 active">{{item.title}} <i class="material-icons">
                 keyboard_arrow_right</i></div>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)">{{link.question}} <i class="material-icons">
+                  <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)">{{link.question}} <i class="material-icons">
                     keyboard_arrow_right</i></a></li>
                 </ul>
               </div>
