@@ -160,11 +160,25 @@
 			<h3 class="center font600">Frequently Asked Questions</h3>
 			<ul class="no-box-shadow" data-collapsible="accordion">
 				<li class="search-accordin relative">
-				<input placeholder="Search Your Answer" id="faq_key" type="text" class="validate">
-				<button type="Submit" class="btn-flat" (click)="search_query();"><i class="material-icons orange-text font-size-change2">search</i></button>
+					<mat-form-field class="example-full-width">
+						<input type="text" placeholder="Search Query" class="no-margin black-text" matInput [formControl]="myControl" [matAutocomplete]="auto"  (keyup)="fetch_list($event)"> 
+						<mat-autocomplete #auto="matAutocomplete">
+							<span *ngIf="filterdList">
+							<mat-option *ngFor="let option of filterOptions"><a routerLink="{{option.url}}" target="_blank">{{option.query}}</a>
+							</mat-option>
+						</span>
+						</mat-autocomplete>
+					</mat-form-field>
+				<!-- <input placeholder="Search Your Answer" id="faq_key" type="text" class="validate">
+				<button type="Submit" class="btn-flat" (click)="search_query();"><i class="material-icons orange-text font-size-change2">search</i></button> -->
 				</li>
 			</ul>	
-			<p class="center">How Can We Help You?</p>
+			<h4 class="font600">Frequently Asked Questions</h4>
+			<ul class="no-box-shadow" data-collapsible="accordion">
+				<li class="search-accordin relative" *ngFor="let item of default_queries;">
+					<a routerLink="{{item.url}}" target="_blank">{{item.query}}</a>
+				</li>
+			</ul>
 			
 	</div>
 	<div class="suce-msg-chat center hide">

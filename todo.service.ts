@@ -128,14 +128,14 @@ export class TodoService {
 
   get_user()
   {
-    return this.user.storage;
-    // let data = JSON.parse(localStorage.getItem('app_token'));
-    // if(data != null)
-    // {
-    //   console.log(this.user)
-    //   return data.user; 
-    // } 
-    // return null; 
+    //return this.user.storage;
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      //console.log(this.user)
+      return data.user; 
+    } 
+    return null; 
   }
 
   get_user_name()
@@ -620,6 +620,16 @@ export class TodoService {
   fetch_pack_by_month(data)
   {
     let url = this.server_url+'accounts/apis/product/fetch_pack_by_month';
+    return this.send_post_request(data,url) ; 
+  }
+  fetch_bot_list(data)
+  {
+    let url = this.server_url+'accounts/apis/home/fetch_bot_list';
+    return this.send_post_request(data,url) ; 
+  }
+  defalut_queries(data)
+  {
+    let url = this.server_url+'accounts/apis/home/default_queries';
     return this.send_post_request(data,url) ; 
   }
 }

@@ -226,9 +226,9 @@
 						</div>
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Your Viewing Card Number" name="recharge_id" maxlength="{{dthmaxlength}}" minlength="{{dthminlength}}" id="amount" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('dth','recharge_id',$event)">
-							<span class="orange-text ca-num-count" *ngIf="viewrange == 1">Enter {{dthminlength}} digits long Id.</span>
 							<a href="javascript:" class="wrong-detail" id="mobid" *ngIf="!dthgroup.controls['recharge_id'].valid && dthgroup.controls['recharge_id'].touched"><i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator">close</i></a>
 						</div>
+						<span class="orange-text ca-num-count" *ngIf="viewrange == 1">Enter {{dthminlength}} digits long Id.</span>
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Amount" maxlength="5" type="number" pattern="[0-9]+" class="validate no-margin" formControlName="amount">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!dthgroup.controls['amount'].valid && dthgroup.controls['amount'].touched"><i class="material-icons">close</i></span>

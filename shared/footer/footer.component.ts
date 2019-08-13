@@ -1,9 +1,12 @@
 import { Component, OnInit ,Input,ViewContainerRef} from '@angular/core';
 import { TodoService } from '../../todo.service';
 import { AuthService } from '../../auth.service';
+import { FormControl } from '@angular/forms'; 
 import { Router } from '@angular/router'
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map, startWith} from 'rxjs/operators';
+import { Observable} from 'rxjs';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
@@ -15,7 +18,13 @@ export class FooterComponent implements OnInit{
   page : string;
   navigate : boolean = false;
   year :  number = new Date().getFullYear();
+  options: any ;
+  default_queries : any;
+  filterOptions : any;
   @Input() baseUrl;
+  filterdList : boolean = false;
+  myControl = new FormControl();
+  filteredOptions: Observable<object>;
   constructor( public todoservice : TodoService,
   private toast : ToastsManager,  
   private spinner: NgxSpinnerService,
@@ -63,18 +72,59 @@ export class FooterComponent implements OnInit{
       ) 
    }
   ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    ); 
+    this.defaut_query()
+  }
+
+  defaut_query()
+  {
+    let data :any;
+    this.todoservice.defalut_queries(data)
+        .subscribe(
+          data => 
+          {
+            this.default_queries = data.default_queries;
+            //console.log(this.default_queries);
+          }
+        ) 
+  }
+  fetch_list(e)
+  {
+    if(e.target.value.length == 1)
+    {
+      let data : any;
+      this.todoservice.fetch_bot_list(data)
+        .subscribe(
+          data => 
+          {
+            this.options = data.bot_list;
+            this.filterdList = true;
+            this.filterOptions = this._filter(e.target.value);
+          }
+        ) 
+    }
+    else
+    {
+      this.filterOptions = this._filter(e.target.value);
+    }
+    
+  }
+  private _filter(value: string): object {
+    if(this.options)
+    {
+      const filterValue = value.toLowerCase();
+      return this.options.filter(option => option.search_words.toLowerCase().includes(value));
+    }
   }
   
   get_token()
   {
     return this.authservice.auth_token();
   }
-  navigate_to(u)
-  {
-    this.navigate = true;
-    this.page = u;
-    this.fetch_page_data();
-  }
+
   subscribe_newsletters(data)
   {
     if(this.get_token())
