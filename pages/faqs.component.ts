@@ -61,6 +61,7 @@ export class FaqsComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('.collapsible').collapsible();
+      $('.modal').modal();
     })
    
     `;

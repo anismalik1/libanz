@@ -157,11 +157,11 @@
 			<span class="close-chat"><i class="material-icons">remove</i></span>
 		</div>
 		<div class="chat-form">	
-			<h3 class="center font600">Frequently Asked Questions</h3>
+			<!-- <h3 class="center font600">Frequently Asked Questions</h3> -->
 			<ul class="no-box-shadow" data-collapsible="accordion">
 				<li class="search-accordin relative">
 					<mat-form-field class="example-full-width">
-						<input type="text" placeholder="Search Query" class="no-margin black-text" matInput [formControl]="myControl" [matAutocomplete]="auto"  (keyup)="fetch_list($event)"> 
+						<input type="text" placeholder="Search Your Query" class="no-margin black-text" matInput [formControl]="myControl" [matAutocomplete]="auto"  (keyup)="fetch_list($event)"> 
 						<mat-autocomplete #auto="matAutocomplete">
 							<span *ngIf="filterdList">
 							<mat-option *ngFor="let option of filterOptions"><a routerLink="{{option.url}}" target="_blank">{{option.query}}</a>
@@ -174,9 +174,9 @@
 				</li>
 			</ul>	
 			<h4 class="font600">Frequently Asked Questions</h4>
-			<ul class="no-box-shadow" data-collapsible="accordion">
+			<ul class="no-box-shadow default-q" data-collapsible="accordion">
 				<li class="search-accordin relative" *ngFor="let item of default_queries;">
-					<a routerLink="{{item.url}}" target="_blank">{{item.query}}</a>
+					<i class="material-icons ques">question_answer</i>  <a routerLink="{{item.url}}" target="_blank">{{item.query}}</a>
 				</li>
 			</ul>
 			

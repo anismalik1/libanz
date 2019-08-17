@@ -8,14 +8,14 @@
   type="ball-clip-rotate">
 </ngx-spinner>
 </div>
-<!-- <section class="hero">
+<section class="hero">
   <div class="container">
-    <h2 class="center font600 white-text margin-top">FAQS</h2>
+    <h2 class="center font600 white-text margin-top">FAQ'S</h2>
   </div>
-</section> -->
-<section class="container">
+</section>
+<section class="white no-padding">
   <div class="row">
-    <div class="col s12 m3">
+    <div class="col s12 m3 queries-faq">
       <div class="card side-nav-faqs grey lighten-2">
         <div class="card-content" *ngIf="faqs">
             <span class="card-title center">Queries</span>
@@ -25,7 +25,7 @@
                 keyboard_arrow_right</i></div>
               <div class="collapsible-body">
                 <ul>
-                  <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)">{{link.question}} <i class="material-icons">
+                  <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)"><i class="material-icons ques">question_answer</i>{{link.question}} <i class="material-icons">
                     keyboard_arrow_right</i></a></li>
                 </ul>
               </div>
@@ -46,6 +46,9 @@
         <h2>{{single.question}}</h2>
         <hr>
         <p [innerHTML]="single.answer"></p>
+        <h4 class="font600 margin-top1">Are you satisfied that Quierie</h4>
+        <a href="javascript:void(0);" class="btn green">Yes</a>
+        <a href="#no-faq" class="btn red modal-trigger">No</a>
       </div>
       
       <div class="faqs-text" *ngIf="searched && searched.length > 0">
@@ -77,6 +80,11 @@
                 <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
               </div>
               <div class="input-field col s12">
+                <input id="mphone" type="number" class="validate" formControlName="phone">
+                <label for="email">Phone*</label>
+                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Phone No.*.</div>
+              </div>
+              <div class="input-field col s12">
                 <textarea id="textarea1" class="materialize-textarea" formControlName="message"></textarea>
                 <label for="textarea1">Type Your Question*</label>
                 <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
@@ -91,6 +99,38 @@
     </div>
   </div>
 </section>
+<div id="no-faq" class="modal">
+  <div class="modal-content">
+    <h4 class="font600 center">Suggest Us For Better Way</h4>
+    <form>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="name" type="text" class="validate">
+          <label for="name">Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>        
+        <div class="input-field col s12 m6">
+          <input id="phone" type="number" class="validate">
+          <label for="phone">Phone No.</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="subject" type="text" class="validate">
+          <label for="subject">Subject</label>
+        </div>
+        <div class="input-field col s12 m12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Message</label>
+        </div>
+        <div class="input-field col s12 m12 right-align">
+          <button type="submit" class="btn orange">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>        
 <!-- <section class="container thank-you-page" style="width: 95%; max-width: 1300px;">
 	<div class="row">
 		<div class="col s12 m10 l6 offset-l3" style="margin-left: 25%; width: 50%;">
