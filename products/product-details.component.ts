@@ -176,7 +176,8 @@ export class ProductDetailsComponent implements OnInit{
     
     for(var i=0;i<this.channels_packs.length ;i++)
       {
-        if( this.channels_packs[i].title.includes("FTA") || this.channels_packs[i].title.includes('All-India') || this.channels_packs[i].title.includes('Airtel Internet') )
+        //console.log(this.channels_packs[i])
+        if( this.channels_packs[i].default_selected == 1 || this.channels_packs[i].default_selected == 2)
         {
           if(this.channels_packs[i].child[0])
           {

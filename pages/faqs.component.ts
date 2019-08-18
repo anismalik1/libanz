@@ -16,6 +16,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class FaqsComponent implements OnInit {
   faqsgroup : FormGroup;
+  unsatisfiedformgroup : FormGroup;
   faqs : any;
   single : any;
   searched : any;
@@ -37,6 +38,12 @@ export class FaqsComponent implements OnInit {
         'email' : [null,Validators.email],
         'message' : ['',Validators.compose([Validators.required])],
       });
+
+      this.unsatisfiedformgroup = fb.group({
+        'hint' : [null],
+        'email' : [null,Validators.compose([Validators.required,Validators.email])],
+        'comment' : ['',Validators.compose([Validators.required])],
+      });
    }
 
   ngOnInit() {
@@ -49,6 +56,17 @@ export class FaqsComponent implements OnInit {
     this.init_script();
   }
 
+  unsatisfied(form)
+  {
+    this.spinner.show();
+    this.todoservice.send_feed({token : this.get_token(),form: form})
+    .subscribe(
+      data => 
+      {
+        this.spinner.hide();
+      }
+    ) 
+  }
   init_script()
   {
     if($('#collapse-script'))

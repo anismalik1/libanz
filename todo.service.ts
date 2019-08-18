@@ -632,4 +632,10 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/default_queries';
     return this.send_post_request(data,url) ; 
   }
+
+  send_feed(data)
+  {
+    let url = this.server_url+'accounts/apis/home/send_feed';
+    return this.send_post_request(data,url) ;
+  }
 }

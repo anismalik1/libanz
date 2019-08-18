@@ -25,8 +25,7 @@
                 keyboard_arrow_right</i></div>
               <div class="collapsible-body">
                 <ul>
-                  <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)"><i class="material-icons ques">question_answer</i>{{link.question}} <i class="material-icons">
-                    keyboard_arrow_right</i></a></li>
+                  <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)"><i class="material-icons ques">question_answer</i>{{link.question}} </a></li>
                 </ul>
               </div>
             </li>
@@ -46,7 +45,7 @@
         <h2>{{single.question}}</h2>
         <hr>
         <p [innerHTML]="single.answer"></p>
-        <h4 class="font600 margin-top1">Are you satisfied that Quierie</h4>
+        <h4 class="font600 margin-top1">Are you satisfied that Query</h4>
         <a href="javascript:void(0);" class="btn green">Yes</a>
         <a href="#no-faq" class="btn red modal-trigger">No</a>
       </div>
@@ -102,66 +101,38 @@
 <div id="no-faq" class="modal">
   <div class="modal-content">
     <h4 class="font600 center">Suggest Us For Better Way</h4>
-    <form>
+    <form [formGroup]="unsatisfiedformgroup" #unsatisfiedform = "ngForm" (ngSubmit)="unsatisfied(unsatisfiedform.value)">
       <div class="row">
-        <div class="input-field col s12 m6">
-          <input id="name" type="text" class="validate">
-          <label for="name">Name</label>
-        </div>
-        <div class="input-field col s12 m6">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>        
-        <div class="input-field col s12 m6">
-          <input id="phone" type="number" class="validate">
-          <label for="phone">Phone No.</label>
-        </div>
-        <div class="input-field col s12 m6">
-          <input id="subject" type="text" class="validate">
-          <label for="subject">Subject</label>
-        </div>
+        <p>
+          <input type="checkbox" id="test1" formControlName="hint" value="1"/>
+          <label for="test1">Fix typos or links</label>
+        </p>
+        <p>
+          <input type="checkbox" id="test2"  formControlName="hint" value="2"/>
+          <label for="test2">Fix incorrect or incomplete information</label>
+        </p>
+        <p>
+          <input type="checkbox" id="test3" formControlName="hint" value="3" />
+          <label for="test3">I have a question</label>
+        </p>
+        <p>
+          <input type="checkbox" id="test4" formControlName="hint" value="4" />
+          <label for="test4">Article too long</label>
+        </p>
         <div class="input-field col s12 m12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Message</label>
+          <textarea id="textarea1" class="materialize-textarea" formControlName="comment"></textarea>
+            <label for="textarea1">Comment</label>
+        </div>
+        <div class="input-field col s12"> 
+          <input id="input_text" type="text" formControlName="email">
+          <label for="input_text">Email</label>
+          <div class="red-text accent-4 center" *ngIf="!unsatisfiedformgroup.controls['email'].valid && unsatisfiedformgroup.controls['email'].touched">Enter Valid Email*.</div>
         </div>
         <div class="input-field col s12 m12 right-align">
-          <button type="submit" class="btn orange">Submit</button>
+          <button type="submit" class="btn orange" [disabled]="!unsatisfiedformgroup.valid">Submit</button>
         </div>
       </div>
     </form>
   </div>
-</div>        
-<!-- <section class="container thank-you-page" style="width: 95%; max-width: 1300px;">
-	<div class="row">
-		<div class="col s12 m10 l6 offset-l3" style="margin-left: 25%; width: 50%;">
-			<div class="card" style="background-color: #eae6c1 !important; position: relative;
-      margin: .5rem 0 1rem 0; transition: box-shadow .25s; border-radius: 2px; box-shadow: 3px 4px 4px 2px rgba(0, 0, 0, .08) !important;">
-        <div class="card-content" style="padding: 24px; border-radius: 0 0 2px 2px; background-color: #eae6c1 !important;">
-    		  <div class="logo-email center" style="text-align: center !important;">
-    		  	<img src="https://mydthshop.com/web-app/assets/images/logo.png" class="responive-img" alt="mydthshop">
-    		  </div>
-          <h3 class="margin-top1 center" style="margin-top: 2rem !important; text-align: center;">
-          	<span class="t" style="background-color: #f1674b; color:#fff; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">T</span>
-        		<span class="h" style="background-color: #205388; color:#fff; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">H</span>
-      			<span class="a" style="background-color: #76c1e9; color:#fff; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">A</span>
-    	  		<span class="n" style="background-color: #f1674b; color:#fff; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">N</span>
-        		<span class="k" style="background-color: #205388; color:#fff; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">K</span><br>
-        		<span class="s" style="background-color: #76c1e9; color: #f1674b; margin-top: 5px; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">&#9733;</span>
-      		 	<span class="y" style="background-color: #f1674b; color: #fff; margin-top: 5px; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">Y</span>
-    			  <span class="o" style="background-color: #205388; color: #fff; margin-top: 5px; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">O</span>
-      		 	<span class="u" style="background-color: #76c1e9; color: #fff; margin-top: 5px; width: 50px; height: 50px; line-height: 50px; display: inline-block; text-align: center; border: 1px solid transparent; border-radius: 50%;">U</span>
-        		<span class="r">&#9733;</span>
-    		  </h3>
-    		  <p class="margin-top1" style="margin-top: 2rem; line-height: 140%; font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-    		  <p class="margin-top" style="margin-top: 1.5rem; line-height: 140%; font-size: 12px;">For any queries or assistance, please contact us a <a href="maito:" style="color: #039be5; text-decoration:none; font-size: 12px;">help@mydthshop.com</a></p>
-    		  <p class="margin-top1" style="margin-top: 2rem; line-height: 140%; font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-    		  <p class="margin-top" style="margin-top: 1.5rem; line-height: 140%; font-size: 12px;">Best Regards</p>
-    		  <span>Team Mydthshop</span><br>
-    		  <a href="https://www.mydthshop.com/" target="_blank" style="color: #039be5; text-decoration:none; font-size: 12px;">https://www.mydthshop.com</a>
-    		  <p class="margin-top" style="margin-top: 1.5rem; line-height: 140%; font-size: 12px;"><span class="font600" style="font-weight: 600;">Security Alert</span> - on the off chance that you get a suspicious mail from anybody professing to be a customer of Mydthshop, requesting your own data or some cash by claiming to offer you an occupation kindly don't react to such sends and convey it to the quick notice of mydthshop.com by keeping in touch with us at help@mydthshop.com. It would be ideal if you take note of that such offers/messages are an infringement of our Terms and Conditions, and mydthshop.com does not support such correspondence with competitors.</p>
-        </div>
-      </div>
-		</div>
-	</div>
-</section> -->
+</div>  
 <app-footer></app-footer>
