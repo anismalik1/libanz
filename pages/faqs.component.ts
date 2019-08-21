@@ -20,6 +20,7 @@ export class FaqsComponent implements OnInit {
   faqs : any;
   single : any;
   searched : any;
+  faq_url : string;
   constructor(
     private fb: FormBuilder,
     private todoservice: TodoService,
@@ -49,7 +50,9 @@ export class FaqsComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(params => {
       let url = params['name']; //log the value of id
-      this.print_faq(url);
+      this.faq_url = url;
+      if(typeof url != 'undefined')
+        this.print_faq(url);
     });
     
     this.faqs_list();
@@ -58,14 +61,21 @@ export class FaqsComponent implements OnInit {
 
   unsatisfied(form)
   {
+    form.faq_url = this.faq_url;
     this.spinner.show();
     this.todoservice.send_feed({token : this.get_token(),form: form})
     .subscribe(
       data => 
       {
         this.spinner.hide();
+        this.toastr.error("Thank you. Your feedback helps us to continually improve our content.");
       }
     ) 
+  }
+
+  thanks()
+  {
+    this.toastr.error("Thank you. Your feedback helps us to continually improve our content.");
   }
   init_script()
   {
