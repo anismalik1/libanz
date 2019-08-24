@@ -39,7 +39,7 @@ constructor(private title: Title, public todoservice : TodoService,
           if(data.PAGEDATA[0].image != '')
           {
             $('.hero').css('background','url(https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
-            $('.hero').css('background-repeat','no-repeat');
+            $('.hero').css('background-repeat','no-repeat');            
           }
           $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
