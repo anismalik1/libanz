@@ -19,7 +19,8 @@ export class FaqsComponent implements OnInit {
   unsatisfiedformgroup : FormGroup;
   faqs : any;
   single : any;
-  searched : any;
+  search_list : any = [];
+  searched : boolean = false;
   faq_url : string;
   constructor(
     private fb: FormBuilder,
@@ -38,6 +39,7 @@ export class FaqsComponent implements OnInit {
         'name' : [null,Validators.compose([Validators.required])],
         'email' : [null,Validators.email],
         'message' : ['',Validators.compose([Validators.required])],
+        'phone' : ['',Validators.compose([Validators.required])],
       });
 
       this.unsatisfiedformgroup = fb.group({
@@ -52,7 +54,10 @@ export class FaqsComponent implements OnInit {
       let url = params['name']; //log the value of id
       this.faq_url = url;
       if(typeof url != 'undefined')
+      {
         this.print_faq(url);
+      }
+        
     });
     
     this.faqs_list();
@@ -119,7 +124,8 @@ export class FaqsComponent implements OnInit {
         this.spinner.hide();
         //this.faqs = data.faqs;
         this.init_script();
-        this.searched = data.faq;
+        this.search_list = data.faq;
+        this.searched = true;
       }
     )
   }
@@ -133,7 +139,7 @@ export class FaqsComponent implements OnInit {
         this.spinner.hide();
         this.single = data.faq[0];
         this.route.navigate(['/p/faqs/'+this.single.url])
-        this.searched = [];
+        this.search_list = [];
       }
     ) 
   }

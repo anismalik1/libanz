@@ -41,8 +41,8 @@
           <input placeholder="Search Your Answer" id="faq_key" type="text" class="validate">
           <button type="Submit" class="btn-flat" (click)="search_faqs();"><i class="material-icons orange-text font-size-change2">search</i></button>
         </li>
-      </ul>
-      <div *ngIf="searched && searched.length == 0">
+      </ul> 
+      <div *ngIf="searched && search_list.length == 0">
           <h4 class="red-text center margin-top1">No Records. Please fill up the form to find your Solution.</h4>
       </div> 
       <div class="faqs-text" *ngIf="single">
@@ -84,7 +84,7 @@
               <div class="input-field col s12">
                 <input id="mphone" type="number" class="validate" formControlName="phone">
                 <label for="email">Phone*</label>
-                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Phone No.*.</div>
+                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['phone'].valid && faqsgroup.controls['phone'].touched">Enter Valid Phone No.*.</div>
               </div>
               <div class="input-field col s12">
                 <textarea id="textarea11" class="materialize-textarea" formControlName="message"></textarea>

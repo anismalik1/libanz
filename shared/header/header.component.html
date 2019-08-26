@@ -52,12 +52,12 @@
 					<ul id="dropdown-notice" class="dropdown-content notifications-dropdown">
 						<li class="notificatoins-dropdown-container">
 							<ul class="notification-drop-ul">
-								<li *ngFor="let item of notifications;">
+								<li *ngFor="let item of notifications;" >
 									<div class="notification-drop-image">
 										<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
 									</div>
 									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
-										<p [innerHTML]="item.comment"></p>
+										<p [innerHTML]="item.visitor_comment"></p>
 										<time class="grey-text">{{time_ago(item.history_time)}}</time>
 									</div>
 								</li>							

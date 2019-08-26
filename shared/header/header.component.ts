@@ -359,9 +359,14 @@ export class HeaderComponent implements OnInit{
             }
             this.notifications = data.notifications;
             this.notification_count =  data.notification_count[0];
+            this.notifications = this.filter_notification(this.notifications);
           }
         }
       )
+  }
+  filter_notification(notifications)
+  {
+    return notifications.filter(option => option.visitor_comment != null);
   }
 
   user_favourites()
@@ -476,6 +481,15 @@ export class HeaderComponent implements OnInit{
     this._renderer2.appendChild(this._document.body, script);
   }
 
+  check_null(string)
+  {
+    if(string != null && string.length > 0 )
+      var a = true;
+    else
+      var a = false;
+    console.log(a)
+    return a;    
+  }
 }
 
 
