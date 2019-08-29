@@ -54,11 +54,11 @@
         <a href="#no-faq" class="btn red modal-trigger">No</a>
       </div>
       
-      <div class="faqs-text" *ngIf="searched && searched.length > 0">
+      <div class="faqs-text" *ngIf="searched && search_list.length > 0">
         <h2>Searched Query</h2>
-        <span class="grey-text">Showing {{searched.length}} results</span>
+        <span class="grey-text">Showing {{search_list.length}} results</span>
         <ul>
-          <li *ngFor="let item of searched;">
+          <li *ngFor="let item of search_list;">
             <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
             <p [innerHTML]="item.meta_description"></p>
           </li>

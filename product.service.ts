@@ -118,13 +118,14 @@ export class ProductService {
         {
           let cart :any = JSON.parse(localStorage.getItem('cart'));
           let index : number = -1;
+          cart = cart.filter(data => data.id != push_cart_id);
+
           for(var i =0;i< Object.keys(cart).length;i++)
           {
-            let item :Item = JSON.parse(cart[i]);
-            if(item.product.id == push_cart_id)
+            let temp :Item = JSON.parse(cart[i]);
+            if(temp.product.id == push_cart_id)
             {
-              index = i;
-              break;
+              cart.splice(i, 1);
             } 
           }
           

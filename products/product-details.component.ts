@@ -375,7 +375,15 @@ export class ProductDetailsComponent implements OnInit{
         }
         else
         {
-          this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet;
+          if(this.todoservice.get_user_type() == 2)
+          {
+            this.product.partnerwalletamount = data.PRODUCTDATA.partner_cashback_wallet;
+          }
+          else
+          {
+            this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet;
+          }
+          
         }
         this.circles = data.circles;
         if(data.PROMOS && data.PROMOS.length > 0)
@@ -493,9 +501,20 @@ export class ProductDetailsComponent implements OnInit{
     return Number(string);
   }
 
-  fetch_all_multi(category_id)
+  fetch_all_multi(category_id,product_id)
   {
-    this.spinner.show() 
+    if(!this.get_token())
+    {
+      $('.logup.modal-trigger')[0].click();
+      setTimeout(()=>{    
+        $('.multi-close')[0].click();
+       }, 1000);
+      
+      this.toastr.error("Please Login to proceed", 'Failed! ');
+      return false;
+    }
+    this.spinner.show();
+    this.add_to_cart(product_id) 
     this.productservice.fetch_all_multi({category_id: category_id})
     .subscribe(
     data => 
@@ -657,7 +676,6 @@ export class ProductDetailsComponent implements OnInit{
       this.toastr.error("Please Login to proceed", 'Failed! ');
       return false;
     }
-  
     if(!this.productservice.if_exist_in_cart(p_id))
     {
       this.productservice.addto_cart(p_id,this.product);
@@ -726,7 +744,10 @@ export class ProductDetailsComponent implements OnInit{
           return elementBottom > viewportTop && elementTop < viewportBottom;
       };
       $(window).scroll(function (event) {
-    
+        if($.fn.isInViewport)
+        {
+          return false;
+        }
         if($(window).width() >767){
         var scroll = $(window).scrollTop();
         if(scroll >= 132)

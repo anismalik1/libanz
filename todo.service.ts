@@ -40,13 +40,20 @@ export class TodoService {
       .subscribe(
         data => 
         {
+          //console.log(data);
           if(data.status == 'Invalid Token')
           {                                                     
             this.authservice.clear_session();
             this.router.navigate(['/login']);
           }
           this.set_user_data(data.USER);
-
+          let storeddata = JSON.parse(localStorage.getItem('app_token'));
+          if(storeddata != null)
+          {
+            storeddata.user = data.USER; 
+            localStorage.setItem('app_token',JSON.stringify(storeddata));
+          } 
+          
         }
       )  
     }
@@ -90,6 +97,7 @@ export class TodoService {
 
   get_user_type()
   {
+    //console.log(this.get_user().user_type);
     if(this.get_user() != null)
       return this.get_user().user_type;
     else

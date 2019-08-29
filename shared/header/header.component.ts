@@ -114,13 +114,13 @@ export class HeaderComponent implements OnInit{
             this.todoservice.set_user_data(user);
             $('.login-modal-close').click();
             let url = window.location.pathname+window.location.hash
-            if(url == '/home' || url == '' || url == '/' || url == "/home%23login")
+            if(url == url)
             {
               this.router.routeReuseStrategy.shouldReuseRoute = function(){
                 return false;
              }
             this.router.navigated = false;
-              this.router.navigate(['/home#login']);
+            this.router.navigate([url]);
             }
           }
           else  
