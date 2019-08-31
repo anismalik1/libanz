@@ -3983,14 +3983,14 @@ canvas {
   .paid-new br{display:none;}
 
 /* Css Yaha Se Dalana */
-.testimonial-card{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15); margin-bottom: 2rem;}
-	.testimonial-card:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31); transition: .3s all linear;}
+.testimonial-card{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; margin-bottom: 2rem; border-radius: 5px;}
+	.testimonial-card:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
 	.testimonial-card .testimonial-text{padding: 1rem 3rem 10px;}
 	.testimonial-card .testimonial-card-image{padding: 0 3rem 3rem;}
 	.testimonial-card .testimonial-card-image cite{ font-size: 18px; font-weight: 600;
 		text-transform: capitalize;}
-	.testimonial-card .testimonial-card-image span{ font-size: 15px; font-weight: 300; color: #bfbfbf;}
-	.card-image img{
+	.testimonial-card .testimonial-card-image p{ font-size: 15px; font-weight: 300; color: #bfbfbf; margin:0;}
+	.testimonial-card-image img{
     width: 60px !important;
     height: 60px !important;
     float: left;
@@ -4011,7 +4011,7 @@ canvas {
 		text-align: justify;	    
 		color: #757575 !important;
 	}
-	.test-earn{padding: 3rem 0; background-repeat: no-repeat; background-size: cover; background-position: center;}
+	.test-earn{padding: 3rem 0; background-repeat: no-repeat; background-size: cover; background-position: center; position: relative;}
 .test-earn::after{background-image: url('https://www.mydthshop.com/web-app/assets/images/testimonial-bg.jpg'); position: absolute; content: ''; width: 125%; top: 0; height: 100%; left: -6%; z-index: 9;}  
 .test-earn .card{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; z-index: 999;}
 .test-earn:hover .card{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
@@ -4024,4 +4024,5 @@ canvas {
 .order-lost{margin-top: 2rem; font-weight: 600;}
 .order-lost li{margin-top: 1rem;}
 .order-lost li strong{font-weight: 600; font-size: 12px;}
+.mydth-follow ul{column-count: 2;}
 /* End Here */
