@@ -96,7 +96,7 @@ login_submit(login)
           let user : any = data.user;
           this.toastr.success('You are logging in...', 'Success!');
           this.authService.AccessToken = this.token_params.accessToken;
-          this.authService.storage(data);
+          this.authService.storage(data); 
           this.todoservice.set_user_data(user);
           this.user_favourites();
           if(this.ref)

@@ -74,7 +74,7 @@
 									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #operator>
 										<span *ngFor="let item of operators.MOBILEPREPAID;">
 											<mat-option [value]="item.id">
-												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span> 
 									</mat-select>
@@ -86,7 +86,7 @@
 									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator>
 										<span *ngFor="let item of operators.MOBILEPOSTPAID;">
 											<mat-option [value]="item.id">
-												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
 									</mat-select>
@@ -564,7 +564,7 @@
 		<div class="row mar-row responsive-kro">
 			<a class="modal-close recharge-close" href="javascript:" (click)="back_to_recharge()"><i class="material-icons">close</i></a>
 			<div class="col s12 m12 l6">
-				<img src="https://mydthshop.com/media/uploads/api_catimages/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
+				<img src="https://mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
 				<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
 				<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 			</div>

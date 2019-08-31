@@ -89,7 +89,7 @@
 			<div class="card">
 					<div class="card-content">
 					<div class="col s12 m12 l5">
-						<img src="https://mydthshop.com/media/uploads/api_catimages/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
+						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
 						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
@@ -167,7 +167,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #operator>
 									<span *ngFor="let item of operators.MOBILEPREPAID;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span> 
 								</mat-select>
@@ -179,7 +179,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator>
 									<span *ngFor="let item of operators.MOBILEPOSTPAID;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
 								</mat-select>
@@ -217,7 +217,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
 									<span *ngFor="let item of operators.DTH;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option> 
 									</span>
 								</mat-select>
@@ -262,7 +262,7 @@
 									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'card')" formControlName="operator" #predataoperator>
 										<span *ngFor="let item of operators.DATACARDS;">
 											<mat-option [value]="item.id">
-												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
 									</mat-select>
@@ -274,7 +274,7 @@
 									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'card')" formControlName="operator" #postdataoperator>
 										<span *ngFor="let item of operators.DATACARDS;">
 											<mat-option [value]="item.id">
-												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
 									</mat-select>
@@ -313,7 +313,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'landline')" formControlName="operator">
 									<span *ngFor="let item of operators.LANDLINECAT;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
 								</mat-select>
@@ -355,7 +355,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'broadband')" formControlName="operator">
 									<span *ngFor="let item of operators.BROADCAT;">
 										<mat-option [value]="+item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
 								</mat-select>
@@ -401,7 +401,7 @@
 									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'electricity')" formControlName="operator">
 										<span *ngFor="let item of electricity_operators;">
 											<mat-option [value]="item.id">
-												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
 									</mat-select>
@@ -442,7 +442,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'gas')" formControlName="operator">
 									<span *ngFor="let item of operators.GAS;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
 								</mat-select>
@@ -483,7 +483,7 @@
 								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'water')" formControlName="operator">
 									<span *ngFor="let item of operators.WATER;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
 								</mat-select>
@@ -523,7 +523,7 @@
 								<mat-select placeholder="Select Operator">
 									<span *ngFor="let item of operators.ELECTRICITY;">
 										<mat-option [value]="item.id">
-											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://mydthshop.com/media/uploads/api_catimages/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
+											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
 								</mat-select>

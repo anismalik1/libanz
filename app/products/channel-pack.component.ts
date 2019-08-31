@@ -72,7 +72,7 @@ export class ChannelPackComponent implements OnInit {
   fetch_channels(channel)
   {
     this.spinner.show();
-		  let data = {token : this.get_token(),channel : channel};
+		  let data = {token : this.get_token(),channel : channel,month:this.month};
 		  this.productservice.fetch_channels(data)
 		  .subscribe(
 			data => 
