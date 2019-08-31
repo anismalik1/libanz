@@ -49,8 +49,8 @@ export class RechargeComponent implements OnInit {
   circles : any;
   pay_step : number = 1;
   prepaid_list : number = 1;
-  dthminlength : number = 0;
-  dthmaxlength : number = 0;
+  dthminlength : number = 8;
+  dthmaxlength : number = 12;
   viewrange : number = 0;
   showstd : number = 0;
   mobilegroup : FormGroup;
@@ -476,11 +476,14 @@ export class RechargeComponent implements OnInit {
     }
     this.spinner.show();	
 		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
+    //console.log(this.rechargeData);
     this.todoservice.recharge_init(this.rechargeData)
 		.subscribe(
 			data => 
 			{
-				this.spinner.hide();
+        this.spinner.hide();
+        this.rechargeData.operator_api_id = data.recharge_id;
+        this.addto_recharge_cart(this.rechargeData);
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
@@ -494,7 +497,7 @@ export class RechargeComponent implements OnInit {
 				this.rechargeData.recharge_name = data.recharge_name;	
 				this.rechargeData.title = data.title;
         this.recharge_ini = 2;
-        this.addto_recharge_cart(this.rechargeData);
+       
         //this.router.navigate(['/recharge/'+this.url_name+'/proceed']);				
 			  }
 			}

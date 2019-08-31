@@ -218,7 +218,6 @@ export class HomeComponent implements OnInit {
         if(!$.isEmptyObject(data))
         {
           var recharge_data :any = {circle_id : circle_id,operator_id : this.selectedOperator , operator_api_id: data.OPERATOR[0].recharge_id,recharge_id: this.rechargeId,title :  'mobile'};
-          //console.log(recharge_data);
           this.navigate_to(recharge_data);
         }
         this.spinner.hide();
@@ -969,7 +968,9 @@ toTimestamp(strDate){
 		.subscribe(
 			data => 
 			{
-				this.spinner.hide();
+        this.spinner.hide();
+        this.rechargeData.operator_api_id = data.recharge_id;
+        this.todoservice.set_recharge('recharge_cart',this.rechargeData);
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
@@ -980,12 +981,12 @@ toTimestamp(strDate){
 			  data =  JSON.parse(b.replace(/\\/g, ''));
 			  if(!$.isEmptyObject(data))
 			  {
-				this.rechargeData.api_img = data.api_img;	
-				this.rechargeData.cat_title = data.cat_title;	
-				this.rechargeData.recharge_name = data.recharge_name;	
-				this.rechargeData.title = data.title;
-        this.recharge_ini = 2;
-        this.todoservice.service_url = this.todoservice.server_url+'index.php?/app_services/'; 				
+          this.rechargeData.api_img = data.api_img;	
+          this.rechargeData.cat_title = data.cat_title;	
+          this.rechargeData.recharge_name = data.recharge_name;	
+          this.rechargeData.title = data.title;
+          this.recharge_ini = 2;
+          this.todoservice.service_url = this.todoservice.server_url+'index.php?/app_services/'; 				
 			  }
 			}
 		  );
