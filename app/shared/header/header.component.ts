@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit{
   myControl = new FormControl();
   logingroup : FormGroup;
   signupgroup : FormGroup;
+  start : number = 0;
+  more_display : boolean = true;
   remember : any = {rm:false,ph:'',pw : ''};
     private token_params : Authparams;
     public phone : number;
@@ -36,7 +38,7 @@ export class HeaderComponent implements OnInit{
     private user_type : number;
     private verify : number;
     public signupverify : number = 0;
-    public notifications : any;
+    public notifications : any = {};
     public notification_count : Number;
     public favourites : any;
     public favourite_count : number;
@@ -341,13 +343,13 @@ export class HeaderComponent implements OnInit{
     ); 
     this.init_page(); 
     this.todoservice.get_user_data();
-    this.user_notification();
+    this.user_notification(this.start);
     this.user_favourites()
   }
 
-  user_notification()
+  user_notification(start)
   {
-    this.todoservice.fetch_user_notifications({token: this.get_token()})
+    this.todoservice.fetch_user_notifications({token: this.get_token(),start: start})
       .subscribe(
         data => 
         {
@@ -357,15 +359,39 @@ export class HeaderComponent implements OnInit{
             {
               return false;
             }
-            this.notifications = data.notifications;
+            //
+            
+            if(this.notifications.length > 0)
+            {
+              this.notifications = this.notifications.concat(data.notifications)
+            }
+            else
+            {
+              this.notifications = data.notifications;
+            }
+            if(data.more_enable)
+              this.more_display = true;
+            else
+              this.more_display = false; 
+            $('#loading-more').remove();
+
             this.notification_count =  data.notification_count[0];
             this.notifications = this.filter_notification(this.notifications);
           }
         }
       )
   }
+
+  load_more_notification()
+  {
+    $('#more-display').after('<span id="loading-more">Loading...</span>');
+    this.start += 10;
+    this.user_notification(this.start);
+  }
+
   filter_notification(notifications)
   {
+    if(notifications.length > 0)
     return notifications.filter(option => option.visitor_comment != null);
   }
 
@@ -431,7 +457,7 @@ export class HeaderComponent implements OnInit{
         $('.suce-msg-chat').removeClass('hide');
         $('.chat-form').addClass('hide');
       });
-      $('#login-modal').modal();
+      $('#login-modal').modal(); 
       $('.dropdown-button').dropdown({
         inDuration: 300,
         outDuration: 225,
@@ -448,7 +474,7 @@ export class HeaderComponent implements OnInit{
       })
       $('.login-modal-close').click(function(){
         $('#login-modal').modal('close');
-      })
+      });
     })
     
     $('.button-collapse').sideNav({
@@ -487,7 +513,6 @@ export class HeaderComponent implements OnInit{
       var a = true;
     else
       var a = false;
-    console.log(a)
     return a;    
   }
 }
