@@ -10,6 +10,7 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { page404Component } from '../pages/404.component';
 import { SideNavComponent } from '../shared/side-nav/side-nav.component';
 
+
 @NgModule({
   imports: [CommonModule,
     FormsModule,

@@ -141,7 +141,6 @@ export class HeaderComponent implements OnInit{
       )  
   }
 
-  
   time_ago(time) {
     switch (typeof time) {
       case 'number':
@@ -176,7 +175,7 @@ export class HeaderComponent implements OnInit{
       token = 'ago',
       list_choice = 1;
   
-    if (seconds == 0) {
+    if (seconds < 60) {
       return 'Just now'
     }
     if (seconds < 0) {
