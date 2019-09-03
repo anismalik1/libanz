@@ -108,14 +108,14 @@ export class HeaderComponent implements OnInit{
           this.token_params = data;
           if(typeof data.status != 'undefined' && data.status == true)
           {
-            
+            $('.login-modal-close').click();
             let user : any = data.user;
             this.step = 1;
             this.authService.AccessToken = this.token_params.accessToken;
             this.authService.storage(data);
             this.todoservice.set_user_data(user);
-            $('.login-modal-close').click();
-            let url = window.location.pathname+window.location.hash
+            let url = window.location.pathname;
+            console.log(url);
             if(url == url)
             {
               this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -341,6 +341,10 @@ export class HeaderComponent implements OnInit{
       map(value => this._filter(value))
     ); 
     this.init_page(); 
+    if(!this.get_token())
+    {
+      return false;
+    }
     this.todoservice.get_user_data();
     this.user_notification(this.start);
     this.user_favourites()
@@ -358,7 +362,6 @@ export class HeaderComponent implements OnInit{
             {
               return false;
             }
-            //
             
             if(this.notifications.length > 0)
             {
@@ -410,8 +413,6 @@ export class HeaderComponent implements OnInit{
                 return false;
               }
               localStorage.setItem('favourite', JSON.stringify(data.favourites));
-              //this.favourites = data.favourites.items;
-              //this.favourite_count =  data.favourite_count;
             }
           }
         )
@@ -420,7 +421,6 @@ export class HeaderComponent implements OnInit{
     {
       let data = JSON.parse(favourite);
       this.favourite_count =  data.count;
-      //this.favourites = data.favourites.items;
     }   
   }
 
@@ -471,9 +471,6 @@ export class HeaderComponent implements OnInit{
       $('.logup.modal-trigger').click(function(){
         $('#login-modal').modal('open');
       })
-      $('.login-modal-close').click(function(){
-        $('#login-modal').modal('close');
-      });
     })
     
     $('.button-collapse').sideNav({

@@ -35,10 +35,14 @@ private retrieve() {
     let storedToken:string = localStorage.getItem(this.tokenKey);
     if(!storedToken)
     {
-      $('.logup.modal-trigger').click();
       throw 'no token found';
     } 
     return storedToken;
+}
+
+call_login_popup()
+{
+  $('.logup.modal-trigger').click();
 }
 
 get_remember()

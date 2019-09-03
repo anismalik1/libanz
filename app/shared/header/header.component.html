@@ -98,6 +98,210 @@
 					<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
 				</div>
 			</div>
+			<div id="login-modal" class="modal">
+				<div class="modal-content no-padding">
+					<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
+					<div class="row no-margin">
+						<div class="col s12 m4 orange no-padding hide-on-med-and-down">
+							<div class="login-modal">
+								<div class="padd-rem1 login-text">
+									<h2 class="white-text">LOGIN</h2>
+									<p class="white-text font-size-change1">Get access to your Orders,Recent Orders & Recommendations</p>
+								</div>
+								<div class="padd-rem1 signup-text hide">
+									<h2 class="white-text">SIGN UP</h2>
+									<p class="white-text font-size-change1">We do not share your details with anyone.</p>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m8">
+							<div class="tabs-sign-up">
+								<ul id="tabs-swipe-demo" class="tabs">
+									<li class="tab col s6"><a class="active" href="#login" id="login-a">Login to MyDthShop</a></li>
+									<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
+								</ul>
+								<div id="login" class="col s12">
+									<div class="login" *ngIf="step == 1">
+									<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix margin-top-cart2">phone</i>
+													<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
+													<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
+													<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
+												</div>
+											
+											<div class="input-field col s12 forget-click">
+												<i class="material-icons prefix margin-top-cart2">lock</i>
+												<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
+												<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
+											</div>
+											<div class="col s12 m6">
+												<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
+										  <label for="remember-me">Remember Me</label>
+											</div>
+											<div class="col s12 m6 right-align">
+												<a routerLink="/forgot-password/recover" class="orange-text font-size-change if-forget-click modal-close">Forgot Password?</a>
+											</div>
+											<div class="col s12 center margin-top">
+												<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Login</button>
+											</div>
+										</div>
+										<!-- <div class="row no-margin center">
+											<div class="col s12 m12">
+												<span class="font-size-change">Login With Social Media</span>
+											</div>
+											<div class="col s12 m12 margin-top-cart2">
+												<a href="#" class="facebook fa-login"><img src="{{this.todoservice.base_url}}assets/images/facebook.png"> Facebook</a>
+												<a href="#" class="facebook fa-goo"><img src="{{this.todoservice.base_url}}assets/images/plus.png"> Google</a>
+											</div>
+										</div> -->
+									</form>
+									</div>
+									<div class="otp-step margin-top1" *ngIf="step == 2">
+										<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
+										<div class="upper-text center">
+											<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
+											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+										</div>
+										<div class="row">
+											<div class="input-field col s12 center otp-inputa" id="inputs">
+													<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
+													<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
+													<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+													<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+											</div>
+											<div class="col s12 center margin-top">
+												<span class="font-size-change1">Don't recieve OTP 
+												<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+											</div>			
+										</div>
+										<div class="row">
+											<div class="col s12 center">
+												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
+												<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+											</div>
+										</div>
+									</form>
+									</div>
+								</div>
+								<div id="signup" class="col s12">
+									<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
+										<div class="col s12 border-every">
+											<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
+												<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
+												<span class="font-size-change1 font600">Become a User</span>
+											</a>
+										</div>
+										<div class="col s12  center or-for-span">
+											<span class="font-size-change relative">OR</span>
+										</div>
+										<div class="col s12  border-every">
+											<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
+												<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
+												<span class="font-size-change1 font600">Become a Retailer</span>
+											</a>
+										</div>
+									</div>
+									<div id="stepep2" *ngIf="signup == 1">
+										<div *ngIf="signupverify == 0">
+										<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
+											<div class="row">
+												<div class="input-field col s12">
+													<i class="material-icons prefix margin-top-cart2">person</i>
+													<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
+													<label for="name">Enter Name*</label>
+													<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
+														<span class="red-text ">*Name is Required.</span>
+													</div>
+												</div>
+												<div class="input-field col s6">
+													<i class="material-icons prefix margin-top-cart2">phone</i>
+													<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
+													<label for="phn_number">Phone Number*</label>
+													<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
+														<span class="red-text"> Phone Number is not valid.</span>
+													</div>
+												</div>
+												<div class="input-field col s6">
+													<i class="material-icons prefix margin-top-cart2">mail</i>
+													<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
+													<label for="enter_email">Enter Email</label>
+													<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
+														<span class="red-text"> Email is not valid.</span>
+													</div>
+												</div>
+												<div class="input-field col s6">
+													<i class="material-icons prefix margin-top-cart2">lock</i>
+													<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
+													<label for="enter_passcode">Enter Password</label>
+													<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
+														<span class="red-text">Password is Required.</span> 
+													</div>
+												</div>
+												<div class="input-field col s6">
+													<i class="material-icons prefix margin-top-cart2">lock</i>
+													<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
+													<label for="confirm_passcode">Confirm Password</label>
+													<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
+														<span class="red-text">Check Confirm Password.</span>
+													</div>
+												</div>
+												<div class="col s12">
+													<p>
+														<input name="user_type" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
+														<label for="test1">Become User</label>
+													</p>
+													<p>
+														<input name="user_type" formControlName="user_type" type="radio" value="2" id="test2"/>
+														<label for="test2">Become Merchant</label>
+													</p>
+													<p>
+														<input name="user_type" formControlName="user_type" type="radio" value="3" id="test3"/>
+														<label for="test3">Become Partner</label>
+													</p>
+												</div>
+												
+												<div class="col s12 center margin-top">
+													<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
+													<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid">Sign up</button>
+												</div>
+											</div>
+										</form>
+										</div>	
+										<div class="otp-step margin-top1" *ngIf="signupverify == 1">
+												<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
+												<div class="upper-text center">
+													<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
+													<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+												</div>
+												<div class="row">
+													<div class="input-field col s12 center otp-inputa" id="inputs">
+															<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
+															<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
+															<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+															<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+													</div>
+													<div class="col s12 center margin-top">
+														<span class="font-size-change1">Don't recieve OTP 
+														<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+													</div>			
+												</div>
+												<div class="row">
+													<div class="col s12 center">
+														<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
+														<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+													</div>
+												</div>
+											</form>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
 	</header>
 	<!-- End Here -->
 	<!-- Side Navigation -->
@@ -128,218 +332,6 @@
 	  <li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
 	</ul>
 	<!-- End Here -->
-	<div id="login-modal" class="modal">
-		<div class="modal-content no-padding">
-			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
-			<div class="row no-margin">
-				<div class="col s12 m4 orange no-padding hide-on-med-and-down">
-					<div class="login-modal">
-						<div class="padd-rem1 login-text">
-							<h2 class="white-text">LOGIN</h2>
-							<p class="white-text font-size-change1">Get access to your Orders,Recent Orders & Recommendations</p>
-						</div>
-						<div class="padd-rem1 signup-text hide">
-							<h2 class="white-text">SIGN UP</h2>
-							<p class="white-text font-size-change1">We do not share your details with anyone.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col s12 m8">
-					<div class="tabs-sign-up">
-						<ul id="tabs-swipe-demo" class="tabs">
-							<li class="tab col s6"><a class="active" href="#login" id="login-a">Login to MyDthShop</a></li>
-							<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
-						</ul>
-						<div id="login" class="col s12">
-							<div class="login" *ngIf="step == 1">
-							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
-											<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
-											<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
-										</div>
-									
-									<div class="input-field col s12 forget-click">
-										<i class="material-icons prefix margin-top-cart2">lock</i>
-										<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
-										<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
-									</div>
-									<div class="col s12 m6">
-										<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
-								  <label for="remember-me">Remember Me</label>
-									</div>
-									<div class="col s12 m6 right-align">
-										<a routerLink="/forgot-password/recover" class="orange-text font-size-change if-forget-click modal-close">Forgot Password?</a>
-									</div>
-									<div class="col s12 center margin-top">
-										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Login</button>
-									</div>
-								</div>
-								<!-- <div class="row no-margin center">
-									<div class="col s12 m12">
-										<span class="font-size-change">Login With Social Media</span>
-									</div>
-									<div class="col s12 m12 margin-top-cart2">
-										<a href="#" class="facebook fa-login"><img src="{{this.todoservice.base_url}}assets/images/facebook.png"> Facebook</a>
-										<a href="#" class="facebook fa-goo"><img src="{{this.todoservice.base_url}}assets/images/plus.png"> Google</a>
-									</div>
-								</div> -->
-							</form>
-							</div>
-							<div class="otp-step margin-top1" *ngIf="step == 2">
-								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
-								<div class="upper-text center">
-									<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-									<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-								</div>
-								<div class="row">
-									<div class="input-field col s12 center otp-inputa" id="inputs">
-											<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-											<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-											<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-											<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
-									</div>
-									<div class="col s12 center margin-top">
-										<span class="font-size-change1">Don't recieve OTP 
-										<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
-									</div>			
-								</div>
-								<div class="row">
-									<div class="col s12 center">
-										<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
-										<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
-									</div>
-								</div>
-							</form>
-							</div>
-						</div>
-						<div id="signup" class="col s12">
-							<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
-								<div class="col s12 border-every">
-									<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
-										<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
-										<span class="font-size-change1 font600">Become a User</span>
-									</a>
-								</div>
-								<div class="col s12  center or-for-span">
-									<span class="font-size-change relative">OR</span>
-								</div>
-								<div class="col s12  border-every">
-									<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
-										<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
-										<span class="font-size-change1 font600">Become a Retailer</span>
-									</a>
-								</div>
-							</div>
-							<div id="stepep2" *ngIf="signup == 1">
-								<div *ngIf="signupverify == 0">
-								<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix margin-top-cart2">person</i>
-											<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
-											<label for="name">Enter Name*</label>
-											<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
-												<span class="red-text ">*Name is Required.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
-											<label for="phn_number">Phone Number*</label>
-											<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
-												<span class="red-text"> Phone Number is not valid.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">mail</i>
-											<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
-											<label for="enter_email">Enter Email</label>
-											<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
-												<span class="red-text"> Email is not valid.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">lock</i>
-											<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
-											<label for="enter_passcode">Enter Password</label>
-											<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
-												<span class="red-text">Password is Required.</span> 
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">lock</i>
-											<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
-											<label for="confirm_passcode">Confirm Password</label>
-											<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
-												<span class="red-text">Check Confirm Password.</span>
-											</div>
-										</div>
-										<div class="col s12">
-											<p>
-												<input name="user_type" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
-												<label for="test1">Become User</label>
-											</p>
-											<p>
-												<input name="user_type" formControlName="user_type" type="radio" value="2" id="test2"/>
-												<label for="test2">Become Merchant</label>
-											</p>
-											<p>
-												<input name="user_type" formControlName="user_type" type="radio" value="3" id="test3"/>
-												<label for="test3">Become Partner</label>
-											</p>
-										</div>
-										
-										<div class="col s12 center margin-top">
-											<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
-											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid">Sign up</button>
-										</div>
-									</div>
-								</form>
-								</div>	
-								<div class="otp-step margin-top1" *ngIf="signupverify == 1">
-										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
-										<div class="upper-text center">
-											<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-										</div>
-										<div class="row">
-											<div class="input-field col s12 center otp-inputa" id="inputs">
-													<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-													<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-													<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-													<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
-											</div>
-											<div class="col s12 center margin-top">
-												<span class="font-size-change1">Don't recieve OTP 
-												<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
-											</div>			
-										</div>
-										<div class="row">
-											<div class="col s12 center">
-												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
-												<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
-											</div>
-										</div>
-									</form>
-								</div>
-								<!-- <div class="row center">
-									<div class="col s12 m12">									
-										<span class="font-size-change">Sign Up With Social Media</span>
-									</div>
-									<div class="col s12 m/12 margin-top-cart2">
-										<a href="javascript:" class="facebook fa-login"><img src="{{this.todoservice.base_url}}assets/images/facebook.png"> Facebook</a>
-										<a href="javascript:" class="facebook fa-goo"><img src="{{this.todoservice.base_url}}assets/images/plus.png"> Google</a>
-									</div>
-								</div> -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	

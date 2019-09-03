@@ -268,7 +268,6 @@ export class ProductDetailsComponent implements OnInit{
 
   fetch_review_data()
   {
-    
     this.spinner.show();
     if(!this.get_token())
     {
@@ -668,7 +667,7 @@ export class ProductDetailsComponent implements OnInit{
     else
     {
       this.product.month_pack = this.month;
-    }
+    } 
 
     if(!this.get_token())
     {
@@ -1076,7 +1075,7 @@ export class ProductDetailsComponent implements OnInit{
       var otf_type = 1;
     }
     this.product.otf_pay_type = otf_type;
-    $('.modal-close.close-mode').click();
+    //$('.modal-close.close-mode').click();
   }
 }
 
