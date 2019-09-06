@@ -16,6 +16,7 @@ import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
 import { MerchantComponent } from './merchant.component';
+import { PackageViewComponent } from './package-view.component';
 
 const routes: Routes = [
   { path: '', component: PageViewComponent },
@@ -23,7 +24,11 @@ const routes: Routes = [
   { path: 'partner-on-mydthshop', component: MerchantComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'recover', component: ForgotPasswordComponent },
-  { path: 'forgot-password', component: ContactUsComponent },
+  // { path: 'forgot-password', component: ContactUsComponent },
+  { path: 'tata-sky', component: PackageViewComponent },
+  { path: 'airtel', component: PackageViewComponent },
+  { path: 'dish-tv', component: PackageViewComponent },
+  { path: 'videocon', component: PackageViewComponent },
   { path: 'user-notify/:id', component: NotifyComponent }
   
 ];
@@ -37,7 +42,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent, MerchantComponent],
+  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent, MerchantComponent, PackageViewComponent],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 

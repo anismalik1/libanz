@@ -115,7 +115,6 @@ export class HeaderComponent implements OnInit{
             this.authService.storage(data);
             this.todoservice.set_user_data(user);
             let url = window.location.pathname;
-            console.log(url);
             if(url == url)
             {
               this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -439,6 +438,16 @@ export class HeaderComponent implements OnInit{
     {
       $('#side-nav-script').remove();
     }
+
+    if($('#snatchbot-script'))
+    {
+      $('#snatchbot-script').remove();
+      let script1 = this._renderer2.createElement('script');
+      script1.type = `text/javascript`;
+      script1.id = `side-nav-script`;
+      script1.src = `https://account.snatchbot.me/script.js`;
+      this._renderer2.appendChild(this._document.body, script1);
+    }
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.id = `side-nav-script`;
@@ -480,6 +489,7 @@ export class HeaderComponent implements OnInit{
       draggable: true, // Choose whether you can drag to open on touch screens,
     }); 
   $('.tabs').tabs();
+  setTimeout("window.sntchChat.Init(70574)", 3000);
   (function () {
     var options = {
         whatsapp: "+918010339339", // WhatsApp number
