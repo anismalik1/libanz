@@ -4054,6 +4054,6 @@ canvas {
 #loadmore-modal{padding: 0;}
 #loadmore-modal .modal-content{padding: 0 !important;}
 #loadmore-modal .modal-header{background: #FF6A00; padding: 1.2rem;}
-#loadmore-modal .modal-header h4{margin: 0;font-size: 1.8rem;color: #fff;}
+#loadmore-modal .modal-header h4{margin: 0;font-size: 1.8rem;color: #fff; font-weight: 600; text-transform: uppercase; text-align: center;}
 #loadmore-modal .modal-header .modal-close{top: 2% !important;right: 3% !important;color: #fff !important;}
 /* End Here */
