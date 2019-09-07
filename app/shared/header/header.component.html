@@ -64,7 +64,7 @@
 										<time class="grey-text">{{time_ago(item.history_time)}}</time>
 									</div>
 								</li>							
-								<li><a class="modal-trigger" href="#loadmore-modal">Load More</a></li>
+								<li><a class="modal-trigger font600" href="#loadmore-modal">Load More</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -80,21 +80,33 @@
 		  </nav>		        
 		</div>
 		
-		<div id="loadmore-modal" class="modal" style="width:100%;height:100%">
+		<div id="loadmore-modal" class="modal white" style="width:40%;height:100%">
 				<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
 				<div class="modal-content">
-					<div class="modal-close">close</div>
+					<div class="modal-header">
+						<h4>Notification's</h4>
+						<div class="modal-close right-align"><i class="material-icons">close</i></div>
+					</div>
 					<ul *ngIf="notifications  && notifications.length > 0">
-							<li *ngFor="let item of notifications;" >
-									<div class="notification-drop-image">
-										<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
-									</div>
-									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
-										<p [innerHTML]="item.visitor_comment"></p>
-										<time class="grey-text">{{time_ago(item.history_time)}}</time>
-									</div>
-								</li>
-					</ul>
+						<li *ngFor="let item of notifications;" >
+							<div class="notification-drop-image">
+								<img src="https://www.mydthshop.com/web-app/assets/images/female-uer.png">
+							</div>
+							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
+								<p><span class="font600">Priya Sharma</span> new chat with you</p>
+								<time class="grey-text">{{time_ago(item.history_time)}}</time>
+							</div>
+						</li>
+						<li *ngFor="let item of notifications;" >
+							<div class="notification-drop-image">
+								<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+							</div>
+							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
+								<p [innerHTML]="item.visitor_comment"></p>
+								<time class="grey-text">{{time_ago(item.history_time)}}</time>
+							</div>
+						</li>
+					</ul>										
 					<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
 				</div>
 			</div>
@@ -114,7 +126,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col s12 m8">
+						<div class="col s12 m8 white">
 							<div class="tabs-sign-up">
 								<ul id="tabs-swipe-demo" class="tabs">
 									<li class="tab col s6"><a class="active" href="#login" id="login-a">Login to MyDthShop</a></li>
@@ -144,7 +156,7 @@
 												<a routerLink="/forgot-password/recover" class="orange-text font-size-change if-forget-click modal-close">Forgot Password?</a>
 											</div>
 											<div class="col s12 center margin-top">
-												<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Login</button>
+												<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Submit</button>
 											</div>
 										</div>
 										<!-- <div class="row no-margin center">
@@ -247,24 +259,28 @@
 														<span class="red-text">Check Confirm Password.</span>
 													</div>
 												</div>
-												<div class="col s12">
+												<div class="col s12 m6">
 													<p>
-														<input name="user_type" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
+														<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
 														<label for="test1">Become User</label>
 													</p>
+												</div>
+												<div class="col s12 m6">
 													<p>
-														<input name="user_type" formControlName="user_type" type="radio" value="2" id="test2"/>
+														<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
 														<label for="test2">Become Merchant</label>
 													</p>
+												</div>
+												<div class="col s12 m6">
 													<p>
-														<input name="user_type" formControlName="user_type" type="radio" value="3" id="test3"/>
+														<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
 														<label for="test3">Become Partner</label>
 													</p>
 												</div>
 												
 												<div class="col s12 center margin-top">
-													<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
-													<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid">Sign up</button>
+													<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+													<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid">Submit</button>
 												</div>
 											</div>
 										</form>
