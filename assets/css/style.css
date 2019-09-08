@@ -4053,7 +4053,17 @@ canvas {
 }
 #loadmore-modal{padding: 0;}
 #loadmore-modal .modal-content{padding: 0 !important;}
-#loadmore-modal .modal-header{background: #FF6A00; padding: 1.2rem;}
+#loadmore-modal .modal-header{background: #FF6A00; padding: 1.2rem;}  
 #loadmore-modal .modal-header h4{margin: 0;font-size: 1.8rem;color: #fff; font-weight: 600; text-transform: uppercase; text-align: center;}
 #loadmore-modal .modal-header .modal-close{top: 2% !important;right: 3% !important;color: #fff !important;}
+.twenty-four-seven{margin: 2rem 0 3rem;}
+.twenty-four-seven .card-image img{width:auto;}
+.twenty-four-seven .card-image{padding:2rem 0 0;}
+.twenty-four-seven .card{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; border-radius: 5px;}
+.twenty-four-seven .card:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
+.card-content a{font-size: 1.3rem; font-weight: 600; color: #ff6a00;}
+.customer-support{padding:2rem 5rem !important;}
+.customer-support h3{font-size:2.3rem;}
+.card-new-shadow {box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; border-radius: 5px;}
+.card-new-shadow:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
 /* End Here */
