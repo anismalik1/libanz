@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild ,Renderer2,Inject,} from '@angular/core';
+import { Component, OnInit,ViewChild ,ViewContainerRef,Renderer2,Inject,} from '@angular/core';
 import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -10,8 +10,8 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
 import { RechargeType } from '../recharge.type';
-// import { Recharge } from '../recharge-entities';
 import { Meta ,Title,DOCUMENT} from '@angular/platform-browser';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import * as $ from 'jquery';
 
 @Component({
@@ -92,7 +92,9 @@ export class RechargeComponent implements OnInit {
     private location : Location,
     public recharge_type : RechargeType,
     private title : Title,
-    private meta : Meta
+    private meta : Meta,
+    private toastr : ToastsManager,
+    private vcr: ViewContainerRef,
   ) {
     
     // if(this.activatedroute.snapshot.url.length > 2 && this.activatedroute.snapshot.url[2].path != '')
@@ -105,6 +107,7 @@ export class RechargeComponent implements OnInit {
     //   }
       
     // }
+    this.toastr.setRootViewContainerRef(vcr);
       this.url_name = this.activatedroute.snapshot.params['name'];
       this.ini_recharge_tabs(this.url_name);
     this.mobilegroup = fb.group({
@@ -517,13 +520,18 @@ recharge_handle()
 	.subscribe(
         data => 
         {
+          this.spinner.hide();
           if(data.status == 'Invalid Token')
           {
             this.authservice.clear_session();
             return false;
           }
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
+          if(data.status == "false")
+          {
+            this.toastr.error(data.msg);
+
+            return false;
+          }
           if(!$.isEmptyObject(data))
           {
             if(typeof data.red_auth != 'undefined' && data.red_auth == 'ptm')
