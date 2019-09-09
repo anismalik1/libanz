@@ -84,12 +84,10 @@ export class HomeComponent implements OnInit {
      private location : Location,
      private route : ActivatedRoute
   ) {
-    // let script = this._renderer2.createElement('script');
-    // script.type = `text/javascript`;
-    // script.src = `/assets/js/lightslider.min.js`;
-    // this._renderer2.appendChild(this._document.body, script);
-    //let info : any  = this.todoservice.get_user();
- 
+    if(!this.get_token())
+    {
+      this.authservice.clear_session();
+    }
    }
 
    filter_circle_name(id)
@@ -378,8 +376,13 @@ export class HomeComponent implements OnInit {
     return this.options.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
   }
   fetch_home_data()
-  {
-    let data = {token : this.get_token()};
+  {   
+      let data = {};
+      if(this.get_token())
+      {
+        data = {token : this.get_token()};
+      }
+      
       this.todoservice.fetch_home_data(data)
       .subscribe(
         data => 
