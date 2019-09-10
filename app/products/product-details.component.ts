@@ -505,12 +505,12 @@ export class ProductDetailsComponent implements OnInit{
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
-      setTimeout(()=>{    
-        $('.multi-close')[0].click();
-       }, 1000);
-      
       this.toastr.error("Please Login to proceed", 'Failed! ');
       return false;
+    }
+    else
+    {
+      $('.checkout-with-multi')[0].click();
     }
     this.spinner.show();
     this.add_to_cart(product_id) 

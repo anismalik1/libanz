@@ -491,9 +491,22 @@ export class HeaderComponent implements OnInit{
       draggable: true, // Choose whether you can drag to open on touch screens,
     }); 
   $('.tabs').tabs();
-  setTimeout("window.sntchChat.Init(70574);", 3000);
+  
+  function openchat()
+  {
+    if(!window.sntchChat)
+    {
+      setTimeout("openchat()", 1000);
+    }
+    else
+    {
+      window.sntchChat.Init(70574);
+      setTimeout("$('#sntch_webchat').css('width','450px');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
+    }
+  }
+  openchat();
   //setTimeout("$('#sntch_webchat').attr('style','background-color: rgb(255, 255, 255); width: 450x; height: 500px; position: fixed; bottom: 10px; right: 10px; max-height: 100%; max-width: 100%; z-index: 2147483647; transform: translateY(0px); transition: transform 0.5s ease 0s; border-radius: 20px 20px 0px 0px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
-  setTimeout("$('#sntch_webchat').css('width','450px');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
+  
   (function () {
     var options = {
         whatsapp: "+918010339339", // WhatsApp number

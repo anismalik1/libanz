@@ -410,7 +410,8 @@
 			</div>
 			<hr>
 			<div class="subtotal inline-block">
-				<a href="#multi-add-modal" *ngIf="!multienable && fta_pack.price != 0" class="btn orange modal-trigger checkout-with-multi"(click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
+				<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
+				<a href="#" *ngIf="!multienable && fta_pack.price != 0" class="btn orange"(click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
 				<a href="javascript:" class="btn orange" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)">Checkout </a>
 			</div>				
 		</div>
