@@ -3611,13 +3611,6 @@ canvas {
 	width: 10%; border: 2px solid #FF6A00; margin: 0 0 1rem;
 }
 .channels-basic .dropdown-content{width: 13% !important;}
-.fixed-header{
-	position: fixed;
-	top: 0;
-	transition: .5s linear all;
-	width: 20%;
-	z-index: 999;
-}
 .compare-top-row .image-wrapper img{width:75px!important; height: 75px!important;}
 .compare-top-row .compare-text.left{min-height: auto !important; font-size:11px !important;}
 .compare-top-row .feature-image-wrapper{text-align: center; padding: 2rem 0;}
@@ -4066,5 +4059,5 @@ canvas {
 .customer-support h3{font-size:2.3rem;}
 .card-new-shadow {box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; border-radius: 5px;}
 .card-new-shadow:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
-.fixed-header{position:fixed;top:0;left:0;transition:.5s linear all;width:100%;z-index:999}
+.fixed-header{position:fixed;transition:.5s linear all;width:100%;}
 /* End Here */

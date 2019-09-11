@@ -743,7 +743,7 @@ export class ProductDetailsComponent implements OnInit{
           return elementBottom > viewportTop && elementTop < viewportBottom;
       };
       $(window).scroll(function (event) {
-        if($.fn.isInViewport)
+        if(!$.fn.isInViewport)
         {
           return false;
         }
