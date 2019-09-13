@@ -303,16 +303,17 @@
 					<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
 					<p class="inline-block font600"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
 					<ng-template #kitblock>
-						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
-						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{item.product.price - 1000 }}</p>
+						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{(item.product.price - 1000) }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 					</ng-template>
 					<ng-template #nokitblock>
-						<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}}</p>
+						<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 					</ng-template>
 					<br/>
 					<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
 						<p class="font600 left"> <span class="grey-text font500 pack-title">{{pack.title}} :</span></p>
-						<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
+						<p class="right font-size-change" *ngIf="item.product.multi != 1"> <i class="icon-inr"></i>{{pack.price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+						<p class="right font-size-change" *ngIf="item.product.multi == 1"> <i class="icon-inr"></i>{{pack.multi_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 						<div class="clearfix"></div>
 					</div>
 					<div style="padding-top: 10px;" *ngIf="item.product.promos">
@@ -322,8 +323,8 @@
 					</div>
 					<div style="padding-top: 10px;">
 							<p class="inline-block grey-text">Extra Cashback<i class="red-text"> *</i> :</p>
-							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount}}</p>								
-							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}}</p>
+							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>								
+							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 						</div>
 				</div>				
 				

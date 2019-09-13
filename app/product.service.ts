@@ -229,10 +229,21 @@ export class ProductService {
       {
         amount += item.product.offer_price * item.quantity;
       }
-      if(item.product.pack_selected[0])
+      if(item.product.multi == 1)
+      {
+        if(item.product.pack_selected[0])
+        amount += Number(item.product.pack_selected[0].multi_price);
+        if(item.product.pack_selected[1])
+          amount += Number(item.product.pack_selected[1].multi_price);
+      }
+      else
+      {
+        if(item.product.pack_selected[0])
         amount += Number(item.product.pack_selected[0].price);
-      if(item.product.pack_selected[1])
-        amount += Number(item.product.pack_selected[1].price);
+        if(item.product.pack_selected[1])
+          amount += Number(item.product.pack_selected[1].price);
+      }
+      
       if(item.product.promos)
       {
         if(item.product.promos.discount <= item.product.promos.max_discount)
