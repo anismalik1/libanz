@@ -3836,7 +3836,7 @@ canvas {
 	width: 60px;
 	transform-origin: 0 50%;
 	border-radius: 0 100px 100px 0;
-	animation: rotate-circle 4.25s ease-in;
+	animation: rotate-circle 3s ease-in infinite;
   }
   .success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
 	content: '';
@@ -3858,14 +3858,14 @@ canvas {
 	left: 14px;
 	width: 25px;
 	transform: rotate(45deg);
-	animation: icon-line-tip 0.75s;
+	animation: icon-line-tip 2s infinite;
   }
   .success-checkmark .check-icon .icon-line.line-long {
 	top: 38px;
 	right: 8px;
 	width: 47px;
 	transform: rotate(-45deg);
-	animation: icon-line-long 0.75s;
+	animation: icon-line-long 2s infinite;
   }
   .success-checkmark .check-icon .icon-circle {
 	top: -4px;
@@ -3952,7 +3952,8 @@ canvas {
 	  top: 38px;
 	}
   }
-.suce-msg-chat{margin:8rem 0;}
+.suce-msg-chat{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; margin-bottom: 2rem; border-radius: 5px; padding: 3rem 0;}
+.suce-msg-chat:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
 .mat-select-value-text{font-weight: 600;}
 .input-field input,.mat-select-placeholder{font-weight: 600}
 .chat-form input{width: 100%; transform: translate(0);}
@@ -4060,4 +4061,8 @@ canvas {
 .card-new-shadow {box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; border-radius: 5px;}
 .card-new-shadow:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
 .fixed-header{position:fixed;transition:.5s linear all;width:100%;}
+.plans-view-details br{display: none;}
+.plans-view-details h3{font-weight: 600;display: inline-block;padding-bottom: 5px;padding-left: 3rem;font-size: 16px;border-bottom: 2px solid #ff9800; position: relative;}
+.plans-view-details h3:after{content: 'star_half';font-family: 'Material Icons';position: absolute;left: 0;top:0;font-size: 25px;color: #ff9800;}
+.no-padding-top{padding: 0 24px 24px !important;}
 /* End Here */

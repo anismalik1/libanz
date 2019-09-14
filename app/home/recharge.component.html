@@ -547,12 +547,12 @@
 					</div>
 				</form>
 			</div>
-			<div class="col s12 m8">
+			<div class="col s12 m8 plans-view-details">
 				<div class="card no-margin">
 					<div class="card-content">
 						<div id="short-content"></div>
 					</div>	
-					<div class="card-content" >
+					<div class="card-content no-padding-top">
 						<div id="tab-2" [className]="(tab_2 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="plans && plans.length > 0">
 							<span class="font-size-change1 font600" ><a href="javascript:" (click)="show_tab(2)">Plans</a></span>
 							<hr class="hr-promo">
