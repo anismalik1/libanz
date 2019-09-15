@@ -144,7 +144,7 @@
 										  <label for="remember-me">Remember Me</label>
 											</div>
 											<div class="col s12 m6 right-align">
-												<a routerLink="/forgot-password/recover" class="orange-text font-size-change if-forget-click">Forgot Password?</a>
+												<a href="#forget-password" class="orange-text font-size-change">Forgot Password?</a>
 											</div>
 											<div class="col s12 center margin-top">
 												<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Submit</button>
@@ -304,6 +304,23 @@
 										</div>
 								</div>
 							</div>
+							<div id="forget-password" class="col s12">
+									<div class="login">
+									<form class="login-step">
+										<div class="row">
+											<div class="input-field col s12">
+												<i class="material-icons prefix margin-top-cart2">email</i>
+													<input id="icon_prefix" type="number" class="validate">
+													<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
+													<!-- <div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div> -->
+												</div>
+											<div class="col s12 center margin-top">
+												<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
+											</div>
+										</div>
+									</form>
+									</div>
+									</div>
 						</div>
 					</div>
 				</div>
