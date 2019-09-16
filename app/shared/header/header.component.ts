@@ -57,6 +57,10 @@ export class HeaderComponent implements OnInit{
     private fb: FormBuilder
   ) 
     {
+      if(!this.get_token())
+      {
+        this.authService.clear_session();
+      }
       this.toastr.setRootViewContainerRef(vcr);
       this.productservice.cartItemsCount();
       this.logingroup = fb.group({
