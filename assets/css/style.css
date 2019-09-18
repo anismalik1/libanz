@@ -2783,6 +2783,7 @@ tbody img{
 .side-nav-faqs .tabs .indicator{display: none !important;}
 .side-nav-faqs .tabs .tab .active{color:#ff6a00 !important;} */
 .faqs-text{padding: 0 2rem;}
+.faqs-text h2{font-size: 2rem;}
 .faqs-text hr{width:25%; border: 2px solid #ff6a00; margin: 0 0 2rem;}
 .side-nav-faqs .card-title,.ask-question .card-title{border-bottom:1px solid #ff6a00; padding-bottom: 10px;}
 .thank-you-page .card,.thank-you-page .card-content{
@@ -3568,8 +3569,9 @@ canvas {
  .blog-page .card-content .author .author-name span:first-child{font-size: 20px;color: #777777;padding-right: 3px;}
  .blog-page .card-content .author .author-name span:last-child{font-size: 14px;font-weight: 600;}
  .blog-page .card-content .blog-content{padding: 1rem;}
- .blog-page .card-content .blog-content .blog-title{font-size: 1.6rem;font-weight: 600; margin-bottom: 10px;display: inline-block;}
+ .blog-page .card-content .blog-content .blog-title{font-size: 1.6rem !important;font-weight: 600; margin-bottom: 10px;display: inline-block;}
  .blog-page .card-content .blog-content p{font-size: 14px;}
+ .blog-content span h2,.blog-content span h1,.blog-content span h3,.blog-content span h4{font-size: 16px;}
  .blog-tabs{background: transparent;}
  .blog-tabs .tab{padding:0 1rem;}
  .blog-tabs .tab a{border-radius: 50px; color: #000; background: #fff;}
