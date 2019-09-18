@@ -3229,9 +3229,9 @@ tbody img{
 .channels-basic{
 	padding:2rem;
 }
-.channels-basic a{
+/* .channels-basic a{
 	margin-top: 2rem;
-}
+} */
 .bse-prc ul h3{
 	border-bottom: 1px solid #c2c2c2;
 	padding-bottom: 10px;
@@ -3610,7 +3610,8 @@ canvas {
 .recnt-post .post-text .font-size-change hr{
 	width: 10%; border: 2px solid #FF6A00; margin: 0 0 1rem;
 }
-.channels-basic .dropdown-content{width: 13% !important;}
+.channels-basic .dropdown-content{width: 15% !important;}
+.channels-basic a i{font-size:20px !important;}
 .compare-top-row .image-wrapper img{width:75px!important; height: 75px!important;}
 .compare-top-row .compare-text.left{min-height: auto !important; font-size:11px !important;}
 .compare-top-row .feature-image-wrapper{text-align: center; padding: 2rem 0;}
@@ -4060,9 +4061,19 @@ canvas {
 .customer-support h3{font-size:2.3rem;}
 .card-new-shadow {box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; border-radius: 5px;}
 .card-new-shadow:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
-.fixed-header{position:fixed;transition:.5s linear all;width:100%; top:0; z-index:99999;}
+.fixed-header{position:fixed;transition:.5s linear all;width:100%; top:0; z-index:999;}
 .plans-view-details br{display: none;}
 .plans-view-details h3{font-weight: 600;display: inline-block;padding-bottom: 5px;padding-left: 3rem;font-size: 16px;border-bottom: 2px solid #ff9800; position: relative;}
 .plans-view-details h3:after{content: 'star_half';font-family: 'Material Icons';position: absolute;left: 0;top:0;font-size: 25px;color: #ff9800;}
 .no-padding-top{padding: 0 24px 24px !important;}
+.new-packages{padding: 3rem 0;}
+.new-packages .share-us-on li{float: left; padding: 0 6px;}
+.new-packages .card{float: left; width:100%;}
+.new-packages .card .card-header{float: left; width:100%; padding: 10px; border-bottom: 1px solid #e4e4e4;}
+.new-packages .card .packages-channels li{display: inline-block !important;width: 18% !important;margin: 10px 5px;border: 1px solid #c2c2c2 !important;padding: 10px !important;}
+.new-packages .card .packages-channels{float: left; padding: 1rem 0; width:100%;}
+.new-packages .all-packages{padding:10px 0;}
+.new-packages .card-title{border-bottom: 1px solid #a2a2a2; padding-bottom: 10px;}
+.new-packages .all-packages li{padding:10px 0; font-size: 15px; font-weight: 600;}
+.new-packages .all-packages li a i{ color: #FF6A00; padding-right:10px; vertical-align: middle;}
 /* End Here */
