@@ -569,7 +569,7 @@ recharge_handle()
   {
     $('#response-code').text('');
     this.selected_promo = promo;
-    this.copy_promo(this.selected_promo.name);
+    this.copy_promo(this.selected_promo.unique_code);
   }
   apply_promo()
   {
@@ -593,8 +593,6 @@ recharge_handle()
 			  //	this.router.navigate(['/login']);
         }
         
-			  let b = JSON.stringify(data);
-			  data =  JSON.parse(b.replace(/\\/g, ''));
 			  if(!$.isEmptyObject(data))
 			  {
           if(data.status == true)

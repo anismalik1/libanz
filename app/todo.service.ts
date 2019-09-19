@@ -557,7 +557,7 @@ export class TodoService {
   apply_promo_code(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/apply_promo_code';
+    let url = this.server_url+'accounts/apis/offers/apply_promo_code';
     return this.send_post_request(data,url) ;
   }
   check_if_recharge_exist(data)

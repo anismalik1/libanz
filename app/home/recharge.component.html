@@ -99,7 +99,7 @@
 								<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
 							</p>
 							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
-								<span class="green-text">Promo Selected</span>
+								<span class="green-text">Promo {{this.selected_promo.unique_code}} Selected</span>
 								<a href="#promo-code-apply" class="modal-trigger">change</a>
 							</p>	
 							<p class="inline-block margin-right fast-forwad relative">
@@ -566,7 +566,7 @@
 							<ul class="promo-ul">
 								<li class="promo-li" *ngFor="let promo of promo_codes;">
 									<a href="#promo-code-modal" class="modal-trigger" (click)="promoselected(promo)">
-										<h4 class="font600 black-text">{{promo.name}}</h4>
+										<h4 class="font600 black-text">{{promo.unique_code}}</h4>
 										<span class="font-size-change1 grey-text"> {{promo.description}}</span>
 										<a href="javascript:" class="right">View detail</a>
 									</a>
@@ -606,7 +606,7 @@
 		<h3 class="font600">{{selected_promo.description}}</h3>
 		<span class="modal-close close-modal-span"><i class="material-icons font-size-change1">close</i></span>
 		<div class="copied-promo-code">
-			<input type="text" size="9" value="{{selected_promo.name}}" id="inputcopyId">
+			<input type="text" size="9" value="{{selected_promo.unique_code}}" id="inputcopyId">
 			<a href="javascript:" (click)="copyToClipboard()">Copy</a>
 		</div>
 		<span class="grey-text">Paste this code on deals page</span>
@@ -628,7 +628,7 @@
 				<div class="red-text" id="response-code"></div>
 			<br/>
 			<ul *ngIf="selected_promo">
-					<h4 class="font600" *ngIf="selected_promo.terms_description">{{selected_promo.name}}</h4>
+					<h4 class="font600" *ngIf="selected_promo.terms_description">{{selected_promo.unique_code}}</h4>
 					{{selected_promo.terms_description}}
 				</ul>
 			</div>
@@ -643,7 +643,7 @@
 				<ul class="promo-ul">
 					<li class="promo-li" *ngFor="let promo of promo_codes;">
 						<a href="javascript:" (click)="promoselected(promo)">
-							<h4 class="font600 black-text">{{promo.name}}</h4>
+							<h4 class="font600 black-text">{{promo.unique_code}}</h4>
 							<span class="font-size-change1 grey-text"> {{promo.description}}</span>
 						</a>
 					</li>
