@@ -4097,18 +4097,10 @@ canvas {
 .new-24-7 .card .card-content{padding: 2rem 0 0;}
 .blog-page .card-action{position: absolute; width: 100%; bottom: 0;}
 .new-jio-fiber .card{box-shadow: none !important;}
-.new-jio-fiber .card .card-content{padding: 3.7rem 3rem;}
+.new-jio-fiber .card .card-content{padding: 2.9rem 3rem;}
 .new-jio-fiber .card .card-content .card-title{font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem;}
 .new-jio-fiber .card .card-content p{font-size: 16px;margin-bottom: 2rem;}
 .new-jio-fiber .card .card-content ul{column-count: 2;}
-.new-jio-fiber .card .card-content ul li{font-size: 13px; font-weight: 600; padding: 1rem 1.5rem; position: relative;}
-.new-jio-fiber .card .card-content ul li:after{
-	content: 'eco';
-	font-family: 'Material Icons';
-	position: absolute;
-	top: 0;
-	left: 0;
-	font-size: 18px;
-	color: #FF6A00; 
-}
+.new-jio-fiber .card .card-content ul li{font-size: 13px !important; font-weight: 600; padding: 1rem 1.5rem; position: relative; margin:0;}
+.new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -5%;top:12%;font-size: 25px;color: #ff9800; }
 /* End Here */
