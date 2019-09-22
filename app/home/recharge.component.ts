@@ -248,6 +248,7 @@ export class RechargeComponent implements OnInit {
       data => 
       {
         this.promo_codes = data.OPERATOR_PROMOS;
+        //console.log(this.promo_codes)
         this.spinner.hide();  
       }
     ) 
@@ -570,6 +571,12 @@ recharge_handle()
     $('#response-code').text('');
     this.selected_promo = promo;
     this.copy_promo(this.selected_promo.unique_code);
+
+    if(Number(this.selected_promo.min_pay) > Number(this.rechargeData.recharge_amount))
+    {
+      $('#response-code').text('This Promocode is applicable for Minimum Amount of Rs. '+this.selected_promo.min_pay);
+      return false;
+    }
   }
   apply_promo()
   {

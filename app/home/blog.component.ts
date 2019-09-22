@@ -35,7 +35,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.page = 'blog';
+    this.page = '/blog/all';
     this.start = 0;
     this.fetch_page_data();
     this.router.params.subscribe(params => {
@@ -94,7 +94,9 @@ export class BlogComponent implements OnInit {
         if(data.PAGEDATA)
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-           $('#page-content').html(this.todoservice.get_page().description);
+          // $('#page-content').html(this.todoservice.get_page().description);
+          $('.hero').css('background','url(https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
+          $('.hero').css('background-repeat','no-repeat');
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);

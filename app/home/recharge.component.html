@@ -99,7 +99,7 @@
 								<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
 							</p>
 							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
-								<span class="green-text">Promo {{this.selected_promo.unique_code}} Selected</span>
+								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span>
 								<a href="#promo-code-apply" class="modal-trigger">change</a>
 							</p>	
 							<p class="inline-block margin-right fast-forwad relative">
