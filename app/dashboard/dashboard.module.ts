@@ -23,9 +23,12 @@ import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
 import { ProductService } from '../product.service';
 import { User } from '../user';
+import { RechargeOrdersComponent } from './recharge-orders.component';
+import { DthOrdersComponent } from './dth-orders.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
+  { path: 'recharge', component: RechargeOrdersComponent },
   { path: 'complaints', component: ComplaintBoxComponent },
   { path: 'value-transfer', component: ValueTransferComponent },
   { path: 'add-money', component: AddMoneyComponent },
@@ -33,7 +36,7 @@ const routes: Routes = [
   { path: 'commission-structure', component: CommissionStructureComponent },
   { path: 'transactions', component: TransactionHistoryComponent },
   { path: 'edit-profile', component: EditAccountComponent },
-  { path: 'book-dth-orders', component: BookDthOrdersComponent },
+  { path: 'dth-orders', component: DthOrdersComponent },
   { path: 'book-dth-order', component: BookDthOrderComponent },
   { path: 'booked-order-list', component: BookedOrderListComponent }, 
 ];
@@ -48,7 +51,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule
   ],
-  declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent],
+  declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent, RechargeOrdersComponent, DthOrdersComponent],
   providers : [ExcelService,AuthService,TodoService,User,ProductService]
 })
 export class DashboardModule { }

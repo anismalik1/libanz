@@ -11,15 +11,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class TransactionHistoryComponent implements OnInit{
 
-  public recharges : any;
   public transactions : any;
-  orders : any;
   w_p: number = 1;
-  r_p: number = 1;
-  o_p: number = 1;
-	recharge_counts : number = 0; 
 	wallet_counts : number = 0; 
-	order_counts : number = 0; 
   constructor( private spinner: NgxSpinnerService ,  public todoservice : TodoService,private authservice : AuthService,private router : Router) { }
   ngOnInit() {
     if(!this.get_token())
@@ -39,11 +33,11 @@ export class TransactionHistoryComponent implements OnInit{
             $('.filter-he').fadeIn(200); 
         });
     });
-    this.fetch_all_history(1);
+    this.fetch_transaction_history(1);
     
   }
   
-  fetch_all_history(page)
+  fetch_transaction_history(page)
   {
     if(!this.authservice.authenticate())
     {
@@ -51,7 +45,7 @@ export class TransactionHistoryComponent implements OnInit{
     }
     this.spinner.show();
     let data =  {token : this.get_token(),page_index: page};
-    this.todoservice.fetch_history(data)
+    this.todoservice.fetch_transaction_history(data)
 		.subscribe(
 			data => 
 			{
@@ -61,53 +55,10 @@ export class TransactionHistoryComponent implements OnInit{
           this.authservice.clear_session();
           this.router.navigate(['/login']);
 			  }
-			  let b = JSON.stringify(data);
-			  data =  JSON.parse(b.replace(/\\/g, ''));
 			  if(!jQuery.isEmptyObject(data))
-			  {
-				  this.recharges      = data.RECHARGES;			
+			  {		
           this.transactions   = data.TRANSACTIONS;
-          this.orders   = data.ORDERS;
-          this.order_counts   = data.ORDERCOUNT;
-          this.wallet_counts  = data.TRANSACTIONS_COUNT;			
-          this.recharge_counts  = data.RECHARGES_COUNT;			
-			  }
-			}
-		  );
-  }
-
-  do_complaint(order_id)
-  {
-    console.log(order_id);
-  }
-  add_complaint()
-  {
-    
-  }
-
-  paging_order_history(page)
-  {
-    if(!this.authservice.authenticate())
-    {
-        this.router.navigate(['/login']);
-    }
-    this.spinner.show();
-    let data =  {token : this.get_token(),page_index : page};
-    this.todoservice.paging_order_history(data)
-		.subscribe(
-			data => 
-			{
-				this.spinner.hide();
-			  if(data.status == 'Invalid Token')
-			  {
-          this.authservice.clear_session();
-          this.router.navigate(['/login']);
-			  }
-			  let b = JSON.stringify(data);
-			  data =  JSON.parse(b.replace(/\\/g, ''));
-			  if(!jQuery.isEmptyObject(data))
-			  {			
-				  this.orders = data.ORDERS;			
+          this.wallet_counts  = data.TRANSACTIONS_COUNT;						
 			  }
 			}
 		  );
@@ -121,7 +72,7 @@ export class TransactionHistoryComponent implements OnInit{
     }
     this.spinner.show();
     let data =  {token : this.get_token(),page_index : page};
-    this.todoservice.paging_wallet_history(data)
+    this.todoservice.paging_transaction_history(data)
 		.subscribe(
 			data => 
 			{
@@ -131,8 +82,6 @@ export class TransactionHistoryComponent implements OnInit{
 				this.authservice.clear_session();
 				this.router.navigate(['/login']);
 			  }
-			  let b = JSON.stringify(data);
-			  data =  JSON.parse(b.replace(/\\/g, ''));
 			  if(!jQuery.isEmptyObject(data))
 			  {			
 				  this.transactions = data.TRANSACTIONS;			
@@ -141,33 +90,6 @@ export class TransactionHistoryComponent implements OnInit{
 		  );
   }
 
-  paging_recharge_history(page)
-  {
-    if(!this.authservice.authenticate())
-    {
-        this.router.navigate(['/login']);
-    }
-    this.spinner.show();
-    let data =  {token : this.get_token(),page_index : page};
-    this.todoservice.paging_recharge_history(data)
-		.subscribe(
-			data => 
-			{
-				this.spinner.hide();
-			  if(data.status == 'Invalid Token')
-			  {
-				this.authservice.clear_session();
-				this.router.navigate(['/login']);
-			  }
-			  let b = JSON.stringify(data);
-			  data =  JSON.parse(b.replace(/\\/g, ''));
-			  if(!jQuery.isEmptyObject(data))
-			  {			
-				  this.recharges      = data.RECHARGES;				
-			  }
-			}
-		  );
-  }
 
   getPage(page , id)
   {
@@ -177,23 +99,10 @@ export class TransactionHistoryComponent implements OnInit{
       this.paging_wallet_history(page);
       this.w_p = page;
     }
-    else if(id == 'r')
-    {
-      this.spinner.show();
-      this.paging_recharge_history(page);
-      this.r_p = page;
-    }
-    else if(id == 'o')
-    {
-      this.spinner.show();
-      this.paging_order_history(page);
-      this.o_p = page;
-    }
   }
   get_token()
   {
     return this.authservice.auth_token();
   }
-  get
 }
 

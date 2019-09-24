@@ -348,11 +348,7 @@ export class TodoService {
     let url = this.server_url+'index.php?/app_services/paging_order_history';
     return this.send_post_request(data,url) ;
   }
-  paging_recharge_history(data)
-  {
-    let url = this.server_url+'index.php?/app_services/paging_recharge_history';
-    return this.send_post_request(data,url) ;
-  }
+  
   fetch_home_data(data)
   {
     let url = this.server_url+'index.php?/app_services/fetch_home';
@@ -644,6 +640,40 @@ export class TodoService {
   send_feed(data)
   {
     let url = this.server_url+'accounts/apis/home/send_feed';
+    return this.send_post_request(data,url) ;
+  }
+
+  fetch_recharge_history(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_recharge_history';
+    return this.send_post_request(data,url) ;
+  }
+
+  paging_recharge_history(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/paging_recharge_history';
+    return this.send_post_request(data,url) ;
+  }
+
+  fetch_orders_history(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_orders_history';
+    return this.send_post_request(data,url) ;
+  }
+  paging_orders_history(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/paging_orders_history';
+    return this.send_post_request(data,url) ;
+  }
+  fetch_transaction_history(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_transaction_history';
+    return this.send_post_request(data,url) ;
+  }
+  
+  paging_transaction_history(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/paging_transaction_history';
     return this.send_post_request(data,url) ;
   }
 }
