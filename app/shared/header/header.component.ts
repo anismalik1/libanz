@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit{
   signupgroup : FormGroup;
   start : number = 0;
   more_display : boolean = true;
+  signupdisabled : boolean= false; 
+  verifydisabled : boolean= false; 
   remember : any = {rm:false,ph:'',pw : ''};
     private token_params : Authparams;
     public phone : number;
@@ -256,12 +258,16 @@ export class HeaderComponent implements OnInit{
   {
     if(formdata.user_type == null)
       formdata.user_type = 1;
+    else
+      this.user_type = formdata.user_type ;  
     if(formdata.password != formdata.cpassword)
     {
       this.toastr.error("Password does not match with Confirm Password", 'Failed');
         return false;
     }
     this.phone = formdata.phone;
+    this.password = formdata.password;
+    this.signupdisabled = true;
     this.todoservice.signup(formdata)
       .subscribe(
         data => 
@@ -273,8 +279,8 @@ export class HeaderComponent implements OnInit{
           else
           {
             this.toastr.error(data.msg, 'Failed');
-            return false;
           }
+          this.signupdisabled = false;
         }
       ) 
   }
@@ -282,22 +288,32 @@ export class HeaderComponent implements OnInit{
   {
     data.otp = data.otp1.toString() + data.otp2.toString() + data.otp3.toString() + data.otp4.toString();
     data.phone = this.phone;
+    this.verifydisabled = true;
     this.todoservice.verify_user(data)
       .subscribe(
         data => 
         {
+          this.verifydisabled = false;
           if(data.status == 'true')
           {
             let store = data.store;
             this.authService.storage(store);
-            let user : any = data.user;
-            this.todoservice.set_user_data(user);
+            
             $('.login-modal-close').click();
             localStorage.removeItem('favourite');
             setTimeout(()=>{    //<<<---    using ()=> syntax
               this.user_favourites();
             }, 2000);
             
+            let url = window.location.pathname;
+            if(url == url)
+            {
+              this.router.routeReuseStrategy.shouldReuseRoute = function(){
+                return false;
+             }
+            this.router.navigated = false;
+            this.router.navigate([url]);
+            }
           }
           else
           {

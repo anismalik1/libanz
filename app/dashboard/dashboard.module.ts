@@ -25,7 +25,8 @@ import { ProductService } from '../product.service';
 import { User } from '../user';
 import { RechargeOrdersComponent } from './recharge-orders.component';
 import { DthOrdersComponent } from './dth-orders.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'recharge', component: RechargeOrdersComponent },
@@ -49,7 +50,9 @@ const routes: Routes = [
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    NgxDaterangepickerMd.forRoot(),
   ],
   declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent, RechargeOrdersComponent, DthOrdersComponent],
   providers : [ExcelService,AuthService,TodoService,User,ProductService]

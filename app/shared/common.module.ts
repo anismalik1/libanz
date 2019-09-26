@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule ,ReactiveFormsModule,} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { LogoutComponent } from '../shared/logout.component';
 import { HeaderComponent } from '../shared/header/header.component';
@@ -18,7 +19,8 @@ import { SideNavComponent } from '../shared/side-nav/side-nav.component';
     MatAutocompleteModule,
     MatInputModule,
     RouterModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    NgxDaterangepickerMd.forRoot(),
 ],
   declarations: [
     HeaderComponent,

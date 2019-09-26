@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-dth-orders',
   templateUrl: './dth-orders.component.html',
@@ -13,6 +15,15 @@ export class DthOrdersComponent implements OnInit {
   public orders : any;
   o_p: number = 1;
   order_counts : number;
+  ranges: any = {
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+  }
+  selected: {startDate: moment.Moment, endDate: moment.Moment};
   constructor(private spinner: NgxSpinnerService ,  public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
     
   }
@@ -37,6 +48,16 @@ export class DthOrdersComponent implements OnInit {
   add_complaint()
   {
     
+  }
+
+  export_dth_orders()
+  {
+    var date = $('[name="daterange"]').val();
+    if(date == '')
+    {
+      return false;
+    }
+    window.location.href = this.todoservice.server_url+'accounts/apis/export/export_dth_orders/?token='+this.get_token()+'&date='+date;
   }
 
   paging_orders_history(page)

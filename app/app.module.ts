@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 
@@ -21,6 +22,7 @@ import { HttpModule } from '@angular/http';
     MatAutocompleteModule,
     MatInputModule,
     ReactiveFormsModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

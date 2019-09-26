@@ -274,7 +274,7 @@
 										
 										<div class="col s12 center margin-top">
 											<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
-											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid">Submit</button>
+											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
 										</div>
 									</div>
 								</form>
@@ -300,7 +300,7 @@
 										<div class="row">
 											<div class="col s12 center">
 												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
-												<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+												<button type="Submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
 											</div>
 										</div>
 									</form>
@@ -308,7 +308,7 @@
 						</div>
 					</div>
 					<div id="forget-password" class="col s12">
-							<div class="login">
+						<div class="login">
 							<form class="login-step">
 								<div class="row">
 									<div class="input-field col s12">
@@ -322,8 +322,8 @@
 									</div>
 								</div>
 							</form>
-							</div>
-							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

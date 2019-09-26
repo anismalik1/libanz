@@ -3,17 +3,19 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { User } from '../user';
 import { Router ,ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styles: []
+  styles: [],
+  providers: [TodoService,User,AuthService]
 })
 export class SignupComponent implements OnInit{
 
-  user_type : number;
-  user_type_enabled : boolean = false;
+  user_type : number = 1;
+  user_type_enabled : boolean = true;
   verify : number = 0;
   phone : number;
   password : string;
@@ -21,6 +23,8 @@ export class SignupComponent implements OnInit{
   signupgroup : FormGroup;
   post :any;
   signupverify : number = 0
+  signupdisabled : boolean = false;
+  verifydisabled : boolean = false;
   constructor(private toast: ToastsManager, 
     private fb : FormBuilder,
     public todoservice : TodoService,
@@ -32,7 +36,11 @@ export class SignupComponent implements OnInit{
     this.user_type = route.snapshot.params['id'];
     this.signupgroup = fb.group({
       'name':[null,Validators.required],
-      'phone' : [null,Validators.compose([Validators.required])],
+      'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+      'email' : [null,Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+      'user_type':[null],
       'password' : [null,Validators.compose([Validators.required])],
       'cpassword' : [null,Validators.compose([Validators.required])],
     });
@@ -83,6 +91,10 @@ export class SignupComponent implements OnInit{
 
   signup_user(formdata)
   {
+    if(formdata.user_type == null)
+      formdata.user_type = 1;
+    else
+      this.user_type = formdata.user_type ;
     if(formdata.password != formdata.cpassword)
     {
       this.toast.error("Password does not match with Confirm Password", 'Failed');
@@ -90,7 +102,7 @@ export class SignupComponent implements OnInit{
     }
     this.phone = formdata.phone;
     this.password = formdata.password;
-    formdata.user_type = this.user_type;
+    this.signupdisabled = true; 
     this.todoservice.signup(formdata)
       .subscribe(
         data => 
@@ -102,8 +114,8 @@ export class SignupComponent implements OnInit{
           else
           {
             this.toast.error(data.msg, 'Failed');
-            return false;
           }
+          this.signupdisabled = false; 
         }
       ) 
   }
@@ -111,10 +123,12 @@ export class SignupComponent implements OnInit{
   {
     data.otp = data.otp1.toString() + data.otp2.toString() + data.otp3.toString() + data.otp4.toString();
     data.phone = this.phone;
+    this.verifydisabled = true;
     this.todoservice.verify_user(data)
       .subscribe(
         data => 
         {
+          this.verifydisabled = false;
           if(data.status == 'true')
           {
             let store = data.store;

@@ -31,12 +31,11 @@
                 <div class="card-content">
                     <form class="date-export">
                         <div class="row no-margin">
-                            <div class="col s12 m3"> 
-                              
-                               <input type="text" placeholder="Choose date" />
-                            </div> 
+                            <div class="col s12 m3">
+                                <input placeholder="Choose date range" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd [(ngModel)]="selected" name="daterange" class="form-control"/>
+                            </div>
                             <div class="col s12 m2">
-                                <button type="Search" class="btn orange no-box-shadow">Export</button>
+                                <button type="Search" class="btn orange no-box-shadow" (click)="export_dth_orders()">Export</button>
                             </div>
                             
                         </div>
