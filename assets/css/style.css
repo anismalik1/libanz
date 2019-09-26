@@ -4091,10 +4091,11 @@ canvas {
     border-radius: 50px;
 }
 .new-24-7 .card{padding: 2rem 0; box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; margin-bottom: 1rem; min-height:205px;}
-.new-form-register{margin-top: 3rem; float: left; width: 100%;}
+.new-form-register{float: left; width: 100%;}
 .new-24-7 .card:hover{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important;-webkit-transition: .3s all linear;transition: .3s all linear;}
 .new-24-7 .card img{width: auto !important;}
 .new-24-7 .card .card-content{padding: 2rem 0 0;}
+.new-24-7 p{padding:0 10rem;}
 .blog-page .card-action{position: absolute; width: 100%; bottom: 0;}
 .new-jio-fiber .card{box-shadow: none !important;}
 .new-jio-fiber .card .card-content{padding: 2.9rem 3rem;}
