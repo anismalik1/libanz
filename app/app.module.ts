@@ -7,7 +7,6 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +20,7 @@ import { HttpModule } from '@angular/http';
     MatSelectModule,
     MatAutocompleteModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

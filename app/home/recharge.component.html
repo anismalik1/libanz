@@ -521,7 +521,7 @@
 						<div class="input-field col s12 m12">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator">
-									<span *ngFor="let item of operators.ELECTRICITY;">
+									<span *ngFor="let item of operators.CABLE;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
