@@ -9,6 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { LoginComponent } from './pages/login.component';
 import { SignupComponent } from './pages/signup.component';
+import { ForgotPasswordComponent } from './pages/forgot-password.component';
 
 const routes: Routes = [
   
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'login/ref/:name', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'forgot-password', loadChildren: './pages/pages.module#PagesModule' },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'contact-us', component: ContactUsComponent},
   { path: 'p/contact-us/:name', component: ContactUsComponent},
   { path: 'p/faqs', component: FaqsComponent},

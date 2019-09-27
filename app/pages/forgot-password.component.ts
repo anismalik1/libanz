@@ -2,13 +2,14 @@ import { Component, OnInit ,ViewContainerRef} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { User } from '../user';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: [],
-  providers : [TodoService]
+  providers: [TodoService,User,AuthService]
 })
 export class ForgotPasswordComponent implements OnInit{
 

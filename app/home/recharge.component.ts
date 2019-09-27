@@ -501,7 +501,10 @@ export class RechargeComponent implements OnInit {
 				this.rechargeData.recharge_name = data.recharge_name;	
 				this.rechargeData.title = data.title;
         this.recharge_ini = 2;
-       
+        if(this.todoservice.get_user().wallet < this.rechargeData.recharge_amount)
+        {
+          this.other_to_pay(2);
+        }
         //this.router.navigate(['/recharge/'+this.url_name+'/proceed']);				
 			  }
 			}

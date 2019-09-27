@@ -147,7 +147,7 @@
 									<label for="remember-me">Remember Me</label>
 									</div>
 									<div class="col s12 m6 right-align">
-										<a href="#forget-password" class="orange-text font-size-change">Forgot Password?</a>
+										<span class="tab"><a routerLink="/forgot-password" class="orange-text font-size-change">Forgot Password?</a></span>
 									</div>
 									<div class="col s12 center margin-top">
 										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Submit</button>
@@ -307,7 +307,7 @@
 								</div>
 						</div>
 					</div>
-					<div id="forget-password" class="col s12">
+					<div id="forget-password" class="col s12 hide">
 						<div class="login">
 							<form class="login-step">
 								<div class="row">

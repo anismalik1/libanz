@@ -40,6 +40,7 @@ export class RechargeStatusComponent implements OnInit {
 		  .subscribe(
         data => 
         {
+          console.log(data);
           this.spinner.hide();
           let b = JSON.stringify(data);
           data =  JSON.parse(b.replace(/&nbsp;/g, ''));

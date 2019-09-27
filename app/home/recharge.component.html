@@ -109,7 +109,7 @@
 							<p class="inline-block margin-right">
 								<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
 								<label for="other-option" class="black-text">Other</label>
-							</p>
+							</p> 
 						</div>
 						<div class="payment-method1"  *ngIf="pay_step==2">
 							<p class="inline-block margin-right ">
@@ -120,7 +120,7 @@
 								<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
 								<label for="paytm" class="black-text">Paytm</label>
 							</p>
-							<p class="inline-block margin-right ">
+							<p class="inline-block margin-right" *ngIf="rechargeData.recharge_amount <= this.todoservice.get_user().wallet">
 								<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
 							</p>
 						</div>                                                                                                      
