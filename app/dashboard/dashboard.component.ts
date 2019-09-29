@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { ExcelService } from '../export.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router,NavigationExtras } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +16,18 @@ export class DashboardComponent implements OnInit{
   recharge_obj : any ={total_orders : 0,total_sum : 0}; 
   products_obj : any ={total_orders : 0,total_sum : 0}; 
   registration_obj : any ={total_register : 0}; 
-  sales_obj : any ={total_sum : 0}; 
+  sales_obj : any = {}; 
   orders : any;
   recharges : any;
+  ranges: any = {
+    'Last 7 Days': [moment().subtract(6, 'days'), moment(),'active'],
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+  }
+  selected: {start: moment.Moment, end: moment.Moment};
   constructor( private excelService: ExcelService, 
     private spinner : NgxSpinnerService, 
     public todoservice : TodoService,
@@ -31,7 +41,7 @@ export class DashboardComponent implements OnInit{
       $('#search').focusout(function(){
         $('.search-result').addClass('hide');
       });
-    this.dashboard_content();
+    
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -40,9 +50,109 @@ export class DashboardComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
-    }   
+    }
+    this.fetch_transactions(); 
+    this.recent_orders();  
   }
 
+  recent_orders()
+  {
+    this.spinner.show();
+    this.todoservice.fetch_recent_orders({token : this.get_token()})
+    .subscribe(
+      data => 
+      {
+        this.spinner.hide();
+        if(data.status == 'Invalid Token')
+        {
+          this.authservice.clear_session();
+          this.router.navigate(['/home']);
+        }
+        else
+        {
+          this.orders         = data.ORDERS;
+          this.recharges      = data.RECHARGES;
+        }
+      }
+    ) 
+  }
+
+
+
+  fetch_transactions()
+  {
+    this.spinner.show();
+    var date = $('[name="daterange"]').val();
+    if(date == '')
+    {
+      date = moment().subtract(6, 'days').format('DD-MM-YYYY') +' To '+ moment().format('DD-MM-YYYY')
+      $('[name="daterange"]').val(date)
+    }
+
+    this.todoservice.fetch_transactions({date : date, token : this.get_token()})
+      .subscribe(
+        data => 
+        {
+          this.spinner.hide();
+          if(data.status == 'Invalid Token')
+          {
+            this.authservice.clear_session();
+            this.router.navigate(['/home']);
+          }
+          else
+          {
+            this.filter_sales(data.SALES);
+          }
+        }
+      ) 
+  }
+  filter_sales(sales_activity)
+  {
+    this.sales_obj.recharge_sale  = 0;
+    this.sales_obj.order_sale     = 0;
+    this.sales_obj.cashback_sale  = 0;
+    this.sales_obj.promo_sale     = 0;
+    this.sales_obj.recharge_count = 0;
+    this.sales_obj.order_count    = 0;
+
+    let recharge_sale = sales_activity.filter(x => x.activity_type == 1);  // recharge sale
+    if(recharge_sale.length > 0 )
+    {
+      this.sales_obj.recharge_count = recharge_sale.length;
+      for(var i = 0;i < recharge_sale.length;i++)
+      {
+        this.sales_obj.recharge_sale += Number(recharge_sale[i].amount); 
+      }
+    }
+
+    let order_sale = sales_activity.filter(x => x.activity_type == 5);  // order sale
+    if(order_sale.length > 0 )
+    {
+      this.sales_obj.order_count = order_sale.length;
+      for(var i = 0;i < order_sale.length;i++)
+      {
+        this.sales_obj.order_sale +=  Number(order_sale[i].amount); 
+      }
+    }
+
+    let cashback_sale = sales_activity.filter(x => x.activity_type == 8);  // cashback sale
+    if(cashback_sale.length > 0 )
+    {
+      for(var i = 0;i < cashback_sale.length;i++)
+      {
+        this.sales_obj.cashback_sale += Number(cashback_sale[i].amount);
+      }
+    }
+
+    let promo_sale = sales_activity.filter(x => x.activity_type == 14);  // Promocodes 
+    if(promo_sale.length > 0 )
+    {
+      for(var i = 0;i < promo_sale.length;i++)
+      {
+        this.sales_obj.promo_sale += Number(promo_sale[i].amount);
+      }
+    }
+  }
   init_script()
   {
     if($('#init-page-script'))

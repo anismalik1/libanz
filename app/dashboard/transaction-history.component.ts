@@ -3,7 +3,7 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-transaction-history',
   templateUrl: './transaction-history.component.html',
@@ -13,7 +13,16 @@ export class TransactionHistoryComponent implements OnInit{
 
   public transactions : any;
   w_p: number = 1;
-	wallet_counts : number = 0; 
+  wallet_counts : number = 0; 
+  ranges: any = {
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+  }
+  selected: {startDate: moment.Moment, endDate: moment.Moment};
   constructor( private spinner: NgxSpinnerService ,  public todoservice : TodoService,private authservice : AuthService,private router : Router) { }
   ngOnInit() {
     if(!this.get_token())
@@ -62,6 +71,16 @@ export class TransactionHistoryComponent implements OnInit{
 			  }
 			}
 		  );
+  }
+
+  export_transactions()
+  {
+    var date = $('[name="daterange"]').val();
+    if(date == '')
+    {
+      return false;
+    }
+    window.location.href = this.todoservice.server_url+'accounts/apis/export/export_transactions/?token='+this.get_token()+'&date='+date;
   }
   
   paging_wallet_history(page)

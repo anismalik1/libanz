@@ -45,7 +45,14 @@ constructor(private title: Title, public todoservice : TodoService,
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
-          window.scroll(0,0); 
+          window.scroll(0,0);
+          
+          // $( "#page-content .testimonial-text blockquote" ).each(function( index ) {
+          //   if(  $( this ).html().length > 300)
+          //   {
+          //     $(this).html("<span class='partial-testimnial'>"+$.trim($(this).html()).substring(0, 300).split(" ").slice(0, -1).join(" ") + "</span><a href='javascript:' onclick=\"$(this).remove();$(this).html($(this).html())\" class='blue-text'>...Load More</a>");
+          //   }
+          // }); 
         }
         this.spinner.hide();  
       }

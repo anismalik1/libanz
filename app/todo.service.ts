@@ -686,4 +686,15 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/export/export_dth_orders';
     return this.send_post_request(data,url) ;
   }
+  fetch_recent_orders(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_recent_orders';
+    return this.send_post_request(data,url) ;
+  }
+
+  fetch_transactions(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_transactions';
+    return this.send_post_request(data,url) ;
+  }
 }
