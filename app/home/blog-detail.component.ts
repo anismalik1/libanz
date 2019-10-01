@@ -86,6 +86,12 @@ export class BlogDetailComponent implements OnInit {
         }
       )
   }
+  decode_html(html)
+  {
+   var textArea = document.createElement('textarea');
+   textArea.innerHTML = html;
+   return textArea.value;
+  }
   comment_submit(value) 
   {
     let data = value;

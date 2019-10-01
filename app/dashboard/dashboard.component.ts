@@ -272,6 +272,11 @@ export class DashboardComponent implements OnInit{
     }
   }
 
+  add_complaint()
+  {
+    
+  }
+
   get_token()
   {
     return this.authservice.auth_token();

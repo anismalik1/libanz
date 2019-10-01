@@ -300,18 +300,8 @@ export class TodoService {
    let url = this.server_url+'index.php?/app_services/fetch_topup_request';
     return this.send_post_request(data,url) ;
   }
-  fetch_complaints(data)
-  {
-    
-    let url = this.server_url+'index.php?/app_services/fetch_complaints_listing';
-    return this.send_post_request(data,url) ;
-  }
-  fetch_complaint_info(data)
-  {
-    
-    let url = this.server_url+'index.php?/app_services/fetch_complaint_info';
-    return this.send_post_request(data,url) ;
-  }
+  
+  
   fetch_operators(data)
   {
     let url = this.server_url+'index.php?/app_services/fetch_operators';
@@ -695,6 +685,24 @@ export class TodoService {
   fetch_transactions(data)
   {
     let url = this.server_url+'accounts/apis/orders/fetch_transactions';
+    return this.send_post_request(data,url) ;
+  }
+  add_complaint(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/add_complaint';
+    return this.send_post_request(data,url) ;
+  }
+  fetch_complaints(data)
+  {
+    
+    let url = this.server_url+'accounts/apis/orders/fetch_complaints_listing';
+    return this.send_post_request(data,url) ;
+  }
+
+  fetch_complaint_info(data)
+  {
+    
+    let url = this.server_url+'accounts/apis/orders/fetch_complaint_info';
     return this.send_post_request(data,url) ;
   }
 }

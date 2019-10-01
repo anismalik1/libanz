@@ -4096,7 +4096,7 @@ canvas {
 .new-24-7 .card img{width: auto !important;}
 .new-24-7 .card .card-content{padding: 2rem 0 0;}
 .new-24-7 p{padding:0 10rem;}
-.blog-page .card-action{position: absolute; width: 100%; bottom: 0;}
+.blog-page .card-action{ width: 100%; bottom: 0;}
 .new-jio-fiber .card{box-shadow: none !important;}
 .new-jio-fiber .card .card-content{padding: 2.9rem 3rem;}
 .new-jio-fiber .card .card-content .card-title{font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem;}

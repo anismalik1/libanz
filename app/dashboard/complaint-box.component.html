@@ -26,7 +26,7 @@
                 <app-side-nav></app-side-nav>		    
             </div>
             <div class="col s12 m9">
-                <div class="card export-and-import">
+                <!-- <div class="card export-and-import">
                     <div class="card-content">
                         <form class="date-export">
                             <div class="row no-margin">
@@ -45,7 +45,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <div class="card">
                     <div class="card-content">
                         <h3 class="font600 inline-block">Complaint Box</h3>
@@ -90,8 +90,8 @@
                                         <td>{{i+1}}</td>
                                         <td>{{complaint.complaint_id}}</td>
                                         <td>{{complaint.id}}</td>
-                                        <td>{{complaint.rechrge_status}}</td>
-                                        <td>{{complaint.subcriber_id}}</td>
+                                        <td><span class="green white-text" *ngIf="complaint.recharge_status == 1">Success</span><span class="red white-text" *ngIf="complaint.recharge_status == 2">Failed</span><span class="yellow white-text" *ngIf="complaint.recharge_status == 3">Pending</span></td>
+                                        <td>{{complaint.recharge_id}}</td>
                                         <td><i class="fa fa-inr"></i> {{complaint.amount}}</td>
                                         <td>{{complaint.title}}</td>
                                         <td>{{complaint.comment}}</td>

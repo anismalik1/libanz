@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit{
           this.token_params = data;
           if(typeof data.status != 'undefined' && data.status == true)
           {
-            $('.login-modal-close').click();
+            $('.modal-close').click();
             let user : any = data.user;
             this.step = 1;
             this.authService.AccessToken = this.token_params.accessToken;

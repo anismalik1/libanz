@@ -191,6 +191,34 @@
                 </div>
             </div>
         </div>
-    </div>
+	</div>
+	<div id="complaints" class="modal complaint-modal">
+		<div class="modal-content">
+		  <h3 class="font600">Add Complaint</h3>
+		  <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+		  <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
+		  <form>
+			<div class="row no-margin">
+			  <div class="input-field col s12">
+				<select>
+				  <option value="" disabled selected>Choose your option</option>
+				  <option value="1">Balance did not receive by customer</option>
+				  <option value="2">Wrong Opreater but correct recharge No/ID</option>
+				  <option value="3">Wrong Recharge No/ID but correct opreater </option>
+				  <option value="4">Other</option>
+				</select>
+			  </div>
+			  <div class="input-field col s12">
+				<textarea id="textarea1" class="materialize-textarea"></textarea>
+				<label for="textarea1" class="font-size-change">Description</label>
+			  </div>
+			</div>
+		  </form>
+		</div>
+		<div class="modal-footer orange center">
+		  <a href="javascript:" class="modal-action btn-flat white-text font-size-change" (click)="add_complaint()">Register</a>
+		</div>
+	  </div>
 </section>
+
 <app-footer-min></app-footer-min>

@@ -84,7 +84,8 @@
                           <td>{{i+1}}</td>
                           <td>{{recharge.recharge_order}}</td>
                           <td>{{recharge.recharge_no}}</td>
-                          <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td>
+                          <td>{{recharge.recharge_name}}</td>
+                          <!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
                           <td><i class="icon-inr"></i>{{recharge.amount }}</td>
                           <td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
                           <td>{{recharge.order_date | date: date:'dd M, Y' }}<br><time>{{recharge.order_date | date:'hh:mm a' }}</time></td>
@@ -99,7 +100,16 @@
                           <td *ngIf="recharge.recharge_status == 1"><span class="green white-text padd1">Success</span></td>
                           <td *ngIf="recharge.recharge_status == 2"><span class="red white-text padd1">Fail</span></td>
                           <td *ngIf="recharge.recharge_status == 3"><span class="orange white-text padd1">Progress</span></td>
-                          <td><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)">Complaint</a></td>
+                          <td>
+                            <div *ngIf="recharge.complaint_id == null">
+                                <span class="orange white-text" *ngIf="check_delay(recharge.order_date) == 2">Please Wait...</span>
+                                <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Complaint</a></span>
+                            </div>
+                            <div *ngIf="recharge.complaint_id != null">
+                                <span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
+                                <span class="orange white-text" *ngIf="recharge.status == 0">Resolved</span>
+                            </div>
+                          </td>
                       </tr>
                   </tbody>	
               </table>
@@ -113,32 +123,45 @@
     </div>
 </div>
 </div>
-</section>
+<!-- <a href="#complaints" class="modal-trigger com" (click)="do_complaint(1)">Complaint</a> -->
 <div id="complaints" class="modal complaint-modal">
+  <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="add_complaint(complaintform.value)">
   <div class="modal-content">
     <h3 class="font600">Add Complaint</h3>
     <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
     <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
-    <form>
+    
       <div class="row no-margin">
         <div class="input-field col s12">
-          <select>
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">Balance did not receive by customer</option>
-            <option value="2">Wrong Opreater but correct recharge No/ID</option>
-            <option value="3">Wrong Recharge No/ID but correct opreater </option>
-            <option value="4">Other</option>
-          </select>
+            <mat-form-field>
+                <mat-select placeholder="Select Operator" formControlName="title">
+                    <mat-option [value]="1">
+                        Balance did not receive by customer
+                    </mat-option>
+                    <mat-option [value]="2">
+                        Wrong Opreater but correct recharge No/ID
+                    </mat-option>
+                    <mat-option [value]="3">
+                        Wrong Recharge No/ID but correct opreater
+                    </mat-option>
+                    <mat-option [value]="4">
+                        Other
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
         <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="textarea1" class="materialize-textarea" formControlName="description" ngModel></textarea>
           <label for="textarea1" class="font-size-change">Description</label>
         </div>
       </div>
-    </form>
+    
   </div>
   <div class="modal-footer orange center">
-    <a href="javascript:" class="modal-action btn-flat white-text font-size-change" (click)="add_complaint()">Register</a>
+    <button type="submit" class="modal-action btn-flat white-text font-size-change">Register</button>
   </div>
+</form>
 </div>
+</section>
+
 <app-footer-min></app-footer-min>

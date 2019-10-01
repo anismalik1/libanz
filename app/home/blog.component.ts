@@ -117,4 +117,11 @@ export class BlogComponent implements OnInit {
   this.loaded_blogs = [];
   this.fetch_blogs(category);
  }
+
+ decode_html(html)
+ {
+  var textArea = document.createElement('textarea');
+  textArea.innerHTML = html;
+  return textArea.value;
+ }
 }
