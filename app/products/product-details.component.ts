@@ -1,10 +1,12 @@
 import { Component, OnInit,ViewContainerRef ,Renderer2,Inject} from '@angular/core';
 import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import {  FormControl } from '@angular/forms'
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable} from 'rxjs';
 import { Product } from '../product.entities';
 import { ProductService } from '../product.service';
 import { Package } from '../packages.entities.service';
@@ -26,6 +28,7 @@ export class ProductDetailsComponent implements OnInit{
   multi_list : any;
   multi_tsk_kit : number = 2;
   circles : any;
+  pincode : any;
   channels : any;
   product_category_list : any;
   product_features : any;
@@ -55,6 +58,10 @@ export class ProductDetailsComponent implements OnInit{
   product_mpackages : Package[];
   promos : any;
   thumbs : any;
+  filterdList : boolean = false;
+  myControl = new FormControl();
+  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  filteredOptions: Observable<object>;
   constructor(
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
@@ -177,11 +184,19 @@ export class ProductDetailsComponent implements OnInit{
     for(var i=0;i<this.channels_packs.length ;i++)
       {
         //console.log(this.channels_packs[i])
-        if( this.channels_packs[i].default_selected == 1 || this.channels_packs[i].default_selected == 2)
+        if( this.channels_packs[i].default_selected == 1)
         {
           if(this.channels_packs[i].child[0])
           {
-            this.fta_pack = this.channels_packs[i].child[0];
+            for(var j=0;j<this.channels_packs[i].child.length ;j++)
+            {
+              //console.log("child"+this.channels_packs[i].child[j]);
+              if(this.channels_packs[i].child[j].default_selected == 2)
+              {
+                this.fta_pack = this.channels_packs[i].child[j];
+              }
+            }
+            
             let fta_exist = this.pack_selected.filter(x => x.id == this.fta_pack.id);
             if(fta_exist.length == 0)
             {
@@ -200,6 +215,7 @@ export class ProductDetailsComponent implements OnInit{
           }
         }
     } 
+    //console.log(this.fta_pack);
     if(this.fta_pack.price == 0 )
     {
       for(var i=0;i < this.channels_packs.length ;i++)
@@ -811,8 +827,60 @@ export class ProductDetailsComponent implements OnInit{
     $('.unhide-link').remove()
     this.hide = false;
   }
-  select_pack(pack)
+  search_me(val)
   {
+    let data : any = {};
+    data.search = val;
+    data.product_id = this.product.id;
+    this.todoservice.search_pincode(data)
+    .subscribe(
+      data => 
+      {
+        if(!jQuery.isEmptyObject(data))
+        {
+          this.filterdList = true;
+          this.filteredOptions = data;
+          //console.log(this.filteredOptions)
+        }
+      }
+    )
+  }
+  check_pincode()
+  {
+    let pincode = $('#pincode-text').val();
+    $('.check-pincode-btn').text('Wait..');
+    let data : any = {};
+    data.pincode = pincode;
+    data.product_id = this.product.id;
+    this.todoservice.search_product_pincode(data)
+    .subscribe(
+      data => 
+      {
+        if(!jQuery.isEmptyObject(data))
+        {
+          $('.check-pincode-btn').text('Check');
+          if(data.status == true)
+          {
+            $('.religon-overlay').hide();
+            this.pincode = pincode;
+            //console.log(this.circles);
+            let circle_exist = this.circles.filter(circles => circles.name.includes(data.circle));
+            if(circle_exist)
+            {
+              //console.log(circle_exist);
+              this.region  = circle_exist[0].circle_id;
+            }
+          }
+          else
+          {
+            this.toastr.error('Failed! '+data.msg);
+          }
+        }
+      }
+    )
+  }
+  select_pack(pack)
+  { 
     if(this.fta_pack.length > 0)
       this.pack_selected = [this.fta_pack];  
     if($('#check-pack-'+pack.id).hasClass('grey-text'))

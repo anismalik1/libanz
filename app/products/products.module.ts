@@ -8,7 +8,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductService } from '../product.service';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
 import { ProductDetailsComponent } from './product-details.component';
 import { ProductsComponent } from './products.component';
 import { CheckoutComponent } from './checkout.component';
@@ -42,7 +42,9 @@ const routes: Routes = [
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent, FavoritesComponent],
   providers : [ProductService,TodoService,User,AuthService]

@@ -705,4 +705,16 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/fetch_complaint_info';
     return this.send_post_request(data,url) ;
   }
+  search_pincode(data)
+  {
+    
+    let url = this.server_url+'accounts/apis/product/search_pincode';
+    return this.send_post_request(data,url) ;
+  }
+  search_product_pincode(data)
+  {
+    
+    let url = this.server_url+'accounts/apis/product/search_product_pincode';
+    return this.send_post_request(data,url) ;
+  }
 }

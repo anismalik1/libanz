@@ -130,6 +130,15 @@
 						</li>
 					</ul>
 				<br/>
+				<ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="pincode">
+						<li>
+							<span class="font-size-change1 font600 grey-text">Pincode</span>
+						</li>
+						<li>
+							<span>{{this.pincode}}</span>
+						</li>
+					</ul>	
+				<br/>	
 					  <div class="clearfix"></div>
 					  <div class="col m4 no-padding" *ngIf="circles">
 							<mat-form-field>
@@ -618,6 +627,20 @@
 </div>
 <div class="religon-overlay" *ngIf="circles"> 
 	<div class="religon-modal" >
+		<div *ngIf="product.title.includes('Xstream'); else elseBlock">
+			<h3 class="center">Check Pincode</h3>
+			<mat-form-field class="example-full-width">
+				<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
+				<mat-autocomplete #auto="matAutocomplete">
+					<span *ngIf="filterdList">
+					<mat-option *ngFor="let option of filteredOptions" [value]="option">{{option}}
+					</mat-option>
+				</span>
+				</mat-autocomplete>
+			</mat-form-field>
+			<button class="orange btn check-pincode-btn" (click)="check_pincode()">Check</button>	
+		</div>
+		<ng-template #elseBlock>
 		<h3 class="center">Select Region</h3>
 	<div *ngFor="let item of circles;let i = index">
 		<div class="chip" *ngIf="i < 5">
@@ -630,7 +653,7 @@
 		<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
 		</div>
 	</div>	
-	
+	</ng-template>
 	</div>
 </div>
 <app-footer></app-footer>
