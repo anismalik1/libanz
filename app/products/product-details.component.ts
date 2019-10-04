@@ -861,13 +861,13 @@ export class ProductDetailsComponent implements OnInit{
           $('.check-pincode-btn').text('Check');
           if(data.status == true)
           {
+            this.product.pincode = pincode;
             $('.religon-overlay').hide();
             this.pincode = pincode;
             //console.log(this.circles);
             let circle_exist = this.circles.filter(circles => circles.name.includes(data.circle));
             if(circle_exist)
             {
-              //console.log(circle_exist);
               this.region  = circle_exist[0].circle_id;
             }
           }
