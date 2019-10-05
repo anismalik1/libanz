@@ -100,7 +100,7 @@
                   			<button id="addButton" (click)="change_count(1,'add')"><i class="material-icons">add</i></button>
                   		</div>
                   	</div> -->
-                  	<ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 5 && product.category_id == 1">
+                  	<!-- <ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 5 && product.category_id == 1">
                   		<li>
                   			<span class="font-size-change1 font600 grey-text">DTH Kit</span>
                   		</li>
@@ -110,7 +110,7 @@
                   		<li>
                   			<a id="kit-3" href="javascript:" [className]="(kit == 3) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(3)">999 Kit</a>
                   		</li>
-					  </ul>
+					  </ul> -->
 					<br/>
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
                   		<li>
@@ -130,7 +130,7 @@
 						</li>
 					</ul>
 				<br/>
-				<ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="pincode">
+				<ul class="monthly-packages margin-top kit-pack" *ngIf="pincode">
 						<li>
 							<span class="font-size-change1 font600 grey-text">Pincode</span>
 						</li>
@@ -324,7 +324,7 @@
 				<h1 class="center font600 text-orange">Available Packs</h1>
 				<span class="chip green white-text">Please Select Your Basic Pack</span>
 			</div>
-			<ul class="collapsible" data-collapsible="expandable">
+			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
 					<div [className]="(packs.default_selected == 1) ? 'collapsible-body lSAction' : 'collapsible-body'">

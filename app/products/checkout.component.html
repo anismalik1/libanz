@@ -157,10 +157,82 @@
           <!-- Login Checkout -->
         	<div class="row no-margin login-checkout hide checkout_2">
         		<div class="col s10 m10 offset-m1">
+								<div class="name margin-top-cart user-address">
+									<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0" checked>
+									<label for="address-0" class="font600 black-text">Add New Address</label>
+								</div>
+							<div class="add-new-address">
+									<form  [formGroup]="addressformgroup" class="location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
+											<div class="modal-content no-padding">
+													<!-- <div class="add-add border-bottom">
+														<h4 class="inline-block">Add Delivery Address</h4> -->
+														<!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
+													<!-- </div> -->
+															<div class="row no-margin">
+															<div class="input-field col s12 m6">
+																<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
+																<label for="name">Name*</label>
+																<div class="center" *ngIf="!addressformgroup.controls['name'].valid && addressformgroup.controls['name'].touched">
+																	<span class="red-text ">*Name is Required.</span>
+																</div>
+															</div>
+															<div class="input-field col s12 m6">
+																<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+																<label for="phn-no">Phone Number*</label>
+																<div class="center" *ngIf="!addressformgroup.controls['contact'].valid && addressformgroup.controls['contact'].touched">
+																	<span class="red-text ">*Enter a Valid Phone Number.</span>
+																</div>
+															</div>
+														</div>
+														<div class="row no-margin">
+															<div class="input-field col s12 m6">
+																<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
+																<label for="pincode">Pincode*</label>
+																<div class="center" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
+																	<span class="red-text ">*Enter a Valid Pincode.</span>
+																</div>
+															</div>
+															<div class="input-field col s12 m6">
+																<input id="locality" name="locality" type="text" class="validate" formControlName="locality" autocomplete="off">
+																<label for="locality">Locality</label>
+															</div>
+														</div>
+														<div class="row no-margin">
+															<div class="input-field col s12 m6">
+																<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
+																<label for="city">City/District/Town*</label>
+																<div class="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
+																	<span class="red-text ">*City is Required.</span>
+																</div>
+															</div>
+															<div class="input-field col s12 m6">
+																<mat-form-field>
+																	<mat-select placeholder="Choose your Circle*" (change)="changeState($event.value)" name="state" formControlName="state">
+																		<mat-option [value]="item.name" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																	</mat-select>
+																</mat-form-field>
+															</div>
+														</div>
+														<div class="row no-margin">
+															<div class="input-field col s12">
+																<input name="address" id="land" type="text" class="validate" formControlName="address">
+																<label for="land">Address*</label>
+																<div class="center" *ngIf="!addressformgroup.controls['address'].valid && addressformgroup.controls['address'].touched">
+																	<span class="red-text ">*Enter Delivery Address.</span>
+																</div>
+															</div>
+														</div>
+											</div>
+											<div class="modal-footer">
+												<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!addressformgroup.valid">Save and Deliver Here</button>
+												<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
+											</div>
+									</form>
+							</div>
         			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
-                <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div>
-        				<ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template>
-        				<ng-template #unchecked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/></ng-template>
+                <!-- <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div> -->
+        				<!-- <ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template> -->
+        				<input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/>
       					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
 									<!-- &nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp; -->
 									<!-- <a href="javascript:" (click)="remove_address(row.id)"> Remove</a> -->
@@ -376,12 +448,12 @@
         </ul>
         <!-- End Here -->
         <!-- Modal Structure --> 
-        <div id="add-new-address" class="modal">
+        <!-- <div id="add-new-address" class="modal">
 					<form  [formGroup]="addressformgroup" class="margin-top location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
 			<div class="modal-content no-padding">
 					<div class="add-add border-bottom">
 						<h4 class="inline-block">Add Delivery Address</h4>
-						<!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
+						
 					</div>
 							<div class="row no-margin">
 							<div class="input-field col s12 m6">
@@ -443,7 +515,7 @@
 				<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
 			</div>
 	</form>
-	</div>
+	</div> -->
       <div id="add-address" class="modal">
             <form class="margin-top location-add1" #addnewaddress = "ngForm" (ngSubmit)="edit_addr(addnewaddress.value)">
         <div class="modal-content no-padding" *ngIf="edit == true">

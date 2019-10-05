@@ -34,6 +34,7 @@ export class CheckoutComponent implements OnInit{
   otfquantity : number = 0;
   cart_items : any;
   circles : any;
+  pincode : any;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -65,6 +66,10 @@ ngOnInit() {
       full_url[2] = '#'+full_url[2];
     this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
   } 
+  if(this.todoservice.get_param('pincode'))
+  {
+    this.pincode = this.todoservice.get_param('pincode');
+  }
   let script = this._renderer2.createElement('script');
   script.type = `text/javascript`;
   script.text = `

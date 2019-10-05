@@ -179,7 +179,7 @@ export class ProductDetailsComponent implements OnInit{
     this.pack_selected = [];
     if(!this.channels_packs)
      return false;
-    //console.log(this.product.url.includes('hd')); 
+    //console.log(this.channels_packs); 
     
     for(var i=0;i<this.channels_packs.length ;i++)
       {
@@ -194,6 +194,10 @@ export class ProductDetailsComponent implements OnInit{
               if(this.channels_packs[i].child[j].default_selected == 2)
               {
                 this.fta_pack = this.channels_packs[i].child[j];
+              }
+              else if(this.channels_packs[i].child[j].default_selected == 1)
+              {
+                this.pack_selected.push(this.channels_packs[i].child[j]); 
               }
             }
             
@@ -580,6 +584,11 @@ export class ProductDetailsComponent implements OnInit{
       this.productservice.addto_cart(multi.id,multi);
     } 
     this.productservice.loadCart();
+    if(this.pincode != '')
+    {
+      this.route.navigate(['/product/checkout'],{queryParams: {pincode: this.pincode}});
+      return;
+    }
     this.route.navigate(['/product/checkout']);
   }
   check_cashback(cashback)
@@ -695,6 +704,11 @@ export class ProductDetailsComponent implements OnInit{
     {
       this.productservice.addto_cart(p_id,this.product);
       this.productservice.loadCart();
+    }
+    if(this.pincode != '')
+    {
+      this.route.navigate(['/product/checkout'],{queryParams: {pincode: this.pincode}});
+      return;
     } 
     this.route.navigate(['product/checkout']);
   }
@@ -864,6 +878,7 @@ export class ProductDetailsComponent implements OnInit{
             this.product.pincode = pincode;
             $('.religon-overlay').hide();
             this.pincode = pincode;
+            this.toastr.error('Great! '+data.msg);
             //console.log(this.circles);
             let circle_exist = this.circles.filter(circles => circles.name.includes(data.circle));
             if(circle_exist)
