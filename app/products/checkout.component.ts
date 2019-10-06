@@ -35,6 +35,7 @@ export class CheckoutComponent implements OnInit{
   cart_items : any;
   circles : any;
   pincode : any;
+  tab_address : any;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -364,15 +365,21 @@ add_new_addr(form)
         if(!jQuery.isEmptyObject(data))
         {
           this.addresses = data.ADDRESSES;
-          if(Object.keys(this.addresses).length == 1)
-          {
-              this.only_address = 1;
-          }
+          
+          setTimeout(()=>{    
+            $('#address-'+data.added_address.address_id).prop('checked',true);
+           }, 1000);
+           this.tab_address = data.added_address; 
+          this.goto_pay();
         }
         $('.modal-close').click();
         this.spinner.hide();
       }
     )  
+}
+set_on_tab(addr)
+{
+  this.tab_address = addr;
 }
 goto_orders()
 {

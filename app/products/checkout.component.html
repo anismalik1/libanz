@@ -143,7 +143,7 @@
             		</div>
             		<div class="col s8 my-cart" >
             			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
-            			<!-- <span class="font600 naam2">{{this.todoservice.get_user_name()}}</span>&nbsp; -->
+            			<span class="font600 naam2" *ngIf="tab_address">{{tab_address.name}}&nbsp;({{tab_address.address}},{{ tab_address.pin}})</span>
             			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
             			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
             		</div>
@@ -232,7 +232,7 @@
         			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
                 <!-- <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div> -->
         				<!-- <ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template> -->
-        				<input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}"/>
+        				<input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}" (change)="set_on_tab(row);"/>
       					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
 									<!-- &nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp; -->
 									<!-- <a href="javascript:" (click)="remove_address(row.id)"> Remove</a> -->
@@ -242,12 +242,12 @@
 								<div class="col s10 m10 offset-m1" *ngIf="addresses && addresses.length > 0">
 								<button type="Submit" class="btn waves-effect waves-light orange" (click)="goto_pay()">DELIVER HERE</button>
 								</div>
-								<div class="add-new-address col s12" *ngIf="addresses && addresses.length == 0">
+								<!-- <div class="add-new-address col s12" *ngIf="addresses && addresses.length == 0">
 									<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Delivery Address</a>
 								</div>
 								<div class="add-new-address col s12" *ngIf="addresses && addresses.length > 0">
 									<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add a New Address</a>
-								</div>
+								</div> -->
         	</div>
         	<!-- End Here -->
           <!-- Fourth Line -->
