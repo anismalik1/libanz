@@ -16,6 +16,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class CheckoutComponent implements OnInit{
   myControl = new FormControl();
   addressformgroup : FormGroup;
+  regaddressformgroup : FormGroup;
   addresses : any ;
   only_address :number = 0 ;
   state : string ; 
@@ -55,6 +56,10 @@ constructor( public todoservice : TodoService,
       'city' : [null,Validators.compose([Validators.required])],
       'state' : [null,Validators.compose([Validators.required])],
       'address' : [null,Validators.compose([Validators.required])],
+    });
+    this.regaddressformgroup = fb.group({
+      'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+      'pincode' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{6}")])],
     });
    }
 ngOnInit() {
@@ -344,7 +349,42 @@ edit_addr(form)
       }
     )  
 }
-
+change_addr_form(section)
+{
+  $('#add-new-address').hide();
+  $('#mboss-address').hide();
+  $('#'+section).show();
+}
+reg_addr(formdata)
+{
+  let data = formdata;
+  this.spinner.show();
+  data.token  = this.get_token();
+  this.todoservice.reg_address(data)
+    .subscribe(
+      data => 
+      {
+        if(data.status == 'Invalid Token')
+        {                                                     
+          this.authservice.clear_session();
+          this.router.navigate(['/login']);
+        }
+        let b = JSON.stringify(data);
+        data =  JSON.parse(b.replace(/\\/g, ''));
+        if(!jQuery.isEmptyObject(data))
+        {
+          this.addresses = data.ADDRESSES;
+          
+          setTimeout(()=>{    
+            $('#address-'+data.added_address.address_id).prop('checked',true);
+           }, 1000);
+           this.tab_address = data.added_address; 
+          this.goto_pay();
+        }
+        this.spinner.hide();
+      }
+    ) 
+}
 add_new_addr(form)
 {
   let data = form;
@@ -372,7 +412,6 @@ add_new_addr(form)
            this.tab_address = data.added_address; 
           this.goto_pay();
         }
-        $('.modal-close').click();
         this.spinner.hide();
       }
     )  

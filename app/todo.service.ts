@@ -354,11 +354,7 @@ export class TodoService {
     let url = this.server_url+'index.php?/app_services/fetch_checkout_data';
     return this.send_post_request(data,url) ;
   }
-  add_new_address(data)
-  {
-    let url = this.server_url+'index.php?/app_services/add_new_address';
-    return this.send_post_request(data,url) ;
-  }
+  
   edit_address(data)
   {
     let url = this.server_url+'index.php?/app_services/edit_address';
@@ -715,6 +711,16 @@ export class TodoService {
   {
     
     let url = this.server_url+'accounts/apis/product/search_product_pincode';
+    return this.send_post_request(data,url) ;
+  }
+  add_new_address(data)
+  {
+    let url = this.server_url+'index.php?/app_services/add_new_address';
+    return this.send_post_request(data,url) ;
+  }
+  reg_address(data)
+  {
+    let url = this.server_url+'index.php?/app_services/reg_address';
     return this.send_post_request(data,url) ;
   }
 }

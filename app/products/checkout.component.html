@@ -143,7 +143,7 @@
             		</div>
             		<div class="col s8 my-cart" >
             			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
-            			<span class="font600 naam2" *ngIf="tab_address">{{tab_address.name}}&nbsp;({{tab_address.address}},{{ tab_address.pin}})</span>
+            			<span class="font600 naam2" *ngIf="tab_address"><span *ngIf="tab_address.name">{{tab_address.name}}-</span>{{tab_address.contact}}&nbsp;(<span *ngIf="tab_address.address">{{tab_address.address}},</span> {{ tab_address.pin}})</span>
             			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
             			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
             		</div>
@@ -158,17 +158,19 @@
         	<div class="row no-margin login-checkout hide checkout_2">
         		<div class="col s10 m10 offset-m1">
 								<div class="name margin-top-cart user-address">
-									<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0" checked>
-									<label for="address-0" class="font600 black-text">Add New Address</label>
+									<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
+									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.enable_mboss == true">M-Boss</label>
+									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.enable_mboss != true">Add New Address</label>
+									<span *ngIf="this.productservice.enable_mboss == true">
+											<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
+											<label for="address-0" class="font600 black-text">REG</label>
+									</span>	
+									
 								</div>
-							<div class="add-new-address">
+							<div class="add-new-address" id="add-new-address">
 									<form  [formGroup]="addressformgroup" class="location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
 											<div class="modal-content no-padding">
-													<!-- <div class="add-add border-bottom">
-														<h4 class="inline-block">Add Delivery Address</h4> -->
-														<!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
-													<!-- </div> -->
-															<div class="row no-margin">
+													<div class="row no-margin">
 															<div class="input-field col s12 m6">
 																<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
 																<label for="name">Name*</label>
@@ -229,6 +231,33 @@
 											</div>
 									</form>
 							</div>
+							<div class="add-new-address" id="reg-address" style="display:none;">
+								<form  [formGroup]="regaddressformgroup" class="location-add1" #regaddress = "ngForm" (ngSubmit)="reg_addr(regaddress.value)">
+										<div class="modal-content no-padding">
+												<div class="row no-margin">
+														<div class="input-field col s12 m6">
+															<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+															<label for="phn-no-reg">Phone Number*</label>
+															<div class="center" *ngIf="!regaddressformgroup.controls['contact'].valid && regaddressformgroup.controls['contact'].touched">
+																<span class="red-text ">*Enter a Valid Phone Number.</span>
+															</div>
+														</div>
+														<div class="input-field col s12 m6">
+															<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
+															<label for="pincode-reg">Pincode*</label>
+															<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
+																<span class="red-text ">*Enter a Valid Pincode.</span>
+															</div>
+														</div>
+														
+													</div>
+											</div>
+											<div class="modal-footer">
+													<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!regaddressformgroup.valid">Save and Deliver Here</button>
+													<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
+												</div>
+									</form>
+							</div>						
         			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
                 <!-- <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div> -->
         				<!-- <ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template> -->
