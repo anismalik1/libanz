@@ -2739,17 +2739,21 @@ tbody img{
   width: 23% !important;
 }
 .search-accordin input{
-	border: 2px solid #ffa530 !important;
-  border-radius: 10px !important;
-  width: 66% !important;
-  text-indent: 15px !important;
-  transform: translate(26%) !important;
-  margin: 1rem 0 2rem 0 !important;
+	border: 2px solid #d4d4d4 !important;
+    border-radius: 50px !important;
+    width: 100% !important;
+    text-indent: 25px !important;
+    margin: 1rem 0 2rem 0 !important;
+    box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28) !important;
+    height: 46px !important;
+    line-height: 46px;
 }
 .search-accordin button{
-  position: absolute;
-  top: 19%;
-  right: 15%;
+	position: absolute;
+    top: 22%;
+    right: 0;
+    color: #9AA0A6;
+    font-size: 22px;
 }
 .search-accordin button:hover,.search-accordin button:focus,.search-accordin button:active{
 	background: transparent;
@@ -4104,4 +4108,20 @@ canvas {
 .new-jio-fiber .card .card-content ul{column-count: 2;}
 .new-jio-fiber .card .card-content ul li{font-size: 13px !important; font-weight: 600; padding: 1rem 1.5rem; position: relative; margin:0;}
 .new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -5%;top:12%;font-size: 25px;color: #ff9800; }
+.link-faqs h5{
+	font-size: 22px;
+    margin: 2rem 0 10px;
+    font-weight: 600;
+    text-transform: capitalize;
+	text-overflow: ellipsis;
+	color: #676767;
+    width: 100%;
+    white-space: nowrap;
+}
+.most-top{font-size: 15px; margin-bottom: 10px;}
+.faqs-new-format li{margin-bottom: 10px;}
+.faqs-new-format hr{width: 25%;border: 2px solid #ff6a00; margin-bottom: 5rem;}
+.link-faqs span{font-size: 15px;}
+.link-faqs p{font-size: 15px; padding: 5px 3rem 0 0;}
+.images-faqs-new{margin-top: 3rem;padding: 0 8px;margin-bottom: 10px;}
 /* End Here */

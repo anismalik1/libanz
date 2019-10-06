@@ -15,87 +15,128 @@
   </div>
 </section> -->
 <section class="white no-padding">
-  <div class="row">
-    <div class="col s12 m3 queries-faq">
-      <div class="card side-nav-faqs grey lighten-2">
-        <div class="card-content" *ngIf="faqs">
-            <span class="card-title center">Queries</span>
-          <ul class="collapsible" data-collapsible="accordion">
-            <li *ngFor="let item of faqs.list;">
-              <div class="collapsible-header font600 active">{{item.title}} <i class="material-icons">
-                keyboard_arrow_right</i></div>
-              <div class="collapsible-body">
-                <ul>
-                  <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)"><i class="material-icons ques">question_answer</i>{{link.question}} </a></li>
-                </ul>
-              </div>
+  <div class="container">
+    <div class="row">
+      <!-- <div class="col s12 m3 queries-faq">
+        <div class="card side-nav-faqs grey lighten-2">
+          <div class="card-content" *ngIf="faqs">
+              <span class="card-title center">Queries</span>
+            <ul class="collapsible" data-collapsible="accordion">
+              <li *ngFor="let item of faqs.list;">
+                <div class="collapsible-header font600 active">{{item.title}} <i class="material-icons">
+                  keyboard_arrow_right</i></div>
+                <div class="collapsible-body">
+                  <ul>
+                    <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)"><i class="material-icons ques">question_answer</i>{{link.question}} </a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="col s12 m8">
+        <div class="col s12 margin-top faq1">        
+          <ul class="collapsible no-box-shadow" data-collapsible="accordion">
+            <li class="search-accordin relative">
+              <input placeholder="Search Your Answer" id="faq_key" type="text" class="validate">
+              <button type="Submit" class="btn-flat" (click)="search_faqs();"><i class="material-icons">search</i></button>
             </li>
-          </ul>
+          </ul> 
+          <div *ngIf="searched && search_list.length == 0">
+              <h4 class="red-text center margin-top1">No Records. Please fill up the form to find your Solution.</h4>
+          </div> 
+          <div class="faqs-text" *ngIf="single">
+            <h2>{{single.question}}</h2>
+            <hr>
+            <p [innerHTML]="single.answer"></p>
+            <h4 class="font600 margin-top1">Was this information helpful?</h4>
+            <a href="javascript:void(0);" class="btn green" (click)="thanks()">Yes</a>
+            <a href="#no-faq" class="btn red modal-trigger">No</a>
+          </div>        
+          <div class="faqs-text" *ngIf="searched && search_list.length > 0">
+            <h2>Searched Query</h2>
+            <span class="grey-text">Showing {{search_list.length}} results</span>
+            <ul>
+              <li *ngFor="let item of search_list;">
+                <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
+                <p [innerHTML]="item.meta_description"></p>
+              </li>
+            </ul>
+          </div>
+          <div class="faqs-new-format left-align">
+            <h2 class="font600 center no-margin">Popular Ask Queries</h2>
+            <p class="grey-text center most-top">Most Top 10 Question</p>
+            <hr>
+            <ul>
+              <li>
+                <div class="link-faqs">
+                  <a href="javascript:void(0);">
+                    <h5 class="font600">Tata Sky New Postpaid connection</h5>
+                    <span class="green-text">Mydthshop.com</span>
+                    <p class="grey-text">Watch Your Favourite Channels & Shows in High Definition At Exciting Prices. Book Now! Free Home Delivery. 24x7 Customer Service. Online Payment Offers. Live TV on Your Mobile. Book Now & Save More. Cash On Delivery Option. Available on Mobile App.</p>
+                  </a>
+                </div>
+              </li>
+              <li>
+                <div class="link-faqs">
+                  <a href="javascript:void(0);">
+                    <h5 class="font600">Tata Sky New Postpaid connection</h5>
+                    <span class="green-text">Mydthshop.com</span>
+                    <p class="grey-text">Watch Your Favourite Channels & Shows in High Definition At Exciting Prices. Book Now! Free Home Delivery. 24x7 Customer Service. Online Payment Offers. Live TV on Your Mobile. Book Now & Save More. Cash On Delivery Option. Available on Mobile App.</p>
+                  </a>
+                </div>
+              </li>
+              <li>
+                <div class="link-faqs">
+                  <a href="javascript:void(0);">
+                    <h5 class="font600">Tata Sky New Postpaid connection</h5>
+                    <span class="green-text">Mydthshop.com</span>
+                    <p class="grey-text">Watch Your Favourite Channels & Shows in High Definition At Exciting Prices. Book Now! Free Home Delivery. 24x7 Customer Service. Online Payment Offers. Live TV on Your Mobile. Book Now & Save More. Cash On Delivery Option. Available on Mobile App.</p>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col s12 m6 margin-top faq1">
-      <h3 class="center font600">Frequently Asked Questions</h3>
-      <ul class="collapsible no-box-shadow" data-collapsible="accordion">
-        <li class="search-accordin relative">
-          <input placeholder="Search Your Answer" id="faq_key" type="text" class="validate">
-          <button type="Submit" class="btn-flat" (click)="search_faqs();"><i class="material-icons orange-text font-size-change2">search</i></button>
-        </li>
-      </ul> 
-      <div *ngIf="searched && search_list.length == 0">
-          <h4 class="red-text center margin-top1">No Records. Please fill up the form to find your Solution.</h4>
-      </div> 
-      <div class="faqs-text" *ngIf="single">
-        <h2>{{single.question}}</h2>
-        <hr>
-        <p [innerHTML]="single.answer"></p>
-        <h4 class="font600 margin-top1">Was this information helpful?</h4>
-        <a href="javascript:void(0);" class="btn green" (click)="thanks()">Yes</a>
-        <a href="#no-faq" class="btn red modal-trigger">No</a>
-      </div>
-      
-      <div class="faqs-text" *ngIf="searched && search_list.length > 0">
-        <h2>Searched Query</h2>
-        <span class="grey-text">Showing {{search_list.length}} results</span>
-        <ul>
-          <li *ngFor="let item of search_list;">
-            <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
-            <p [innerHTML]="item.meta_description"></p>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col s12 m3 ask-question">
-      <div class="card grey lighten-2">
-        <div class="card-content grey lighten-2 center">
-          <span class="card-title">Ask Your Questions</span>
-          <form id="contact-form" [formGroup]="faqsgroup" #faqsform = "ngForm" (ngSubmit)="faqs_submit(faqsform.value)">
-            <div class="row no-margin">
-              <div class="input-field col s12">
-                <input id="name" type="text" class="validate" formControlName="name">
-                <label for="name">Name*</label>
-                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['name'].valid && faqsgroup.controls['name'].touched">Enter Name*.</div>
-              </div>
-              <div class="input-field col s12">
-                <input id="memail" type="email" class="validate" formControlName="email">
-                <label for="email">Email*</label>
-                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
-              </div>
-              <div class="input-field col s12">
-                <input id="mphone" type="number" class="validate" formControlName="phone">
-                <label for="email">Phone*</label>
-                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['phone'].valid && faqsgroup.controls['phone'].touched">Enter Valid Phone No.*.</div>
-              </div>
-              <div class="input-field col s12">
-                <textarea id="textarea11" class="materialize-textarea" formControlName="message"></textarea>
-                <label for="textarea11">Type Your Question*</label>
-                <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
-              </div>
-              <div class="col s12 center">
-                <button type="Submit" class="btn orange" [disabled]="!faqsgroup.valid">Submit</button>
-              </div>
+      <div class="col s12 m4">
+        <div class="images-faqs-new">
+          <img src="https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs">
+        </div>
+        <div class="col s12 ask-question">
+          <div class="card grey lighten-2">
+            <div class="card-content grey lighten-2 center">
+              <span class="card-title">Ask Your Questions</span>
+              <form id="contact-form" [formGroup]="faqsgroup" #faqsform = "ngForm" (ngSubmit)="faqs_submit(faqsform.value)">
+                <div class="row no-margin">
+                  <div class="input-field col s12">
+                    <input id="name" type="text" class="validate" formControlName="name">
+                    <label for="name">Name*</label>
+                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['name'].valid && faqsgroup.controls['name'].touched">Enter Name*.</div>
+                  </div>
+                  <div class="input-field col s12">
+                    <input id="memail" type="email" class="validate" formControlName="email">
+                    <label for="email">Email*</label>
+                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
+                  </div>
+                  <div class="input-field col s12">
+                    <input id="mphone" type="number" class="validate" formControlName="phone">
+                    <label for="email">Phone*</label>
+                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['phone'].valid && faqsgroup.controls['phone'].touched">Enter Valid Phone No.*.</div>
+                  </div>
+                  <div class="input-field col s12">
+                    <textarea id="textarea11" class="materialize-textarea" formControlName="message"></textarea>
+                    <label for="textarea11">Type Your Question*</label>
+                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
+                  </div>
+                  <div class="col s12 center">
+                    <button type="Submit" class="btn orange" [disabled]="!faqsgroup.valid">Submit</button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -137,5 +178,6 @@
       </div>
     </form>
   </div>
-</div>  
+</div>
+  
 <app-footer></app-footer>
