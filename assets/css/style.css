@@ -4124,4 +4124,15 @@ canvas {
 .link-faqs span{font-size: 15px;}
 .link-faqs p{font-size: 15px; padding: 5px 3rem 0 0;}
 .images-faqs-new{margin-top: 3rem;padding: 0 8px;margin-bottom: 10px;}
+.faq-new-lider .card-title{
+	padding: 1rem;
+    background-image: -webkit-linear-gradient(0deg,#f27d21 0,#e3232d 30%,#c52b08 61%,#ff030f 100%);
+    font-size: 1.6rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.faq-new-lider .responsive-img{max-width:200px;}
+.faq-new-lider{margin: 1rem 0;}
 /* End Here */
