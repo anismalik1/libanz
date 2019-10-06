@@ -95,6 +95,34 @@ export class FaqsComponent implements OnInit {
     $(document).ready(function(){
       $('.collapsible').collapsible();
       $('.modal').modal();
+      $('.faq-new-lider').lightSlider({
+        item: 1,
+        auto: false,
+        loop: false,
+        pause: 3000,
+        controls: true,
+        pager: false,
+        responsive: [
+        {
+          breakpoint:900,
+          settings: {
+            item:1
+          }
+        },
+        {
+          breakpoint:600,
+          settings: {
+            item:1
+          }
+        },
+        {
+          breakpoint:380,
+          settings: {
+            item:1
+          }
+        }
+        ]
+      });
     })
    
     `;
