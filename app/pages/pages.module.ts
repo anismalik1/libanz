@@ -18,9 +18,12 @@ import { AuthService } from '../auth.service';
 import { MerchantComponent } from './merchant.component';
 import { PackageViewComponent } from './package-view.component';
 import { UserDetailComponent } from './user-detail.component';
+import { TestimonialsComponent } from './testimonials.component';
+import { TruncatePipe } from './truncatePipe';
 
 const routes: Routes = [
   { path: '', component: PageViewComponent },
+  { path: 'testimonials', component: TestimonialsComponent },
   { path: 'user-detail', component: UserDetailComponent },
   { path: 'merchant-on-mydthshop', component: MerchantComponent },
   { path: 'partner-on-mydthshop', component: MerchantComponent },
@@ -44,7 +47,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent],
+  declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 

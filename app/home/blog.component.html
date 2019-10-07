@@ -73,7 +73,7 @@ type="ball-clip-rotate">
 								<time>{{ item.c_date | date}}</time>
 							</p>
 						</div>
-						<div class="blog-content">
+						<div class="blog-content"> 
 						<span class="blog-title" title="{{item.title}}">{{item.title | slice:0:32}}<span *ngIf="item.title.length>32">...</span></span>
 						<span class="blog-description-{{item.id}}" [innerHTML]="decode_html(item.shortDescription) | truncate : 225 : '...'"> </span>
 						</div>

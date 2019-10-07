@@ -21,18 +21,38 @@ export class ProductService {
   private item : Item;
   public cartItems: number = 0;
   public cart_items : Item[] = [];
-  public enable_mboss : boolean = false; 
   cod_invalid = false; 
   constructor(private http : Http )
   {
     this.loadCart();
   } 
  
+  is_mboss_enable()
+  {
+    let airtel_all : number = 0; 
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if(cart != null)
+    {
+      for(var i =0;i<Object.keys(cart).length; i++)
+      {
+        let item = JSON.parse(cart[i]);
+        if(item.product.title.toLowerCase().includes('airtel'))
+        {
+          airtel_all++;
+        }
+      }
+      if(Object.keys(cart).length == airtel_all)
+      {
+        return true;
+      }
+      return false;
+    } 
+  }
+
   loadCart() : void
    {
     this.cart_items = [];
     let cod_count :number  = 0;
-    let airtel_all : number = 0; 
     let cart = JSON.parse(localStorage.getItem('cart'));
     if(cart != null)
     {
@@ -47,14 +67,6 @@ export class ProductService {
           product : item.product,
           quantity : item.quantity
         });
-        if(item.product.title.toLowerCase().includes('airtel'))
-        {
-          airtel_all++;
-        }
-      }
-      if(Object.keys(cart).length == airtel_all)
-      {
-        this.enable_mboss = true;
       }
       if(cod_count > 0)
       {

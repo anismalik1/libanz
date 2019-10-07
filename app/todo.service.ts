@@ -723,4 +723,9 @@ export class TodoService {
     let url = this.server_url+'index.php?/app_services/reg_address';
     return this.send_post_request(data,url) ;
   }
+  fetch_testimonials(data)
+  {
+    let url = this.server_url+'accounts/apis/page/testimonials';
+    return this.send_post_request(data,url) ;
+  }
 }

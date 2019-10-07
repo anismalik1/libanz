@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner
+	bdColor="rgba(255,255,255,0.8)"
+	size="default"
+	color="#ec9737"
+	loadingText="Loading..."
+	type="ball-clip-rotate">
+</ngx-spinner>
+</div>
+
+<section>
+    <div class="container">
+    <div class="row"><!-- Editor Me itna yaha se dalna he -->
+    <div class="col s12 m6" *ngFor="let item of testimonials;">
+    <div class="card testimonial-card">
+    <div class="card-content testimonial-text">
+    <blockquote [innerHTML]="decode_html(item.description) | truncate : 230 : '...'">
+    </blockquote>
+    </div>
+    
+    <div class="card-image testimonial-card-image"><img class="responsive-img" src="https://www.mydthshop.com/web-app/assets/images/recharge-icon/user.svg" />&nbsp;<i>{{item.title}}</i>
+    
+    <p>{{item.user_type}}</p>
+    </div>
+    </div>
+    </div>
+ 
+    <!-- End Here --></div>
+    </div>
+    </section>
+    <app-footer></app-footer>
+    

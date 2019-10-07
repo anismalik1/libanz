@@ -4135,4 +4135,5 @@ canvas {
 }
 .faq-new-lider .responsive-img{max-width:200px;}
 .faq-new-lider{margin: 1rem 0;}
+.testimonial-text{ 	height: 180px;overflow-y:scroll }
 /* End Here */
