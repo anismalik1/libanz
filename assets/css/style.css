@@ -4114,7 +4114,6 @@ canvas {
     font-weight: 600;
     text-transform: capitalize;
 	text-overflow: ellipsis;
-	color: #676767;
     width: 100%;
     white-space: nowrap;
 }
@@ -4135,5 +4134,6 @@ canvas {
 }
 .faq-new-lider .responsive-img{max-width:200px;}
 .faq-new-lider{margin: 1rem 0;}
-.testimonial-text{ 	height: 180px;overflow-y:scroll }
+.testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
+.share-us-on{float: left; width: 100%; margin-top: 6px;}
 /* End Here */
