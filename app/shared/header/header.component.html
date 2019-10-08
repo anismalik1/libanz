@@ -78,286 +78,285 @@
 			  </ul>
 			</div>
 		  </nav>		        
-		</div>
-		
+		</div>		
 		<div id="loadmore-modal" class="modal white" style="width:40%;height:100%">
-				<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4>Notification's</h4>
-						<div class="modal-close right-align"><i class="material-icons">close</i></div>
+		<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
+		<div class="modal-content">
+		<div class="modal-header">
+		<h4>Notification's</h4>
+		<div class="modal-close right-align"><i class="material-icons">close</i></div>
+		</div>
+		<ul *ngIf="notifications  && notifications.length > 0">
+		<li *ngFor="let item of notifications;" >
+		<div class="notification-drop-image">
+		<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+		</div>
+		<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
+		<p [innerHTML]="item.visitor_comment"></p>
+		<time class="grey-text">{{time_ago(item.history_time)}}</time>
+		</div>
+		</li>
+		</ul>										
+		<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
+		</div>
+		</div>			
+</header>
+<!-- End Here -->
+<!-- Login Modal -->
+<div id="login-modal" class="modal">
+	<div class="modal-content no-padding">
+		<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
+		<div class="row no-margin">
+			<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url(https://www.mydthshop.com/web-app/assets/images/login-banner.jpg);background-size: cover;">
+				<div class="login-modal">
+					<div class="padd-rem1 login-text">
+						<h2 class="black-text no-margin">LOGIN</h2>
+						<p class="black-text font-size-change1">Get access to your Orders,Recent Orders & Recommendations</p>
 					</div>
-					<ul *ngIf="notifications  && notifications.length > 0">
-						<li *ngFor="let item of notifications;" >
-							<div class="notification-drop-image">
-								<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
-							</div>
-							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
-								<p [innerHTML]="item.visitor_comment"></p>
-								<time class="grey-text">{{time_ago(item.history_time)}}</time>
-							</div>
-						</li>
-					</ul>										
-					<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
-				</div>
-			</div>			
-	</header>
-	<!-- End Here -->
-	<!-- Login Modal -->
-	<div id="login-modal" class="modal">
-		<div class="modal-content no-padding">
-			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
-			<div class="row no-margin">
-				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url(https://www.mydthshop.com/web-app/assets/images/login-banner.jpg);background-size: cover;">
-					<div class="login-modal">
-						<div class="padd-rem1 login-text">
-							<h2 class="black-text no-margin">LOGIN</h2>
-							<p class="black-text font-size-change1">Get access to your Orders,Recent Orders & Recommendations</p>
-						</div>
-						<div class="padd-rem1 signup-text hide">
-							<h2 class="black-text">SIGN UP</h2>
-							<p class="black-text font-size-change1">We do not share your details with anyone.</p>
-						</div>
+					<div class="padd-rem1 signup-text hide">
+						<h2 class="black-text">SIGN UP</h2>
+						<p class="black-text font-size-change1">We do not share your details with anyone.</p>
 					</div>
 				</div>
-				<div class="col s12 m8 white">
-					<div class="tabs-sign-up">
-						<ul id="tabs-swipe-demo" class="tabs">
-							<li class="tab col s6"><a class="active" href="#login" id="login-a">Login to MyDthShop</a></li>
-							<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
-						</ul>
-						<div id="login" class="col s12">
-							<div class="login" *ngIf="step == 1">
-							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
+			</div>
+			<div class="col s12 m8 white">
+				<div class="tabs-sign-up">
+					<ul id="tabs-swipe-demo" class="tabs">
+						<li class="tab col s6"><a class="active" href="#login" id="login-a">Login to MyDthShop</a></li>
+						<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
+					</ul>
+					<div id="login" class="col s12">
+						<div class="login" *ngIf="step == 1">
+						<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix margin-top-cart2">phone</i>
+										<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
+										<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
+										<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
+									</div>
+								
+								<div class="input-field col s12 forget-click">
+									<i class="material-icons prefix margin-top-cart2">lock</i>
+									<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
+									<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
+								</div>
+								<div class="col s12 m6">
+									<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
+								<label for="remember-me">Remember Me</label>
+								</div>
+								<div class="col s12 m6 right-align">
+									<span class="tab"><a routerLink="/forgot-password" class="orange-text font-size-change">Forgot Password?</a></span>
+								</div>
+								<div class="col s12 center margin-top">
+									<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Submit</button>
+								</div>
+							</div>
+							<!-- <div class="row no-margin center">
+								<div class="col s12 m12">
+									<span class="font-size-change">Login With Social Media</span>
+								</div>
+								<div class="col s12 m12 margin-top-cart2">
+									<a href="#" class="facebook fa-login"><img src="{{this.todoservice.base_url}}assets/images/facebook.png"> Facebook</a>
+									<a href="#" class="facebook fa-goo"><img src="{{this.todoservice.base_url}}assets/images/plus.png"> Google</a>
+								</div>
+							</div> -->
+						</form>
+						</div>
+						<div class="otp-step margin-top1" *ngIf="step == 2">
+							<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
+							<div class="upper-text center">
+								<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
+								<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 center otp-inputa" id="inputs">
+										<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
+										<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
+										<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+										<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+								</div>
+								<div class="col s12 center margin-top">
+									<span class="font-size-change1">Don't recieve OTP 
+									<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+								</div>			
+							</div>
+							<div class="row">
+								<div class="col s12 center">
+									<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
+									<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+								</div>
+							</div>
+						</form>
+						</div>
+					</div>
+					<div id="signup" class="col s12">
+						<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
+							<div class="col s12 border-every">
+								<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
+									<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
+									<span class="font-size-change1 font600">Become a User</span>
+								</a>
+							</div>
+							<div class="col s12  center or-for-span">
+								<span class="font-size-change relative">OR</span>
+							</div>
+							<div class="col s12  border-every">
+								<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
+									<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
+									<span class="font-size-change1 font600">Become a Retailer</span>
+								</a>
+							</div>
+						</div>
+						<div id="stepep2" *ngIf="signup == 1">
+							<div *ngIf="signupverify == 0">
+							<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
 								<div class="row">
 									<div class="input-field col s12">
-										<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
-											<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
-											<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
+										<i class="material-icons prefix margin-top-cart2">person</i>
+										<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
+										<label for="name">Enter Name*</label>
+										<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
+											<span class="red-text ">*Name is Required.</span>
 										</div>
-									
-									<div class="input-field col s12 forget-click">
+									</div>
+									<div class="input-field col s6">
+										<i class="material-icons prefix margin-top-cart2">phone</i>
+										<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
+										<label for="phn_number">Phone Number*</label>
+										<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
+											<span class="red-text"> Phone Number is not valid.</span>
+										</div>
+									</div>
+									<div class="input-field col s6">
+										<i class="material-icons prefix margin-top-cart2">mail</i>
+										<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
+										<label for="enter_email">Enter Email</label>
+										<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
+											<span class="red-text"> Email is not valid.</span>
+										</div>
+									</div>
+									<div class="input-field col s6">
 										<i class="material-icons prefix margin-top-cart2">lock</i>
-										<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
-										<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
+										<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
+										<label for="enter_passcode">Enter Password</label>
+										<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
+											<span class="red-text">Password is Required.</span> 
+										</div>
+									</div>
+									<div class="input-field col s6">
+										<i class="material-icons prefix margin-top-cart2">lock</i>
+										<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
+										<label for="confirm_passcode">Confirm Password</label>
+										<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
+											<span class="red-text">Check Confirm Password.</span>
+										</div>
 									</div>
 									<div class="col s12 m6">
-										<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
-									<label for="remember-me">Remember Me</label>
+										<p>
+											<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
+											<label for="test1">Become User</label>
+										</p>
 									</div>
-									<div class="col s12 m6 right-align">
-										<span class="tab"><a routerLink="/forgot-password" class="orange-text font-size-change">Forgot Password?</a></span>
+									<div class="col s12 m6">
+										<p>
+											<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
+											<label for="test2">Become Merchant</label>
+										</p>
 									</div>
+									<div class="col s12 m6">
+										<p>
+											<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
+											<label for="test3">Become Partner</label>
+										</p>
+									</div>
+									
 									<div class="col s12 center margin-top">
-										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn" [disabled]="!logingroup.valid">Submit</button>
-									</div>
-								</div>
-								<!-- <div class="row no-margin center">
-									<div class="col s12 m12">
-										<span class="font-size-change">Login With Social Media</span>
-									</div>
-									<div class="col s12 m12 margin-top-cart2">
-										<a href="#" class="facebook fa-login"><img src="{{this.todoservice.base_url}}assets/images/facebook.png"> Facebook</a>
-										<a href="#" class="facebook fa-goo"><img src="{{this.todoservice.base_url}}assets/images/plus.png"> Google</a>
-									</div>
-								</div> -->
-							</form>
-							</div>
-							<div class="otp-step margin-top1" *ngIf="step == 2">
-								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
-								<div class="upper-text center">
-									<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-									<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-								</div>
-								<div class="row">
-									<div class="input-field col s12 center otp-inputa" id="inputs">
-											<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-											<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-											<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-											<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
-									</div>
-									<div class="col s12 center margin-top">
-										<span class="font-size-change1">Don't recieve OTP 
-										<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
-									</div>			
-								</div>
-								<div class="row">
-									<div class="col s12 center">
-										<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
-										<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+										<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+										<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
 									</div>
 								</div>
 							</form>
-							</div>
-						</div>
-						<div id="signup" class="col s12">
-							<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
-								<div class="col s12 border-every">
-									<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
-										<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
-										<span class="font-size-change1 font600">Become a User</span>
-									</a>
-								</div>
-								<div class="col s12  center or-for-span">
-									<span class="font-size-change relative">OR</span>
-								</div>
-								<div class="col s12  border-every">
-									<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
-										<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
-										<span class="font-size-change1 font600">Become a Retailer</span>
-									</a>
-								</div>
-							</div>
-							<div id="stepep2" *ngIf="signup == 1">
-								<div *ngIf="signupverify == 0">
-								<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
+							</div>	
+							<div class="otp-step margin-top1" *ngIf="signupverify == 1">
+									<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
+									<div class="upper-text center">
+										<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
+										<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+									</div>
 									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix margin-top-cart2">person</i>
-											<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
-											<label for="name">Enter Name*</label>
-											<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
-												<span class="red-text ">*Name is Required.</span>
-											</div>
+										<div class="input-field col s12 center otp-inputa" id="inputs">
+												<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
+												<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
+												<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+												<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
 										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
-											<label for="phn_number">Phone Number*</label>
-											<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
-												<span class="red-text"> Phone Number is not valid.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">mail</i>
-											<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
-											<label for="enter_email">Enter Email</label>
-											<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
-												<span class="red-text"> Email is not valid.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">lock</i>
-											<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
-											<label for="enter_passcode">Enter Password</label>
-											<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
-												<span class="red-text">Password is Required.</span> 
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">lock</i>
-											<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
-											<label for="confirm_passcode">Confirm Password</label>
-											<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
-												<span class="red-text">Check Confirm Password.</span>
-											</div>
-										</div>
-										<div class="col s12 m6">
-											<p>
-												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
-												<label for="test1">Become User</label>
-											</p>
-										</div>
-										<div class="col s12 m6">
-											<p>
-												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
-												<label for="test2">Become Merchant</label>
-											</p>
-										</div>
-										<div class="col s12 m6">
-											<p>
-												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
-												<label for="test3">Become Partner</label>
-											</p>
-										</div>
-										
 										<div class="col s12 center margin-top">
-											<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
-											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
+											<span class="font-size-change1">Don't recieve OTP 
+											<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+										</div>			
+									</div>
+									<div class="row">
+										<div class="col s12 center">
+											<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
+											<button type="Submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
 										</div>
 									</div>
 								</form>
-								</div>	
-								<div class="otp-step margin-top1" *ngIf="signupverify == 1">
-										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
-										<div class="upper-text center">
-											<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-										</div>
-										<div class="row">
-											<div class="input-field col s12 center otp-inputa" id="inputs">
-													<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-													<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-													<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-													<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
-											</div>
-											<div class="col s12 center margin-top">
-												<span class="font-size-change1">Don't recieve OTP 
-												<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
-											</div>			
-										</div>
-										<div class="row">
-											<div class="col s12 center">
-												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
-												<button type="Submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
-											</div>
-										</div>
-									</form>
-								</div>
-						</div>
+							</div>
 					</div>
-					<div id="forget-password" class="col s12 hide">
-						<div class="login">
-							<form class="login-step">
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix margin-top-cart2">email</i>
-											<input id="icon_prefix" type="number" class="validate">
-											<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
-											<!-- <div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div> -->
-										</div>
-									<div class="col s12 center margin-top">
-										<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
+				</div>
+				<div id="forget-password" class="col s12 hide">
+					<div class="login">
+						<form class="login-step">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix margin-top-cart2">email</i>
+										<input id="icon_prefix" type="number" class="validate">
+										<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
+										<!-- <div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div> -->
 									</div>
+								<div class="col s12 center margin-top">
+									<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
 								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+</div>
+<!-- End Here -->
+<!-- Side Navigation -->
+<ul id="slide-out" class="side-nav">
+	<div class="user-view no-padding">
+			<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block"><a href="#login-modal" class="logup modal-trigger">Login & Register</a></li>
+		</div>
+	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
+		<ul>
+			<li class="inline-block user-after-login-img"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img vertical-align-middle" alt="user"></li>
+			<li class="inline-block user-after-login-text">
+				<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''">{{this.todoservice.get_user_name()}}</p>
+				<span >{{this.todoservice.get_user_phone()}}</span>
+			</li>
+		</ul>
 	</div>
-	<!-- End Here -->
-	<!-- Side Navigation -->
-	<ul id="slide-out" class="side-nav">
-		<div class="user-view no-padding">
-			  <li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block"><a href="#login-modal" class="logup modal-trigger">Login & Register</a></li>
-		  </div>
-		<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
-			<ul>
-				<li class="inline-block user-after-login-img"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img vertical-align-middle" alt="user"></li>
-				<li class="inline-block user-after-login-text">
-					<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''">{{this.todoservice.get_user_name()}}</p>
-					<span >{{this.todoservice.get_user_phone()}}</span>
-				</li>
-			</ul>
-		</div>
-		<li><div class="divider another-balance"></div></li>
-		<div class="user-detail grey lighten-4 another-balance" *ngIf="this.todoservice.user.storage">
-			<ul>
-				<li class="inline-block"><span class="font-size-change">Balance</span></li>
-				<li class="inline-block right"><span class="font-size-change"><i class="icon-inr"></i>{{this.todoservice.user.storage.wallet}}</span></li>
-			</ul>
-		</div>
-		<li><div class="divider"></div></li>
-	  <li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-	  <li><a routerLink="/p/about-us" routerLinkActive="active">About Us</a></li>
-	  <li><a routerLink="/contact-us" routerLinkActive="active">Contact Us</a></li>
-	  <li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
-	</ul>
-	<!-- End Here -->
+	<li><div class="divider another-balance"></div></li>
+	<div class="user-detail grey lighten-4 another-balance" *ngIf="this.todoservice.user.storage">
+		<ul>
+			<li class="inline-block"><span class="font-size-change">Balance</span></li>
+			<li class="inline-block right"><span class="font-size-change"><i class="icon-inr"></i>{{this.todoservice.user.storage.wallet}}</span></li>
+		</ul>
+	</div>
+	<li><div class="divider"></div></li>
+	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+	<li><a routerLink="/p/about-us" routerLinkActive="active">About Us</a></li>
+	<li><a routerLink="/contact-us" routerLinkActive="active">Contact Us</a></li>
+	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
+</ul>
+<!-- End Here -->
 
 
 	

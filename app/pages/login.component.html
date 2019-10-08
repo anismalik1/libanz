@@ -11,13 +11,13 @@
 </div>
 <div class="work" *ngIf="step==1;then loginform else otpverify"></div>
 <ng-template #loginform>
-	<section class="login-form no-padding">
+	<section class="login-form no-padding white">
 		<div class="row no-margin">
-			<div class="col s12 m12 l6 no-padding login-side-image">
-				<img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images">
+			<div class="col s12 m12 l6 no-padding login-side-image" style="background-image: url(https://mydthshop.com/web-app/assets/images/login.jpg);">
+				<!-- <img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images"> -->
 			</div>
-			<div class="col s12 m12 l6">
-				<div class="card no-margin">
+			<div class="col s12 m12 l6 no-padding">
+				<div class="card margin-top4 no-box-shadow ">
 					<div class="card-content"> 
 						<div class="center">
 							<h3 class="font600 orange-text">Welcome back!</h3>

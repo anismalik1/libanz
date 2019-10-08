@@ -835,6 +835,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 .margin-right{
 	margin-right: 1rem !important;
 }
+.margin-top4{
+	margin-top: 4rem !important;
+}
 .margin-left{
 	margin-left: 1rem !important;
 }
@@ -2012,8 +2015,8 @@ tbody img{
 	margin-top: 0 !important;
 }
 .card{
-	box-shadow: 3px 4px 4px 2px rgba(0, 0, 0, .08) !important;
-	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08) !important;
+	box-shadow: 3px 4px 4px 2px rgba(0, 0, 0, .08);
+	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
 }
 .lSNext,.lSPrev{
 	background-color: #ffffff;
@@ -2833,10 +2836,7 @@ tbody img{
 	color: #76c1e9;
 	margin-top: 5px;
 }
-.login-side-image img{
-	image-rendering: all;
-	height: 91vh;
-}
+.login-side-image{background-size: cover; height: 85.4vh;}
 .margin-high{
 	margin-top: 5rem;
 }
@@ -4136,4 +4136,5 @@ canvas {
 .faq-new-lider{margin: 1rem 0;}
 .testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
 .share-us-on{float: left; width: 100%; margin-top: 6px;}
+.margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
 /* End Here */
