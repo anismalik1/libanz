@@ -524,7 +524,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 	color: #ffa530;
 }
 .search-input{
-	width: 620px !important;
+	width: 550px !important;
 }
 @media (max-width:1130px) {
 	.search-input{

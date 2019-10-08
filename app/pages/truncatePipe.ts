@@ -4,7 +4,7 @@ import { Pipe, PipeTransform} from '@angular/core';
     name: 'truncate'
   })
   export class TruncatePipe implements PipeTransform {
-    transform(value: string, limit = 25, completeWords = false,ellipsis = '<a href="javascript:" class="load-more" title="'+value+'">... +More</a>') {
+    transform(value: string, limit = 25, completeWords = false,ellipsis = '<a href="javascript:" class="load-more" title="'+value+'">... +Read More</a>') {
       if (completeWords) {
         limit = value.substr(0, limit).lastIndexOf(' ');
       }

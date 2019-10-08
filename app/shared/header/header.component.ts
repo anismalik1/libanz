@@ -115,6 +115,7 @@ export class HeaderComponent implements OnInit{
           if(typeof data.status != 'undefined' && data.status == true)
           {
             $('.modal-close').click();
+            $('.modal-overlay').css('display','none');
             let user : any = data.user;
             this.step = 1;
             this.authService.AccessToken = this.token_params.accessToken;

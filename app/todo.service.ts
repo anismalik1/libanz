@@ -154,11 +154,16 @@ export class TodoService {
       return data.user.name; 
     } 
     return ''; 
+  }
 
-    // if(this.get_user() != null)
-    //   return this.get_user().name;
-    // else
-    //   return ''; 
+  get_user_avatar()
+  {
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      return data.user.avatar; 
+    } 
+    return ''; 
   }
   
   get_user_email()
@@ -726,6 +731,11 @@ export class TodoService {
   fetch_testimonials(data)
   {
     let url = this.server_url+'accounts/apis/page/testimonials';
+    return this.send_post_request(data,url) ;
+  }
+  upload_avatar(data)
+  {
+    let url = this.server_url+'accounts/apis/home/upload_avatar';
     return this.send_post_request(data,url) ;
   }
 }

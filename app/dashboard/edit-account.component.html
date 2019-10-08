@@ -32,10 +32,10 @@
                         <h3 class="font600 inline-block">Account Dashboard </h3>
                         <a href="javascript:" class="font-size-change inline-block margin-left1 edit-click" (click)="edituser()">Edit</a>
                         <a href="#change-password" class="font-size-change modal-trigger inline-block margin-left1">Change Password</a>
-                        <form #manageform1 = "ngForm" (ngSubmit)="update_details(manageform1.value)">
+                        <form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()">
                             <div class="row edit-acc no-margin">
                                 <div class="input-field col s12 m6 l8">
-                                  <input placeholder="Name" id="name" name="name" value="{{userinfo.name}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.name" [disabled]="!isvalid">
+                                  <input placeholder="Name" id="name" name="name" value="{{userinfo.name}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.name" formControlName="name" [disabled]="!isvalid">
                                 </div>
                               </div>  
                           
@@ -49,39 +49,50 @@
                       </div>
                       <div class="row edit-acc no-margin">
                         <div class="input-field col s12 m6 l4">
-                          <input placeholder="City" id="city" name="city" value="{{userinfo.city}}" type="text" class="validate no-margin" ngModel [disabled]="!isvalid">
+                          <input placeholder="City" id="city" name="city" value="{{userinfo.city}}" type="text" class="validate no-margin" ngModel [disabled]="!isvalid" formControlName="city">
                         </div>
                         <div class="input-field col s12 m6 l4">
-                          <input placeholder="Pincode" id="pincode" name="pincode" value="{{userinfo.pincode}}" type="number" class="validate no-margin" [(ngModel)]="userinfo.pincode" [disabled]="!isvalid">
+                          <input placeholder="Pincode" id="pincode" name="pincode" value="{{userinfo.pincode}}" type="number" class="validate no-margin" [(ngModel)]="userinfo.pincode" formControlName="pincode" [disabled]="!isvalid">
                         </div>
                       </div>
                       <div class="row edit-acc no-margin">
                         <div class="input-field col s12 m6 l4">
-                          <input placeholder="State" id="state" name="state" value="{{userinfo.state}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.state" [disabled]="!isvalid">
+                          <input placeholder="State" id="state" name="state" value="{{userinfo.state}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.state" formControlName="state" [disabled]="!isvalid">
                         </div>
                         <div class="input-field col s12 m6 l4">
-                          <input placeholder="Enter Email" id="email" name="email" value="{{userinfo.email}}" type="email" class="validate no-margin" [(ngModel)]="userinfo.email" [disabled]="!isvalid">
+                          <input placeholder="Enter Email" id="email" name="email" value="{{userinfo.email}}" formControlName="email" type="email" class="validate no-margin" [(ngModel)]="userinfo.email" [disabled]="!isvalid">
                         </div>
                       </div>
                       <div class="row edit-acc no-margin">
                         <div class="input-field col s12 m12 l8">
-                          <textarea id="textarea1" [disabled]="!isvalid" [(ngModel)]="userinfo.shipping_address" name="shipping_address" class="materialize-textarea" placeholder="C.S.C No.-1, Unit No.-9,10,11, 1st Floor Sector-3, Rohini, New Delhi-110085">{{userinfo.shipping_address}}</textarea>
+                          <textarea id="textarea1" [disabled]="!isvalid" [(ngModel)]="userinfo.shipping_address" name="shipping_address" formControlName="shipping_address" class="materialize-textarea" placeholder="C.S.C No.-1, Unit No.-9,10,11, 1st Floor Sector-3, Rohini, New Delhi-110085">{{userinfo.shipping_address}}</textarea>
                         </div>
                       </div>
                       <div class="row edit-acc">
                         <span class="left grey-text margin-left1 margin-right font600">Your Gender</span>
                         <p class="inline">
-                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" class="with-gap" type="radio" value="1" id="male" [disabled]="!isvalid">
+                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" formControlName="gender" class="with-gap" type="radio" value="1" id="male" [disabled]="!isvalid">
                               <label for="male">Male</label>
                             </p>
                             <p class="inline">
-                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" class="with-gap" type="radio" id="female" value="2" [disabled]="!isvalid">
+                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" class="with-gap" formControlName="gender" type="radio" id="female" value="2" [disabled]="!isvalid">
                               <label for="female">Female</label>
                             </p>
                       </div>
                       <div class="row edit-acc">
+                        <div class="inline">
+                          <div class="form-group">
+                              <img width="43" src="{{this.todoservice.server_url}}{{userinfo.avatar}}" alt="user-icon"/>
+                            <label for="avatar">Change</label>
+                            <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="row edit-acc">
                           <div class="col s12 m12 l8 center">
-                              <button type="Submit" class="btn orange btn-large" [disabled]="!isvalid">Update Details</button>
+                              <!-- <button type="Submit" class="btn orange btn-large" [disabled]="!isvalid">Update Details</button> -->
+                              <button type="submit" [disabled]="form.invalid || loading" class="btn orange btn-large">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
                           </div>
                       </div>
                     </form>
