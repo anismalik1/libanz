@@ -4047,14 +4047,14 @@ canvas {
     right: 20%;
     top: 15%;
 }
-.modal-close{
+#loadmore-modal .modal-close{
 	font-size: 2.1rem;
     color: #8e8e8e;
     position: absolute;
     top: 0;
     right: 1%;
 }
-#loadmore-modal{padding: 0;}
+#loadmore-modal{padding: 0; z-index: 9999 !important;}
 #loadmore-modal .modal-content{padding: 0 !important;}
 #loadmore-modal .modal-header{background: #FF6A00; padding: 1.2rem;}  
 #loadmore-modal .modal-header h4{margin: 0;font-size: 1.8rem;color: #fff; font-weight: 600; text-transform: uppercase; text-align: center;}
