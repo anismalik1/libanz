@@ -35,7 +35,7 @@
           </div>
           <!-- End Here -->
           <!-- Address Checkout -->
-        	<div class="row no-margin login-checkout hide checkout_1">
+        	<div class="row no-margin white login-checkout hide checkout_1">
         		<div class="col s12 m5 offset-m1">
         			<div class="name margin-top-cart">
         				<span class="inline-block grey-text margin-right">Name</span>
@@ -48,7 +48,7 @@
         			<div class="name margin-top-cart">
         				<a href="javascript:" routerLink="/logout" class="font600">Logout &amp; Sign in to another account</a>
         			</div>
-        			<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_orders()">PROCEED</button>
+        			<button class="btn waves-effect waves-light orange margin-top" type="Submit" (click)="goto_orders()">PROCEED</button>
         		</div>
         		<div class="col s12 m6">
         			<div class="name margin-top-cart">
@@ -155,7 +155,7 @@
           </div>          
           <!-- End Here -->
           <!-- Login Checkout -->
-        	<div class="row no-margin login-checkout hide checkout_2">
+        	<div class="row no-margin white login-checkout hide checkout_2">
         		<div class="col s10 m10 offset-m1">
 								<div class="name margin-top-cart user-address">
 									<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
@@ -227,7 +227,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!addressformgroup.valid">Save and Deliver Here</button>
-												<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
+												<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 											</div>
 									</form>
 							</div>
@@ -254,7 +254,7 @@
 											</div>
 											<div class="modal-footer">
 													<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!regaddressformgroup.valid">Save and Deliver Here</button>
-													<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
+													<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 												</div>
 									</form>
 							</div>						
