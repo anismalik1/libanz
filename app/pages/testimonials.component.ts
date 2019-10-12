@@ -11,6 +11,7 @@ import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
 export class TestimonialsComponent implements OnInit {
 
   testimonials : any;
+  page : string = 'testimonial';
   constructor(private title: Title, public todoservice : TodoService,
     private spinner: NgxSpinnerService,private meta : Meta,
     private _renderer2: Renderer2, 
@@ -19,7 +20,7 @@ export class TestimonialsComponent implements OnInit {
 
   ngOnInit() {
     this.fetch_testimonials();
-    
+    this.fetch_page_data();
   }
 
   fetch_testimonials()
@@ -43,7 +44,7 @@ export class TestimonialsComponent implements OnInit {
 
   init_script()
   {
-    if($('#init-page-script'))
+    if($('#init-page-script')) 
     {
       $('#init-page-script').remove();
     }
@@ -67,5 +68,41 @@ decode_html(html)
   var textArea = document.createElement('textarea');
   textArea.innerHTML = html;
   return textArea.value;
+ }
+ fetch_page_data()
+ {
+  let page = {page : this.page}; 
+  if(page.page == '')
+  {
+      return false;
+  }
+  this.todoservice.fetch_page_data(page)
+    .subscribe(
+      data => 
+      {
+        if(data.PAGEDATA)
+        {
+          this.todoservice.set_page_data(data.PAGEDATA[0]);
+          if(data.PAGEDATA[0].image != '')
+          {
+            $('.hero').css('background','url(https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
+            $('.hero').css('background-repeat','no-repeat');            
+          }
+          $('#page-content').html(this.todoservice.get_page().description);
+          this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+          this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+          this.title.setTitle(this.todoservice.get_page().metaTitle);
+          window.scroll(0,0);
+          
+          // $( "#page-content .testimonial-text blockquote" ).each(function( index ) {
+          //   if(  $( this ).html().length > 300)
+          //   {
+          //     $(this).html("<span class='partial-testimnial'>"+$.trim($(this).html()).substring(0, 300).split(" ").slice(0, -1).join(" ") + "</span><a href='javascript:' onclick=\"$(this).remove();$(this).html($(this).html())\" class='blue-text'>...Load More</a>");
+          //   }
+          // }); 
+        }
+        this.spinner.hide();  
+      }
+    ) 
  }
 }

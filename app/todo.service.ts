@@ -738,4 +738,9 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/upload_avatar';
     return this.send_post_request(data,url) ;
   }
+  fetch_package_data(data)
+  {
+    let url = this.server_url+'accounts/apis/product/fetch_package_by_category';
+    return this.send_post_request(data,url) ;
+  }
 }

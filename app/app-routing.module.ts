@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'recharge', loadChildren: './home/home.module#HomeModule'},
   { path: 'p/accounts', loadChildren: './pages/pages.module#PagesModule'},
   { path: 'lead', loadChildren: './pages/pages.module#PagesModule'},
-  { path: 'p/package', loadChildren: './pages/pages.module#PagesModule'},
+  { path: 'package-list', loadChildren: './pages/pages.module#PagesModule'},
   { path: 'reviews', loadChildren: './pages/pages.module#PagesModule'},
   { path: '', loadChildren: './home/home.module#HomeModule'},
   {path: '**', redirectTo: '/404'},

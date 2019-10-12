@@ -52,8 +52,9 @@ type="ball-clip-rotate">
 							</p>
 						</div>
 						<div class="blog-content">
-						<span class="blog-title">{{post[0].title}}</span>
-            <p [innerHTML]="decode_html(post[0].description)"></p>
+              <span class="blog-title">{{post[0].title}}</span>
+              <div class="clearfix"></div>
+              <p [innerHTML]="decode_html(post[0].description)"></p>
 						</div>
           </div>
           <div class="card-action right-align">
