@@ -95,11 +95,15 @@ export class ChannelPackComponent implements OnInit {
         {
           channel_list += '<h3 class="font600">'+this.product_pack_rows[j].title+'</h3>';
           var channels = JSON.parse(this.product_pack_rows[j].channel_ids); 
-          for(var k=0;k < channels.length;k++)
+          if( channels != null )
           {
-            channel_list += '<li class="center"><img src="'+this.productservice.server_url+channels[k].img+'" class="responsive-img" alt="'+channels[k].name+'"><br><span class="font-size-change">'+channels[k].name+'</span></li>'; 
-            this.channel_count = Number(this.channel_count) + 1; 
+            for(var k=0;k < channels.length;k++)
+            {
+              channel_list += '<li class="center"><img src="'+this.productservice.server_url+channels[k].img+'" class="responsive-img" alt="'+channels[k].name+'"><br><span class="font-size-change">'+channels[k].name+'</span></li>'; 
+              this.channel_count = Number(this.channel_count) + 1; 
+            }
           }
+          
         }
         if(channel_list != '')
           $('#product-pack').html(channel_list);

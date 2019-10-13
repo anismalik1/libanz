@@ -12,7 +12,7 @@
 <div id="fb-root"></div>
 <section class="channels-basic">
     <div class="container center">
-      <h1>Tata Sky Packages 
+      <h1 *ngIf="details == false">{{this.package.category}} Packages 
          
         <span >
         <a href="javascript:void(0);" class="btn-floating btn-large orange dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>
@@ -37,6 +37,22 @@
         </ul>
       </span>      
     </h1>
+    <h1 *ngIf="details == true"> 
+      <span *ngFor="let item of package_list;">{{item.title}}</span>      
+    </h1>
+    <div class="row">
+        <div class="col s12" *ngIf="details == true">
+            <ul class="share-us-on center">
+              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}/{{this.pack_id}}" ><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"></a></li>
+              <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
+              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url=https://www.mydthshop.com/package-list/{{this.url}}/{{this.pack_id}}"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"></a></li>
+              <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="https://mydthshop.com/web-app/assets/images/gmail.png" alt="gmail"></a></li>
+              <li><a href="https://api.whatsapp.com/send?phone=918010339339&text=https://www.mydthshop.com/package-list/{{this.url}}/{{this.pack_id}}" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
+              <li><a href="https://www.mydthshop.com/accounts/apis/export/export_package_category/{{this.pack_id}}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="https://mydthshop.com/web-app/assets/images/down-arrow.png" alt="download"></a></li>
+            </ul>
+          </div>
+    </div>
+    
     </div>
   </section>
 <section class="new-packages white packages-channels-download">
@@ -44,20 +60,11 @@
     <div class="row no-margin">
       <div class="col s12 m8">
         <div class="card" *ngFor="let item of package_list;">
-          <div class="card-header">
+          <div class="card-header" *ngIf="details == false">
             <div class="col s8">
-              <h2 class="font600 no-margin">{{item.title}}</h2>
+              <h2 class="font600 no-margin">{{item.title}} <a routerLink="/package-list/{{this.url}}/{{item.id}}" target="_blank"><i class="material-icons orange-text" *ngIf="details == false">share</i></a></h2>
             </div>
-            <div class="col s4">
-              <ul class="share-us-on">
-                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"></a></li>
-                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li>
-                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"></a></li>
-                <li><a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Gmail"><img src="https://mydthshop.com/web-app/assets/images/gmail.png" alt="gmail"></a></li>
-                <li><a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
-                <li><a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="https://mydthshop.com/web-app/assets/images/down-arrow.png" alt="download"></a></li>
-              </ul>
-            </div>
+            
           </div>
           <div class="card-content">
             <ul class="packages-channels">
@@ -80,16 +87,18 @@
           <div class="card-content">
             <h3 class="card-title no-margin">All Packages</h3>
             <ul class="all-packages">
-              <li><a href="javascript:(0);" class="black-text"><i class="material-icons">
-                  stars</i> Airtel Packages</a></li>
-              <li><a href="javascript:(0);" class="black-text"><i class="material-icons">
+              <li><a routerLink="/package-list/tata-sky" class="black-text"><i class="material-icons">
+                  stars</i> Tata Sky Packages</a></li>
+                  <li><a routerLink="/package-list/airtel" class="black-text"><i class="material-icons">
+                      stars</i> Airtel Packages</a></li>
+              <li><a routerLink="/package-list/videocon" class="black-text"><i class="material-icons">
                   stars</i> Videocon Packages</a></li>
-              <li><a href="javascript:(0);" class="black-text"><i class="material-icons">
+              <li><a routerLink="/package-list/dish-tv" class="black-text"><i class="material-icons">
                   stars</i> Dish Tv Packages</a></li>
-              <li><a href="javascript:(0);" class="black-text"><i class="material-icons">
+              <!-- <li><a routerLink="/package-list/dish-tv" class="black-text"><i class="material-icons">
                   stars</i> Jio Fiber</a></li>
-              <li><a href="javascript:(0);" class="black-text"><i class="material-icons">
-                  stars</i> Airtel Xtream</a></li>
+              <li><a routerLink="/package-list/dish-tv" class="black-text"><i class="material-icons">
+                  stars</i> Airtel Xtream</a></li> -->
             </ul>
           </div>
         </div>
@@ -101,15 +110,24 @@
 		<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
 		<div class="modal-content">
 		<div class="modal-header">
-		<h4>Shate With Email</h4>
+		<h4>Shate Url To Email</h4>
 		<div class="modal-close right-align"><i class="material-icons">close</i></div>
-		</div>
-		<div class="input-field col s12">
-      <i class="material-icons prefix margin-top-cart2">mail</i>
-        <input id="icon_prefix" type="text" class="validate" name="email">
+    </div>
+    <form [formGroup]="sharemailgroup" class="login-page-form" #sharemailform = "ngForm" (ngSubmit)="share_to_mail(sharemailform.value)">
+      <div class="input-field col s12">
+        <i class="material-icons prefix margin-top-cart2">mail</i>
+        <input id="icon_prefix" type="email" class="validate share-email" formControlName="email">
         <label for="icon_prefix" class="font-size-change">Enter Email</label>
-        <div class="red-text accent-4 center hide">Enter Email.</div>
-      </div>									
+        <div class="center" *ngIf="!sharemailgroup.controls['email'].valid && sharemailgroup.controls['email'].touched">
+            <span class="red-text"> Email is not valid.</span>
+          </div>
+      </div>	
+      <div class="row">
+        <div class="col s12 center">
+          <button type="submit" [disabled]="!sharemailgroup.controls['email'].valid" class="btn waves-effect waves-light orange">Submit</button>
+        </div>
+      </div>	
+    </form>							
 		<!-- <div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div> -->
 		</div>
 		</div>

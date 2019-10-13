@@ -743,4 +743,9 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/product/fetch_package_by_category';
     return this.send_post_request(data,url) ;
   }
+  share_channel_pack_on_mail(data)
+  {
+    let url = this.server_url+'accounts/apis/product/share_channel_pack_on_mail';
+    return this.send_post_request(data,url) ;
+  }
 }

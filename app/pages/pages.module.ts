@@ -30,10 +30,16 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'recover', component: ForgotPasswordComponent },
   // { path: 'forgot-password', component: ContactUsComponent },
-  { path: 'tata-sky', component: PackageViewComponent },
-  { path: 'airtel', component: PackageViewComponent },
-  { path: 'dish-tv', component: PackageViewComponent },
-  { path: 'videocon', component: PackageViewComponent },
+  { path: ':name', component: PackageViewComponent },
+  { path: ':name/:id', component: PackageViewComponent },
+  // { path: 'tata-sky', component: PackageViewComponent },
+  // { path: 'tata-sky/:id', component: PackageViewComponent },
+  // { path: 'airtel', component: PackageViewComponent },
+  // { path: 'airtel/:id', component: PackageViewComponent },
+  // { path: 'dish-tv', component: PackageViewComponent },
+  // { path: 'dish-tv/:id', component: PackageViewComponent },
+  // { path: 'videocon', component: PackageViewComponent },
+  // { path: 'videocon/:id', component: PackageViewComponent },
   { path: 'user-notify/:id', component: NotifyComponent }
   
 ];
