@@ -4137,4 +4137,6 @@ canvas {
 .testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
 .share-us-on{float: left; width: 100%; margin-top: 6px;}
 .margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
+.share-us-on{display: flex;}
+.packages-channels-download .card .packages-channels li{width: 30% !important;}
 /* End Here */
