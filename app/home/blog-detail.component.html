@@ -113,6 +113,7 @@ type="ball-clip-rotate">
       <div class="col s12 m5">
         <div class="card recnt-post no-box-shadow">
           <h3>Recent Post</h3>
+          <hr class="detail-hr">
           <ul>
             <li *ngFor="let item of recent_posts;">
               <a [routerLink]="['/blog-detail/'+item.url]" target="_blank">

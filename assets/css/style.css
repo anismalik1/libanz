@@ -3587,11 +3587,7 @@ canvas {
 	margin-right:5px !important;
  }
  .recnt-post{padding: 0 1rem; float: left;} 
- .recnt-post h3{    
-	font-size: 23px;
-	font-weight: 600;
-	text-transform: uppercase;
-}
+ .recnt-post h3{font-size: 23px;font-weight: 600;text-transform: uppercase;margin-top: 0; margin-bottom: 8px;}
 .recnt-post li{margin-bottom: 10px; float: left; border-bottom: 1px solid #cac8c8; padding-bottom: 10px; width:100%;}
 .recnt-post .post-img{width: 30%; float: left;}
 .recnt-post .post-img img{vertical-align: super;}
@@ -3601,8 +3597,8 @@ canvas {
 	color: #000; 
 	width: 100%;
 	margin-bottom: 10px;
-	font-size: 1.2rem !important;
-    font-weight: 600;
+	font-size: 14px !important;
+	text-align: left;
     margin-bottom: 10px;
     display: inline-block;
 }
@@ -3758,7 +3754,7 @@ canvas {
 .fast-forwad [type="checkbox"]+label{padding-left: 27px !important; line-height: 20px !important;}
 .cut-images  br{display: none;}
 .blog-content span h1,.blog-content span hr{display: none;}
-.post-text .font-size-change{padding: 0 4rem 0 0;}
+/* .post-text .font-size-change{padding: 0 4rem 0 0;} */
 /* End Here */
 .craft .dropdown-content{min-width: 35rem !important;}
 #long-content br{display: none;}
@@ -4139,4 +4135,5 @@ canvas {
 .margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
 .share-us-on{display: flex;}
 .packages-channels-download .card .packages-channels li{width: 30% !important;}
+.detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
 /* End Here */
