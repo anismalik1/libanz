@@ -117,6 +117,12 @@ export class PackageViewComponent implements OnInit {
         data => 
         {
           this.package_list = data.package;
+          if(this.details == true)
+          {
+            this.meta.addTag({ name: 'description', content:  data.package[0].title});
+            this.meta.addTag({ name: 'keywords', content: "Pack "+data.package[0].title +" Detail" });
+            this.title.setTitle( data.package[0].title+ " | MydthShop");
+          }
           this.spinner.hide();  
         }
       ) 
