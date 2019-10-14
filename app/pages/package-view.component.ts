@@ -129,7 +129,10 @@ export class PackageViewComponent implements OnInit {
    }
    share_to_mail(form)
    {
-    form.url = 'https://www.mydthshop.com/package-list/'+this.url+'/'+this.pack_id;
+     if(this.pack_id)
+      form.url = 'https://www.mydthshop.com/package-list/'+this.url+'/'+this.pack_id;
+     else
+      form.url = 'https://www.mydthshop.com/package-list/'+this.url;
      this.todoservice.share_channel_pack_on_mail(form)
      .subscribe(
       data => 
