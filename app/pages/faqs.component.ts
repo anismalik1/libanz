@@ -117,7 +117,7 @@ export class FaqsComponent implements OnInit {
     find(val)
     {
       this.query_string = val;
-      this.search_faqs()
+      this.go_to_search()
     }
     filter_keywords(keywords)
     {
@@ -221,7 +221,11 @@ export class FaqsComponent implements OnInit {
   }
   go_to_search()
   {
-    let key = $("#faq_key").val();
+    var key : any = '';
+    if(this.query_string == '')
+      key = $("#faq_key").val();
+    else
+      key = this.query_string; 
     if(1 == 1)
     {
       this.route.routeReuseStrategy.shouldReuseRoute = function(){
