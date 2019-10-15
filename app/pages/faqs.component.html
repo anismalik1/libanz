@@ -39,7 +39,16 @@
         <div class="col s12 margin-top faq1">        
           <ul class="collapsible no-box-shadow" data-collapsible="accordion">
             <li class="search-accordin relative">
-              <input placeholder="Search Your Answer" id="faq_key" type="text" class="validate">
+                <mat-form-field class="example-full-width">
+										<input type="text" placeholder="Search Your Answer" id="faq_key" class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
+										<mat-autocomplete #auto="matAutocomplete">
+											<span *ngIf="filterdList">
+											<mat-option *ngFor="let option of filteredOptions" [value]="option">
+												<a href="javascript:" class="black-text" (click)="find(option)">{{option}}</a>
+											</mat-option>
+										</span>
+										</mat-autocomplete>
+									</mat-form-field>
               <button type="Submit" class="btn-flat" (click)="search_faqs();"><i class="material-icons">search</i></button>
             </li>
           </ul> 
@@ -64,35 +73,17 @@
               </li>
             </ul>
           </div>
-          <div class="faqs-new-format left-align">
+          <div class="faqs-new-format left-align" *ngIf="!searched">
             <h2 class="font600 center no-margin">Popular Ask Queries</h2>
-            <p class="grey-text center most-top">Most Top 10 Question</p>
+            <p class="grey-text center most-top" *ngIf="default_queries">Top {{default_queries.length}} Question</p>
             <hr>
             <ul>
-              <li>
+              <li *ngFor="let item of default_queries;">
                 <div class="link-faqs">
-                  <a href="javascript:void(0);">
-                    <h5 class="font600">Tata Sky New Postpaid connection</h5>
-                    <span class="green-text">Mydthshop.com</span>
-                    <p class="grey-text">Watch Your Favourite Channels & Shows in High Definition At Exciting Prices. Book Now! Free Home Delivery. 24x7 Customer Service. Online Payment Offers. Live TV on Your Mobile. Book Now & Save More. Cash On Delivery Option. Available on Mobile App.</p>
-                  </a>
-                </div>
-              </li>
-              <li>
-                <div class="link-faqs">
-                  <a href="javascript:void(0);">
-                    <h5 class="font600">Tata Sky New Postpaid connection</h5>
-                    <span class="green-text">Mydthshop.com</span>
-                    <p class="grey-text">Watch Your Favourite Channels & Shows in High Definition At Exciting Prices. Book Now! Free Home Delivery. 24x7 Customer Service. Online Payment Offers. Live TV on Your Mobile. Book Now & Save More. Cash On Delivery Option. Available on Mobile App.</p>
-                  </a>
-                </div>
-              </li>
-              <li>
-                <div class="link-faqs">
-                  <a href="javascript:void(0);">
-                    <h5 class="font600">Tata Sky New Postpaid connection</h5>
-                    <span class="green-text">Mydthshop.com</span>
-                    <p class="grey-text">Watch Your Favourite Channels & Shows in High Definition At Exciting Prices. Book Now! Free Home Delivery. 24x7 Customer Service. Online Payment Offers. Live TV on Your Mobile. Book Now & Save More. Cash On Delivery Option. Available on Mobile App.</p>
+                  <a [routerLink]="item.url" target="_blank">
+                    <h5 class="font600">{{item.meta_title}}</h5>
+                    <span class="green-text">https:www.mydthshop.com{{item.url}}</span>
+                    <p class="grey-text">{{item.meta_description}}</p>
                   </a>
                 </div>
               </li>
@@ -103,7 +94,7 @@
       <div class="col s12 m4">
         <div class="images-faqs-new">
           <img src="https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs">
-        <ul class="faq-new-lider hide">
+        <ul class="faq-new-lider">
           <li>
             <div class="card">
               <div class="card-image padd center">

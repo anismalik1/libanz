@@ -609,7 +609,7 @@ export class TodoService {
   }
   search_faqs(data)
   {
-    let url = this.server_url+'accounts/apis/home/search_faqs';
+    let url = this.server_url+'accounts/apis/page/get_faqs_search_keywords';
     return this.send_post_request(data,url) ;
   }
   fetch_pack_by_month(data)
@@ -624,7 +624,7 @@ export class TodoService {
   }
   defalut_queries(data)
   {
-    let url = this.server_url+'accounts/apis/home/default_queries';
+    let url = this.server_url+'accounts/apis/page/default_queries';
     return this.send_post_request(data,url) ; 
   }
 
@@ -746,6 +746,11 @@ export class TodoService {
   share_channel_pack_on_mail(data)
   {
     let url = this.server_url+'accounts/apis/product/share_channel_pack_on_mail';
+    return this.send_post_request(data,url) ;
+  }
+  get_faqs_search_keywords(data)
+  {
+    let url = this.server_url+'accounts/apis/page/get_faqs_search_keywords';
     return this.send_post_request(data,url) ;
   }
 }

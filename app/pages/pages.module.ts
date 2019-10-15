@@ -5,6 +5,7 @@ import { SharedCommonModule } from '../shared/common.module';
 import { PageViewComponent } from './page-view.component';
 import { ContactUsComponent } from './contact-us.component';
 import { ForgotPasswordComponent } from './forgot-password.component';
+import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductService } from '../product.service';
 import { FormsModule ,ReactiveFormsModule,} from '@angular/forms';
@@ -52,6 +53,9 @@ const routes: Routes = [
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
   declarations: [PageViewComponent,ContactUsComponent, FaqsComponent, ForgotPasswordComponent,LoginComponent, SignupComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe],
   providers : [ProductService,TodoService,User,AuthService] 

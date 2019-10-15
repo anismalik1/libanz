@@ -1,9 +1,10 @@
 import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup ,FormControl} from '@angular/forms';
 import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
+import { Observable} from 'rxjs';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -22,6 +23,12 @@ export class FaqsComponent implements OnInit {
   search_list : any = [];
   searched : boolean = false;
   faq_url : string;
+  default_queries : any;
+  query_string : any;
+  myControl = new FormControl();
+  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  filteredOptions: Observable<object>;
+  filterdList : boolean = false;
   constructor(
     private fb: FormBuilder,
     private todoservice: TodoService,
@@ -32,6 +39,7 @@ export class FaqsComponent implements OnInit {
     private _renderer2: Renderer2, 
     private router : ActivatedRoute, 
     private route : Router,
+
     @Inject(DOCUMENT) private _document, 
   ) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -50,6 +58,15 @@ export class FaqsComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(this.todoservice.get_param('q'))
+    {
+      this.query_string = this.todoservice.get_param('q');
+      this.query_string = this.query_string.replace(/%20/g, " ");
+      //console.log(this.query_string)
+      this.myControl.setValue(this.query_string);
+      this.search_faqs();
+    }
+    
     this.router.params.subscribe(params => {
       let url = params['name']; //log the value of id
       this.faq_url = url;
@@ -62,6 +79,7 @@ export class FaqsComponent implements OnInit {
     
     this.faqs_list();
     this.init_script();
+    this.defaut_query();
   }
 
   unsatisfied(form)
@@ -78,6 +96,54 @@ export class FaqsComponent implements OnInit {
     ) 
   }
 
+  search_me(event)
+    {
+      let data :any = {};
+      data.search = event;
+      this.query_string = event;
+      this.todoservice.get_faqs_search_keywords(data)
+      .subscribe(
+        data => 
+        {
+          if(!jQuery.isEmptyObject(data))
+          {
+            this.filterdList = true;
+            this.filter_keywords(data.searches);
+            //this.filteredOptions = data.searches;
+          }
+        }
+      ) 
+    }
+    find(val)
+    {
+      this.query_string = val;
+      this.search_faqs()
+    }
+    filter_keywords(keywords)
+    {
+      let keys : any  = [];
+      for(var i = 0;i < keywords.length;i++)
+      {
+        let arr = keywords[i].meta_keyword.split(",");
+        for(var j = 0;j < arr.length;j++)
+        {
+          if(arr[j].includes(this.query_string))
+          {
+            if(keys.length >= 10)
+            {
+              break;
+            }
+            if(!keys.includes(arr[j]))
+              keys.push(arr[j]) 
+          }
+        }
+        if(keys.length >= 10)
+        {
+          break;
+        }
+      }
+      this.filteredOptions = keys;
+    }   
   thanks()
   {
     this.toastr.error("Thank you. Your feedback helps us to continually improve our content.");
@@ -141,18 +207,41 @@ export class FaqsComponent implements OnInit {
       }
     ) 
   }
-  search_faqs()
+  defaut_query()
+  {
+    let data :any;
+    this.todoservice.defalut_queries(data)
+      .subscribe(
+        data => 
+        {
+          this.default_queries = data.default_queries;
+          //console.log(this.default_queries);
+        }
+      ) 
+  }
+  go_to_search()
   {
     let key = $("#faq_key").val();
+    if(1 == 1)
+    {
+      this.route.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+      }
+    }  
+    this.route.navigated = false;
+    this.route.navigate([ '/p/faqs' ], { queryParams: { q: key } });
+  }
+  search_faqs()
+  {
     this.spinner.show();
-    this.todoservice.search_faqs({key : key})
+    this.todoservice.search_faqs({search : this.query_string})
     .subscribe(
       data => 
       {
         this.spinner.hide();
         //this.faqs = data.faqs;
         this.init_script();
-        this.search_list = data.faq;
+        this.search_list = data.searches;
         this.searched = true;
       }
     )

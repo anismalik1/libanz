@@ -19,7 +19,6 @@ export class FooterComponent implements OnInit{
   navigate : boolean = false;
   year :  number = new Date().getFullYear();
   options: any ;
-  default_queries : any;
   filterOptions : any;
   @Input() baseUrl;
   filterdList : boolean = false;
@@ -76,20 +75,6 @@ export class FooterComponent implements OnInit{
       startWith(''),
       map(value => this._filter(value))
     ); 
-    this.defaut_query()
-  }
-
-  defaut_query()
-  {
-    let data :any;
-    this.todoservice.defalut_queries(data)
-        .subscribe(
-          data => 
-          {
-            this.default_queries = data.default_queries;
-            //console.log(this.default_queries);
-          }
-        ) 
   }
   fetch_list(e)
   {
