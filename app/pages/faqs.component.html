@@ -40,7 +40,7 @@
           <ul class="collapsible no-box-shadow" data-collapsible="accordion">
             <li class="search-accordin relative">
                 <mat-form-field class="example-full-width">
-										<input type="text" placeholder="Search Your Answer" id="faq_key" class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
+										<input type="text" placeholder="Search Your Answer" id="faq_key" class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" (keyup.enter)="go_to_search()"> 
 										<mat-autocomplete #auto="matAutocomplete">
 											<span *ngIf="filterdList">
 											<mat-option *ngFor="let option of filteredOptions" [value]="option">
@@ -51,6 +51,10 @@
 								</mat-form-field>
               <button type="Submit" class="btn-flat" (click)="go_to_search();"><i class="material-icons">search</i></button>
             </li>
+          </ul>
+          <ul>
+            <li><a href="">News</a></li>
+            <li><a href="">Videos</a></li>
           </ul> 
           <div *ngIf="searched && search_list.length == 0">
               <h4 class="red-text center margin-top1">No Records. Please fill up the form to find your Solution.</h4>

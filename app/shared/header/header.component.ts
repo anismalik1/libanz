@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit{
   myControl = new FormControl();
   logingroup : FormGroup;
   signupgroup : FormGroup;
+  href : string;
   start : number = 0;
   more_display : boolean = true;
   signupdisabled : boolean= false; 
@@ -355,7 +356,9 @@ export class HeaderComponent implements OnInit{
       ) 
     }                                     
   ngOnInit()
-  {                                     
+  {  
+    this.href = this.router.url;
+    console.log(this.href);                                   
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))

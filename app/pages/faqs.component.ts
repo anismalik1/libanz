@@ -111,6 +111,7 @@ export class FaqsComponent implements OnInit {
     script.id = `collapse-script`;
     script.text = `
     $(document).ready(function(){
+      
       $('.collapsible').collapsible();
       $('.modal').modal();
       $('.faq-new-lider').lightSlider({
@@ -247,6 +248,7 @@ export class FaqsComponent implements OnInit {
     this.route.navigated = false;
     this.route.navigate([ '/p/faqs' ], { queryParams: { q: key } });
   }
+  
   search_faqs(page)
   {
     this.spinner.show();
