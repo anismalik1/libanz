@@ -52,9 +52,9 @@
               <button type="Submit" class="btn-flat" (click)="go_to_search();"><i class="material-icons">search</i></button>
             </li>
           </ul>
-          <ul>
-            <li><a href="">News</a></li>
-            <li><a href="">Videos</a></li>
+          <ul *ngIf="this.query_string != ''">
+            <li><a routerLink="/blog/all" target="_blank">News</a></li>
+            <li><a target="_blank" href="https://www.youtube.com/channel/UCaIDgIvn8kEMe2vevaTAPFw/search?query={{this.query_string}}">Videos</a></li>
           </ul> 
           <div *ngIf="searched && search_list.length == 0">
               <h4 class="red-text center margin-top1">No Records. Please fill up the form to find your Solution.</h4>
