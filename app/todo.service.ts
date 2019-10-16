@@ -607,11 +607,7 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/single_faq';
     return this.send_post_request(data,url) ;
   }
-  search_faqs(data)
-  {
-    let url = this.server_url+'accounts/apis/page/get_faqs_search_keywords';
-    return this.send_post_request(data,url) ;
-  }
+ 
   fetch_pack_by_month(data)
   {
     let url = this.server_url+'accounts/apis/product/fetch_pack_by_month';
@@ -751,6 +747,11 @@ export class TodoService {
   get_faqs_search_keywords(data)
   {
     let url = this.server_url+'accounts/apis/page/get_faqs_search_keywords';
+    return this.send_post_request(data,url) ;
+  }
+  search_faqs_list(data)
+  {
+    let url = this.server_url+'accounts/apis/page/get_faqs_search_list';
     return this.send_post_request(data,url) ;
   }
 }

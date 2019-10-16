@@ -16,6 +16,7 @@ import { NotifyComponent } from './notify.component';
 import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
+import { NgxPaginationModule} from 'ngx-pagination';
 import { MerchantComponent } from './merchant.component';
 import { PackageViewComponent } from './package-view.component';
 import { UserDetailComponent } from './user-detail.component';
@@ -54,6 +55,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    NgxPaginationModule,
     MatAutocompleteModule,
     MatInputModule,
   ],

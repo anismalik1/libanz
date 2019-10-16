@@ -48,7 +48,7 @@
 											</mat-option>
 										</span>
 										</mat-autocomplete>
-									</mat-form-field>
+								</mat-form-field>
               <button type="Submit" class="btn-flat" (click)="go_to_search();"><i class="material-icons">search</i></button>
             </li>
           </ul> 
@@ -65,13 +65,16 @@
           </div>        
           <div class="faqs-text" *ngIf="searched && search_list.length > 0">
             <h2>Searched Query</h2>
-            <span class="grey-text">Showing {{search_list.length}} results</span>
+            <span class="grey-text">Showing {{search_list.length}} Of {{search_count}} Results</span>
             <ul>
-              <li *ngFor="let item of search_list;">
+              <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
                 <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
                 <p [innerHTML]="item.meta_description"></p>
               </li>
             </ul>
+            <div class="has-text-centered right-align">
+                <pagination-controls (pageChange)="getPage($event)" id="order-p"></pagination-controls>
+            </div>
           </div>
           <div class="faqs-new-format left-align" *ngIf="!searched">
             <h2 class="font600 center no-margin">Popular Ask Queries</h2>
@@ -94,31 +97,28 @@
       <div class="col s12 m4">
         <div class="images-faqs-new">
           <img src="https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs">
-        <ul class="faq-new-lider">
-          <li>
+        <ul class="faq-new-lider" *ngIf="product_images">
+          <li *ngFor="let item of product_images">
             <div class="card">
               <div class="card-image padd center">
-                <img alt="images" class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702501551270412.png">
+                <img alt="images" class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}">
               </div>
               <div class="clearfix"></div>
               <div class="card-stacked">
                 <div class="card-content no-padding">
-                  <span class="card-title white-text font-size-change1">TATA SKY HD SET TOP BOX</span>
+                  <span class="card-title white-text font-size-change1">{{item.title}}</span>
                   <div class="row center">
                       <div class="col s12 m12">
-                        <span class="font-16 black-text font600"><i class="icon-inr"></i>1199</span>
-                        <span class="font-16 grey-text del-pri"><i class="icon-inr"></i>1800</span>                          
-                      </div>
-                      <div class="col s12 m12">
-                        <div class="font-16 green-text ng-star-inserted">Cash Back: <i class="icon-inr"></i>50 </div>
+                        <span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+                        <span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>                          
                       </div>
                       <div class="clearfix"></div>
                       <div class="col s12 m12 ">
-                        <a class="blue-text font-16" target="_blank" href="/product/compare-box?urls=tata-sky-hd-set-top-box&amp;ref=tata-sky-hd-set-top-box">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+                        <a class="blue-text font-16" target="_blank" href="/product/compare-box?urls={{item.url}}&ref={{item.url}}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
                       </div>
                     </div> 									 
                     <div class="btn-new1 center">
-                      <a class="btn" target="_blank" href="/product/tata-sky-hd-set-top-box">Book Now</a>
+                      <a class="btn" target="_blank" href="/product/{{item.url}}">Book Now</a>
                     </div>
                 </div>
               </div>
