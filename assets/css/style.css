@@ -4136,4 +4136,5 @@ canvas {
 .share-us-on{display: flex;}
 .packages-channels-download .card .packages-channels li{width: 30% !important;}
 .detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
+.recommended-section .card{min-height: 195px;}
 /* End Here */

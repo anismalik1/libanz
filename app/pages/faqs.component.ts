@@ -29,6 +29,7 @@ export class FaqsComponent implements OnInit {
   o_p: number = 1;
   search_count : number = 0;
   product_images : any;
+  suggested_product : any;
   myControl = new FormControl();
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
@@ -146,6 +147,13 @@ export class FaqsComponent implements OnInit {
    
     `;
     this._renderer2.appendChild(this._document.body, script);
+  }
+
+  go_to_form()
+  {
+    $('html, body').animate({
+      scrollTop: $(".ask-question").offset().top
+    }, 1000);
   }
 
   search_me(event)
@@ -266,7 +274,11 @@ export class FaqsComponent implements OnInit {
         {
           this.product_images = data.products; 
           this.init_script()
-        }   
+        } 
+        if(data.suggested_products)
+        {
+          this.suggested_product = data.suggested_products;
+        }  
         this.searched = true;
       }
     )
