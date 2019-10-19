@@ -57,7 +57,16 @@
         <div class="card" *ngFor="let item of package_list;">
           <div class="card-header" *ngIf="details == false">
             <div class="col s12">
-              <h2 class="font600 no-margin">{{item.title}} <a routerLink="/package-list/{{this.url}}/{{item.id}}" target="_blank"><i class="material-icons orange-text" *ngIf="details == false">share</i></a></h2>
+              <h2 class="font600 no-margin"><a class="blue-text" routerLink="/package-list/{{this.url}}/{{item.id}}" target="_blank">{{item.title}}</a>
+                <ul class="share-us-on right">
+                    <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}/{{item.id}}" ><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"></a></li>
+                    <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
+                    <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url=https://www.mydthshop.com/package-list/{{this.url}}/{{item.id}}"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"></a></li>
+                    <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="https://mydthshop.com/web-app/assets/images/gmail.png" alt="gmail" (click)="ini_pack(item.id)"></a></li>
+                    <li><a href="https://api.whatsapp.com/send?phone=918010339339&text=https://www.mydthshop.com/package-list/{{this.url}}/{{item.id}}" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
+                    <li><a href="https://www.mydthshop.com/accounts/apis/export/export_package_category/{{item.id }}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="https://mydthshop.com/web-app/assets/images/down-arrow.png" alt="download"></a></li>
+                  </ul>
+              </h2>
             </div>
             
           </div>

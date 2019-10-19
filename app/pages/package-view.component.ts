@@ -127,6 +127,10 @@ export class PackageViewComponent implements OnInit {
         }
       ) 
    }
+   ini_pack(id)
+   {
+    this.pack_id = id;
+   }
    share_to_mail(form)
    {
      if(this.pack_id)

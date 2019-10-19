@@ -525,7 +525,10 @@ export class HeaderComponent implements OnInit{
     }); 
   $('.tabs').tabs();
   function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    if(google)
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    else
+    setTimeout("googleTranslateElementInit()", 1000);  
   }
   setTimeout("googleTranslateElementInit()", 1000);
   function openchat()
