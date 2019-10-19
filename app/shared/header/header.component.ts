@@ -358,7 +358,7 @@ export class HeaderComponent implements OnInit{
   ngOnInit()
   {  
     this.href = this.router.url;
-    console.log(this.href);                                   
+    //console.log(this.href);                                   
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -468,8 +468,17 @@ export class HeaderComponent implements OnInit{
       $('#snatchbot-script').remove();
       let script1 = this._renderer2.createElement('script');
       script1.type = `text/javascript`;
-      script1.id = `side-nav-script`;
+      script1.id = `snatchbot-script`;
       script1.src = `https://account.snatchbot.me/script.js`;
+      this._renderer2.appendChild(this._document.body, script1);
+    }
+    if($('#translater-script'))
+    {
+      $('#translater-script').remove();
+      let script1 = this._renderer2.createElement('script');
+      script1.type = `text/javascript`;
+      script1.id = `translater-script`;
+      script1.src = `//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
       this._renderer2.appendChild(this._document.body, script1);
     }
     let script = this._renderer2.createElement('script');
@@ -515,7 +524,10 @@ export class HeaderComponent implements OnInit{
       draggable: true, // Choose whether you can drag to open on touch screens,
     }); 
   $('.tabs').tabs();
-  
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+  setTimeout("googleTranslateElementInit()", 1000);
   function openchat()
   {
     if(!window.sntchChat)
