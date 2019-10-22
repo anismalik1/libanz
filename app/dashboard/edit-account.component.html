@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-content">
                         <h3 class="font600 inline-block">Account Dashboard </h3>
-                        <a href="javascript:" class="font-size-change inline-block margin-left1 edit-click" (click)="edituser()">Edit</a>
+                        <!-- <a href="javascript:" class="font-size-change inline-block margin-left1 edit-click" (click)="edituser()">Edit</a> -->
                         <a href="#change-password" class="font-size-change modal-trigger inline-block margin-left1">Change Password</a>
                         <form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()">
                             <div class="row edit-acc no-margin">
@@ -97,7 +97,7 @@
                       </div>
                     </form>
                     </div>
-                    <div class="card-content">
+                    <!-- <div class="card-content">
                         <h3 class="font600 inline-block">Update KYC </h3>
                         <form #kycform = "ngForm" (ngSubmit)="update_kyc(kyc.value)">
                       <div class="row edit-acc no-margin">
@@ -140,7 +140,7 @@
                           </div>
                       </div>
                     </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

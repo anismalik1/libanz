@@ -80,7 +80,16 @@ export class EditAccountComponent implements OnInit{
     this.http.post('https://www.mydthshop.com/accounts/apis/home/upload_avatar', formModel)
     .subscribe(
       data => {
-          console.log("Subscribe data", data);
+        this.toastr.error("Updated Successfully");
+        let url = window.location.pathname;
+        if(url == url)
+        {
+          this.router.routeReuseStrategy.shouldReuseRoute = function(){
+            return false;
+          }
+        }  
+        this.router.navigated = false;
+        this.router.navigate([url]);
       }
   )
     setTimeout(() => {

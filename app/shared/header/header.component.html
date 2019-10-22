@@ -340,7 +340,7 @@
 		</div>
 	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
 		<ul>
-			<li class="inline-block user-after-login-img"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img vertical-align-middle" alt="user"></li>
+			<li class="inline-block user-after-login-img"><a class="no-padding" routerLink="/dashboard/edit-profile"><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img vertical-align-middle" alt="user"></a></li>
 			<li class="inline-block user-after-login-text">
 				<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''">{{this.todoservice.get_user_name()}}</p>
 				<span >{{this.todoservice.get_user_phone()}}</span>
