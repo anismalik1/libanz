@@ -327,7 +327,7 @@ nav ul a:hover{
 .recharge-section{
 	/* background: linear-gradient(to right, #ff6c01 0%, #ff6c01 100%); */
 	background:#fff;
-	margin-top: 7px;
+	/* margin-top: 7px; */
 	padding: 6px 0 !important;
 }
 .recharge-section .tabs{
@@ -3549,7 +3549,7 @@ canvas {
  .font-16{font-size: 16px;}
  .lSSlideOuter{width:100%;}
  .view-category{right:10px;}
- .header-strip{padding:5px 0;}
+ .header-strip{padding:1px 0;}
  .header-strip span{font-size:14px; font-weight: 400;}
  .header-strip span a,.header-strip span{color: #777777 !important; transition: .3s all linear;}
  .tabs::-webkit-scrollbar { width: 0 !important }
@@ -4131,10 +4131,15 @@ canvas {
 .faq-new-lider .responsive-img{max-width:200px;}
 .faq-new-lider{margin: 1rem 0;}
 .testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
-.share-us-on{float: left; width: 100%; margin-top: 6px;}
+.share-us-on{float: left; width: 100%; margin-top: 6px; justify-content: center !important;}
+.share-us-on li{margin: 0 12px !important;} 
 .margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
 .share-us-on{display: flex;}
 .packages-channels-download .card .packages-channels li{width: 30% !important;}
 .detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
 .recommended-section .card{min-height: 195px;}
+.goog-te-gadget{font-size:0 !important;}
+.goog-te-gadget span{display: none !important;}
+.strip-right-text.right{margin-top: 11px;}
+.goog-te-combo{width: 200px !important;padding: 0 10px !important; border: 1px solid #FF6A00 !important; background: transparent !important;}
 /* End Here */

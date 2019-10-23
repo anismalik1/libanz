@@ -47,11 +47,11 @@
 						</div>
 					</ul>	 	         -->
 				</ul>
-				<div id="mobile" class="col s12 mobile" style="display:none">
+				<!-- <div id="mobile" class="col s12 mobile" style="display:none">
 					<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)">
 						<div class="row no-margin">
 							<div class="input-field col s12 m12 l2 border-right">
-								<!-- <input placeholder="" formControlName="recharge_id" maxlength="10" minlength="10" type="text" class="validate no-margin" > -->
+								<input placeholder="" formControlName="recharge_id" maxlength="10" minlength="10" type="text" class="validate no-margin" >
 								<mat-form-field class="example-full-width">
 									<input type="text" placeholder="Enter Mobile Number" formControlName="recharge_id" class="no-margin black-text" maxlength="10" minlength="10" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="next_to('mobile','recharge_id',$event)"> 
 									<mat-autocomplete #auto="matAutocomplete">
@@ -112,7 +112,7 @@
 							</div>
 						</div>
 					</form>
-				</div>
+				</div> -->
 				<!-- <div id="dth" class="col s12 mobile">
 					<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)">
 						<div class="row no-margin">
