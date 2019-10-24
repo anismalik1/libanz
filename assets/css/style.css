@@ -4138,6 +4138,7 @@ canvas {
 .packages-channels-download .card .packages-channels li{width: 30% !important;}
 .detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
 .recommended-section .card{min-height: 195px;}
+.google-translater{height: 40px;overflow: hidden;}
 .goog-te-gadget{font-size:0 !important;}
 .goog-te-gadget span{display: none !important;}
 .strip-right-text.right{margin-top: 11px;}
