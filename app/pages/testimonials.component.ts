@@ -103,6 +103,12 @@ decode_html(html)
         }
         this.spinner.hide();  
       }
+      
     ) 
  }
+  see_more()
+  {
+    $('.testimonial-card').removeClass('hide');
+    $('.see-more').remove();  
+  }
 }

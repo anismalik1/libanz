@@ -111,7 +111,7 @@ export class ChannelPackComponent implements OnInit {
          $('#product-pack').html("<li>Channel list is not updated.</li>");
         this.meta.addTag({ name: 'description', content: data.pack_info.meta_description });
         this.meta.addTag({ name: 'keywords', content: data.pack_info.meta_keywords });
-        this.title.setTitle(data.pack_info.meta_title);  
+        this.title.setTitle(data.pack_info.meta_title);    
       }
       );
   }

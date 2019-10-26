@@ -92,7 +92,8 @@ fetch_page_data()
         this.spinner.hide();
         if(data.status == true)
         {
-          this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+          $('[href="#modal1"]')[0].click();
+          //this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }
     )  

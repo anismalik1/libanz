@@ -16,8 +16,8 @@
 <section>
     <div class="container">
     <div class="row"><!-- Editor Me itna yaha se dalna he -->
-    <div class="col s12 m6" *ngFor="let item of testimonials;">
-    <div class="card testimonial-card">
+    <div class="col s12 m6" *ngFor="let item of testimonials;let i = index;">
+    <div [className]="(i >= 6)? 'card testimonial-card hide': 'card testimonial-card'">
     <div class="card-content testimonial-text">
     <blockquote [innerHTML]="decode_html(item.description) | truncate : 230 : '...'">
     </blockquote>
@@ -29,8 +29,9 @@
     </div>
     </div>
     </div>
- 
+    
     <!-- End Here --></div>
+    <div class="see-more btn-new1 center" *ngIf="testimonials && testimonials.length > 6"><a class="btn" href="javascript:" (click)="see_more()">See More+</a></div>
     </div>
     </section>
     <app-footer></app-footer>

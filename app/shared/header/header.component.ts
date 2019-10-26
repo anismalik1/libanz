@@ -525,10 +525,10 @@ export class HeaderComponent implements OnInit{
     }); 
   $('.tabs').tabs();
   function googleTranslateElementInit() {
-    if(google)
+    if(typeof google != 'undefined')
       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     else
-    setTimeout("googleTranslateElementInit()", 1000);  
+      setTimeout("googleTranslateElementInit()", 1000);  
   }
   setTimeout("googleTranslateElementInit()", 1000);
   function openchat()
@@ -546,17 +546,17 @@ export class HeaderComponent implements OnInit{
   openchat();
   //setTimeout("$('#sntch_webchat').attr('style','background-color: rgb(255, 255, 255); width: 450x; height: 500px; position: fixed; bottom: 10px; right: 10px; max-height: 100%; max-width: 100%; z-index: 2147483647; transform: translateY(0px); transition: transform 0.5s ease 0s; border-radius: 20px 20px 0px 0px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
   
-  (function () {
-    var options = {
-        whatsapp: "+918010339339", // WhatsApp number
-        call_to_action: "Message us", // Call to action
-        position: "left", // Position may be 'right' or 'left'
-    };
-    var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
-    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-    s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-})();
+//   (function () {
+//     var options = {
+//         whatsapp: "+918010339339", // WhatsApp number
+//         call_to_action: "Message us", // Call to action
+//         position: "left", // Position may be 'right' or 'left'
+//     };
+//     var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+//     var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+//     s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+//     var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+// })();
     // (function(h,o,t,j,a,r){
     //     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
     //     h._hjSettings={hjid:1408142,hjsv:6};
