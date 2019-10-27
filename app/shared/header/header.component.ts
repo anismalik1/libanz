@@ -569,6 +569,11 @@ export class HeaderComponent implements OnInit{
     this._renderer2.appendChild(this._document.body, script);
   }
 
+  open_chat()
+  {
+    $('#sntch_button').click();
+  }
+
   check_null(string)
   {
     if(string != null && string.length > 0 )

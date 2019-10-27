@@ -19,7 +19,7 @@ export class MerchantComponent implements OnInit {
      private meta : Meta, private route : ActivatedRoute,
      private authservice : AuthService,
      private vcr: ViewContainerRef,
-    private toastr: ToastsManager,) { 
+    private toastr: ToastsManager) { 
       this.toastr.setRootViewContainerRef(vcr);
       this.page = 'accounts/'+route.snapshot.url[0].path;
       this.spinner.show();

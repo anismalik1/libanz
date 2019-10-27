@@ -1,7 +1,11 @@
 import { Component, OnInit,Renderer2,Inject } from '@angular/core';
 import { TodoService } from '../todo.service';
+import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 
 @Component({
   selector: 'app-testimonials',
@@ -11,12 +15,23 @@ import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
 export class TestimonialsComponent implements OnInit {
 
   testimonials : any;
+  contactgroup : FormGroup;
   page : string = 'testimonial';
   constructor(private title: Title, public todoservice : TodoService,
     private spinner: NgxSpinnerService,private meta : Meta,
-    private _renderer2: Renderer2, 
+    private _renderer2: Renderer2,private fb: FormBuilder,
+    private authservice : AuthService,
+    private toastr: ToastsManager,
      @Inject(DOCUMENT) private _document,
-    ) { }
+    ) { 
+      this.contactgroup = fb.group({
+        'name' : [null,Validators.compose([Validators.required])],
+        'email' : [null,Validators.compose([Validators.email])],
+        'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+        'subject' : [null],
+        'message' : [null],
+      });
+    }
 
   ngOnInit() {
     this.fetch_testimonials();
@@ -110,5 +125,32 @@ decode_html(html)
   {
     $('.testimonial-card').removeClass('hide');
     $('.see-more').remove();  
+  }
+  contact_submit(data)
+  {
+    data.token  = this.get_token();
+    this.spinner.show();
+    if(this.page.includes("merchant"))
+      data.which_form = 3;
+    else 
+      data.which_form = 4; 
+
+    this.todoservice.save_contact_form(data)
+    .subscribe(
+      data => 
+      {
+        let b = JSON.stringify(data);
+        data =  JSON.parse(b.replace(/\\/g, ''));
+        this.spinner.hide();
+        if(data.status == true)
+        {
+          this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+        }
+      }
+    )  
+  }
+  get_token()
+  {
+    return this.authservice.auth_token();
   }
 }
