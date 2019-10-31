@@ -38,6 +38,7 @@ export class ChannelPackComponent implements OnInit {
     this.month = Number(this.todoservice.get_param('month'));
     this.router.params.subscribe(params => {
       this.channel_id = params['id']; //log the value of id
+      this.spinner.show();
       this.fetch_channels(this.channel_id);
     });
     this.init_script();
@@ -77,7 +78,7 @@ export class ChannelPackComponent implements OnInit {
 		  .subscribe(
 			data => 
 			{
-        this.spinner.hide();
+        
         let channel_list : string = '';
         let all_channel_packs = data.channel_packs;
         this.product_pack_info = data.pack_info;
@@ -111,7 +112,8 @@ export class ChannelPackComponent implements OnInit {
          $('#product-pack').html("<li>Channel list is not updated.</li>");
         this.meta.addTag({ name: 'description', content: data.pack_info.meta_description });
         this.meta.addTag({ name: 'keywords', content: data.pack_info.meta_keywords });
-        this.title.setTitle(data.pack_info.meta_title);    
+        this.title.setTitle(data.pack_info.meta_title); 
+        this.spinner.hide();   
       }
       );
   }
