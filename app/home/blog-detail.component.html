@@ -81,7 +81,7 @@ type="ball-clip-rotate">
           <button class="btn orange" type="Submit" *ngIf="this.todoservice.get_user_name() == ''" (click)="show_login()">Login to Comment</button>
         </div>
         <div class="leave-comment hide">
-          <div class="card grey lighten-4">
+          <div class="card">
             <div class="card-content padd-rem">
               <h2>Leave Comment</h2>
               <form [formGroup]="commentgroup" #commentform = "ngForm" (ngSubmit)="comment_submit(commentform.value)">

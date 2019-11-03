@@ -1688,6 +1688,7 @@ select[name="datatable_length"]{
 	min-height: 300px !important;
 	background-repeat: no-repeat !important;
 	background-position:center !important;
+	margin: 10px 0;
 }
 .hero h2{
 	top: 35%;
@@ -3555,7 +3556,8 @@ canvas {
  .tabs::-webkit-scrollbar { width: 0 !important }
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
  .banner-slider1 .full-width{height: 300px;}
- #wallet-type label img{width: 50px; vertical-align: text-bottom;}
+ #wallet-type label img{vertical-align: middle;width: 60px;}
+ #wallet-type .mydth-wallet img{width: 100px;}
  .blog-page{padding: 2rem 0;}
  .blog-page .card-content{padding: 0;}
  .blog-page .card-content .author{padding: 1rem;border-bottom: 1px solid #e6e6e6;}
@@ -3586,7 +3588,7 @@ canvas {
 	vertical-align: middle;
 	margin-right:5px !important;
  }
- .recnt-post{padding: 0 1rem; float: left;} 
+ .recnt-post{padding: 0 1rem; float: left;width: 100%;} 
  .recnt-post h3{font-size: 23px;font-weight: 600;text-transform: uppercase;margin-top: 0; margin-bottom: 8px;}
 .recnt-post li{margin-bottom: 10px; float: left; border-bottom: 1px solid #cac8c8; padding-bottom: 10px; width:100%;}
 .recnt-post .post-img{width: 30%; float: left;}
@@ -4071,6 +4073,7 @@ canvas {
 .plans-view-details h3:after{content: 'star_half';font-family: 'Material Icons';position: absolute;left: 0;top:0;font-size: 25px;color: #ff9800;}
 .no-padding-top{padding: 0 24px 24px !important;}
 .new-packages{padding: 3rem 0;}
+.new-packages h2 a{color: #000000;}
 .new-packages .share-us-on li{float: left; padding: 0 6px;}
 .new-packages .card{float: left; width:100%;}
 .new-packages .card .card-header{float: left; width:100%; padding: 10px; border-bottom: 1px solid #e4e4e4;}
