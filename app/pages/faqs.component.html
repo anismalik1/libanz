@@ -78,7 +78,7 @@
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
                 <div class="link-faqs">
                   <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
-                  <span class="green-text">https:www.mydthshop.com{{item.url}}</span>
+                  <span class="green-text">https:www.mydthshop.com/p/faqs/{{item.url}}</span>
                   <p [innerHTML]="item.meta_description"></p>
                 </div>
                 
@@ -97,7 +97,7 @@
                 <div class="link-faqs">
                   <a [routerLink]="item.url" target="_blank">
                     <h5 class="font600">{{item.meta_title}}</h5>
-                    <span class="green-text">https:www.mydthshop.com{{item.url}}</span>
+                    <span class="green-text">https:www.mydthshop.com/p/faqs/{{item.url}}</span>
                     <p class="grey-text">{{item.meta_description}}</p>
                   </a>
                 </div>
