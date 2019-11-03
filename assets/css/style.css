@@ -2753,8 +2753,8 @@ tbody img{
 }
 .search-accordin button{
 	position: absolute;
-    top: 22%;
-    right: 0;
+    top: 30%;
+    right: -1%;
     color: #9AA0A6;
     font-size: 22px;
 }
@@ -4104,20 +4104,12 @@ canvas {
 .new-jio-fiber .card .card-content ul{column-count: 2;}
 .new-jio-fiber .card .card-content ul li{font-size: 13px !important; font-weight: 600; padding: 1rem 1.5rem; position: relative; margin:0;}
 .new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -5%;top:12%;font-size: 25px;color: #ff9800; }
-.link-faqs h5{
-	font-size: 22px;
-    margin: 2rem 0 10px;
-    font-weight: 600;
-    text-transform: capitalize;
-	text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-}
+.link-faqs h5{font-size: 20px;margin: 2rem 0 10px;font-weight: 600;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;}
 .most-top{font-size: 15px; margin-bottom: 10px;}
-.faqs-new-format li{margin-bottom: 10px;}
+.faqs-new-format li{margin-bottom: 25px;}
 .faqs-new-format hr{width: 25%;border: 2px solid #ff6a00; margin-bottom: 5rem;}
-.link-faqs span{font-size: 15px;}
-.link-faqs p{font-size: 15px; padding: 5px 3rem 0 0;}
+.link-faqs span{font-size: 16px;}
+.link-faqs p{font-size: 16px; padding: 5px 3rem 0 0;}
 .images-faqs-new{margin-top: 3rem;padding: 0 8px;margin-bottom: 10px;}
 .faq-new-lider .card-title{
 	padding: 1rem;
@@ -4143,4 +4135,12 @@ canvas {
 .goog-te-gadget span{display: none !important;}
 .strip-right-text.right{margin-top: 11px;}
 .goog-te-combo{width: 200px !important;padding: 0 10px !important; border: 1px solid #FF6A00 !important; background: transparent !important;}
+.faqs-text{padding: 0;}
+.faqs-text .grey-text{color: #70757a;}
+.faqs-text li a{font-size: 20px;margin: 2rem 0 10px;font-weight: 600;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;overflow: hidden;display: inherit;}
+.faqs-text li p{font-size: 16px;padding: 5px 3rem 0 0;}
+.faqs-text li{margin: 2rem 0;}
+.images-faqs-new h2{font-size: 18px;margin-top: 5rem;}
+.recommended-section .card-content{padding: 7px;}
+.recommended-section .card-content a{color: #1a0dab;text-overflow: ellipsis;font-size: 12px;white-space: nowrap;width: 100%;overflow: hidden;display: inherit;}
 /* End Here */

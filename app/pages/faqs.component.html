@@ -68,7 +68,7 @@
             <a href="#no-faq" class="btn red modal-trigger">No</a>
           </div>        
           <div class="faqs-text" *ngIf="searched && search_list.length > 0">
-            <h2>Searched Query</h2>
+            <!-- <h2>Searched Query</h2> -->
             <span class="grey-text">Showing {{search_list.length}} Of {{search_count}} Results</span>
             <ul>
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
@@ -110,7 +110,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="card-stacked">
-                        <div class="card-content no-padding">
+                        <div class="card-content">
                             <a class="blue-text" target="_blank" href="/product/{{item.url}}" title="{{item.title}}">{{item.title | slice:0:26}}<span *ngIf="item.title.length>26">...</span></a>
                           <!-- <span class="card-title blue-text font-size-change1"></span> -->
                           <div class="row center">
@@ -157,8 +157,8 @@
         </ul> -->
         </div>
         <div class="col s12 ask-question">
-          <div class="card grey lighten-2">
-            <div class="card-content grey lighten-2 center">
+          <div class="card">
+            <div class="card-content center">
               <span class="card-title">Ask Your Questions</span>
               <form id="contact-form" [formGroup]="faqsgroup" #faqsform = "ngForm" (ngSubmit)="faqs_submit(faqsform.value)">
                 <div class="row no-margin">
