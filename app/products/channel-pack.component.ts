@@ -72,6 +72,8 @@ export class ChannelPackComponent implements OnInit {
 
   fetch_channels(channel)
   {
+    if(this.month == 0 )
+      this.month = 1 ;
     this.spinner.show();
 		  let data = {token : this.get_token(),channel : channel,month:this.month};
 		  this.productservice.fetch_channels(data)
