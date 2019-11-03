@@ -63,7 +63,7 @@
           <div *ngIf="searched && search_list.length == 0">
               <h4 class="red-text center margin-top1">No Records. Please fill up the form <a href="javascript:" (click)="go_to_form()">here</a> to find your Solution.</h4>
           </div> 
-          <div class="faqs-text" *ngIf="single">
+          <div class="faqs-text link-faqs" *ngIf="single">
             <h2>{{single.question}}</h2>
             <hr>
             <p [innerHTML]="single.answer"></p>
@@ -76,8 +76,12 @@
             <span class="grey-text">Showing {{search_list.length}} Of {{search_count}} Results</span>
             <ul>
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
-                <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
-                <p [innerHTML]="item.meta_description"></p>
+                <div class="link-faqs">
+                  <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
+                  <span class="green-text">https:www.mydthshop.com{{item.url}}</span>
+                  <p [innerHTML]="item.meta_description"></p>
+                </div>
+                
               </li>
             </ul>
             <div class="has-text-centered right-align">
