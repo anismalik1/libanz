@@ -2746,7 +2746,7 @@ tbody img{
     border-radius: 50px !important;
     width: 100% !important;
     text-indent: 25px !important;
-    margin: 1rem 0 2rem 0 !important;
+    margin: 1rem 0 1rem 0 !important;
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28) !important;
     height: 46px !important;
     line-height: 46px;
@@ -4136,11 +4136,19 @@ canvas {
 .strip-right-text.right{margin-top: 11px;}
 .goog-te-combo{width: 200px !important;padding: 0 10px !important; border: 1px solid #FF6A00 !important; background: transparent !important;}
 .faqs-text{padding: 0;}
-.faqs-text .grey-text{color: #70757a;}
+.faqs-text .grey-text{color: #70757a !important;font-size: 14px;}
 .faqs-text li a{font-size: 20px;margin: 2rem 0 10px;font-weight: 600;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;overflow: hidden;display: inherit;}
 .faqs-text li p{font-size: 16px;padding: 5px 3rem 0 0;}
-.faqs-text li{margin: 2rem 0;}
+.faqs-text li{margin: 1rem 0 2rem;}
 .images-faqs-new h2{font-size: 18px;margin-top: 5rem;}
 .recommended-section .card-content{padding: 7px;}
-.recommended-section .card-content a{color: #1a0dab;text-overflow: ellipsis;font-size: 12px;white-space: nowrap;width: 100%;overflow: hidden;display: inherit;}
+.recommended-section .card-content a{color: #1a0dab;text-overflow: ellipsis;font-size: 14px;white-space: nowrap;width: 100%;overflow: hidden;display: inherit;}
+.ngx-pagination li,.ngx-pagination li a{margin: 0;}
+.ngx-pagination li a{font-size: 14px;vertical-align: middle;}
+.ngx-pagination{margin: 3rem 0;margin-bottom: 3rem !important;}
+.ngx-pagination li a:last-child{color: #000000;}
+.news-tabs{border-bottom: 1px solid #ebebeb;padding-bottom: 1rem;margin-bottom: 2rem;}
+.news-tabs li{display: inline-block;padding: 0 10px;}
+.news-tabs li a{font-size: 14px;color:#5f6368;}
+.icons-news{height: 16px;width: 16px;margin-right: 5px;vertical-align: text-bottom;display: inline-block;fill: currentColor;}
 /* End Here */
