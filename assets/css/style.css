@@ -3558,7 +3558,7 @@ canvas {
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
  .banner-slider1 .full-width{height: 300px;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
- #wallet-type .mydth-wallet img{width: 100px;}
+ #wallet-type .mydth-wallet img{width: 80px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
  .blog-page .card-content{padding: 0;}
  .blog-page .card-content .author{padding: 1rem;border-bottom: 1px solid #e6e6e6;}
@@ -3614,11 +3614,10 @@ canvas {
 	white-space: nowrap;
 	overflow: hidden;
 }
-.recnt-post .post-text .font-size-change hr{
-	width: 10%; border: 2px solid #FF6A00; margin: 0 0 1rem;
-}
-.channels-basic .dropdown-content{width: 15% !important;}
-.channels-basic a i{font-size:20px !important;}
+.recnt-post .post-text .font-size-change hr{width: 10%; border: 2px solid #FF6A00; margin: 0 0 1rem;}
+.channels-basic .dropdown-content{width: 16% !important;}
+.channels-basic .btn-floating.btn-large i{font-size: 24px !important;}
+.channels-basic .dropdown-content img{padding-right: 10px;vertical-align: middle;margin-top: -3px;}
 .compare-top-row .image-wrapper img{width:75px!important; height: 75px!important;}
 .compare-top-row .compare-text.left{min-height: auto !important; font-size:11px !important;}
 .compare-top-row .feature-image-wrapper{text-align: center; padding: 2rem 0;}
@@ -4127,10 +4126,11 @@ canvas {
 .faq-new-lider .responsive-img{max-width:200px;}
 .faq-new-lider{margin: 1rem 0;}
 .testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
-.share-us-on{float: left; width: 100%; margin-top: 6px; justify-content: center !important;}
+.share-us-on{float: right; width: 100%; margin-top: 6px; justify-content: center !important;}
 .share-us-on li{margin: 0 12px !important;} 
 .margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
 .share-us-on{display: flex;}
+.new-packages h2{display: inline-block;}
 .packages-channels-download .card .packages-channels li{width: 30% !important;}
 .detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
 .recommended-section .card{min-height: 195px;}
@@ -4162,5 +4162,5 @@ canvas {
 .images-faqs-new .recommended-section .card{min-height: 175px;}
 .ask-question .card{border:1px solid #dedede;}
 .ask-question .card .card-title{border-bottom: 2px solid #ff6a00;}
-.testimonial-text .btn-new1 .btn{width:15% !important;}
+.see-more .btn-new1{width:15% !important;}
 /* End Here */
