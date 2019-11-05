@@ -2754,8 +2754,9 @@ tbody img{
 }
 .search-accordin button{
 	position: absolute;
-    top: 30%;
-    right: -1%;
+	top: 33%;
+	padding: 0;
+    right: 2%;
     color: #9AA0A6;
     font-size: 22px;
 }
@@ -4154,4 +4155,12 @@ canvas {
 .news-tabs li{display: inline-block;padding: 0 10px;}
 .news-tabs li a{font-size: 14px;color:#5f6368;}
 .icons-news{height: 16px;width: 16px;margin-right: 5px;vertical-align: text-bottom;display: inline-block;fill: currentColor;}
+.faq1 .mat-form-field-label{top: 42% !important; left: 3% !important;}
+.new-faq-mar{margin: 1rem 0;}
+.images-faqs-new .card{border:1px solid #dedede;}
+.images-faqs-new .card .card-image{border-bottom:1px solid #dedede;}
+.images-faqs-new .recommended-section .card{min-height: 175px;}
+.ask-question .card{border:1px solid #dedede;}
+.ask-question .card .card-title{border-bottom: 2px solid #ff6a00;}
+.testimonial-text .btn-new1 .btn{width:15% !important;}
 /* End Here */
