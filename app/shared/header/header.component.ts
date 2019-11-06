@@ -540,7 +540,7 @@ export class HeaderComponent implements OnInit{
     else
     {
       window.sntchChat.Init(70574);
-      setTimeout("$('#sntch_webchat').css('width','450px');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
+      setTimeout("$('#sntch_webchat').css('width','350px');$('#sntch_iframe')[0].setAttribute('style', 'width:350px; height:425px; border:0');$('#sntch_webchat').css('height','400')", 5000);
     }
   }
   openchat();

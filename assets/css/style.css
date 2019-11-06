@@ -4155,6 +4155,7 @@ canvas {
 .news-tabs li{display: inline-block;padding: 0 10px;}
 .news-tabs li a{font-size: 14px;color:#5f6368;}
 .icons-news{height: 16px;width: 16px;margin-right: 5px;vertical-align: text-bottom;display: inline-block;fill: currentColor;}
+
 .faq1 .mat-form-field-label{top: 42% !important; left: 3% !important;}
 .new-faq-mar{margin: 1rem 0;}
 .images-faqs-new .card{border:1px solid #dedede;}
