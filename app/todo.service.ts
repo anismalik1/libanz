@@ -314,12 +314,12 @@ export class TodoService {
   }
   recharge_init(data)
   {
-    let url = this.server_url+'index.php?/app_recharge/recharge_init'; 
+    let url = this.server_url+'accounts/apis/recharge/recharge_init'; 
     return this.send_post_request(data,url) ;
   }
   recharge_handler(data)
   {
-    let url = this.server_url+'index.php?/app_recharge/recharge_handler'; 
+    let url = this.server_url+'accounts/apis/recharge/recharge_handler'; 
     return this.send_post_request(data,url) ; 
   }
   
@@ -392,7 +392,7 @@ export class TodoService {
   }
   check_amount(data)
   {
-    let url = this.server_url+'index.php?/app_recharge/check_amount';
+    let url = this.server_url+'accounts/apis/recharge/check_amount';
     return this.send_post_request(data,url) ; 
   }
   fetch_order_status(data)
