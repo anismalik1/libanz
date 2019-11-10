@@ -259,6 +259,7 @@ section{
 .padd-bottom{
 	padding-bottom: 1rem;
 }
+.padding-form{padding: 2rem 2rem 0;}
 .text-cursive{
 	font-family:'Satisfy', cursive; 
 }
@@ -4074,7 +4075,8 @@ canvas {
 .no-padding-top{padding: 0 24px 24px !important;}
 .new-packages{padding: 3rem 0;}
 .new-packages h2 a{color: #000000;}
-.new-packages .share-us-on li{float: left; padding: 0 6px;}
+.new-packages .share-us-on li{float: left; padding: 0;}
+.new-share .share-us-on{float: none !important;}
 .new-packages .card{float: left; width:100%;}
 .new-packages .card .card-header{float: left; width:100%; padding: 10px; border-bottom: 1px solid #e4e4e4;}
 .new-packages .card .packages-channels li{display: inline-block !important;width: 18% !important;margin: 10px 5px;border: 1px solid #c2c2c2 !important;padding: 10px !important;}
@@ -4107,7 +4109,8 @@ canvas {
 .new-jio-fiber .card .card-content ul{column-count: 2;}
 .new-jio-fiber .card .card-content ul li{font-size: 13px !important; font-weight: 600; padding: 1rem 1.5rem; position: relative; margin:0;}
 .new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -5%;top:12%;font-size: 25px;color: #ff9800; }
-.link-faqs h5{font-size: 20px;margin: 2rem 0 10px;font-weight: 600;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;}
+.link-faqs h5{font-size: 20px;margin: 2rem 0 10px;border-bottom:1px solid transparent;font-weight: 500;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;}
+.link-faqs h5:hover{border-bottom: 1px solid #1a0dab;}
 .most-top{font-size: 15px; margin-bottom: 10px;}
 .faqs-new-format li{margin-bottom: 25px;}
 .faqs-new-format hr{width: 25%;border: 2px solid #ff6a00; margin-bottom: 5rem;}
@@ -4126,11 +4129,11 @@ canvas {
 .faq-new-lider .responsive-img{max-width:200px;}
 .faq-new-lider{margin: 1rem 0;}
 .testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
-.share-us-on{float: right; width: 100%; margin-top: 6px; justify-content: center !important;}
+.share-us-on{float: right; width: auto; margin-top: 6px; justify-content: center !important;}
 .share-us-on li{margin: 0 12px !important;} 
 .margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
 .share-us-on{display: flex;}
-.new-packages h2{display: inline-block;}
+.new-packages h2{display: inline-block;font-size: 2rem;}
 .packages-channels-download .card .packages-channels li{width: 30% !important;}
 .detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
 .recommended-section .card{min-height: 195px;}
@@ -4141,7 +4144,8 @@ canvas {
 .goog-te-combo{width: 200px !important;padding: 0 10px !important; border: 1px solid #FF6A00 !important; background: transparent !important;}
 .faqs-text{padding: 0;}
 .faqs-text .grey-text{color: #70757a !important;font-size: 14px;}
-.faqs-text li a{font-size: 20px;margin: 2rem 0 10px;font-weight: 600;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;overflow: hidden;display: inherit;}
+.faqs-text li a{font-size: 20px;margin: 2rem 0 10px;border-bottom:1px solid transparent;font-weight: 500;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;overflow: hidden;display: inherit;}
+.faqs-text li a:hover{border-bottom: 1px solid #1a0dab;}
 .faqs-text li p{font-size: 16px;padding: 5px 3rem 0 0;}
 .faqs-text li{margin: 1rem 0 2rem;}
 .images-faqs-new h2{font-size: 18px;margin-top: 5rem;}
@@ -4163,6 +4167,6 @@ canvas {
 .images-faqs-new .recommended-section .card{min-height: 175px;}
 .ask-question .card{border:1px solid #dedede;}
 .ask-question .card .card-title{border-bottom: 2px solid #ff6a00;}
-.see-more .btn-new1{width:15% !important;}
+.see-more .btn{width:17% !important;font-size: 1.3rem;}
 .recommended-section .card:hover{transition: all .2s ease-in-out;-ms-transform: scale(1.2); -webkit-transform: scale(1.2); transform: scale(1.2);}
 /* End Here */

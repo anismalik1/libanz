@@ -34,16 +34,16 @@
     <div class="see-more btn-new1 center" *ngIf="testimonials && testimonials.length > 6"><a class="btn" href="javascript:" (click)="see_more()">See More+</a></div>
     </div>
     </section>
-    <section class="middle-part margin-top paad-new white">
-            <div class="container">
-              <h4 class="center text-uppercase font600 why">Register Here!</h4>		
+    <section class="middle-part margin-top white no-padding">
+            <div class="container-fluid">              
               <div class="row">
-                <div class="col m6 ">
+                <div class="col m6 no-padding">
                   <img class="responsive-img full-width" src="https://www.mydthshop.com/accounts/assets/img/Business-india.jpg">
                 </div>
                 <div class="col s12 m6">
                   <form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">
-                    <div class="row">
+										<h4 class="center text-uppercase font600 why">Register Here!</h4>
+                    <div class="row no-margin padding-form">
                       <div class="input-field col s12 m6">
                         <input id="first_name" name="name" type="text" class="validate" formControlName="name">
                         <label for="first_name">Name*</label>
