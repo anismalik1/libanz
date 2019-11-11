@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
   gasgroup : FormGroup;
   watergroup : FormGroup;
   order : any = {};
+  recommended : any;
   package_item : Package;
   packages : Package[];
   product_mpackages : Package[];
@@ -405,6 +406,8 @@ export class HomeComponent implements OnInit {
             this.airtel_slides    = this.filter_product('airtel',data.products);  
             this.dishtv_slides    = this.filter_product('dish',data.products);  
             this.videcone_slides  = this.filter_product('videocon',data.products); 
+            if(data.recommended.length > 0)
+              this.recommended  = this.filter_recommended(data.recommended,data.products); 
             
             this.init_page();
             $('#mobile').css('display','');  
@@ -417,6 +420,7 @@ export class HomeComponent implements OnInit {
       )  
   }
 
+  
   check_cashback(product_id)
   {
     //console.log(product_id);
@@ -443,6 +447,19 @@ export class HomeComponent implements OnInit {
           new_slides.push(categories[i]); 
         }
     }
+    return new_slides;
+  }
+
+  filter_recommended(recommended,categories)
+  {
+    let temp :any = [];
+    let new_slides = [];
+    for(var i=0;i<recommended.length ;i++)
+    {
+      let slide = categories.filter(x => x.id == recommended[i].product_id);
+      new_slides.push(slide[0]);
+    } 
+    //console.log(new_slides);
     return new_slides;
   }
 
