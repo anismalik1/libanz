@@ -382,12 +382,12 @@ export class TodoService {
   }
   signup(data)
   {
-    let url = this.server_url+'index.php?/app_services/signup';
+    let url = this.server_url+'accounts/apis/home/signup';
     return this.send_post_request(data,url) ; 
   }
   verify_user(data)
   {
-    let url = this.server_url+'index.php?/app_services/verify_signup';
+    let url = this.server_url+'accounts/apis/home/verify_signup';
     return this.send_post_request(data,url) ; 
   }
   check_amount(data)

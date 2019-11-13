@@ -25,8 +25,9 @@ const routes: Routes = [
   { path: 'blog/:name', component: BlogComponent },
   { path: 'blog-detail/:name', component: BlogDetailComponent },
   { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent },
-  { path: ':name', component: RechargeComponent },
-  { path: ':name/proceed', component: RechargeComponent }
+  { path: 'for/:name', component: RechargeComponent },
+  { path: ':name/proceed', component: RechargeComponent },
+  {path: '**', redirectTo: '/404'},
 ];
 @NgModule({
   imports: [

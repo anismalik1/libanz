@@ -187,7 +187,7 @@ export class FaqsComponent implements OnInit {
         let arr = keywords[i].meta_keyword.split(",");
         for(var j = 0;j < arr.length;j++)
         {
-          if(arr[j].includes(this.query_string))
+          if(arr[j].toLowerCase().includes(this.query_string.toLowerCase()))
           {
             if(keys.length >= 10)
             {

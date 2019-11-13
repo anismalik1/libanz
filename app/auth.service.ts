@@ -14,7 +14,7 @@ export class AuthService {
   public ttl  = 12;
   constructor(private http : Http) { }
   public base_url = "http://www.mydthshop.com/app/";
-  private token_api = 'https://www.mydthshop.com/index.php?/app_services/dologin';
+  private token_api = 'https://www.mydthshop.com/accounts/apis/home/dologin';
 
 
   dologin(data) : Observable<Authparams> 

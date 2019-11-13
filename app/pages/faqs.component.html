@@ -125,9 +125,12 @@
                           <div class="row no-margin">
                               <div class="col s12 m12">
                                 <span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
-                                <span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>                          
+                                <span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>                                                   
                               </div>
-                            
+                              <div class="col s12 m12">
+                                <span class="green-text" *ngIf="item.cod_available == 1">COD Available</span>
+                                <span class="green-text" *ngIf="item.cod_available != 1">Free Home Delivery</span>
+                              </div>
                             </div> 									 
                             
                         </div>
