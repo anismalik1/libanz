@@ -240,7 +240,7 @@ export class RechargeComponent implements OnInit {
       this.fetch_promocode(tab);
       this.fetch_navigate_data(tab);
       
-  }
+  } 
   fetch_promocode(tab)
   {
     this.todoservice.fetch_promocode({operator : tab})
@@ -359,17 +359,69 @@ export class RechargeComponent implements OnInit {
             this.circles  = data.CIRCLES;
             this.spinner.hide();
             let recharge_data  = this.todoservice.get_recharge();
-            if(recharge_data && (!recharge_data.circle_id || !recharge_data.operator_id ))
+            if(recharge_data && !recharge_data.operator_id )
             {
               localStorage.removeItem('recharge_cart');
               return false;
             }
             this.recharge_cart = recharge_data;
-            this.region        = recharge_data.circle_id;
-            this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
-            this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
-            this.mobilegroup.controls['circle_area'].setValue(this.region);
-            this.mobilegroup.controls['amount'].setValue(recharge_data.amount);
+            if(recharge_data.circle_id)
+              this.region        = recharge_data.circle_id;
+            if(this.recharge_cart != null)
+            {
+              //console.log(this.recharge_cart);
+              if(this.recharge_cart.recharge_type == 'mobile')
+              {
+                this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.mobilegroup.controls['circle_area'].setValue(this.region);
+                this.mobilegroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'dth')
+              {
+                this.dthgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.dthgroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.dthgroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'datacard')
+              {
+                this.datacardgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.datacardgroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.datacardgroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'landline')
+              {
+                this.landlinegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.landlinegroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.landlinegroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'broadband')
+              {
+                this.broadbandgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.broadbandgroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.broadbandgroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'electricity')
+              {
+                this.electricitygroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.electricitygroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.electricitygroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'gas')
+              {
+                this.gasgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.gasgroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.gasgroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              else if(this.recharge_cart.recharge_type == 'water')
+              {
+                this.watergroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
+                this.watergroup.controls['operator'].setValue(recharge_data.operator_id);
+                this.watergroup.controls['amount'].setValue(recharge_data.recharge_amount);
+              }
+              
+            }
+           
             this.selectedOperator = Number(recharge_data.operator_id);
             this.filter_operator_name(recharge_data.operator_id);
             this.filter_circle_name(Number(recharge_data.circle_id));
@@ -402,12 +454,7 @@ export class RechargeComponent implements OnInit {
   }
   recharge_init(s,formdata)
   {
-    if(!this.authservice.authenticate())
-    {
-      $('.logup.modal-trigger')[0].click();
-      return false;
-    }
-
+    
     if(s == 'mobile' && !this.mobilegroup.valid)
     {
       Object.keys(this.mobilegroup.controls).forEach(field => { // {1}
@@ -480,14 +527,25 @@ export class RechargeComponent implements OnInit {
     }
     this.spinner.show();	
 		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
-    //console.log(this.rechargeData);
+    if(!this.authservice.authenticate())
+    {
+      $('.logup.modal-trigger')[0].click();
+      var time = new Date();
+      this.rechargeData.recharge_type = s;
+      this.rechargeData.time = time.getTime();
+      this.addto_recharge_cart(this.rechargeData);
+      this.spinner.hide();
+      return false;
+    }
+    
     this.todoservice.recharge_init(this.rechargeData)
 		.subscribe(
 			data => 
 			{
         this.spinner.hide();
         this.rechargeData.operator_api_id = data.recharge_id;
-        this.addto_recharge_cart(this.rechargeData);
+        this.rechargeData.recharge_type = s;
+        //this.addto_recharge_cart(this.rechargeData);
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();

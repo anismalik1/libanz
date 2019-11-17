@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit{
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
     }
+    this.spinner.show();
     this.fetch_transactions(); 
     this.recent_orders();  
   }

@@ -1,15 +1,16 @@
-import {Component} from "@angular/core";
-import {Router, NavigationEnd} from "@angular/router";
+import {Component,OnInit} from "@angular/core";
+import {Router, NavigationEnd,RouteConfigLoadStart, RouteConfigLoadEnd} from "@angular/router";
+import { NgxSpinnerService } from 'ngx-spinner';
 declare var ga: Function;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = '';
- 
-  constructor(public router: Router ) {
+  loadingRouteConfig: boolean;
+  constructor(public router: Router,private spinner : NgxSpinnerService ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { 
         ga('set', 'page', event.urlAfterRedirects);
@@ -17,5 +18,16 @@ export class AppComponent {
       }
     });
   }
+  ngOnInit () {
+    this.router.events.subscribe(event => {
+        if (event instanceof RouteConfigLoadStart) {
+            this.loadingRouteConfig = true;
+            this.spinner.show();
+        } else if (event instanceof RouteConfigLoadEnd) {
+            this.loadingRouteConfig = false;
+            this.spinner.hide();
+        }
+    });
+}
  
 }

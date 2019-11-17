@@ -118,12 +118,6 @@ export class HomeComponent implements OnInit {
    back_to_recharge()
    {
      this.recharge_ini = 1;
-     setTimeout(()=>{    
-      $('#mobile').css('display','');  
-      $('#select-item').css('display',''); 
-     this.ini_list(); 
-     }, 500);
-     
    }
    changeCircle(id)
    {
@@ -406,8 +400,7 @@ export class HomeComponent implements OnInit {
             this.airtel_slides    = this.filter_product('airtel',data.products);  
             this.dishtv_slides    = this.filter_product('dish',data.products);  
             this.videcone_slides  = this.filter_product('videocon',data.products); 
-            if(data.recommended.length > 0)
-              this.recommended  = this.filter_recommended(data.recommended,data.products); 
+            this.recommended  = this.filter_recommended(data.products); 
             
             this.init_page();
             $('#mobile').css('display','');  
@@ -450,17 +443,10 @@ export class HomeComponent implements OnInit {
     return new_slides;
   }
 
-  filter_recommended(recommended,categories)
+  filter_recommended(categories)
   {
-    let temp :any = [];
-    let new_slides = [];
-    for(var i=0;i<recommended.length ;i++)
-    {
-      let slide = categories.filter(x => x.id == recommended[i].product_id);
-      new_slides.push(slide[0]);
-    } 
-    //console.log(new_slides);
-    return new_slides;
+    let slide = categories.filter(x => x.recommended == 1);
+    return slide;
   }
 
   filter_products(slider_data)
@@ -617,7 +603,7 @@ toTimestamp(strDate){
     script.type = `text/javascript`;
     script.id = `init-page-script`;
     script.text = `
-      $(document).ready(function(){ $('[href="#mobile"]').click();
+      $(document).ready(function(){
         $('.slider-5').lightSlider({
           item: 4,
           auto: false,
@@ -839,14 +825,14 @@ toTimestamp(strDate){
     $('.dropdown-more-click').click(function(){
       $('.dropdown-more').toggle();
     });
-    $(".dropdown-more").delegate('li','click',function(e){
-      e.preventDefault();
-      var targetli = $('#select-item > li:nth-child(9)').html();
-      $('#select-item > li:nth-child(9)').html(this.innerHTML);
-      this.innerHTML = targetli;
-      $('#select-item > li:nth-child(9) a')[0].click();
-      $('.dropdown-more-click').click()
-    }); 
+    // $(".dropdown-more").delegate('li','click',function(e){
+    //   e.preventDefault();
+    //   var targetli = $('#select-item > li:nth-child(9)').html();
+    //   $('#select-item > li:nth-child(9)').html(this.innerHTML);
+    //   this.innerHTML = targetli;
+    //   $('#select-item > li:nth-child(9) a')[0].click();
+    //   $('.dropdown-more-click').click()
+    // }); 
     });
     
     `;

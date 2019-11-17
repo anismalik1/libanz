@@ -377,7 +377,7 @@ nav ul a:hover{
 .recharge-section .tabs .indicator{
 	width: 5%;
 	margin: 0 auto;
-	background-color: #ff9800 !important;
+	background-color: transparent;
 }
 .initialized{
 	display: none;

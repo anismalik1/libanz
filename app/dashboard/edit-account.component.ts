@@ -6,6 +6,7 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -28,6 +29,7 @@ export class EditAccountComponent implements OnInit{
     private http : Http,
     private router : Router,
     private fb: FormBuilder,
+    private spinner : NgxSpinnerService,
     private vrc : ViewContainerRef) { 
     this.toastr.setRootViewContainerRef(vrc);
     this.manage_account_info();
@@ -77,6 +79,7 @@ export class EditAccountComponent implements OnInit{
   onSubmit() {
     const formModel = this.prepareSave();
     this.loading = true;
+    this.spinner.show();
     this.http.post('https://www.mydthshop.com/accounts/apis/home/upload_avatar', formModel)
     .subscribe(
       data => {
@@ -84,6 +87,7 @@ export class EditAccountComponent implements OnInit{
         let response = $.parseJSON(data['_body'])
         if(response.status == 1)
         {
+          this.spinner.hide();
           this.toastr.error("Updated Successfully");
           let url = window.location.pathname;
           if(url == url)
@@ -123,8 +127,9 @@ export class EditAccountComponent implements OnInit{
 
   manage_account_info()
   {
-    if(this.authservice.retrieveToken())
+    if(this.authservice.retrieveToken()) 
     {
+      this.spinner.show();
       let data = {token : this.get_token()};
       this.todoservice.manage_account_info(data)
       .subscribe(
@@ -137,6 +142,7 @@ export class EditAccountComponent implements OnInit{
           }
           var b = JSON.stringify(data.USER);
           this.userinfo = JSON.parse(b.replace(/\\/g, ''));
+          this.spinner.hide();
         }
       )  
     }
