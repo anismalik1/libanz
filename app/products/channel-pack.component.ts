@@ -84,6 +84,7 @@ export class ChannelPackComponent implements OnInit {
         let channel_list : string = '';
         let all_channel_packs = data.channel_packs;
         this.product_pack_info = data.pack_info;
+        //console.log(this.product_pack_info);
         for(var i=0;i<data.channel_pack_ids.length;i++)
         {
           let temp = data.channel_pack_ids[i];

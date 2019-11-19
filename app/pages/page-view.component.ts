@@ -86,13 +86,13 @@ contact_submit(data)
   data.token  = this.get_token();
   this.spinner.show();
   if(this.router.url == '/p/24-7') 
-    data.which_form = "24-7";
+    data.which_form = 5;
   else if(this.router.url == '/p/jio-fiber') 
-    data.which_form = "JIO Fiber";
+    data.which_form = 6;
   else if(this.router.url == '/p/airtel-xstream') 
-    data.which_form = "Airtel XSTREAM"; 
+    data.which_form = 7; 
   else if(this.router.url == '/p/dishsmrt-hub') 
-    data.which_form = "DishSMRT HUB";     
+    data.which_form = 8;     
 
   this.todoservice.save_contact_form(data)
   .subscribe(
@@ -103,7 +103,7 @@ contact_submit(data)
       this.spinner.hide();
       if(data.status == true)
       {
-        this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+        this.toastr.error("Successful! We Have Received Your Query And will get back to you soon.");
       }
     }
   )  

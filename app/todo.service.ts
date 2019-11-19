@@ -520,13 +520,13 @@ export class TodoService {
   save_contact_form (data)
   {
     
-    let url = this.server_url+'index.php?/app_services/save_contact_form';
+    let url = this.server_url+'accounts/apis/query/save_contact_form';
     return this.send_post_request(data,url) ; 
   }
   subscribe_newsletters(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/subscribe_newsletters';
+    let url = this.server_url+'accounts/apis/query/subscribe_newsletters';
     return this.send_post_request(data,url) ;
   }
   save_faqs_form(data)

@@ -82,6 +82,7 @@ fetch_page_data()
     {
       data.token  = this.get_token();
     }
+    data.which_form = 1;
     this.spinner.show();
     this.todoservice.save_contact_form(data)
     .subscribe(

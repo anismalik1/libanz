@@ -45,35 +45,27 @@ export class PackageViewComponent implements OnInit {
         this.pack_id = params['id'];
         this.package.pack_id = this.pack_id;
       }
-    });
+    }); 
 
     if(this.url == 'tata-sky')
     {
-      this.meta.addTag({ name: 'description', content: "Tata Sky Packages | All Tata Sky Packages" });
-      this.meta.addTag({ name: 'keywords', content: "Tata Sky Packages | All Tata Sky Packages" });
-      this.title.setTitle("Tata Sky Packages | All Tata Sky Packages");
+      this.fetch_page_data('/package-list/tata-sky');
       this.package.category = 'Tata Sky';
     }
     else if(this.url == 'airtel')
     {
+      this.fetch_page_data('/package-list/airtel');
       this.package.category = 'Airtel';
-      this.meta.addTag({ name: 'description', content: "Airtel Packages | All Airtel Packages" });
-      this.meta.addTag({ name: 'keywords', content: "Airtel Packages | All Airtel Packages" });
-      this.title.setTitle("Airtel Packages | All Airtel Packages");
     }
     else if(this.url == 'dish-tv')
     {
+      this.fetch_page_data('/package-list/dish-tv');
       this.package.category = 'Dishtv';
-      this.meta.addTag({ name: 'description', content: "Dishtv Packages | All Dishtv Packages" });
-      this.meta.addTag({ name: 'keywords', content: "Dishtv Packages | All Dishtv Packages" });
-      this.title.setTitle("Dishtv Packages | All Dishtv Packages");
     }
     else if(this.url == 'videocon')
     {
+      this.fetch_page_data('/package-list/videocon');
       this.package.category = 'Videocon';
-      this.meta.addTag({ name: 'description', content: "Videocon Packages | All Videocon Packages" });
-      this.meta.addTag({ name: 'keywords', content: "Videocon Packages | All Videocon Packages" });
-      this.title.setTitle("Videocon Packages | All Videocon Packages");
     }
     this.package_data();
     $('.fb-share-button').attr('data-href',"https://www.mydthshop.com"+this.path);
@@ -82,6 +74,44 @@ export class PackageViewComponent implements OnInit {
       this.init_script();
     }, 2000);
 
+  }
+  goto_package()
+  {
+    setTimeout (() => {
+      let url = window.location.pathname;
+    if(url == url)
+    {
+      this.router.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+      }
+      this.router.navigated = false;
+      this.router.navigate([url]);
+    }
+    }, 300);
+    
+  }
+  fetch_page_data(page_url)
+  {
+   let page = {page : page_url}; 
+   if(page.page == '')
+   {
+       return false;
+   }
+   this.todoservice.fetch_page_data(page)
+     .subscribe(
+       data => 
+       {
+         if(data.PAGEDATA)
+         {
+           this.todoservice.set_page_data(data.PAGEDATA[0]);
+           $('#page-content').html(this.todoservice.get_page().description);
+           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+           this.title.setTitle(this.todoservice.get_page().metaTitle);
+         }
+         this.spinner.hide();  
+       }
+     ) 
   }
 
   init_script()

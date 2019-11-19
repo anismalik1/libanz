@@ -114,20 +114,20 @@
 		<div class="row no-margin">
 			<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url(https://www.mydthshop.com/web-app/assets/images/login-banner.jpg);background-size: cover;">
 				<div class="login-modal">
-					<div class="padd-rem1 login-text">
+					<div class="padd-rem1 login-text" *ngIf="signup != 1">
 						<h2 class="black-text no-margin">LOGIN</h2>
 						<p class="black-text font-size-change1">Get access to your Orders,Recent Orders & Recommendations</p>
 					</div>
-					<div class="padd-rem1 signup-text hide">
+					<div class="padd-rem1 signup-text" *ngIf="signup == 1">
 						<h2 class="black-text">SIGN UP</h2>
 						<p class="black-text font-size-change1">We do not share your details with anyone.</p>
 					</div>
 				</div>
 			</div>
-			<div class="col s12 m8 white">
+			<div class="col s12 m8 white"> 
 				<div class="tabs-sign-up">
 					<ul id="tabs-swipe-demo" class="tabs">
-						<li class="tab col s6"><a class="active" href="#login" id="login-a">Login to MyDthShop</a></li>
+						<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to MyDthShop</a></li>
 						<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
 					</ul>
 					<div id="login" class="col s12">

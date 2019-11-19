@@ -377,7 +377,7 @@ export class HomeComponent implements OnInit {
       {
         data = {token : this.get_token()};
       }
-      
+      this.spinner.show();
       this.todoservice.fetch_home_data(data)
       .subscribe(
         data => 
@@ -385,6 +385,7 @@ export class HomeComponent implements OnInit {
           // data =  JSON.parse(data.replace(/"/g, "'"));
           // let b = JSON.stringify(data);
           // data =  JSON.parse(b.replace(/\\/g, ''));
+          this.spinner.hide();
           if(!$.isEmptyObject(data))
           {
             let page_data = data.PAGEDATA[0] 
