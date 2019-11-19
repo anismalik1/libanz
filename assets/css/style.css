@@ -9,7 +9,7 @@ strong{font-weight: 600;}
 .choose-set-up-box{min-height: 202px;}
 .choose-set-up-box .card-content{padding: 1rem 10px;}
 .lSNext, .lSPrev{background-color: transparent!important;border:none}
-.lSNext:hover, .lSPrev:hover{background-color: #ff6a00!important;border-radius: 4px 0 0 4px;}
+.lSNext:hover, .lSPrev:hover{background-color: #e2e0df!important;border-radius: 4px 0 0 4px;}
 
 i.left{margin-left:10px;}
 .cdk-overlay-container{z-index: 9999!important}
@@ -2028,18 +2028,23 @@ tbody img{
     border: 1px solid #f5f5f5;
 }
 .lSAction>a{
-	width: 40px;
-	top: 53%;
-	transform: translate(0%,-50%);
-	line-height: 52px;
-	height: 52px;
+	width: auto;
+    top: 53%;
+    -webkit-transform: translate(0%,-50%);
+    transform: translate(0%,-50%);
+    line-height: 52px;
+    height: auto;
+    padding: 42px 20px;
+    background-color: #fff!important;
+   
 }
 .lSAction>.lSNext{
-	background-position: -30px 16px;
-	border-radius: 0 4px 4px 0;
+	background-position: -30px 30px;
+	border-radius: 4px 0 0 4px;
 }
 .lSAction>.lSPrev{
-	background-position: 11px 16px;
+	background-position: 11px 30px;
+	border-radius: 0 4px 4px 0;
 }
 .icon-images{
 	border:1px solid #c2c2c2;
@@ -4178,3 +4183,19 @@ canvas {
 .recomm .card{border: 1px solid #d6d6d6; transition: .3s all linear;}
 .recomm .card:hover{border: none;box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important;}
 /* End Here */
+
+
+
+
+.recomended-wrapper{
+		background: url(https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg) no-repeat;
+		background-size: cover
+}
+
+
+
+.recomended-wrapper h2{
+
+color: #fff;
+font-size: 40px;
+}
