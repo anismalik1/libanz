@@ -21,7 +21,7 @@ import { User } from '../user';
 import { FavoritesComponent } from './favorites.component'; 
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
-  { path: 'listing', component: ProductsComponent },
+  { path: 'listing/:name', component: ProductsComponent },
   { path: 'channel-pack/:id', component: ChannelPackComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart', component: CartComponent },

@@ -377,7 +377,7 @@ export class TodoService {
   }
   checkout_items(data)
   {
-    let url = this.server_url+'index.php?/app_services/checkout_items';
+    let url = this.server_url+'accounts/apis/orders/checkout_items';
     return this.send_post_request(data,url) ;
   }
   signup(data)

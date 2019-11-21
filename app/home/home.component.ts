@@ -447,6 +447,7 @@ export class HomeComponent implements OnInit {
   filter_recommended(categories)
   {
     let slide = categories.filter(x => x.recommended == 1);
+    slide = slide.slice(0,8)
     return slide;
   }
 
