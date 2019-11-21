@@ -4188,7 +4188,7 @@ canvas {
 
 
 .recomended-wrapper{
-		background: url(https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg) no-repeat;
+		background: url('../images/recommened-bg.jpg') no-repeat 100% 100%;
 		background-size: cover
 }
 
