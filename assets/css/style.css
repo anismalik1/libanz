@@ -5,7 +5,7 @@
   }
 body{font-family: Arial,sans-serif !important;background: #f1f3f6;}
 html{font-size: 12px;font-family: Arial,sans-serif !important;width: 100%;overflow-x: hidden;}
-strong{font-weight: 600;}
+strong{font-weight: 600;word-break: break-all;}
 .choose-set-up-box{min-height: 202px;}
 .choose-set-up-box .card-content{padding: 1rem 10px;}
 .lSNext, .lSPrev{background-color: transparent!important;border:none}
@@ -2165,18 +2165,19 @@ tbody img{
 	#long-content h1{text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 100%;}
 	.container{width: 90%;}
 	.promo-li{padding: 15pv !important;}
-	.cut-images li{width: 49% !important; margin-bottom: 10px;}
+	ul.cut-images:after {display: block;content: '';clear: both;}
+	.cut-images li{width: 49% !important; margin-bottom: 10px; float: left;min-height: 110px; }
 	.social-icons-footer{text-align: center !important;}
 	.religon-modal{height: auto !important; width:90% !important;}
 	.responsive-compare-table {margin-bottom: 1rem;}
 	.banner-slider1 .full-width{height: auto !important;}
 	.header-strip span{font-size: 12px !important;}
-	#select-item li{border: 1px solid #d0cfcf; padding: 10px 0; border-radius: 10px;}
-	.bse-prc ul li{width:46% !important;}
+	#select-item li{border: 1px solid #d0cfcf; padding: 10px 0; border-radius: 10px;    }
+	
 	.footer-register .col{margin-bottom: 1rem;}
 	.lSAction>a{top:57%;}
 	.brand-logo svg{max-width: 150px !important;}
-	.navigation nav .mar{margin: 0 0 0 13rem !important;}
+	.navigation nav .mar{margin: 0 0 0 13rem !important;  }
 	#primary-nav .brand-logo{font-size: 0;}
 	.sldr-txt h2{text-align: left !important; font-size: 20px;}
 	.ngxImageZoomContainer{width: auto !important; height: auto !important;}
@@ -2575,7 +2576,7 @@ tbody img{
 	.copyr{
 		text-align: center !important;
 	}
-	.bse-prc ul li{width:23% !important;}
+	
 }
 .copyr{
 	text-align: right;
@@ -3243,13 +3244,7 @@ tbody img{
 	border-bottom: 1px solid #c2c2c2;
 	padding-bottom: 10px;
 }
-.bse-prc ul li{
-	display: inline-block !important;
-	width: 10% !important;
-	margin: 5px;
-    border: 1px solid #c2c2c2 !important;
-    padding: 10px !important;
-}
+
 .new-design-card ul li p{
 	text-overflow:ellipsis;
 	white-space: nowrap;
@@ -3527,7 +3522,7 @@ canvas {
  @media (max-width:600px) and (min-width:320px) {
 	 #multi-add-modal .m3{margin-bottom: 1rem;}
 	.rt-image-box{display: none;}
-	.bse-prc ul li{width:30% !important;}
+
  .retailer-slider .col{
 		max-height: auto;
 		min-height: auto;
@@ -3542,7 +3537,7 @@ canvas {
  }
  @media (max-width:991px) and (min-width:768px){
 	.registration-here-page{padding: 1rem 4rem; transform: translate(0,0);}
-	.bse-prc ul li{width: 20% !important;}
+	
 	.retailer-slider img, .retailer-slider .col{
 		max-height: auto;
 		min-height: auto;
@@ -4115,7 +4110,7 @@ canvas {
 .new-jio-fiber .card .card-content ul{column-count: 2;}
 .new-jio-fiber .card .card-content ul li{font-size: 13px !important; font-weight: 600; padding: 1rem 1.5rem; position: relative; margin:0;}
 .new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -5%;top:12%;font-size: 25px;color: #ff9800; }
-.link-faqs h5{font-size: 20px;margin: 2rem 0 10px;border-bottom:1px solid transparent;font-weight: 500;text-transform: capitalize;text-overflow: ellipsis;color:#1a0dab;width: 100%;white-space: nowrap;}
+.link-faqs h5{font-size: 20px;margin: 2rem 0 10px;border-bottom:1px solid transparent;font-weight: 500;text-transform: capitalize;text-overflow: ellipsis;color:rgba(0,0,0,.87);width: 100%; }
 .link-faqs h5:hover{border-bottom: 1px solid #1a0dab;}
 .most-top{font-size: 15px; margin-bottom: 10px;}
 .faqs-new-format li{margin-bottom: 25px;}
@@ -4199,4 +4194,49 @@ canvas {
 
 color: #333;
 font-size: 40px;
+}
+
+ul#product-pack li {
+    display: inline-block;
+    width: 16.666%;
+	margin-bottom:10px
+}
+
+
+span.border-wrap {
+    display: block;
+    border: 1px solid #e3e3e3;
+    margin: 0 5px;
+    padding: 15px;
+}
+
+
+
+@media(max-width:991px) and  (min-width:758px){
+	#product-pack li{
+		width:20%;
+	}
+}
+
+@media(max-width:767px) and  (min-width:481px){
+	ul#product-pack li{
+		width:33.333%;
+	}
+}
+
+
+@media(max-width:767px){
+
+.navigation.header .header-strip.grey.lighten-3{display:none;}
+#brand-category li:first-child { float: none;}	
+#brand-category li{    margin-right: 20px;}
+.navigation.header li:nth-child(2){margin-left: 54px;}
+
+}
+
+@media(max-width:480px){
+ul#product-pack li{
+		width:50%;
+		
+	}
 }
