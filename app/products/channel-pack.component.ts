@@ -103,7 +103,7 @@ export class ChannelPackComponent implements OnInit {
           {
             for(var k=0;k < channels.length;k++)
             {
-              channel_list += '<li class="center"><img src="'+this.productservice.server_url+channels[k].img+'" class="responsive-img" alt="'+channels[k].name+'"><br><span class="font-size-change">'+channels[k].name+'</span></li>'; 
+              channel_list += '<li class="center"><span class="border-wrap"><img src="'+this.productservice.server_url+channels[k].img+'" class="responsive-img" alt="'+channels[k].name+'"><br><span class="font-size-change">'+channels[k].name+'</span></span></li>'; 
               this.channel_count = Number(this.channel_count) + 1; 
             }
           }
