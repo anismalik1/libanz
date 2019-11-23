@@ -90,9 +90,6 @@ export class ProductDetailsComponent implements OnInit{
       this.p_id = params['name']; //log the value of id
       this.fetch_product_data(this.p_id,this.cat_id);
     });
-
-    
-   
     
     $('body').delegate('#stars li','mouseover', function(){
       var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on

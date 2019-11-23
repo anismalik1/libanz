@@ -3,7 +3,7 @@ import { ProductService } from '../product.service';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 
 @Component({
@@ -24,29 +24,37 @@ export class ProductsComponent implements OnInit{
   checked_quality : any = {is_primary: false,is_secondary : false};
   checked_str_quality : any = {is_sd: false,is_hd : false,is_4k:false};
   checked_package : any = {monthly:false,yearly:false};
-  constructor( private cartStore: ProductService,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router) { }
+  constructor( private cartStore: ProductService,
+    private spinner : NgxSpinnerService,
+    public todoservice : TodoService,
+    private authservice : AuthService,private router : Router,
+    private route : ActivatedRoute
+    ) { }
   ngOnInit() {
-    this.data = {cat_id : '',page_index:0}; 
-    if(this.todoservice.get_param('cat_id') != '')
-        this.data.cat_id = this.todoservice.get_param('cat_id');
-    
-    var arr = this.data.cat_id.split(',');
+    this.data = {cat_id : '',page_index:0};
+    this.route.params.subscribe(params => {
+      this.data.cat_id = params['name'];
+    });
+    // if(this.todoservice.get_param('cat_id') != '')
+    //     this.data.cat_id = this.todoservice.get_param('cat_id');
+    //console.log(this.data.cat_id)
+    var arr = this.data.cat_id.split('&&'); 
 
     for(var i=0;i < arr.length ;i++)
     {
-      if(arr[i] == 1)
+      if(arr[i].includes('tata'))
         this.checked_filter.is_tatasky = true;
-      if(arr[i] == 2)
+      if(arr[i].includes('videocon'))
         this.checked_filter.is_videocon = true; 
-      if(arr[i] == 3)
+      if(arr[i].includes('airtel'))
         this.checked_filter.is_airtel = true; 
-      if(arr[i] == 4)
+      if(arr[i].includes('dish'))
         this.checked_filter.is_dth = true;
-      if(arr[i] == 138)
+      if(arr[i].includes('freetoair'))
         this.checked_filter.is_air = true;
-      if(arr[i] == 241)
+      if(arr[i].includes('sundirect'))
         this.checked_filter.is_sundirect = true;
-      if(arr[i] == 210)
+      if(arr[i].includes('bigtv'))
         this.checked_filter.is_bigtv = true; 
     }
     this.apply_product_filter(1);
@@ -57,16 +65,16 @@ export class ProductsComponent implements OnInit{
   {
     var array : any = ''; 
     $('#brand-category input[type="checkbox"]:checked').each(function(){
-      array += $(this).val()+','; 
+      array += $(this).val()+'AND'; 
     });
     
 
     if(array != '')
     {
-      array = array.slice(0, -1);
+      array = array.slice(0, -3);
     }
 
-    this.router.navigate(['/product/listing'],{ queryParams: { cat_id:  array} });
+    this.router.navigate(['/product/listing/'+array]);
     this.spinner.show();
     let filter_data : any = { cat_id : array};
     this.todoservice.get_filter_products(filter_data)
@@ -81,9 +89,9 @@ export class ProductsComponent implements OnInit{
   }
   apply_product_filter(page)
   {
+    //console.log(page)
     var array : any = ''; 
-    if(this.todoservice.get_param('cat_id') != '')
-      array = this.todoservice.get_param('cat_id');
+    array = this.data.cat_id;
 
     let filter_data : any = { cat_id : array};
     this.data = filter_data;

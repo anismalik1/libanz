@@ -374,6 +374,7 @@ nav ul a:hover{
 .recharge-section .tabs .tab:hover a span,.recharge-section .tabs .tab:hover p span{
 	color: #000 !important;
 }
+.recharge-section li.active{border: 1px solid #ff6a00!important}
 .recharge-section .tabs .indicator{
 	width: 5%;
 	margin: 0 auto;
@@ -4187,15 +4188,15 @@ canvas {
 
 
 
-.recomended-wrapper{
+/* .recomended-wrapper{
 		background: url('../images/recommened-bg.jpg') no-repeat 100% 100%;
 		background-size: cover
-}
+} */
 
 
 
 .recomended-wrapper h2{
 
-color: #fff;
+color: #333;
 font-size: 40px;
 }

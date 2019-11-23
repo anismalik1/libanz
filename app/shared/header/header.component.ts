@@ -463,7 +463,7 @@ export class HeaderComponent implements OnInit{
       $('#side-nav-script').remove();
     }
 
-    if($('#snatchbot-script'))
+    if($('#snatchbot-script') && $(window).width() > 767)
     {
       $('#snatchbot-script').remove();
       let script1 = this._renderer2.createElement('script');

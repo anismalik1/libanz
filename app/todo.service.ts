@@ -351,7 +351,7 @@ export class TodoService {
   }
   get_filter_products(data)
   {
-    let url = this.server_url+'index.php?/app_services/get_filter_products';
+    let url = this.server_url+'accounts/apis/product/get_filter_products';
     return this.send_post_request(data,url) ;
   }
   fetch_checkout_data(data)
