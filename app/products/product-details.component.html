@@ -331,7 +331,7 @@
 						<div class="row">
 							<div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
 							<!-- <div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
-							<div class="card" *ngIf="item.default_selected == 2">
+							<div class="card product-new" *ngIf="item.default_selected == 2">
 								<div class="card-content center">
 									<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
 									<h4 class="grey-text">{{item.title}}</h4>
