@@ -70,6 +70,7 @@ export class EditAccountComponent implements OnInit{
 
 
   onFileChange(event) {
+    
     if(event.target.files.length > 0) {
       let file = event.target.files[0];
       this.form.get('avatar').setValue(file);
@@ -85,9 +86,10 @@ export class EditAccountComponent implements OnInit{
       data => {
         
         let response = $.parseJSON(data['_body'])
+        this.spinner.hide();
         if(response.status == 1)
         {
-          this.spinner.hide();
+         
           this.toastr.error("Updated Successfully");
           let url = window.location.pathname;
           if(url == url)

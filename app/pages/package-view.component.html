@@ -17,18 +17,21 @@
         <span >
         <a href="javascript:void(0);" class="btn-floating btn-large orange dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>
         <ul id='dropdown1' class='dropdown-content'>
-          <li class="border-bottom3">
-              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}">Share On Facebook</a>        
-          </li>
-          <li class="border-bottom3"> 
-            <a target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&text=https://www.mydthshop.com/package-list/{{this.url}}" class="grey-text modal-trigger no-margin"> Share on WhatsApp</a>
-          </li>
-          <li class="border-bottom3">
-            <a  href="#sharemail-modal" class="grey-text modal-trigger no-margin"> Share on Gmail</a>
-          </li>
-          <li>
-          <a href="https://www.mydthshop.com/accounts/apis/export/export_category_packages/{{this.url}}" class="grey-text no-margin"> Download All Packages</a>
-          </li>
+            <li>
+                <a href="#sharemail-modal" class="grey-text modal-trigger no-margin"><img alt="gmail" src="https://mydthshop.com/web-app/assets/images/gmail.png">Send mail</a>
+              </li>
+              <li>
+                <a href="https://www.mydthshop.com/accounts/apis/export/export_category_packages/{{this.url}}" class="grey-text no-margin"><img alt="download" src="https://mydthshop.com/web-app/assets/images/down-arrow.png"> Download Sheet</a>
+              </li>
+              <li>
+                <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&text=https://www.mydthshop.com/package-list/{{this.url}}"><img alt="whatsapp" src="https://mydthshop.com/web-app/assets/images/whatsapp.png"> Share On Whatsapp</a>
+              </li>
+                <li>
+                <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}" target="_blank"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"> Share On Facebook</a>
+              </li>
+                <li>
+                <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="https://twitter.com/share?url=https://www.mydthshop.com/package-list/{{this.url}}" target="_blank"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"> Share On Twitter</a>
+                </li>
         </ul>
       </span>      
     </h1>

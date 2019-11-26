@@ -82,7 +82,8 @@
                       <div class="row edit-acc">
                         <div class="inline">
                           <div class="form-group">
-                              <img width="43" src="{{this.todoservice.server_url}}{{userinfo.avatar}}" alt="user-icon"/>
+                              Max Size(100x100)  
+                              <img width="43" src="{{this.todoservice.server_url}}{{userinfo.avatar}}" alt="user-icon" id="change-icon"/>
                             <label for="avatar">Change</label>
                             <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
                           </div>
@@ -92,55 +93,11 @@
                       <div class="row edit-acc">
                           <div class="col s12 m12 l8 center">
                               <!-- <button type="Submit" class="btn orange btn-large" [disabled]="!isvalid">Update Details</button> -->
-                              <button type="submit" [disabled]="form.invalid || loading" class="btn orange btn-large">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+                              <button type="submit" [disabled]="form.invalid || loading" class="btn orange btn-large">Save <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
                           </div>
                       </div>
                     </form>
                     </div>
-                    <!-- <div class="card-content">
-                        <h3 class="font600 inline-block">Update KYC </h3>
-                        <form #kycform = "ngForm" (ngSubmit)="update_kyc(kyc.value)">
-                      <div class="row edit-acc no-margin">
-                        <div class="input-field col s12 m6 l8">
-                          <input placeholder="Enter Name" id="kname" name="name" type="text" class="validate no-margin">
-                        </div>
-                      </div>
-                      <div class="row edit-acc no-margin">
-                        <div class="input-field col s12 m6 l4">
-                          <input placeholder="Aadhar Card No." id="Aadhar" name="Aadhar" type="text" class="validate no-margin" maxlength="12">
-                        </div>
-                        <div class="input-field col s12 m6 l4">
-                          <input placeholder="Pan Card No." id="pan" name="pan" type="number" class="validate no-margin">
-                        </div>
-                      </div>
-                      <div class="row edit-acc no-margin">
-                        <div class="input-field col s12 m6 l4">
-                          <input placeholder="GST No." id="gst" name="gst" type="number" class="validate no-margin">
-                        </div>
-                        <div class="input-field col s12 m6 l4">
-                          <input placeholder="Phone No." id="phn" name="phn" type="number" class="validate no-margin">
-                        </div>
-                      </div>
-                      <div class="row edit-acc no-margin">
-                        <div class="input-field col s12 m6 l4">
-                          <input placeholder="Enter Pincode" id="kpincode" name="pincode" type="text" class="validate no-margin">
-                        </div>
-                        <div class="input-field col s12 m6 l4">
-                          <input placeholder="Enter Email" id="kemail" name="email" type="email" class="validate no-margin">
-                        </div>
-                      </div>
-                      <div class="row edit-acc no-margin">
-                        <div class="input-field col s12 m12 l8">
-                          <textarea id="textarea11" class="materialize-textarea" placeholder="C.S.C No.-1, Unit No.-9,10,11, 1st Floor Sector-3, Rohini, New Delhi-110085"></textarea>
-                        </div>
-                      </div>
-                      <div class="row edit-acc">
-                          <div class="col s12 m12 l8 center">
-                              <button type="Submit" class="btn orange btn-large">Update KYC</button>
-                          </div>
-                      </div>
-                    </form>
-                    </div> -->
                 </div>
             </div>
         </div>
