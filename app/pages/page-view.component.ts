@@ -57,6 +57,10 @@ constructor(private title: Title, public todoservice : TodoService,
             $('.hero').css('background','url(https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
             $('.hero').css('background-repeat','no-repeat');            
           }
+          else
+          {
+            $('.hero').remove(); 
+          }
           $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
