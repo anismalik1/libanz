@@ -4212,6 +4212,37 @@ span.border-wrap {
 
 
 
+.packages-channels.packages-channels-new{
+	margin-top: 15px;
+}
+
+.smart-packs .smart-inner{
+border: 1px solid #e3e3e3;
+    padding: 15px;
+    margin-bottom: 15px;
+	min-height:240px;
+	
+}
+
+.smart-packs .smart-inner a{
+background: #ff6a00;
+    color: #fff;
+    padding: 10px;
+    display: inline-block;
+    margin: 0;
+    border-radius: 5px;
+    /* width: 83px; */
+    margin-top: 10px;
+	
+}	
+
+
+.smart-packs .font-size-change1{
+	display:block;
+}
+
+
+
 @media(max-width:991px) and  (min-width:758px){
 	#product-pack li{
 		width:20%;
