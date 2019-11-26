@@ -56,7 +56,7 @@
 <section class="new-packages white packages-channels-download">
   <div class="container">
     <div class="row no-margin">
-      <div class="col s12 m8">
+      <div class="col s12 m12 l8">
         <div class="card" *ngFor="let item of package_list;">
           <div class="card-header" *ngIf="details == false">
             <div class="col s12">
@@ -72,21 +72,25 @@
             </div>            
           </div>
           <div class="card-content">
-            <ul class="packages-channels">
-              <li class="center" *ngFor="let channel_pack of item.child">
-                <div class="card-content center">
-                  <!-- <span class="when-check" id="check-pack-{{channel_pack.id}}"><i class="material-icons">check_circle</i></span> -->
+		  <div class="packages-channels packages-channels-new">
+		  <div class="row">
+				<div class="col l4 s12 m6 smart-packs" *ngFor="let channel_pack of item.child">
+				<div class="smart-inner">
+					    <!-- <span class="when-check" id="check-pack-{{channel_pack.id}}"><i class="material-icons">check_circle</i></span> -->
                   <h4 class="grey-text">{{channel_pack.title}}</h4>
                   <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{channel_pack.price}}</span><span *ngIf="multienable">{{channel_pack.multi_price}}</span>  <small>@ {{channel_pack.month}} Month</small></span>
                   <span class="font-size-change1" [innerHTML] = "remove_new_line(channel_pack.short_description)"></span>
                   <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set">Channels</a>
-                </div>
-              </li>              
-            </ul>
+				  
+				  </div>
+				</div>
+				</div>
+		  </div>
+	
           </div>
         </div>
       </div>
-      <div class="col s12 m4">
+      <div class="col s12 m12 l4">
         <div class="card grey lighten-3">          
           <div class="card-content">
             <h3 class="card-title no-margin">All Packages</h3>
