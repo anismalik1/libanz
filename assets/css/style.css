@@ -4108,8 +4108,8 @@ canvas {
 .new-jio-fiber .card .card-content .card-title{font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem;}
 .new-jio-fiber .card .card-content p{font-size: 16px;margin-bottom: 2rem;}
 .new-jio-fiber .card .card-content ul{column-count: 2;}
-.new-jio-fiber .card .card-content ul li{font-size: 13px !important; font-weight: 600; padding: 1rem 1.5rem; position: relative; margin:0;}
-.new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -5%;top:12%;font-size: 25px;color: #ff9800; }
+.new-jio-fiber .card .card-content ul li{display: inline-block; width: 100%; font-size: 13px !important; font-weight: 600; text-align: left; padding: 1rem 10px 0 2rem; position: relative; margin:0;}
+.new-jio-fiber .card .card-content ul li:after{	content: 'star_half';font-family: 'Material Icons';position: absolute;left: -3%;top:10%;font-size: 25px;color: #ff9800; }
 .link-faqs h5{font-size: 20px;margin: 2rem 0 10px;border-bottom:1px solid transparent;font-weight: 500;text-transform: capitalize;text-overflow: ellipsis;color:rgba(0,0,0,.87);width: 100%; }
 .link-faqs h5:hover{border-bottom: 1px solid #1a0dab;}
 .most-top{font-size: 15px; margin-bottom: 10px;}
@@ -4135,7 +4135,7 @@ canvas {
 .margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
 .share-us-on{display: flex;}
 .new-packages h2{display: inline-block;font-size: 2rem;}
-.packages-channels-download .card .packages-channels li{width: 30% !important;}
+.packages-channels-download .card .packages-channels li{width: 30% !important;min-height: 231px;vertical-align: middle;}
 .detail-hr{width: 18%;border: 2px solid #ff6a00;margin: 0 0 1.5rem;}
 .recommended-section .card{min-height: 195px;}
 .google-translater{height: 40px;overflow: hidden;}
@@ -4178,6 +4178,9 @@ canvas {
 .recomm .btn-new1 .btn{width: 100% !important;border-radius: 0 !important;box-shadow: none;margin: 0;}
 .recomm .card{border: 1px solid #d6d6d6; transition: .3s all linear;}
 .recomm .card:hover{border: none;box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important;}
+.new-airtel-x ul{column-count: 1 !important;}
+.new-airtel-x ul li{padding: 1rem 2rem !important;}
+.new-airtel-frame iframe{margin-top: 8.5rem;border: 5px solid #FF6A00 !important;border-right: 8px solid #c75300 !important;border-bottom: 8px solid #c75300 !important;}
 /* End Here */
 
 
