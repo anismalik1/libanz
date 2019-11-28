@@ -81,6 +81,7 @@
                   <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{channel_pack.price}}</span><span *ngIf="multienable">{{channel_pack.multi_price}}</span>  <small>@ {{channel_pack.month}} Month</small></span>
                   <span class="font-size-change1" [innerHTML] = "remove_new_line(channel_pack.short_description)"></span>
                   <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set">Channels</a>
+                  <a href="javascript:void(0)" target="_blank" class="font-size-change1 chng-set grey lighten-3 black-text">Buy Now</a>
 				  
 				  </div>
 				</div>

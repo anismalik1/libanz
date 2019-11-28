@@ -3635,7 +3635,27 @@ canvas {
 .about-us-pages br{display: none;}
 .about-us-pages .mission{background: #f1efef; padding: 1rem; margin-top: 1rem; border: 1px solid #d2d2d2; min-height: 234px;}
 .side-url{padding-left: 5rem !important;}
-.channels-accoriadn .card-content{min-height: 200px;}
+.channels-accoriadn .card-content{
+	border: 1px solid #e3e3e3;
+	text-align: center;
+	padding: 15px;
+	margin-bottom: 15px;
+	min-height: 240px;
+}
+.channels-accoriadn .card-content .card-title{
+	border-bottom: 1px solid #a2a2a2;
+	padding-bottom: 10px;
+}
+.channels-accoriadn .card-content a{
+	background: #ff6a00;
+    color: #fff;
+    padding: 10px;
+    display: inline-block;
+    margin: 0;
+    border-radius: 2px;
+    /* width: 83px; */
+    margin-top: 10px;
+}
 #page-content br{display:none;} 
 #page-content {font-size: 15px;} 
 #circles-content .tabs{height: auto; white-space: normal;}
@@ -4231,7 +4251,7 @@ background: #ff6a00;
     padding: 10px;
     display: inline-block;
     margin: 0;
-    border-radius: 5px;
+    border-radius: 2px;
     /* width: 83px; */
     margin-top: 10px;
 	
@@ -4241,8 +4261,6 @@ background: #ff6a00;
 .smart-packs .font-size-change1{
 	display:block;
 }
-
-
 
 @media(max-width:991px) and  (min-width:758px){
 	#product-pack li{
