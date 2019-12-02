@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-edit-account',
@@ -15,6 +16,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styles: []
 })
 export class EditAccountComponent implements OnInit{
+  imageChangedEvent: any = '';
+    croppedImage: any = '';
   userinfo : any = {};
   isvalid : boolean = false;
   kyc :any;
@@ -36,6 +39,24 @@ export class EditAccountComponent implements OnInit{
     this.createForm();
   }
 
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+    //console.log(this.imageChangedEvent)
+}
+imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.form.get('avatar').setValue(this.croppedImage);
+    //console.log(this.croppedImage)
+}
+imageLoaded() {
+    // show cropper
+}
+cropperReady() {
+    // cropper ready
+}
+loadImageFailed() {
+    // show message
+}
   createForm() {
     this.form = this.fb.group({
       name: ['', Validators.required],

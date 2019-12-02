@@ -293,16 +293,16 @@ export class TodoService {
     let url = this.server_url+'index.php?/app_services/fetch_commission_listing_by_category';
     return this.send_post_request(data,url) ; 
   }
+
   add_topup(data)
   {
-    
-    let url = this.server_url+'index.php?/app_services/add_topup_request';
+    let url = this.server_url+'accounts/apis/orders/add_topup_request';
     return this.send_post_request(data,url) ; 
   }
   fetch_topup_request(data)
   {
    
-   let url = this.server_url+'index.php?/app_services/fetch_topup_request';
+   let url = this.server_url+'accounts/apis/orders/fetch_topup_request';
     return this.send_post_request(data,url) ;
   }
   

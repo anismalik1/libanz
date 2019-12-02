@@ -545,7 +545,11 @@ export class HeaderComponent implements OnInit{
   }
   openchat();
   //setTimeout("$('#sntch_webchat').attr('style','background-color: rgb(255, 255, 255); width: 450x; height: 500px; position: fixed; bottom: 10px; right: 10px; max-height: 100%; max-width: 100%; z-index: 2147483647; transform: translateY(0px); transition: transform 0.5s ease 0s; border-radius: 20px 20px 0px 0px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
-  
+  (function () {
+  $.getScript("https://connect.facebook.net/en_US/all.js#xfbml=1", function () {
+        FB.init({ appId: '1346509102168933', status: true, cookie: true, xfbml: true });
+    });
+  })();
 //   (function () {
 //     var options = {
 //         whatsapp: "+918010339339", // WhatsApp number

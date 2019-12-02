@@ -433,6 +433,7 @@ export class ProductDetailsComponent implements OnInit{
           this.product.tsk_kit = 2;
         }
         this.product_id = this.product.id;
+        this.meta.addTag({  property: 'og:title', content: this.product.meta_title });
         this.meta.addTag({ name: 'description', content: this.product.meta_description });
         this.meta.addTag({ name: 'keywords', content: this.product.meta_keyword });
         this.title.setTitle(this.product.meta_title + " With "+this.month+ ' Month Pack');
@@ -463,12 +464,11 @@ export class ProductDetailsComponent implements OnInit{
         }
         this.init_page();
         window.scroll(0,0);
-        //console.log(this.product)  
+        //this.share_fb_links();
       }
     )
     
   }
-
   add_to_favorite()
   {
     $('.wishlist').addClass('active');

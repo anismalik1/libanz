@@ -16,7 +16,7 @@
                 <div class="card">
               <div class="card-content user-content">
                   <div class="user-image">
-                      <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50">
+                      <img src="{{this.todoservice.get_user_avatar()}}" class="responsive-img" alt="User-icon" width="50">
                   </div>
                   <div class="user-name">
                       <span>Welcome,</span><br>
@@ -81,11 +81,24 @@
                       </div>
                       <div class="row edit-acc">
                         <div class="inline">
+                            <input type="file" (change)="fileChangeEvent($event)" />
+
+                            <image-cropper
+                                [imageChangedEvent]="imageChangedEvent"
+                                [maintainAspectRatio]="true"
+                                [aspectRatio]="4/4"
+                                [resizeToWidth]="100"
+                                format="png"
+                                (imageCropped)="imageCropped($event)"
+                            ></image-cropper>
+                            
+                            <img [src]="croppedImage" />
                           <div class="form-group">
                               Max Size(100x100)  
-                              <img width="43" src="{{this.todoservice.server_url}}{{userinfo.avatar}}" alt="user-icon" id="change-icon"/>
-                            <label for="avatar">Change</label>
-                            <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+                              <img width="43" src="{{this.todoservice.server_url}}{{userinfo.avatar}}" alt="user-icon" id="change-icon" *ngIf="userinfo.avatar && !userinfo.avatar.includes('data:image/png')"/>
+                              <img width="43" src="{{userinfo.avatar}}" alt="user-icon" id="change-icon" *ngIf="userinfo.avatar && userinfo.avatar.includes('data:image/png')"/>
+                            <!-- <label for="avatar">Change</label>
+                            <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput> -->
                           </div>
                           
                         </div>
