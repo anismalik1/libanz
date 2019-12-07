@@ -4241,7 +4241,7 @@ nav ul a span.badge{line-height: 18px !important;}
 .commnt-display li .commnt-text .grey-text{font-size: 13px;margin-left: 1rem;}
 .commnt-display li .commnt-text p{font-size: 14px;padding-right: 2rem;}
 .commnt-display h2{margin: 0 0 3rem 3rem;border-bottom: 2px solid #FF6A00 ;display: inline-block;font-weight: 600;font-size: 24px;}
-.commnt-display li{width: 100%;float:left;margin-bottom: 1rem;}
+.commnt-display li{width: 100%;float:left;margin-bottom: 1rem;border-bottom: 1px solid #eaeaea;padding: 10px 0;}
 /* End Here */
 .recomended-wrapper h2{
 
