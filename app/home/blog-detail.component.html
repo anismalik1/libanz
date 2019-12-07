@@ -37,7 +37,7 @@ type="ball-clip-rotate">
     <div class="row">
       <div class="col s12 m7">
         <div class="card no-box-shadow" *ngIf="post">
-					<div class="card-image">
+					<div class="card-image detial-images">
 						<img src="https://www.mydthshop.com/accounts/assets/img/cms/{{post[0].image}}" class="responsive-img" alt="{{post[0].title}}">
 					</div>
 					<div class="card-content">
@@ -76,6 +76,29 @@ type="ball-clip-rotate">
             </ul> -->
           </div>
         </div>
+        <ul class="commnt-display row">
+          <h2>Comment Reviews</h2>
+          <li>
+            <div class="commnt-image col s2 center">
+              <img src="https://mydthshop.com//web-app/assets/images/user.jpg" class="responsive-img">
+            </div>
+            <div class="commnt-text col s10 no-padding">
+              <h5>Prakash Jha</h5>
+              <span class="grey-text">Test@gmail.com</span>
+              <p>Today, most of the people are using DTH connection for their TV to watch all the satellite channels. The full form of DTH service is direct to home.</p>
+            </div>
+          </li>
+          <li>
+            <div class="commnt-image col s2 center">
+              <img src="https://mydthshop.com//web-app/assets/images/user.jpg" class="responsive-img">
+            </div>
+            <div class="commnt-text col s10 no-padding">
+              <h5>Prakash Jha</h5>
+              <span class="grey-text">Test@gmail.com</span>
+              <p>Today, most of the people are using DTH connection for their TV to watch all the satellite channels. The full form of DTH service is direct to home.</p>
+            </div>
+          </li>
+        </ul>
         <div class="leave-comment-button">
           <button class="btn orange" type="Submit" (click)="show_comment_box()" *ngIf="this.todoservice.get_user_name() != ''">Leave Comment</button>
           <button class="btn orange" type="Submit" *ngIf="this.todoservice.get_user_name() == ''" (click)="show_login()">Login to Comment</button>

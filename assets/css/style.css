@@ -2876,7 +2876,7 @@ tbody img{
 	color: #76c1e9;
 	margin-top: 5px;
 }
-.login-side-image{background-size: cover; height: 85.4vh;}
+.login-side-image{background-size: cover; height: 83.7vh;}
 .margin-high{
 	margin-top: 5rem;
 }
@@ -3719,7 +3719,7 @@ canvas {
 .notification-drop-ul{width:auto !important;/* left:-150% !important; */min-width:400px !important;}
 .wishlist.active i{color: #ff6a00}
 .wishlist:hover i{color: #ff6a00}
-.blog-page .card-image img{min-height: 185px !important; max-height: 185px !important;}
+.blog-page .card-image img{min-height: 185px !important; max-height: 185px !important;object-fit:cover;}
 
 /* Merchant on mydth css */
 .slider-section{
@@ -4234,6 +4234,14 @@ canvas {
 .new-jio-fiber .card-title,.new-jio{font-size: 2.5rem;font-weight: 600;border-bottom: 2px solid #ff6a00;margin-bottom: 1rem !important;display: inline-block !important;padding-bottom: 5px;}
 .new-jio-fiber1{text-align: center;margin: 2rem 0;}
 #user-nav a img{border-radius: 50px;}
+nav ul a span.badge{line-height: 18px !important;}
+.detial-images img{min-height: 300px !important;max-height: 300px !important;object-fit: cover;}
+.commnt-display li .commnt-image img{width:70px;height:70px;vertical-align: middle;margin-top: 5px;}
+.commnt-display li .commnt-text h5{font-weight: 600; font-size: 16px;display: inline-block;}
+.commnt-display li .commnt-text .grey-text{font-size: 13px;margin-left: 1rem;}
+.commnt-display li .commnt-text p{font-size: 14px;padding-right: 2rem;}
+.commnt-display h2{margin: 0 0 3rem 3rem;border-bottom: 2px solid #FF6A00 ;display: inline-block;font-weight: 600;font-size: 24px;}
+.commnt-display li{width: 100%;float:left;margin-bottom: 1rem;}
 /* End Here */
 .recomended-wrapper h2{
 
