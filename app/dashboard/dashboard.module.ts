@@ -42,6 +42,7 @@ const routes: Routes = [
   { path: 'dth-orders', component: DthOrdersComponent },
   { path: 'book-dth-order', component: BookDthOrderComponent },
   { path: 'booked-order-list', component: BookedOrderListComponent }, 
+  {path: '**', redirectTo: '/error/404'},
 ];
 @NgModule({
   imports: [

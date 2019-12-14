@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'package-list',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'reviews',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: '',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
-  {path: '**', redirectTo: '/404'},
+  {path: '**', redirectTo: '/error/404'},
 ];
 
 @NgModule({

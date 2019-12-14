@@ -44,7 +44,7 @@ constructor( public todoservice : TodoService,
   }
   if(this.authService.authenticate())
   {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
   }
   this.logingroup = fb.group({
     'phone' : [null,Validators.compose([Validators.required])],
@@ -60,7 +60,7 @@ constructor( public todoservice : TodoService,
 ngOnInit() {
   if(this.get_token())
     {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
 }
 login_submit(login)
@@ -104,7 +104,7 @@ login_submit(login)
           }
           else
           {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
           }
         }
         else  

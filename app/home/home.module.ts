@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent },
   { path: 'for/:name', component: RechargeComponent },
   { path: ':name/proceed', component: RechargeComponent },
-  {path: '**', redirectTo: '/404'},
+  {path: '**', redirectTo: '/error/404'},
 ];
 @NgModule({
   imports: [

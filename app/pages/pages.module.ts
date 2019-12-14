@@ -27,8 +27,8 @@ import { TruncatePipe } from './truncatePipe';
 const routes: Routes = [
   { path: '', component: PageViewComponent },
   { path: '404', component: page404Component },
-  { path: 'login/ref/:name', component: LoginComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'login/ref/:name', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'contact-us', component: ContactUsComponent },
@@ -41,19 +41,10 @@ const routes: Routes = [
   { path: 'partner-on-mydthshop', component: MerchantComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'recover', component: ForgotPasswordComponent },
-  // { path: 'forgot-password', component: ContactUsComponent },
   { path: ':name', component: PackageViewComponent },
   { path: ':name/:id', component: PackageViewComponent },
-  // { path: 'tata-sky', component: PackageViewComponent },
-  // { path: 'tata-sky/:id', component: PackageViewComponent },
-  // { path: 'airtel', component: PackageViewComponent },
-  // { path: 'airtel/:id', component: PackageViewComponent },
-  // { path: 'dish-tv', component: PackageViewComponent },
-  // { path: 'dish-tv/:id', component: PackageViewComponent },
-  // { path: 'videocon', component: PackageViewComponent },
-  // { path: 'videocon/:id', component: PackageViewComponent },
-  { path: 'user-notify/:id', component: NotifyComponent }
-  
+  { path: 'user-notify/:id', component: NotifyComponent },
+  {path: '**', redirectTo: '/error/404'},
 ];
 
 @NgModule({
