@@ -4352,18 +4352,32 @@ ul#product-pack li{
 
 .mobile-header-right span.noti-circle {width: 22px;height: 22px;background: #fff;display: block;color: #000;border-radius: 50%;line-height: 22px;position: absolute;top: -7px;right: -24px;text-align: center;font-size: 12px;font-weight: bold;}
 .mobile-header-right ul li{ margin-right:40px; cursor:pointer} 
-.mobile-top-menu {z-index: 9;background: #fff;font-size: 12px;margin-top: -22px;margin: -42px 15px 0;border-radius: 16px;box-shadow: 0 2px 3px 0px #dcdcdc;}
+.mobile-top-menu {z-index: 9;background: #fff;font-size: 12px;;margin: -42px 15px 14px 15px;border-radius: 16px;box-shadow: 0 2px 3px 0px #dcdcdc;}
 .mobile-top-menu ul li{display:inline-block;width:24%;text-align:center;}
 .mobile-top-menu ul li a{color: #000;padding: 15px 0;display: block;} 
-.mobile-top-menu ul li a span{display: block;background: #ff6a00;width: 31px;color: #ffff;border-radius: 50%;margin: 0 auto 8px auto;padding: 6px;}
+.mobile-top-menu ul li a span{display: block;background: #ff6a00;width: 31px;color: #ffff;border-radius: 50%;margin: 0 auto 8px auto;padding: 5px;}
+
 .mobile-footer-menu {z-index: 9999;background: #fff;font-size: 12px;margin-top: -22px;/* margin: -38px 15px 0; */padding: 15px 0;margin-top: 20px;box-shadow: 0 0px 4px 1px #dcdcdc;position: fixed;width: 100%;bottom: 0;left: 0;right: 0;}
 .mobile-footer-menu ul li{display:inline-block;width:24%;text-align:center;}
 .mobile-footer-menu ul li img{ margin-bottom:4px}
 .mobile-footer-menu ul li a{color:#000;} 
 .mobile-footer-menu ul li a span{display:block;}
+.mobile-footer-menu ul li a span.icon-home{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/home.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li a span.icon-products{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/product.png') no-repeat;width:18px; height:18px}
+.mobile-footer-menu ul li a span.icon-packages{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/package.png') no-repeat;width:18px; height:18px}
+.mobile-footer-menu ul li a span.icon-faqs{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/faq.png') no-repeat;width:18px; height:18px}	
+
+
+
+.mobile-footer-menu ul li.active a span.icon-home{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/home-active.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-products{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/product-active.png')  no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-packages{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/package-active.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-faqs{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/faq-active.png') no-repeat; width:18px; height:18px}
+
+.mobile-footer-menu ul li.active a span{color:#ff6a00}
 
 .side-menu {font-size: 14px;background: #fff;width: 280px;height: 89vh;overflow-y: scroll;position: fixed;top: 0;left: -280px; opacity:0; visibility:hidden; transition:all 0.5s;}
-.side-menu.open-menu{ left: 0;visibility: visible;opacity: 1;z-index:999;}
+.side-menu.open-menu{ left: 0;visibility: visible;opacity: 1;z-index:10000;}
 .side-menu-body{padding:0 18px;}
 .side-menu h3{ padding:10px 0 5px 0;}
 .side-menu ul{padding-bottom: 15px; border-bottom: 1px solid #ddd;}
