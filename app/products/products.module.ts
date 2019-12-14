@@ -21,6 +21,7 @@ import { User } from '../user';
 import { FavoritesComponent } from './favorites.component'; 
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
+  { path: 'listing', component: ProductsComponent },
   { path: 'listing/:name', component: ProductsComponent },
   { path: 'channel-pack/:id', component: ChannelPackComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -28,8 +29,7 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: ':name', component: ProductDetailsComponent },
-  
- // { path: ':name/multi/:name', component: ProductDetailsComponent },
+  {path: '**', redirectTo: '/error/404'},
 ];
 
 @NgModule({

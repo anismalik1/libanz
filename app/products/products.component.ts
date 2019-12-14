@@ -35,9 +35,30 @@ export class ProductsComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.data.cat_id = params['name'];
     });
-    // if(this.todoservice.get_param('cat_id') != '')
-    //     this.data.cat_id = this.todoservice.get_param('cat_id');
-    //console.log(this.data.cat_id)
+    if(this.todoservice.get_param('cat_id') != '')
+    {
+      var cat = this.todoservice.get_param('cat_id');
+      if(cat == 4)
+      {
+        this.router.navigate(['/product/listing/dish-tv']);
+        return;
+      }
+      else if(cat == 1)
+      {
+        this.router.navigate(['/product/listing/tata-sky']);
+        return;
+      } 
+      else if(cat == 2)
+      {
+        this.router.navigate(['/product/listing/airtel']);
+        return;
+      } 
+      else if(cat == 3)
+      {
+        this.router.navigate(['/product/listing/videocon']);
+        return;
+      } 
+    }
     var arr = this.data.cat_id.split('&&'); 
 
     for(var i=0;i < arr.length ;i++)
