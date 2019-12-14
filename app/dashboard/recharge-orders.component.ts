@@ -1,7 +1,8 @@
 import { Component, OnInit ,Renderer2,Inject,ViewContainerRef} from '@angular/core';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
+import {Meta,Title } from "@angular/platform-browser";
 import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms'; 
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -35,12 +36,11 @@ export class RechargeOrdersComponent implements OnInit {
     public todoservice : TodoService,
     private authservice : AuthService,
     @Inject(DOCUMENT) private _document,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
     private _renderer2: Renderer2, 
     private fb: FormBuilder, 
     vcr: ViewContainerRef,
     private router : Router) { 
-      this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
@@ -55,7 +55,7 @@ export class RechargeOrdersComponent implements OnInit {
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     }
     this.fetch_recharge_history(this.r_p); 
     this.init_script()
@@ -78,7 +78,7 @@ export class RechargeOrdersComponent implements OnInit {
   {
     if(!this.authservice.authenticate())
     {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/proceed/login']);
         return;
     }
     this.spinner.show();
@@ -92,11 +92,11 @@ export class RechargeOrdersComponent implements OnInit {
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
 			  }
 			  if(!jQuery.isEmptyObject(data))
 			  {			
-          this.toastr.success(data.msg);
+          this.toastr.successToastr(data.msg);
           let url = window.location.pathname;
             if(url == url)
             {
@@ -125,7 +125,7 @@ export class RechargeOrdersComponent implements OnInit {
   {
     if(!this.authservice.authenticate())
     {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/proceed/login']);
     }
     this.spinner.show();
     let data =  {token : this.get_token(),page_index : page};
@@ -137,7 +137,7 @@ export class RechargeOrdersComponent implements OnInit {
 			  if(data.status == 'Invalid Token')
 			  {
 				this.authservice.clear_session();
-				this.router.navigate(['/login']);
+				this.router.navigate(['/proceed/login']);
 			  }
 			  if(!jQuery.isEmptyObject(data))
 			  {			
@@ -181,7 +181,7 @@ export class RechargeOrdersComponent implements OnInit {
   {
     if(!this.authservice.authenticate())
     {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/proceed/login']);
     }
     this.spinner.show();
     let data =  {token : this.get_token(),page_index: page};
@@ -193,7 +193,7 @@ export class RechargeOrdersComponent implements OnInit {
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
 			  }
 			  if(!jQuery.isEmptyObject(data))
 			  {

@@ -1,5 +1,6 @@
 import { Component, OnInit ,Renderer2,Inject} from '@angular/core';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { Meta,Title } from "@angular/platform-browser";
+import { DOCUMENT} from "@angular/common";
 import { TodoService } from '../todo.service';
 import { ProductService } from '../product.service';
 import { NgxSpinnerService } from 'ngx-spinner';

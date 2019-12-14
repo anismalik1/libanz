@@ -1,10 +1,11 @@
 import { Component, OnInit,ViewContainerRef ,Renderer2,Inject} from '@angular/core';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { Meta,Title } from "@angular/platform-browser";
+import { DOCUMENT} from "@angular/common";
 import {  FormControl } from '@angular/forms'
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router,ActivatedRoute } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable} from 'rxjs';
 import { Product } from '../product.entities';
@@ -69,12 +70,11 @@ export class ProductDetailsComponent implements OnInit{
     private title: Title,
     private meta : Meta,
     private vcr: ViewContainerRef,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
     public todoservice : TodoService,
     private authservice : AuthService,
     public productservice : ProductService,
     private router : ActivatedRoute, private route : Router ) {
-    this.toastr.setRootViewContainerRef(vcr);
     this.product_categories();
    }
   ngOnInit() {
@@ -294,7 +294,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       $('.logup.modal-trigger')[0].click();
       this.rating = 0;
-      this.toastr.error("Please Login to rate this product", 'Failed! ');
+      this.toastr.errorToastr("Please Login to rate this product", 'Failed! ');
       this.spinner.hide();
       return false;
     }
@@ -323,7 +323,7 @@ export class ProductDetailsComponent implements OnInit{
 
     if(ratingValue == null || ratingValue == NaN)
     {
-      this.toastr.error("Please Select Rating.", 'Failed! ');
+      this.toastr.errorToastr("Please Select Rating.", 'Failed! ');
       this.spinner.hide();
       return false;
     }
@@ -331,7 +331,7 @@ export class ProductDetailsComponent implements OnInit{
     form.token = this.get_token();
     if(form.token == '' || form.token == null)
     {
-      this.toastr.error("Please Login to rate this product.", 'Failed! ');
+      this.toastr.errorToastr("Please Login to rate this product.", 'Failed! ');
       this.spinner.hide();
       return false;
     }
@@ -478,7 +478,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       if( typeof this.kit == 'undefined' )
       {
-        this.toastr.error("Please Select Kit first");
+        this.toastr.errorToastr("Please Select Kit first");
         return false;
       }
     }
@@ -488,7 +488,7 @@ export class ProductDetailsComponent implements OnInit{
     }
     if(typeof this.month == 'undefined')
     {
-      this.toastr.error("Please Select Month Package first");
+      this.toastr.errorToastr("Please Select Month Package first");
         return false;
     }
     else
@@ -499,7 +499,7 @@ export class ProductDetailsComponent implements OnInit{
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
-      this.toastr.error("Please Login to proceed", 'Failed! ');
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
       return false;
     }
 
@@ -509,7 +509,7 @@ export class ProductDetailsComponent implements OnInit{
     data => 
     {
       this.spinner.hide();
-      this.toastr.error(data.msg);
+      this.toastr.errorToastr(data.msg);
       if(data.status == true)
         localStorage.setItem('favourite', JSON.stringify(data.favourites));
     }
@@ -526,7 +526,7 @@ export class ProductDetailsComponent implements OnInit{
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
-      this.toastr.error("Please Login to proceed", 'Failed! ');
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
       return false;
     }
     else
@@ -677,7 +677,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       if( typeof this.kit == 'undefined' )
       {
-        this.toastr.error("Please Select Kit first");
+        this.toastr.errorToastr("Please Select Kit first");
         return false;
       }
     }
@@ -687,7 +687,7 @@ export class ProductDetailsComponent implements OnInit{
     }
     if(typeof this.month == 'undefined')
     {
-      this.toastr.error("Please Select Month Package first");
+      this.toastr.errorToastr("Please Select Month Package first");
         return false;
     }
     else
@@ -698,7 +698,7 @@ export class ProductDetailsComponent implements OnInit{
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
-      this.toastr.error("Please Login to proceed", 'Failed! ');
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
       return false;
     }
     if(!this.productservice.if_exist_in_cart(p_id))
@@ -879,7 +879,7 @@ export class ProductDetailsComponent implements OnInit{
             this.product.pincode = pincode;
             $('.religon-overlay').hide();
             this.pincode = pincode;
-            this.toastr.error('Great! '+data.msg);
+            this.toastr.errorToastr('Great! '+data.msg);
             //console.log(this.circles);
             let circle_exist = this.circles.filter(circles => circles.name.includes(data.circle));
             if(circle_exist)
@@ -889,7 +889,7 @@ export class ProductDetailsComponent implements OnInit{
           }
           else
           {
-            this.toastr.error('Failed! '+data.msg);
+            this.toastr.errorToastr('Failed! '+data.msg);
           }
         }
       }
@@ -1002,7 +1002,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       if( typeof this.kit == 'undefined' )
       {
-        this.toastr.error("Please Select TSK Kit");
+        this.toastr.errorToastr("Please Select TSK Kit");
         return false;
       }
     }
@@ -1077,7 +1077,7 @@ export class ProductDetailsComponent implements OnInit{
     this.product.offer_price = Number($('#offer-price').text());
     this.product.price = Number($('#mrp-price').text());
     this.productservice.addto_cart(id,this.product);
-    this.toastr.info("Your Item is Added to the Cart");
+    this.toastr.infoToastr("Your Item is Added to the Cart");
   }
 
   multi_tsk(id)
@@ -1109,7 +1109,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       if( typeof this.kit == 'undefined' )
       {
-        this.toastr.error("Please Select TSK Kit");
+        this.toastr.errorToastr("Please Select TSK Kit");
         return false;
       }
     }
@@ -1149,7 +1149,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       if($('#paytm-ref').val() == '')
       {
-        this.toastr.error("Please Enter the Paytm Transaction ID");
+        this.toastr.errorToastr("Please Enter the Paytm Transaction ID");
         return false;
       }
       var otf_type = 2;

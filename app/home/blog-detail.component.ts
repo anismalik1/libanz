@@ -1,11 +1,11 @@
 import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { Meta,Title } from "@angular/platform-browser";
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -24,7 +24,7 @@ export class BlogDetailComponent implements OnInit {
     @Inject(DOCUMENT) private _document, 
     public todoservice : TodoService,
     private authservice : AuthService,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
     private router : ActivatedRoute,
     private  meta : Meta,
     private title : Title, 
@@ -32,7 +32,6 @@ export class BlogDetailComponent implements OnInit {
     private spinner : NgxSpinnerService,
     private fb: FormBuilder
   ) { 
-    this.toastr.setRootViewContainerRef(vcr);
     this.commentgroup = fb.group({
       'name' : [null,Validators.compose([Validators.required])],
       'email' : [null,Validators.compose([Validators.required])],
@@ -103,7 +102,7 @@ export class BlogDetailComponent implements OnInit {
       .subscribe(
         data => 
         {
-          this.toastr.success(data.msg);
+          this.toastr.successToastr(data.msg);
           this.spinner.hide();
         }
       )

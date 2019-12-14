@@ -36,7 +36,7 @@ export class DthOrdersComponent implements OnInit {
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     }
     this.fetch_orders_history(this.o_p); 
   }
@@ -64,7 +64,7 @@ export class DthOrdersComponent implements OnInit {
   {
     if(!this.authservice.authenticate())
     {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/proceed/login']);
     }
     this.spinner.show();
     let data =  {token : this.get_token(),page_index : page};
@@ -76,7 +76,7 @@ export class DthOrdersComponent implements OnInit {
 			  if(data.status == 'Invalid Token')
 			  {
 				this.authservice.clear_session();
-				this.router.navigate(['/login']);
+				this.router.navigate(['/proceed/login']);
 			  }
 			  if(!jQuery.isEmptyObject(data))
 			  {			
@@ -105,7 +105,7 @@ export class DthOrdersComponent implements OnInit {
   {
     if(!this.authservice.authenticate())
     {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/proceed/login']);
     }
     this.spinner.show();
     let data =  {token : this.get_token(),page_index: page};
@@ -117,7 +117,7 @@ export class DthOrdersComponent implements OnInit {
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
 			  }
 			  if(!jQuery.isEmptyObject(data))
 			  {

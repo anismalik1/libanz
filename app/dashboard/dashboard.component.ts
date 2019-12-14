@@ -1,5 +1,5 @@
 import { Component, OnInit,Renderer2,Inject } from '@angular/core';
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ExcelService } from '../export.service';
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit{
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     }
     this.spinner.show();
     this.fetch_transactions(); 
@@ -213,7 +213,7 @@ export class DashboardComponent implements OnInit{
           if(data.status == 'Invalid Token')
           {
             this.authservice.clear_session();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/proceed/login']);
           }
           let b = JSON.stringify(data);
           data =  JSON.parse(b.replace(/\\/g, ''));

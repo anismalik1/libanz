@@ -1,9 +1,9 @@
 import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-add-money',
@@ -14,8 +14,8 @@ export class AddMoneyComponent implements OnInit{
 	public user = {phone:'loading',name:'loading'};
 	paybankaccount : string = '';
 	yourbankname : string = '';
-  constructor( private toastr : ToastsManager,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
-    this.toastr.setRootViewContainerRef(vrc);
+  constructor( private toastr : ToastrManager,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
+    
   }
   ngOnInit() {
     if(!this.get_token())
@@ -25,7 +25,7 @@ export class AddMoneyComponent implements OnInit{
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
 		} 
 		
 		$(document).ready(function() {	
@@ -60,7 +60,7 @@ export class AddMoneyComponent implements OnInit{
 	{
 		if(formdata.amount == '')
 		{
-			this.toastr.error("Enter Amount", 'Failed!');
+			this.toastr.errorToastr("Enter Amount", 'Failed!');
 			return false;
 		}
 		formdata.paymethod 		= $('#paymethod').val();
@@ -76,7 +76,7 @@ export class AddMoneyComponent implements OnInit{
 			{
 			  if(data.status == 'success')
 			  {
-				this.toastr.success(data.msg, 'Success!');
+				this.toastr.successToastr(data.msg, 'Success!');
 			  }
 			}
 		  )  

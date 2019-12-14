@@ -5,7 +5,7 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-merchant',
   templateUrl: './merchant.component.html',
@@ -19,8 +19,7 @@ export class MerchantComponent implements OnInit {
      private meta : Meta, private route : ActivatedRoute,
      private authservice : AuthService,
      private vcr: ViewContainerRef,
-    private toastr: ToastsManager) { 
-      this.toastr.setRootViewContainerRef(vcr);
+    private toastr: ToastrManager) { 
       this.page = 'accounts/'+route.snapshot.url[0].path;
       this.spinner.show();
       this.fetch_page_data();
@@ -84,7 +83,7 @@ export class MerchantComponent implements OnInit {
         this.spinner.hide();
         if(data.status == true)
         {
-          this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+          this.toastr.errorToastr("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }
     )  

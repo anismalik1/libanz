@@ -1,12 +1,11 @@
 import { Component, OnInit , Output ,Renderer2,Inject,ViewContainerRef} from '@angular/core';
 import { FormBuilder,Validators, FormGroup, FormControl, Form } from '@angular/forms';
 
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-book-dth-order',
@@ -34,12 +33,10 @@ export class BookDthOrderComponent implements OnInit{
     private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
   vcr: ViewContainerRef,
-  private toastr : ToastsManager,
   public fb : FormBuilder,
   private spinner : NgxSpinnerService,
   
   private authservice : AuthService,private router : Router) { 
-    this.toastr.setRootViewContainerRef(vcr);
   this.bookformgroup = fb.group({
       'fname' : [null,Validators.compose([Validators.required])],
       'lname' : [null,Validators.compose([Validators.required])],
@@ -82,7 +79,7 @@ ngOnInit() {
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     } 
 }
 book_order(form)
@@ -116,7 +113,7 @@ book_order(form)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -182,7 +179,7 @@ apply_tsk_margin(value)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -287,7 +284,7 @@ enable_plan(event)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -314,7 +311,7 @@ get_products(event)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -338,7 +335,7 @@ get_categories()
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -363,7 +360,7 @@ call_dth_quality(event)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));

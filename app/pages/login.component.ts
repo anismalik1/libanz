@@ -7,8 +7,8 @@ import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
 import { Authparams } from '../authparams';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
   logingroup : FormGroup;
   remember : any = {rm:false,ph:'',pw : ''};  
 constructor( public todoservice : TodoService,
-  private toastr: ToastsManager,
+  private toastr: ToastrManager,
   private authService : AuthService,
   private spinner : NgxSpinnerService,
   private router : Router, 
@@ -38,7 +38,6 @@ constructor( public todoservice : TodoService,
   private route : ActivatedRoute,
   private fb: FormBuilder
 ) {
-  this.toastr.setRootViewContainerRef(vcr);
   if(this.route.snapshot.params['name'])
   {
     this.ref = this.route.snapshot.params['name'];
@@ -82,7 +81,7 @@ login_submit(login)
     }
     if(typeof this.phone == "undefined" || typeof this.password == "undefined")
     {
-      this.toastr.error("Please Enter Valid Details", 'Failed');
+      this.toastr.errorToastr("Please Enter Valid Details", 'Failed');
       return false;
     }
     this.spinner.show();
@@ -94,7 +93,7 @@ login_submit(login)
         if(typeof data.status != 'undefined' && data.status == true)
         {
           let user : any = data.user;
-          this.toastr.success('You are logging in...', 'Success!');
+          this.toastr.successToastr('You are logging in...', 'Success!');
           this.authService.AccessToken = this.token_params.accessToken;
           this.authService.storage(data); 
           this.todoservice.set_user_data(user);
@@ -116,7 +115,7 @@ login_submit(login)
           }
           else
           {
-            this.toastr.error(data.message, 'Oops!');
+            this.toastr.errorToastr(data.message, 'Oops!');
           }
         }
         this.spinner.hide();
@@ -157,11 +156,11 @@ resend_otp()
         {
           if(data.status == true)
           {
-            this.toastr.success(data.message);
+            this.toastr.successToastr(data.message);
           }
           else
           {
-            this.toastr.error(data.message);
+            this.toastr.errorToastr(data.message);
           }
         }
         this.spinner.hide();

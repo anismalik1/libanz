@@ -1,11 +1,12 @@
 import { Component, OnInit,Renderer2,Inject} from '@angular/core';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { Meta,Title } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import * as $ from 'jquery'; 
 @Component({
   selector: 'app-notify',
@@ -22,7 +23,7 @@ export class NotifyComponent implements OnInit {
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private todoservice : TodoService,
-    private toastr : ToastsManager,
+    private toastr : ToastrManager,
     private activatedroute: ActivatedRoute,
     private authservice : AuthService,
     private meta: Meta,
@@ -209,11 +210,11 @@ export class NotifyComponent implements OnInit {
       {
         if(data.status == true)
         {
-          this.toastr.success(data.msg);
+          this.toastr.successToastr(data.msg);
         }
         else
         {
-          this.toastr.error(data.msg);
+          this.toastr.errorToastr(data.msg);
         }
         this.spinner.hide();
       }

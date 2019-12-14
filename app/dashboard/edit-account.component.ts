@@ -1,11 +1,11 @@
 import { Component, OnInit,ViewContainerRef,Renderer2,Inject,ElementRef, ViewChild } from '@angular/core';
 import { Headers,Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ImageCroppedEvent } from 'ngx-image-cropper';
@@ -23,10 +23,10 @@ export class EditAccountComponent implements OnInit{
   kyc :any;
   form: FormGroup;
   loading: boolean = false;
-  @ViewChild('fileInput') fileInput: ElementRef;
+  //@ViewChild('fileInput') fileInput: ElementRef;
   constructor( private _renderer2: Renderer2,  
     @Inject(DOCUMENT) private _document,
-    private toastr : ToastsManager ,
+    private toastr : ToastrManager ,
     public todoservice : TodoService,
     private authservice : AuthService,
     private http : Http,
@@ -34,7 +34,6 @@ export class EditAccountComponent implements OnInit{
     private fb: FormBuilder,
     private spinner : NgxSpinnerService,
     private vrc : ViewContainerRef) { 
-    this.toastr.setRootViewContainerRef(vrc);
     this.manage_account_info();
     this.createForm();
   }
@@ -81,7 +80,7 @@ loadImageFailed() {
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     } 
   }
   edituser()
@@ -111,7 +110,7 @@ loadImageFailed() {
         if(response.status == 1)
         {
          
-          this.toastr.error("Updated Successfully");
+          this.toastr.successToastr("Updated Successfully",'Success!');
           let url = window.location.pathname;
           if(url == url)
           {
@@ -124,7 +123,7 @@ loadImageFailed() {
         }
         else
         {
-          this.toastr.error(response.msg);
+          this.toastr.errorToastr(response.msg);
         }
         
       }
@@ -161,7 +160,7 @@ loadImageFailed() {
           if(data.status == 'Invalid Token')
           {                                                     
             this.authservice.clear_session();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/proceed/login']);
           }
           var b = JSON.stringify(data.USER);
           this.userinfo = JSON.parse(b.replace(/\\/g, ''));
@@ -178,7 +177,7 @@ loadImageFailed() {
   {
     if(formdata.newpassword != formdata.cnewpassword)
     {
-      this.toastr.error('Your Password Does Not Match ', 'failed!');
+      this.toastr.errorToastr('Your Password Does Not Match ', 'failed!');
       return false;
     }
     if(this.authservice.retrieveToken())
@@ -190,11 +189,11 @@ loadImageFailed() {
         {
           if(data.status == 'true')
           {
-            this.toastr.success(data.msg, 'Success!');
+            this.toastr.successToastr(data.msg, 'Success!');
           }
           else
           {
-            this.toastr.error(data.msg, 'Failed!');
+            this.toastr.successToastr(data.msg, 'Failed!');
           }
         }
       )  
@@ -211,7 +210,7 @@ loadImageFailed() {
         {
           if(data.status == 'true')
           {
-            this.toastr.success('Updated ', 'Success!');
+            this.toastr.successToastr('Updated ', 'Success!');
           }
         }
       )  
@@ -230,7 +229,7 @@ loadImageFailed() {
           if(data.status == 'Invalid Token')
           {                                                     
             this.authservice.clear_session();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/proceed/login']);
           }
           this.todoservice.set_user_data(data.USER);
           this.userinfo     = data.USER;

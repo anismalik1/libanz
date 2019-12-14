@@ -10,8 +10,9 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
 import { RechargeType } from '../recharge.type';
-import { Meta ,Title,DOCUMENT} from '@angular/platform-browser';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Meta ,Title} from '@angular/platform-browser';
+import { DOCUMENT} from '@angular/common';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import * as $ from 'jquery';
 
 @Component({
@@ -21,12 +22,12 @@ import * as $ from 'jquery';
 })
 export class RechargeComponent implements OnInit {
   myControl = new FormControl();
-  @ViewChild('operator') moperator;                                                        
-  @ViewChild('postoperator') postoperator;                                                        
-  @ViewChild('mcircle') mcircle;                                                        
-  @ViewChild('dcircle') dcircle;                                                        
-  @ViewChild('predataoperator') predataoperator;                                                        
-  @ViewChild('postdataoperator') postdataoperator;                                                        
+  @ViewChild('operator', {static: false}) moperator;                                                        
+  @ViewChild('postoperator', {static: false}) postoperator;                                                        
+  @ViewChild('mcircle', {static: false}) mcircle;                                                        
+  @ViewChild('dcircle', {static: false}) dcircle;                                                        
+  @ViewChild('predataoperator', {static: false}) predataoperator;                                                        
+  @ViewChild('postdataoperator', {static: false}) postdataoperator;                                                        
   public userinfo = {wallet:'',phone:'',name:''};
   public operators : any = {};
   public loop : boolean = false;
@@ -93,7 +94,7 @@ export class RechargeComponent implements OnInit {
     public recharge_type : RechargeType,
     private title : Title,
     private meta : Meta,
-    private toastr : ToastsManager,
+    private toastr : ToastrManager,
     private vcr: ViewContainerRef,
   ) {
     
@@ -107,7 +108,6 @@ export class RechargeComponent implements OnInit {
     //   }
       
     // }
-    this.toastr.setRootViewContainerRef(vcr);
       this.url_name = this.activatedroute.snapshot.params['name'];
       this.ini_recharge_tabs(this.url_name);
     this.mobilegroup = fb.group({
@@ -590,7 +590,7 @@ recharge_handle()
           }
           if(data.status == "false")
           {
-            this.toastr.error(data.msg);
+            this.toastr.errorToastr(data.msg);
 
             return false;
           }

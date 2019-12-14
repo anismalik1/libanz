@@ -1,20 +1,19 @@
 import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { map, startWith} from 'rxjs/operators';
 import { AuthService } from '../../auth.service';
 import { TodoService } from '../../todo.service';
 import { ProductService } from '../../product.service';
 import { Observable} from 'rxjs';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { Authparams } from '../../authparams';
 import { User } from '../../user';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
   providers : [ProductService,TodoService,User]
 })
 export class HeaderComponent implements OnInit{
@@ -54,7 +53,7 @@ export class HeaderComponent implements OnInit{
     private authService : AuthService,
     public todoservice : TodoService,
     public productservice : ProductService,
-    private toastr : ToastsManager,
+    private toastr : ToastrManager,
     private vcr: ViewContainerRef,
     private router : Router,
     private fb: FormBuilder
@@ -64,7 +63,6 @@ export class HeaderComponent implements OnInit{
       {
         this.authService.clear_session();
       }
-      this.toastr.setRootViewContainerRef(vcr);
       this.productservice.cartItemsCount();
       this.logingroup = fb.group({
         'phone' : [null,Validators.compose([Validators.required])],
@@ -102,7 +100,7 @@ export class HeaderComponent implements OnInit{
 
       if(typeof this.phone == "undefined" || typeof this.password == "undefined")
       {
-        this.toastr.error("Please Enter Valid Details", 'Failed');
+        this.toastr.errorToastr("Please Enter Valid Details", 'Failed');
         return false;
       }
       //this.spinner.show();
@@ -140,7 +138,7 @@ export class HeaderComponent implements OnInit{
             }
             else
             {
-              this.toastr.error(data.message, 'Oops!');
+              this.toastr.errorToastr(data.message, 'Oops!');
             }
           }
          // this.spinner.hide();
@@ -220,11 +218,11 @@ export class HeaderComponent implements OnInit{
           {
             if(data.status == true)
             {
-              this.toastr.success(data.message);
+              this.toastr.successToastr(data.message);
             }
             else
             {
-              this.toastr.error(data.message);
+              this.toastr.errorToastr(data.message);
             }
           }
           //this.spinner.hide();
@@ -264,7 +262,7 @@ export class HeaderComponent implements OnInit{
       this.user_type = formdata.user_type ;  
     if(formdata.password != formdata.cpassword)
     {
-      this.toastr.error("Password does not match with Confirm Password", 'Failed');
+      this.toastr.errorToastr("Password does not match with Confirm Password", 'Failed');
         return false;
     }
     this.phone = formdata.phone;
@@ -280,7 +278,7 @@ export class HeaderComponent implements OnInit{
           }
           else
           {
-            this.toastr.error(data.msg, 'Failed');
+            this.toastr.errorToastr(data.msg, 'Failed');
           }
           this.signupdisabled = false;
         }
@@ -319,7 +317,7 @@ export class HeaderComponent implements OnInit{
           }
           else
           {
-            this.toastr.error(data.msg, 'Failed');
+            this.toastr.errorToastr(data.msg, 'Failed');
             return false;
           }
         }
@@ -485,7 +483,25 @@ export class HeaderComponent implements OnInit{
     script.type = `text/javascript`;
     script.id = `side-nav-script`;
     script.text = `
+        
     $(document).ready(function(){
+      $('#mobile-search').on('focus',function(){
+        $(this).addClass('no-bg');	
+      });
+      
+      $('#mobile-search').on('blur',function(){
+        $(this).removeClass('no-bg');	
+        $(this).val('');
+      });	
+    $('#mobile-bar').on('click',function(e){
+      $('.side-menu').addClass('open-menu');
+      e.stopPropagation();
+    });
+    
+    $(document).on('click',function(){
+      $('.side-menu').removeClass('open-menu');
+    });
+    //====================mobile js end ===================
       $('.chat-box').on('click', function(){
         $('.chat-box-msg').css('transform','translate(0,0)');
         $('.chat-box').addClass('hide');

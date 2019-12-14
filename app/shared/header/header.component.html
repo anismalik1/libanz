@@ -1,4 +1,105 @@
 <!-- Header Start Here -->
+
+<div class="mobile-wrapper">
+	<!-- mobile header start-->
+	<header id="mobile-header" class="clearfix">
+		<div class="mobile-header-left">
+			<ul>
+			<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
+			<li class="mobile-search"><input type="text" id="mobile-search"> <span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span></li>
+		</ul>
+		</div>
+		
+		<div class="mobile-header-right">
+			<ul>
+			<li *ngIf="this.todoservice.get_user_name() == ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </li>
+			<li *ngIf="this.todoservice.get_user_name() != ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </li>
+			<li *ngIf="notification_count"><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle">{{notification_count.count}}</span> </li>
+		</ul>
+		</div>
+		
+		<div class="clearfix"></div>
+	</header>
+	
+	<!-- mobile header end-->
+	<!-- mobile top menu start-->	
+	<div class="mobile-top-menu">
+		<ul>
+			<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
+			<li><a [routerLink]="['/dashboard/dth-orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
+			<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
+			<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a [routerLink]="['/dashboard//value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span>Value Transfer</a></li>
+		</ul>
+	</div>
+	
+	<!-- mobile top menu end-->
+	
+	<div class="mobile-footer-menu">
+		<ul>
+			<li routerLinkActive="active"><a [routerLink]="['/']"><span class="icon-home"><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/home.png" /></span><span class="mobile-footer-text">Home</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/product.png" /></span><span class="mobile-footer-text">Products</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="icon-packages"><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/package.png" /></span><span class="mobile-footer-text">Packages</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="icon-faqs"><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/faq.png" /></span><span class="mobile-footer-text">FAQS</span></a></li>
+		</ul>
+	</div>
+	
+</div>
+	<div class="side-menu">
+		<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
+			<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+			<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+			<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/>
+			<h3>{{this.todoservice.get_user_name()}}</h3>
+			<p>{{this.todoservice.get_user_phone()}}</p>
+		</div>
+		
+		<div class="side-menu-body">
+		<h3>Information</h3>	
+			<ul>	
+				<li><a [routerLink]="['/p/about-us']">About Us</a></li>
+				<li><a [routerLink]="['/p/dth-connection-refund-polic']">Refund Policy</a></li>
+				<li><a [routerLink]="['/help/contact-us']">Contact Us</a></li>
+				<li><a [routerLink]="['/p/know-about-my-dth-shop']">Who We Are</a></li>
+				<li><a [routerLink]="['/p/mydthshop-terms-and-conditions']">Terms &amp; Conditions</a></li>
+				<li><a [routerLink]="['/p/privacy-policy']">Privacy policy</a></li>
+				<li><a [routerLink]="['/p/mydthshop-disclaimer']">Disclaimer</a></li>
+				<li><a [routerLink]="['/blog/all']">Blog</a></li>
+				<li><a [routerLink]="['/p/sitemap-on-mydthshop']">Sitemap</a></li>
+			</ul>	
+		
+		<h3>Categories</h3>
+			<ul>	
+				<li><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></li>
+				<li><a [routerLink]="['/product/listing/videocon']">Videocon</a></li>
+				<li><a [routerLink]="['/product/listing/airtel']">Airtel</a></li>
+				<li><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></li>
+				<li><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></li>
+				<li><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></li>
+				<li><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></li>
+			</ul>	
+		<ul>	
+			<h3>All Product Packages</h3>
+			<li><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages</a></li>
+			<li><a [routerLink]="['/package-list/airtel']">Airtel Packages</a></li>
+			<li><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></li>
+			<li><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></li>
+		</ul>	
+		
+		<h3>Follow Us</h3>
+		<ul class="side-social">	
+			<li><a [routerLink]="['https://www.facebook.com/mydthshop/']"><img src="{{this.todoservice.base_url}}assets/images/facebook1.png" /></a></li>
+			<li><a [routerLink]="['https://www.linkedin.com/company/14611847/admin/']"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
+			<li><a [routerLink]="['https://twitter.com/mydthshop']"><img src="{{this.todoservice.base_url}}assets/images/twitter.png" /></a></li>
+			<li><a [routerLink]="['https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA']"><img src="{{this.todoservice.base_url}}assets/images/youtube.png" /></a></li>
+			<li><a [routerLink]="['https://in.pinterest.com/jain2221/pins/']"><img src="{{this.todoservice.base_url}}assets/images/pinterest.png" /></a></li>
+			<li><a [routerLink]="['https://www.instagram.com/mydthshopindia/']"><img src="{{this.todoservice.base_url}}assets/images/instagram.png" /></a></li>
+			<li><a [routerLink]="['https://mydthshopp.blogspot.com/']"><img src="{{this.todoservice.base_url}}assets/images/blogger.png" /></a></li>
+		</ul>	
+						
+		</div>
+	</div>
+		
+<!--########################## mobile menu #############################-->
 <header class="navigation header">
 	<div class="header-strip grey lighten-3">
 		<div class="container">
@@ -10,7 +111,7 @@
 				<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant on Mydth</a> |</span>
 				<span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span>
 				<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank">Testimonial</a> |</span>
-				<span> <a class="grey-text" [routerLink]="['/p/faqs']" target="_blank">Faq</a> |</span>
+				<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">Faq</a> |</span>
 				<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank">Blog</a> |</span>
 				<span><a href="javascript:void(0);" class="grey-text"> KYC</a> |</span>
 				<span><a class="grey-text" [routerLink]="['/p/24-7']" target="_blank">24x7 support</a></span>
@@ -22,11 +123,12 @@
 		<div class="container">
 			<nav>
 			<div class="nav-wrapper" id="primary-nav">										
-				<a routerLink="/home" href="javascript:" class="brand-logo">
+				<a routerLink="/" href="javascript:" class="brand-logo">
 					<img src="https://mydthshop.com/accounts/assets/img/logo.png" class="responsive-img" alt="Mydthshop Logo">			
 				</a>
+				<!-- <h2>STOP Worrying! We Will Solve All Your Query</h2> -->
 			  <ul id="nav-mobile" class="mar inline-block">		        
-				<li class="search-input" *ngIf="!href.includes('/p/faqs')">
+				<li class="search-input" *ngIf="!href.includes('/help/faqs')">
 					<form>
 						  <div class="row no-margin">
 							<div class="input-field col s12">
@@ -81,10 +183,12 @@
 				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> 
 					<img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a>
 				</li>
-				<li id="user-nav"><a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;">{{this.todoservice.get_user_name()}}</span>
-					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/></a>
+				<li id="user-nav">
+					<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;">{{this.todoservice.get_user_name()}}</span>
+						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/>
+					</a>
 				</li>
 			  </ul>
 			</div>
@@ -366,7 +470,7 @@
 	<li><div class="divider"></div></li>
 	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
 	<li><a routerLink="/p/about-us" routerLinkActive="active">About Us</a></li>
-	<li><a routerLink="/contact-us" routerLinkActive="active">Contact Us</a></li>
+	<li><a routerLink="/help/contact-us" routerLinkActive="active">Contact Us</a></li>
 	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
 </ul>
 <!-- End Here -->

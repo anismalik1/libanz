@@ -7,7 +7,7 @@ import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map, startWith} from 'rxjs/operators';
 import { Observable} from 'rxjs';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-footer',
@@ -25,13 +25,12 @@ export class FooterComponent implements OnInit{
   myControl = new FormControl();
   filteredOptions: Observable<object>;
   constructor( public todoservice : TodoService,
-  private toast : ToastsManager,  
+  private toast : ToastrManager,  
   private spinner: NgxSpinnerService,
   private vcr :ViewContainerRef,
     private authservice : AuthService,private router : Router, private title: Title, private meta : Meta) {
   ///this.fetch_page_data();
     window.scroll(0,0);
-    this.toast.setRootViewContainerRef(vcr);
      if(!this.todoservice.footer_data)
      {
        this.page = 'footer';
@@ -66,7 +65,7 @@ export class FooterComponent implements OnInit{
             if(this.todoservice.footer_data)
                $('#footer-content').html(this.todoservice.get_footer_page().description);
           }
-          this.spinner.hide();
+          //this.spinner.hide();
         }
       ) 
    }
@@ -122,14 +121,14 @@ export class FooterComponent implements OnInit{
       .subscribe(
         data => 
         {
-          this.toast.error(data.msg);
+          this.toast.errorToastr(data.msg);
           this.spinner.hide();
         }
       ) 
     }
     else
     {
-      this.toast.error("Error! Please Enter Email.");
+      this.toast.errorToastr("Error! Please Enter Email.");
     }
   }
   

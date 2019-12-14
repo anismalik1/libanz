@@ -209,7 +209,7 @@
 															</div>
 															<div class="input-field col s12 m6">
 																<mat-form-field>
-																	<mat-select placeholder="Choose your Circle*" (change)="changeState($event.value)" name="state" formControlName="state">
+																	<mat-select placeholder="Choose your Circle*" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
 																		<mat-option [value]="item.name" *ngFor="let item of circles;">{{item.name}}</mat-option>
 																	</mat-select>
 																</mat-form-field>
@@ -584,7 +584,7 @@
                 </div>
                 <div class="input-field col s12 m6">
                         <mat-form-field>
-                            <mat-select placeholder="Choose your State" (change)="changeState($event.value)" name="state" [(ngModel)]="editaddress.state">
+                            <mat-select placeholder="Choose your State" (selectionChange)="changeState($event.value)" name="state" [(ngModel)]="editaddress.state">
                                 <mat-option [value]="Delhi">Delhi</mat-option>
                                 <mat-option [value]="Mumbai">Mumbai</mat-option>
                                 <mat-option [value]="Chennai">Chennai</mat-option>

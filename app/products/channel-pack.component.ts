@@ -1,7 +1,8 @@
 import { Component, OnInit,ViewContainerRef ,Renderer2,Inject} from '@angular/core';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
+import { Meta,Title } from "@angular/platform-browser";
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
@@ -25,7 +26,7 @@ export class ChannelPackComponent implements OnInit {
     private title: Title,
     private meta : Meta,
     private vcr: ViewContainerRef,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
     private authservice : AuthService,
     private productservice : ProductService,
     private todoservice : TodoService,
@@ -133,11 +134,11 @@ export class ChannelPackComponent implements OnInit {
        {
         if(data.status == true)
         {
-          this.toastr.info(data.msg)
+          this.toastr.infoToastr(data.msg)
         }
         else
         {
-          this.toastr.info("Something went wrong. Please try later.")
+          this.toastr.infoToastr("Something went wrong. Please try later.")
         } 
          this.spinner.hide();  
        }

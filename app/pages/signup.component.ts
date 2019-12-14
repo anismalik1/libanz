@@ -1,11 +1,11 @@
 import { Component, OnInit ,ViewContainerRef} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router ,ActivatedRoute} from '@angular/router'
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -25,14 +25,13 @@ export class SignupComponent implements OnInit{
   signupverify : number = 0
   signupdisabled : boolean = false;
   verifydisabled : boolean = false;
-  constructor(private toast: ToastsManager, 
+  constructor(private toast: ToastrManager, 
     private fb : FormBuilder,
     public todoservice : TodoService,
     private route : ActivatedRoute,
     private authservice : AuthService,
     vcr: ViewContainerRef,
-    private router : Router) { 
-      this.toast.setRootViewContainerRef(vcr);
+    private router : Router) {
     this.user_type = route.snapshot.params['id'];
     this.signupgroup = fb.group({
       'name':[null,Validators.required],
@@ -77,11 +76,11 @@ export class SignupComponent implements OnInit{
           {
             if(data.status == true)
             {
-              this.toast.success(data.message);
+              this.toast.successToastr(data.message);
             }
             else
             {
-              this.toast.error(data.message);
+              this.toast.errorToastr(data.message);
             }
           }
           //this.spinner.hide();
@@ -97,7 +96,7 @@ export class SignupComponent implements OnInit{
       this.user_type = formdata.user_type ;
     if(formdata.password != formdata.cpassword)
     {
-      this.toast.error("Password does not match with Confirm Password", 'Failed');
+      this.toast.errorToastr("Password does not match with Confirm Password", 'Failed');
         return false;
     }
     this.phone = formdata.phone;
@@ -113,7 +112,7 @@ export class SignupComponent implements OnInit{
           }
           else
           {
-            this.toast.error(data.msg, 'Failed');
+            this.toast.successToastr(data.msg, 'Failed');
           }
           this.signupdisabled = false; 
         }
@@ -137,7 +136,7 @@ export class SignupComponent implements OnInit{
           }
           else
           {
-            this.toast.error(data.msg, 'Failed');
+            this.toast.errorToastr(data.msg, 'Failed');
             return false;
           }
         }

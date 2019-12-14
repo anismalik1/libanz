@@ -4,7 +4,7 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -16,11 +16,10 @@ export class ForgotPasswordComponent implements OnInit{
   constructor( public todoservice : TodoService,
               private authservice : AuthService,
               private router : Router,
-              private toast : ToastsManager,
+              private toast : ToastrManager,
               private vcr: ViewContainerRef,
               private fb: FormBuilder,
   ) {
-    this.toast.setRootViewContainerRef(vcr);
     this.resetgroup = fb.group({
       'password' : [null,Validators.compose([Validators.required])],
        'cpassword' : [null,Validators.compose([Validators.required])],
@@ -40,7 +39,7 @@ export class ForgotPasswordComponent implements OnInit{
   {
     if(data.phone == '')
     {
-      this.toast.error("Enter Registered Phone");
+      this.toast.errorToastr("Enter Registered Phone");
       return false;
     }
     this.phone = data.phone;
@@ -56,7 +55,7 @@ export class ForgotPasswordComponent implements OnInit{
           }
           else
           {
-            this.toast.error(data.msg);
+            this.toast.errorToastr(data.msg);
           }
         }
       )  
@@ -67,7 +66,7 @@ export class ForgotPasswordComponent implements OnInit{
     form.phone = this.phone
     if(form.password != form.cpassword)
     {
-      this.toast.error('Confirm password must be same.');
+      this.toast.errorToastr('Confirm password must be same.');
       return false;
     }
     this.todoservice.reset_password(form)
@@ -78,13 +77,13 @@ export class ForgotPasswordComponent implements OnInit{
           data =  JSON.parse(b.replace(/\\/g, ''));
           if(data.status == true)
           {
-            this.toast.error(data.msg);
+            this.toast.errorToastr(data.msg);
             this.back_to_login = true;
             this.router.navigate(['/home#login']);
           }
           else
           {
-            this.toast.error(data.msg);
+            this.toast.errorToastr(data.msg);
           }
         }
       )  

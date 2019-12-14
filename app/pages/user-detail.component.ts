@@ -4,7 +4,7 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-user-detail',
@@ -17,12 +17,11 @@ export class UserDetailComponent implements OnInit {
   constructor(
     public todoservice : TodoService,
     private authservice : AuthService,
-    private toastr : ToastsManager,
+    private toastr : ToastrManager,
     private vcr: ViewContainerRef,
     private fb: FormBuilder,
     public spinner : NgxSpinnerService,
   ) { 
-    this.toastr.setRootViewContainerRef(vcr);
     this.user_detailgroup = fb.group({
       'name' : [null,Validators.compose([Validators.required])],
        'email' : [null,Validators.compose([Validators.required])],

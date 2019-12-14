@@ -4,9 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './shared/logout.component';
 import { ContactUsComponent } from './pages/contact-us.component';
 import { FaqsComponent } from './pages/faqs.component';
-import { page404Component } from './pages/404.component';
+
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { ToastrModule } from 'ng6-toastr-notifications';
 import { LoginComponent } from './pages/login.component';
 import { SignupComponent } from './pages/signup.component';
 import { ForgotPasswordComponent } from './pages/forgot-password.component';
@@ -14,32 +14,26 @@ import { ForgotPasswordComponent } from './pages/forgot-password.component';
 const routes: Routes = [
   
   { path: 'logout', component: LogoutComponent },
-  { path: '404', component: page404Component },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
-  { path: 'product', loadChildren: './products/products.module#ProductsModule'},
-  { path: 'login/ref/:name', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'contact-us', component: ContactUsComponent},
-  { path: 'p/contact-us/:name', component: ContactUsComponent},
-  { path: 'p/faqs', component: FaqsComponent},
-  { path: 'p/faqs/:name', component: FaqsComponent},
-  { path: 'p/:name', loadChildren: './pages/pages.module#PagesModule'},
-  { path: 'home#login', loadChildren: './home/home.module#HomeModule'}, 
-  { path: 'home', loadChildren: './home/home.module#HomeModule'},
-  { path: 'home/', loadChildren: './home/home.module#HomeModule'},
-  { path: 'recharge', loadChildren: './home/home.module#HomeModule'},
-  { path: 'p/accounts', loadChildren: './pages/pages.module#PagesModule'},
-  { path: 'lead', loadChildren: './pages/pages.module#PagesModule'},
-  { path: 'package-list', loadChildren: './pages/pages.module#PagesModule'},
-  { path: 'reviews', loadChildren: './pages/pages.module#PagesModule'},
-  { path: '', loadChildren: './home/home.module#HomeModule'},
+  { path: 'error', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
+  { path: 'product', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
+  { path: 'proceed',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
+  { path: 'help',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: 'p/:name',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: 'home#login',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)}, 
+  { path: 'home',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
+  { path: 'home/',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
+  { path: 'recharge',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
+  { path: 'p/accounts',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: 'lead',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: 'package-list',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: 'reviews',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: '',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   {path: '**', redirectTo: '/404'},
 ];
 
 @NgModule({
-  imports: [CommonModule,RouterModule.forRoot(routes),ToastModule.forRoot()],
+  imports: [CommonModule,RouterModule.forRoot(routes),ToastrModule.forRoot()],
   declarations: [
 ],
   exports: [RouterModule,NgxSpinnerModule]

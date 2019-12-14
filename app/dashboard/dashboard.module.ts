@@ -17,7 +17,7 @@ import { EditAccountComponent } from './edit-account.component';
 import { BookDthOrderComponent } from './book-dth-order.component';
 import { BookedOrderListComponent } from './booked-order-list.component';
 import { FooterMinComponent } from '../shared/footer/footer-min.component';
-import { NgxPaginationModule} from 'ngx-pagination';
+
 import { BookDthOrdersComponent } from './book-dth-orders.component';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
@@ -28,6 +28,7 @@ import { DthOrdersComponent } from './dth-orders.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxPaginationModule} from 'ngx-pagination';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'recharge', component: RechargeOrdersComponent },
@@ -46,9 +47,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    NgxPaginationModule,
     SharedCommonModule,
     NgxSpinnerModule,
-    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,

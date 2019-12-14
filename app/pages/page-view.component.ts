@@ -5,7 +5,7 @@ import { Meta ,Title} from '@angular/platform-browser';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-page-view',
@@ -20,7 +20,7 @@ export class PageViewComponent implements OnInit {
 constructor(private title: Title, public todoservice : TodoService,
   private spinner: NgxSpinnerService,private router : Router,
   private fb: FormBuilder,
-  private toastr: ToastsManager,
+  private toastr: ToastrManager,
   private authservice : AuthService,
    private meta : Meta, private route : ActivatedRoute) {
   this.page = route.snapshot.params['name'];
@@ -107,7 +107,7 @@ contact_submit(data)
       this.spinner.hide();
       if(data.status == true)
       {
-        this.toastr.error("Successful! We Have Received Your Query And will get back to you soon.");
+        this.toastr.errorToastr("Successful! We Have Received Your Query And will get back to you soon.");
       }
     }
   )  

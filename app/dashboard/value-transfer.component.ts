@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewContainerRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -14,8 +14,7 @@ export class ValueTransferComponent implements OnInit{
 
   step : number = 1;
   fetch_user : any = {phone: '',name:'',id:''}; 
-  constructor(private spinner : NgxSpinnerService, vcr: ViewContainerRef,private toastr: ToastsManager,public todoservice : TodoService,private authservice : AuthService,private router : Router) {
-    this.toastr.setRootViewContainerRef(vcr);
+  constructor(private spinner : NgxSpinnerService, vcr: ViewContainerRef,private toastr: ToastrManager,public todoservice : TodoService,private authservice : AuthService,private router : Router) {
    }
   ngOnInit() {
     if(!this.get_token())
@@ -25,7 +24,7 @@ export class ValueTransferComponent implements OnInit{
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     } 
   }
   
@@ -33,7 +32,7 @@ export class ValueTransferComponent implements OnInit{
   {
     if(formdata.phone == '')
     {
-      this.toastr.success(" Please Enter the registered number to whom transfer", 'Failed! ');
+      this.toastr.successToastr(" Please Enter the registered number to whom transfer", 'Failed! ');
       return false;
     }
     this.spinner.show();
@@ -48,7 +47,7 @@ export class ValueTransferComponent implements OnInit{
           if(data.status == 'Invalid Token')
           {
             this.authservice.clear_session();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/proceed/login']);
           }
           this.fetch_user = data;
           if(data.status == 'true')
@@ -56,7 +55,7 @@ export class ValueTransferComponent implements OnInit{
             this.step = 2;
           }
           else{
-            this.toastr.error(" Please Check the Number and try again",' Failed ');
+            this.toastr.errorToastr(" Please Check the Number and try again",' Failed ');
           }
         }
       )  
@@ -64,7 +63,7 @@ export class ValueTransferComponent implements OnInit{
     else
     {
       this.authservice.clear_session();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/proceed/login']);
     }
   }
 
@@ -82,18 +81,18 @@ export class ValueTransferComponent implements OnInit{
           if(data.status == 'Invalid Token')
           {
             this.authservice.clear_session();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/proceed/login']);
           }
           if(data.status == 'success')
           {
-            this.toastr.success(" Transfer is Successful", 'Success! ');
+            this.toastr.successToastr(" Transfer is Successful", 'Success! ');
             this.step = 1;
             this.todoservice.set_user_data(data.USER);
             return false;
           }
           else
           {
-            this.toastr.error(' '+data.error, 'Failed! ');
+            this.toastr.errorToastr(' '+data.error, 'Failed! ');
             return false;
           }
         }
@@ -102,7 +101,7 @@ export class ValueTransferComponent implements OnInit{
     else
     {
       this.authservice.clear_session();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/proceed/login']);
     }
   }
 

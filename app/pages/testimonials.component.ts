@@ -3,8 +3,9 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { DOCUMENT } from "@angular/common";
+import {Meta,Title } from "@angular/platform-browser";
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class TestimonialsComponent implements OnInit {
     private spinner: NgxSpinnerService,private meta : Meta,
     private _renderer2: Renderer2,private fb: FormBuilder,
     private authservice : AuthService,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
      @Inject(DOCUMENT) private _document,
     ) { 
       this.contactgroup = fb.group({
@@ -144,7 +145,7 @@ decode_html(html)
         this.spinner.hide();
         if(data.status == true)
         {
-          this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+          this.toastr.errorToastr("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }
     )  

@@ -142,7 +142,7 @@
 					  <div class="clearfix"></div>
 					  <div class="col m4 no-padding" *ngIf="circles">
 							<mat-form-field>
-								<mat-select placeholder="Circle Area" [(value)]="this.region" (change)="circle_selected($event.value)">
+								<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)">
 									<span *ngFor="let item of circles;">
 										<mat-option [value]="item.circle_id" >
 											<span class="operator-name">{{ item.name }}</span>
@@ -550,7 +550,7 @@
 		<div class="row">
 			<div class="col s12 m6">
 				<mat-form-field>
-					<mat-select placeholder="Select Operator" (change)="category_selected($event.value)">
+					<mat-select placeholder="Select Operator" (selectionChange)="category_selected($event.value)">
 						<span *ngFor="let item of product_category_list;">
 							<mat-option [value]="item.id">
 								<span class="operator-name">{{ item.title }}</span>
@@ -561,7 +561,7 @@
 			</div>
 			<div class="col s12 m6" >
 				<mat-form-field>
-					<mat-select placeholder="Select Product" (change)="continue_to_change($event.value)">
+					<mat-select placeholder="Select Product" (selectionChange)="continue_to_change($event.value)">
 						<span *ngFor="let item of product_list;">
 							<mat-option [value]="item.url">
 								<span class="operator-name">{{ item.title }}</span>

@@ -164,7 +164,7 @@
 						</div>						
 						<div class="input-field col s12 m12" id="prepaid-list">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #operator>
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #operator>
 									<span *ngFor="let item of operators.MOBILEPREPAID;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -176,7 +176,7 @@
 						</div>
 						<div class="input-field col s12 m12 hide" id="postpaid-list">
 							<mat-form-field >
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator>
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator>
 									<span *ngFor="let item of operators.MOBILEPOSTPAID;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -188,7 +188,7 @@
 						</div>
 						<div class="input-field col s12 m12">
 							<mat-form-field>
-								<mat-select placeholder="Select Circle" #mcircle [(value)]="region" formControlName="circle_area" (change)="get_plans($event.value,'get')">
+								<mat-select placeholder="Select Circle" #mcircle [(value)]="region" formControlName="circle_area" (selectionChange)="get_plans($event.value,'get')">
 									<mat-option *ngFor="let item of circles;" [value]="item.circle_id">
 										<span class="operator-name">{{ item.name }}</span>
 									</mat-option>
@@ -214,7 +214,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
 									<span *ngFor="let item of operators.DTH;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -259,7 +259,7 @@
 						<div class="input-field col s12 m12">
 							<div class="" id="pre-datacard-list">        
 								<mat-form-field>
-									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'card')" formControlName="operator" #predataoperator>
+									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'card')" formControlName="operator" #predataoperator>
 										<span *ngFor="let item of operators.DATACARDS;">
 											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -271,7 +271,7 @@
 							</div>
 							<div class="hide" id="post-datacard-list">        
 								<mat-form-field>
-									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'card')" formControlName="operator" #postdataoperator>
+									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'card')" formControlName="operator" #postdataoperator>
 										<span *ngFor="let item of operators.DATACARDS;">
 											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -310,7 +310,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'landline')" formControlName="operator">
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'landline')" formControlName="operator">
 									<span *ngFor="let item of operators.LANDLINECAT;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -352,7 +352,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'broadband')" formControlName="operator">
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'broadband')" formControlName="operator">
 									<span *ngFor="let item of operators.BROADCAT;">
 										<mat-option [value]="+item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -385,7 +385,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1" >
 							<mat-form-field>
-								<mat-select placeholder="Select Circle" (change)="filter_operator($event.value)" formControlName="circle">
+								<mat-select placeholder="Select Circle" (selectionChange)="filter_operator($event.value)" formControlName="circle">
 									<span *ngFor="let item of circles;">
 										<mat-option [value]="item.id">
 											<span class="operator-name">{{ item.name }}</span>
@@ -398,7 +398,7 @@
 						<div class="inner-electricity hide">
 							<div class="input-field col s12 m12 electric-cls1" >
 								<mat-form-field>
-									<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'electricity')" formControlName="operator">
+									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'electricity')" formControlName="operator">
 										<span *ngFor="let item of electricity_operators;">
 											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -439,7 +439,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'gas')" formControlName="operator">
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'gas')" formControlName="operator">
 									<span *ngFor="let item of operators.GAS;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -480,7 +480,7 @@
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator" (change)="changeOperator($event.value,'water')" formControlName="operator">
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'water')" formControlName="operator">
 									<span *ngFor="let item of operators.WATER;">
 										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>

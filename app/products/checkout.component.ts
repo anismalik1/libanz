@@ -1,12 +1,12 @@
 import { Component, OnInit,Renderer2,Inject,ViewContainerRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-checkout',
@@ -43,11 +43,10 @@ constructor( public todoservice : TodoService,
   private productservice : ProductService,
   private authservice : AuthService,
   private spinner : NgxSpinnerService,
-  private toastr: ToastsManager,
+  private toastr: ToastrManager,
   vcr: ViewContainerRef,
   private fb: FormBuilder,
   private router : Router) {
-    this.toastr.setRootViewContainerRef(vcr);
     this.addressformgroup = fb.group({
       'name' : [null,Validators.compose([Validators.required])],
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -425,7 +424,7 @@ goto_orders()
   let address = $('[name="client_address"]:checked').val()
   if(typeof address =='undefined' )
   {
-    this.toastr.error("Please Add a New Address.");
+    this.toastr.errorToastr("Please Add a New Address.");
     return false;
   }
   $('.checkout_1').addClass('hide');

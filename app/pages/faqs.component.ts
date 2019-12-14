@@ -1,6 +1,6 @@
 import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup ,FormControl} from '@angular/forms';
-import { DOCUMENT,Meta,Title } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
@@ -8,8 +8,8 @@ import { Observable} from 'rxjs';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PaginationService } from 'ngx-pagination';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-faqs',
   templateUrl: './faqs.component.html',
@@ -39,7 +39,7 @@ export class FaqsComponent implements OnInit {
     private fb: FormBuilder,
     private todoservice: TodoService,
     private spinner : NgxSpinnerService,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
     private vcr: ViewContainerRef,
     private authservice : AuthService,
     private _renderer2: Renderer2, 
@@ -48,7 +48,6 @@ export class FaqsComponent implements OnInit {
 
     @Inject(DOCUMENT) private _document, 
   ) {
-    this.toastr.setRootViewContainerRef(vcr);
       this.faqsgroup = fb.group({
         'name' : [null,Validators.compose([Validators.required])],
         'email' : [null,Validators.email],
@@ -97,7 +96,7 @@ export class FaqsComponent implements OnInit {
       data => 
       {
         this.spinner.hide();
-        this.toastr.error("Thank you. Your feedback helps us to continually improve our content.");
+        this.toastr.errorToastr("Thank you. Your feedback helps us to continually improve our content.");
       }
     ) 
   }
@@ -206,7 +205,7 @@ export class FaqsComponent implements OnInit {
     }   
   thanks()
   {
-    this.toastr.error("Thank you. Your feedback helps us to continually improve our content.");
+    this.toastr.errorToastr("Thank you. Your feedback helps us to continually improve our content.");
   }
  
   faqs_list()
@@ -230,7 +229,7 @@ export class FaqsComponent implements OnInit {
         data => 
         {
           this.default_queries = data.default_queries;
-          //console.log(this.default_queries);
+          this.spinner.hide();
         }
       ) 
   }
@@ -313,7 +312,7 @@ export class FaqsComponent implements OnInit {
         this.spinner.hide();
         if(data.status == true)
         {
-          this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+          this.toastr.errorToastr("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }
     )  

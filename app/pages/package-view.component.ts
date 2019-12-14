@@ -1,11 +1,11 @@
 import { Component, OnInit,Renderer2,Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-package-view',
@@ -24,7 +24,7 @@ export class PackageViewComponent implements OnInit {
     private spinner: NgxSpinnerService,private router : Router,
     private _renderer2: Renderer2,  
     @Inject(DOCUMENT) private _document, 
-    private toastr : ToastsManager,
+    private toastr : ToastrManager,
      private meta : Meta, 
      private fb: FormBuilder,
      private route : ActivatedRoute) { 
@@ -172,9 +172,9 @@ export class PackageViewComponent implements OnInit {
       data => 
       {
         if(data.status == true)
-          this.toastr.success('Great! Mail Sent Successful.');
+          this.toastr.successToastr('Great! Mail Sent Successful.');
         else
-          this.toastr.success('Failed! Please Try Later.'); 
+          this.toastr.successToastr('Failed! Please Try Later.'); 
         this.spinner.hide();  
       }
     ) 

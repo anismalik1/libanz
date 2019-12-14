@@ -6,8 +6,8 @@ import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
+import * as $ from 'jquery';
 @Component({ 
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
@@ -20,14 +20,13 @@ export class ContactUsComponent implements OnInit {
   constructor(private fb: FormBuilder, 
     private todoservice: TodoService,
     private spinner : NgxSpinnerService,
-    private toastr: ToastsManager,
+    private toastr: ToastrManager,
     private meta : Meta,
     private title : Title,
     private vcr: ViewContainerRef,
     private router : ActivatedRoute,
     private route : Router,
     private authservice : AuthService) { 
-      this.toastr.setRootViewContainerRef(vcr);
       this.contactgroup = fb.group({
         'name' : [null,Validators.compose([Validators.required])],
         'email' : [null,Validators.compose([Validators.required])],
