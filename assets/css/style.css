@@ -4294,46 +4294,7 @@ background: #ff6a00;
 	display:block;
 }
 
-@media(max-width:991px) and  (min-width:758px){
-	#product-pack li{
-		width:20%;
-	}
-}
 
-@media(max-width:767px) and  (min-width:481px){
-	ul#product-pack li{
-		width:33.333%;
-	}
-}
-
-
-@media(max-width:767px){
-
-.navigation.header .header-strip.grey.lighten-3{display:none;}
-#brand-category li:first-child { float: none;}	
-#brand-category li{    margin-right: 20px;}
-.navigation.header li:nth-child(2){margin-left: 54px;}
-
-}
-
-@media(max-width:480px){
-ul#product-pack li{
-		width:50%;
-	}
-}
-@media(min-width:767px){
-	.mobile-wrapper{display:none;}
-	.navigation.header{display:block;}
-	.login-side-image{display:block}
-	
-}
-@media only screen and (max-width:766px){
-	.mobile-wrapper{display:block;}
-	.navigation.header{display:none;}
-	.login-side-image{display:none}
-	#sntch_webchat{display:none}
-	.slider-flash-deal{display: none}
-}
 
 .mobile-wrapper {width: 100%;   margin: 0 auto;}
 #mobile-header{background-color: #ff6a00;padding:15px;height: 100px;color:#fff;}
@@ -4388,3 +4349,51 @@ ul#product-pack li{
 .side-menu .side-menu-header:after{content:''; clear:both; display:block;}
 .side-menu .side-social li{ display:inline-block;margin-right:5px;}
 .mobile-header-left input[type=text]{margin: 0 0 5px 0!important;}
+
+.mobile-footer {background: #fff;padding: 10px 0; display:none;}
+.mobile-footer ul{text-align:center;}
+.mobile-footer ul li{display:inline-block}
+.mobile-footer ul li a{    background: #fff;padding: 10px;display: block;}
+
+
+@media(max-width:991px) and  (min-width:758px){
+	#product-pack li{width:20%;}
+}
+
+@media(max-width:767px) and  (min-width:481px){
+ul#product-pack li{width:33.333%;}
+}
+
+
+@media(max-width:767px){
+.navigation.header .header-strip.grey.lighten-3{display:none;}
+#brand-category li:first-child { float: none;}	
+#brand-category li{    margin-right: 20px;}
+.navigation.header li:nth-child(2){margin-left: 54px;}
+}
+
+@media(max-width:480px){
+ul#product-pack li{width:50%;}
+#footer-content,.desktop-footer,.last-footer,.lSAction>.lSNext,.lSAction>.lSPrev{display:none;}
+body{padding-bottom: 80px;}
+.mobile-footer {display:block}
+}
+
+
+
+@media(min-width:767px){
+	.mobile-wrapper{display:none;}
+	.navigation.header{display:block;}
+	.login-side-image{display:block}
+	
+}
+
+@media only screen and (max-width:766px){
+	.mobile-wrapper{display:block;}
+	.navigation.header{display:none;}
+	.login-side-image{display:none}
+	#sntch_webchat{display:none}
+	.slider-flash-deal{display: none}
+}
+
+
