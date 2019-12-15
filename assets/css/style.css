@@ -4342,20 +4342,29 @@ background: #ff6a00;
 .side-menu {font-size: 14px;background: #fff;width: 280px;height: 89vh;overflow-y: scroll;position: fixed;top: 0;left: -280px; opacity:0; visibility:hidden; transition:all 0.5s;}
 .side-menu.open-menu{ left: 0;visibility: visible;opacity: 1;z-index:10000;}
 .side-menu-body{padding:0 18px;}
-.side-menu h3{ padding:10px 0 5px 0;}
+.side-menu h3{ padding:0 0 5px 0;}
 .side-menu ul{padding-bottom: 15px; border-bottom: 1px solid #ddd;}
 .side-menu ul li a{padding: 5px 0;display: block; color:#333;} 
 .side-menu .side-menu-header{background-color: #ffffff;padding: 8px 18px;border-bottom: 1px solid #ddd;}
-.side-menu .side-menu-header h3{    padding: 18px 0 2px 0;}
-.side-menu .side-menu-header img {width: 80px;border-radius: 50%;float: left; margin-right:8px;}
+.side-menu .side-menu-header h3{    padding: 18px 0 2px 0; margin:0;     text-transform: capitalize;}
+.side-menu .side-menu-header .profile {width: 80px;border-radius: 50%;float: left; margin-right:8px;}
 .side-menu .side-menu-header:after{content:''; clear:both; display:block;}
 .side-menu .side-social li{ display:inline-block;margin-right:5px;}
 .mobile-header-left input[type=text]{margin: 0 0 5px 0!important;}
+.login-section {border-bottom: 1px solid #ddd;}
+.login-section a {display: block;margin-bottom: 10px;}
 
 .mobile-footer {background: #fff;padding: 10px 0; display:none;}
 .mobile-footer ul{text-align:center;}
 .mobile-footer ul li{display:inline-block}
 .mobile-footer ul li a{    background: #fff;padding: 10px;display: block;}
+.wallet-mobile {
+    margin: 10px 0;
+}
+
+
+
+
 
 
 @media(max-width:991px) and  (min-width:758px){
