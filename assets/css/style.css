@@ -4358,9 +4358,7 @@ background: #ff6a00;
 .mobile-footer ul{text-align:center;}
 .mobile-footer ul li{display:inline-block}
 .mobile-footer ul li a{    background: #fff;padding: 10px;display: block;}
-.wallet-mobile {
-    margin: 10px 0;
-}
+.wallet-mobile {margin: 10px 0;border-bottom: 1px solid #e3e3e3;padding: 0 0 10px 15px;}
 
 
 

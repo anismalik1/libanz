@@ -80,12 +80,15 @@
 			
 			
 			
-			<div class="wallet-mobile">
-			<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
-			</div>
+			
 		</div>
 		
+		<div class="wallet-mobile">
+			<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
+			</div>
+		
 		<div class="side-menu-body">
+		
 		<div class="login-section" *ngIf="this.todoservice.get_user_name() != ''">
 			<h3>Login</h3>
 			<a routerLink="/proceed/login" class="btn waves-effect waves-light orange" type="button">Login</a>
