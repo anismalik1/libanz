@@ -24,26 +24,10 @@
 		
 		<div class="mobile-header-right">
 			<ul>
-				<li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </a></li>
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </a></li>
-				<li *ngIf="notification_count"><a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice1'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle">{{notification_count.count}}</span></a> </li>
-			</ul>
-		<ul id="dropdown-notice1" class="dropdown-content notifications-dropdown">
-				<li class="notificatoins-dropdown-container">
-					<ul class="notification-drop-ul" *ngIf="notifications  && notifications.length > 0">
-						<li *ngFor="let item of notifications;" >
-							<div class="notification-drop-image">
-								<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
-							</div>
-							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'notification-drop-text'">
-								<p [innerHTML]="item.visitor_comment"></p>
-								<time class="grey-text">{{time_ago(item.history_time)}}</time>
-							</div>
-						</li>							
-						<li><a class="modal-trigger font600" href="#loadmore-modal">Load More</a></li>
-					</ul>
-				</li>
-			</ul>
+			<li *ngIf="this.todoservice.get_user_name() == ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </li>
+			<li *ngIf="this.todoservice.get_user_name() != ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </li>
+			<li *ngIf="notification_count"><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle">{{notification_count.count}}</span> </li>
+		</ul>
 		</div>
 		
 		<div class="clearfix"></div>
@@ -64,7 +48,7 @@
 	
 	<div class="mobile-footer-menu">
 		<ul>
-			<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="icon-home"></span><span class="mobile-footer-text">Home</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/']"><span class="icon-home"></span><span class="mobile-footer-text">Home</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"></span><span class="mobile-footer-text">Products</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="icon-packages"></span><span class="mobile-footer-text">Packages</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="icon-faqs"></span><span class="mobile-footer-text">FAQS</span></a></li>
