@@ -56,6 +56,7 @@ export class RechargeOrdersComponent implements OnInit {
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
+      return false;
     }
     this.fetch_recharge_history(this.r_p); 
     this.init_script()

@@ -33,6 +33,7 @@ export class TransactionHistoryComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
+      return false;
     } 
     $(document).ready(function() {
         $('.filter-show').on('click',function(){

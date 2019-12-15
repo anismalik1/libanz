@@ -6,7 +6,19 @@
 		<div class="mobile-header-left">
 			<ul>
 			<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
-			<li class="mobile-search"><input type="text" id="mobile-search"> <span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span></li>
+			<li class="mobile-search">
+				<mat-form-field class="example-full-width">
+				<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)">
+				 <span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
+				 <mat-autocomplete #auto="matAutocomplete">
+						<span *ngIf="filterdList">
+						<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
+							<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
+						</mat-option>
+					</span>
+					</mat-autocomplete>
+				</mat-form-field>
+			</li>
 		</ul>
 		</div>
 		
@@ -51,9 +63,16 @@
 			<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/>
 			<h3>{{this.todoservice.get_user_name()}}</h3>
 			<p>{{this.todoservice.get_user_phone()}}</p>
+			<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 		</div>
 		
 		<div class="side-menu-body">
+		<div class="login-section" *ngIf="this.todoservice.get_user_name() != ''">
+			<h3>Login</h3>
+			<a routerLink="/proceed/login" class="btn waves-effect waves-light orange" type="button">Login</a>
+			<a routerLink="/proceed/signup" class="btn waves-effect waves-light orange" type="button">Signup</a>
+		</div>
+		
 		<h3>Information</h3>	
 			<ul>	
 				<li><a [routerLink]="['/p/about-us']">About Us</a></li>
