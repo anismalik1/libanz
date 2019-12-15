@@ -36,7 +36,7 @@ export class FavoritesComponent implements OnInit {
        full_url[2] = '';
       else
         full_url[2] = '#'+full_url[2];
-      this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+      this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
     }  
   }
   get_token()

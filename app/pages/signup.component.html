@@ -106,12 +106,12 @@
 													<label for="test2">Become Merchant</label>
 												</p>
 											</div>
-											<div class="col s12 m6">
+											<!-- <div class="col s12 m6">
 												<p>
 													<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
 													<label for="test3">Become Partner</label>
 												</p>
-											</div>
+											</div> -->
 											
 											<div class="col s12 center margin-top">
 												<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
@@ -124,9 +124,9 @@
 				</div>			
 			</div>
 		</div>
+		<div class="clearfix"></div>
 	</section>
 </ng-template>
-
 <ng-template #otpverify>
 	<section class="login-page">
 		<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
@@ -169,5 +169,7 @@
 				</div>
 			</div>
 		</form>
+		<div class="clearfix"></div>
 	</section>
 </ng-template>
+<app-footer></app-footer>

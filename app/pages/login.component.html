@@ -21,7 +21,7 @@
 					<div class="card-content"> 
 						<div class="center">
 							<h3 class="font600 orange-text">Welcome back!</h3>
-							<span>Login to Continue with MyDthShop</span>
+							<span id="page-content"></span>
 							<form [formGroup]="logingroup" class="margin-top sec-7" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
 								<div class="row">
 									<div class="input-field col s12 m9 offset-m1">
@@ -112,3 +112,4 @@
 			</form>
 		</section>
 	</ng-template>
+	<app-footer ></app-footer>

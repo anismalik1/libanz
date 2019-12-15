@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: ':name', component: ProductDetailsComponent },
-  {path: '**', redirectTo: '/error/404'},
+ // {path: '**', redirectTo: '/error/404'},
 ];
 
 @NgModule({

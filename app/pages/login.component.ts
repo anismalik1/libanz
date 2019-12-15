@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit{
   public otp4 : string;
   private ref : string; 
   logingroup : FormGroup;
+  page :string =  "/login";
   remember : any = {rm:false,ph:'',pw : ''};  
 constructor( public todoservice : TodoService,
   private toastr: ToastrManager,
@@ -35,6 +36,8 @@ constructor( public todoservice : TodoService,
   private spinner : NgxSpinnerService,
   private router : Router, 
   vcr: ViewContainerRef,
+  private meta : Meta,
+  private title : Title,
   private route : ActivatedRoute,
   private fb: FormBuilder
 ) {
@@ -62,7 +65,35 @@ ngOnInit() {
     {
       this.router.navigate(['/']);
     }
+    this.fetch_page_data();
 }
+
+fetch_page_data()
+ {
+  let page = {page : this.page}; 
+  if(page.page == '')
+  {
+      return false;
+  }
+  this.todoservice.fetch_page_data(page)
+    .subscribe(
+      data => 
+      {
+        if(data.PAGEDATA)
+        {
+          this.todoservice.set_page_data(data.PAGEDATA[0]);
+          
+          $('#page-content').html(this.todoservice.get_page().description);
+          this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+          this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+          this.title.setTitle(this.todoservice.get_page().metaTitle);
+          window.scroll(0,0);
+        }
+        this.spinner.hide();  
+      }
+    ) 
+ }
+
 login_submit(login)
 {
     if(this.step == 2)

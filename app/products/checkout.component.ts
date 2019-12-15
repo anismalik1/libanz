@@ -69,7 +69,7 @@ ngOnInit() {
     full_url[2] = '';
     else
       full_url[2] = '#'+full_url[2];
-    this.router.navigate(['/login/ref/'+full_url[1]+full_url[2]]);
+    this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
   } 
   if(this.todoservice.get_param('pincode'))
   {
@@ -272,7 +272,7 @@ remove_address(id)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -291,7 +291,7 @@ edit_address(id)
   this.spinner.show();
   if(!this.get_token())
   {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
     return;
   }
   let data : any = {token : this.get_token(), edit_id : id};
@@ -302,7 +302,7 @@ edit_address(id)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -331,7 +331,7 @@ edit_addr(form)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -366,7 +366,7 @@ reg_addr(formdata)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -397,7 +397,7 @@ add_new_addr(form)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));
@@ -485,7 +485,7 @@ checkout_items(type)
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/proceed/login']);
         }
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/\\/g, ''));

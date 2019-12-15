@@ -1,8 +1,10 @@
 import { Component, OnInit ,ViewContainerRef} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { Meta ,Title} from '@angular/platform-browser';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from '../user';
 import { Router ,ActivatedRoute} from '@angular/router'
 import * as $ from 'jquery';
@@ -25,10 +27,14 @@ export class SignupComponent implements OnInit{
   signupverify : number = 0
   signupdisabled : boolean = false;
   verifydisabled : boolean = false;
+  page :string =  "/signup";
   constructor(private toast: ToastrManager, 
     private fb : FormBuilder,
     public todoservice : TodoService,
+    private meta : Meta,
+    private title : Title,
     private route : ActivatedRoute,
+    private spinner : NgxSpinnerService,
     private authservice : AuthService,
     vcr: ViewContainerRef,
     private router : Router) {
@@ -48,9 +54,35 @@ export class SignupComponent implements OnInit{
   ngOnInit() {
     if(this.get_token())
     {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
+    this.fetch_page_data();
   }
+  fetch_page_data()
+ {
+  let page = {page : this.page}; 
+  if(page.page == '')
+  {
+      return false;
+  }
+  this.todoservice.fetch_page_data(page)
+    .subscribe(
+      data => 
+      {
+        if(data.PAGEDATA)
+        {
+          this.todoservice.set_page_data(data.PAGEDATA[0]);
+          
+          $('#page-content').html(this.todoservice.get_page().description);
+          this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+          this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+          this.title.setTitle(this.todoservice.get_page().metaTitle);
+          window.scroll(0,0);
+        }
+        this.spinner.hide();  
+      }
+    ) 
+ }
   set_user_type(user_type)
   {
     this.user_type_enabled = true;
