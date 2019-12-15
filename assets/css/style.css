@@ -4298,7 +4298,9 @@ background: #ff6a00;
 
 .mobile-wrapper {width: 100%;   margin: 0 auto;}
 #mobile-header{background-color: #ff6a00;padding:15px;height: 100px;color:#fff;}
-#mobile-header ul li{display:inline-block;position:relative;}
+#mobile-header .mat-form-field-infix{padding:0!important; border:0!important}
+#mobile-header .mat-form-field-appearance-legacy .mat-form-field-wrapper{padding:0!important;}
+#mobile-header ul li{display:inline-block;position:relative; float:left;}
 .mobile-header-left{float:left;}
 #mobile-bar{ cursor:pointer;}
 .mobile-search {width: 180px;margin-left:10px; }
@@ -4370,13 +4372,14 @@ ul#product-pack li{width:33.333%;}
 #brand-category li:first-child { float: none;}	
 #brand-category li{    margin-right: 20px;}
 .navigation.header li:nth-child(2){margin-left: 54px;}
+#footer-content,.desktop-footer,.last-footer,.lSAction>.lSNext,.lSAction>.lSPrev{display:none;}
+body{padding-bottom: 80px;}
+.mobile-footer {display:block}	
 }
 
 @media(max-width:480px){
 ul#product-pack li{width:50%;}
-#footer-content,.desktop-footer,.last-footer,.lSAction>.lSNext,.lSAction>.lSPrev{display:none;}
-body{padding-bottom: 80px;}
-.mobile-footer {display:block}
+
 }
 
 
