@@ -2,6 +2,7 @@
 
 <div class="mobile-wrapper">
 	<!-- mobile header start-->
+	<div class="mobile-mask"></div>
 	<header id="mobile-header" class="clearfix">
 		<div class="mobile-header-left">
 			<ul>
@@ -78,6 +79,10 @@
 			<li><a [routerLink]="['/dashboard/dth-orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
 			<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
 			<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a [routerLink]="['/dashboard//value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span>Value Transfer</a></li>
+			
+			
+			
+			
 		</ul>
 	</div>
 	

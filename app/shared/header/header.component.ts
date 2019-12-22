@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject } from '@angular/core';
+	import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { map, startWith} from 'rxjs/operators';
@@ -494,12 +494,16 @@ export class HeaderComponent implements OnInit{
         $(this).val('');
       });	
     $('#mobile-bar').on('click',function(e){
+		$('.mobile-mask').show();
       $('.side-menu').addClass('open-menu');
       e.stopPropagation();
+	  
+	  
     });
     
     $(document).on('click',function(){
       $('.side-menu').removeClass('open-menu');
+	  $('.mobile-mask').hide();
     });
     //====================mobile js end ===================
       $('.chat-box').on('click', function(){
