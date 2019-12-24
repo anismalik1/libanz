@@ -157,6 +157,17 @@ export class PackageViewComponent implements OnInit {
         }
       ) 
    }
+   go_to_nav(nav)
+   {
+     if(1==1)
+     {
+       this.router.routeReuseStrategy.shouldReuseRoute = function(){
+         return false;
+       }
+     this.router.navigated = false;
+     this.router.navigate([nav]);
+     }
+   }
    ini_pack(id)
    {
     this.pack_id = id;

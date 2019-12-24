@@ -5,10 +5,10 @@
 
 <div class="mobile-footer">
 	<ul>
-		<li><a routerLink="/p/accounts/merchant-on-mydthshop">Merchant On Mydth</a></li>
-		<li><a routerLink="/p/accounts/partner-on-mydthshop">Partner On Mydth</a></li>
-		<li><a routerLink="/blog/all">Blogs</a></li>
-		<li><a routerLink="/p/24-7">24x7 Support</a></li>
+		<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/p/accounts/merchant-on-mydthshop">Merchant On Mydth</a></li>
+		<li routerLinkActive="active"><a routerLink="/p/accounts/partner-on-mydthshop">Partner On Mydth</a></li>
+		<li routerLinkActive="active"><a routerLink="/blog/all">Blogs</a></li>
+		<li routerLinkActive="active"><a routerLink="/p/24-7">24x7 Support</a></li>
 	</ul>
 </div>
 

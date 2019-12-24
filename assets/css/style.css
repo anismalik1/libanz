@@ -1718,10 +1718,6 @@ select[name="datatable_length"]{
 	line-height: 30px; 
 }
 .hero{	
-	background-size: cover !important;
-	min-height: 300px !important;
-	background-repeat: no-repeat !important;
-	background-position:center !important;
 	margin: 10px 0;
 }
 .hero h2{
@@ -2204,7 +2200,7 @@ tbody img{
 	.responsive-compare-table {margin-bottom: 1rem;}
 	.banner-slider1 .full-width{height: auto !important;}
 	.header-strip span{font-size: 12px !important;}
-	#select-item li{border: 1px solid #d0cfcf; padding: 10px 0; border-radius: 10px;    }
+	#select-item li{border: 1px solid #d0cfcf; padding: 5px 0; border-radius: 10px;    }
 	
 	.footer-register .col{margin-bottom: 1rem;}
 	.lSAction>a{top:57%;}
@@ -4346,7 +4342,9 @@ background: #ff6a00;
 .side-menu-body{padding:0 18px;}
 .side-menu h3{ padding:0 0 5px 0;}
 .side-menu ul{padding-bottom: 15px; border-bottom: 1px solid #ddd;}
-.side-menu ul li{background: url(assets/images/bullet.png) no-repeat 0px 2px;margin: 10px 0;}
+.logout{ padding-bottom: 0!important; border-bottom: none!important;}
+.side-menu ul li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+.side-menu .logout li{background: url('https://www.mydthshop.com/web-app/assets/images/logout.png') no-repeat 0px 2px;margin: 10px 0;}
 .side-menu ul li a{padding: 0px 0 0 25px;display: block; color:#333;} 
 .side-menu .side-menu-header{background-color: #ffffff;padding: 8px 18px;border-bottom: 1px solid #ddd;}
 .side-menu .side-menu-header h3{    padding: 18px 0 2px 0; margin:0;     text-transform: capitalize;}
@@ -4355,17 +4353,24 @@ background: #ff6a00;
 .side-menu .side-social li{display: inline-block;margin: 0 5px 0 0!important;background: none;}
 .side-menu .side-social li a{padding:0;}
 
-
 .mobile-header-left input[type=text]{margin: 0 0 5px 0!important;}
 .login-section {border-bottom: 1px solid #ddd;}
 .login-section a {display: block;margin-bottom: 10px;}
-
 .mobile-footer {background: #fff;padding: 10px 0; display:none;}
 .mobile-footer ul{text-align:center;}
 .mobile-footer ul li{display:inline-block}
 .mobile-footer ul li a{    background: #fff;padding: 10px;display: block;}
 .wallet-mobile {margin: 10px 0;border-bottom: 1px solid #e3e3e3;padding: 0 0 10px 15px;}
-
+.back-icon li a {
+	padding: 0px 0 0 25px;
+	display: block;
+	color: #333;
+}
+.mobile-footer li.active{font-weight: 600}
+.back-icon li {
+	background: url(https://www.mydthshop.com/web-app/assets/images/back-arrow.png) no-repeat 0px 2px;
+	margin: 10px 0;
+}
 
 .mobile-mask {
     background: rgba(0,0,0,0.8);
@@ -4379,11 +4384,6 @@ background: #ff6a00;
     z-index: 10000;
 	display:none;
 }
-
-
-
-
-
 
 @media(max-width:991px) and  (min-width:758px){
 	#product-pack li{width:20%;}
@@ -4401,7 +4401,9 @@ ul#product-pack li{width:33.333%;}
 .navigation.header li:nth-child(2){margin-left: 54px;}
 #footer-content,.desktop-footer,.last-footer,.lSAction>.lSNext,.lSAction>.lSPrev{display:none;}
 body{padding-bottom: 80px;}
-.mobile-footer {display:block}	
+.mobile-footer {display:block}
+.on-web{display:none;}	
+.on-mobile{display:block;}	
 }
 
 @media(max-width:480px){
@@ -4410,14 +4412,12 @@ body{padding-bottom: 80px;}
  .home-product-card .card-title {text-overflow: ellipsis;white-space: nowrap;background-image: none;color: #000!important;font-weight: bold;padding: 0;font-size: 16px!important;}
 }
 
-
-
-
 @media(min-width:767px){
 	.mobile-wrapper{display:none;}
 	.navigation.header{display:block;}
 	.login-side-image{display:block}
-	
+	.on-web{display:block;}	
+	.on-mobile{display:none;}
 }
 
 @media only screen and (max-width:766px){

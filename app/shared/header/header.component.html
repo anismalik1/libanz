@@ -27,7 +27,7 @@
 			<ul>
 			<li *ngIf="this.todoservice.get_user_name() == ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </li>
-			<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle">{{notification_count.count}}</span> </a>
+			<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
 				<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown">
 						<li class="notificatoins-dropdown-container">
 							<ul class="notification-drop-ul" *ngIf="notifications  && notifications.length > 0">
@@ -78,11 +78,7 @@
 			<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
 			<li><a [routerLink]="['/dashboard/dth-orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
 			<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
-			<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a [routerLink]="['/dashboard//value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span>Value Transfer</a></li>
-			
-			
-			
-			
+			<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span>Value Transfer</a></li>	
 		</ul>
 	</div>
 	
@@ -90,7 +86,7 @@
 	
 	<div class="mobile-footer-menu">
 		<ul>
-			<li routerLinkActive="active"><a [routerLink]="['/']"><span class="icon-home"></span><span class="mobile-footer-text">Home</span></a></li>
+			<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="icon-home"></span><span class="mobile-footer-text">Home</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"></span><span class="mobile-footer-text">Products</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="icon-packages"></span><span class="mobile-footer-text">Packages</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="icon-faqs"></span><span class="mobile-footer-text">FAQS</span></a></li>
@@ -100,54 +96,41 @@
 </div>
 	<div class="side-menu">
 		<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
-			
-			
-			
-			
 			<div class="side-profile-details">
 			<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
 			
 			<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-			
-			
-			
 			<img class="responsive-img vertical-align-middle"  src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/>
 				<h3>{{this.todoservice.get_user_name()}}</h3>
-			
-			
 			<p>{{this.todoservice.get_user_phone()}}</p>
 			<div class="clearfix"></div>
 			</div>
-			
-			
-			
-			
-			
-		</div>
-		
-		<div class="wallet-mobile">
-			<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
+			<div class="wallet-mobile">
+				<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 			</div>
-		
-		<div class="side-menu-body">
-		
-		<div class="login-section" *ngIf="this.todoservice.get_user_name() != ''">
-			<h3>Login</h3>
-			<a routerLink="/proceed/login" class="btn waves-effect waves-light orange" type="button">Login</a>
-			<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey" type="button">Signup</a>
+			<ul class="logout">	
+				<li><a [routerLink]="['/logout']">Logout</a></li>
+			</ul>		
+			
 		</div>
-		
+		<div class="side-menu-body">
+			<div class="login-section"  *ngIf="this.todoservice.get_user_name() == ''">
+				<h3>Login</h3>
+				<a routerLink="/proceed/login" class="btn waves-effect waves-light orange" type="button">Login</a>
+				<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey" type="button">Signup</a>
+			</div>
+			
 		<h3>Information</h3>	
 			<ul>	
-				<li><a [routerLink]="['/p/about-us']">About Us</a></li>
-				<li><a [routerLink]="['/p/dth-connection-refund-polic']">Refund Policy</a></li>
+				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')">About Us</a></li>
+				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')">Refund Policy</a></li>
 				<li><a [routerLink]="['/help/contact-us']">Contact Us</a></li>
-				<li><a [routerLink]="['/p/know-about-my-dth-shop']">Who We Are</a></li>
-				<li><a [routerLink]="['/p/mydthshop-terms-and-conditions']">Terms &amp; Conditions</a></li>
-				<li><a [routerLink]="['/p/privacy-policy']">Privacy policy</a></li>
-				<li><a [routerLink]="['/p/mydthshop-disclaimer']">Disclaimer</a></li>
+				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
+				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Terms &amp; Conditions</a></li>
+				<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
+				<li><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></li>
 				<li><a [routerLink]="['/blog/all']">Blog</a></li>
-				<li><a [routerLink]="['/p/sitemap-on-mydthshop']">Sitemap</a></li>
+				<li><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></li>
 			</ul>	
 		
 		<h3>Categories</h3>

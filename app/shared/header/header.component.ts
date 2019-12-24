@@ -450,6 +450,17 @@ export class HeaderComponent implements OnInit{
 
     return this.options.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
   }
+  go_to_nav(nav)
+  {
+    if(1==1)
+    {
+      this.router.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+      }
+    this.router.navigated = false;
+    this.router.navigate([nav]);
+    }
+  }
   get_token()
   {
     return this.authService.auth_token();
@@ -482,9 +493,9 @@ export class HeaderComponent implements OnInit{
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.id = `side-nav-script`;
-    script.text = `
-        
+    script.text = ` 
     $(document).ready(function(){
+      //$(".side-menu").swipe( {fingers:1} );
       $('#mobile-search').on('focus',function(){
         $(this).addClass('no-bg');	
       });

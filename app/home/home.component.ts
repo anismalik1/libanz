@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit {
      private location : Location,
      private route : ActivatedRoute
   ) {
+    this.spinner.show();
     if(!this.get_token())
     {
       this.authservice.clear_session();

@@ -10,6 +10,23 @@
 </ngx-spinner>
 </div>
 <div id="fb-root"></div>
+<section class="channels-basic new-packages on-mobile">
+  <div class="row">
+    <div class="container center">
+        <div class="card">
+          <div class="card-content no-padding">
+              <ul class="package-list all-packages no-padding">
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i><a [routerLink]="['/package-list/tata-sky']" (click)="go_to_nav('/package-list/tata-sky')"><span class="icon-home"></span><span class="mobile-footer-text">Tata Sky Packages</span></a></li>
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i><a [routerLink]="['/package-list/airtel']" (click)="go_to_nav('/package-list/airtel')"><span class="icon-products"></span><span class="mobile-footer-text">Airtel Packages</span></a></li>
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i><a [routerLink]="['/package-list/videocon']" (click)="go_to_nav('/package-list/videocon')"><span class="icon-packages"></span><span class="mobile-footer-text">Videocon Packages</span></a></li>
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i><a [routerLink]="['/package-list/dish-tv']" (click)="go_to_nav('/package-list/dish-tv')"><span class="icon-faqs"></span><span class="mobile-footer-text">DishTv Packages</span></a></li>
+                </ul>
+          </div>
+          
+        </div>    
+      </div>
+  </div>
+</section>      
 <section class="channels-basic">
     <div class="container center">
       <h1 *ngIf="details == false">{{this.package.category}} Packages 
@@ -88,7 +105,7 @@
           </div>
         </div>
       </div>
-      <div class="col s12 m12 l4">
+      <div class="col s12 m12 l4 on-web">
         <div class="card grey lighten-3">          
           <div class="card-content">
             <h3 class="card-title no-margin">All Packages</h3>

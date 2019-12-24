@@ -52,10 +52,10 @@ constructor(private title: Title, public todoservice : TodoService,
         if(data.PAGEDATA)
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-          if(data.PAGEDATA[0].image != '')
+          if(data.PAGEDATA[0].image != '' && data.PAGEDATA[0].image != undefined)
           {
-            $('.hero').css('background','url(https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
-            $('.hero').css('background-repeat','no-repeat');            
+            $('.hero img').attr('src','https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image);
+            //$('.hero').css('background-repeat','no-repeat');            
           }
           else
           {

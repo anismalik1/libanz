@@ -39,8 +39,12 @@
 <!-- Responsive icon -->
 <section class="recharge-section show-on-medium-and-down hide-on-med-and-up">
 	<div class="container">
-		<div class="row">
-			<div class="col s12">				
+		<!-- <div class="row">
+			<div class="col s12">
+				<ul class="back-icon">
+					<li><h4><a class="black-text"routerLink="/">Back</a></h4></li>
+				</ul> 
+								
 				<ul class="center" id="select-item">
 					<div class="row">
 						<div class="col s4">
@@ -75,9 +79,14 @@
 							<li class="tab" [ngClass]="{'active' : this.recharge_type.landline}"><a class="black-text"  routerLink="/recharge/for/landline" (click)="navigate_to('landline');"><img src="{{this.params.base_url}}assets/images/new-icons/9.png" class="responsive-img" alt="1"><br><span>Landline</span></a></li>
 						</div>
 					</div>
-				</ul>
+				</ul> 
 			</div>
-		</div>
+		</div> -->
+		<div class="col s12">
+			<ul class="back-icon">
+				<li><a class="black-text"routerLink="/">Back</a></li>
+			</ul>
+		</div>	
 	</div>
 </section>
 <!-- End Here -->
