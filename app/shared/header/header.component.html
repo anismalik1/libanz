@@ -28,9 +28,9 @@
 			<li *ngIf="this.todoservice.get_user_name() == ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
-				<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown">
+				<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
 						<li class="notificatoins-dropdown-container">
-							<ul class="notification-drop-ul" *ngIf="notifications  && notifications.length > 0">
+							<ul  *ngIf="notifications  && notifications.length > 0">
 								<li *ngFor="let item of notifications;" >
 									<div class="notification-drop-image">
 										<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
