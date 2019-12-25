@@ -13,6 +13,13 @@ strong{font-weight: 600;word-break: break-all;}
 .home-product-card .black-text{margin-right:8px}
 
 
+.custom-noti {left: auto!important;width: 280px!important;right: -30px!important;padding: 15px!important;top: 35px!important;height: 400px;overflow-y: scroll!important;}
+.custom-noti .notification-drop-image{ float:left;}
+.custom-noti .notification-drop-text{overflow: hidden;padding-left: 10px;	}
+.custom-noti li {border-bottom: 1px solid #e3e3e3;padding: 10px 0;}
+.custom-noti li:first-child{ padding-top:0} 
+.custom-noti li:last-child{padding-bottom:0; border-bottom:0;} 
+
 i.left{margin-left:10px;}
 .cdk-overlay-container{z-index: 9999!important}
 select{display: block;} 
