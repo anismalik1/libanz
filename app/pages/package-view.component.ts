@@ -19,7 +19,9 @@ export class PackageViewComponent implements OnInit {
   details : boolean = false;
   url : string;
   pack_id : number;
+  pack_box : any = [];
   sharemailgroup : FormGroup;
+  sharwhatsappgroup : FormGroup;
   constructor(private title: Title, public todoservice : TodoService,
     private spinner: NgxSpinnerService,private router : Router,
     private _renderer2: Renderer2,  
@@ -29,7 +31,10 @@ export class PackageViewComponent implements OnInit {
      private fb: FormBuilder,
      private route : ActivatedRoute) { 
       this.sharemailgroup = fb.group({
-        'email' : [null,Validators.email],
+        'email' : [null,Validators.compose([Validators.required]),Validators.email],
+      });
+      this.sharwhatsappgroup = fb.group({
+        'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
       });
      }
 
@@ -131,6 +136,8 @@ export class PackageViewComponent implements OnInit {
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     $('#sharemail-modal').modal();
+    $('#choosebox-modal').modal();
+    $('#sharewhatsapp-modal').modal();
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
@@ -156,6 +163,57 @@ export class PackageViewComponent implements OnInit {
           this.spinner.hide();  
         }
       ) 
+   }
+   choose_box_for_this_pack(id,pack_id)
+   {
+    if(this.url == 'tata-sky')
+    {
+      var category = 1;
+    }
+    else if(this.url == 'airtel')
+    {
+      var category = 3;
+    }
+    else if(this.url == 'dish-tv')
+    {
+      var category = 4;
+    }
+    else if(this.url == 'videocon')
+    {
+      var category = 2;
+    }
+    this.spinner.show();
+    this.todoservice.choose_box_for_this_pack({id: id,product_category: category})
+    .subscribe(
+      data => 
+      {
+        var products = this.filter_products(id,pack_id,data.products)
+        //this.pack_box = data.products;
+        this.spinner.hide();  
+      }
+    ) 
+   }
+   filter_products(id,pack_id,products)
+   {
+    this.pack_box = [];
+    for(var i=0;i<products.length;i++)
+    {
+      var products_packs = $.parseJSON(products[i].channel_packages);
+      //console.log(products_packs)
+      for(var j=0;j<products_packs.length;j++)
+      {
+        //console.log(products_packs[j])
+        if(products_packs[j] == id)
+        {
+          this.pack_box.push(products[i])
+          break;
+        }
+      }
+    }
+    if(this.pack_box.length > 0)
+    {
+      this.ini_pack(pack_id);
+    }
    }
    go_to_nav(nav)
    {
@@ -189,6 +247,19 @@ export class PackageViewComponent implements OnInit {
         this.spinner.hide();  
       }
     ) 
+   }
+   share_to_whatsapp(form) 
+   {
+    
+    if(this.pack_id)
+      var url = 'https://www.mydthshop.com/package-list/'+this.url+'/'+this.pack_id;
+     else
+      var url = 'https://www.mydthshop.com/package-list/'+this.url;
+      window.open('https://api.whatsapp.com/send?phone='+form.phone+'&text='+url, "_blank");
+   }
+   init_id(id)
+   {
+     this.pack_id = id;
    }
    remove_new_line(str)
   {

@@ -107,7 +107,7 @@ contact_submit(data)
       this.spinner.hide();
       if(data.status == true)
       {
-        this.toastr.errorToastr("Successful! We Have Received Your Query And will get back to you soon.");
+        this.toastr.successToastr("Successful! We Have Received Your Query And will get back to you soon.");
       }
     }
   )  

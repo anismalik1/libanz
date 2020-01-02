@@ -37,6 +37,7 @@ export class ProductDetailsComponent implements OnInit{
   multienable : boolean = false;
   display : number = 0;
   p_id : any;
+  pack_id : Number;
   cat_id : any;
   channel_display = 0;
   product : Product;
@@ -79,6 +80,7 @@ export class ProductDetailsComponent implements OnInit{
    }
   ngOnInit() {
     this.cat_id = this.todoservice.get_param('cat_id');
+    this.pack_id = Number(this.todoservice.get_param('id'));
     if(this.todoservice.get_param('month'))
       this.month = Number(this.todoservice.get_param('month'));
     
@@ -138,6 +140,15 @@ export class ProductDetailsComponent implements OnInit{
      }, 2000);
     
   }
+  check_child_exist(id,childs)
+  {
+    for(var i = 0;i<childs.length;i++)
+    {
+      if(childs[i].id == id)
+        return true;
+    }
+    return false;
+  }
   tick_multi()
   {
     if($("#multi-enable").is(':checked'))
@@ -181,7 +192,7 @@ export class ProductDetailsComponent implements OnInit{
     for(var i=0;i<this.channels_packs.length ;i++)
       {
         //console.log(this.channels_packs[i])
-        if( this.channels_packs[i].default_selected == 1)
+        if( this.channels_packs[i].default_selected == 1 || this.pack_id)
         {
           if(this.channels_packs[i].child[0])
           {
@@ -192,7 +203,7 @@ export class ProductDetailsComponent implements OnInit{
               {
                 this.fta_pack = this.channels_packs[i].child[j];
               }
-              else if(this.channels_packs[i].child[j].default_selected == 1)
+              else if(this.channels_packs[i].child[j].default_selected == 1 || this.pack_id == this.channels_packs[i].child[j].id)
               {
                 this.pack_selected.push(this.channels_packs[i].child[j]); 
               }

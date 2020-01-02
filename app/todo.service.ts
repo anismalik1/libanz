@@ -754,4 +754,9 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/page/get_faqs_search_list';
     return this.send_post_request(data,url) ;
   }
+  choose_box_for_this_pack(data)
+  {
+    let url = this.server_url+'accounts/apis/product/choose_box_for_this_pack';
+    return this.send_post_request(data,url) ;
+  }
 }

@@ -47,9 +47,11 @@
 												<a href="javascript:" class="black-text" (click)="find(option)">{{option}}</a>
 											</mat-option>
 										</span>
-										</mat-autocomplete>
+								    </mat-autocomplete>
 								</mat-form-field>
-              <button type="Submit" class="btn-flat" (click)="go_to_search();"><i class="material-icons">search</i></button>
+              <button type="Submit" class="btn-flat" (click)="go_to_search();" ><i class="material-icons">search</i></button>
+              <button type="Submit" class="btn-flat" onclick="speech.start()" style="right: 10%;" id="search-on"><i id="mic-icon" class="material-icons">mic</i></button>
+              <!-- <button type="Submit" class="btn-flat" onclick="speech.stop()" style="right: 7%;" id="search-off"><i class="material-icons">clear</i></button> -->
             </li>
           </ul>
           <ul class="news-tabs" *ngIf="this.query_string != ''">
@@ -77,8 +79,8 @@
             <ul>
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
                 <div class="link-faqs">
-                  <a routerLink="/p/faqs/{{item.url}}" href="item.url" (click)="print_faq(item.url)">{{item.question}}</a>
-                  <span class="green-text">https:www.mydthshop.com/p/faqs/{{item.url}}</span>
+                  <a routerLink="'/help/faqs/'+{{item.url}}" (click)="print_faq(item.url)">{{item.question}}</a>
+                  <span class="green-text">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
                   <p [innerHTML]="item.meta_description"></p>
                 </div>
                 
@@ -96,9 +98,9 @@
             <ul>
               <li *ngFor="let item of default_queries;">
                 <div class="link-faqs">
-                  <a [routerLink]="item.url" target="_blank">
+                  <a [routerLink]="'/help/faqs/'+item.url" target="_blank">
                     <h5 class="font600">{{item.meta_title}}</h5>
-                    <span class="green-text">https:www.mydthshop.com/p/faqs/{{item.url}}</span>
+                    <span class="green-text">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
                     <p class="grey-text">{{item.meta_description}}</p>
                   </a>
                 </div>

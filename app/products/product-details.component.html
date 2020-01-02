@@ -38,10 +38,10 @@
 					<div class="product-img center">
 							<div class="xzoom-thumbs left" *ngIf="thumbs">
 									<ul>
-											<li *ngFor="let item of thumbs;">
-												<a href="javascript:">
-														<img class="xzoom-gallery" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/100x100{{item.image}}">
-												</a>
+										<li *ngFor="let item of thumbs;">
+											<a href="javascript:">
+												<img class="xzoom-gallery" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/100x100{{item.image}}">
+											</a>
 										</li>
 								</ul>
 							</div>
@@ -327,7 +327,7 @@
 			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
-					<div [className]="(packs.default_selected == 1) ? 'collapsible-body lSAction' : 'collapsible-body'">
+					<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
 						<div class="row">
 							<div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
 							<!-- <div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
@@ -340,7 +340,7 @@
 									<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
 								</div>
 							</div>
-							<div class="card" *ngIf="item.default_selected == 0">
+							<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
 								<div class="card-content center" >
 									<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 									<h4 class="grey-text">{{item.title}}</h4>
@@ -350,7 +350,7 @@
 									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger">Channels</a></span>
 								</div>
 							</div>
-							<div class="card" *ngIf="item.default_selected == 1">
+							<div class="card" *ngIf="item.default_selected == 1 || item.id == pack_id">
 								<div class="card-content center" >
 									<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 									<h4 class="grey-text">{{item.title}}</h4>

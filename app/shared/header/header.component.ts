@@ -496,6 +496,14 @@ export class HeaderComponent implements OnInit{
     script.text = ` 
     $(document).ready(function(){
       //$(".side-menu").swipe( {fingers:1} );
+      $('#mobile-dashboard-menus').lightSlider({
+        item: 4,
+        auto: false,
+        loop: false,
+        controls: true,
+      });
+      $('#loadmore-modal').modal();
+      $('#loadmore-modal2').modal();
       $('#mobile-search').on('focus',function(){
         $(this).addClass('no-bg');	
       });
@@ -570,7 +578,102 @@ export class HeaderComponent implements OnInit{
     if(typeof google != 'undefined')
       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     else
-      setTimeout("googleTranslateElementInit()", 1000);  
+      setTimeout("googleTranslateElementInit()", 1000);
+      setTimeout("set_lang()", 5000);
+  }
+  function set_lang()
+  {
+    $(".goog-te-combo option[value='my']").remove();
+    $(".goog-te-combo option[value='af']").remove();
+      $(".goog-te-combo option[value='sq']").remove();
+      $(".goog-te-combo option[value='am']").remove();
+      $(".goog-te-combo option[value='ar']").remove();
+      $(".goog-te-combo option[value='hy']").remove();
+      $(".goog-te-combo option[value='az']").remove();
+      $(".goog-te-combo option[value='eu']").remove();
+      $(".goog-te-combo option[value='be']").remove();
+      $(".goog-te-combo option[value='bs']").remove();
+      $(".goog-te-combo option[value='bg']").remove();
+      $(".goog-te-combo option[value='ca']").remove();
+      $(".goog-te-combo option[value='ceb']").remove();
+      $(".goog-te-combo option[value='ny']").remove();
+      $(".goog-te-combo option[value='zh-CN']").remove();
+      $(".goog-te-combo option[value='zh-TW']").remove();
+      $(".goog-te-combo option[value='co']").remove();
+      $(".goog-te-combo option[value='hr']").remove();
+      $(".goog-te-combo option[value='cs']").remove();
+      $(".goog-te-combo option[value='da']").remove();
+      $(".goog-te-combo option[value='nl']").remove();
+      $(".goog-te-combo option[value='eo']").remove();
+      $(".goog-te-combo option[value='et']").remove();
+      $(".goog-te-combo option[value='tl']").remove();
+      $(".goog-te-combo option[value='fi']").remove();
+      $(".goog-te-combo option[value='fr']").remove();
+      $(".goog-te-combo option[value='fy']").remove();
+      $(".goog-te-combo option[value='gl']").remove();
+      $(".goog-te-combo option[value='ka']").remove();
+      $(".goog-te-combo option[value='de']").remove();
+      $(".goog-te-combo option[value='el']").remove();
+      $(".goog-te-combo option[value='ht']").remove();
+      $(".goog-te-combo option[value='ha']").remove();
+      $(".goog-te-combo option[value='haw']").remove();
+      $(".goog-te-combo option[value='iw']").remove();
+      $(".goog-te-combo option[value='hmn']").remove();
+      $(".goog-te-combo option[value='hu']").remove();
+      $(".goog-te-combo option[value='is']").remove();
+      $(".goog-te-combo option[value='ig']").remove();
+      $(".goog-te-combo option[value='id']").remove();
+      $(".goog-te-combo option[value='ga']").remove();
+      $(".goog-te-combo option[value='it']").remove();
+      $(".goog-te-combo option[value='ja']").remove();
+      $(".goog-te-combo option[value='jw']").remove();
+      $(".goog-te-combo option[value='kn']").remove();
+      $(".goog-te-combo option[value='kk']").remove();
+      $(".goog-te-combo option[value='km']").remove();
+      $(".goog-te-combo option[value='ko']").remove();
+      $(".goog-te-combo option[value='ku']").remove();
+      $(".goog-te-combo option[value='ky']").remove();
+      $(".goog-te-combo option[value='lo']").remove();
+      $(".goog-te-combo option[value='la']").remove();
+      $(".goog-te-combo option[value='lv']").remove();
+      $(".goog-te-combo option[value='lt']").remove();
+      $(".goog-te-combo option[value='lb']").remove();
+      $(".goog-te-combo option[value='mk']").remove();
+      $(".goog-te-combo option[value='mg']").remove();
+      $(".goog-te-combo option[value='ms']").remove();
+      $(".goog-te-combo option[value='mt']").remove();
+      $(".goog-te-combo option[value='mi']").remove();
+      $(".goog-te-combo option[value='no']").remove();
+      $(".goog-te-combo option[value='ps']").remove();
+      $(".goog-te-combo option[value='fa']").remove();
+      $(".goog-te-combo option[value='pl']").remove();
+      $(".goog-te-combo option[value='pt']").remove();
+      $(".goog-te-combo option[value='ro']").remove();
+      $(".goog-te-combo option[value='ru']").remove();
+      $(".goog-te-combo option[value='sm']").remove();
+      $(".goog-te-combo option[value='gd']").remove();
+      $(".goog-te-combo option[value='sr']").remove();
+      $(".goog-te-combo option[value='st']").remove();
+      $(".goog-te-combo option[value='sn']").remove();
+      $(".goog-te-combo option[value='sd']").remove();
+      $(".goog-te-combo option[value='si']").remove();
+      $(".goog-te-combo option[value='sk']").remove();
+      $(".goog-te-combo option[value='sl']").remove();
+      $(".goog-te-combo option[value='es']").remove();
+      $(".goog-te-combo option[value='su']").remove();
+      $(".goog-te-combo option[value='sw']").remove();
+      $(".goog-te-combo option[value='sv']").remove();
+      $(".goog-te-combo option[value='tg']").remove();
+      $(".goog-te-combo option[value='th']").remove();
+      $(".goog-te-combo option[value='tr']").remove();
+      $(".goog-te-combo option[value='uk']").remove();
+      $(".goog-te-combo option[value='uz']").remove();
+      $(".goog-te-combo option[value='vi']").remove();
+      $(".goog-te-combo option[value='cy']").remove();
+      $(".goog-te-combo option[value='xh']").remove();
+      $(".goog-te-combo option[value='yi']").remove();
+      $(".goog-te-combo option[value='yo']").remove();
+      $(".goog-te-combo option[value='zu']").remove();
   }
   setTimeout("googleTranslateElementInit()", 1000);
   function openchat()
