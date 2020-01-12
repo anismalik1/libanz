@@ -19,6 +19,9 @@ export class ChannelPackComponent implements OnInit {
   product_pack_info : any = [];
   channel_count : Number = 0;
   month : number;
+  pack_box : any;
+  category : number;
+  pack_id : number;
   constructor( 
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
@@ -37,6 +40,7 @@ export class ChannelPackComponent implements OnInit {
 
   ngOnInit() {
     this.month = Number(this.todoservice.get_param('month'));
+    this.category = Number(this.todoservice.get_param('category'));
     this.router.params.subscribe(params => {
       this.channel_id = params['id']; //log the value of id
       this.spinner.show();
@@ -57,6 +61,7 @@ export class ChannelPackComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('.modal').modal();
+      $('#choosebox-modal').modal();
     $('.dropdown-button').dropdown({
       inDuration: 300,
       outDuration: 225,
@@ -66,6 +71,7 @@ export class ChannelPackComponent implements OnInit {
       belowOrigin: false, // Displays dropdown below the button
       alignment: 'left'
     });
+
     });
     `;
     this._renderer2.appendChild(this._document.body, script);
@@ -121,6 +127,40 @@ export class ChannelPackComponent implements OnInit {
       }
       );
   }
+  choose_box_for_this_pack(parent,id)
+   {
+     this.pack_id = id;
+    if(this.category == undefined)
+      return false;
+    this.spinner.show();
+    this.todoservice.choose_box_for_this_pack({id: id,product_category: this.category})
+    .subscribe(
+      data => 
+      {
+        this.filter_products(parent,data.products)
+        this.spinner.hide();  
+      }
+    ) 
+   }
+   filter_products(id,products)
+   {
+    this.pack_box = [];
+    for(var i=0;i<products.length;i++)
+    {
+      var products_packs = $.parseJSON(products[i].channel_packages);
+      //console.log(products_packs)
+      for(var j=0;j<products_packs.length;j++)
+      {
+        //console.log(products_packs[j])
+        if(products_packs[j] == id)
+        {
+          this.pack_box.push(products[i])
+          break;
+        }
+      }
+    }
+   } 
+
   share_pack_to_mail()
   {
     var email = $("#sendmail-modal #pack-email").val();

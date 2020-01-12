@@ -18,35 +18,59 @@
             </div>
             <div class="col s12 m9">
                 <div class="card">
-                    <div class="card-content">
+                    <div class="card-content" *ngIf="order_id">
+                        <ul class="back-icon">
+                          <li><a class="black-text" href="javascript:" (click)="back_to_addmoney()">Back</a></li>
+                        </ul>
+                        <div  class="mb-1">
+                            <h3 class="font600 inline-block">Invoice </h3>
+                        </div>
+                        <ul *ngIf="order_data">
+                          <li><strong>Invoice No: </strong> #{{order_data.id}}</li>
+                          <li><strong>Amount: </strong> {{order_data.amount}}</li>
+                          <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
+                          <li><strong>Payment Status: </strong><span *ngIf="order_data.payment_status == 2" class="red-text">Failed</span><span *ngIf="order_data.payment_status == 1" class="green-text">Successful</span><span *ngIf="order_data.payment_status == 3" class="orange-text">Pending</span></li>
+                          <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Mydth</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
+                          <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li>
+                          <li><strong>Comment: </strong>{{order_data.comment}}</li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                      <div class="card-content" *ngIf="!order_id">
                         <h3 class="font600 inline-block">TopUp Request </h3>
                         <div class="row sec-7">
                             <div class="col s12 m7">
                                 <form #addmoneyform = "ngForm" (ngSubmit)="add_money(addmoneyform.value)">
                               <div class="row">
                                 <div class="input-field col s12 m10">
-                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin">
+                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin" (keyup)="calc_percentage()">
                                   <label for="enter-amount">Enter Amount*</label>
                                 </div>
                               </div>
-							  <div class="row"> 
+							                <div class="row"> 
                                 <div class="input-field col s12 m10">
-                                  <select name="paymethod" ngModel id="paymethod" >
-                                    <option value="">Select Payment Method</option>
-                                    <option value="NEFT / RTGS / FUND TRANSFER" selected>NEFT / RTGS / FUND TRANSFER</option>
-                                    <option value="IMPS">IMPS</option>
-                                    <option value="Cash Deposit">Cash Deposit</option>
-                                    <option value="Net Banking">Net Banking</option>
-                                    <option value="Debit Card / Credit Card">Debit Card / Credit Card</option>
-                                    <option value="Others">Others</option>
-                                  </select>
-                                        <label>Select Payment Method</label>
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Payment Method" (selectionChange)='check_method($event.value)'  [(ngModel)]="paymethod" name="paymethod">
+                                          <mat-option [value]="">Select  </mat-option>
+                                          <mat-option [value]="'FUND TRANSFER'">NEFT/IMPS/RTGS/FUND TRANSFER </mat-option>
+                                          <mat-option [value]="'Cash Deposit'">Cash Deposit </mat-option>
+                                          <mat-option [value]="'Gateway'">Gateway </mat-option>
+                                          <mat-option [value]="'Paytm'">Paytm </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>    
                                 </div>
                               </div>
-							  <div class="row" >
+                              <div class="row additional-charge hide">
+                                <div class="col s12 m12">
+                                  <div class="chip orange white-text">
+                                  </div>
+                                </div> 
+                              </div>
+                              <div class="default-hide hide">
+							                <div class="row" >
                                 <div class="input-field col s12 m10">
                                   <input id="bank-id" name="ref_id" ngModel type="text" class="validate no-margin">
-                                  <label for="bank-id">Bank Reference ID*</label>
+                                  <label for="bank-id">Reference ID/TXN ID*</label>
                                 </div>
                               </div>
                               <div class="row">
@@ -56,34 +80,29 @@
                                 </div>
                               </div>
                               
-                              <div class="row" class="change-hide">
+                              <!-- <div class="row" class="change-hide">
                                 <div class="input-field col s12 m10">
                                   <select name="paybankaccount" [(ngModel)]="paybankaccount" id="paybankaccount">
-                                          <option value="">Please Select Bank</option>
-                                          <option value="HDFC Bank">HDFC Bank</option>
-                                          <option value="Axis Bank">Axis Bank</option>
-                                          <option value="SBI Bank">SBI Bank</option>
-                                        </select>
-                                        <label>MYDTH Bank Name</label>
-                                </div>
-                              </div>
-                              <div class="row" class="change-hide">
-							  
-                                <div class="input-field col s12 m10" >
-                                  <select name="yourbankname" [(ngModel)]="yourbankname" id="yourbankname">
-                                    <option value="">Select Bank Name</option>
+                                    <option value="">Please Select Bank</option>
                                     <option value="HDFC Bank">HDFC Bank</option>
                                     <option value="Axis Bank">Axis Bank</option>
-                                    <option value="SBI Bank">SBI Bank</option>
+                                    <option value="SBI Bank">SBI Bank</option> 
                                   </select>
-                                  <label>Your Bank Name</label>
+                                  <label>MYDTH Bank Name</label>
                                 </div>
-                              </div>
-                              <div class="row">
+                              </div> -->
+                              <div class="clearfix"></div>
+                            </div>
+                              <div class="row send-topup hide">
                                 <div class="input-field col s12 m10 center">
                                   <button type="submit" class="btn btn-large orange white-text">Send TopUp Request</button>
                                 </div>
                               </div>
+                              <div class="row send-gateway hide">
+                                  <div class="input-field col s12 m10 center">
+                                    <button type="submit" class="btn btn-large orange white-text">Proceed</button>
+                                  </div>
+                                </div>
                             </form>
                             </div>
                             <div class="col s12 m5 axis-bank">
@@ -105,32 +124,6 @@
                               
                             </tbody>
                           </table>
-                          <!-- <div class="card no-box-shadow payment-m">
-                                    <div class="card-content no-padding">
-                                        <span class="font600 font-size-change">[DEBIT/CREDIT CARD/NET BANKING]</span>
-                                        <form class="margin-top-cart1">
-                                      <div class="row no-margin">
-                                        <div class="input-field col s12">
-                                          <input id="amonut" type="number" name="amount" class="validate">
-                                          <label for="amount">Enter Amount</label>
-                                        </div>
-                                        <div class="input-field col s12">
-                                          <select>
-                                                  <option value="1">Debit Card / Credit Card</option>
-                                                  <option value="2">Net Banking Online</option>
-                                                </select>
-                                                <label>Payment Method</label>
-                                        </div>
-                                        <div class="input-field col s12">
-                                          <button type="submit" class="btn orange">Continue</button>
-                                        </div>
-                                        <div class="input-field col s12">
-                                          <span class="grey-text">Payment Gateway Charge will be apply*</span>
-                                        </div>
-                                      </div>
-                                    </form>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>

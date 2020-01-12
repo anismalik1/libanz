@@ -46,7 +46,7 @@ export class TopupRequestComponent implements OnInit{
   {
     this.spinner.show();
     this.status = status;
-    this.fetch_topup_request(1);
+    this.fetch_topup_request(4);
   }
   
   fetch_topup_request(page)

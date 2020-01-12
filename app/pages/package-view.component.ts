@@ -22,6 +22,7 @@ export class PackageViewComponent implements OnInit {
   pack_box : any = [];
   sharemailgroup : FormGroup;
   sharwhatsappgroup : FormGroup;
+  category : any;
   constructor(private title: Title, public todoservice : TodoService,
     private spinner: NgxSpinnerService,private router : Router,
     private _renderer2: Renderer2,  
@@ -56,21 +57,25 @@ export class PackageViewComponent implements OnInit {
     {
       this.fetch_page_data('/package-list/tata-sky');
       this.package.category = 'Tata Sky';
+      this.category = 1;
     }
     else if(this.url == 'airtel')
     {
       this.fetch_page_data('/package-list/airtel');
       this.package.category = 'Airtel';
+      this.category = 3;
     }
     else if(this.url == 'dish-tv')
     {
       this.fetch_page_data('/package-list/dish-tv');
       this.package.category = 'Dishtv';
+      this.category = 4;
     }
     else if(this.url == 'videocon')
     {
       this.fetch_page_data('/package-list/videocon');
       this.package.category = 'Videocon';
+      this.category = 2;
     }
     this.package_data();
     $('.fb-share-button').attr('data-href',"https://www.mydthshop.com"+this.path);
@@ -128,13 +133,7 @@ export class PackageViewComponent implements OnInit {
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.id = `fb-script`;
-    script.text = `(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    script.text = `
     $('#sharemail-modal').modal();
     $('#choosebox-modal').modal();
     $('#sharewhatsapp-modal').modal();
@@ -166,30 +165,14 @@ export class PackageViewComponent implements OnInit {
    }
    choose_box_for_this_pack(id,pack_id)
    {
-    if(this.url == 'tata-sky')
-    {
-      var category = 1;
-    }
-    else if(this.url == 'airtel')
-    {
-      var category = 3;
-    }
-    else if(this.url == 'dish-tv')
-    {
-      var category = 4;
-    }
-    else if(this.url == 'videocon')
-    {
-      var category = 2;
-    }
     this.spinner.show();
-    this.todoservice.choose_box_for_this_pack({id: id,product_category: category})
+    this.todoservice.choose_box_for_this_pack({id: id,product_category: this.category})
     .subscribe(
       data => 
       {
-        var products = this.filter_products(id,pack_id,data.products)
-        //this.pack_box = data.products;
-        this.spinner.hide();  
+        this.filter_products(id,pack_id,data.products)
+        this.spinner.hide(); 
+
       }
     ) 
    }

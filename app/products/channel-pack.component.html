@@ -34,6 +34,7 @@
 		</span></h1>
 		<p class="font-size-change1 font600">{{product_pack_info.short_description}}*</p>
 		<span class="font-size-change1"><i class="icon-inr"></i> {{product_pack_info.price}} @ {{month}} Month</span><br>
+		<a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set btn orange modal-trigger" (click)="choose_box_for_this_pack(product_pack_info.parent_id,product_pack_info.id)">Buy Now</a>
 	</div>
 </section>
 
@@ -72,7 +73,41 @@
 		</div>	
 	</div>
 </div>
-
+<div id="choosebox-modal" class="modal white" style="width:40%;height:100%">
+		<div class="modal-content">
+		  <span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
+		  <h2 class="center">Choose box</h2>
+		  <div class="clearfix"></div>
+		  <div class="row" *ngIf="pack_box">
+			<div class="col s12 m12" *ngFor="let item of pack_box">
+			  <div class="card center">
+				  <!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
+				  <div class="include-multi-box">
+					<div class="col s12 m3">
+					  <div class="card-image">
+						<img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+					  </div>
+					</div>
+					<div class="col s12 m6">
+					  <div class="card-content">
+						<span>{{item.title}}</span>
+					  </div>
+					</div>
+					<div class="col s12 m3">
+					  <div class="card-content">
+						<span >Rs. {{item.offer_price}} </span>
+					  </div>
+					  <div class="clearfix"></div>
+					  <a class="modal-close btn right orange" routerLink="/product/{{item.url}}" [queryParams]= "{ref : 'pack',id: this.pack_id}">Select</a>
+					</div>
+					<div class="clearfix"></div>
+				  </div> 
+				</div>
+			</div>
+		  </div>
+		  <div class="clearfix"></div>
+		</div>
+	  </div>
 
 
 

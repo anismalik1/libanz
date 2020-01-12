@@ -86,8 +86,8 @@
                                     <tbody>
                                         <tr *ngFor="let row of transactions | paginate: { id: 'wallet-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: w_p, totalItems: wallet_counts }; let i=index">
                                             <td>{{i+1}}</td>
-                                            <td *ngIf="row.activity_type == 6 || row.activity_type == 7 || row.activity_type == 14 || row.activity_type == 8">{{row.tr_id}}</td>
-                                            <td *ngIf="row.activity_type != 6 && row.activity_type != 14 && row.activity_type != 7 && row.activity_type != 8">{{row.order_id}}</td>
+                                            <td *ngIf="row.activity_type == 6 || row.activity_type == 4 || row.activity_type == 7 || row.activity_type == 14 || row.activity_type == 8">{{row.tr_id}}</td>
+                                            <td *ngIf="row.activity_type != 6 && row.activity_type != 4 && row.activity_type != 14 && row.activity_type != 7 && row.activity_type != 8">{{row.order_id}}</td>
                                             <td>{{row.transaction_id}}</td>
                                             <td>{{row.subscriber_id}}</td>
                                            <td>{{row.history_time | date: date:'dd M, Y'}}<br><time>{{row.history_time | date:'hh:mm a'}}</time></td>
@@ -100,7 +100,8 @@
                                             <td *ngIf="row.transaction_type == 1" class="green-text"> <i class="icon-inr"></i>{{row.amount}}</td>
                                             <td *ngIf="row.transaction_type == 3" class="green-text"> <i class="icon-inr"></i>{{row.amount }}</td>
                                             <td> <i class="icon-inr"></i>{{row.commission_surcharge}}</td>
-                                            <td *ngIf="row.transaction_type == 1"> <i class="icon-inr"></i>{{row.balance_before*1+row.amount*1+row.commission_surcharge*1 }}</td>
+                                            <td *ngIf="row.transaction_type == 1 && row.payment_status == 1"> <i class="icon-inr"></i>{{row.balance_before*1+row.amount*1+row.commission_surcharge*1 }}</td>
+                                            <td *ngIf="(row.transaction_type == 1 && row.payment_status == 2) ||(row.transaction_type == 1 && row.payment_status == 3)"> <i class="icon-inr"></i>{{row.balance_before }}</td>
                                             <td *ngIf="row.transaction_type == 2"> <i class="icon-inr"></i>{{row.balance_before*1-row.amount*1+row.commission_surcharge*1 }}</td>
                                             <td *ngIf="row.transaction_type == 3"> <i class="icon-inr"></i>{{row.balance_before+row.commission_surcharge*1 }}</td>
                                             <td *ngIf="row.paymethod == 1">Wallet</td>

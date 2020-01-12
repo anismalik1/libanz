@@ -38,7 +38,7 @@
                                     <option value="3">Failed</option>
                                 </select>
                                 </div> -->
-                                <div class="col s12 m3">
+                                <!-- <div class="col s12 m3">
                                     <input type="text" class="no-margin" placeholder="Remark">
                                 </div>
                                 <div class="col s12 m2">
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col s12 m2 right-align">
                                     <a class='btn orange inline-block' href='javascript:' (click)="fetch_topup(0)">Pending Topup</a>
-                                </div>
+                                </div> -->
                             </div>
                         </form>
                     </div>
@@ -62,56 +62,47 @@
                             <table id="datatable" class="display responsive-table datatable-example">
                                 <thead>
                                     <tr>
-                                        <th width="35px" nowrap="nowrap"> 
-                                            <input type="checkbox" id="all" class="select-all"/>
-                                      <label for="all"></label>
-                                  </th>
+                                       
                                         <th width="60px" nowrap="nowrap">S.No.</th>
                                         <th width="80px" nowrap="nowrap">Order Id</th>
                                         <th width="100px" nowrap="nowrap">Order Date</th>
                                         <!-- <th width="100px" nowrap="nowrap">Name</th>
                                         <th width="100px" nowrap="nowrap">Contact No.</th> -->
                                         <th width="80px" nowrap="nowrap">Amount</th>
+                                        <th width="80px" nowrap="nowrap">Commission/Surcharge</th>
                                         <th width="125px" nowrap="nowrap">Payment Type</th>
-                                        <th width="105px" nowrap="nowrap">Bank Name</th>
                                         <th nowrap="nowrap">Bank ref.</th>
                                         <th nowrap="nowrap">Status</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th width="35px" nowrap="nowrap"> 
-                                            <input type="checkbox" id="all" class="select-all"/>
-                                      <label for="all"></label>
-                                  </th>
+                                        
                                         <th width="60px" nowrap="nowrap">S.No.</th>
                                         <th width="80px" nowrap="nowrap">Order Id</th>
                                         <th width="100px" nowrap="nowrap">Order Date</th>
                                         <!-- <th width="100px" nowrap="nowrap">Name</th>
                                         <th width="100px" nowrap="nowrap">Contact No.</th> -->
                                         <th width="80px" nowrap="nowrap">Amount</th>
+                                        <th width="80px" nowrap="nowrap">Commission/Surcharge</th>
                                         <th width="125px" nowrap="nowrap">Payment Type</th> 
-                                        <th width="105px" nowrap="nowrap">Bank Name</th>
                                         <th nowrap="nowrap">Bank ref.</th>
                                         <th nowrap="nowrap">Status</th>
                                     </tr>
                                 </tfoot>
                                 <tbody *ngIf="topup_counts > 0">			
 									<tr *ngFor="let topup of topups | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: topup_counts };let i = index">
-                                        <td nowrap="nowrap"> 
-                                            <input type="checkbox" id="{{i+1}}" />
-										<label for="{{i+1}}"></label>
-										</td>
+                                        
                                         <td nowrap="nowrap">{{i+1}}</td>
-                                        <td nowrap="nowrap">{{topup.id}}</td>
-                                        <td nowrap="nowrap">{{topup.date | date: date:'dd M, Y'}}<br><time>{{topup.date | date:'HH:mm a'}}</time></td>
+                                        <td nowrap="nowrap">{{topup.order_id}}</td>
+                                        <td nowrap="nowrap">{{topup.history_time | date: date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
                                         <!-- <td nowrap="nowrap">{{topup.name}}</td>
                                         <td nowrap="nowrap">{{topup.phone}}</td> -->
                                         <td nowrap="nowrap"><i class="icon-inr"></i>{{topup.amount}}</td>
-                                        <td nowrap="nowrap">{{topup.paymethod}}</td>
-                                        <td nowrap="nowrap">{{topup.paybankaccount}}</td>
-                                        <td nowrap="nowrap">{{topup.ref_id}}</td>
-                                        <td nowrap="nowrap"><span class="green white-text padd1" *ngIf="topup.sent==1">Success</span><span class="orange white-text padd1" *ngIf="topup.sent==0">Pending</span></td>
+                                        <td nowrap="nowrap">{{topup.payment}}</td>
+                                        <td nowrap="nowrap">{{topup.commission_surcharge}}</td>
+                                        <td nowrap="nowrap">{{topup.transaction_id}}</td>
+                                        <td nowrap="nowrap">{{topup.status}}</td>
                                     </tr>  
                                 </tbody>
                                 <tbody *ngIf="topup_counts == 0">

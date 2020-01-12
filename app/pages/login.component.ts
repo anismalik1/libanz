@@ -41,6 +41,7 @@ constructor( public todoservice : TodoService,
   private route : ActivatedRoute,
   private fb: FormBuilder
 ) {
+  console.log(this.route.snapshot.params['name']);  
   if(this.route.snapshot.params['name'])
   {
     this.ref = this.route.snapshot.params['name'];
@@ -131,12 +132,17 @@ login_submit(login)
           this.user_favourites();
           if(this.ref)
           {
-            this.router.navigate(['/'+this.ref.replace('#', "/")]); 
+            if(this.ref.indexOf("order-id") > 0)
+              window.location.href =   '/'+this.ref.replace('#', "/").replace('%3D','=').replace('%3F','?');
+            else
+              this.router.navigate(['/'+this.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
           }
           else
           {
             this.router.navigate(['/']);
+            
           }
+         
         }
         else  
         {

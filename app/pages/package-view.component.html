@@ -90,12 +90,12 @@
 		  <div class="packages-channels packages-channels-new">
 		  <div class="row">
 				<div class="col l4 s12 m6 smart-packs" *ngFor="let channel_pack of item.child">
-				<div class="smart-inner">
+				<div class="smart-inner ">
 					<!-- <span class="when-check" id="check-pack-{{channel_pack.id}}"><i class="material-icons">check_circle</i></span> -->
           <h4 class="grey-text">{{channel_pack.title}}</h4>
           <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{channel_pack.price}}</span><span *ngIf="multienable">{{channel_pack.multi_price}}</span>  <small>@ {{channel_pack.month}} Month</small></span>
           <span class="font-size-change1" [innerHTML] = "remove_new_line(channel_pack.short_description)"></span>
-          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set">Channels</a>
+          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" target="_blank" class="font-size-change1 chng-set">Channels</a>
           <a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set grey lighten-3 black-text modal-trigger" (click)="choose_box_for_this_pack(item.id,channel_pack.id)">Buy Now</a>
 				  
 				  </div>

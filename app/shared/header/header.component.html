@@ -75,18 +75,28 @@
 	<!-- mobile top menu start-->	
 	<div class="mobile-top-menu">
 		<ul id="mobile-dashboard-menus">
-			<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
-			<li><a [routerLink]="['/dashboard/dth-orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
-			<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
-			<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span>Value Transfer</a></li>
-			<li><a [routerLink]="['/dashboard']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/dashboard.png" /></span>Dashboard</a></li>
-			<li><a [routerLink]="['/recharge/for/mobile']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/smartphone-call.png" /></span>Recharge</a></li>
-			<li><a [routerLink]="['/dashboard/recharge']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Recharge Orders</a></li>
-			<li><a [routerLink]="['/dashboard/complaints']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Complaints</a></li>	
-			<li><a [routerLink]="['/dashboard/topup-request']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/top-up.png" /></span>Topup Request</a></li>	
-			<li><a [routerLink]="['/dashboard/commission-structure']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/percentage.png" /></span>Commissions</a></li>	
-			<li><a [routerLink]="['/dashboard/edit-profile']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/pencil.png" /></span>Edit Account</a></li>	
-			
+			<li>
+				<ul>
+					<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
+					<li><a [routerLink]="['/dashboard/dth-orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
+					<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
+					<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span>Value Transfer</a></li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li><a [routerLink]="['/dashboard']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/dashboard.png" /></span>Dashboard</a></li>
+					<li><a [routerLink]="['/recharge/for/mobile']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/smartphone-call.png" /></span>Recharge</a></li>
+					<li><a [routerLink]="['/dashboard/recharge']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Recharge Orders</a></li>
+					<li><a [routerLink]="['/dashboard/complaints']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Complaints</a></li>	
+				</ul>
+			</li>
+				<li>
+					<ul>
+						<li><a [routerLink]="['/dashboard/topup-request']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/top-up.png" /></span>Topup Request</a></li>	
+						<li><a [routerLink]="['/dashboard/commission-structure']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/percentage.png" /></span>Commissions</a></li>	
+					</ul>
+				</li>
 		</ul>
 	</div>
 	
@@ -109,7 +119,7 @@
 			
 			<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 			<img class="responsive-img vertical-align-middle"  src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/>
-				<h3>{{this.todoservice.get_user_name()}}</h3>
+				<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
 			<p>{{this.todoservice.get_user_phone()}}</p>
 			<div class="clearfix"></div>
 			</div>

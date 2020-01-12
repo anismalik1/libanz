@@ -126,6 +126,7 @@ export class HeaderComponent implements OnInit{
               this.router.routeReuseStrategy.shouldReuseRoute = function(){
                 return false;
              }
+            //console.log(url) 
             this.router.navigated = false;
             this.router.navigate([url]);
             }
@@ -497,7 +498,7 @@ export class HeaderComponent implements OnInit{
     $(document).ready(function(){
       //$(".side-menu").swipe( {fingers:1} );
       $('#mobile-dashboard-menus').lightSlider({
-        item: 4,
+        item: 1,
         auto: false,
         loop: false,
         controls: true,
