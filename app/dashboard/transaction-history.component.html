@@ -46,7 +46,7 @@
                     <div class="card">
                         <div class="card-content">
                             <h3 class="font600 inline-block">Wallet Transaction History</h3>
-                            <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a>
+                            <!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a> -->
                             <div class="overflow-scroll">							
                                 <table id="datatable2" class="display responsive-table datatable-example">
                                     <thead>
@@ -63,7 +63,8 @@
                                             <th nowrap="nowrap" width="205px">Commission/ Surcharge/ Cashback</th>
                                             <th nowrap="nowrap" width="160px">Balance After Trans</th>
                                             <th nowrap="nowrap" width="140px">Payment Method</th>
-                                            <th nowrap="nowrap" width="95px">Status</th>
+                                            <th nowrap="nowrap" width="95px">Payment Status</th>
+                                            <th nowrap="nowrap" width="95px">Order Status</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -80,14 +81,14 @@
                                             <th nowrap="nowrap" width="205px">Commission/ Surcharge/ Cashback</th>
                                             <th nowrap="nowrap" width="160px">Balance After Trans</th>
                                             <th nowrap="nowrap" width="140px">Payment Method</th>
-                                            <th nowrap="nowrap" width="95px">Status</th>
+                                            <th nowrap="nowrap" width="95px">Payment Status</th>
+                                            <th nowrap="nowrap" width="95px">Order Status</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr *ngFor="let row of transactions | paginate: { id: 'wallet-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: w_p, totalItems: wallet_counts }; let i=index">
                                             <td>{{i+1}}</td>
-                                            <td *ngIf="row.activity_type == 6 || row.activity_type == 4 || row.activity_type == 7 || row.activity_type == 14 || row.activity_type == 8">{{row.tr_id}}</td>
-                                            <td *ngIf="row.activity_type != 6 && row.activity_type != 4 && row.activity_type != 14 && row.activity_type != 7 && row.activity_type != 8">{{row.order_id}}</td>
+                                            <td>{{row.order_id}}</td>
                                             <td>{{row.transaction_id}}</td>
                                             <td>{{row.subscriber_id}}</td>
                                            <td>{{row.history_time | date: date:'dd M, Y'}}<br><time>{{row.history_time | date:'hh:mm a'}}</time></td>
@@ -113,7 +114,7 @@
                                             <td *ngIf="row.payment_status == 2"><span class="red white-text padd1">Fail</span></td>
                                             <td *ngIf="row.payment_status == 0"><span class="orange white-text padd1">Pending</span></td>
                                             <td *ngIf="row.payment_status == 3"><span class="orange white-text padd1">Pending</span></td>
-                                            
+                                            <td><span class="padd1">{{row.status}}</span></td> 
                                         </tr>
                                     </tbody>	
                                 </table>

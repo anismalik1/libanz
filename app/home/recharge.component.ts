@@ -52,6 +52,7 @@ export class RechargeComponent implements OnInit {
   prepaid_list : number = 1;
   dthminlength : number = 8;
   dthmaxlength : number = 12;
+  validationtext : string = '';
   viewrange : number = 0;
   showstd : number = 0;
   mobilegroup : FormGroup;
@@ -317,26 +318,30 @@ export class RechargeComponent implements OnInit {
     {
       if(data == 68)
       {
-        this.dthminlength = 11;
-        this.dthmaxlength = 11;
+        this.validationtext = "Please Enter Registered Mobile No./ Viewing Card No.";
+        this.dthminlength = 10;
+        this.dthmaxlength = 10;
       }else if(data == 69)
       {
-        this.dthminlength = 8;
-        this.dthmaxlength = 12;
-        this.viewrange = 0;
+        this.dthminlength = 11;
+        this.dthmaxlength = 0;
+        this.validationtext = "Please Enter 10 digits long Smart Card Number .";
       }else if(data == 71)
       {
         this.dthminlength = 10;
         this.dthmaxlength = 10;
+        this.validationtext = "Subscriber ID starts with 1 and 10 digits long. To locate it, press the home button on remote.";
       }else if(data == 72)
       {
         this.dthminlength = 8;
         this.dthmaxlength = 12;
+        this.validationtext = "Please Enter 10 digits long Customer ID. To know your Customer ID SMS 'ID' to 566777 from your registered mobile number.";
         this.viewrange = 0;
       }else if(data == 74)
       {
         this.dthminlength = 10;
         this.dthmaxlength = 10;
+        this.validationtext = "Customer ID starts with 3 and is 10 digits long. To locate it, press the MENU button on remote";
       }
     }
     else if(s == 'card')
@@ -545,7 +550,7 @@ export class RechargeComponent implements OnInit {
         this.spinner.hide();
         this.rechargeData.operator_api_id = data.recharge_id;
         this.rechargeData.recharge_type = s;
-        //this.addto_recharge_cart(this.rechargeData);
+       
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
@@ -554,12 +559,17 @@ export class RechargeComponent implements OnInit {
 			  }
 			  if(!$.isEmptyObject(data))
 			  {
+          if(data.record_exist)
+          {
+            this.rechargeData.record_exist = data.record_exist
+          }
 				this.rechargeData.api_img = data.api_img;	
 				this.rechargeData.cat_title = data.cat_title;	
 				this.rechargeData.recharge_name = data.recharge_name;	
 				this.rechargeData.title = data.title;
         this.recharge_ini = 2;
-        if(this.todoservice.get_user().wallet < this.rechargeData.recharge_amount)
+        //console.log(this.todoservice.get_user_wallet_amount())
+        if(this.todoservice.get_user_wallet_amount() < this.rechargeData.recharge_amount)
         {
           this.other_to_pay(2);
         }
@@ -613,7 +623,7 @@ recharge_handle()
         }
       )
  }
- other_to_pay(paystep)
+  other_to_pay(paystep)
   {
     this.pay_step = paystep;
   }

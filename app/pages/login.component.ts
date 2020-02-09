@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit{
   private ref : string; 
   logingroup : FormGroup;
   page :string =  "/login";
+  notification : string = '';
   remember : any = {rm:false,ph:'',pw : ''};  
 constructor( public todoservice : TodoService,
   private toastr: ToastrManager,
@@ -41,7 +42,7 @@ constructor( public todoservice : TodoService,
   private route : ActivatedRoute,
   private fb: FormBuilder
 ) {
-  console.log(this.route.snapshot.params['name']);  
+  //console.log(this.route.snapshot.params['name']);  
   if(this.route.snapshot.params['name'])
   {
     this.ref = this.route.snapshot.params['name'];
@@ -62,6 +63,9 @@ constructor( public todoservice : TodoService,
   }
  }
 ngOnInit() {
+  if(this.todoservice.get_param('reset') && this.todoservice.get_param('reset') == 'true')
+    this.notification = "Your Password Reset Successful. Login here.";
+     
   if(this.get_token())
     {
       this.router.navigate(['/']);

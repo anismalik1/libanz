@@ -370,7 +370,7 @@ export class ProductDetailsComponent implements OnInit{
   }
 
 
-  fetch_product_data(p_id,cat_id)
+  fetch_product_data(p_id,cat_id) 
 	{
     this.channel_display = 0; 
       this.spinner.show();
@@ -534,6 +534,19 @@ export class ProductDetailsComponent implements OnInit{
 
   fetch_all_multi(category_id,product_id)
   {
+    if($('[name="pincode"]').length > 0)
+    {
+      var pincode =  $('[name="pincode"]').val();
+      if(pincode == null || pincode == '')
+      {
+        this.toastr.errorToastr("Please Enter Pincode.");
+        $('html, body').animate({
+          scrollTop: $("#monthly-packages").offset().top
+        }, 1000);
+        $('[name="pincode"]').css("border-bottom", "1px solid #ff6a00");
+        return false;
+      }
+    }
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
@@ -676,12 +689,38 @@ export class ProductDetailsComponent implements OnInit{
 
   buyNow(p_id)
   {
-    if(!this.product.title.includes("multi"))
+    if($('[name="pincode"]').length > 0)
     {
-      
+      var pincode =  $('[name="pincode"]').val();
+      if(pincode == null || pincode == '')
+      {
+        this.toastr.errorToastr("Please Enter Pincode.");
+        $('html, body').animate({
+          scrollTop: $("#monthly-packages").offset().top
+        }, 1000);
+        $('[name="pincode"]').css("border-bottom", "1px solid #ff6a00");
+        return false;
+      }
+      this.product.pincode = pincode;
+      this.productservice.set_pincode(pincode);
     }
+    
+
     if(this.multienable)
-      this.product.subscriber_id = $('[name="subscriber_id"]').val();
+    {
+      var sub_id =  $('[name="subscriber_id"]').val();
+      if(sub_id == null || sub_id == '')
+      {
+        this.toastr.errorToastr("Please Enter Subscriber Id OR Phone Number");
+        $('html, body').animate({
+          scrollTop: $("#monthly-packages").offset().top
+        }, 1000);
+        $('[name="subscriber_id"]').css("border-bottom", "1px solid #ff6a00");
+        return false;
+      }
+      this.product.subscriber_id =sub_id;
+    }
+      
     if(this.pack_selected)
       this.product.pack_selected = this.pack_selected;
     if($('#kit-packages').length > 0 )

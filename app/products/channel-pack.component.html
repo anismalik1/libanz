@@ -33,8 +33,8 @@
 			</ul>
 		</span></h1>
 		<p class="font-size-change1 font600">{{product_pack_info.short_description}}*</p>
-		<span class="font-size-change1"><i class="icon-inr"></i> {{product_pack_info.price}} @ {{month}} Month</span><br>
-		<a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set btn orange modal-trigger" (click)="choose_box_for_this_pack(product_pack_info.parent_id,product_pack_info.id)">Buy Now</a>
+		<span class="font-size-change1"><i class="icon-inr"></i> {{product_pack_info.price}} @ {{month}} Month</span><br> 
+		<a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set btn orange modal-trigger" (click)="choose_box_for_this_pack(product_pack_info.parent_id,product_pack_info.id)" *ngIf="this.category">Buy Now</a>
 	</div>
 </section>
 

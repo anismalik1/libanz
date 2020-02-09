@@ -135,7 +135,10 @@
 						</div>                                                                                                      
 						
 					</div>
-					<div class="col s12 m12 l2">
+					<div class="no-proceed red-text" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
+						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
+					</div>
+					<div class="col s12 m12 l2" *ngIf="!rechargeData.record_exist">
 						<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount}}</button>
 					</div>
 					<div class="clearfix"></div>
@@ -168,8 +171,9 @@
 								</span>
 								</mat-autocomplete>
 							</mat-form-field>
-							<!-- <input placeholder="Enter Mobile Number"  maxlength="10" minlength="10" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('mobile','recharge_id',$event)"> -->
+							<!-- <input placeholder="Enter Mobile Number"  maxlength="10" minlength="10" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('mobile','recharge_id',$event)"> --> 
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Mobile Number" id="mobid" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>  
+							<div class="red-text" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched">Enter a Valid Number</div>  
 						</div>						
 						<div class="input-field col s12 m12" id="prepaid-list">
 							<mat-form-field>
@@ -222,7 +226,7 @@
 				<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)" *ngIf="recharge_type.dth">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
-							<mat-form-field>
+							<mat-form-field> 
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
 									<span *ngFor="let item of operators.DTH;">
 										<mat-option [value]="item.id">
@@ -236,8 +240,9 @@
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Your Viewing Card Number" name="recharge_id" maxlength="{{dthmaxlength}}" minlength="{{dthminlength}}" id="amount" type="text" class="validate no-margin" formControlName="recharge_id" (keyup)="next_to('dth','recharge_id',$event)">
 							<a href="javascript:" class="wrong-detail" id="mobid" *ngIf="!dthgroup.controls['recharge_id'].valid && dthgroup.controls['recharge_id'].touched"><i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator">close</i></a>
+							<div class="red-text" *ngIf="!dthgroup.controls['recharge_id'].valid && dthgroup.controls['recharge_id'].touched">Enter a Valid Number.</div> 
+							<div class="green-text">{{validationtext}}</div> 	
 						</div>
-						<span class="orange-text ca-num-count" *ngIf="viewrange == 1">Enter {{dthminlength}} digits long Id.</span>
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Amount" maxlength="5" type="number" pattern="[0-9]+" class="validate no-margin" formControlName="amount">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!dthgroup.controls['amount'].valid && dthgroup.controls['amount'].touched"><i class="material-icons">close</i></span>
@@ -288,7 +293,7 @@
 										</span>
 									</mat-select>
 								</mat-form-field>
-								<span class="wrong-detail" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number">close</i></span> 
+								<span class="wrong-detail" id="mobid" *ngIf="!datacardgroup.controls['operator'].valid && datacardgroup.controls['operator'].touched"><i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator">close</i></span> 
 							</div>  
 						</div>
 						<div class="input-field col s12 m12">

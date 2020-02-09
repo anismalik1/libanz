@@ -128,8 +128,9 @@
           		<div class="divider"></div>
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-					<button class="btn waves-effect waves-light orange right" type="Submit" (click)="goto_address()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
-				</div>
+								<button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="goto_address()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
+								<button class="btn waves-effect waves-light orange right hide button-two" type="Submit" (click)="goto_pay()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
+							</div>
           	
           	<div class="divider"></div>
         	</div>
@@ -159,11 +160,11 @@
         		<div class="col s10 m10 offset-m1">
 								<div class="name margin-top-cart user-address">
 									<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
-									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true">M-Boss</label>
+									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add New Address</span></label>
 									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() != true">Add New Address</label>
 									<span *ngIf="this.productservice.is_mboss_enable()">
 											<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
-											<label for="address-0" class="font600 black-text">REG</label>
+											<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
 									</span>	
 									
 								</div>
@@ -188,7 +189,7 @@
 														</div>
 														<div class="row no-margin">
 															<div class="input-field col s12 m6">
-																<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
+																<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" [(value)]="this.pincode" value="{{this.pincode}}">
 																<label for="pincode">Pincode*</label>
 																<div class="center" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
 																	<span class="red-text ">*Enter a Valid Pincode.</span>
@@ -209,8 +210,8 @@
 															</div>
 															<div class="input-field col s12 m6">
 																<mat-form-field>
-																	<mat-select placeholder="Choose your Circle*" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
-																		<mat-option [value]="item.name" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																	<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
+																		<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
 																	</mat-select>
 																</mat-form-field>
 															</div>
@@ -283,7 +284,7 @@
           <div class="card fourth-line">
             <div class="card-content black-text padd-only no-margin">
             	<div class="row no-margin">
-            		<div class="col s1 number center margin-top-cart1">
+            		<div class="col s1 number center margin-top-cart1 payment-number">
             			<span>4</span>
             		</div>
             		<div class="col s8 my-cart">

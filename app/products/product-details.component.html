@@ -130,17 +130,9 @@
 						</li>
 					</ul>
 				<br/>
-				<ul class="monthly-packages margin-top kit-pack" *ngIf="pincode">
-						<li>
-							<span class="font-size-change1 font600 grey-text">Pincode</span>
-						</li>
-						<li>
-							<span>{{this.pincode}}</span>
-						</li>
-					</ul>	
-				<br/>	
+					
 					  <div class="clearfix"></div>
-					  <div class="col m4 no-padding" *ngIf="circles">
+					  <div class="col m4 no-padding" *ngIf="circles"> 
 							<mat-form-field>
 								<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)">
 									<span *ngFor="let item of circles;">
@@ -151,17 +143,26 @@
 								</mat-select>
 							</mat-form-field>
 					  </div>
-					  <div class="clearfix"></div>  
+					  <div class="clearfix"></div> 
+					  <ul class="monthly-packages margin-top kit-pack" *ngIf="product && product.title.toLowerCase().includes('airtel')">
+						<li>
+							<span class="font-size-change1 font600 grey-text">Pincode</span>
+						</li>
+						<li>
+							<input type="text" style="width:180px" name="pincode" placeholder="Pincode" value="{{this.pincode}}" [disabled]="this.pincode" >
+						</li>
+					</ul>
+					<div class="clearfix"></div> 
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="multienable">
 						<li>
 							<span class="font-size-change1 font600 grey-text">Multi</span>
 						</li>
 						<li>
-							<input id="multi-enable" type="checkbox" (change)="tick_multi()" [checked]="multienable">
+							<input id="multi-enable" type="checkbox" (change)="tick_multi()" [checked]="multienable" disabled>
 							<label for="multi-enable"></label>
 						</li>
 						<li *ngIf="multienable">
-							<input type="text" name="subscriber_id" placeholder="Subscriber Id">
+							<input type="text" style="width:180px" name="subscriber_id" placeholder="Subscriber Id OR Phone No">
 						</li>
 					</ul>
 					<div class="review-ratings">

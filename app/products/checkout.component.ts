@@ -36,6 +36,8 @@ export class CheckoutComponent implements OnInit{
   cart_items : any;
   circles : any;
   pincode : any;
+  region : any;
+  reg_address : number = 0; 
   tab_address : any;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
@@ -46,7 +48,7 @@ constructor( public todoservice : TodoService,
   private toastr: ToastrManager,
   vcr: ViewContainerRef,
   private fb: FormBuilder,
-  private router : Router) {
+  private router : Router) { 
     this.addressformgroup = fb.group({
       'name' : [null,Validators.compose([Validators.required])],
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -70,7 +72,20 @@ ngOnInit() {
     else
       full_url[2] = '#'+full_url[2];
     this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
+    return false;
   } 
+  
+  if(this.productservice.get_pincode())
+  {
+    this.pincode = this.productservice.get_pincode()
+    this.addressformgroup.controls['pincode'].setValue(this.pincode);
+    this.regaddressformgroup.controls['pincode'].setValue(this.pincode);
+  }
+  if(this.productservice.get_region())
+  {
+    this.region = this.productservice.get_region();
+    this.addressformgroup.controls['state'].setValue(this.region);
+  }
   if(this.todoservice.get_param('pincode'))
   {
     this.pincode = this.todoservice.get_param('pincode');
@@ -157,11 +172,12 @@ ngOnInit() {
   });
   $('body').delegate('.chngs3','click', function() {
     $('.modal').modal();
-      $('.checkout_3').removeClass('hide');	
+      $('.checkout_3').show();	
       $('.chngs2').addClass('hide');								
+      $('.chng3').addClass('hide');								
       $('.checkout_4').addClass('hide');									
       $('.checkout_2').addClass('hide');									
-      $('.naam3').addClass('hide');									
+      //$('.naam3').addClass('hide');									
       $('.third-line').addClass('white');									
       $('.fourth-line').removeClass('white');									
   });
@@ -188,6 +204,9 @@ ngOnInit() {
   this._renderer2.appendChild(this._document.body, script);
   this.get_checkout_data();
   this.todoservice.get_user_data();
+  console.log(this.pincode);
+  console.log(this.region)
+  
 }
 cod_apply()
 {
@@ -254,6 +273,18 @@ get_checkout_data()
           }
         }
         this.spinner.hide();
+        if(this.productservice.cart_items.length == 1)
+        {
+          if(this.productservice.cart_items[0].product.title.toLowerCase().includes('multi') && this.todoservice.get_user_type() == 2)
+          {
+            $('.second-line').hide();
+            //$('.checkout_3').hide();
+            $('.payment-number span').text('3');
+            $('.second-line').hide();
+            $('.checkout_3 .button-one').hide();
+            $('.checkout_3 .button-two').removeClass('hide');
+          }
+        }
       }
     )  
   }
@@ -350,8 +381,10 @@ edit_addr(form)
 }
 change_addr_form(section)
 {
+  if(section == 'reg-address')
+    this.reg_address = 1;
   $('#add-new-address').hide();
-  $('#mboss-address').hide();
+  $('#reg-address').hide();
   $('#'+section).show();
 }
 reg_addr(formdata)
@@ -435,9 +468,11 @@ goto_orders()
 }
 goto_pay()
 {
+  $('.checkout_3').hide();
   $('.checkout_2').addClass('hide');
   $('.checkout_4').removeClass('hide');
   $('.chngs2').removeClass('hide');
+  $('.chngs3').removeClass('hide');
   $('.third-line').removeClass('white');
   $('.fourth-line').addClass('white');
 }
@@ -475,7 +510,7 @@ checkout_items(type)
   this.spinner.show();
   let address_id = $('.user-address input:checked').val();
   let wallet_type = $('#wallet-type input:checked').val();
-  let data  = {token : this.get_token(),address_id: address_id , products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
+  let data  = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
   
   this.todoservice.checkout_items(data)
     .subscribe(

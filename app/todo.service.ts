@@ -44,7 +44,7 @@ export class TodoService {
           if(data.status == 'Invalid Token')
           {                                                     
             this.authservice.clear_session();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/proceed/login']);
           }
           this.set_user_data(data.USER);
           let storeddata = JSON.parse(localStorage.getItem('app_token'));

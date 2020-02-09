@@ -29,6 +29,7 @@ export class ForgotPasswordComponent implements OnInit{
   public phone : string;
   public password : string;
   public step : number = 1;
+  public tick : number;
   back_to_login : boolean = false;
   resetgroup : FormGroup;
   ngOnInit() {
@@ -48,10 +49,11 @@ export class ForgotPasswordComponent implements OnInit{
         data => 
         {
           let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
+          data =  JSON.parse(b.replace(/\\/g, '')); 
           if(data.status == true)
           {
             this.step = 2;
+            this.tick_clock(30);
           }
           else
           {
@@ -61,6 +63,21 @@ export class ForgotPasswordComponent implements OnInit{
       )  
   }
 
+  tick_clock(tick)
+  {
+    if(tick == 0)
+      return false;
+    this.tick = tick - 1;
+    setTimeout(() => {
+          this.tick_clock(this.tick); 
+        }, 1000);
+  }
+
+  resend_otp()
+  {
+    var data = {phone : this.phone};
+    this.process_to_reset(data)
+  }
   reset_password(form)
   {
     form.phone = this.phone
@@ -79,7 +96,7 @@ export class ForgotPasswordComponent implements OnInit{
           {
             this.toast.errorToastr(data.msg);
             this.back_to_login = true;
-            this.router.navigate(['/home#login']);
+            this.router.navigate(['/proceed/login?reset=true']);
           }
           else
           {

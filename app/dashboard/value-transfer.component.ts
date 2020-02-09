@@ -33,7 +33,7 @@ export class ValueTransferComponent implements OnInit{
   {
     if(formdata.phone == '')
     {
-      this.toastr.successToastr(" Please Enter the registered number to whom transfer", 'Failed! ');
+      this.toastr.successToastr(" Please Enter the registered number to whom Transfer", 'Failed! ');
       return false;
     }
     this.spinner.show();
@@ -56,7 +56,7 @@ export class ValueTransferComponent implements OnInit{
             this.step = 2;
           }
           else{
-            this.toastr.errorToastr(" Please Check the Number and try again",' Failed ');
+            this.toastr.errorToastr(data.msg,' Failed ');
           }
         }
       )  

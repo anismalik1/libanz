@@ -824,6 +824,10 @@
 										<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
 										<!-- <span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span> -->
 									</div>
+									<div class="col s12 m12">
+										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
+										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+									</div>
 									<div class="clearfix"></div>
 									<div class="col s12 m12 ">
 										<a class="blue-text font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>

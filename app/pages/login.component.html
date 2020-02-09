@@ -21,6 +21,7 @@
 					<div class="card-content"> 
 						<div class="center">
 							<h3 class="font600 orange-text">Welcome back!</h3>
+							<div class="notification-text green-text" *ngIf="notification != ''">{{notification}}</div>
 							<span id="page-content"></span>
 							<form [formGroup]="logingroup" class="margin-top sec-7" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
 								<div class="row">

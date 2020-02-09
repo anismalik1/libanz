@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product.entities';
 import { Item } from './item.entities';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Headers,Http,HttpModule } from '@angular/http';
 import 'rxjs/add/observable/of';
@@ -22,7 +23,7 @@ export class ProductService {
   public cartItems: number = 0;
   public cart_items : Item[] = [];
   cod_invalid = false; 
-  constructor(private http : Http )
+  constructor(private http : Http, private router : Router )
   {
     this.loadCart();
   } 
@@ -171,6 +172,19 @@ export class ProductService {
     this.cartItemsCount();   
   }
 
+  set_pincode(pincode)
+  {
+    localStorage.setItem('pincode',JSON.stringify(pincode));
+  }
+
+  get_pincode()
+  {
+    if( localStorage.getItem('pincode') != null )
+    {
+      return JSON.parse(localStorage.getItem('pincode'));
+    }
+    return false;
+  }
   set_region(region)
   {
     localStorage.setItem('region',JSON.stringify(region));
@@ -412,6 +426,14 @@ export class ProductService {
       }
     }
     localStorage.setItem('cart',JSON.stringify(cart));
+    if(1==1)
+    {
+      this.router.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+      }
+    this.router.navigated = false;
+    this.router.navigate(['/product/checkout']);
+    }
     this.loadCart();
     this.cartItemsCount();
   }

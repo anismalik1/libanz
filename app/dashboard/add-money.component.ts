@@ -89,6 +89,7 @@ export class AddMoneyComponent implements OnInit{
 	check_method(data)
 	{
 		this.paymethod = data;
+		console.log(data);
 		if(data == undefined)
 		{
 			$('.default-hide').addClass('hide');
@@ -140,6 +141,7 @@ export class AddMoneyComponent implements OnInit{
 		  .subscribe( 
 			data => 
 			{
+				$('.send-topup button,.send-gateway button').text('Send Topup Request').prop("disabled", false);	
 			  if(data.status == 'success')
 			  {
 					this.toastr.successToastr(data.msg, 'Success!');
@@ -151,6 +153,10 @@ export class AddMoneyComponent implements OnInit{
 					}	
 					this.router.navigated = false;
 					this.router.navigate(['/dashboard/add-money']);
+				}
+				else if(data.status == 'error')
+				{
+					this.toastr.errorToastr(data.msg, 'Failed!');
 				}
 				else if(data.status == 'red' && data.red_auth == 'card')
 				{
