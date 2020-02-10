@@ -24,6 +24,10 @@
     padding: 8px 24px 24px 24px;
     border-radius: 0 0 2px 2px;
 }
+span.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
 </style>
 </div>
 <section class="recharge-section hide-on-med-and-down" *ngIf="recharge_ini == 1">
@@ -55,7 +59,7 @@
 </section> 
 
 <!-- Responsive icon -->
-<section class="recharge-section show-on-medium-and-down hide-on-med-and-up">
+<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
 	<div class="container">
 		<!-- <div class="row">
 			<div class="col s12">
@@ -102,7 +106,7 @@
 		</div> -->
 		<div class="col s12">
 			<ul class="back-icon">
-				<li>  <a class="black-text"routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp; Back</a> </li>
+				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp; Back</a> </li>
 			</ul>
 		</div>	
 	</div>
@@ -242,6 +246,7 @@
 						</div>
 					</div>
 				</form>
+					<div class=" dth-box">
 				<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)" *ngIf="recharge_type.dth">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
@@ -277,6 +282,7 @@
 						</div>
 					</div>
 				</form>
+				</div>
 				<form method="post" [formGroup]="datacardgroup" #datacardform = "ngForm" (ngSubmit)="recharge_init('datacard',datacardform.value)" *ngIf="this.recharge_type.datacard">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
