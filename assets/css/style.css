@@ -4541,11 +4541,9 @@ i.material-icons.black-text {
 
 	.hide-mobile{
 
-		display: none;
+		display: none !important;
 	}
-	#page-content{
-		display:none;
-	}
+	
 	form#contact-form .orange {
 		
 		width: 100%;
