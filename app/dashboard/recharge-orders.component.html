@@ -46,7 +46,7 @@
             </div>
             <div class="card">
       <div class="card-content">
-          <h3 class="font600 inline-block">My Recharge History</h3>
+          <h3 class="font600 inline-block">My Orders</h3>
           <div class="overflow-scroll">							
               <table id="datatable" class="display responsive-table datatable-example">
                   <thead>
@@ -56,11 +56,12 @@
                           <th nowrap="nowrap" width="113px">Recharge No.</th>
                           <th nowrap="nowrap" width="137px">Service Provider</th>
                           <th nowrap="nowrap" width="80px">Amount</th>
-                          <th nowrap="nowrap" width="115px">Out Standing</th>
+                          <th nowrap="nowrap" width="115px">Balance Before</th>
                           <th nowrap="nowrap" width="102px">Order Date</th>
                           <th nowrap="nowrap" width="140px">Payment Method</th>
                           <th nowrap="nowrap" width="130px">Payment Status</th>
                           <th nowrap="nowrap" width="135px">Recharge Status</th>
+                          <th nowrap="nowrap" width="135px">Remark</th>
                           <th nowrap="nowrap" width="95px">Complaint</th>
                       </tr>
                   </thead>
@@ -71,35 +72,32 @@
                           <th nowrap="nowrap" width="113px">Recharge No.</th>
                           <th nowrap="nowrap" width="137px">Service Provider</th>
                           <th nowrap="nowrap" width="80px">Amount</th>
-                          <th nowrap="nowrap" width="115px">Out Standing</th>
+                          <th nowrap="nowrap" width="115px">Balance Before</th>
                           <th nowrap="nowrap" width="102px">Order Date</th>
                           <th nowrap="nowrap" width="140px">Payment Method</th>
                           <th nowrap="nowrap" width="130px">Payment Status</th>
                           <th nowrap="nowrap" width="135px">Recharge Status</th>
+                          <th nowrap="nowrap" width="135px">Remark</th>
                           <th nowrap="nowrap" width="95px">Complaint</th>
                       </tr>
                   </tfoot>
                   <tbody>
                       <tr *ngFor="let recharge of recharges| paginate: { id: 'recharge-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: r_p, totalItems: recharge_counts };let i = index">
                           <td>{{i+1}}</td>
-                          <td>{{recharge.recharge_order}}</td>
-                          <td>{{recharge.recharge_no}}</td>
+                          <td>{{recharge.id}}</td>
+                          <td>{{recharge.subcriber_id}}</td>
                           <td>{{recharge.recharge_name}}</td>
                           <!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
-                          <td><i class="icon-inr"></i>{{recharge.amount }}</td>
+                          <td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
                           <td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
                           <td>{{recharge.order_date | date: date:'dd M, Y' }}<br><time>{{recharge.order_date | date:'hh:mm a' }}</time></td>
-                          <td *ngIf="recharge.payment_gateway == 1">Wallet</td>
-                          <td *ngIf="recharge.payment_gateway == 2">Gateway</td>
-                          <td *ngIf="recharge.payment_gateway == 3">Wallet/Gateway</td>
-                          <td *ngIf="recharge.payment_gateway == 4">Paytm</td>
-                          <td *ngIf="recharge.payment_status == 1">Complete</td>
-                          <td *ngIf="recharge.payment_status == 2">Fail</td>
-                          <td *ngIf="recharge.payment_status == 3">Pending</td>
-                          <td *ngIf="recharge.payment_status == 4">Refunded</td>
-                          <td *ngIf="recharge.recharge_status == 1"><span class="green white-text padd1">Success</span></td>
-                          <td *ngIf="recharge.recharge_status == 2"><span class="red white-text padd1">Fail</span></td>
-                          <td *ngIf="recharge.recharge_status == 3"><span class="orange white-text padd1">Progress</span></td>
+                          <td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">MYDTH</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
+                          <td><span *ngIf="recharge.payment_status == 1">Complete</span><span *ngIf="recharge.payment_status == 2">Fail</span><span *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
+                            <td>
+                              <span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
+                              <span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
+                            </td>
+                            <td>{{recharge.remark}}</td>
                           <td>
                             <div *ngIf="recharge.complaint_id == null">
                                 <span class="orange white-text" *ngIf="check_delay(recharge.order_date) == 2">Please Wait...</span>

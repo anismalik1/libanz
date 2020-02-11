@@ -52,7 +52,7 @@ export class RechargeOrdersComponent implements OnInit {
     {
       let full_url = this.router.url.split('/');
       if(!full_url[2])
-       full_url[2] = '';
+       full_url[2] = ''; 
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
@@ -112,14 +112,14 @@ export class RechargeOrdersComponent implements OnInit {
 		  );
   }
 
-  export_recharge()
+  export_recharge() 
   {
     var date = $('[name="daterange"]').val();
     if(date == '')
     {
       return false;
     }
-    window.location.href = this.todoservice.server_url+'accounts/apis/export/export_recharge/?token='+this.get_token()+'&date='+date;
+    window.location.href = this.todoservice.server_url+'accounts/apis/export/export_orders/?token='+this.get_token()+'&date='+date;
   }
 
   paging_recharge_history(page)
