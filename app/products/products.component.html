@@ -1,3 +1,38 @@
+<style>
+    .cs-box-shadow{
+
+        /* box-shadow: 1px 1px 4px #8c8c8c!important; */
+    border-radius: 5px;
+   
+    border: 1px solid #FF5722 !IMPORTANT;
+    margin-top: 10px;
+    }
+    .rounded-btn{
+
+        border-radius: 20px;
+    }
+    .cst-font{
+
+        font-size:20px;
+        font-weight: bold;
+    }
+    .sorting-div{
+        border-radius: 10px;
+    line-height: 10px;
+    }
+    .nav-wrapper{
+
+        font-weight:bold !important;
+    }
+    @media only screen and (max-width :767px){
+
+        .rounded-btn{
+            width: 100%;
+            border-radius:20px;
+            height:40px;
+        }
+    }
+    </style>
 <app-header></app-header>
 <div class="spinner-wrapper">
 <ngx-spinner
@@ -34,7 +69,7 @@ type="ball-clip-rotate">
 <div class="col s12">
 <ul id="brand-category">
 <li>
-<span class="black-text"><h3>Brands</h3> </span>
+<span class="black-text"><h3><strong>Brands </strong>   </h3> </span>
 </li>
 <li>
 <input type="checkbox" id="tata" [checked]="checked_filter.is_tatasky" (change)="filter_cat()" value="tata-sky"/>
@@ -93,8 +128,8 @@ type="ball-clip-rotate">
 </div> -->
 <div class="col s12 m12 l12 pagngiune">	
 <div class="col s12">		
-<div class="search-sort no-margin card-panel no-box-shadow">
-<span class="inline-block">{{product_counts}} Products</span>
+<div class="search-sort no-margin card-panel no-box-shadow sorting-div">
+<span class="inline-block cst-font">{{product_counts}} Products</span>
 <!-- <div class="right min-margin margin-left">
 <span class="inline-block">Sort By: &nbsp;</span>
 <form class="inline-block">								
@@ -115,7 +150,7 @@ type="ball-clip-rotate">
 
 <div class="row no-margin">
 <div class="col s12 m6 l3  image-size-chng"  *ngFor="let product of products">
-<div class="card no-box-shadow products-list">
+<div class="card no-box-shadow products-list cs-box-shadow">
 <div class="card-image">
 <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{product.image}}" class="responsive-img" alt="hd-tata-sky">
 </div>
@@ -128,7 +163,7 @@ type="ball-clip-rotate">
 <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() != 2 && product.user_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.user_cashback_wallet}} <span class="right orange-text" *ngIf="product.cod_available == 1">COD Available</span></p>
 </div>
 <div class="card-action padd center">
-<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange">Book Now</a>
+<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn">Book Now</a>
 </div>
 </div>
 </div>	

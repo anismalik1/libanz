@@ -1,3 +1,12 @@
+<style>
+	.shadow-hide{
+		box-shadow: none !important;
+	}
+	.col.m6.s12.l5.no-padding.cst-top-img img {
+    padding-top: 28px;
+}
+</style>
+
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -93,12 +102,12 @@
 			<div class="col s12 center cst-p-hide" id="page-content"></div>
 		</div>
 		<div class="row no-margin">
-			<div class="col m6 s12 l5 no-padding">
+			<div class="col m6 s12 l5 no-padding cst-top-img">
 					<img class="responsive-img full-width  hide-img" src="https://www.mydthshop.com/accounts/assets/img/Business-india.jpg">
 				</div>
 			<div class="col s12 m6 l7 circle">
-				<div class="card">
-					<div class="card-content">
+				<div class="card shadow-hide">
+					<div class="card-content ">
 						<h2 class="center font600">Leave us your Info and we will get back to you.</h2>
 						<form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">
 				      <div class="row sec-7">

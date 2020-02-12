@@ -4495,8 +4495,9 @@ body{padding-bottom: 80px;}
 }
 .view-category {
     right: 18px;
-    margin-top: -10px;
+    margin-top: -4px;
 }
+
 
 #long-content h1, #long-content h2 {
     margin: 0;
@@ -4647,13 +4648,40 @@ ul.lSPager.lSpg {
 	display:none;
 }
 div#page-content h1 {
-    font-size: 28px;
+    font-size: 26px;
 }
+
+.mobile-footer-menu ul li {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+}
+div#sntch_button {
+    display: none !important;
+}
+span.fa.fa-edit.fa-2x {
+	font-size: 18px;
+	color: #414141;
+}
+#topcontrol{
+
+	position:fixed;
+	right:17px;
+	bottom:60px !important;
+	z-index:9;
+	}
 }
 
 
 /* desktop */
 
+.new-jio-fiber h3{
+
+	padding-bottom:20px !important;
+}
+.col.m6.s12.l5.no-padding.cst-top-img img {
+    padding-top: 7px;
+}
 .circle.card.center {
     border-radius: 50%;
     padding: 30px;
