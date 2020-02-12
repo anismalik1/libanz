@@ -41,12 +41,7 @@
                         <div class="row sec-7">
                             <div class="col s12 m7">
                                 <form #addmoneyform = "ngForm" (ngSubmit)="add_money(addmoneyform.value)">
-                              <div class="row">
-                                <div class="input-field col s12 m10">
-                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin" (keyup)="calc_percentage()">
-                                  <label for="enter-amount">Enter Amount*</label>
-                                </div>
-                              </div>
+                              
 							                <div class="row"> 
                                 <div class="input-field col s12 m10">
                                     <mat-form-field>
@@ -58,6 +53,12 @@
                                           <mat-option [value]="'Paytm'">Paytm </mat-option>
                                         </mat-select>
                                       </mat-form-field>    
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12 m10">
+                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin" (keyup)="calc_percentage()">
+                                  <label for="enter-amount">Enter Amount*</label>
                                 </div>
                               </div>
                               <div class="row additional-charge hide">

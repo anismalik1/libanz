@@ -112,6 +112,31 @@ export class RechargeOrdersComponent implements OnInit {
 		  );
   }
 
+  decode_data(data)
+  {
+    let jsondecode : any = [];
+    if(data != '')
+    {
+      jsondecode = JSON.parse(data);
+      if(jsondecode.operator_title)
+      {
+        return jsondecode.operator_title;
+      }
+      else if(jsondecode.product_title)
+      {
+        let pack = '';
+        for(var i = 0;i < jsondecode.pack_selected.length;i++)
+        {
+          if(jsondecode.product_title.toLowerCase().includes('multi'))
+            pack += jsondecode.pack_selected[i].title+'('+jsondecode.pack_selected[i].multi_price+')';
+          else
+            pack += jsondecode.pack_selected[i].title+'('+jsondecode.pack_selected[i].price+')';  
+        }
+        return jsondecode.product_title +'('+ pack+')';
+      }
+    }
+    return '';
+  }
   export_recharge() 
   {
     var date = $('[name="daterange"]').val();

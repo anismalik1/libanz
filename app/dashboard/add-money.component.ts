@@ -125,11 +125,20 @@ export class AddMoneyComponent implements OnInit{
 	
 	add_money(formdata)
 	{
-		if(formdata.amount == '')
+		if(formdata.amount == '' || formdata.amount == null)
 		{
 			this.toastr.errorToastr("Enter Amount", 'Failed!');
 			return false;
 		}
+		if(formdata.paymethod == 'FUND TRANSFER' || formdata.paymethod == "Cash Deposit")
+		{
+			if(formdata.ref_id == '')
+			{
+				this.toastr.errorToastr("Enter Reference ID", 'Failed!');
+				return false;
+			}
+		}
+		
 		formdata.paymethod 		= this.paymethod;
 		formdata.paybankaccount = $('#paybankaccount').val();
 		//formdata.yourbankname 	= $('#yourbankname').val(); 

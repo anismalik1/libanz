@@ -271,12 +271,12 @@ span.card-title {
 							<input placeholder="Enter Amount" maxlength="5" type="number" pattern="[0-9]+" class="validate no-margin" formControlName="amount">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!dthgroup.controls['amount'].valid && dthgroup.controls['amount'].touched"><i class="material-icons">close</i></span>
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
 							</p>
-						</div>
+						</div> -->
 						<div class="col s12 m12 continue no-padding orange">
 							<button type="submit" class="btn-flat white-text">Proceed to Recharge</button>
 						</div>
@@ -334,12 +334,12 @@ span.card-title {
 							<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Amount" id="mobid" *ngIf="!datacardgroup.controls['amount'].valid && datacardgroup.controls['amount'].touched"><i class="material-icons">close</i></span> 
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
-						</div>
+						</div> -->
 						<div class="col s12 m12 continue no-padding orange">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
@@ -375,12 +375,13 @@ span.card-title {
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!landlinegroup.controls['amount'].valid && landlinegroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
-							<div class="input-field col s12 m12 margin-btm no-padding">
+							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
 									<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								</p>
-							</div>
+							</div> -->
+							
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 							</div>
@@ -409,12 +410,12 @@ span.card-title {
 							<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['amount'].valid && broadbandgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
-						</div>
+						</div> -->
 						<div class="col s12 m12 continue no-padding orange">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
@@ -460,12 +461,12 @@ span.card-title {
 									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['amount'].valid && electricitygroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 								</div>
-								<div class="input-field col s12 m12 margin-btm no-padding">
+								<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 									<p class="inline-block margin-right fast-forwad relative">
 										<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 										<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									</p>
-								</div>
+								</div> -->
 								<div class="col s12 m12 continue no-padding orange">
 									<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 								</div>
@@ -503,12 +504,12 @@ span.card-title {
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!gasgroup.controls['amount'].valid && gasgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
-							<div class="input-field col s12 m12 margin-btm no-padding">
+							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
 									<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								</p>
-							</div>
+							</div> -->
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 							</div>
@@ -543,12 +544,12 @@ span.card-title {
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!watergroup.controls['amount'].valid && watergroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
-							<div class="input-field col s12 m12 margin-btm no-padding">
+							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
 									<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								</p>
-							</div>
+							</div> -->
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 							</div>
@@ -574,12 +575,12 @@ span.card-title {
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin">
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
-						</div>
+						</div> -->
 						<div class="col s12 m12 continue no-padding orange">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
