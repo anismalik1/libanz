@@ -1,3 +1,29 @@
+<style>
+  .link-faqs h5 {
+    background: #ececec;
+    padding: 7px 7px 7px 9px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 17px !important;
+    /* content: '>>'; */
+}
+button.btn-flat.search-btn {
+    position: absolute;
+    left: 16px;
+    padding-right: 20px;
+    top: 22px !important;
+}
+#faq_key {
+  padding-left:30px;
+}
+p.grey-text.center.stop-txt {
+  color: #f36c21 !important;
+    font-size: 22px !important;
+}
+
+</style>
+
 <app-header></app-header>
 <title></title>
 <div class="spinner-wrapper">
@@ -36,11 +62,14 @@
         </div>
       </div> -->
       <div class="col s12 m8">
-        <div class="col s12 margin-top faq1">        
+        <div class="col s12 margin-top faq1"> 
+          <p class="grey-text center stop-txt">Stop Worrying! We Will Solve All Your Queries</p>       
           <ul class="collapsible no-box-shadow" data-collapsible="accordion">
             <li class="search-accordin relative">
+
                 <mat-form-field class="example-full-width">
-										<input type="text" placeholder="Search Your Answer" id="faq_key" class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" (keyup.enter)="go_to_search()"> 
+                  <button type="Submit" class="btn-flat search-btn" (click)="go_to_search();" ><i class="material-icons search">search</i></button>
+										<input type="text" id="faq_key"  class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" (keyup.enter)="go_to_search()" > 
 										<mat-autocomplete #auto="matAutocomplete">
 											<span *ngIf="filterdList">
 											<mat-option *ngFor="let option of filteredOptions" [value]="option">
@@ -49,7 +78,7 @@
 										</span>
 								    </mat-autocomplete>
 								</mat-form-field>
-              <button type="Submit" class="btn-flat" (click)="go_to_search();" ><i class="material-icons">search</i></button>
+            
               <button type="Submit" class="btn-flat" onclick="speech.start()" style="right: 10%;" id="search-on"><i id="mic-icon" class="material-icons">mic</i></button>
               <!-- <button type="Submit" class="btn-flat" onclick="speech.stop()" style="right: 7%;" id="search-off"><i class="material-icons">clear</i></button> -->
             </li>
@@ -92,7 +121,7 @@
           </div>
           <div class="faqs-new-format left-align" *ngIf="!searched">
             <h2 class="font600 center no-margin">Popular Ask Queries</h2>
-            <p class="grey-text center most-top">Stop Worrying! We Will Solve All Your Queries</p>
+            
             <p class="grey-text center most-top" *ngIf="default_queries">Top {{default_queries.length}} Question</p>
             <hr>
             <ul>

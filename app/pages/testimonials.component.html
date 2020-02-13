@@ -1,3 +1,32 @@
+<style>
+
+
+.testimonial-card .testimonial-text {
+    padding: 1rem 3rem 10px;
+    border-top: 4px solid #ff6a00;
+    border-radius: 7px;
+}
+
+blockquote.cst-icon1 p::after {
+    content: '"';
+    font-size: 25px;
+}
+.testimonial-text blockquote p {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8em;
+    text-align: justify;
+    color: #000000 !important;
+}
+.card .card-content p::before {
+  content: '" ' !important;
+    font-size: 30px !important;
+}
+
+</style>
+
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -19,14 +48,15 @@
     <div class="row"><!-- Editor Me itna yaha se dalna he -->
     <div class="col s12 m6" *ngFor="let item of testimonials;let i = index;">
     <div [className]="(i >= 6)? 'card testimonial-card hide': 'card testimonial-card'">
-    <div class="card-content testimonial-text">
-    <blockquote [innerHTML]="decode_html(item.description) | truncate : 230 : '...'">
+    <div class="card-content testimonial-text cst-icon">
+    <blockquote [innerHTML]="decode_html(item.description) | truncate : 230 : '...'" class="cst-icon1">
+      <span>"</span>
     </blockquote>
     </div>
     
     <div class="card-image testimonial-card-image"><img class="responsive-img" src="https://www.mydthshop.com/web-app/assets/images/recharge-icon/user.svg" />&nbsp;<i>{{item.title}}</i>
     
-    <p>{{item.user_type}}</p>
+    <p >{{item.user_type}}</p>
     </div>
     </div>
     </div>
@@ -43,7 +73,7 @@
                 </div>
                 <div class="col s12 m6">
                   <form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">
-										<h4 class="center text-uppercase font600 why">Register Here!</h4>
+										<h4 class="center text-uppercase font600 why">Query With Us </h4>
                     <div class="row no-margin padding-form">
                       <div class="input-field col s12 m6">
                         <input id="first_name" name="name" type="text" class="validate" formControlName="name">

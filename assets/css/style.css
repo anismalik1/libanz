@@ -2800,17 +2800,22 @@ tbody img{
 	border: 2px solid #d4d4d4 !important;
     border-radius: 50px !important;
     width: 100% !important;
-    text-indent: 25px !important;
+	text-indent: 25px !important;
+	padding-left:27px !important;
     margin: 1rem 0 1rem 0 !important;
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28) !important;
     height: 46px !important;
     line-height: 46px;
 }
+
+.faqs-section.orange-text h2 {
+    display: none !important;
+}
 .search-accordin button{
 	position: absolute;
 	top: 33%;
 	padding: 0;
-    right: 2%;
+    right: -3px !important;
     color: #9AA0A6;
     font-size: 22px;
 }
@@ -4094,7 +4099,12 @@ canvas {
 		font-weight: 300;
 		line-height: 1.8em;
 		text-align: justify;	    
-		color: #757575 !important;
+		color: #000 !important;
+	}
+	.testimonial-text blockquote p::before{
+
+		content:'" ';
+		font-size:30px;
 	}
 .test-earn{padding: 3rem 0; background-repeat: no-repeat; background-size: cover; background-position: center; position: relative; z-index:9999;}
 .test-earn::after{background-image: url('https://www.mydthshop.com/web-app/assets/images/testimonial-bg.jpg'); position: absolute; content: ''; width: 125%; top: 0; height: 100%; left: -6%; z-index: -1;}  
@@ -4670,10 +4680,32 @@ span.fa.fa-edit.fa-2x {
 	bottom:60px !important;
 	z-index:9;
 	}
+
+	.new-jio-fiber ul {
+		-moz-column-count: 2;
+		column-count: 2;
+		padding: 0px !important;
+	}
 }
 
 
 /* desktop */
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+	border-radius: 0;
+	font-weight:normal !important;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
 
 .new-jio-fiber h3{
 
