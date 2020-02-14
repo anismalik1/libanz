@@ -25,6 +25,17 @@
 
         font-weight:bold !important;
     }
+    .ct-btn{
+        width: 100%;
+    background: #eeeeee !IMPORTANT;
+    color: #333 !IMPORTANT;
+    font-weight: bold;
+    }
+    .w-100{
+
+        width:100%;
+        margin-bottom: 10px;
+    }
     @media only screen and (max-width :767px){
 
         .rounded-btn{
@@ -164,7 +175,8 @@ type="ball-clip-rotate">
 <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() != 2 && product.user_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.user_cashback_wallet}} <span class="right orange-text" *ngIf="product.cod_available == 1">COD Available</span></p>
 </div>
 <div class="card-action padd center">
-<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn">Book Now</a>
+<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn w-100">Book Now</a>
+<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn ct-btn">Add To Cart</a>
 </div>
 </div>
 </div>	
