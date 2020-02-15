@@ -90,7 +90,7 @@
                           <!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
                           <td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
                           <td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
-                          <td>{{recharge.order_date | date: date:'dd M, Y' }}<br><time>{{recharge.order_date | date:'hh:mm a' }}</time></td>
+                          <td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
                           <td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">MYDTH</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
                           <td><span *ngIf="recharge.payment_status == 1">Complete</span><span *ngIf="recharge.payment_status == 2">Fail</span><span *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
                             <td>
