@@ -1,3 +1,4 @@
+
 <!-- Header Start Here -->
 
 <div class="mobile-wrapper">
@@ -220,8 +221,8 @@
 						  <div class="row no-margin">
 							<div class="input-field col s12">
 								<button type="submit" class="btn-flat"><i class="material-icons white-text">search</i></button>
-									<mat-form-field class="example-full-width">
-										<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
+									<mat-form-field class="example-full-width test1">
+										<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
 										<mat-autocomplete #auto="matAutocomplete">
 											<span *ngIf="filterdList">
 											<mat-option *ngFor="let option of filteredOptions" [value]="option.title">

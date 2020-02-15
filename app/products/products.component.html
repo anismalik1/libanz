@@ -5,7 +5,7 @@
     border-radius: 5px;
    
     margin-top: 10px;
-    box-shadow: 1px 1px 7px #333 !important;
+    box-shadow: 1px 1px 7px #8c8c8c!important;
 
     }
     .rounded-btn{
@@ -27,9 +27,10 @@
     }
     .ct-btn{
         width: 100%;
-    background: #eeeeee !IMPORTANT;
-    color: #333 !IMPORTANT;
-    font-weight: bold;
+        width: 100%;
+    background: #F44336 !important;
+    color: #fff !IMPORTANT;
+
     }
     .w-100{
 
@@ -175,8 +176,9 @@ type="ball-clip-rotate">
 <p class="font-size-change green-text1 font600 margin-top" *ngIf="this.todoservice.get_user_type() != 2 && product.user_cashback_wallet > 0">Cashback : <i class="icon-inr"></i>{{product.user_cashback_wallet}} <span class="right orange-text" *ngIf="product.cod_available == 1">COD Available</span></p>
 </div>
 <div class="card-action padd center">
-<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn w-100">Book Now</a>
-<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn ct-btn">Add To Cart</a>
+
+<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn   w-100"> <i class="material-icons white-text">shopping_cart</i> Add To Cart</a>
+<a href="javascript:" [routerLink]="['/product/'+product.url.trim()]" class="white-text btn orange rounded-btn w-100 ct-btn"><i class="material-icons white-text">flash_on</i> Buy Now</a>
 </div>
 </div>
 </div>	

@@ -1,3 +1,23 @@
+<style>
+	.cs-bg-color{
+
+		background-color: #fff;
+		
+		}	
+		.recomm .btn-new1 .btn {
+    width: 67.5% !important;
+    border-radius: 0 !important;
+    box-shadow: none;
+    margin: 0;
+    border-radius: 20px !important;
+    margin-bottom: 17px;
+}
+ 
+li.clogin.ng-star-inserted {
+    margin-top: 3px !important;
+}
+
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -9,7 +29,7 @@
 </ngx-spinner>
 </div>
 <h4 class="paybill-txt hide-on-med-and-up">Recharge & Pay Bills </h4>
-<section class="recharge-section1 hide-on-med-and-down" *ngIf="recharge_ini == 1">
+<section class="recharge-section1 hide-on-med-and-down cs-bg-color" *ngIf="recharge_ini == 1">
 	<div class="container">
 		<div class="row mar-row">
 			<div class="col s12">
@@ -851,16 +871,16 @@
 			<ul class="retailer-slider">
 				<li *ngFor="let banner of filter_banners('user-type')">
 					<div class="no-margin">
-						<div class="col s12 m12 l8 no-padding rt-image-box">
+						<div class="col s12 m12 l12 no-padding rt-image-box">
 							<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%"></a>
 						</div>
-						<div class="col s12 m12 l4 no-padding">
+						<!-- <div class="col s12 m12 l4 no-padding">
 							<div class="registration-here-page center">
 								<h2 class="uppercase font600 orange-text">{{banner.title}}</h2>
 								<p  class="font-size-change1 black-text">{{banner.description}}</p>
 								<a href="{{banner.imageurl}}"  target="_blank" class="btn orange margin-top1">Register Here</a>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</li>				
 			</ul>
