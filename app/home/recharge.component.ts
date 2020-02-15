@@ -616,7 +616,7 @@ recharge_handle()
             }
           else
           {
-            this.router.navigate(['/orders/recharge-receipt/'+data.unique_id]);
+            this.router.navigate(['/orders/recharge-receipt/'+data.order_id]);
           } 
           } 
           this.todoservice.service_url = this.todoservice.server_url+'index.php?/app_services/';

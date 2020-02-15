@@ -64,6 +64,24 @@ export class RechargeStatusComponent implements OnInit {
 		  ) 
   }
 
+  operator(data,action)
+  {
+    let jsondecode : any = [];
+    if(data != '')
+    {
+      jsondecode = JSON.parse(data);
+      if(action == 'title' && jsondecode.operator_title)
+      {
+        return jsondecode.operator_title;
+      }
+      if(action == 'image' && jsondecode.operator_image)
+      {
+        return jsondecode.operator_image;
+      }
+      return '';
+    }
+  }
+  
   tick_tick_clock()
   {
     if(this.tick_clock > 0)
@@ -84,6 +102,6 @@ export class RechargeStatusComponent implements OnInit {
   }
   back_to_home()
   {
-    this.router.navigate(['/home'])    
+    this.router.navigate(['/'])    
   }
 }
