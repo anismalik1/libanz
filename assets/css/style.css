@@ -3451,8 +3451,8 @@ canvas {
 	min-height: 100px;
 }
 .retailer-slider img,.retailer-slider .col{
-	max-height: 450px;
-	min-height: 450px;
+	max-height:300px;
+	min-height:300px;
 }
 .religon-overlay{
 	position: fixed;
