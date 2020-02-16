@@ -16,8 +16,25 @@
 li.clogin.ng-star-inserted {
     margin-top: 3px !important;
 }
+.tabs .tab {
+    display: inline-block;
+	text-align: center;
+	line-height: 14px;
+}
+
+li.indicator{
+    display: none !important;
+}
+.tabs .tab a {
+	color: rgba(68, 67, 67, 0.7);
+}
+section {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
 
 </style>
+
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -33,7 +50,7 @@ li.clogin.ng-star-inserted {
 	<div class="container">
 		<div class="row mar-row">
 			<div class="col s12">
-				<ul class="tabs center" id="select-item" >
+				<ul class="tabs center" id="select-item cst-ul-list" >
 					<li class="tab"><a [routerLink]="['/recharge/for/mobile']" title="Mobile Recharge"><img src="{{this.params.base_url}}assets/images/new-icons/2.png" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
 
 					<li class="tab"><a [routerLink]="['/recharge/for/dth-recharge']" title="DTH Recharge"><img src="{{this.params.base_url}}assets/images/new-icons/7.png" class="responsive-img" alt="1"><br><span>DTH</span></a></li>

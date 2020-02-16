@@ -21,10 +21,29 @@ p.grey-text.center.stop-txt {
   color: #f36c21 !important;
     font-size: 22px !important;
 }
+.dis-none {
+    color: #ff6a00;
+    text-align: center;
+    position: absolute;
+    justify-content: center;
+    left: 43%;
+    top: 43px;
+}
+
+@media only screen and(max-width :767px){
+
+    .dis-none{
+
+      display: none;
+    }
+
+}
+
 
 </style>
-
+<h2 class="dis-none">Help Centre</h2> 
 <app-header>
+  
   
 </app-header>
 
@@ -71,7 +90,7 @@ p.grey-text.center.stop-txt {
       <div class="col s12 m8">
         
         <div class="col s12 margin-top faq1"> 
-          <!-- <p class="grey-text center stop-txt">Stop Worrying! We Will Solve All Your Queries</p>        -->
+          <p class="grey-text center stop-txt">Stop Worrying! We Will Solve All Your Queries</p> 
           <ul class="collapsible no-box-shadow" data-collapsible="accordion">
             <li class="search-accordin relative">
 
