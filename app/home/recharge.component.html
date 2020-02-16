@@ -9,6 +9,9 @@
 	box-shadow: 1px 1px 10px #9c9c9c !important;
 	
 	}
+	.mt-bt-20{
+		margin-bottom: 20px;
+	}
 
 	.heading-txt1{
 
@@ -39,6 +42,20 @@
 		padding: 16px 0px 0px 14px;
 		width:100%;
 		border-bottom:1px solid #ececec;
+	}
+
+.label-txt{
+
+	width: 100%;
+    white-space: nowrap;
+    padding-top: 23px;
+}
+	@media only screen and (max-width: 767px){
+
+		.mobile-wrapper{
+
+			display:none !important;
+		}
 	}
 	</style>
 <app-header></app-header>
@@ -288,8 +305,8 @@ span.card-title {
 						<div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-									<label>Instant payment from your wallet </label>
+									<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<label class="label-txt">Instant payment from your wallet </label>
 								</p>
 						</div> 
 						<div class="col s12 m12 continue no-padding orange">
