@@ -4486,7 +4486,7 @@ body{padding-bottom: 80px;}
 	.navigation.header{display:none;}
 	.login-side-image{display:none}
 	#sntch_webchat{display:none}
-	.slider-flash-deal{display: none}
+	/* .slider-flash-deal{display: none} */
 }
 #dropdown-notice2 li{margin-right:0!important;}
 
