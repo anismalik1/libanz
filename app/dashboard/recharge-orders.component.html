@@ -54,6 +54,7 @@
                           <th nowrap="nowrap" width="57px">S.No.</th>
                           <th nowrap="nowrap">Order No.</th>
                           <th nowrap="nowrap" width="113px">SubscriberID</th>
+                          <th nowrap="nowrap" width="113px">TXNID/REFID</th>
                           <th nowrap="nowrap" width="137px">Provider/ Brand</th>
                           <th nowrap="nowrap" width="80px">Amount</th>
                           <th nowrap="nowrap" width="115px">Balance Before</th>
@@ -70,6 +71,7 @@
                           <th nowrap="nowrap" width="57px">S.No.</th>
                           <th nowrap="nowrap">Order No.</th>
                           <th nowrap="nowrap" width="113px">SubscriberID</th>
+                          <th nowrap="nowrap" width="113px">TXNID/REFID</th>
                           <th nowrap="nowrap" width="137px">Provider/ Brand</th>
                           <th nowrap="nowrap" width="80px">Amount</th>
                           <th nowrap="nowrap" width="115px">Balance Before</th>
@@ -86,6 +88,7 @@
                           <td>{{i+1}}</td>
                           <td>{{recharge.id}}</td>
                           <td>{{recharge.subcriber_id}}</td>
+                          <td>{{recharge.transaction_id}}</td>
                           <td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
                           <!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
                           <td><i class="icon-inr"></i>{{recharge.grand_total }}</td>

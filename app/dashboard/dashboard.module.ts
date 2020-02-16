@@ -31,7 +31,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxPaginationModule} from 'ngx-pagination';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'recharge', component: RechargeOrdersComponent },
+  { path: 'orders', component: RechargeOrdersComponent },
   { path: 'complaints', component: ComplaintBoxComponent },
   { path: 'value-transfer', component: ValueTransferComponent },
   { path: 'add-money', component: AddMoneyComponent },
