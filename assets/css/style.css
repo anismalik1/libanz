@@ -1735,9 +1735,9 @@ select[name="datatable_length"]{
 	width: 75%; 
 	line-height: 30px; 
 }
-.hero{	
+/* .hero{	
 	margin: 10px 0;
-}
+} */
 .hero h2{
 	top: 35%;
 	position: absolute;
