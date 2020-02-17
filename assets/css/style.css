@@ -4521,6 +4521,9 @@ body{padding-bottom: 80px;}
 	border-bottom: transparent;
 	
 }
+#select-slide .active {
+    border-bottom: transparent;
+}
 .view-category {
     right: 18px;
     margin-top: -4px;
