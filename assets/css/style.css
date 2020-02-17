@@ -8,6 +8,13 @@
 	font-family: 'Muli', sans-serif;
 	background-color:#f1f3f6;
   }
+  @media only screen and (max-width: 767px){
+
+	body{
+		font-family: 'Muli', sans-serif;
+		background-color:#f3f3f3 !important;
+	  }
+  }
 /* body{font-family: Arial,sans-serif !important;background: #f1f3f6;} */
 html{font-size: 12px;font-family: Arial,sans-serif !important;width: 100%;overflow-x: hidden;}
 strong{font-weight: 600;word-break: break-all;}
@@ -4580,9 +4587,9 @@ i.material-icons.black-text {
 	}
 	.recharge-section {
 		/* background: linear-gradient(to right, #ff6c01 0%, #ff6c01 100%); */
-		background: #ececec;
+		background: #f3f3f3;
 		/* margin-top: 7px; */
-		padding: 6px 0 !important;
+		padding-top: 0px !important;
 	}
 	.about-us-pages h1 {
 		margin-bottom: 0;
@@ -4611,8 +4618,8 @@ i.material-icons.black-text {
 	.paybill-txt{
 
 		font-weight: 600;
-		color: #8c8c8c;
-		padding-left: 18px;
+		color: #545454;
+    padding-left: 17px;
 		}
 
 		.lSSlideOuter .lSPager.lSpg>li a {
@@ -4648,20 +4655,21 @@ ul.lSPager.lSpg {
     color: #333;
 
 }
-.cst-bg-color{
+/* .cst-bg-color{
 
 	background-color: #ff6c01  !important;
 	color:#fff !important;
-}
+} */
 .cst-bg-color ul li a{
 
 	
-	color:#fff !important;
+	color:#000 !important;
 }
 .black-text {
    
-    line-height:15px !important;
-
+    line-height: 14px !important;
+    font-size: 12px !important;
+    color: #545454 !important;
 
 }
 .cst-p-hide p{

@@ -1,3 +1,18 @@
+<style>
+	.fix-align label {
+    margin: 0 !important;
+}
+	@media only screen and (max-width: 767px){
+
+		.fix-align label {
+    margin: 0 !important;
+}
+.fix-align label.font-size-change {
+    margin: 0px !important;
+} 
+
+	}
+</style>
 <app-header></app-header>
 <title>Mydthshop Login</title>
 <div class="spinner-wrapper">
@@ -23,9 +38,9 @@
 							<h3 class="font600 orange-text">Welcome back!</h3>
 							<div class="notification-text green-text" *ngIf="notification != ''">{{notification}}</div>
 							<span id="page-content"></span>
-							<form [formGroup]="logingroup" class="margin-top sec-7" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
+							<form [formGroup]="logingroup" class="margin-top sec-7 " #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
 								<div class="row">
-									<div class="input-field col s12 m9 offset-m1">
+									<div class="input-field col s12 m9 offset-m1 fix-align">
 										<i class="material-icons prefix margin-top-cart2">phone</i>
 										<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
 										<label for="icon_prefix" class="font-size-change">Enter Phone No.</label>
@@ -33,7 +48,7 @@
 
 									</div> 
 								</div> 
-								<div class="input-field col s12 m9 offset-m1">
+								<div class="input-field col s12 m9 offset-m1 fix-align">
 									<i class="material-icons prefix margin-top-cart2">lock</i>
 									<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
 									<label for="password" class="font-size-change">Enter Password</label>

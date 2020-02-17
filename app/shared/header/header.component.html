@@ -1,5 +1,11 @@
 
+<style>
 
+.issue-menu a.logup.modal-trigger {
+    color: #fff;
+    border-radius: 20px;
+}
+	</style>
 <!-- Header Start Here -->
 
 <div class="mobile-wrapper">
@@ -146,7 +152,7 @@
 			<ul>	
 				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')">About Us</a></li>
 				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')">Refund Policy</a></li>
-				<li><a [routerLink]="['/help/contact-us']">Contact Us</a></li>
+				<li><a [routerLink]="['/p/24-7']">Contact Us</a></li>
 				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
 				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
 				<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
@@ -537,7 +543,7 @@
 <!-- Side Navigation -->
 <ul id="slide-out" class="side-nav">
 	<div class="user-view no-padding">
-			<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block"><a href="#login-modal" class="logup modal-trigger">Login & Register</a></li>
+			<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login & Register</a></li>
 		</div>
 	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
 		<ul>
