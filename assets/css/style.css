@@ -4493,7 +4493,7 @@ body{padding-bottom: 80px;}
 	.navigation.header{display:none;}
 	.login-side-image{display:none}
 	#sntch_webchat{display:none}
-	.slider-flash-deal{display: none}
+	.slider-flash-deal{display: none;}
 }
 #dropdown-notice2 li{margin-right:0!important;}
 
@@ -4518,7 +4518,7 @@ body{padding-bottom: 80px;}
 	.slider-flash-deal .tabs {
     height: 81px;
     font-size: 10px !important;
-	border-bottom: 3px solid #ff6a00;
+	border-bottom: transparent;
 	
 }
 .view-category {
@@ -4664,6 +4664,7 @@ ul.lSPager.lSpg {
 
 	
 	color:#000 !important;
+	font-size:15px !important;
 }
 .black-text {
    
@@ -4713,10 +4714,34 @@ span.fa.fa-edit.fa-2x {
 	
 	}
 
+	.hide-on-desktop{
+
+		display: block !important;
+	}
+	.cst-bg-color{
+		background: #fff !important;
+    padding-top: 10px !important;
 }
+
+.banner-slider1 .card-content {
+    margin-top: -15px;
+}
+	}
+
+
 
 
 /* desktop */
+.blog-content{
+
+	height: 150px !important;
+    overflow: auto;
+}
+
+.hide-on-desktop{
+
+	display: none;
+}
 
 .tabs .indicator {
     position: absolute;
@@ -4850,7 +4875,7 @@ a.logup.modal-trigger.black-text {
 .cst-border {
     border: none !important;
 	box-shadow: 1px 1px 10px #9c9c9c !important;
-	padding-bottom: 50px !important;
+	padding-bottom: 32px !important;
 }
 
 .cst-border1 {
