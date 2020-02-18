@@ -5,6 +5,12 @@
     color: #fff;
     border-radius: 20px;
 }
+
+.rounded-btn{
+
+	border-radius:20px;
+}
+
 	</style>
 <!-- Header Start Here -->
 
@@ -143,15 +149,19 @@
 		</div>
 		<div class="side-menu-body">
 			<div class="login-section"  *ngIf="this.todoservice.get_user_name() == ''">
-				<h3>Login</h3>
-				<a routerLink="/proceed/login" class="btn waves-effect waves-light orange" type="button">Login</a>
-				<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey" type="button">Signup</a>
+				<h3>Navigation Menu</h3>
+				<a routerLink="/proceed/login" class="btn waves-effect waves-light orange rounded-btn" type="button">Login</a>
+				<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
+		
+				
+				
+		
 			</div>
 			
 		<h3>Information</h3>	
-			<ul>	
-				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')">About Us</a></li>
-				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')">Refund Policy</a></li>
+			<ul class="">	
+				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
+				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
 				<li><a [routerLink]="['/p/24-7']">Contact Us</a></li>
 				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
 				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
@@ -162,7 +172,7 @@
 			</ul>	
 		
 		<h3>Categories</h3>
-			<ul>	
+			<ul class="mb-menu-txt">	
 				<li><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></li>
 				<li><a [routerLink]="['/product/listing/videocon']">Videocon</a></li>
 				<li><a [routerLink]="['/product/listing/airtel']">Airtel</a></li>
@@ -543,7 +553,7 @@
 <!-- Side Navigation -->
 <ul id="slide-out" class="side-nav">
 	<div class="user-view no-padding">
-			<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login & Register</a></li>
+			<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login / Sign Up</a></li>
 		</div>
 	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
 		<ul>
