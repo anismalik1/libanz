@@ -23,7 +23,7 @@
 			<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
 			<li class="mobile-search">
 				<mat-form-field class="example-full-width">
-				<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)">
+				<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px;">
 				 <span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
 				 <mat-autocomplete #auto="matAutocomplete">
 						<span *ngIf="filterdList">
