@@ -12,15 +12,34 @@
 }
 .breadcrumb:before {
     
-    margin: 14px 10px 0 8px;
+    margin:-4px 10px 0 8px;
   
+}
+.tabs {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 60px;
+    padding-top: 6px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+	white-space: nowrap;
 }
 
 .blog-min-hei {
     min-height: 470px !important;
     overflow: auto;
 }
-</style>
+@media only screen and (max-width: 767px){
+	
+	.breadcrumb:before {
+    
+    margin: 3px 10px 0 8px;
+  
+}
+	
+}</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
 <ngx-spinner

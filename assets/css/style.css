@@ -4586,7 +4586,7 @@ i.material-icons.black-text {
 	    border: 1px solid #d0cfcf;
     border-radius: 5px;
     background: #fff;
-    width: 116%;
+    width: 114%;
     margin-left: -9px;
     font-size: 8px;
 	}
@@ -4731,7 +4731,7 @@ span.fa.fa-edit.fa-2x {
 }
 
 .banner-slider1 .card-content {
-    margin-top: -15px;
+    margin-top: -7px;
 }
 
 #select-slide{
@@ -4753,6 +4753,8 @@ span.fa.fa-edit.fa-2x {
 
 
 /* desktop */
+
+
 .beard .breadcrumb:before {
     color: #000;
     padding:19px 0 0 0 !important;
