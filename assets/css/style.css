@@ -4746,7 +4746,13 @@ span.fa.fa-edit.fa-2x {
     padding: 21px 0 0 0 !important;
 }
 
+.new-24-7 .card{
 
+	display:none;
+}
+.col.m6.no-padding.cs-page1 {
+    margin-top: -84px;
+}
 	}
 
 
