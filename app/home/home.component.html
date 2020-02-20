@@ -125,7 +125,10 @@ background-color: #fff;
 }
 .mt-35{
 
-	margin-top:-55px !important;
+	margin-top:-52px !important;
+}
+#select-item {
+    padding: 0 !important;
 }
 }
 </style>
@@ -173,7 +176,7 @@ background-color: #fff;
 <h4 class="paybill-txt hide-on-med-and-up">Recharge & Pay Bills </h4>
 <section class="recharge-section1 hide-on-med-and-down cs-bg-color" *ngIf="recharge_ini == 1">
 	<div class="container">
-		<div class="row mar-row">
+		<div class="row mar-row" style="margin-bottom:50px !important">
 			<div class="col s12">
 				<ul class="tabs center" id="select-item cst-ul-list" >
 					<li class="tab"><a [routerLink]="['/recharge/for/mobile']" title="Mobile Recharge"><img src="{{this.params.base_url}}assets/images/new-icons/2.png" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
