@@ -584,13 +584,20 @@ export class TodoService {
     let url = this.server_url+'index.php?/app_services/fetch_single_blog';
     return this.send_post_request(data,url) ;
   }
+
   submit_comment(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/submit_comment';
+    let url = this.server_url+'accounts/apis/page/submit_comment';
     return this.send_post_request(data,url) ;
   }
 
+  fetch_post_comments(data)
+  {
+    
+    let url = this.server_url+'accounts/apis/page/fetch_post_comments';
+    return this.send_post_request(data,url) ;
+  }
   get_plans(data)
   {
     let url = this.server_url+'accounts/apis/plan_api/plans';
@@ -762,6 +769,11 @@ export class TodoService {
   fetch_addmoney_order(data)
   {
     let url = this.server_url+'accounts/apis/orders/fetch_addmoney_order';
+    return this.send_post_request(data,url) ;
+  }
+  get_last_recharges(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/get_last_recharges';
     return this.send_post_request(data,url) ;
   }
 }

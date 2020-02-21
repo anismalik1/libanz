@@ -25,9 +25,8 @@ export class RechargeStatusComponent implements OnInit {
       this.fetch_recharge_order_status(this.order_id); 
    }
   ngOnInit() {
-     
   }
-  
+
   fetch_recharge_order_status(id)
   {
       if(this.iterate == 0)

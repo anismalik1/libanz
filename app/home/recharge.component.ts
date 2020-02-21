@@ -14,6 +14,7 @@ import { Meta ,Title} from '@angular/platform-browser';
 import { DOCUMENT} from '@angular/common';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import * as $ from 'jquery';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-recharge',
@@ -81,6 +82,7 @@ export class RechargeComponent implements OnInit {
   tab_1 : boolean = false;
   tab_2 : boolean = false;
   electricity_operators :any;
+  last_recharges : any;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -155,7 +157,40 @@ export class RechargeComponent implements OnInit {
       });
       
      spinner.show()
-    this.ini_script()   
+    this.ini_script() ;
+    if(this.get_token())
+      this.get_last_recharges()  
+  }
+
+  get_last_recharges()
+  {
+    this.todoservice.get_last_recharges({token : this.get_token()})
+    .subscribe(
+      data => 
+      {
+        this.last_recharges = data.LAST_RECHARGE;
+        this.spinner.hide();  
+      }
+    ) 
+  }
+
+  
+  decode_data(data,action)
+  {
+    let jsondecode : any = [];
+    if(data != '')
+    {
+      jsondecode = JSON.parse(data);
+      if(action == 'operator')
+      {
+        return jsondecode.operator_title;
+      }
+      else if(action == 'img')
+      {
+        return jsondecode.operator_image;
+      }
+    }  
+    return '';
   }
 
   ini_script()
@@ -304,10 +339,44 @@ export class RechargeComponent implements OnInit {
   {
     this.ini_recharge_tabs(tab);
   }
+
   changeOperator(data,s)
   {
+    $('.additional-text').remove()
     this.viewrange = 1;
-    this.selectedOperator = data;
+    
+    if(data.amount_type == 1)
+    {
+      var commission = data.commission;
+      var type = '%';
+    }
+    else
+    {
+      var commission = data.commission;
+      var type = '';
+    }
+    var text = '';
+    if(data.commission_type == 1)
+    {
+      text = "Congrates! "+commission+type+" Amount will be Credited.";
+    }
+    else
+    {
+      text = "Additional "+commission+type+" Amount will be Deducted.";
+    }
+    
+    
+    if(commission > 0)
+    {
+      if(data.commission_type == 1 && this.todoservice.get_user_type() == 2)
+        $("#"+s+"-form .btn-flat").parent().before("<div class='col m12 green-text additional-text'>"+text+"</div>");
+      else if(data.commission_type == 2)
+      {
+        $("#"+s+"-form .btn-flat").parent().before("<div class='col m12 red-text additional-text'>"+text+"</div>");
+      }
+    }  
+      
+    this.selectedOperator = data.id;
     this.mobilegroup.controls['circle_area'].setValue(0);
     if(s == 'mobile')
     {
@@ -353,6 +422,34 @@ export class RechargeComponent implements OnInit {
     {
       this.showstd = 1;
     }
+  }
+    change_list(val)
+  {
+    if(val == 1)
+    {
+      $('#prepaid-list').removeClass('hide');
+      $('#postpaid-list').addClass('hide');
+      this.moperator.open();
+    }
+    else if(val == 2)
+    {
+      $('#postpaid-list').removeClass('hide');
+      $('#prepaid-list').addClass('hide');
+      this.postoperator.open();
+    }
+    else if(val == 3)
+    {
+      $('#post-datacard-list').addClass('hide');
+      $('#pre-datacard-list').removeClass('hide');
+      this.predataoperator.open();
+    }
+    else if(val == 4)
+    {
+      $('#post-datacard-list').removeClass('hide');
+      $('#pre-datacard-list').addClass('hide');
+      this.postdataoperator.open();
+    }
+
   }
   ngOnInit() {
     let data = {token : ''};
@@ -525,13 +622,12 @@ export class RechargeComponent implements OnInit {
       return;
     }
     
-    
-    if(formdata.amount <= 0 || formdata.recharge_id <= 0 || formdata.operator <= 0 )
+    if(formdata.amount <= 0 || formdata.recharge_id.id <= 0 || formdata.operator <= 0 )
 		{
       return false;
     }
     this.spinner.show();	
-		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
+		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator.id,circle_id: formdata.circle_area};
     if(!this.authservice.authenticate())
     {
       $('.logup.modal-trigger')[0].click();
@@ -548,6 +644,8 @@ export class RechargeComponent implements OnInit {
 			data => 
 			{
         this.spinner.hide();
+        if(data.comm_p)
+          this.rechargeData.recharge_amount = data.comm_p;
         this.rechargeData.operator_api_id = data.recharge_id;
         this.rechargeData.recharge_type = s;
        
@@ -697,7 +795,7 @@ recharge_handle()
   }
 check_amount(s)
  {
-  let v = $('#'+s+' [formControlName="recharge_id"]').val();
+  let v = $('#'+s+'-form [formcontrolname="recharge_id"]').val();
   if( typeof this.selectedOperator != 'undefined' || v != '')
   {
     $('#'+s+' .calc-amount-btn').text('Please Wait...');

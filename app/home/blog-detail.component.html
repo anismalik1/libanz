@@ -78,26 +78,16 @@ type="ball-clip-rotate">
         </div>
         <ul class="commnt-display row">
           <h2>Comment Reviews</h2>
-          <li>
+          <li *ngFor="let item of comments;"> 
             <div class="commnt-image col s2 center">
               <img src="https://mydthshop.com//web-app/assets/images/user.jpg" class="responsive-img">
             </div>
             <div class="commnt-text col s10 no-padding">
-              <h5>Prakash Jha</h5>
-              <span class="grey-text">Test@gmail.com</span>
-              <p>Today, most of the people are using DTH connection for their TV to watch all the satellite channels. The full form of DTH service is direct to home.</p>
+              <h5>{{item.name}}</h5>
+              <p>{{item.comment}}<span class="grey-text">{{item.comment_date | date: data: 'dd M,Y'}}</span> </p>
             </div>
           </li>
-          <li>
-            <div class="commnt-image col s2 center">
-              <img src="https://mydthshop.com//web-app/assets/images/user.jpg" class="responsive-img">
-            </div>
-            <div class="commnt-text col s10 no-padding">
-              <h5>Prakash Jha</h5>
-              <span class="grey-text">Test@gmail.com</span>
-              <p>Today, most of the people are using DTH connection for their TV to watch all the satellite channels. The full form of DTH service is direct to home.</p>
-            </div>
-          </li>
+          
         </ul>
         <div class="leave-comment-button">
           <button class="btn orange" type="Submit" (click)="show_comment_box()" *ngIf="this.todoservice.get_user_name() != ''">Leave Comment</button>

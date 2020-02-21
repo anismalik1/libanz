@@ -19,6 +19,7 @@ export class BlogDetailComponent implements OnInit {
   public recent_posts : any;
   public post : any;
   public commentgroup : FormGroup;
+  public comments : any;
   constructor(
     private _renderer2: Renderer2,  
     @Inject(DOCUMENT) private _document, 
@@ -44,7 +45,6 @@ export class BlogDetailComponent implements OnInit {
       this.url = params['name']; //log the value of id
      this.fetch_single_blog(this.url);
      this.init_script();
-     
    });
    
   }
@@ -82,6 +82,7 @@ export class BlogDetailComponent implements OnInit {
           this.meta.addTag({ name: 'description', content: this.post[0].metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.post[0].metaKeyword });
           this.title.setTitle(this.post[0].metaTitle);
+          this.fetch_post_comments();
         }
       )
   }
@@ -91,12 +92,25 @@ export class BlogDetailComponent implements OnInit {
    textArea.innerHTML = html;
    return textArea.value;
   }
+  fetch_post_comments()
+  {
+    let data :any = {};
+    data.post_id = this.post[0].id;
+
+    this.spinner.show();
+      this.todoservice.fetch_post_comments(data)
+      .subscribe(
+        data => 
+        {
+          this.comments = data.COMMENTS;
+          this.spinner.hide();
+        }
+      )
+  }
   comment_submit(value) 
   {
     let data = value;
-    data.token = this.get_token();
     data.post_id = this.post[0].id;
-
     this.spinner.show();
       this.todoservice.submit_comment(data)
       .subscribe(

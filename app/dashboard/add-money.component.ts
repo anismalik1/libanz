@@ -82,32 +82,31 @@ export class AddMoneyComponent implements OnInit{
 		var amount = $('#enter-amount').val()
 		if((this.paymethod) && (this.paymethod == 'Gateway' || this.paymethod == 'Paytm' || this.paymethod == 'Cash Deposit'))
 		{
-			$('.additional-charge .chip').html('Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i>');
+			$('.additional-charge').html('<div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i></div>');
 		}
 	}
 
 	check_method(data)
 	{
 		this.paymethod = data;
-		console.log(data);
 		if(data == undefined)
 		{
 			$('.default-hide').addClass('hide');
 			$('.send-topup').addClass('hide');
 			$('.send-gateway').addClass('hide');
 		}
-		else if( data == 'Gateway' || data == "Paytm")
+		else if( data == 'Gateway' || data == "Paytm" || data == "Cash Deposit")
 		{
 			var amount = $('#enter-amount').val();
 			$('.additional-charge').removeClass('hide');
 			if(Number(amount) > 0)
-				$('.additional-charge .chip').html('Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i>');
+				$('.additional-charge ').html('<div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i></div>');
 			$('.default-hide').addClass('hide');
 			
 			$('.send-gateway').removeClass('hide');
 			$('.send-topup').addClass('hide');
 		}
-		else if(data == 'FUND TRANSFER' || data == "Cash Deposit")
+		else if(data == 'FUND TRANSFER')
 		{
 			$('.default-hide').removeClass('hide');
 			$('.send-topup').removeClass('hide');
