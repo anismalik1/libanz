@@ -176,7 +176,7 @@ span.card-title {
 					<div class="card-content ">
 					<div class="col s12 m12 l5">
 						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
-						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
+						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount + rechargeData.commission}} <a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
 					<div class="col s12 m12 l5 margin-top">
@@ -185,7 +185,7 @@ span.card-title {
 								<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
 							</p>
 							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
-								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span>
+								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span> 
 								<a href="#promo-code-apply" class="modal-trigger">change</a>
 							</p>	
 							<p class="inline-block margin-right fast-forwad relative">
@@ -206,7 +206,7 @@ span.card-title {
 								<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
 								<label for="paytm" class="black-text">Paytm</label>
 							</p>
-							<p class="inline-block margin-right" *ngIf="rechargeData.recharge_amount <= this.todoservice.get_user().wallet">
+							<p class="inline-block margin-right" *ngIf="(rechargeData.recharge_amount + rechargeData.commission) <= this.todoservice.get_user_wallet_amount()">
 								<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
 							</p>
 						</div>                                                                                                      
@@ -216,7 +216,7 @@ span.card-title {
 						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 					</div>
 					<div class="col s12 m12 l2" *ngIf="!rechargeData.record_exist">
-						<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount}}</button>
+						<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount + rechargeData.commission}}</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>	
@@ -619,11 +619,11 @@ span.card-title {
 						</span>
 					</div>
 				</form>
-				<form method="post" id="broadband-form" #cableform = "ngForm" (ngSubmit)="recharge_init('cable-tv',cableform.value)"  *ngIf="this.recharge_type.cable">
+				<form method="post" id="cable-tv-form" [formGroup]="cablegroup" #cableform = "ngForm" (ngSubmit)="recharge_init('cable-tv',cableform.value)"  *ngIf="this.recharge_type.cable">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
 							<mat-form-field>
-								<mat-select placeholder="Select Operator">
+								<mat-select placeholder="Select Operator" formControlName="operator">
 									<span *ngFor="let item of operators.CABLE;">
 										<mat-option [value]="item">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
@@ -633,10 +633,10 @@ span.card-title {
 							</mat-form-field>
 						</div>
 						<div class="input-field col s12 m12">
-							<input placeholder="Customer ID" name="recharge_id" type="text" class="validate no-margin">
+							<input placeholder="Customer ID" name="recharge_id" type="text" class="validate no-margin" formControlName="recharge_id">
 						</div>
 						<div class="input-field col s12 m12">
-							<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin">
+							<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin"  formControlName="amount">
 						</div>
 						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">

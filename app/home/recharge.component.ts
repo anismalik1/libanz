@@ -65,6 +65,7 @@ export class RechargeComponent implements OnInit {
   banners : any = [];
   gasgroup : FormGroup;
   watergroup : FormGroup;
+  cablegroup : FormGroup;
   order : any = {};
   package_item : Package;
   packages : Package[];
@@ -155,6 +156,11 @@ export class RechargeComponent implements OnInit {
         'operator' : [null,Validators.compose([Validators.required])],
         'recharge_id' : [null,Validators.compose([Validators.required])]
       });
+      this.cablegroup = fb.group({
+        'amount' : [null,Validators.compose([Validators.required])],
+         'operator' : [null,Validators.compose([Validators.required])],
+         'recharge_id' : [null,Validators.compose([Validators.required])]
+       });
       
      spinner.show()
     this.ini_script() ;
@@ -205,7 +211,7 @@ export class RechargeComponent implements OnInit {
     script.text = `
    $(document).ready(function(){
     $('.modal').modal();
-    
+    $('.tooltipped').tooltip();
     });
     function pack_price(price)
     {
@@ -621,6 +627,14 @@ export class RechargeComponent implements OnInit {
       });
       return;
     }
+    else if(s == 'cable-tv' && !this.cablegroup.valid)
+    {
+      Object.keys(this.cablegroup.controls).forEach(field => { // {1}
+        const control = this.cablegroup.get(field);            // {2}
+        control.markAsTouched({ onlySelf: true });       // {3}
+      });
+      return;
+    }
     
     if(formdata.amount <= 0 || formdata.recharge_id.id <= 0 || formdata.operator <= 0 )
 		{
@@ -645,7 +659,9 @@ export class RechargeComponent implements OnInit {
 			{
         this.spinner.hide();
         if(data.comm_p)
-          this.rechargeData.recharge_amount = data.comm_p;
+          this.rechargeData.commission = data.comm_p;
+        else
+          this.rechargeData.commission = 0; 
         this.rechargeData.operator_api_id = data.recharge_id;
         this.rechargeData.recharge_type = s;
        
@@ -654,7 +670,8 @@ export class RechargeComponent implements OnInit {
           this.authservice.clear_session();
           return false;
 			  //	this.router.navigate(['/login']);
-			  }
+        }
+        this.ini_script();
 			  if(!$.isEmptyObject(data))
 			  {
           if(data.record_exist)
