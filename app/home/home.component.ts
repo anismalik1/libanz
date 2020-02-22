@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild ,Renderer2,Inject} from '@angular/core';
 import {Location} from '@angular/common';
 import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms'; 
+import { ToastrManager } from 'ng6-toastr-notifications';
 import {Meta,Title } from "@angular/platform-browser";
 import { DOCUMENT} from "@angular/common";
 import { TodoService } from '../todo.service';
@@ -12,6 +13,7 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
 import * as $ from 'jquery';
+import { parse } from 'path';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,13 +21,7 @@ import * as $ from 'jquery';
 })
 
 export class HomeComponent implements OnInit {
-  myControl = new FormControl();
- // @ViewChild('operator') moperator;                                                        
- // @ViewChild('postoperator') postoperator;                                                        
- // @ViewChild('mcircle') mcircle;                                                        
- // @ViewChild('dcircle') dcircle;                                                        
- // @ViewChild('predataoperator') predataoperator;                                                        
- // @ViewChild('postdataoperator') postdataoperator;                                                        
+  myControl = new FormControl();                                                      
   public userinfo = {wallet:'',phone:'',name:''};
   public operators : any = {};
   public loop : boolean = false;
@@ -72,6 +68,7 @@ export class HomeComponent implements OnInit {
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
+  ratings : any;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -80,6 +77,7 @@ export class HomeComponent implements OnInit {
      private router : Router,
      private  meta : Meta,
      private title : Title, 
+     private toastr : ToastrManager,
      private fb: FormBuilder,
      private spinner: NgxSpinnerService,
      public params : Params,
@@ -125,84 +123,6 @@ export class HomeComponent implements OnInit {
    {
     this.filter_circle_name(id);
    }
-  //  next_to(s,control,e)
-  //  {
-  //    if(s == 'mobile')
-  //    {
-  //     if( this.check_if_not_digits(e))
-  //     {
-  //       this.mobilegroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
-  //     }
-  //      this.rechargeId = e.target.value;
-  //     let recharge_id = String(this.rechargeId);  
-  //     if(recharge_id.length <= 2)
-  //       return false;
-  //     this.todoservice.check_if_recharge_exist({recharge_id: recharge_id})
-  //     .subscribe(
-  //       data => 
-  //       {
-  //         let recharge_data = data.RECHARGEID;
-  //         this.region = Number(recharge_data.circle_id);
-  //         if(!$.isEmptyObject(recharge_data))
-  //         {
-  //           this.filterdList = true;
-  //           this.filteredOptions = recharge_data;
-  //           this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
-  //           this.mobilegroup.controls['circle_area'].setValue(Number(recharge_data.circle_id));
-  //           this.selectedOperator = recharge_data.operator_id;
-  //           this.filter_operator_name(recharge_data.operator_id);
-  //           this.filter_circle_name(Number(recharge_data.circle_id));
-  //           var url = '';
-          
-  //          }
-  //         else
-  //         {
-  //           if(control == 'recharge_id' && this.mobilegroup.controls[control].valid && !this.operators.selected)
-  //           {
-  //             if($('.mobile-recharge-type:checked').val() == 1)
-  //             {
-  //               this.moperator.open();
-  //             }
-  //             else{
-  //               this.postoperator.open();
-  //             }
-  //           }
-  //         }
-  //         this.spinner.hide();
-  //       }
-  //     )  
-      
-  //    }
-  //    else if(s == 'dth')
-  //    {
-  //     if( this.check_if_not_digits(e))
-  //     {
-  //       this.dthgroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
-  //     }
-  //    }
-  //    else if(s == 'datacard')
-  //    {
-  //     if( this.check_if_not_digits(e))
-  //     {
-  //       this.datacardgroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
-  //     }
-  //     if(control == 'recharge_id' && this.datacardgroup.controls[control].valid)
-  //     {
-        
-  //       if($('.data-card-type:checked').val() == 1)
-  //       {
-  //         this.predataoperator.open();
-  //       }
-  //       else{
-  //         this.postdataoperator.open();
-  //       }
-  //     }
-  //    }
-  //    else if(s == 'datacard')
-  //    {
-      
-  //    }  
-  //  } 
    
    circle_selected(circle_id)
    {
@@ -385,7 +305,8 @@ export class HomeComponent implements OnInit {
         {
           if(!$.isEmptyObject(data))
           {
-            let page_data = data.PAGEDATA[0] 
+            let page_data = data.PAGEDATA[0];
+            this.ratings = data.rating; 
             if(page_data)
             {
               this.meta.addTag({ name: 'description', content: page_data.metaDesc });
@@ -412,6 +333,61 @@ export class HomeComponent implements OnInit {
       )  
   }
 
+  check_if_favorite(product_id)
+  {
+    let products = JSON.parse(localStorage.getItem('favourite'));
+    var exist = products.items.filter(product => product.prod_id == product_id);
+   
+    if(exist.length > 0)
+      return 'orange-text';  
+    return ''; 
+  }
+  add_to_favorite(product)
+  {
+
+    $('.wishlist').addClass('active');
+
+    if(!this.get_token())
+    {
+      $('.logup.modal-trigger')[0].click();
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
+      return false;
+    }
+
+    this.spinner.show() 
+    this.todoservice.add_to_favorite({product : product,token : this.get_token()})
+    .subscribe(
+    data => 
+    {
+      this.spinner.hide();
+      this.toastr.successToastr(data.msg);
+      if(data.status == true)
+        localStorage.setItem('favourite', JSON.stringify(data.favourites));
+    }
+    ) 
+  }
+
+  product_rating(product_id)
+  {
+    let j : any = 0;
+    let rate : any = 0;
+    //console.log(this.ratings);
+    for(var i = 0;i < this.ratings.length;i++)
+    {
+      if(product_id == this.ratings[i].product_id)
+      {
+        rate = Number(rate) + Number(this.ratings[i].reting);
+        j = Number(j) + 1;
+      }
+    }
+    if(j == 0)
+      j = 1;
+    let rating = (rate/j);
+    if(rating == 0)
+      return 0;
+    else
+      return rating.toFixed(1)+'('+j+')';  
+  }
   
   check_cashback(product_id)
   {

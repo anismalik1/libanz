@@ -776,4 +776,9 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/get_last_recharges';
     return this.send_post_request(data,url) ;
   }
+  add_to_favorite(data)
+  {
+    let url = this.server_url+'accounts/apis/product/add_to_favorite';
+    return this.send_post_request(data,url) ; 
+  }
 }
