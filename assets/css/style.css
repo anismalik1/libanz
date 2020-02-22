@@ -3621,7 +3621,7 @@ canvas {
  .header-strip span a,.header-strip span{color: #777777 !important; transition: .3s all linear;}
  .tabs::-webkit-scrollbar { width: 0 !important }
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
- .banner-slider1 .full-width{height: 255px;}
+ .banner-slider1 .full-width{height: 265px;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
  #wallet-type .mydth-wallet img{width: 80px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
@@ -4756,6 +4756,20 @@ span.fa.fa-edit.fa-2x {
 .padding-form {
     padding: 2rem 2rem 2rem;
 }
+.cst-back{
+
+	background: #fff;
+    height: 40px;
+    padding: 8px;
+}
+.bk-icon{
+	font-size: 16px !important;
+    padding-left: 16px !important;
+}
+.hide-on-mobile{
+
+	display: none;
+}
 	}
 
 
@@ -4784,6 +4798,7 @@ span.fa.fa-edit.fa-2x {
 
 	display: none;
 }
+
 
 .tabs .indicator {
     position: absolute;

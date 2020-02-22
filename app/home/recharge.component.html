@@ -51,8 +51,10 @@
     padding-top: 23px;
 }
 
+
+
 	</style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
 	bdColor="rgba(255,255,255,1)"
@@ -161,7 +163,7 @@ span.card-title {
 		</div> -->
 		<div class="col s12">
 			<ul class="back-icon">
-				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp; Back</a> </li>
+				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp;</a> </li>
 			</ul>
 		</div>	
 	</div>
@@ -337,7 +339,9 @@ span.card-title {
 						<div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
+								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<label class="label-txt">Instant payment from your wallet </label>
 							</p>
 						</div> 
 						<div class="col s12 m12 continue no-padding orange">
@@ -428,7 +432,7 @@ span.card-title {
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Telephone Number (With ISD Code)" id="mobid" *ngIf="!landlinegroup.controls['recharge_id'].valid && landlinegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
 						</div>
 
-						<div class="col s12 m12 right continue no-padding orange electric-cls-btn" >
+						<div class="col s12 m12 right continue no-padding orange electric-cls-btn" style="margin-right: 20px;" >
 							<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('landline');">Proceed to Pay</button>
 						</div>
 
@@ -479,7 +483,7 @@ span.card-title {
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
 						</div> -->
-						<div class="col s12 m12 continue no-padding orange">
+						<div class="col s12 m12 continue no-padding orange" style="margin-top:20px;">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
 					</div>
@@ -644,7 +648,7 @@ span.card-title {
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
 						</div> -->
-						<div class="col s12 m12 continue no-padding orange">
+						<div class="col s12 m12 continue no-padding orange" style="margin-top:20px;">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
 					</div>

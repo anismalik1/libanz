@@ -1163,7 +1163,31 @@ background-color: #fff;
 	</div>
 </section>
 <!-- End Here -->
-<section class="retailer-section white no-padding margin-top-order">
+<section class="retailer-section white no-padding margin-top-order" style="height:420px; background-color: #8c8c8c;">
+	<div class="container-fluid">
+		<div class="row no-margin">
+			<ul class="retailer-slider">
+				<li *ngFor="let banner of filter_banners('user-type')">
+					<div class="no-margin">
+						<div class="col s12 m12 l12 no-padding rt-image-box">
+							<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%"></a>
+						</div>
+						<!-- <div class="col s12 m12 l4 no-padding">
+							<div class="registration-here-page center">
+								<h2 class="uppercase font600 orange-text">{{banner.title}}</h2>
+								<p  class="font-size-change1 black-text">{{banner.description}}</p>
+								<a href="{{banner.imageurl}}"  target="_blank" class="btn orange margin-top1">Register Here</a>
+							</div>
+						</div> -->
+					</div>
+				</li>				
+			</ul>
+		</div>
+	</div>
+</section>
+
+<!-- mobile code for testimonial -->
+<section class="retailer-section white no-padding margin-top-order" style="display: none;">
 	<div class="container-fluid">
 		<div class="row no-margin">
 			<ul class="retailer-slider">

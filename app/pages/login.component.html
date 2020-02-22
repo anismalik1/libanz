@@ -13,7 +13,7 @@
 
 	}
 </style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <title>Mydthshop Login</title>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -23,7 +23,13 @@
 	loadingText="Loading..."
 	type="ball-clip-rotate">
 </ngx-spinner>
+
 </div>
+<div class="col s12 cst-back">
+	<ul class="back-icon">
+		<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon"></span>&nbsp;</a> </li>
+	</ul>
+  </div>
 <div class="work" *ngIf="step==1;then loginform else otpverify"></div>
 <ng-template #loginform>
 	<section class="login-form no-padding white">
