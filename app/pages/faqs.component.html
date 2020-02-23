@@ -59,7 +59,7 @@ p.grey-text.center.stop-txt {
 </div>
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon"></span>&nbsp;</a> </li>
+      <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon"></span>&nbsp; Frequent Ask Questions</a> </li>
   </ul>
 </div>	
 <!-- <section class="hero" style="background-image: url(https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg)">
@@ -139,7 +139,7 @@ p.grey-text.center.stop-txt {
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
                 <div class="link-faqs">
                   <a routerLink="'/help/faqs/'+{{item.url}}" (click)="print_faq(item.url)">{{item.question}}</a>
-                  <span class="green-text">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
+                  <span class="orange-clr">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
                   <p [innerHTML]="item.meta_description"></p>
                 </div>
                 
@@ -159,7 +159,7 @@ p.grey-text.center.stop-txt {
                 <div class="link-faqs">
                   <a [routerLink]="'/help/faqs/'+item.url" target="_blank">
                     <h5 class="font600">{{item.meta_title}}</h5>
-                    <span class="green-text">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
+                    <span class="orange-clr">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
                     <p class="grey-text">{{item.meta_description}}</p>
                   </a>
                 </div>

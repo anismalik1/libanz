@@ -163,7 +163,7 @@ span.card-title {
 		</div> -->
 		<div class="col s12">
 			<ul class="back-icon">
-				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp;</a> </li>
+				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp; Recharge & Bill Payments </a> </li>
 			</ul>
 		</div>	
 	</div>
@@ -235,6 +235,7 @@ span.card-title {
 				<div class=" mobile no-margin cst-border">
 				<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)" *ngIf="this.recharge_type.mobile ">
 					<div class="row no-margin">
+						<h4 class="mb-txt">Mobile Recharge or Bill Payment						</h4>
 						<div class="col s12 m12 margin-top1 cst-label-hover">
 							<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="prepaid-radio"  value="1" checked  (click)="show_operator('prepaid')"/>
 							<label for="prepaid-radio" class="cst-label" (click)="change_list(1)">Prepaid</label>
@@ -307,7 +308,7 @@ span.card-title {
 								</p>
 						</div> 
 						<div class="col s12 m12 continue no-padding orange">
-							<button type="submit" class="btn-flat white-text">Continue</button>
+							<button type="submit" class="btn-flat white-text">Proceed To Pay </button>
 						</div>
 					</div>
 				</form>
@@ -695,7 +696,7 @@ span.card-title {
 
 
 			<div class="col s12 m9 plans-view-details">
-				<div class="card no-margin cst-border1">
+				<div class="card no-margin cst-border1 pt-bottom-space">
 					<div class="card-content">
 						<div id="short-content"></div>
 					</div>	

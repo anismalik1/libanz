@@ -45,7 +45,7 @@ section {
 	color:#746d67;
 	 float:right;
 	  padding:15px 20px 0px 0px;
-	  font-size:15px;
+	  font-size:17px;
 }
 .heading-txt1{
 	font-size: 17px;
@@ -59,6 +59,14 @@ section {
 						width: 100px;
 						color: #fff;
 						float: left;
+
+}
+.rating-green-content{
+	background:#1c851c;
+	padding: 4px 10px 4px 10px;
+    width: auto;
+    color: #fff;
+    float: left;
 
 }
 .price-cut1{
@@ -174,7 +182,7 @@ background-color: #fff;
 
 
 <h4 class="paybill-txt hide-on-med-and-up">Recharge & Pay Bills </h4>
-<section class="recharge-section1 hide-on-med-and-down cs-bg-color" *ngIf="recharge_ini == 1">
+<section class="recharge-section1 hide-on-med-and-down cs-bg-color set-height" *ngIf="recharge_ini == 1" >
 	<div class="container">
 		<div class="row mar-row" style="margin-bottom:50px !important">
 			<div class="col s12">
@@ -644,7 +652,7 @@ background-color: #fff;
 		</div	>
 	</div>
 </section>
-<section class="recharge-section show-on-medium-and-down hide-on-med-and-up">
+<section class="recharge-section show-on-medium-and-down hide-on-med-and-up" >
 	<div class="container">
 		<div class="row">
 			<div class="col s12">				
@@ -776,12 +784,12 @@ background-color: #fff;
 			<div class="col s12 m4 list-{{item.id}}" >
 			<div class="product-image">
 			
-				<div class="row">
-					<div class="col s4">
-						<div class="rating-green" *ngIf="item.cod_available == 1">COD Available </div>
+				<div class="row" style="margin-bottom:10px;">
+					<div class="col s10">
+						<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 					</div>
-					<div class="col s8">
-						<span class="fa fa-heart pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+					<div class="col s2">
+						<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
 					</div>
 				</div>
 				<div class="row">
@@ -817,12 +825,12 @@ background-color: #fff;
 			<div class="col s12 m4" >
 			<div class="product-image">
 			
-				<div class="row">
-					<div class="col s4">
-						<div class="rating-green" *ngIf="item.cod_available == 1">COD Available </div>
+				<div class="row" style="margin-bottom:10px;">
+					<div class="col s10">
+						<div class=".rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 					</div>
-					<div class="col s8">
-						<span class="fa fa-heart pull-right icn-clr1" ></span>
+					<div class="col s2">
+						<span class="fa fa-star pull-right icn-clr1" ></span>
 					</div>
 				</div>
 				<div class="row">
@@ -858,12 +866,12 @@ background-color: #fff;
 			<div class="col s12 m4" >
 			<div class="product-image">
 			
-				<div class="row">
-					<div class="col s4">
-						<div class="rating-green" *ngIf="item.cod_available == 1">COD Available </div>
+				<div class="row" style="margin-bottom:10px;">
+					<div class="col s10">
+						<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 					</div>
-					<div class="col s8">
-						<span class="fa fa-heart pull-right icn-clr1" ></span>
+					<div class="col s2">
+						<span class="fa fa-star pull-right icn-clr1" ></span>
 					</div>
 				</div>
 				<div class="row">
@@ -899,12 +907,12 @@ background-color: #fff;
 			<div class="col s12 m4" >
 			<div class="product-image">
 			
-				<div class="row">
-					<div class="col s4">
-						<div class="rating-green" *ngIf="item.cod_available == 1">COD Available </div>
+				<div class="row" style="margin-bottom:10px;">
+					<div class="col s10">
+						<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 					</div>
-					<div class="col s8">
-						<span class="fa fa-heart pull-right icn-clr1" ></span>
+					<div class="col s2">
+						<span class="fa fa-star pull-right icn-clr1" ></span>
 					</div>
 				</div>
 				<div class="row">

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <style>
 
@@ -9,6 +11,20 @@
 .rounded-btn{
 
 	border-radius:20px;
+}
+.mobile-footer-menu ul li.active span {
+    color: #ff6a00 !important;
+}
+
+
+@media only screen and (max-width: 767px){
+	.mobile-footer-menu ul li a span {
+    display: block;
+    color: #4d4e4e;
+}
+.icon-cst-clr-1{
+	font-size: 18px;
+}
 }
 
 	</style>
@@ -41,13 +57,14 @@
 			<ul>
 			<li *ngIf="this.todoservice.get_user_name() == ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </li>
+			<li><a href="#"><img src="../../../assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">2</span></li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
 				<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
 						<li class="notificatoins-dropdown-container">
 							<ul  *ngIf="notifications  && notifications.length > 0">
 								<li *ngFor="let item of notifications;" >
 									<div class="notification-drop-image">
-										<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+										<img src="../../../assets/images/favorite-white.png" class="responsive-img">
 									</div>
 									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 										<p [innerHTML]="item.visitor_comment"></p>
@@ -119,11 +136,11 @@
 	
 	<div class="mobile-footer-menu">
 		<ul>
-			<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="icon-home"></span><span class="mobile-footer-text">Home</span></a></li>
+			<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="fa fa-home" style="font-size:18px;"></span><span class="mobile-footer-text">Home</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"></span><span class="mobile-footer-text">Products</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="icon-packages"></span><span class="mobile-footer-text">Packages</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="icon-faqs"></span><span class="mobile-footer-text">FAQS</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-edit fa-2x"></span><span class="mobile-footer-text">Chat</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-question-circle" style="font-size:18px;"></span><span class="mobile-footer-text">FAQS</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger </span></a></li>
 		</ul>
 	</div>
 	
@@ -143,7 +160,7 @@
 				<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 			</div>
 			<ul class="logout">	
-				<li><a [routerLink]="['/logout']">Logout</a></li>
+				<li><a [routerLink]="['/logout']"><span class="fa fa-sign-out"></span>Logout</a></li>
 			</ul>		
 			
 		</div>
@@ -162,7 +179,7 @@
 			<ul class="">	
 				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
 				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
-				<li><a [routerLink]="['/p/24-7']">Contact Us</a></li>
+				<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
 				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
 				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
 				<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
@@ -192,7 +209,7 @@
 		<h3>Follow Us</h3>
 		<ul class="side-social">	
 			<li><a [routerLink]="['https://www.facebook.com/mydthshop/']"><img src="{{this.todoservice.base_url}}assets/images/facebook1.png" /></a></li>
-			<li><a [routerLink]="['https://www.linkedin.com/company/14611847/admin/']"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
+			<li><a [routerLink]="['https://www.linkedin.com/company/mydthshop/']"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
 			<li><a [routerLink]="['https://twitter.com/mydthshop']"><img src="{{this.todoservice.base_url}}assets/images/twitter.png" /></a></li>
 			<li><a [routerLink]="['https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA']"><img src="{{this.todoservice.base_url}}assets/images/youtube.png" /></a></li>
 			<li><a [routerLink]="['https://in.pinterest.com/jain2221/pins/']"><img src="{{this.todoservice.base_url}}assets/images/pinterest.png" /></a></li>
@@ -574,10 +591,10 @@
 		</ul>
 	</div>
 	<li><div class="divider"></div></li>
-	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
 	<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
-	<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp;Contact Us</a></li>
-	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
+	<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
+	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
 </ul>
 <!-- End Here -->
 
