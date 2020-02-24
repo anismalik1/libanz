@@ -50,9 +50,15 @@
     white-space: nowrap;
     padding-top: 23px;
 }
+.dth-box{
 
+	margin-top:15px;
+}
 
-
+.mat-form-field-type-mat-select .mat-form-field-label {
+    width: calc(100% - 18px);
+    font-size: 16px !important;
+}
 	</style>
 <app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
@@ -313,6 +319,7 @@ span.card-title {
 					</div>
 				</form>
 					<div class=" dth-box">
+						<h4 class="mb-txt">DTH Payment						</h4>
 				<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)" *ngIf="recharge_type.dth">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
@@ -449,6 +456,8 @@ span.card-title {
 									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								</p>
 							</div> -->
+							<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<label class="label-txt">Instant payment from your wallet </label>
 							
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
@@ -458,6 +467,7 @@ span.card-title {
 				</form>
 				<form method="post" id="broadband-form" [formGroup]="broadbandgroup" #broadbandform = "ngForm" (ngSubmit)="recharge_init('broadband',broadbandform.value)" *ngIf="this.recharge_type.broadband">
 					<div class="row no-margin">
+					
 						<div class="input-field col s12 m12">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'broadband')" formControlName="operator">
@@ -484,6 +494,8 @@ span.card-title {
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
 						</div> -->
+						<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<br/><label class="label-txt">Instant payment from your wallet </label>
 						<div class="col s12 m12 continue no-padding orange" style="margin-top:20px;">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
@@ -535,6 +547,7 @@ span.card-title {
 										<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									</p>
 								</div> -->
+								
 								<div class="col s12 m12 continue no-padding orange">
 									<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 								</div>
