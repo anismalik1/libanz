@@ -233,7 +233,6 @@ export class FaqsComponent implements OnInit {
     }
     find(val)
     {
-      console.log(val)
       this.query_string = val;
       this.go_to_search()
     }
