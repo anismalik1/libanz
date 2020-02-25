@@ -67,8 +67,8 @@
 		
 		<div class="mobile-header-right">
 			<ul>
-			<li *ngIf="this.todoservice.get_user_name() == ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span> </li>
-			<li *ngIf="this.todoservice.get_user_name() != ''"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span> </li>
+			<li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span></a> </li>
+			<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
 			<li><a href="#"><img src="../../../assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">2</span></li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
 				<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
@@ -416,15 +416,7 @@
 									<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
 								</div>
 							</div>
-							<!-- <div class="row no-margin center">
-								<div class="col s12 m12">
-									<span class="font-size-change">Login With Social Media</span>
-								</div>
-								<div class="col s12 m12 margin-top-cart2">
-									<a href="#" class="facebook fa-login"><img src="{{this.todoservice.base_url}}assets/images/facebook.png"> Facebook</a>
-									<a href="#" class="facebook fa-goo"><img src="{{this.todoservice.base_url}}assets/images/plus.png"> Google</a>
-								</div>
-							</div> -->
+							
 						</form>
 						</div>
 						<div class="otp-step margin-top1" *ngIf="step == 2">

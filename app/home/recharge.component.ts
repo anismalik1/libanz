@@ -77,6 +77,8 @@ export class RechargeComponent implements OnInit {
   operator_id : number = 0;
   activity : number = 0;
   plans : any;
+  alloperators : any;
+  selected_operator : number = 0;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
@@ -102,16 +104,6 @@ export class RechargeComponent implements OnInit {
     private vcr: ViewContainerRef,
   ) {
     
-    // if(this.activatedroute.snapshot.url.length > 2 && this.activatedroute.snapshot.url[2].path != '')
-    // {
-    //   if(localStorage.getItem('recharge_cart') != null)
-    //   {
-    //     this.rechargeData = JSON.parse(localStorage.getItem('recharge_cart'));
-    //     this.recharge_ini = 2;
-
-    //   }
-      
-    // }
       this.url_name = this.activatedroute.snapshot.params['name'];
       this.ini_recharge_tabs(this.url_name);
     this.mobilegroup = fb.group({
@@ -168,9 +160,18 @@ export class RechargeComponent implements OnInit {
       this.get_last_recharges()  
   }
 
+  check_list(type)
+  {
+    if(this.url_name.includes(type))
+    {
+      return 'hide'
+    }
+    return '';
+  }
+
   get_last_recharges()
   {
-    this.todoservice.get_last_recharges({token : this.get_token()})
+    this.todoservice.get_last_recharges({token : this.get_token(),category: this.url_name})
     .subscribe(
       data => 
       {
@@ -239,13 +240,13 @@ export class RechargeComponent implements OnInit {
     this.plans = [];
       if(tab == 'mobile' || tab == 'mobile-postpaid')
       {
+        //console.log('mobile');
         this.recharge_type.mobile = true;
 
         if(this.operator_id > 0 && this.region > 0)
         {
           this.get_plans(this.region,this.operator_id);
         }
-        
       }
       else if(tab == 'dth-recharge')
       {
@@ -271,7 +272,7 @@ export class RechargeComponent implements OnInit {
       {
         this.recharge_type.cable = true;
       }
-      else if(tab == 'datacard')
+      else if(tab == 'datacard' || tab == 'datacard-postpaid')
       {
         this.recharge_type.datacard = true;
       }
@@ -281,6 +282,7 @@ export class RechargeComponent implements OnInit {
       }
       this.fetch_promocode(tab);
       this.fetch_navigate_data(tab);
+      this.get_last_recharges();
       
   } 
   fetch_promocode(tab)
@@ -350,19 +352,20 @@ export class RechargeComponent implements OnInit {
   {
     $('.additional-text').remove()
     this.viewrange = 1;
-    
-    if(data.amount_type == 1)
+    var operatordata = this.alloperators.filter(x => x.id == data);
+
+    if(operatordata.amount_type == 1)
     {
-      var commission = data.commission;
+      var commission = operatordata.commission;
       var type = '%';
     }
     else
     {
-      var commission = data.commission;
+      var commission = operatordata.commission;
       var type = '';
     }
     var text = '';
-    if(data.commission_type == 1)
+    if(operatordata.commission_type == 1)
     {
       text = "Congrates! "+commission+type+" Amount will be Credited.";
     }
@@ -374,15 +377,15 @@ export class RechargeComponent implements OnInit {
     
     if(commission > 0)
     {
-      if(data.commission_type == 1 && this.todoservice.get_user_type() == 2)
+      if(operatordata.commission_type == 1 && this.todoservice.get_user_type() == 2)
         $("#"+s+"-form .btn-flat").parent().before("<div class='col m12 green-text additional-text'>"+text+"</div>");
-      else if(data.commission_type == 2)
+      else if(operatordata.commission_type == 2)
       {
         $("#"+s+"-form .btn-flat").parent().before("<div class='col m12 red-text additional-text'>"+text+"</div>");
       }
     }  
       
-    this.selectedOperator = data.id;
+    this.selectedOperator = data;
     this.mobilegroup.controls['circle_area'].setValue(0);
     if(s == 'mobile')
     {
@@ -463,6 +466,7 @@ export class RechargeComponent implements OnInit {
       .subscribe(
         data => 
         {
+            this.alloperators = data.ALLOPERATORS;
             this.operators = data.OPERATORS;
             this.circles  = data.CIRCLES;
             this.spinner.hide();
@@ -543,6 +547,16 @@ export class RechargeComponent implements OnInit {
 
         }
       )
+  }
+
+  filter_operators(filter_id)
+  {
+    if( this.alloperators)
+    {
+      var operators = this.alloperators.filter(x => x.parent_id == filter_id);
+      return operators;
+    }
+    
   }
 
   show_operator(type)
@@ -947,23 +961,26 @@ check_amount(s)
  }
  selected_recharge(recharge_data)
  {
-  this.region        = recharge_data.circle_id;
-  //console.log(recharge_data);
-  this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
-  this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
+  this.region  = recharge_data.address_id;
+  var decode_data = JSON.parse(recharge_data.order_data);
+  //console.log(decode_data.operator_id);
+  this.mobilegroup.controls['recharge_id'].setValue(recharge_data.subcriber_id);
+  this.mobilegroup.controls['operator'].setValue(Number(decode_data.operator_id));
+  this.selected_operator = decode_data.operator_id;
   this.mobilegroup.controls['circle_area'].setValue(this.region);
-  this.mobilegroup.controls['amount'].setValue(recharge_data.amount);
+  this.mobilegroup.controls['amount'].setValue(recharge_data.grand_total);
   this.selectedOperator = Number(recharge_data.operator_id);
   this.filter_operator_name(recharge_data.operator_id);
   this.filter_circle_name(Number(recharge_data.circle_id));
   if(this.region > 0 && recharge_data.operator_id > 0)
   {
   if(this.activity != recharge_data.activity_id)
-    this.get_plans(this.region,recharge_data.operator_api_id);
+    this.get_plans(this.region,decode_data.api_id);
   } 
-  this.operator_id = recharge_data.operator_api_id;
+  this.operator_id = decode_data.api_id;
   this.activity = recharge_data.activity_id;
  }
+ 
  get_plans(circle,operator)
  {
   if(this.url_name != 'mobile')
@@ -1013,9 +1030,7 @@ check_amount(s)
 
  filter_operator_name(id)
   {
-  let operator = this.operators.MOBILEPREPAID.filter(x => x.id == id);
-  if(!operator)
-  operator = this.operators.MOBILEPOSTPAID.filter(x => x.id == id);
+  let operator = this.alloperators.filter(x => x.id == id);
   if(operator.length == 0)
     return false;
   this.operators.selected = operator;

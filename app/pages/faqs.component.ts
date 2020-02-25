@@ -193,6 +193,12 @@ export class FaqsComponent implements OnInit {
         });
       }
     });
+    $(document).ready(function() {
+      $('#modal-speak').modal({
+        startingTop: '0', // Starting top style attribute
+        endingTop: '10%', // Ending top style attribute
+      });
+  });
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

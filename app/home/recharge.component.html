@@ -169,7 +169,7 @@ span.card-title {
 		</div> -->
 		<div class="col s12">
 			<ul class="back-icon">
-				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp; Recharge & Bill Payments </a> </li>
+				<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left"></span>&nbsp; Recharge & Bill Payments</a> </li>
 			</ul>
 		</div>	
 	</div>
@@ -239,21 +239,20 @@ span.card-title {
 		<div class="row">
 			<div class="col s12 m3">
 				<div class=" mobile no-margin cst-border">
-				<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)" *ngIf="this.recharge_type.mobile ">
+				<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)" *ngIf="this.recharge_type.mobile">
 					<div class="row no-margin">
-						<h4 class="mb-txt">Mobile Recharge or Bill Payment						</h4>
 						<div class="col s12 m12 margin-top1 cst-label-hover">
-							<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="prepaid-radio"  value="1" checked  (click)="show_operator('prepaid')"/>
-							<label for="prepaid-radio" class="cst-label" (click)="change_list(1)">Prepaid</label>
-							<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="postpaid-radio" value="2" (click)="show_operator('postpaid')"/>
-							<label for="postpaid-radio" (click)="change_list(2)">Postpaid</label>
+							<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="prepaid-radio"  value="1" [checked]="!url_name.includes('postpaid')"  (click)="navigate_to('mobile')"/>
+							<label for="prepaid-radio" class="cst-label" routerLink="/recharge/for/mobile">Prepaid</label>
+							<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="postpaid-radio" value="2" [checked]="url_name.includes('postpaid')" (click)="navigate_to('mobile-postpaid')"/>
+							<label for="postpaid-radio" routerLink="/recharge/for/mobile-postpaid">Postpaid</label>
 						</div>
 						<div class="input-field col s12 m12">
 							<mat-form-field class="example-full-width">
 								<input type="text" placeholder=" Mobile Number" formControlName="recharge_id" class="no-margin black-text" maxlength="10" minlength="10" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="next_to('mobile','recharge_id',$event)"> 
 								<mat-autocomplete #auto="matAutocomplete">
 									<span *ngIf="filterdList">
-									<mat-option *ngFor="let option of filteredOptions" [value]="option.recharge_id" (click)="selected_recharge(option)">{{option.recharge_id}}
+									<mat-option *ngFor="let option of filteredOptions" [value]="option.subcriber_id" (click)="selected_recharge(option)">{{option.subcriber_id}}
 									</mat-option>
 								</span>
 								</mat-autocomplete>
@@ -262,11 +261,11 @@ span.card-title {
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Mobile Number" id="mobid" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>  
 							<div class="red-text" *ngIf="!mobilegroup.controls['recharge_id'].valid && mobilegroup.controls['recharge_id'].touched">Enter a Valid Number</div>  
 						</div>						
-						<div class="input-field col s12 m12" id="prepaid-list">
+						<div class="input-field col s12 m12" *ngIf="!url_name.includes('postpaid')" id="prepaid-list">
 							<mat-form-field>
-								<mat-select placeholder=" Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #operator>
-									<span *ngFor="let item of operators.MOBILEPREPAID;">
-										<mat-option [value]="item">
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #operator [(value)]="selected_operator">
+									<span *ngFor="let item of filter_operators(75);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span> 
@@ -274,11 +273,11 @@ span.card-title {
 							</mat-form-field>
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Opreater" id="opid-1" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span> 
 						</div>
-						<div class="input-field col s12 m12 hide" id="postpaid-list">
+						<div class="input-field col s12 m12" *ngIf="url_name.includes('postpaid')" id="postpaid-list">
 							<mat-form-field >
-								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator>
-									<span *ngFor="let item of operators.MOBILEPOSTPAID;">
-										<mat-option [value]="item">
+								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator [(value)]="selected_operator">
+									<span *ngFor="let item of filter_operators(76);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
@@ -314,7 +313,7 @@ span.card-title {
 								</p>
 						</div> 
 						<div class="col s12 m12 continue no-padding orange">
-							<button type="submit" class="btn-flat white-text">Proceed To Pay </button>
+							<button type="submit" class="btn-flat white-text">Continue</button>
 						</div>
 					</div>
 				</form>
@@ -326,8 +325,8 @@ span.card-title {
 							<h4 class="mb-txt">DTH Payment						</h4>
 							<mat-form-field> 
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
-									<span *ngFor="let item of operators.DTH;">
-										<mat-option [value]="item">
+									<span *ngFor="let item of filter_operators(59);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option> 
 									</span>
@@ -366,17 +365,17 @@ span.card-title {
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span> 
 						</div>
 						<div class="col s12 m12 margin-top1 bill-type">
-							<input name="group1" class="with-gap data-card-type" type="radio" id="width-1" checked value="1"/>
-							<label for="width-1" (click)="change_list(3)">Prepaid</label>
-							<input name="group1" class="with-gap data-card-type" type="radio" id="width2" value="2"/>
-							<label for="width2" (click)="change_list(4)">Postpaid</label>
+							<input name="group1" class="with-gap data-card-type" type="radio" id="width-1" value="1" [checked]="!url_name.includes('postpaid')" (click)="navigate_to('datacard')"/>
+							<label for="width-1" routerLink="/recharge/for/datacard" >Prepaid</label>
+							<input name="group1" class="with-gap data-card-type" type="radio" id="width2" value="2" [checked]="url_name.includes('postpaid')" (click)="navigate_to('datacard-postpaid')"/>
+							<label for="width2" routerLink="/recharge/for/datacard-postpaid" >Postpaid</label>
 						</div>
 						<div class="input-field col s12 m12">
-							<div class="" id="pre-datacard-list">        
+							<div *ngIf="!url_name.includes('postpaid')" id="pre-datacard-list">        
 								<mat-form-field>
 									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'card')" formControlName="operator" #predataoperator>
-										<span *ngFor="let item of operators.DATACARDS;">
-											<mat-option [value]="item">
+										<span *ngFor="let item of filter_operators(145);">
+											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
@@ -384,11 +383,11 @@ span.card-title {
 								</mat-form-field>
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span> 
 							</div>
-							<div class="hide" id="post-datacard-list">        
+							<div *ngIf="url_name.includes('postpaid')" id="post-datacard-list">        
 								<mat-form-field>
 									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'card')" formControlName="operator" #postdataoperator>
-										<span *ngFor="let item of operators.DATACARDS;">
-											<mat-option [value]="item">
+										<span *ngFor="let item of filter_operators(195);">
+											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
@@ -426,8 +425,8 @@ span.card-title {
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'landline')" formControlName="operator">
-									<span *ngFor="let item of operators.LANDLINECAT;">
-										<mat-option [value]="item">
+									<span *ngFor="let item of filter_operators(62);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
@@ -472,8 +471,8 @@ span.card-title {
 						<div class="input-field col s12 m12">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'broadband')" formControlName="operator">
-									<span *ngFor="let item of operators.BROADCAT;">
-										<mat-option [value]="item">
+									<span *ngFor="let item of filter_operators(63);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
@@ -520,8 +519,8 @@ span.card-title {
 							<div class="input-field col s12 m12 electric-cls1" >
 								<mat-form-field>
 									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'electricity')" formControlName="operator">
-										<span *ngFor="let item of electricity_operators;">
-											<mat-option [value]="item">
+										<span *ngFor="let item of filter_operators(61);">
+											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>
 										</span>
@@ -562,8 +561,8 @@ span.card-title {
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'gas')" formControlName="operator">
-									<span *ngFor="let item of operators.GAS;">
-										<mat-option [value]="item">
+									<span *ngFor="let item of filter_operators(66);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
@@ -603,8 +602,8 @@ span.card-title {
 						<div class="input-field col s12 m12 electric-cls1">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'water')" formControlName="operator">
-									<span *ngFor="let item of operators.WATER;">
-										<mat-option [value]="item">
+									<span *ngFor="let item of filter_operators(67);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
@@ -643,8 +642,8 @@ span.card-title {
 						<div class="input-field col s12 m12">
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" formControlName="operator">
-									<span *ngFor="let item of operators.CABLE;">
-										<mat-option [value]="item">
+									<span *ngFor="let item of filter_operators(181);">
+										<mat-option [value]="item.id">
 											<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 										</mat-option>
 									</span>
@@ -677,7 +676,7 @@ span.card-title {
 						<div class="row">
 						<div class="col s2">
 							<div class="cstm-img">
-							<img src="https://www.mydthshop.com/media/uploads/api_catimages/{{decode_data(item.order_data,'img')}}" alt="{{decode_data(item.order_data,'operator')}}" class="responsive-image">
+							<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{decode_data(item.order_data,'img')}}" alt="{{decode_data(item.order_data,'operator')}}" class="responsive-image">
 							</div>
 						</div>
 						<div class="col s10">
@@ -710,7 +709,7 @@ span.card-title {
 
 
 			<div class="col s12 m9 plans-view-details">
-				<div class="card no-margin cst-border1 pt-bottom-space">
+				<div class="card no-margin cst-border1">
 					<div class="card-content">
 						<div id="short-content"></div>
 					</div>	
