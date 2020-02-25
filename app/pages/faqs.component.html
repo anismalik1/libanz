@@ -110,12 +110,13 @@ p.grey-text.center.stop-txt {
 								</mat-form-field>
             
               <button type="Submit" class="btn-flat modal-trigger" onclick="speech.start()" style="right: 10%;" id="search-on" href="#modal-speak"><i id="mic-icon" class="material-icons ">mic</i></button>
+              <button type="button" class="btn-flat" id="search-ico" style="right: 20px!important;" (click)="go_to_search()"> <i class="material-icons">search</i></button>
               <!-- <button type="Submit" class="btn-flat" onclick="speech.stop()" style="right: 7%;" id="search-off"><i class="material-icons">clear</i></button> -->
             </li>
           </ul>
           <div id="modal-speak" class="modal">
               <div class="modal-header">
-                  <a href="javascript:" class="modal-action modal-close waves-effect waves-green btn-flat">close</a>
+                  <a href="javascript:" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="speech.stop()">close</a>
                 </div>
             <div class="modal-content">
               <h1 class="left"> I am Listning...</h1> <p class="left"><i id="mic-icon" class="large material-icons" style="font-size: 50px;">mic</i></p>

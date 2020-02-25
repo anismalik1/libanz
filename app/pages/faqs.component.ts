@@ -158,6 +158,9 @@ export class FaqsComponent implements OnInit {
         speech.recognition.onresult = function (evt) {
           document.getElementById('faq_key').value= evt.results[0][0].transcript;
           speech.stop();
+          $('.faq1 .modal-close')[0].click();
+          $('#faq_key').focus();
+          $('#search-ico').click();
         };
         speech.recognition.start();
         //console.log(document.getElementById('search-on'))
@@ -230,6 +233,7 @@ export class FaqsComponent implements OnInit {
     }
     find(val)
     {
+      console.log(val)
       this.query_string = val;
       this.go_to_search()
     }
@@ -301,6 +305,8 @@ export class FaqsComponent implements OnInit {
       key = $("#faq_key").val();
     else
       key = this.query_string; 
+    if(key == '')
+      return false;  
     if(1 == 1)
     {
       this.route.routeReuseStrategy.shouldReuseRoute = function(){
