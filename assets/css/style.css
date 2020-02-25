@@ -2188,12 +2188,23 @@ tbody img{
 	}
 }
 .monthly-packages li a{
-	border: 1px solid #c2c2c2;
-	text-align: center;
-	width: 100%;
-	display: inline-block;
-	height: 35px;
-	line-height: 35px;
+	border: transparent !important;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    height: 35px;
+    line-height: 32px!important;
+}
+.grey-txt-package{
+	color: #313131 !important;
+	
+}
+.rounded-btn{
+	border-radius:20px !important;
+}
+.pt-all-10 {
+	padding-left: 25px !important;
+	padding-bottom:20px;
 }
 .descripetion-detail span{
 	width: 15%;
@@ -3726,8 +3737,8 @@ canvas {
     padding: 10px;
     display: inline-block;
     margin: 0;
-    border-radius: 2px;
-    /* width: 83px; */
+    border-radius: 20px;
+    width: 110px;
     margin-top: 10px;
 }
 #page-content br{display:none;} 
@@ -4421,7 +4432,10 @@ background: #ff6a00;
 .side-menu h3{ padding:0 0 5px 0;}
 .side-menu ul{padding-bottom: 15px; border-bottom: 1px solid #ddd;}
 .logout{ padding-bottom: 0!important; border-bottom: none!important;}
-.side-menu li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+/* .side-menu li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;} */
+.information li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+.category-txt li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+.product-txt li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
 .side-menu .logout li{background: url('https://www.mydthshop.com/web-app/assets/images/logout.png') no-repeat 0px 2px;margin: 10px 0;}
 .side-menu ul li a{padding: 0px 0 0 25px;display: block; color:#333;} 
 .side-menu .side-menu-header{background-color: #ffffff;padding: 8px 18px;border-bottom: 1px solid #ddd;}

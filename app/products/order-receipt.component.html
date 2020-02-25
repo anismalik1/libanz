@@ -1,3 +1,15 @@
+<style>
+	.cst-text{
+			text-align: center;
+	}
+	@media only screen and ( max-width: 767px){
+
+		.cst-text{
+			text-align: center;
+    font-size: 20px;
+		}
+	}
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -14,9 +26,18 @@
 		<div class="col s12 m10 l6 offset-l3">
 			<div class="card no-margin">
 				<div class="card-content" *ngIf="orders">
-						<div class="col s12 no-padding">									
-							<h2 class="font600">Thank you for shopping with us.</h2>
-							<span class="font-size-change1">We will send you a SMS conformation within 30 mintues.</span>
+						<div class="col s12 no-padding">	
+							<div class="icon" style="background-color: green;
+							color: #fff;
+							height: 45px;
+							width: 45px;
+							padding: 5px 0px 0px 12px;
+							border-radius: 50%;
+							font-size: 24px;">
+								<span class="fa fa-check"></span>
+							</div>								
+							<h2 class="font600 cst-text">Thank you for shopping with us.</h2>
+							<span class="font-size-change1" style="text-align: center;">We will send you a SMS conformation within 30 mintues.</span>
 							<div class="border padd-rem margin-top-order">
 								<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{orders[0].deliver_to}}</span> from Mydthshop</p>
 								<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{orders[0].delivery_date}}</span></p>
@@ -68,8 +89,9 @@
 								<!-- <div class="center" *ngIf="order.cashback > 0 && order.payment == 'wallet'"><span class="font-size-change1 margin-top green-text">*Congratulations You Have recieved {{order.cashback}} Cashback on your MyDth Wallet.</span></div>								 -->
 							</div> 
 						</div>
-						<div class="center"><a routerLink="/home" href="javascript:" class="btn orange white-text full-width">Continue Shopping</a></div>
-						<p class="red-text center margin-checkout">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
+						<div class="center"><a routerLink="/home" href="javascript:" class="btn orange white-text full-width rounded-btn">Continue Shopping</a></div>
+						
+						<br/><p class="red-text center margin-checkout">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
 					</div>
 				</div>
 			</div>

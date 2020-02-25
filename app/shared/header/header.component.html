@@ -16,7 +16,19 @@
     color: #ff6a00 !important;
 }
 
+.phone-pay-icon li span{
 
+	font-size:20px;
+	padding-right:10px;
+}
+.phone-pay-icon li::before{
+
+	background-image:transparent;
+}
+.phone-pay-icon li a {
+	border-bottom: 1px solid #ececec;
+	padding: 5px;
+}
 @media only screen and (max-width: 767px){
 	.mobile-footer-menu ul li a span {
     display: block;
@@ -138,7 +150,7 @@
 		<ul>
 			<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="fa fa-home" style="font-size:18px;"></span><span class="mobile-footer-text">Home</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"></span><span class="mobile-footer-text">Products</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="icon-packages"></span><span class="mobile-footer-text">Packages</span></a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="fa fa-gift" style="font-size:18px;"></span><span class="mobile-footer-text">Packages</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-question-circle" style="font-size:18px;"></span><span class="mobile-footer-text">FAQS</span></a></li>
 			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger </span></a></li>
 		</ul>
@@ -174,9 +186,23 @@
 				
 		
 			</div>
+
+			<ul class="phone-pay-icon">	
+				<li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li>
+				<li><a href="#"><span class="fa fa-credit-card"></span> My BHIM UPI ID </a></li>
+				<li><a href="#"><span class="fa fa-map-marker"></span> My Address </a></li>
+				<li><a href="#"><span class="fa fa-language"></span> My Language </a></li>
+				<li><a href="#"><span class="fa fa-bell"></span> Bill Notification </a></li>
+				<li><a href="#"><span class="fa fa-key"></span> Change Password </a></li>
+				<li><a href="#"><span class="fa fa-lock"></span> Enable Screen Lock </a></li>
+				<li><a href="#"><span class="fa fa-ban"></span> Blocked Contact </a></li>
+				<li><a href="#"><span class="fa fa-file"></span> Policies </a></li>
+				
+			</ul>	
+
 			
 		<h3>Information</h3>	
-			<ul class="">	
+			<ul class="information">	
 				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
 				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
 				<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
@@ -189,7 +215,7 @@
 			</ul>	
 		
 		<h3>Categories</h3>
-			<ul class="mb-menu-txt">	
+			<ul class="mb-menu-txt category-txt">	
 				<li><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></li>
 				<li><a [routerLink]="['/product/listing/videocon']">Videocon</a></li>
 				<li><a [routerLink]="['/product/listing/airtel']">Airtel</a></li>
@@ -198,7 +224,7 @@
 				<li><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></li>
 				<li><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></li>
 			</ul>	
-		<ul>	
+		<ul class="product-txt">	
 			<h3>All Product Packages</h3>
 			<li><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages</a></li>
 			<li><a [routerLink]="['/package-list/airtel']">Airtel Packages</a></li>

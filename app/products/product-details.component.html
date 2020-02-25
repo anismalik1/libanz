@@ -1,3 +1,11 @@
+<style>
+.review-text .green {
+    padding: 5px 3px 6px 5px;
+    margin-right: 1rem;
+    border-radius: 50%;
+}
+
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -56,8 +64,8 @@
                         
                       </div>
                       <div class="product-btn center">
-                      	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+                      	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
                       </div>
                     </div>
                   </div>
@@ -117,7 +125,7 @@
                   			<span class="font-size-change1 font600 grey-text">Packages selected{{month}}</span>
                   		</li>
                   		<li *ngFor="let item of package_month;let i = index">
-                  			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
+                  			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)" style="color:#fff !important;">{{item.month_label}}</a>
                   		</li>
 					  </ul>
 					<br/>
@@ -348,7 +356,7 @@
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
-									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger">Channels</a></span>
+									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
 								</div>
 							</div>
 							<div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
@@ -367,10 +375,10 @@
 				</li>
 			</ul>
  
-			<ul>
-				<li class="red-text" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
-				<li class="red-text" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
-				<li class="red-text" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+			<ul class="pt-all-10">
+				<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
+				<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
+				<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
 			</ul>
 			
 </div>
@@ -420,8 +428,8 @@
 			<hr>
 			<div class="subtotal inline-block">
 				<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange"(click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
-				<a href="javascript:" class="btn orange" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)">Checkout </a>
+				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn"(click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
+				<a href="javascript:" class="btn orange" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a>
 			</div>				
 		</div>
 	</div>

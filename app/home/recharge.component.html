@@ -319,10 +319,11 @@ span.card-title {
 					</div>
 				</form>
 					<div class=" dth-box">
-						<h4 class="mb-txt">DTH Payment						</h4>
+					
 				<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)" *ngIf="recharge_type.dth">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
+							<h4 class="mb-txt">DTH Payment						</h4>
 							<mat-form-field> 
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
 									<span *ngFor="let item of operators.DTH;">
