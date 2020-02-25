@@ -37,6 +37,12 @@
 .icon-cst-clr-1{
 	font-size: 18px;
 }
+#mobile-header {
+    background-color: #ff6a00;
+    padding: 15px 0px 0px 15px;
+    height: 100px;
+    color: #fff;
+}
 }
 
 	</style>
@@ -76,7 +82,7 @@
 							<ul  *ngIf="notifications  && notifications.length > 0">
 								<li *ngFor="let item of notifications;" >
 									<div class="notification-drop-image">
-										<img src="../../../assets/images/favorite-white.png" class="responsive-img">
+										<img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" class="responsive-img">
 									</div>
 									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 										<p [innerHTML]="item.visitor_comment"></p>
