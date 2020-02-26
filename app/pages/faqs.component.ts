@@ -163,7 +163,6 @@ export class FaqsComponent implements OnInit {
           $('#search-ico').click();
         };
         speech.recognition.start();
-        //console.log(document.getElementById('search-on'))
         document.getElementById('mic-icon').style.color = '#6947f3';
         document.getElementById('search-on').disabled = true;
       },
@@ -233,6 +232,7 @@ export class FaqsComponent implements OnInit {
     }
     find(val)
     {
+      $("#faq_key").val(val);
       this.query_string = val;
       this.go_to_search()
     }
@@ -300,10 +300,10 @@ export class FaqsComponent implements OnInit {
   go_to_search()
   {
     var key : any = '';
-    if(this.query_string == '')
-      key = $("#faq_key").val();
-    else
-      key = this.query_string; 
+    key = $("#faq_key").val();
+    if(key == '')
+      key = this.query_string;
+    //console.log(key)   
     if(key == '')
       return false;  
     if(1 == 1)
@@ -313,6 +313,8 @@ export class FaqsComponent implements OnInit {
       }
     }  
     this.route.navigated = false;
+    //console.log(key)
+    //window.location.href = "/help/faqs?q="+key;
     this.route.navigate([ '/help/faqs' ], { queryParams: { q: key } });
   }
   
