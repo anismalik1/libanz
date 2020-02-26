@@ -144,7 +144,7 @@
             		</div>
             		<div class="col s8 my-cart" >
             			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
-            			<span class="font600 naam2" *ngIf="tab_address"><span *ngIf="tab_address.name">{{tab_address.name}}-</span>{{tab_address.contact}}&nbsp;(<span *ngIf="tab_address.address">{{tab_address.address}},</span> {{ tab_address.pin}})</span>
+            			<span class="font600 naam2" *ngIf="address"><span >{{address.name}}-</span>{{address.contact}}&nbsp;(<span *ngIf="address">{{address.address}},</span> {{ address.pin}})</span>
             			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
             			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
             		</div>
@@ -258,20 +258,17 @@
 													<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 												</div>
 									</form>
-							</div>						
-        			<div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
-                <!-- <div *ngIf="only_address == 1 || row.set_default == 1;then checked else unchecked"></div> -->
-        				<!-- <ng-template #checked><input class="with-gap" name="client_address" type="radio" value="{{row.id}}"  id="address-{{row.id}}" checked></ng-template> -->
-        				<input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}" (change)="set_on_tab(row);"/>
+							</div>
+							<p *ngIf="address">{{address.address}}, {{address.city}}, {{address.state}}, {{address.pin}}</p>						
+        			<!-- <div class="name margin-top-cart user-address" *ngFor="let row of addresses;">
+               <input class="with-gap" name="client_address" type="radio" value="{{row.id}}" id="address-{{row.id}}" (change)="set_on_tab(row);"/>
       					<label for="address-{{row.id}}" class="font600 black-text">{{row.name}} &nbsp;<span>{{row.contact}}</span></label>
-									<!-- &nbsp;<a href="#add-address" class="modal-trigger edit-address" (click)="edit_address(row.id)"> Edit</a>&nbsp; -->
-									<!-- <a href="javascript:" (click)="remove_address(row.id)"> Remove</a> -->
 									<p>{{row.address}}, {{row.city}}, {{row.state}}, {{row.pin}}</p>
-        			</div>        			
+        			</div>        			 -->
 								</div>
-								<div class="col s10 m10 offset-m1" *ngIf="addresses && addresses.length > 0">
+								<!-- <div class="col s10 m10 offset-m1" *ngIf="addresses && addresses.length > 0">
 								<button type="Submit" class="btn waves-effect waves-light orange margin-top" (click)="goto_pay()">DELIVER HERE</button>
-								</div>
+								</div> -->
 								<!-- <div class="add-new-address col s12" *ngIf="addresses && addresses.length == 0">
 									<a href="#add-new-address" class="modal-trigger"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Delivery Address</a>
 								</div>

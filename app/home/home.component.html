@@ -649,7 +649,7 @@ background-color: #fff;
 				</form>
 			</div> -->
 		</div>
-		</div	>
+		</div>
 	</div>
 </section>
 <section class="recharge-section show-on-medium-and-down hide-on-med-and-up" >
@@ -780,167 +780,180 @@ background-color: #fff;
 	<h2 class=" font600 padd center txt-pro ">Tata Sky Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/tata-sky']">View All</a></span></h2>
 	
 	<div class="container-fluid">
-		<div class="row no-margin 1" *ngFor="let item of tata_slides;let i = index">
-			<div class="col s12 m4 list-{{item.id}}" >
-			<div class="product-image">
-			
-				<div class="row" style="margin-bottom:10px;">
-					<div class="col s10">
-						<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
-					</div>
-					<div class="col s2">
-						<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
-					</div>
-				</div>
-				<div class="row">
-				
-				<div class="col s2">
-					<div class="product-img1">
-					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
-					</div>
-				</div>
-				<div class="col s10">
-					<div class="rechare-section-list">
-						<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
-
-						<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
-						<br/>
-						<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+		<ul class="product-slider">
+			<li *ngFor="let item of tata_slides">
+				<div class="row no-margin 1">
+					<div class="col s12 m4 list-{{item.id}}" >
+					<div class="product-image">
+					
+						<div class="row" style="margin-bottom:10px;">
+							<div class="col s10">
+								<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+							</div>
+							<div class="col s2">
+								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+							</div>
+						</div>
+						<div class="row">
 						
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+						<div class="col s2">
+							<div class="product-img1">
+							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+							</div>
+						</div>
+						<div class="col s10">
+							<div class="rechare-section-list">
+								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+		
+								<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
+								<br/>
+								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+								
+								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+							</div>
+						</div>
+						</div>
+						</div>
 					</div>
-				</div>
-				</div>
-				</div>
-			</div>
-			
-			</div>
+					
+					</div>
+				</li>
+			</ul>
 		</div>
 </section>
 <section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
 	<h2 class=" font600 padd center txt-pro ">Dishtv Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/dish-tv']">View All</a></span></h2>
 	
 	<div class="container-fluid">
-		<div class="row no-margin 1" *ngFor="let item of dishtv_slides;let i = index">
-			<div class="col s12 m4" >
-			<div class="product-image">
-			
-				<div class="row" style="margin-bottom:10px;">
-					<div class="col s10">
-					
-						<div class="rating-green-content">	Free Home Delievery </div>
-						<!-- <div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div> -->
-					</div>
-					<div class="col s2">
-						<span class="fa fa-star pull-right icn-clr1" ></span>
-					</div>
-				</div>
-				<div class="row">
-				
-				<div class="col s2">
-					<div class="product-img1">
-					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
-					</div>
-				</div>
-				<div class="col s10">
-					<div class="rechare-section-list">
-						<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
-
-						<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
-						<br/>
-						<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+			<ul class="product-slider">
+				<li *ngFor="let item of dishtv_slides">
+					<div class="row no-margin 1">
+						<div class="col s12 m4 list-{{item.id}}" >
+						<div class="product-image">
 						
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-					</div>
-				</div>
-				</div>
-				</div>
-			</div>
+							<div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div>
+							<div class="row">
+							
+							<div class="col s2">
+								<div class="product-img1">
+								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+								</div>
+							</div>
+							<div class="col s10">
+								<div class="rechare-section-list">
+									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-			</div>
+									<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
+									<br/>
+									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+									
+									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+								</div>
+							</div>
+							</div>
+							</div>
+						</div>
+						
+						</div>
+					</li>
+				</ul>
 		</div>
 </section>
 <section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
 	<h2 class=" font600 padd center txt-pro ">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/airtel']">View All</a></span></h2>
 	
 	<div class="container-fluid">
-		<div class="row no-margin 1" *ngFor="let item of airtel_slides;let i = index">
-			<div class="col s12 m4" >
-			<div class="product-image">
-			
-				<div class="row" style="margin-bottom:10px;">
-					<div class="col s10">
-						<div class="rating-green-content">	Free Home Delievery </div>
-						<!-- <div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div> -->
-					</div>
-					<div class="col s2">
-						<span class="fa fa-star pull-right icn-clr1" ></span>
-					</div>
-				</div>
-				<div class="row">
-				
-				<div class="col s2">
-					<div class="product-img1">
-					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
-					</div>
-				</div>
-				<div class="col s10">
-					<div class="rechare-section-list">
-						<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
-
-						<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
-						<br/>
-						<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+		<ul class="product-slider">
+			<li *ngFor="let item of airtel_slides">
+				<div class="row no-margin 1">
+					<div class="col s12 m4 list-{{item.id}}" >
+					<div class="product-image">
+					
+						<div class="row" style="margin-bottom:10px;">
+							<div class="col s10">
+								<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+							</div>
+							<div class="col s2">
+								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+							</div>
+						</div>
+						<div class="row">
 						
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+						<div class="col s2">
+							<div class="product-img1">
+							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+							</div>
+						</div>
+						<div class="col s10">
+							<div class="rechare-section-list">
+								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+		
+								<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
+								<br/>
+								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+								
+								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+							</div>
+						</div>
+						</div>
+						</div>
 					</div>
-				</div>
-				</div>
-				</div>
-			</div>
-			
-			</div>
+					
+					</div>
+				</li>
+			</ul>
 		</div>
 </section>
 <section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
 	<h2 class=" font600 padd center txt-pro ">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/videocon']">View All</a></span></h2>
 	
 	<div class="container-fluid">
-		<div class="row no-margin 1" *ngFor="let item of videcone_slides;let i = index">
-			<div class="col s12 m4" >
-			<div class="product-image">
-			
-				<div class="row" style="margin-bottom:10px;">
-					<div class="col s10">
-						<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
-					</div>
-					<div class="col s2">
-						<span class="fa fa-star pull-right icn-clr1" ></span>
-					</div>
-				</div>
-				<div class="row">
-				
-				<div class="col s2">
-					<div class="product-img1">
-					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
-					</div>
-				</div>
-				<div class="col s10">
-					<div class="rechare-section-list">
-						<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
-
-						<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
-						<br/>
-						<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+			<ul class="product-slider">
+				<li *ngFor="let item of videcone_slides">
+					<div class="row no-margin 1">
+						<div class="col s12 m4 list-{{item.id}}" >
+						<div class="product-image">
 						
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-					</div>
-				</div>
-				</div>
-				</div>
-			</div>
+							<div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div>
+							<div class="row">
+							
+							<div class="col s2">
+								<div class="product-img1">
+								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+								</div>
+							</div>
+							<div class="col s10">
+								<div class="rechare-section-list">
+									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-			</div>
+									<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div>
+									<br/>
+									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+									
+									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+								</div>
+							</div>
+							</div>
+							</div>
+						</div>
+						
+						</div>
+					</li>
+				</ul>
 		</div>
 </section>
 
@@ -958,7 +971,6 @@ background-color: #fff;
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li>
-
 						</ul>
 						<ul class="tabs" id="select-slide" *ngIf="filter_banners('main-banner')">
 							<li class="tab hide"><a href="javascript:"></a></li>
@@ -1188,53 +1200,21 @@ background-color: #fff;
 	</div>
 </section>
 <!-- End Here -->
-<section class="retailer-section white no-padding margin-top-order" style="height:420px; background-color: #8c8c8c;">
+<section class="white no-padding margin-top-order">
 	<div class="container-fluid">
 		<div class="row no-margin">
-			<ul class="retailer-slider">
+			<ul class="mob-retailer-slider">
 				<li *ngFor="let banner of filter_banners('user-type')">
 					<div class="no-margin">
-						<div class="col s12 m12 l12 no-padding rt-image-box">
-							<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%"></a>
+						<div class="col s12 m12 l12 no-padding">
+							<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" alt="{{banner.imageAlt}}"></a>
 						</div>
-						<!-- <div class="col s12 m12 l4 no-padding">
-							<div class="registration-here-page center">
-								<h2 class="uppercase font600 orange-text">{{banner.title}}</h2>
-								<p  class="font-size-change1 black-text">{{banner.description}}</p>
-								<a href="{{banner.imageurl}}"  target="_blank" class="btn orange margin-top1">Register Here</a>
-							</div>
-						</div> -->
 					</div>
 				</li>				
 			</ul>
 		</div>
 	</div>
 </section>
-
-<!-- mobile code for testimonial -->
-<section class="retailer-section white no-padding margin-top-order" style="display: none;">
-	<div class="container-fluid">
-		<div class="row no-margin">
-			<ul class="retailer-slider">
-				<li *ngFor="let banner of filter_banners('user-type')">
-					<div class="no-margin">
-						<div class="col s12 m12 l12 no-padding rt-image-box">
-							<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" class="responsive-img" alt="{{banner.imageAlt}}" width="100%"></a>
-						</div>
-						<!-- <div class="col s12 m12 l4 no-padding">
-							<div class="registration-here-page center">
-								<h2 class="uppercase font600 orange-text">{{banner.title}}</h2>
-								<p  class="font-size-change1 black-text">{{banner.description}}</p>
-								<a href="{{banner.imageurl}}"  target="_blank" class="btn orange margin-top1">Register Here</a>
-							</div>
-						</div> -->
-					</div>
-				</li>				
-			</ul>
-		</div>
-	</div>
-</section>
-
 
 
 <!--JavaScript at end of body for optimized loading-->

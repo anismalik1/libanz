@@ -723,12 +723,12 @@ export class TodoService {
   }
   add_new_address(data)
   {
-    let url = this.server_url+'index.php?/app_services/add_new_address';
+    let url = this.server_url+'accounts/apis/product/add_new_address';
     return this.send_post_request(data,url) ;
   }
   reg_address(data)
   {
-    let url = this.server_url+'index.php?/app_services/reg_address';
+    let url = this.server_url+'accounts/apis/product/reg_address';
     return this.send_post_request(data,url) ;
   }
   fetch_testimonials(data)

@@ -39,6 +39,7 @@ export class CheckoutComponent implements OnInit{
   region : any;
   reg_address : number = 0; 
   tab_address : any;
+  address : any;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -204,8 +205,6 @@ ngOnInit() {
   this._renderer2.appendChild(this._document.body, script);
   this.get_checkout_data();
   this.todoservice.get_user_data();
-  console.log(this.pincode);
-  console.log(this.region)
   
 }
 cod_apply()
@@ -405,12 +404,8 @@ reg_addr(formdata)
         data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
-          this.addresses = data.ADDRESSES;
-          
-          setTimeout(()=>{    
-            $('#address-'+data.added_address.address_id).prop('checked',true);
-           }, 1000);
-           this.tab_address = data.added_address; 
+          this.address = data.address;
+          this.tab_address = data.address.address_id; 
           this.goto_pay();
         }
         this.spinner.hide();
@@ -436,12 +431,8 @@ add_new_addr(form)
         data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
-          this.addresses = data.ADDRESSES;
-          
-          setTimeout(()=>{    
-            $('#address-'+data.added_address.address_id).prop('checked',true);
-           }, 1000);
-           this.tab_address = data.added_address; 
+           this.address = data.added_address; 
+           this.tab_address = this.address.address_id;
           this.goto_pay();
         }
         this.spinner.hide();
@@ -508,7 +499,7 @@ checkout_items(type)
   }
 
   this.spinner.show();
-  let address_id = $('.user-address input:checked').val();
+  let address_id = this.tab_address
   let wallet_type = $('#wallet-type input:checked').val();
   let data  = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
   

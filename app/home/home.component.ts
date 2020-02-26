@@ -739,8 +739,18 @@ toTimestamp(strDate){
           var child = $(this).find('.data-slide').text();
           flashdeal.goToSlide(Number(child));
         });
-        
-        $('.retailer-slider').lightSlider({
+        var product = $('.product-slider').lightSlider({
+          item: 1,
+          auto: false,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true
+        });
+        $('.mob-retailer-slider').lightSlider({
           item: 1,
           auto: true,
           pauseOnHover: true,
@@ -749,27 +759,7 @@ toTimestamp(strDate){
           keyPress: true,
           controls: true,
           pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
+          enableDrag: true
         });
              
       // Hide sideNav
