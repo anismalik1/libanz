@@ -27,7 +27,11 @@
 }
 .phone-pay-icon li a {
 	border-bottom: 1px solid #ececec;
-	padding: 5px;
+	padding:7px;
+}
+.phone-pay-icon li:nth-last-child(0) {
+	border-bottom:transparent
+	
 }
 @media only screen and (max-width: 767px){
 	.mobile-footer-menu ul li a span {
@@ -42,6 +46,10 @@
     padding: 15px 0px 0px 15px;
     height: 100px;
     color: #fff;
+}
+.hide-left-menu-mb{
+
+	display: none !important;
 }
 }
 
@@ -207,8 +215,8 @@
 			</ul>	
 
 			
-		<h3>Information</h3>	
-			<ul class="information">	
+		<h3 class="hide-left-menu-mb">Information</h3>	
+			<ul class="information hide-left-menu-mb">	
 				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
 				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
 				<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
@@ -220,8 +228,8 @@
 				<li><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></li>
 			</ul>	
 		
-		<h3>Categories</h3>
-			<ul class="mb-menu-txt category-txt">	
+		<h3 class="hide-left-menu-mb">Categories</h3>
+			<ul class="mb-menu-txt category-txt hide-left-menu-mb">	
 				<li><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></li>
 				<li><a [routerLink]="['/product/listing/videocon']">Videocon</a></li>
 				<li><a [routerLink]="['/product/listing/airtel']">Airtel</a></li>
@@ -230,7 +238,7 @@
 				<li><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></li>
 				<li><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></li>
 			</ul>	
-		<ul class="product-txt">	
+		<ul class="product-txt hide-left-menu-mb">	
 			<h3>All Product Packages</h3>
 			<li><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages</a></li>
 			<li><a [routerLink]="['/package-list/airtel']">Airtel Packages</a></li>
@@ -238,8 +246,8 @@
 			<li><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></li>
 		</ul>	
 		
-		<h3>Follow Us</h3>
-		<ul class="side-social">	
+		<h3 class="hide-left-menu-mb">Follow Us</h3>
+		<ul class="side-social hide-left-menu-mb">	
 			<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/facebook1.png" /></a></li>
 			<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
 			<li><a href="https://twitter.com/mydthshop"><img src="{{this.todoservice.base_url}}assets/images/twitter.png" /></a></li>
