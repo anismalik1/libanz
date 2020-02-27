@@ -34,18 +34,19 @@ section {
 }
 .rating-green{
 
-	background: #1c851c;
+						background: #1c851c;
 						padding: 3px 0px 3px 22px;
 						width: 100px;
 						color: #fff;
 						float: left;
+						
 }
 .icn-clr1{
 
 	color:#746d67;
 	 float:right;
-	  padding:15px 20px 0px 0px;
-	  font-size:17px;
+	  padding:4px 20px 0px 0px;
+	  font-size:15px;
 }
 .heading-txt1{
 	font-size: 17px;
@@ -62,16 +63,18 @@ section {
 
 }
 .rating-green-content{
-	background:#ff6a00;
-	padding: 4px 10px 4px 10px;
+	background: #ff6a00;
+    padding: 2px 10px 2px 10px;
     width: auto;
     color: #fff;
     float: left;
+    margin-left: -9px;
+    font-size: 10px;
 
 }
 .price-cut1{
 
-	padding-bottom:10px; padding-top:15px;
+	padding-bottom:2px; padding-top:10px;
 }
 .list-data{
 	padding-bottom:10px; font-size:16px; color:#333;
@@ -94,12 +97,7 @@ width: 60px;
 text-align: center;
 margin: 2px;
 }
-.list-data a{
 
-	color: #333;
-    font-size: 14px;
-    font-weight: bold;
-}
 
 @media only screen and (max-width: 767px){
 
@@ -108,14 +106,17 @@ margin: 2px;
     padding-bottom:0px !important;
 }
 .heading-txt1{
-	font-size: 14px;
+	font-size: 11px;
+}
+.heading-txt1 a{
+	color:#333;
 }
 .rechare-section-list{
 	padding-left: 20px;
 }
 .product-image{
 
-	height:172px;
+	height:146px;
 background-color: #fff;
 
 }
@@ -137,6 +138,21 @@ background-color: #fff;
 }
 #select-item {
     padding: 0 !important;
+}
+.list-data a{
+
+color: #333;
+font-size: 11px;
+font-weight: bold
+}
+.offer-txt{
+
+	color:#1c851c;
+	font-size:10px;
+	padding-left:8px;
+}
+ul.mob-retailer-slider.lightSlider.lSSlide {
+    height: 66px;
 }
 }
 </style>
@@ -726,7 +742,7 @@ background-color: #fff;
 					</div>		        
 				</div>
 				<div class="card-action right-align">
-					<a href="javascript:" (click)="continue_back()" class="btn orange">Continue</a>
+					<a href="javascript:" (click)="continue_back()" class="btn orange">Proceed To Pay</a>
 				</div>
 			</div>
 		</div>
@@ -830,15 +846,22 @@ background-color: #fff;
 					<div class="row no-margin 1">
 						<div class="col s12 m4 list-{{item.id}}" >
 						<div class="product-image">
-						
 							<div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" >Free Home Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div>
+							<!-- <div class="row" style="margin-bottom:10px;">
 								<div class="col s10">
 									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 								</div>
 								<div class="col s2">
 									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
 								</div>
-							</div>
+							</div> -->
 							<div class="row">
 							
 							<div class="col s2">
@@ -923,12 +946,20 @@ background-color: #fff;
 						
 							<div class="row" style="margin-bottom:10px;">
 								<div class="col s10">
-									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+									<div class="rating-green-content" >Free Home Delievery </div>
 								</div>
 								<div class="col s2">
 									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
 								</div>
 							</div>
+							<!-- <div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div> -->
 							<div class="row">
 							
 							<div class="col s2">
@@ -1038,6 +1069,7 @@ background-color: #fff;
 		<div class="row no-margin home-product-card">
 			<ul class="slider-66">
 				<li *ngFor="let item of dishtv_slides;let i = index">
+					
 				<div class="card">
 					<div class="card-image padd center">
 						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}-image">
@@ -1122,6 +1154,15 @@ background-color: #fff;
 		<div class="row no-margin home-product-card">
 			<ul class="slider-8">
 				<li *ngFor="let item of videcone_slides;let i = index">
+
+					<div class="row" style="margin-bottom:10px;">
+						<div class="col s10">
+							<div class="rating-green-content" >Free Home Delievery </div>
+						</div>
+						<div class="col s2">
+							<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+						</div>
+					</div>
 				<div class="card">
 					<div class="card-image padd center">
 						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}-image">
