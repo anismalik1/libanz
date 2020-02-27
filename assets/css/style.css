@@ -4794,6 +4794,11 @@ span.fa.fa-edit.fa-2x {
 
 	display: none;
 }
+.wallet-mobile {
+	margin: 10px -17px !important;
+	border-bottom: 1px solid #e3e3e3;
+	padding: 0 0 10px 15px;
+}
 	}
 
 

@@ -22,14 +22,29 @@ p.grey-text.center.stop-txt {
     font-size: 22px !important;
 }
 .dis-none {
-    color: #ff6a00;
+  color: #f47c3a;
     text-align: center;
     position: absolute;
     justify-content: center;
-    left: 43%;
+    left: 33%;
     top: 43px;
 }
+.icon-fix{
 
+  font-size: 45px;
+    background: #ececec;
+    border-radius: 50%;
+    padding: 10px;
+}
+div#modal-speak {
+    height: 250px;
+    border-radius: 10px;
+}
+.cst-color{
+
+  color:#8c8c8c;
+  font-size: 20px;;
+}
 @media only screen and (max-width :767px){
 
     .dis-none{
@@ -114,10 +129,17 @@ p.grey-text.center.stop-txt {
           </ul>
           <div id="modal-speak" class="modal">
               <div class="modal-header">
-                  <a href="javascript:" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="speech.stop()">close</a>
+                  <a href="javascript:" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="speech.stop()" style="visibility:hidden;">close</a>
                 </div>
             <div class="modal-content">
-              <h1 class="left"> I am Listning...</h1> <p class="left"><i id="mic-icon" class="large material-icons" style="font-size: 50px;">mic</i></p>
+              <h1 class="left speak-txt"> Speak Now ...</h1> 
+              <p class="left" style="float:right !important;"><i id="mic-icon" class="large material-icons " style="font-size: 50px;
+              font-size: 55px;
+                background: #fff;
+                border-radius: 50%;
+                padding: 10px;
+                color: #f74747;
+    box-shadow: 1px 1px 10px #ececec;">mic</i></p>
             </div>
             
           </div>

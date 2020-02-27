@@ -1,7 +1,35 @@
 <style>
+	body{
+
+overflow:hidden !important;
+}
+	.thanks-txt{
+
+		font-size:14px;
+	}
 	.cst-text{
 			text-align: center;
 	}
+	.card .card-content {
+    padding: 0px;
+    border-radius: 0 0 2px 2px;
+}
+.margin-top-order{
+	margin:0px !important;
+	 padding:2px 0px 2px 5px !important;
+}
+.card .card-content .card-title {
+    line-height: 10px !important;
+}
+
+.card .card-content p {
+    margin: -2px;
+
+}
+.fix-padding{
+
+	padding: 0px;
+}
 	@media only screen and ( max-width: 767px){
 
 		.cst-text{
@@ -23,7 +51,7 @@
 <!-- End Here -->
 <section class="middle white">
 	<div class="row no-margin">
-		<div class="col s12 m10 l6 offset-l3">
+		<div class="col s12 m10 l6 offset-l3 fix-padding">
 			<div class="card no-margin">
 				<div class="card-content" *ngIf="orders">
 						<div class="col s12 no-padding">	
@@ -36,7 +64,7 @@
 							font-size: 24px;">
 								<span class="fa fa-check"></span>
 							</div>								
-							<h2 class="font600 cst-text">Thank you for shopping with us.</h2>
+							<h2 class="font600 cst-text thanks-txt">Thank you for shopping with us.</h2>
 							<span class="font-size-change1" style="text-align: center;">We will send you a SMS conformation within 30 mintues.</span>
 							<div class="border padd-rem margin-top-order">
 								<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{orders[0].deliver_to}}</span> from Mydthshop</p>
@@ -44,7 +72,7 @@
 							</div>
 						</div>
 						<div class="order-list" *ngFor="let order of orders">							
-							<div class="row no-margin border-on-bottom padd-bottom">
+							<div class="row no-margin border-on-bottom">
 								
 								<div class="col s8 no-padding">
 									<span class="font-size-change1">Order Number</span><br>
@@ -58,7 +86,7 @@
 									
 								</div>
 							</div>
-							<div class="row padd-bottom margin-checkout">						
+							<div class="row margin-checkout">						
 								<div class="col s12 m2" >
 									<a href="javascript:">
 										<span ><img src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{order.image}}" class="responsive-img vertical-align-middle border" alt="Tata sky logo"></span>
