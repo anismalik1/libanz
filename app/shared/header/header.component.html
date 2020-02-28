@@ -33,6 +33,14 @@
 	border-bottom:transparent
 	
 }
+/* .user-after-login{
+
+	background: #ececec;
+    border-radius: 50%;
+    width: 50px;
+    margin: 0px 8px 0px 0px;
+
+} */
 @media only screen and (max-width: 767px){
 	.mobile-footer-menu ul li a span {
     display: block;
@@ -608,7 +616,7 @@
 		</div>
 	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
 		<ul>
-			<li class="inline-block user-after-login-img"><a class="no-padding" routerLink="/dashboard/edit-profile">
+			<li class="inline-block c"><a class="no-padding" routerLink="/dashboard/edit-profile">
 				<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 				<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/></a>
 			<li class="inline-block user-after-login-text">

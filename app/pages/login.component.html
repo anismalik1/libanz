@@ -2,16 +2,43 @@
 	.fix-align label {
     margin: 0 !important;
 }
+
+i.material-icons.prefix.margin-top-cart2 {
+    position: absolute;
+    left: -29px;
+    top: -7px;
+}
+.fix-align label.font-size-change {
+	margin-top: -25px !important;
+} 
+.fix-align label.font-size-change :focus{
+	padding-top: 24px;
+} 
+label.font-size-change.active {
+    padding-top: 29px;
+}
+
 	@media only screen and (max-width: 767px){
 
 		.fix-align label {
     margin: 0 !important;
 }
 .fix-align label.font-size-change {
-    margin: 0px !important;
+	margin-top: -25px !important;
 } 
+.fix-align label.font-size-change:focus{
+	padding-top: 24px;
+} 
+.card .card-content {
+    padding: 3px 15px 15px 36px !important;
+}
+label.font-size-change.active {
+    padding-top: 29px;
+}
 
 	}
+
+	
 </style>
 <app-header class="hide-on-mobile"></app-header>
 <title>Mydthshop Login</title>
@@ -27,7 +54,7 @@
 </div>
 <div class="col s12 cst-back">
 	<ul class="back-icon">
-		<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon"></span>&nbsp;</a> </li>
+		<li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon"></span>&nbsp; Login Now </a> </li>
 	</ul>
   </div>
 <div class="work" *ngIf="step==1;then loginform else otpverify"></div>

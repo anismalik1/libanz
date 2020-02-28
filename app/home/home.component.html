@@ -749,7 +749,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	</div>
 </section>
 <section *ngIf="recharge_ini == 2">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row mar-row responsive-kro">
 			<a class="modal-close recharge-close" href="javascript:" (click)="back_to_recharge()"><i class="material-icons">close</i></a>
 			<div class="col s12 m12 l6">
@@ -1018,7 +1018,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- Tata Sky section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
 	<h2 class="center padd border-bottom font600">Tata Sky Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/tata-sky']" target="_blank">View All</a></span></h2>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row no-margin">
 			<div class="col s12 m12">
 				<div class="row no-margin home-product-card">
@@ -1108,7 +1108,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- Airtel Dish section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
 	<h2 class="border-bottom font600 padd center">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/airtel']" target="_blank">View All</a></span></h2>
-	<div class="container">
+	<div class="container-fluid">
 			<div class="row no-margin home-product-card">
 				<ul class="slider-7">
 					<li *ngFor="let item of airtel_slides;let i = index">
@@ -1150,7 +1150,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- Videocon D2H section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
 	<h2 class="border-bottom font600 padd center">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/videocon']" target="_blank">View All</a></span></h2>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row no-margin home-product-card">
 			<ul class="slider-8">
 				<li *ngFor="let item of videcone_slides;let i = index">
@@ -1204,7 +1204,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- Reccomended For You -->
 <section class="flash-deal recomended-wrapper white margin-top-order sldr-txt hide-on-mobile" *ngIf="this.recommended">
 		<h2 class="border-bottom font600 padd center">Largest Selling Products</h2>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row no-margin home-product-card recomm">
 			<div class="col s12 m3" *ngFor="let item of recommended">
 				<div class="card">
