@@ -15,6 +15,15 @@
 .mobile-footer-menu ul li.active span {
     color: #ff6a00 !important;
 }
+.cst-name {
+    height: 100px;
+    width: 100px;
+	background: #ececec;
+	color:#333;
+    padding: 5px;
+	border-radius: 50%;
+	font-size:16px;
+}
 
 .phone-pay-icon li span{
 
@@ -324,9 +333,11 @@
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
 					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a>
 				</li>
+			
 				<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
-					<a routerLink="/product/favorites"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
-				</li>				
+					<a routerLink="/product/favorites"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
+				</li>	
+					
 				<li class="craft relative" >
 					<a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
 					<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
@@ -347,6 +358,7 @@
 								<li><a class="modal-trigger font600" data-target="loadmore-modal2" href="#loadmore-modal2">Load More</a></li>
 							</ul>
 						</li>
+						
 					</ul>
 				</li>
 				</ul>
@@ -367,17 +379,22 @@
 						<time class="grey-text">{{time_ago(item.history_time)}}</time>
 						</div>
 						</li>
+						
 						</ul>										
 						<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
 						</div>
 						</div>
 			  <ul id="nav-mobile" class="inline-block log-sig right">
 				<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Log In/Sign Up </a></li>
+				
 				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> 
 					<img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a>
 				</li>
+				<li>
+					<span class="cst-name">RG</span>
+				</li>
 				<li id="user-nav">
-					<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;">{{this.todoservice.get_user_name()}}</span>
+					<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
 						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
 						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/>
@@ -616,7 +633,7 @@
 		</div>
 	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
 		<ul>
-			<li class="inline-block c"><a class="no-padding" routerLink="/dashboard/edit-profile">
+			<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
 				<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 				<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/></a>
 			<li class="inline-block user-after-login-text">

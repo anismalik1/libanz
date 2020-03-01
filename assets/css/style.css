@@ -2232,7 +2232,7 @@ tbody img{
 	.mobile{padding: 1rem !important; margin-bottom: 1rem;}
 	#long-content h1{text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 100%;}
 	.container{width: 90%;}
-	.promo-li{padding: 15pv !important;}
+	.promo-li{padding: 15px !important;}
 	ul.cut-images:after {display: block;content: '';clear: both;}
 	.cut-images li{width: 49% !important; margin-bottom: 10px; float: left;min-height: 110px; }
 	.social-icons-footer{text-align: center !important;}
