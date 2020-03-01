@@ -438,14 +438,14 @@ export class TodoService {
   fetch_review_data(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_review_data';
+    let url = this.server_url+'accounts/apis/product/fetch_review_data';
     return this.send_post_request(data,url) ;
   }
 
   add_product_review(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/add_product_review';
+    let url = this.server_url+'accounts/apis/product/add_product_review';
     return this.send_post_request(data,url) ; 
   }
 

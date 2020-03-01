@@ -470,7 +470,7 @@ export class ProductService {
   fetch_channels(data)
   {
     this.request_action = '';
-    let url = this.server_url+'index.php?/app_services/fetch_channels';
+    let url = this.server_url+'accounts/apis/product/fetch_channels';
     return this.send_post_request(data,url) ;
   }
   fetch_products_by_category(data)

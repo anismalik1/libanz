@@ -354,7 +354,7 @@ export class ProductDetailsComponent implements OnInit{
       form.id = this.rate_data.id;
     }
     form.review_start = this.review_start;  
-		 this.todoservice.add_product_review(form)
+		 this.todoservice.add_product_review(form) 
 		  .subscribe(
 			data => 
 			{
@@ -1047,7 +1047,7 @@ export class ProductDetailsComponent implements OnInit{
 
   select_month(month)
   {
-    console.log(month)
+    //console.log(month)
     if($('#kit-packages').length > 0 )
     {
       if( typeof this.kit == 'undefined' )
@@ -1148,7 +1148,7 @@ export class ProductDetailsComponent implements OnInit{
     }, 1000);
     if(opt == 2)
     {
-      $('.checkout-with-multi').text("Include Multibox");
+      $('.multi-text').text("Include Multibox");
     }
   }
 

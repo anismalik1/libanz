@@ -390,9 +390,9 @@
 				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> 
 					<img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a>
 				</li>
-				<li>
+				<!-- <li>
 					<span class="cst-name">RG</span>
-				</li>
+				</li> -->
 				<li id="user-nav">
 					<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
 						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>

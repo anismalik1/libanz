@@ -173,7 +173,7 @@ ngOnInit() {
   });
   $('body').delegate('.chngs3','click', function() {
     $('.modal').modal();
-      $('.checkout_3').show();	
+      $('.checkout_3').removeClass('hide');	
       $('.chngs2').addClass('hide');								
       $('.chng3').addClass('hide');								
       $('.checkout_4').addClass('hide');									
