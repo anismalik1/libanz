@@ -72,7 +72,6 @@
 
 	</style>
 <!-- Header Start Here -->
-
 <div class="mobile-wrapper">
 	<!-- mobile header start-->
 	<div class="mobile-mask"></div>
@@ -97,6 +96,7 @@
 		</div>
 		
 		<div class="mobile-header-right">
+				
 			<ul>
 			<li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span></a> </li>
 			<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
@@ -603,7 +603,7 @@
 							</div>
 					</div>
 				</div>
-				<div id="forget-password" class="col s12 hide">
+				<!-- <div id="forget-password" class="col s12 hide">
 					<div class="login">
 						<form class="login-step">
 							<div class="row">
@@ -611,7 +611,7 @@
 									<i class="material-icons prefix margin-top-cart2">email</i>
 										<input id="icon_prefix" type="number" class="validate">
 										<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
-										<!-- <div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div> -->
+										
 									</div>
 								<div class="col s12 center margin-top">
 									<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
@@ -619,7 +619,7 @@
 							</div>
 						</form>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

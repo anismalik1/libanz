@@ -466,7 +466,7 @@ export class ProductDetailsComponent implements OnInit{
         if(typeof data.PACKAGEMONTH != 'undefined' )
         {
           this.package_month = data.PACKAGEMONTH;
-          //console.log(this.package_month)
+          console.log(this.package_month)
           if(this.package_month)
           {
             this.monthdata = [this.package_month[0]];
@@ -1047,7 +1047,7 @@ export class ProductDetailsComponent implements OnInit{
 
   select_month(month)
   {
-    
+    console.log(month)
     if($('#kit-packages').length > 0 )
     {
       if( typeof this.kit == 'undefined' )

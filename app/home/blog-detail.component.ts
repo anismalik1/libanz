@@ -117,7 +117,15 @@ export class BlogDetailComponent implements OnInit {
       .subscribe(
         data => 
         {
-          this.toastr.successToastr(data.msg);
+          if(data.status == true)
+          {
+            this.toastr.successToastr(data.msg);
+            this.fetch_post_comments();
+          }
+          else
+          {
+            this.toastr.errorToastr(data.msg);
+          }
           this.spinner.hide();
         }
       )

@@ -122,10 +122,10 @@
 					<br/>
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
                   		<li>
-                  			<span class="font-size-change1 font600 grey-text">Packages selected{{month}}</span>
+                  			<span class="font-size-change1 font600 grey-text">Packages selected</span>
                   		</li>
                   		<li *ngFor="let item of package_month;let i = index">
-                  			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)" style="color:#fff !important;">{{item.month_label}}</a>
+                  			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
                   		</li>
 					  </ul>
 					<br/>
