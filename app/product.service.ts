@@ -464,7 +464,7 @@ export class ProductService {
   fetch_product_data(data)
   {
     this.request_action = '';
-    let url = this.server_url+'index.php?/app_services/fetch_product';
+    let url = this.server_url+'accounts/apis/product/fetch_product';
     return this.send_post_request(data,url) ;
   }
   fetch_channels(data)
@@ -476,20 +476,20 @@ export class ProductService {
   fetch_products_by_category(data)
   {
     this.request_action = '';
-    let url = this.server_url+'index.php?/app_services/fetch_products_by_category';
+    let url = this.server_url+'accounts/apis/product/fetch_products_by_category';
     return this.send_post_request(data,url) ;
   }
   fetch_all_multi(data)
   {
     this.request_action = '';
-    let url = this.server_url+'index.php?/app_services/fetch_all_multi';
+    let url = this.server_url+'accounts/apis/product/fetch_all_multi';
     return this.send_post_request(data,url) ;
   }
 
   compare_urls(data)
   {
     this.request_action = '';
-    let url = this.server_url+'index.php?/app_services/compare_urls';
+    let url = this.server_url+'accounts/apis/product/compare_urls';
     return this.send_post_request(data,url) ;
   } 
   share_pack_to_mail(data)

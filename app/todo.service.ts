@@ -231,13 +231,13 @@ export class TodoService {
   fetch_user_info(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_user_info';
+    let url = this.server_url+'accounts/apis/home/fetch_user_info';
     return this.send_post_request(data,url) ; 
   }
 
   fetch_qr_user(data)
   {
-    let url = this.server_url+'index.php?/app_services/fetch_qr_user_info';
+    let url = this.server_url+'accounts/apis/home/fetch_qr_user_info';
     return this.send_post_request(data,url) ; 
   }
   
@@ -265,13 +265,13 @@ export class TodoService {
 
   send_value(data)
   {
-    let url = this.server_url+'index.php?/app_services/send_value_to_wallet';
+    let url = this.server_url+'accounts/apis/home/send_value_to_wallet';
     return this.send_post_request(data,url) ; 
   }
   manage_account_info(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/manage_account_info';
+    let url = this.server_url+'accounts/apis/home/manage_account_info';
     return this.send_post_request(data,url) ; 
   }
   update_account(data)
@@ -283,14 +283,14 @@ export class TodoService {
   update_password(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/update_password';
+    let url = this.server_url+'accounts/apis/home/update_password';
     return this.send_post_request(data,url) ; 
   }
 
   fetch_commissions(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_commission_listing_by_category';
+    let url = this.server_url+'accounts/apis/home/fetch_commission_listing_by_category';
     return this.send_post_request(data,url) ; 
   }
 
@@ -309,7 +309,7 @@ export class TodoService {
   
   fetch_operators(data)
   {
-    let url = this.server_url+'index.php?/app_services/fetch_operators';
+    let url = this.server_url+'accounts/apis/home/fetch_operators';
     return this.send_post_request(data,url) ;
   }
   recharge_init(data)
@@ -346,7 +346,7 @@ export class TodoService {
   
   fetch_home_data(data)
   {
-    let url = this.server_url+'index.php?/app_services/fetch_home';
+    let url = this.server_url+'accounts/apis/home/fetch_home';
     return this.send_post_request(data,url) ;
   }
   get_filter_products(data)
@@ -356,7 +356,7 @@ export class TodoService {
   }
   fetch_checkout_data(data)
   {
-    let url = this.server_url+'index.php?/app_services/fetch_checkout_data';
+    let url = this.server_url+'accounts/apis/product/fetch_checkout_data';
     return this.send_post_request(data,url) ;
   }
   
@@ -397,7 +397,7 @@ export class TodoService {
   }
   fetch_order_status(data)
   {
-    let url = this.server_url+'index.php?/app_services/fetch_order_status';
+    let url = this.server_url+'accounts/apis/orders/fetch_order_status';
     return this.send_post_request(data,url) ; 
   }
   fetch_recharge_order_status(data)
@@ -452,7 +452,7 @@ export class TodoService {
   fetch_more_reviews(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_more_reviews';
+    let url = this.server_url+'accounts/apis/product/fetch_more_reviews';
     return this.send_post_request(data,url) ;
   }
 
@@ -471,13 +471,13 @@ export class TodoService {
   proceed_to_reset(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/proceed_to_reset';
+    let url = this.server_url+'accounts/apis/home/proceed_to_reset';
     return this.send_post_request(data,url) ; 
   }
   reset_password(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/reset_password';
+    let url = this.server_url+'accounts/apis/home/reset_password';
     return this.send_post_request(data,url) ; 
   }
   fetch_booked_orders(data)
@@ -495,7 +495,7 @@ export class TodoService {
   get_search_data(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/get_search_data';
+    let url = this.server_url+'accounts/apis/home/get_search_data';
     return this.send_post_request(data,url) ; 
   }
   track_record(data)
@@ -507,7 +507,7 @@ export class TodoService {
   fetch_page_data(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_page_data';
+    let url = this.server_url+'accounts/apis/page/fetch_page_data';
     return this.send_post_request(data,url) ; 
   }
   apply_package(data)
@@ -532,13 +532,13 @@ export class TodoService {
   save_faqs_form(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/save_faqs_form';
+    let url = this.server_url+'accounts/apis/query/save_faqs_form';
     return this.send_post_request(data,url) ;
   }
   fetch_promocode(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_promocode';
+    let url = this.server_url+'accounts/apis/home/fetch_promocode';
     return this.send_post_request(data,url) ;
   }
   apply_promo_code(data)
@@ -550,38 +550,38 @@ export class TodoService {
   check_if_recharge_exist(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/check_if_recharge_exist';
+    let url = this.server_url+'accounts/apis/recharge/check_if_recharge_exist';
     return this.send_post_request(data,url) ;
   }
   product_categories()
   {
     let data = {};
-    let url = this.server_url+'index.php?/app_services/product_categories';
+    let url = this.server_url+'accounts/apis/product/product_categories';
     return this.send_post_request(data,url) ;
   }
   channel_category_by_circle(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/channel_category_by_circle';
+    let url = this.server_url+'accounts/apis/product/channel_category_by_circle';
     return this.send_post_request(data,url) ;
   }
 
   fetch_blogs(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_blogs';
+    let url = this.server_url+'accounts/apis/page/fetch_blogs';
     return this.send_post_request(data,url) ;
   }
   fetch_blogs_by_category(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_blogs_by_category';
+    let url = this.server_url+'accounts/apis/page/fetch_blogs_by_category';
     return this.send_post_request(data,url) ;
   }
   fetch_single_blog(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/fetch_single_blog';
+    let url = this.server_url+'accounts/apis/page/fetch_single_blog';
     return this.send_post_request(data,url) ;
   }
 

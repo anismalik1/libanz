@@ -240,11 +240,12 @@ export class RechargeComponent implements OnInit {
     this.plans = [];
       if(tab == 'mobile' || tab == 'mobile-postpaid')
       {
-        //console.log('mobile');
+       
         this.recharge_type.mobile = true;
 
         if(this.operator_id > 0 && this.region > 0)
         {
+          //console.log(this.operator_id);
           this.get_plans(this.region,this.operator_id);
         }
       }
@@ -331,6 +332,7 @@ export class RechargeComponent implements OnInit {
         {
           $('#short-content').html(data.PAGEDATA[0].shortDescription);
           $('#long-content').html(data.PAGEDATA[0].description);
+          $('#page-title').html(data.PAGEDATA[0].title);
           this.meta.addTag({ name: 'description', content: data.PAGEDATA[0].metaDesc });
           this.meta.addTag({ name: 'keywords', content: data.PAGEDATA[0].metaKeyword });
           this.title.setTitle(data.PAGEDATA[0].metaTitle);
@@ -350,6 +352,7 @@ export class RechargeComponent implements OnInit {
 
   changeOperator(data,s)
   {
+    //console.log(data);
     $('.additional-text').remove()
     this.viewrange = 1;
     var operatordata = this.alloperators.filter(x => x.id == data);
@@ -389,6 +392,7 @@ export class RechargeComponent implements OnInit {
     this.mobilegroup.controls['circle_area'].setValue(0);
     if(s == 'mobile')
     {
+      this.operator_id = operatordata.recharge_id;
       this.mcircle.open();
       this.filter_operator_name(this.selectedOperator);
     }
@@ -467,7 +471,7 @@ export class RechargeComponent implements OnInit {
         data => 
         {
             this.alloperators = data.ALLOPERATORS;
-            this.operators = data.OPERATORS;
+            this.operators = data.ALLOPERATORS;
             this.circles  = data.CIRCLES;
             this.spinner.hide();
             let recharge_data  = this.todoservice.get_recharge();
@@ -539,10 +543,12 @@ export class RechargeComponent implements OnInit {
             this.filter_circle_name(Number(recharge_data.circle_id));
             if(this.region > 0 && recharge_data.operator_id > 0)
             {
-            if(this.activity != recharge_data.activity_id)
-              this.get_plans(this.region,recharge_data.operator_api_id);
+              var operators = this.alloperators.filter(x => x.id == recharge_data.operator_id);
+              //console.log(operators)  
+              if(this.activity != recharge_data.activity_id)
+                this.get_plans(this.region,operators[0].recharge_id);   
             } 
-            this.operator_id = recharge_data.operator_api_id;
+            this.operator_id = operators[0].recharge_id;
             this.activity = recharge_data.activity_id;
 
         }
@@ -649,13 +655,13 @@ export class RechargeComponent implements OnInit {
       });
       return;
     }
-    
+   // console.log(formdata)
     if(formdata.amount <= 0 || formdata.recharge_id.id <= 0 || formdata.operator <= 0 )
 		{
       return false;
     }
     this.spinner.show();	
-		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator.id,circle_id: formdata.circle_area};
+		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
     if(!this.authservice.authenticate())
     {
       $('.logup.modal-trigger')[0].click();
@@ -697,7 +703,7 @@ export class RechargeComponent implements OnInit {
 				this.rechargeData.recharge_name = data.recharge_name;	
 				this.rechargeData.title = data.title;
         this.recharge_ini = 2;
-        //console.log(this.todoservice.get_user_wallet_amount())
+       // console.log(this.rechargeData.recharge_amount)
         if(this.todoservice.get_user_wallet_amount() < this.rechargeData.recharge_amount)
         {
           this.other_to_pay(2);
@@ -741,14 +747,14 @@ recharge_handle()
             }
             else if(typeof data.red_auth != 'undefined' && data.red_auth == 'card')
             {
-              window.location.href = "https://www.mydthshop.com/index.php?/app_responses/recharge_pay/?order_id="+data.order_id;
+              window.location.href = "https://www.mydthshop.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id;
             }
           else
           {
             this.router.navigate(['/orders/recharge-receipt/'+data.order_id]);
           } 
           } 
-          this.todoservice.service_url = this.todoservice.server_url+'index.php?/app_services/';
+          //this.todoservice.service_url = this.todoservice.server_url+'index.php?/app_services/';
         }
       )
  }
@@ -820,7 +826,8 @@ recharge_handle()
   {
     if(value > 0){
       $('.inner-electricity').removeClass('hide');
-      this.electricity_operators = this.operators.ELECTRICITY.filter(x => x.circle_id == value);
+      this.electricity_operators = this.filter_operators(61);
+      this.electricity_operators = this.electricity_operators.filter(x => x.circle_id == value);
     }
     
   }
@@ -893,6 +900,7 @@ check_amount(s)
  {
   if(s == 'mobile')
   {
+    this.mobilegroup.controls['recharge_id'].setValue(e.target.value);
    if( this.check_if_not_digits(e))
    {
      this.mobilegroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));
@@ -961,9 +969,9 @@ check_amount(s)
  }
  selected_recharge(recharge_data)
  {
+   //console.log(recharge_data)
   this.region  = recharge_data.address_id;
   var decode_data = JSON.parse(recharge_data.order_data);
-  //console.log(decode_data.operator_id);
   this.mobilegroup.controls['recharge_id'].setValue(recharge_data.subcriber_id);
   this.mobilegroup.controls['operator'].setValue(Number(decode_data.operator_id));
   this.selected_operator = decode_data.operator_id;
@@ -983,10 +991,12 @@ check_amount(s)
  
  get_plans(circle,operator)
  {
+   //console.log(operator);
   if(this.url_name != 'mobile')
     return true; 
   if(operator == 'get')
    {
+    // console.log(this.operator_id)
     operator = this.operator_id;
    }
     

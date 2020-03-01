@@ -255,21 +255,6 @@ get_checkout_data()
         if(!jQuery.isEmptyObject(data))
         {
           this.addresses = data.ADDRESSES;
-          if(Object.keys(this.addresses).length == 1)
-          {
-              this.only_address = 1;
-          }
-          else
-          {
-              for(var i=0;i<Object.keys(this.addresses).length;i++)
-              {
-                  if(this.addresses[i].set_default == 1)
-                  {
-                      this.default_address  = this.addresses[i];
-                      break;
-                  }
-              }
-          }
         }
         this.spinner.hide();
         if(this.productservice.cart_items.length == 1)
@@ -534,7 +519,7 @@ checkout_items(type)
             }
             else if(typeof data.red_auth != 'undefined' && data.red_auth == 'card')
             {
-              window.location.href = "https://www.mydthshop.com/index.php/app_responses/pay/?order_id="+data.order_id;
+              window.location.href = "https://www.mydthshop.com/accounts/apis/response/product_pay/?order_id="+data.order_id;
             }
             else
             {

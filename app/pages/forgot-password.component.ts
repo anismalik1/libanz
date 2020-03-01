@@ -90,13 +90,11 @@ export class ForgotPasswordComponent implements OnInit{
       .subscribe(
         data => 
         {
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
           if(data.status == true)
           {
-            this.toast.errorToastr(data.msg);
+            this.toast.successToastr(data.msg);
             this.back_to_login = true;
-            this.router.navigate(['/proceed/login?reset=true']);
+            this.router.navigate(['/proceed/login'], { queryParams: { reset: 'true' } });
           }
           else
           {

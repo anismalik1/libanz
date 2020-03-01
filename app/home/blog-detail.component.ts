@@ -111,6 +111,7 @@ export class BlogDetailComponent implements OnInit {
   {
     let data = value;
     data.post_id = this.post[0].id;
+    data.token = this.get_token();
     this.spinner.show();
       this.todoservice.submit_comment(data)
       .subscribe(

@@ -176,6 +176,23 @@ loadImageFailed() {
   }
   update_password(formdata)
   {
+    if(formdata.cpassword == "")
+    {
+      this.toastr.errorToastr("Enter Password", 'Failed!');
+      return false;
+    }
+    if(formdata.newpassword == "")
+    {
+      this.toastr.errorToastr("Enter New Password", 'Failed!');
+      return false;
+    }
+
+    if(formdata.cnewpassword == "")
+    {
+      this.toastr.errorToastr("Enter Confirm Password", 'Failed!');
+      return false;
+    }
+      
     if(formdata.newpassword != formdata.cnewpassword)
     {
       this.toastr.errorToastr('Your Password Does Not Match ', 'failed!');
@@ -194,7 +211,7 @@ loadImageFailed() {
           }
           else
           {
-            this.toastr.successToastr(data.msg, 'Failed!');
+            this.toastr.errorToastr(data.msg, 'Failed!');
           }
         }
       )  

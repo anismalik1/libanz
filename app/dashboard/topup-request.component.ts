@@ -63,8 +63,6 @@ export class TopupRequestComponent implements OnInit{
             this.authservice.clear_session();
             this.router.navigate(['/proceed/login']);
           }
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
           this.topups = data.TOPUP;
           this.topup_counts = data.TOPUPCOUNT;
           if(!jQuery.isEmptyObject(this.topups))

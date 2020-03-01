@@ -273,7 +273,7 @@ export class HomeComponent implements OnInit {
     //     'recharge_id' : [null,Validators.compose([Validators.required])]
     //   }); 
   this.spinner.show();  
-	this.fetch_operators();
+	//this.fetch_operators();
   this.fetch_home_data();
   if(!this.get_token())
   {

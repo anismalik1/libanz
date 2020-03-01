@@ -369,12 +369,10 @@ export class FaqsComponent implements OnInit {
     .subscribe(
       data => 
       {
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         this.spinner.hide();
         if(data.status == true)
         {
-          this.toastr.errorToastr("Successful! We Have Received Your Query And will be back to you soon.");
+          this.toastr.successToastr("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }
     )  

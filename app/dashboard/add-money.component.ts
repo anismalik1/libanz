@@ -97,6 +97,7 @@ export class AddMoneyComponent implements OnInit{
 		}
 		else if( data == 'Gateway' || data == "Paytm" || data == "Cash Deposit")
 		{
+			
 			var amount = $('#enter-amount').val();
 			$('.additional-charge').removeClass('hide');
 			if(Number(amount) > 0)
@@ -105,6 +106,8 @@ export class AddMoneyComponent implements OnInit{
 			
 			$('.send-gateway').removeClass('hide');
 			$('.send-topup').addClass('hide');
+			if(data == "Cash Deposit")
+				$('.default-hide').removeClass('hide');
 		}
 		else if(data == 'FUND TRANSFER')
 		{
@@ -168,7 +171,7 @@ export class AddMoneyComponent implements OnInit{
 				}
 				else if(data.status == 'red' && data.red_auth == 'card')
 				{
-					window.location.href = "https://www.mydthshop.com/index.php?/app_responses/add_money_pay/?order_id="+data.activity;
+					window.location.href = "https://www.mydthshop.com/accounts/apis/response/add_money_pay/?order_id="+data.activity;
 				}
 				else if(data.status == 'red' && data.red_auth == 'paytm')
 				{
