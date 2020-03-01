@@ -97,7 +97,15 @@ width: 60px;
 text-align: center;
 margin: 2px;
 }
+.pt-img{
+	padding:5px;
+}
 
+.heading-txt{
+
+	font-size:22px;
+	
+}
 
 @media only screen and (max-width: 767px){
 
@@ -838,7 +846,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		</div>
 </section>
 <section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
-	<h2 class=" font600 padd center txt-pro ">Dishtv Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/dish-tv']">View All</a></span></h2>
+	<h2 class=" font600 padd txt-pro heading-txt">Dishtv Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/dish-tv']">View All</a></span></h2>
 	
 	<div class="container-fluid">
 			<ul class="product-slider">
@@ -935,7 +943,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		</div>
 </section>
 <section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
-	<h2 class=" font600 padd center txt-pro ">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/videocon']">View All</a></span></h2>
+	<h2 class=" font600 padd txt-pro heading-txt">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/videocon']">View All</a></span></h2>
 	
 	<div class="container-fluid">
 			<ul class="product-slider">
@@ -1017,7 +1025,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- End Here -->
 <!-- Tata Sky section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
-	<h2 class="center padd border-bottom font600">Tata Sky Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/tata-sky']" target="_blank">View All</a></span></h2>
+	<h2 class="padd border-bottom font600 heading-txt">Tata Sky Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/tata-sky']" target="_blank">View All</a></span></h2>
 	<div class="container-fluid">
 		<div class="row no-margin">
 			<div class="col s12 m12">
@@ -1044,7 +1052,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 											</div>
 											<div class="clearfix"></div>
 											<div class="col s12 m12 ">
-												<a class="blue-text font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+												<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 											</div>
 										</div> 									 
 										<div class="btn-new1 center">
@@ -1063,7 +1071,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- end here -->
 <!-- Dish Tv Section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
-	<h2 class="border-bottom font600 padd center ">Dishtv Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/dish-tv']" target="_blank">View All</a></span></h2>
+	<h2 class="border-bottom font600 padd  heading-txt">Dishtv Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/dish-tv']" target="_blank">View All</a></span></h2>
 	
 	<div class="container-fluid">
 		<div class="row no-margin home-product-card">
@@ -1090,7 +1098,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									</div>
 									<div class="clearfix"></div>
 									<div class="col s12 m12 ">
-										<a class="blue-text font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+										<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 									</div>
 								</div> 									 
 								<div class="btn-new1 center">
@@ -1107,7 +1115,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- end here -->
 <!-- Airtel Dish section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
-	<h2 class="border-bottom font600 padd center">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/airtel']" target="_blank">View All</a></span></h2>
+	<h2 class="border-bottom font600 padd heading-txt">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/airtel']" target="_blank">View All</a></span></h2>
 	<div class="container-fluid">
 			<div class="row no-margin home-product-card">
 				<ul class="slider-7">
@@ -1132,7 +1140,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 										</div>
 										<div class="clearfix"></div>
 										<div class="col s12 m12 ">
-											<a class="blue-text font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+											<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 										</div>
 									</div> 									 
 									<div class="btn-new1 center">
@@ -1149,12 +1157,13 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- end here -->
 <!-- Videocon D2H section -->
 <section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
-	<h2 class="border-bottom font600 padd center">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/videocon']" target="_blank">View All</a></span></h2>
+	<h2 class="border-bottom font600 padd heading-txt">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/videocon']" target="_blank">View All</a></span></h2>
 	<div class="container-fluid">
 		<div class="row no-margin home-product-card">
 			<ul class="slider-8">
 				<li *ngFor="let item of videcone_slides;let i = index">
-
+				
+				<div class="card">
 					<div class="row" style="margin-bottom:10px;">
 						<div class="col s10">
 							<div class="rating-green-content" >Free Home Delievery </div>
@@ -1163,7 +1172,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
 						</div>
 					</div>
-				<div class="card">
 					<div class="card-image padd center">
 						<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}-image">
 					</div>
@@ -1186,7 +1194,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								</div>
 								<div class="clearfix"></div>
 								<div class="col s12 m12 ">
-									<a class="blue-text font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+									<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 								</div>
 							</div> 									 
 							<div class="btn-new1 center">
@@ -1203,11 +1211,23 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- end here -->
 <!-- Reccomended For You -->
 <section class="flash-deal recomended-wrapper white margin-top-order sldr-txt hide-on-mobile" *ngIf="this.recommended">
-		<h2 class="border-bottom font600 padd center">Largest Selling Products</h2>
+		<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
 	<div class="container-fluid">
 		<div class="row no-margin home-product-card recomm">
 			<div class="col s12 m3" *ngFor="let item of recommended">
+				
 				<div class="card">
+					<div class="row" style="margin-bottom:10px;">
+						<div class="col s10">
+							<div class="rating-green-content" >Free Home Delievery </div>
+						</div>
+						<div class="col s2">
+							<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
+							<img src="../../assets/images/new.gif" class="img-responsive pt-img"/>
+
+						</div>
+					</div>
+
 						<div class="card-image padd center">
 							<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
 						</div>
@@ -1227,7 +1247,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									</div>
 									<div class="clearfix"></div>
 									<div class="col s12 m12 ">
-										<a class="blue-text font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+										<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 									</div>
 								</div> 									 
 								<div class="btn-new1 center">

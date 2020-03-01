@@ -75,29 +75,29 @@
 					<span class="font600 font-size-change white-text">INFORMATION</span><br>
 					<ul class="left">
 						<!-- <li class="padd-right-left"><a routerLink="/p/about-us-rohini-delhi" (click)="navigate_to('about-us-rohini-delhi')" class="white-text" target="_blank">About Us</a></li> -->
-						<li class="padd-right-left"><a routerLink="/p/about-us" class="white-text" target="_blank">About Us</a></li>
-						<li class="padd-right-left"><a routerLink="/p/dth-connection-refund-policy" target="_blank" class="white-text">Refund Policy</a></li>
-						<li class="padd-right-left"><a routerLink="/help/contact-us" target="_blank" class="white-text">Contact Us</a></li>
-						<li class="padd-right-left"><a routerLink="/p/know-about-my-dth-shop" target="_blank" class="white-text">Who We Are</a></li>
-						<li class="padd-right-left"><a routerLink="/p/mydthshop-terms-and-conditions" target="_blank" class="white-text">Terms &amp; Conditions</a></li>
-						<li class="padd-right-left"><a routerLink="/p/privacy-policy" target="_blank" class="white-text">Privacy policy</a></li>
-						<li class="padd-right-left"><a routerLink="/p/mydthshop-disclaimer" target="_blank" class="white-text">Disclaimer</a></li>
+						<li class="padd-right-left"><a routerLink="/p/about-us" (click)="navigate_to('/p/about-us')"  class="white-text" >About Us</a></li>
+						<li class="padd-right-left"><a routerLink="/p/dth-connection-refund-policy"(click)="navigate_to('p/dth-connection-refund-policy')"class="white-text">Refund Policy</a></li>
+						<li class="padd-right-left"><a routerLink="/p/24-7" (click)="navigate_to('/p/24-7')"  class="white-text">Contact Us</a></li>
+						<li class="padd-right-left"><a routerLink="/p/know-about-my-dth-shop" (click)="navigate_to('/p/know-about-my-dth-shop')"  class="white-text">Who We Are</a></li>
+						<li class="padd-right-left"><a routerLink="/p/mydthshop-terms-and-conditions" (click)="navigate_to('/p/mydthshop-terms-and-conditions')" class="white-text">Terms &amp; Conditions</a></li>
+						<li class="padd-right-left"><a routerLink="/p/privacy-policy" (click)="navigate_to('/p/privacy-policy')" class="white-text">Privacy policy</a></li>
+						<li class="padd-right-left"><a routerLink="/p/mydthshop-disclaimer" (click)="navigate_to('/p/mydthshop-disclaimer')"  class="white-text">Disclaimer</a></li>
 						<!-- <li class="padd-right-left"><a routerLink="/p/download-brochures" target="_blank" class="white-text">Download Brochures</a></li> -->
 						<!-- <li class="padd-right-left"><a routerLink="/user-guide" target="_blank" class="white-text">View User Guide</a></li> -->
-						<li class="padd-right-left"><a routerLink="/blog/all" target="_blank"  class="white-text" >Blog</a></li>
-						<li class="padd-right-left"><a href="https://www.mydthshop.com/p/sitemap-on-mydthshop" target="_blank"  class="white-text" >Sitemap</a></li>
+						<li class="padd-right-left"><a routerLink="/blog/all" (click)="navigate_to('/blog/all')"  class="white-text" >Blog</a></li>
+						<li class="padd-right-left"><a href="https://www.mydthshop.com/p/sitemap-on-mydthshop"   class="white-text" >Sitemap</a></li>
 					</ul>
 				</div>
 				<div class="col s5 m2 l3">
 					<span class="font600 font-size-change white-text">CATEGORIES</span>
 					<ul>
-						<li class="padd-right-left"><a [routerLink]="['/product/listing/tata-sky']" target="_blank" class="white-text">Tata Sky</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/product/listing/videocon']" target="_blank" class="white-text">Videocon</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/product/listing/airtel']" target="_blank" class="white-text">Airtel</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/product/listing/dish-tv']" target="_blank" class="white-text">Dish Tv</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/p/jio-fiber']" class="white-text" target="_blank">Jio Fiber</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/p/airtel-xstream']" class="white-text" target="_blank">Airtel Xtream</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/p/dishsmrt-hub']" class="white-text" target="_blank">DishSMRT HUB</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/product/listing/tata-sky']" (click)="navigate_to('/product/listing/tata-sky')"  class="white-text">Tata Sky</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/product/listing/videocon']" (click)="navigate_to('/product/listing/videocon')"  class="white-text">Videocon</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/product/listing/airtel']" (click)="navigate_to('/product/listing/airtel')"  class="white-text">Airtel</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/product/listing/dish-tv']" (click)="navigate_to('/product/listing/dish-tv')"   class="white-text">Dish Tv</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/p/jio-fiber']"  (click)="navigate_to('/p/jio-fiber')" class="white-text" >Jio Fiber</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/p/airtel-xstream']"  (click)="navigate_to('/p/airtel-xstream')" class="white-text" >Airtel Xtream</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/p/dishsmrt-hub']"  (click)="navigate_to('/p/dishsmrt-hub')" class="white-text" >DishSMRT HUB</a></li>
 						<!-- <li class="padd-right-left"><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:1}" class="white-text">Big Tv</a></li> -->
 						<!-- <li class="padd-right-left"><a [routerLink]="['/products']" [queryParams]="{cat_id:1}" class="grey-text">Sun Direct</a></li> -->
 					</ul>
@@ -118,10 +118,10 @@
 				<div class="col s12 m2 l3">
 					<span class="font600 font-size-change white-text">All Product Packages</span>
 					<ul>							
-						<li class="padd-right-left"><a [routerLink]="['/package-list/tata-sky']" class="white-text" target="_blank">Tata Sky Packages</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/package-list/airtel']" class="white-text" target="_blank">Airtel Packages</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/package-list/videocon']" class="white-text" target="_blank">Videocon Packages</a></li>
-						<li class="padd-right-left"><a [routerLink]="['/package-list/dish-tv']" class="white-text" target="_blank">DishTv Packages</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/package-list/tata-sky']" (click)="navigate_to('/package-list/tata-sky')" class="white-text" target="_blank">Tata Sky Packages</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/package-list/airtel']" (click)="navigate_to('/package-list/airtel')" class="white-text" target="_blank">Airtel Packages</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/package-list/videocon']" (click)="navigate_to('/package-list/videocon')" class="white-text" target="_blank">Videocon Packages</a></li>
+						<li class="padd-right-left"><a [routerLink]="['/package-list/dish-tv']" (click)="navigate_to('/package-list/dish-tv')" class="white-text" target="_blank">DishTv Packages</a></li>
 						<!-- <li class="padd-right-left"><a href="https://www.mydthshop.com/package-list/tata-sky" class="white-text" target="_blank">Jio Fiber Packages</a></li>
 						<li class="padd-right-left"><a href="https://www.mydthshop.com/package-list/tata-sky" class="white-text" target="_blank">Airtel Xtream Packages</a></li> -->
 					</ul>

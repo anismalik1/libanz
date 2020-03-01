@@ -27,7 +27,9 @@ p.grey-text.center.stop-txt {
     position: absolute;
     justify-content: center;
     left: 33%;
-    top: 43px;
+    top: 46px;
+    font-size: 23px;
+    font-weight: bold;
 }
 .icon-fix{
 
@@ -123,7 +125,7 @@ div#modal-speak {
 								</mat-form-field>
             
               <button type="Submit" class="btn-flat modal-trigger" onclick="speech.start()" style="right: 10%;" id="search-on" href="#modal-speak"><i id="mic-icon" class="material-icons ">mic</i></button>
-              <button type="button" class="btn-flat" id="search-ico" style="right: 20px!important;" (click)="go_to_search()"> <i class="material-icons">search</i></button>
+              <!-- <button type="button" class="btn-flat" id="search-ico" style="right: 20px!important;" (click)="go_to_search()"> <i class="material-icons">search</i></button> -->
               <!-- <button type="Submit" class="btn-flat" onclick="speech.stop()" style="right: 7%;" id="search-off"><i class="material-icons">clear</i></button> -->
             </li>
           </ul>
@@ -203,7 +205,7 @@ div#modal-speak {
           <!-- <img src="https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs"> -->
           <div class="recommended-section" *ngIf="suggested_product && suggested_product.length > 0">
               <h2>Suggested Products</h2>
-              <div class="col m4 s4" *ngFor="let item of suggested_product">
+              <div class="col m4 s12" *ngFor="let item of suggested_product">
                   <div class="card">
                       <div class="card-image padd center">
                         <img alt="images" class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}">
@@ -219,7 +221,7 @@ div#modal-speak {
                                 <span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>                                                   
                               </div>
                               <div class="col s12 m12">
-                                <span class="green-text" *ngIf="item.cod_available == 1">COD Available</span>
+                                <span class="green-text white-spc-txt" *ngIf="item.cod_available == 1">COD Available</span>
                                 <span class="green-text" *ngIf="item.cod_available != 1">Free Home Delivery</span>
                               </div>
                             </div> 									 

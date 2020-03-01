@@ -6,8 +6,9 @@
 }
 .cst-font-size{
 
-	font-size:26px !important;
+	font-size:23px !important;
 }
+
  @media only screen and (max-width: 767px){
 
 	.new-packages h2 {
@@ -31,7 +32,7 @@
 
 <section class="channels-basic">
 	<div class="container center">
-		<h1 class="cst-font-size">{{product_pack_info.title}} 
+		<h1 class="cst-font-size"><span class="pt-top-20"> {{product_pack_info.title}}  </span>
 			<span >
 			<a href="#" class="btn-floating btn-large orange chng-set dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>
 			<ul id='dropdown1' class='dropdown-content'>
@@ -54,7 +55,7 @@
 		</span></h1>
 		<p class="font-size-change1 font600">{{product_pack_info.short_description}}*</p>
 		<span class="font-size-change1"><i class="icon-inr"></i> {{product_pack_info.price}} @ {{month}} Month</span><br> 
-		<a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set btn orange modal-trigger" (click)="choose_box_for_this_pack(product_pack_info.parent_id,product_pack_info.id)" *ngIf="this.category">Buy Now <span class="fa fa-edit"></span></a>
+	<br/>	<a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set btn orange modal-trigger rounded-btn" (click)="choose_box_for_this_pack(product_pack_info.parent_id,product_pack_info.id)" *ngIf="this.category">Buy Now <span class="fa fa-edit"></span></a>
 	</div>
 </section>
 
@@ -65,9 +66,9 @@
 			</ul>
 		</div>
 		<ul>
-			<li class="red-text" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
-			<li class="red-text" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
-			<li class="red-text" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
+			<li class="grey-text" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+			<li class="grey-text" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
+			<li class="grey-text" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
 		</ul>
 	</div>
 </section>
