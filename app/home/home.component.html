@@ -196,18 +196,14 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<div class="col s12 m12 no-padding">
 				<div class="card no-margin">
 					<div class="card-content no-padding">
-						<ul class="flash-deal-slider">
+						<ul class="mobile-slider">
 							<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
 								<a href="{{item.imageurl}}" target="_blank">
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li>
 
-						</ul>
-						<ul class="tabs" id="select-slide" *ngIf="filter_banners('main-banner')">
-							<li class="tab hide"><a href="javascript:"></a></li>
-							<li class="tab" *ngFor="let item of filter_banners('main-banner');let i = index"><span class="data-slide hide">{{i+1}}</span><a [class.active]="i==0" href="javascript:"><p class="font-size-change1 font600 black-text" title="{{item.title}}">{{item.title}}</p><span class="grey-text" title="{{item.description}}">{{item.description}}</span></a></li>		
-						</ul>
+						</ul> 
 					</div>
 				</div>
 			</div>

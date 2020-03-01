@@ -698,6 +698,19 @@ toTimestamp(strDate){
         });
         $('.tooltipped').tooltip({delay: 50});
         $('.modal').modal();
+        $('.mobile-slider').lightSlider({
+          item: 1,
+          auto: true,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true,
+         
+         
+        });
         var flashdeal = $('.flash-deal-slider').lightSlider({
           item: 1,
           auto: true,
