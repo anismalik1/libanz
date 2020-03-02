@@ -47,12 +47,23 @@ div#modal-speak {
   color:#8c8c8c;
   font-size: 20px;;
 }
+.faq-btn{
+
+  margin-right: 20px;
+    width: 100px;
+}
 @media only screen and (max-width :767px){
 
     .dis-none{
 
       display: none;
     }
+    .faq-btn{
+
+margin-right: 20px;
+  width: 100px;
+  margin-bottom: 50px;
+}
 
 }
 
@@ -161,8 +172,8 @@ div#modal-speak {
             <hr>
             <p [innerHTML]="single.answer"></p>
             <h4 class="font600 margin-top1">Was this information helpful?</h4>
-            <a href="javascript:void(0);" class="btn green" (click)="thanks()">Yes</a>
-            <a href="#no-faq" class="btn red modal-trigger">No</a>
+            <a href="javascript:void(0);" class="btn green faq-btn rounded-btn" (click)="thanks()">Yes</a>
+            <a href="#no-faq" class="btn red modal-trigger faq-btn rounded-btn">No</a>
           </div>        
           <div class="faqs-text" *ngIf="searched && search_list.length > 0">
             <!-- <h2>Searched Query</h2> -->

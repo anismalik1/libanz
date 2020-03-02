@@ -50,10 +50,20 @@
     margin: 0px 8px 0px 0px;
 
 } */
+.mobile-footer ul li a ::before {
+    content: 'o' ;
+    color: #7d7c7c;
+    padding-right: 6px ;
+}
 @media only screen and (max-width: 767px){
 	.mobile-footer-menu ul li a span {
     display: block;
     color: #4d4e4e;
+}
+.mobile-footer ul li a ::before {
+    content: 'o' ;
+    color: #7d7c7c;
+    padding-right: 6px ;
 }
 .icon-cst-clr-1{
 	font-size: 18px;
@@ -228,7 +238,22 @@
 				<li><a href="#"><span class="fa fa-lock"></span> Enable Screen Lock </a></li>
 				<li><a href="#"><span class="fa fa-ban"></span> Blocked Contact </a></li>
 				<li><a href="#"><span class="fa fa-file"></span> Policies </a></li>
-				
+				<li>
+					<select class="form-control">
+						<option>My Information</option>
+						<option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></option>
+						<option>Option</option>
+						<option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></option>
+						<option><a [routerLink]="['/p/24-7']">Help & Support </a></option>
+						<option> <a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></option>
+						<option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></option>
+						<option><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></option>
+						<option><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></option>
+						<option><a [routerLink]="['/blog/all']">Blog</a></option>
+						<option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></option>
+						
+					</select>
+				</li>
 			</ul>	
 
 			
@@ -243,6 +268,7 @@
 				<li><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></li>
 				<li><a [routerLink]="['/blog/all']">Blog</a></li>
 				<li><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></li>
+			
 			</ul>	
 		
 		<h3 class="hide-left-menu-mb">Categories</h3>

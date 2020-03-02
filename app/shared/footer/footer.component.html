@@ -1,14 +1,19 @@
-
+<style>
+	.cst-footer-link{
+    color: #7d7c7c;
+    padding-right: 2px ;
+}
+</style>
 
 <!-- Footer Start Here -->
 
 
 <div class="mobile-footer">
-	<ul>
-		<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/p/accounts/merchant-on-mydthshop">Merchant On Mydth</a></li>
-		<li routerLinkActive="active"><a routerLink="/p/accounts/partner-on-mydthshop">Partner On Mydth</a></li>
-		<li routerLinkActive="active"><a routerLink="/blog/all">Blogs</a></li>
-		<li routerLinkActive="active"><a routerLink="/p/24-7">24x7 Support</a></li>
+	<ul class="cst-footer">
+		<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/p/accounts/merchant-on-mydthshop"><span class="cst-footer-link"> o </span>Merchant On Mydth</a></li>
+		<li routerLinkActive="active"><a routerLink="/p/accounts/partner-on-mydthshop"><span class="cst-footer-link"> o </span> Partner On Mydth</a></li>
+		<li routerLinkActive="active"><a routerLink="/blog/all"><span class="cst-footer-link"> o </span> Blogs</a></li>
+		<li routerLinkActive="active"><a routerLink="/p/24-7"> <span class="cst-footer-link"> o </span> 24x7 Support</a></li>
 	</ul>
 </div>
 
