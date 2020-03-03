@@ -4402,9 +4402,9 @@ background: #ff6a00;
 
 .mobile-header-right span.noti-circle {width: 22px;height: 22px;background: #fff;display: block;color: #000;border-radius: 50%;line-height: 22px;position: absolute;top: -7px;right: -24px;text-align: center;font-size: 12px;font-weight: bold;}
 .mobile-header-right ul li{ margin-right:40px; cursor:pointer} 
-.mobile-top-menu {z-index: 9;background: #fff;font-size: 12px;;margin: -42px 15px 14px 15px;border-radius: 16px;box-shadow: 0 2px 3px 0px #dcdcdc;}
+.mobile-top-menu {height:70px; z-index: 9;background: #fff;font-size: 12px;;margin: -42px 15px 14px 15px;border-radius: 16px;box-shadow: 0 2px 3px 0px #dcdcdc;}
 .mobile-top-menu #mobile-dashboard-menus li{display:inline-block;width:24%;text-align:center;}
-.mobile-top-menu #mobile-dashboard-menus li a{color: #000;padding: 15px 0;display: block;} 
+.mobile-top-menu #mobile-dashboard-menus li a{color: #000;padding: 8px 0;display: block;} 
 .mobile-top-menu #mobile-dashboard-menus li a span{display: block;background: #ff6a00;width: 31px;color: #ffff;border-radius: 50%;margin: 0 auto 8px auto;padding: 5px;}
 #mobile-dashboard-menus img{width:16px;}
 .mobile-footer-menu {z-index: 9999;background: #fff;font-size: 12px;margin-top: -22px;/* margin: -38px 15px 0; */padding: 15px 0;margin-top: 20px;box-shadow: 0 0px 4px 1px #dcdcdc;position: fixed;width: 100%;bottom: 0;left: 0;right: 0;}
@@ -4755,7 +4755,7 @@ span.fa.fa-edit.fa-2x {
 }
 
 .banner-slider1 .card-content {
-    margin-top: -7px;
+    margin-top: -10px;
 }
 
 #select-slide{
