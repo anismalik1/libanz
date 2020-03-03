@@ -80,6 +80,8 @@
 }
 }
 
+
+
 	</style>
 <!-- Header Start Here -->
 <div class="mobile-wrapper">
@@ -158,7 +160,7 @@
 	<!-- mobile header end-->
 	<!-- mobile top menu start-->	
 	<div class="mobile-top-menu">
-		<ul id="mobile-dashboard-menus">
+		<ul id="mobile-dashboard-menus" style="height:72px !important">
 			<li>
 				<ul>
 					<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span> Pay </a></li>
@@ -168,20 +170,20 @@
 					
 				</ul>
 			</li>
-			<li>
+			<!-- <li>
 				<ul>
-					<li><a [routerLink]="['/dashboard']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/dashboard.png" /></span>Dashboard</a></li>
+					 <li><a [routerLink]="['/dashboard']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/dashboard.png" /></span>Dashboard</a></li>
 					<li><a [routerLink]="['/recharge/for/mobile']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/smartphone-call.png" /></span>Recharge</a></li>
-					<li><a [routerLink]="['/dashboard/recharge']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Recharge Orders</a></li>
+					<li><a [routerLink]="['/dashboard/recharge']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Recharge Orders</a></li> 
 					<li><a [routerLink]="['/dashboard/complaints']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/complaint-box.png" /></span>Complaints</a></li>	
 				</ul>
-			</li>
-				<li>
+			</li> -->
+				<!-- <li>
 					<ul>
 						<li><a [routerLink]="['/dashboard/topup-request']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/top-up.png" /></span>Topup Request</a></li>	
 						<li><a [routerLink]="['/dashboard/commission-structure']"><span><img src="{{this.todoservice.base_url}}assets/images/recharge-icon/percentage.png" /></span>Commissions</a></li>	
 					</ul>
-				</li>
+				</li> -->
 		</ul>
 	</div>
 	
@@ -218,26 +220,36 @@
 			
 		</div>
 		<div class="side-menu-body">
-			<div class="login-section"  *ngIf="this.todoservice.get_user_name() == ''">
-				<h3>Navigation Menu</h3>
+			<div class="login-section" >
+				<!-- <h3>Navigation Menu</h3>
 				<a routerLink="/proceed/login" class="btn waves-effect waves-light orange rounded-btn" type="button">Login</a>
 				<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
 		
 				
-				
+				 -->
 		
-			</div>
+		
+			<h3>Navigation Menu</h3>
+			<ul class="phone-pay-icon"  *ngIf="this.todoservice.get_user_name() == ''">	
+				<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up </a></li>
+				<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login </a></li>
 
-			<ul class="phone-pay-icon">	
+				<li><a [routerLink]="['/dashboard']"><span class="fa fa-tachometer"></span>Dashboard </a></li>
+			
+				<li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li>
+				<li><a [routerLink]="['/dashboard/commission-structure']"><span class="fa fa-sitemap"></span> Commission </a></li>
 				<li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li>
-				<li><a href="#"><span class="fa fa-credit-card"></span> My BHIM UPI ID </a></li>
-				<li><a href="#"><span class="fa fa-map-marker"></span> My Address </a></li>
+				
+				
 				<li><a href="#"><span class="fa fa-language"></span> My Language </a></li>
-				<li><a href="#"><span class="fa fa-bell"></span> Bill Notification </a></li>
-				<li><a href="#"><span class="fa fa-key"></span> Change Password </a></li>
+				
+			
 				<li><a href="#"><span class="fa fa-lock"></span> Enable Screen Lock </a></li>
-				<li><a href="#"><span class="fa fa-ban"></span> Blocked Contact </a></li>
-				<li><a href="#"><span class="fa fa-file"></span> Policies </a></li>
+			
+				<li><a href="#"><span class="fa fa-check"></span> KYC Verify </a></li>
+				<li><a [routerLink]="['/dashboard/complaints']"><span class="fa fa-envelope"></span> complaints </a></li>
+				
+			
 				<li>
 					<select class="form-control">
 						<option>My Information</option>
@@ -255,7 +267,7 @@
 					</select>
 				</li>
 			</ul>	
-
+			</div>
 			
 		<h3 class="hide-left-menu-mb">Information</h3>	
 			<ul class="information hide-left-menu-mb">	
