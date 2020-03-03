@@ -4391,7 +4391,7 @@ background: #ff6a00;
 .mobile-header-left{float:left;}
 #mobile-bar{ cursor:pointer;}
 .mobile-search {width: 180px;margin-left:10px; }
-.mobile-search  input[type="text"]{width: 100%;height: 30px;border-radius: 5px;border: 0;outline: 0;padding: 0 12px;background:#fff url('../images/logo.png') no-repeat 15px 9px; }
+.mobile-search  input[type="text"]{width: 100%;height: 30px;border-radius: 5px;border: 0;outline: 0;padding: 0 12px;background:#fff url('https://www.mydthshop.com/web-app/assets/images/search-logo-tm.png') no-repeat 15px 9px; }
 .mobile-search .no-bg{background-image:none!important;}
 
 .mobile-search button{background:none;outline:0;border:0;cursor:pointer;padding: 6px 30px;}
