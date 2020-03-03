@@ -201,7 +201,7 @@
 	</div>
 	
 </div>
-	<div class="side-menu">
+	<div class="side-menu" id="mobile-side-menu">
 		<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
 			<div class="side-profile-details">
 			<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
@@ -504,7 +504,7 @@
 							<div class="upper-text center">
 								<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
 								<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-							</div>
+							</div> 
 							<div class="row">
 								<div class="input-field col s12 center otp-inputa" id="inputs">
 										<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
@@ -513,8 +513,9 @@
 										<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
 								</div>
 								<div class="col s12 center margin-top">
-									<span class="font-size-change1">Don't recieve OTP 
-									<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+									<span class="font-size-change1">Don't recieve OTP </span>
+									<!-- <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span> -->
+									<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp()" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button>
 								</div>			
 							</div>
 							<div class="row">

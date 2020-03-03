@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit{
     public otp2: string;
     public otp3: string;
     public otp4 : string;
+    public tick : number = 0;
     private user_type : number;
     private verify : number;
     public signupverify : number = 0;
@@ -136,6 +137,7 @@ export class HeaderComponent implements OnInit{
             if(typeof data.step != 'undefined' &&  data.step == 'verify')
             {
               this.step = 2;
+              this.tick_clock(60);
             }
             else
             {
@@ -220,6 +222,7 @@ export class HeaderComponent implements OnInit{
             if(data.status == true)
             {
               this.toastr.successToastr(data.message);
+              this.tick_clock(60);
             }
             else
             {
@@ -496,6 +499,7 @@ export class HeaderComponent implements OnInit{
     script.id = `side-nav-script`;
     script.text = ` 
     $(document).ready(function(){
+      $('select').material_select();
       //$(".side-menu").swipe( {fingers:1} );
       $('#mobile-dashboard-menus').lightSlider({
         item: 1,
@@ -517,11 +521,12 @@ export class HeaderComponent implements OnInit{
 		$('.mobile-mask').show();
       $('.side-menu').addClass('open-menu');
       e.stopPropagation();
-	  
-	  
     });
     
-    $(document).on('click',function(){
+    $(document).on('click',function(e){
+      if (e.target.id == "mobile-side-menu" || $(e.target).parents("#mobile-side-menu").length) {
+        return false;
+      }
       $('.side-menu').removeClass('open-menu');
 	  $('.mobile-mask').hide();
     });
@@ -717,6 +722,16 @@ export class HeaderComponent implements OnInit{
     // })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     `;
     this._renderer2.appendChild(this._document.body, script);
+  }
+
+  tick_clock(tick)
+  {
+    if(tick == 0)
+      return false;
+    this.tick = tick - 1;
+    setTimeout(() => {
+          this.tick_clock(this.tick); 
+        }, 1000);
   }
 
   open_chat()

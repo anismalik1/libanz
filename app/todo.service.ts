@@ -489,7 +489,7 @@ export class TodoService {
   resend_otp(data)
   {
     
-    let url = this.server_url+'index.php?/app_services/resend_otp';
+    let url = this.server_url+'accounts/apis/home/resend_otp';
     return this.send_post_request(data,url) ; 
   }
   get_search_data(data)

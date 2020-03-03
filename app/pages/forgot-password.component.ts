@@ -53,7 +53,7 @@ export class ForgotPasswordComponent implements OnInit{
           if(data.status == true)
           {
             this.step = 2;
-            this.tick_clock(30);
+            this.tick_clock(60);
           }
           else
           {

@@ -62,6 +62,7 @@ export class RechargeComponent implements OnInit {
   landlinegroup : FormGroup;
   broadbandgroup : FormGroup;
   electricitygroup : FormGroup;
+  testgroup : FormGroup;
   banners : any = [];
   gasgroup : FormGroup;
   watergroup : FormGroup;
@@ -86,6 +87,7 @@ export class RechargeComponent implements OnInit {
   tab_2 : boolean = false;
   electricity_operators :any;
   last_recharges : any;
+  dthpattern : string = '';
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -106,54 +108,10 @@ export class RechargeComponent implements OnInit {
     
       this.url_name = this.activatedroute.snapshot.params['name'];
       this.ini_recharge_tabs(this.url_name);
-    this.mobilegroup = fb.group({
-      'amount' : [null,Validators.compose([Validators.required])],
-       'operator' : [null,Validators.compose([Validators.required])],
-       'recharge_id' : [null,Validators.compose([Validators.required])],
-       'circle_area' : [null,Validators.compose([Validators.required])]
-     });
-     this.dthgroup = fb.group({
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
+   
+      this.testgroup = this.fb.group({
+        'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
       });
-      this.datacardgroup = fb.group({
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
-      });
-      this.landlinegroup = fb.group({
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
-      });
-      this.broadbandgroup = fb.group({
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
-      });
-      this.electricitygroup = fb.group({
-       'circle' : [null],
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
-      });
-      this.gasgroup = fb.group({
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
-      });
-      this.watergroup = fb.group({
-       'amount' : [null,Validators.compose([Validators.required])],
-        'operator' : [null,Validators.compose([Validators.required])],
-        'recharge_id' : [null,Validators.compose([Validators.required])]
-      });
-      this.cablegroup = fb.group({
-        'amount' : [null,Validators.compose([Validators.required])],
-         'operator' : [null,Validators.compose([Validators.required])],
-         'recharge_id' : [null,Validators.compose([Validators.required])]
-       });
-      
      spinner.show()
     this.ini_script() ;
     if(this.get_token())
@@ -237,6 +195,7 @@ export class RechargeComponent implements OnInit {
     this.recharge_type.cable = false;
     this.recharge_type.datacard = false;
     this.recharge_type.landline = false;
+
     this.plans = [];
       if(tab == 'mobile' || tab == 'mobile-postpaid')
       {
@@ -245,7 +204,6 @@ export class RechargeComponent implements OnInit {
 
         if(this.operator_id > 0 && this.region > 0)
         {
-          //console.log(this.operator_id);
           this.get_plans(this.region,this.operator_id);
         }
       }
@@ -285,6 +243,55 @@ export class RechargeComponent implements OnInit {
       this.fetch_navigate_data(tab);
       this.get_last_recharges();
       
+      this.mobilegroup = this.fb.group({
+        'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+        // 'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
+         'operator' : [null,Validators.compose([Validators.required])],
+         recharge_id: new FormControl('', [Validators.required,Validators.minLength(10)]),
+        // 'recharge_id' : [null,Validators.compose([Validators.required])], //[null,[Validators.required,Validators.minLength(10),Validators.pattern("[0-9]{10}$")]],
+         'circle_area' : [null,Validators.compose([Validators.required])]
+       });
+       this.dthgroup = this.fb.group({
+         'amount' : [null,[Validators.required,Validators.min(50),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          'recharge_id' : [null,Validators.compose([Validators.required,Validators.pattern(this.dthpattern)])],
+        });
+        this.datacardgroup = this.fb.group({
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          recharge_id: new FormControl('', [Validators.required,Validators.minLength(10)]),
+        });
+        this.landlinegroup = this.fb.group({
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          'recharge_id' : [null,Validators.compose([Validators.required])]
+        });
+        this.broadbandgroup = this.fb.group({
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          recharge_id: new FormControl('', [Validators.required,Validators.minLength(10)]),
+        });
+        this.electricitygroup = this.fb.group({
+         'circle' : [null],
+         'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          'recharge_id' : [null,Validators.compose([Validators.required])]
+        });
+        this.gasgroup = this.fb.group({
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          'recharge_id' : [null,Validators.compose([Validators.required])]
+        });
+        this.watergroup = this.fb.group({
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator' : [null,Validators.compose([Validators.required])],
+          'recharge_id' : [null,Validators.compose([Validators.required])]
+        });
+        this.cablegroup = this.fb.group({
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+           'operator' : [null,Validators.compose([Validators.required])],
+           'recharge_id' : [null,Validators.compose([Validators.required])]
+         });
   } 
   fetch_promocode(tab)
   {
@@ -401,28 +408,22 @@ export class RechargeComponent implements OnInit {
       if(data == 68)
       {
         this.validationtext = "Please Enter Registered Mobile No./ Viewing Card No.";
-        this.dthminlength = 10;
-        this.dthmaxlength = 10;
+        this.dthpattern = "[0-9]{10}$";
       }else if(data == 69)
       {
-        this.dthminlength = 11;
-        this.dthmaxlength = 0;
-        this.validationtext = "Please Enter 10 digits long Smart Card Number .";
+        this.validationtext = "Please Enter 11 digits long Smart Card Number .";
+        this.dthpattern = "[0-9]{11}$";
       }else if(data == 71)
       {
-        this.dthminlength = 10;
-        this.dthmaxlength = 10;
+        this.dthpattern = "[1][0-9]{9}$";
         this.validationtext = "Subscriber ID starts with 1 and 10 digits long. To locate it, press the home button on remote.";
       }else if(data == 72)
       {
-        this.dthminlength = 8;
-        this.dthmaxlength = 12;
-        this.validationtext = "Please Enter 10 digits long Customer ID. To know your Customer ID SMS 'ID' to 566777 from your registered mobile number.";
-        this.viewrange = 0;
+        this.dthpattern = "[0-9]{10}$";
+        this.validationtext = "Know your Customer ID SMS 'ID' to 566777 from your registered mobile number.";
       }else if(data == 74)
       {
-        this.dthminlength = 10;
-        this.dthmaxlength = 10;
+        this.dthpattern = "[3][0-9]{9}$";
         this.validationtext = "Customer ID starts with 3 and is 10 digits long. To locate it, press the MENU button on remote";
       }
     }
@@ -901,6 +902,7 @@ check_amount(s)
   if(s == 'mobile')
   {
     this.mobilegroup.controls['recharge_id'].setValue(e.target.value);
+    //console.log(this.mobilegroup.controls['recharge_id'].value)
    if( this.check_if_not_digits(e))
    {
      this.mobilegroup.controls['recharge_id'].setValue(e.target.value.replace(/\D/g,''));

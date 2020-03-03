@@ -774,6 +774,18 @@ toTimestamp(strDate){
           pager: false,
           enableDrag: true
         });
+        $('.bottom-slider').lightSlider({
+          item: 1,
+          auto: true,
+          pauseOnHover: true,
+          autoWidth:true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true
+        });
              
       // Hide sideNav
       $('.button-collapse1').on('click', function () {
