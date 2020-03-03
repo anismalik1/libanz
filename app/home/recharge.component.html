@@ -356,7 +356,7 @@ div#circles-content ul li a {
 				<form id="dth-form" [formGroup]="dthgroup" #dthform = "ngForm" (ngSubmit)="recharge_init('dth',dthform.value)" *ngIf="recharge_type.dth">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12">
-							<h4 class="dth-txt">DTH Recharge </h4>
+							<h4 class="dth-txt-1">DTH Recharge </h4>
 							<mat-form-field> 
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'dth')" formControlName="operator" #operator>
 									<span *ngFor="let item of filter_operators(59);">
@@ -525,7 +525,7 @@ div#circles-content ul li a {
 					<div class="row no-margin">
 					
 						<div class="input-field col s12 m12">
-							<h4 class="dth-txt">Pay Landline OR Broadband Bill	</h4>
+							<h4 class="dth-txt-1">Pay Landline OR Broadband Bill	</h4>
 
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'broadband')" formControlName="operator">
@@ -563,7 +563,7 @@ div#circles-content ul li a {
 				<form id="electricity-form" method="post" [formGroup]="electricitygroup" #electricityform = "ngForm" (ngSubmit)="recharge_init('electricity',electricityform.value)" *ngIf="this.recharge_type.electricity">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1" >
-							<h4 class="dth-txt">Pay Electricity Bill	</h4>
+							<h4 class="dth-txt-1">Pay Electricity Bill	</h4>
 							<mat-form-field>
 								<mat-select placeholder="Select Circle" (selectionChange)="filter_operator($event.value)" formControlName="circle">
 									<span *ngFor="let item of circles;">
@@ -647,7 +647,7 @@ div#circles-content ul li a {
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
 
-							<h4 class="dth-txt">Pay Gas Bill Payment	</h4>
+							<h4 class="dth-txt-1">Pay Gas Bill Payment	</h4>
 
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'gas')" formControlName="operator">
@@ -705,7 +705,7 @@ div#circles-content ul li a {
 				<form method="post" id="water-form" [formGroup]="watergroup" #waterform = "ngForm" (ngSubmit)="recharge_init('water',waterform.value)" *ngIf="this.recharge_type.water">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
-							<h4 class="dth-txt">Pay Water Bill	</h4>
+							<h4 class="dth-txt-1">Pay Water Bill	</h4>
 
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'water')" formControlName="operator">
