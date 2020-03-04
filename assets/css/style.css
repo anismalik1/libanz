@@ -2085,7 +2085,7 @@ tbody img{
 }
 .lSAction>a{
 	width: auto;
-    top: 51%;
+    top: 55%;
     -webkit-transform: translate(0%,-50%);
     transform: translate(0%,-50%);
     line-height: 52px;
@@ -4825,6 +4825,17 @@ span.fa.fa-edit.fa-2x {
 	margin-top:-35px !important;
 } */
 
+a.pack-price {
+    border: 1px solid #ececec;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+a.pack-price:hover{
+background: #ff6a00;
+color: #fff !important;
+border-color: #ff6a00;
+}
 
 .txt-compare{
 	
@@ -4837,7 +4848,7 @@ span.fa.fa-edit.fa-2x {
 .mb-txt{
 
 	font-size: 16px;
-    padding: 25px 0px 0px 12px;
+    padding: 25px 0px 0px 20px;
     font-weight: 600;
 }
 .dth-txt{

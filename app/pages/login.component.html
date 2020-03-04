@@ -68,6 +68,7 @@ label.font-size-change.active {
 				<div class="card margin-top4 no-box-shadow ">
 					<div class="card-content"> 
 						<div class="center">
+					<span class="fa fa-lock fa-4x"  style="color: #8c8c8c;"></span>
 							<h3 class="font600 orange-text">Welcome back!</h3>
 							<div class="notification-text green-text" *ngIf="notification != ''">{{notification}}</div>
 							<span id="page-content"></span>
@@ -98,7 +99,7 @@ label.font-size-change.active {
 								</div>
 								<div class="row">
 									<div class="col s12 m9 offset-m1">
-										<button type="Submit" class="btn orange login-btn" [disabled]="!logingroup.valid">Login</button>
+										<button type="Submit" class="btn orange login-btn rounded-btn" [disabled]="!logingroup.valid">Login</button>
 									</div>
 								</div>
 								<!-- <div class="row no-margin">

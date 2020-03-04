@@ -26,8 +26,10 @@ li.clogin.ng-star-inserted {
 
 .shadow-box img{
 
-width:100%;
-border: 6px solid #fff;
+    width: 90%;
+   
+    border-radius:20px;
+    padding: 6px;
 }
 .tabs .tab {
     display: inline-block;
@@ -62,7 +64,7 @@ section {
 
 	color:#746d67 !important;
 	 float:right;
-	  padding:4px 20px 0px 0px;
+	  padding:6px 20px 0px 0px;
 	  font-size:15px;
 }
 .heading-txt1{
@@ -87,6 +89,7 @@ section {
     float: left;
     margin-left: -9px !important;
     font-size: 10px;
+	
 
 }
 .price-cut1{
@@ -143,6 +146,7 @@ margin: 2px;
 
 	height:146px;
 background-color: #fff;
+border-radius:10px;
 
 }
 .cst-btn-link{
@@ -179,6 +183,17 @@ font-weight: bold
 }
 ul.mob-retailer-slider.lightSlider.lSSlide {
     height: 66px;
+}
+.rating-green-content{
+	background: #ff6a00;
+    padding: 2px 10px 2px 10px;
+    width: auto;
+    color: #fff;
+    float: left;
+    margin-left: -9px !important;
+    font-size: 10px;
+	border-top-left-radius: 10px;
+
 }
 }
 </style>
@@ -606,7 +621,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						<div class="card">
 							<div class="row" style="margin-bottom:10px;">
 								<div class="col s10">
-									<div class="rating-green-content" >Free Home Delievery </div>
+									<div class="rating-green-content" >COD / Free Home Delievery </div>
 								</div>
 								<div class="col s2">
 									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
@@ -711,7 +726,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 					<div class="card">
 						<div class="row" style="margin-bottom:10px;">
 							<div class="col s10">
-								<div class="rating-green-content" >Free Home Delievery </div>
+								<div class="rating-green-content" >COD / Free Home Delievery </div>
 							</div>
 							<div class="col s2">
 								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
