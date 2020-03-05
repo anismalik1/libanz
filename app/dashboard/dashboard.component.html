@@ -1,226 +1,239 @@
-<app-header></app-header>
-<div class="spinner-wrapper">
-    <ngx-spinner
-        bdColor="rgba(255,255,255,0.8)"
-        size="default"
-        color="#ec9737"
-        loadingText="Loading..."
-        type="ball-clip-rotate">
-    </ngx-spinner>
-</div>
-<section class="flash-deal">
-    <div class="container">
-        <div class="row no-margin">
-            <div class="col s12 m3">
-                <div class="card">
-              <div class="card-content user-content">
-                  <div class="user-image">
-					  <!-- <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50"> -->
-					  <div class="circle-img" style="height:30px; width: 30px;background-color:#f00; border-radius:50%; color:#fff;"></div>
-                  </div>
-                  <div class="user-name">
-                      <span>Welcome,</span><br>
-                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user_name()">{{this.todoservice.get_user_name()}}</span>
-                  </div>
-              </div>
-            </div>
-            <app-side-nav></app-side-nav>
-            </div>
-            <div class="col s12 m9">
-                <div class="row">
-					<div class="col s12 s2 m1 right">
-							<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button>
-					</div>
-					<div class="col s12 m3 right">
-						<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/>
+<style>
+
+	.cashback-box{
+	background-image: linear-gradient(45deg, red, #ff6a00);
+		color: #fff;
+		border-radius: 10px;
+		height: auto;
+		padding:5px 0px;
+		}
+		.cashback-box-1{
+			background-image: linear-gradient( 45deg ,#6dbfef, #5736f4);
+		color: #fff;
+		border-radius: 10px;
+		padding:5px 0px;
+		}
+		.cashback-box-1 span{
+			font-size: 20px !important;
+		}
+	
+		.cashback-box-2{
+			background-image: linear-gradient(45deg, #4CAF50, #d6ff43);
+		color: #fff;
+		border-radius: 10px;
+		padding:5px 0px;
+	
+		}
+		.cashback-box-2 span{
+			font-size: 20px !important;
+		}
+	
+		.cashback-box span{
+	
+				font-size: 20px !important;
+		}
+		.pt-left-icon{
+			padding-left:25px;
+			float:right;
+		}
+		.table-box-design{
+	
+			width:100%;
+			background-color: #fff;
+			box-shadow: 1px 1px 10px #ececec;
+			padding:12px;
+		}
+	</style>
+	<app-header></app-header>
+	<div class="spinner-wrapper">
+		<ngx-spinner
+			bdColor="rgba(255,255,255,0.8)"
+			size="default"
+			color="#ec9737"
+			loadingText="Loading..."
+			type="ball-clip-rotate">
+		</ngx-spinner>
+	</div>
+	<section class="flash-deal">
+		<div class="container">
+			<div class="row no-margin">
+				<div class="col s12 m3">
+					<div class="card">
+				  <div class="card-content user-content">
+					  <div class="user-image">
+						  <!-- <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/user.svg" class="responsive-img" alt="User-icon" width="50"> -->
+						  <div class="circle-img" style="height:30px; width: 30px;background-color:#f00; border-radius:50%; color:#fff;"></div>
+					  </div>
+					  <div class="user-name">
+						  <span>Welcome,</span><br>
+						  <span class="font-size-change font600" *ngIf="this.todoservice.get_user_name()">{{this.todoservice.get_user_name()}}</span>
+					  </div>
+				  </div>
+				</div>
+				<app-side-nav></app-side-nav>
+				</div>
+				<div class="col s12 m9">
+					<div class="row">
+						<div class="col s12 s2 m1 right">
+								<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button>
+						</div>
+						<div class="col s12 m3 right">
+							<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/>
+						</div>
+						
+						<div class="clearfix"></div>
+						<div class="col s12 m4">
+							<div class="card cashback-box">
+								<div class="card-content">
+									<span class="card-title inline-block font-size-change1">Cashback Received <span class="fa fa-download pt-left-icon"></span></span>
+									<div class="slaes-rup margin-top-cart">
+										<span class="font-size-change2"><i class="icon-inr"></i>{{this.sales_obj.cashback_sale + this.sales_obj.promo_sale}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col s12 m4">
+							<div class="card cashback-box-1">
+								<div class="card-content">
+									<span class="card-title inline-block font-size-change1">DTH Orders ({{sales_obj.order_count}}) <span class="fa fa-file pt-left-icon"></span></span>
+									<div class="slaes-rup margin-top-cart">
+										<span class="font-size-change2"> <i class="icon-inr"></i> {{sales_obj.order_sale }}</span>
+										<!-- <div class="percent-info green-text inline-block right margin-top-cart1">8% <i class="material-icons">trending_up</i></div> -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m4">
+							<div class="card cashback-box-2">
+								<div class="card-content">
+									<span class="card-title inline-block font-size-change1">Recharge Orders ({{sales_obj.recharge_count}}) <span class="fa fa-diamond pt-left-icon"></span></span>
+									<div class="slaes-rup margin-top-cart">
+										<span class="font-size-change2"><i class="icon-inr"></i> {{sales_obj.recharge_sale}}</span>
+										 <!-- <div class="percent-info green-text inline-block right margin-top-cart1">8% <i class="material-icons">trending_up</i></div> -->
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					
-					<div class="clearfix"></div>
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title inline-block font-size-change1">Cashback Received</span>
-                                <div class="slaes-rup margin-top-cart">
-                                    <span class="font-size-change2"><i class="icon-inr"></i>{{this.sales_obj.cashback_sale + this.sales_obj.promo_sale}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title inline-block font-size-change1">DTH Orders ({{sales_obj.order_count}})</span>
-                                <div class="slaes-rup margin-top-cart">
-                                    <span class="font-size-change2"> <i class="icon-inr"></i> {{sales_obj.order_sale }}</span>
-                                    <!-- <div class="percent-info green-text inline-block right margin-top-cart1">8% <i class="material-icons">trending_up</i></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title inline-block font-size-change1">Recharge Orders ({{sales_obj.recharge_count}})</span>
-                                <div class="slaes-rup margin-top-cart">
-                                    <span class="font-size-change2"><i class="icon-inr"></i> {{sales_obj.recharge_sale}}</span>
-                                     <!-- <div class="percent-info green-text inline-block right margin-top-cart1">8% <i class="material-icons">trending_up</i></div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3 class="font600 inline-block">Recent DTH Orders</h3>
-							<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a> -->
-							<a [routerLink]="['/dashboard/dth-orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a>
-							<div class="overflow-scroll">
-								<table id="datatable1" class="display responsive-table datatable-example">
-										<thead>
-											<tr>
-												<th nowrap="nowrap" width="57px">S.No.</th>
-												<th nowrap="nowrap">Order No.</th>
-												<th nowrap="nowrap" width="125px">Product</th>
-												<th nowrap="nowrap" width="102px">Order Date</th>
-												<th nowrap="nowrap" width="140px">Amount</th>
-												<th nowrap="nowrap" width="130px">Subscriber ID</th>
-												<th nowrap="nowrap" width="135px">Paymnet Method</th>
-												<th nowrap="nowrap" width="135px">Deliver to</th>
-												<th nowrap="nowrap" width="95px">Status</th>
-												<!-- <th nowrap="nowrap" width="95px">Action</th> -->
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th nowrap="nowrap" width="57px">S.No.</th>
-												<th nowrap="nowrap">Order No.</th>
-												<th nowrap="nowrap" width="125px">Product</th>
-												<th nowrap="nowrap" width="102px">Order Date</th>
-												<th nowrap="nowrap" width="140px">Amount</th>
-												<th nowrap="nowrap" width="130px">Subscriber ID</th>
-												<th nowrap="nowrap" width="135px">Paymnet Method</th>
-												<th nowrap="nowrap" width="135px">Deliver to</th>
-												<th nowrap="nowrap" width="95px">Status</th>
-												<!-- <th nowrap="nowrap" width="95px">Action</th> -->
-											</tr>
-										</tfoot>
-										<tbody>
-												<tr *ngFor="let item of orders;let i=index">
-														<td>{{i+1}}</td>
-														<td>{{item.id}}</td>
-														<td>{{item.title}}</td>
-														<td>{{item.order_date | date: date:'dd M, Y'}}<br></td>
-														<td><i class="icon-inr"></i>{{item.final_price}}</td>
-														<td>{{item.subcriber_id}}</td>
-														<td>{{item.payment}}</td>
-														<td>{{item.deliver_to}}</td>
-														<td *ngIf="item.status == 'Pending'"><span class="orange white-text padd1">Pending</span></td>
-														<td *ngIf="item.status == 'Failed'"><span class="red white-text padd1">Failed</span></td>
-														<td *ngIf="item.status != 'Failed' && item.status != 'Pending'"><span class="green white-text padd1">{{item.status}}</span></td>
-														<!-- <td>
-																<a href="#view-more" class="btn tooltipped btn-icon orange modal-trigger" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change">visibility</i></a>
-														</td> -->
-												</tr>
-										</tbody>	
-								</table>
-							</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3 class="font600 inline-block">Recent Recharge Orders</h3>
-							<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="recharges_to_export()" id="export-recharge-txt">Export All Data</button></a> -->
-							<a [routerLink]="['/dashboard/recharge']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-recharge-txt">View All</button></a>
-							<div class="overflow-scroll">
-								<table id="datatable" class="display responsive-table datatable-example">
-										<thead>
-											<tr>
-												<th nowrap="nowrap" width="57px">S.No.</th>
-												<th nowrap="nowrap">Order No.</th>
-												<th nowrap="nowrap" width="113px">Recharge No.</th>
-												<th nowrap="nowrap" width="137px">Service Provider</th>
-												<th nowrap="nowrap" width="80px">Amount</th>
-												<th nowrap="nowrap" width="115px">Out Standing</th>
-												<th nowrap="nowrap" width="102px">Order Date</th>
-												<th nowrap="nowrap" width="140px">Payment Method</th>
-												<th nowrap="nowrap" width="130px">Payment Status</th>
-												<th nowrap="nowrap" width="135px">Recharge Status</th>
-												<th nowrap="nowrap" width="95px">Complaint</th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th nowrap="nowrap" width="57px">S.No.</th>
-												<th nowrap="nowrap">Order No.</th>
-												<th nowrap="nowrap" width="113px">Recharge No.</th>
-												<th nowrap="nowrap" width="137px">Service Provider</th>
-												<th nowrap="nowrap" width="80px">Amount</th>
-												<th nowrap="nowrap" width="115px">Out Standing</th>
-												<th nowrap="nowrap" width="102px">Order Date</th>
-												<th nowrap="nowrap" width="140px">Payment Method</th>
-												<th nowrap="nowrap" width="130px">Payment Status</th>
-												<th nowrap="nowrap" width="135px">Recharge Status</th>
-												<th nowrap="nowrap" width="95px">Complaint</th>
-											</tr>
-										</tfoot>
-										<tbody>
-												<tr *ngFor="let recharge of recharges;let i = index">
-														<td>{{i+1}}</td>
-														<td>{{recharge.recharge_order}}</td>
-														<td>{{recharge.recharge_no}}</td>
-														<td>{{recharge.recharge_name}}</td>
-														<!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
-														<td> <i class="icon-inr"></i>{{recharge.amount}}</td>
-														<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
-														<td>{{recharge.order_date | date: date:'dd M, Y' }}<br><time>{{recharge.order_date | date:'HH:mm a' }}</time></td>
-														<td *ngIf="recharge.payment_gateway == 1">Wallet</td>
-														<td *ngIf="recharge.payment_gateway == 2">Gateway</td>
-														<td *ngIf="recharge.payment_gateway == 3">Wallet/Gateway</td>
-														<td *ngIf="recharge.payment_gateway == 4">Paytm</td>
-														<td *ngIf="recharge.payment_status == 1">Complete</td>
-														<td *ngIf="recharge.payment_status == 2">Fail</td>
-														<td *ngIf="recharge.payment_status == 3">Pending</td>
-														<td *ngIf="recharge.recharge_status == 1"><span class="green white-text padd1">Success</span></td>
-														<td *ngIf="recharge.recharge_status == 2"><span class="red white-text padd1">Fail</span></td>
-														<td *ngIf="recharge.recharge_status == 3"><span class="orange white-text padd1">Progress</span></td>
-														<td><a href="#complaints" class="modal-trigger com">Complaint</a></td>
-												</tr>
-										</tbody>	
-								</table>
-							</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
-	<div id="complaints" class="modal complaint-modal">
-		<div class="modal-content">
-		  <h3 class="font600">Add Complaint</h3>
-		  <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
-		  <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
-		  <form>
-			<div class="row no-margin">
-			  <div class="input-field col s12">
-				<select>
-				  <option value="" disabled selected>Choose your option</option>
-				  <option value="1">Balance did not receive by customer</option>
-				  <option value="2">Wrong Opreater but correct recharge No/ID</option>
-				  <option value="3">Wrong Recharge No/ID but correct opreater </option>
-				  <option value="4">Other</option>
-				</select>
-			  </div>
-			  <div class="input-field col s12">
-				<textarea id="textarea1" class="materialize-textarea"></textarea>
-				<label for="textarea1" class="font-size-change">Description</label>
-			  </div>
+					<div class="responsive-table table-box-design" style="width: 100%; overflow:auto;">
+						<h3 class="font600 inline-block">Recent DTH Orders</h3>
+						<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a> -->
+						<a [routerLink]="['/dashboard/dth-orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a>
+						<hr/>
+	
+						<table class="table ">
+							<tr>
+								<th nowrap="nowrap" >S.No.</th>
+													<th nowrap="nowrap">Order No.</th>
+													<th nowrap="nowrap" >Product</th>
+													<th nowrap="nowrap" >Order Date</th>
+													<th nowrap="nowrap" >Amount</th>
+													<th nowrap="nowrap" >Subscriber ID</th>
+													<th nowrap="nowrap" >Paymnet Method</th>
+													<th nowrap="nowrap" >Deliver to</th>
+													<th nowrap="nowrap" >Status</th>
+							</tr>
+							<tr *ngFor="let item of orders;let i=index">
+								<td>{{i+1}}</td>
+								<td>{{item.id}}</td>
+								<td>{{item.title}}</td>
+								<td>{{item.order_date | date: date:'dd M, Y'}}<br></td>
+								<td><i class="icon-inr"></i>{{item.final_price}}</td>
+								<td>{{item.subcriber_id}}</td>
+								<td>{{item.payment}}</td>
+								<td>{{item.deliver_to}}</td>
+								<td *ngIf="item.status == 'Pending'"><span class="orange white-text padd1">Pending</span></td>
+								<td *ngIf="item.status == 'Failed'"><span class="red white-text padd1">Failed</span></td>
+								<td *ngIf="item.status != 'Failed' && item.status != 'Pending'"><span class="green white-text padd1">{{item.status}}</span></td>
+								<!-- <td>
+										<a href="#view-more" class="btn tooltipped btn-icon orange modal-trigger" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change">visibility</i></a>
+								</td> -->
+						</tr>
+						</table>
+					</div>
+	
+	
+					<div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:20px;">
+						<h3 class="font600 inline-block">Recent Recharge Orders</h3>
+						<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a> -->
+						<a [routerLink]="['/dashboard/recharge']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-recharge-txt">View All</button></a>
+								
+						<hr/>
+	
+						<table class="table ">
+							<tr>
+								<th nowrap="nowrap" >S.No.</th>
+													<th nowrap="nowrap">Order No.</th>
+													<th nowrap="nowrap" >Recharge No.</th>
+													<th nowrap="nowrap" >Service Provider</th>
+													<th nowrap="nowrap" >Amount</th>
+													<th nowrap="nowrap" >Out Standing</th>
+													<th nowrap="nowrap" >Order Date</th>
+													<th nowrap="nowrap" >Payment Method</th>
+													<th nowrap="nowrap" >Payment Status</th>
+													<th nowrap="nowrap" >Recharge Status</th>
+													<th nowrap="nowrap" >Complaint</th>
+							</tr>
+							<tr *ngFor="let recharge of recharges;let i = index">
+								<td>{{i+1}}</td>
+								<td>{{recharge.recharge_order}}</td>
+								<td>{{recharge.recharge_no}}</td>
+								<td>{{recharge.recharge_name}}</td>
+								<!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
+								<td> <i class="icon-inr"></i>{{recharge.amount}}</td>
+								<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
+								<td>{{recharge.order_date | date: date:'dd M, Y' }}<br><time>{{recharge.order_date | date:'HH:mm a' }}</time></td>
+								<td *ngIf="recharge.payment_gateway == 1">Wallet</td>
+								<td *ngIf="recharge.payment_gateway == 2">Gateway</td>
+								<td *ngIf="recharge.payment_gateway == 3">Wallet/Gateway</td>
+								<td *ngIf="recharge.payment_gateway == 4">Paytm</td>
+								<td *ngIf="recharge.payment_status == 1">Complete</td>
+								<td *ngIf="recharge.payment_status == 2">Fail</td>
+								<td *ngIf="recharge.payment_status == 3">Pending</td>
+								<td *ngIf="recharge.recharge_status == 1"><span class="green white-text padd1">Success</span></td>
+								<td *ngIf="recharge.recharge_status == 2"><span class="red white-text padd1">Fail</span></td>
+								<td *ngIf="recharge.recharge_status == 3"><span class="orange white-text padd1">Progress</span></td>
+								<td><a href="#complaints" class="modal-trigger com">Complaint</a></td>
+						</tr>
+						
+						</table>
+					</div>
+	
+	
+					
+				 
+				</div>
 			</div>
-		  </form>
 		</div>
-		<div class="modal-footer orange center">
-		  <a href="javascript:" class="modal-action btn-flat white-text font-size-change" (click)="add_complaint()">Register</a>
-		</div>
-	  </div>
-</section>
-
-<app-footer-min></app-footer-min>
+		<div id="complaints" class="modal complaint-modal">
+			<div class="modal-content">
+			  <h3 class="font600">Add Complaint</h3>
+			  <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+			  <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
+			  <form>
+				<div class="row no-margin">
+				  <div class="input-field col s12">
+					<select>
+					  <option value="" disabled selected>Choose your option</option>
+					  <option value="1">Balance did not receive by customer</option>
+					  <option value="2">Wrong Opreater but correct recharge No/ID</option>
+					  <option value="3">Wrong Recharge No/ID but correct opreater </option>
+					  <option value="4">Other</option>
+					</select>
+				  </div>
+				  <div class="input-field col s12">
+					<textarea id="textarea1" class="materialize-textarea"></textarea>
+					<label for="textarea1" class="font-size-change">Description</label>
+				  </div>
+				</div>
+			  </form>
+			</div>
+			<div class="modal-footer orange center">
+			  <a href="javascript:" class="modal-action btn-flat white-text font-size-change" (click)="add_complaint()">Register</a>
+			</div>
+		  </div>
+	</section>
+	
+	<app-footer-min></app-footer-min>
