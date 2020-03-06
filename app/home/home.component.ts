@@ -335,6 +335,10 @@ export class HomeComponent implements OnInit {
 
   check_if_favorite(product_id)
   {
+    if(localStorage.getItem('favourite') == null)
+    {
+      return false;
+    }
     let products = JSON.parse(localStorage.getItem('favourite'));
     var exist = products.items.filter(product => product.prod_id == product_id);
    
@@ -767,6 +771,7 @@ toTimestamp(strDate){
           item: 1,
           auto: true,
           pauseOnHover: true,
+          autoWidth:true,
           loop: true,
           pause: 5000,
           keyPress: true,

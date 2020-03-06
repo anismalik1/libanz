@@ -661,7 +661,8 @@ export class RechargeComponent implements OnInit {
 		{
       return false;
     }
-    this.spinner.show();	
+    this.spinner.show();
+    //console.log(formdata)	
 		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
     if(!this.authservice.authenticate())
     {
@@ -704,7 +705,7 @@ export class RechargeComponent implements OnInit {
 				this.rechargeData.recharge_name = data.recharge_name;	
 				this.rechargeData.title = data.title;
         this.recharge_ini = 2;
-       // console.log(this.rechargeData.recharge_amount)
+        //console.log(this.rechargeData.recharge_amount)
         if(this.todoservice.get_user_wallet_amount() < this.rechargeData.recharge_amount)
         {
           this.other_to_pay(2);
