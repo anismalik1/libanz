@@ -824,24 +824,10 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <div class="container-fluid">
 	<div class="row">
 		<ul class="bottom-slider">
-			<li>
+			<li *ngFor="let banner of filter_banners('mobile_bottom_banner')">
 				<div class="col m12 col s12">
 					<div class="shadow-box">
-							<img src="https://www.mydthshop.com/web-app/assets/images/banner/slider-fix-1.png"/>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="col m12 col s12">
-					<div class="shadow-box">
-							<img src="https://www.mydthshop.com/web-app/assets/images/banner/slider-fix-2.png"/>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="col m12 col s12">
-					<div class="shadow-box">
-							<img src="https://www.mydthshop.com/web-app/assets/images/banner/slider-fix-3.png"/>
+							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
 					</div>
 				</div>
 			</li>

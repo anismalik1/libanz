@@ -402,7 +402,7 @@ export class TodoService {
   }
   fetch_recharge_order_status(data)
   {
-    let url = this.server_url+'index.php?/app_services/fetch_recharge_order_status';
+    let url = this.server_url+'accounts/apis/recharge/fetch_recharge_order_status';
     return this.send_post_request(data,url) ; 
   }
   fetch_product_categories(data)

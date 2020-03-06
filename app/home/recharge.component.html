@@ -213,7 +213,7 @@ div#circles-content ul li a {
 						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 					</div>
 					<div class="col s12 m12 l2" *ngIf="!rechargeData.record_exist">
-						<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount + rechargeData.commission}}</button>
+						<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount * 1 + rechargeData.commission * 1}}</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>	

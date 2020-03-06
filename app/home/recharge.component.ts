@@ -548,8 +548,9 @@ export class RechargeComponent implements OnInit {
               //console.log(operators)  
               if(this.activity != recharge_data.activity_id)
                 this.get_plans(this.region,operators[0].recharge_id);   
+              this.operator_id = operators[0].recharge_id;  
             } 
-            this.operator_id = operators[0].recharge_id;
+            
             this.activity = recharge_data.activity_id;
 
         }
