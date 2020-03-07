@@ -222,11 +222,11 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     var width = $(window).width(); 
-    if(width < 450)
-    {
-      this.router.navigate(['/mhome']);
-      return false;
-    }
+    // if(width < 450)
+    // {
+    //   this.router.navigate(['/mhome']);
+    //   return false;
+    // }
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -785,7 +785,7 @@ toTimestamp(strDate){
           enableDrag: true
         });
         $('.bottom-slider').lightSlider({
-          item: 1,
+          item: 3,
           auto: true,
           pauseOnHover: true,
           loop: true,
@@ -793,7 +793,28 @@ toTimestamp(strDate){
           keyPress: true,
           controls: true,
           pager: false,
-          enableDrag: true
+          enableDrag: true,
+          responsive: [
+            {
+              breakpoint:900,
+              settings: {
+                item:3	
+              }
+            },
+            {
+              breakpoint:600,
+              settings: {
+                item:2
+              }
+            },
+            {
+              breakpoint:380,
+              settings: {
+                item:1
+              }
+            }, 
+           
+            ],
         });
              
       // Hide sideNav

@@ -831,7 +831,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	<div class="row">
 		<ul class="bottom-slider">
 			<li *ngFor="let banner of filter_banners('mobile_bottom_banner')">
-				<div class="col m4 s12">
+				<div class="col m12 s12">
 					<div class="shadow-box">
 							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
 					</div>
@@ -853,7 +853,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						<div class="col s10">
 							<div class="rating-green-content" >Free Home Delievery </div>
 						</div>
-						<div class="col s2">
+						<div class="col s2" *ngIf="item.new_product == 1">
 							<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
 							<img src="https://www.mydthshop.com/web-app/assets/images/new.gif" class="img-responsive pt-img"/>
 
