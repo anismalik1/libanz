@@ -78,6 +78,20 @@
 
 	display: none !important;
 }
+.dashboard-menu-mobile li {
+
+list-style-type: none;
+
+}
+.dashboard-menu-mobile li a {
+
+    list-style-type: none;
+    font-size: 15px !important;
+    padding: 7px 0px 7px 0px;
+    border-bottom: 1px solid #ececec;
+
+}
+
 }
 
 
@@ -214,7 +228,31 @@
 			<div class="wallet-mobile">
 				<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 			</div>
+
+			<ul class="dashboard-menu-mobile">
+				<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Recharge </a></li>
+				<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders </a></li>
+			   
+				<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><span class="fa fa-envelope"></span> &nbsp;  Value Transfer</a></li>
+		  
+				<li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><span class="fa fa-gift"></span> &nbsp;  Manage Retailer </a></li>
+				
+				<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Complaint Box </a></li>
+		  
+				<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money </a></li>
+		  
+				<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Topup Request </a></li>
+		  
+				<li *ngIf="this.todoservice.get_user_type() == 2"><a routerLink="/dashboard/commission-structure" routerLinkActive="active" class="font-size-change"> <span class="fa fa-sitemap"></span> &nbsp;  Commission Structure </a></li>
+		  
+				<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History </a></li>
+		  
+		  
+				<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Account </a></li>
+				
+			</ul>
 			<ul class="logout">	
+				
 				<li><a [routerLink]="['/logout']">Logout</a></li>
 			</ul>		
 			
@@ -717,6 +755,7 @@
 	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
 	<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
 	<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
+	
 	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
 </ul>
 <!-- End Here -->
