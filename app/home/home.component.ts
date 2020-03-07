@@ -13,7 +13,6 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
 import * as $ from 'jquery';
-import { parse } from 'path';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -84,6 +83,7 @@ export class HomeComponent implements OnInit {
      private location : Location,
      private route : ActivatedRoute
   ) {
+    
     this.spinner.show();
     if(!this.get_token())
     {
@@ -221,6 +221,12 @@ export class HomeComponent implements OnInit {
     this.pay_step = paystep;
   }
   ngOnInit() {
+    var width = $(window).width(); 
+    if(width < 450)
+    {
+      this.router.navigate(['/mhome']);
+      return false;
+    }
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))

@@ -18,16 +18,18 @@ import { Nl2pbrPipe } from './nl2pbr.pipe';
 import { TruncatePipe } from './truncatePipe';
 import { BlogComponent } from './blog.component';
 import { BlogDetailComponent } from './blog-detail.component';
+import { MobileHomeComponent } from './mobile-home.component';
 const routes: Routes = [
   
   //{ path: 'recharge/:name/proceed', component: RechargeComponent },
   { path: '', component: HomeComponent },
+  { path: 'mhome', component: MobileHomeComponent },
   { path: 'blog/:name', component: BlogComponent },
   { path: 'blog-detail/:name', component: BlogDetailComponent },
   { path: 'orders/recharge-receipt/:name', component: RechargeStatusComponent },
   { path: 'for/:name', component: RechargeComponent },
   { path: ':name/proceed', component: RechargeComponent },
-  //{path: '**', redirectTo: '/error/404'},
+  {path: '**', redirectTo: '/error/404'},
 ];
 @NgModule({
   imports: [
@@ -42,7 +44,7 @@ const routes: Routes = [
     NgxSpinnerModule,
     SharedCommonModule
   ],
-  declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe,TruncatePipe, BlogComponent, BlogDetailComponent],
+  declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe,TruncatePipe, BlogComponent, BlogDetailComponent, MobileHomeComponent],
   providers : [TodoService,AuthService,User,Params,RechargeType]
 
 })
