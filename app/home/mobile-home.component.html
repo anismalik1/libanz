@@ -1,1 +1,428 @@
-<p>mobile-home works!</p>
+<style>
+	.cs-bg-color{
+
+		background-color: #fff;
+		
+		}	
+		.recomm .btn-new1 .btn {
+    width: 67.5% !important;
+    border-radius: 0 !important;
+    box-shadow: none;
+    margin: 0;
+    border-radius: 20px !important;
+    margin-bottom: 17px;
+}
+.cst-name {
+    height: 100px;
+    width: 100px;
+    background: #ececec;
+    padding: 5px;
+	border-radius: 50%;
+}
+
+li.clogin.ng-star-inserted {
+    margin-top: 3px !important;
+}
+
+.shadow-box img{
+
+	width: 92%;
+    border-radius: 20px;
+    padding:  5px 10px 5px 4px !important;
+}
+.tabs .tab {
+    display: inline-block;
+	text-align: center;
+	line-height: 14px;
+}
+
+li.indicator{
+    display: none !important;
+}
+.tabs .tab a {
+	color: rgba(68, 67, 67, 0.7);
+}
+section {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.rating-green{
+
+						background: #1c851c;
+						padding: 3px 0px 3px 22px;
+						width: 100px;
+						color: #fff;
+						float: left;
+						
+}
+.line-ht{
+
+	line-height: 2;
+}
+.icn-clr1{
+
+	color:#746d67 !important;
+	 float:right;
+	  padding:6px 20px 0px 0px;
+	  font-size:15px;
+}
+.heading-txt1{
+	font-size: 17px;
+						padding-bottom:10px;
+						font-weight: bold;
+						text-overflow: ellipsis;
+}
+.rating-green{
+	background: #1c851c;
+    padding: 3px 0px 3px 12px;
+    width: 75px;
+    color: #fff;
+    float: left;
+
+}
+.rating-green-content{
+	background: #ff6a00;
+    padding: 2px 10px 2px 10px;
+    width: auto;
+    color: #fff;
+    float: left;
+    margin-left: -9px !important;
+    font-size: 10px;
+	
+
+}
+.price-cut1{
+
+	padding-bottom:2px; padding-top:10px;
+}
+.list-data{
+	padding-bottom:10px; font-size:16px; color:#333;
+}
+.product-image{
+
+/* padding: 24px 0px 0px 5px; */
+width: 100%;
+box-shadow: 1px 1px 10px #ececec;
+margin-bottom: 20px;
+border: 1px solid #ececec;
+border-radius: 2px;
+	
+
+}
+.product-img1 img{
+
+height: 60px;
+width: 60px;
+text-align: center;
+margin: 2px;
+}
+.pt-img{
+	padding:5px;
+}
+
+.heading-txt{
+
+	font-size:22px;
+	
+}
+
+@media only screen and (max-width: 767px){
+
+
+.card .card-content {
+    padding-bottom:0px !important;
+}
+.heading-txt1{
+	font-size: 11px;
+}
+.heading-txt1 a{
+	color:#333;
+}
+.rechare-section-list{
+	padding-left: 20px;
+}
+.product-image{
+
+	height:146px;
+background-color: #fff;
+border-radius:10px;
+
+}
+.cst-btn-link{
+	color:#51377e;
+}
+	
+.bg-transparent{
+	background-color: transparent !important;
+}
+.txt-pro{
+	font-weight: 600;
+	color: #545454;
+	font-size:17px;
+	padding-bottom: 0px !important;
+}
+.mt-35{
+
+	margin-top:-52px !important;
+}
+#select-item {
+    padding: 0 !important;
+}
+.list-data a{
+
+color: #333;
+font-size: 11px;
+font-weight: bold
+}
+.offer-txt{
+
+	color:#1c851c;
+	font-size:10px;
+	padding-left:8px;
+}
+ul.mob-retailer-slider.lightSlider.lSSlide {
+    height: 66px;
+}
+.rating-green-content{
+	background: #ff6a00;
+    padding: 2px 10px 2px 10px;
+    width: auto;
+    color: #fff;
+    float: left;
+    margin-left: -9px !important;
+    font-size: 10px;
+	border-top-left-radius: 10px;
+
+}
+.mobile-hidden{
+
+	display: none !important;
+}
+
+
+ 
+}
+</style>
+
+<section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
+	<h2 class=" font600 padd center txt-pro ">Tata Sky Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/tata-sky']">View All</a></span></h2>
+	
+	<div class="container-fluid">
+		<ul class="product-slider">
+			<li *ngFor="let item of tata_slides">
+				<div class="row no-margin 1">
+					<div class="col s12 m4 list-{{item.id}}" >
+					<div class="product-image">
+					
+						<div class="row" style="margin-bottom:10px;">
+							<div class="col s10">
+								<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+							</div>
+							<div class="col s2">
+								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+							</div>
+						</div>
+						<div class="row">
+						
+						<div class="col s2">
+							<div class="product-img1">
+							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+							</div>
+						</div>
+						<div class="col s10">
+							<div class="rechare-section-list">
+								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+		
+								<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span> </div><span class="line-ht"> &nbsp; (10)</span>
+								<br/>
+								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+								
+								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+							</div>
+						</div>
+						</div>
+						</div>
+					</div>
+					
+					</div>
+				</li>
+			</ul>
+		</div>
+</section>
+<section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
+	<h2 class=" font600 padd txt-pro heading-txt">Dishtv Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/dish-tv']">View All</a></span></h2>
+	
+	<div class="container-fluid">
+			<ul class="product-slider">
+				<li *ngFor="let item of dishtv_slides">
+					<div class="row no-margin 1">
+						<div class="col s12 m4 list-{{item.id}}" >
+						<div class="product-image">
+							<div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" >Free Home Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div>
+							<!-- <div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div> -->
+							<div class="row">
+							
+							<div class="col s2">
+								<div class="product-img1">
+								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+								</div>
+							</div>
+							<div class="col s10">
+								<div class="rechare-section-list">
+									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+			
+									<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div><span class="line-ht"> &nbsp; (25)</span>
+									<br/>
+									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+									
+									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+								</div>
+							</div>
+							</div>
+							</div>
+						</div>
+						
+						</div>
+					</li>
+				</ul>
+		</div>
+</section>
+<section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
+	<h2 class=" font600 padd center txt-pro ">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/airtel']">View All</a></span></h2>
+	
+	<div class="container-fluid">
+		<ul class="product-slider">
+			<li *ngFor="let item of airtel_slides">
+				<div class="row no-margin 1">
+					<div class="col s12 m4 list-{{item.id}}" >
+					<div class="product-image">
+					
+						<div class="row" style="margin-bottom:10px;">
+							<div class="col s10">
+								<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+							</div>
+							<div class="col s2">
+								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+							</div>
+						</div>
+						<div class="row">
+						
+						<div class="col s2">
+							<div class="product-img1">
+							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+							</div>
+						</div>
+						<div class="col s10">
+							<div class="rechare-section-list">
+								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+		
+								<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div><span class="line-ht"> &nbsp; (50)</span>
+								<br/>
+								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+								
+								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+							</div>
+						</div>
+						</div>
+						</div>
+					</div>
+					
+					</div>
+				</li>
+			</ul>
+		</div>
+</section>
+<section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
+	<h2 class=" font600 padd txt-pro heading-txt">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/videocon']">View All</a></span></h2>
+	
+	<div class="container-fluid">
+			<ul class="product-slider">
+				<li *ngFor="let item of videcone_slides">
+					<div class="row no-margin 1">
+						<div class="col s12 m4 list-{{item.id}}" >
+						<div class="product-image">
+						
+							<div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" >Free Home Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div>
+							<!-- <div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
+								</div>
+								<div class="col s2">
+									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								</div>
+							</div> -->
+							<div class="row">
+							
+							<div class="col s2">
+								<div class="product-img1">
+								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+								</div>
+							</div>
+							<div class="col s10">
+								<div class="rechare-section-list">
+									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+			
+									<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div><span class="line-ht"> &nbsp; (50)</span>
+									<br/>
+									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+									
+									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+								</div>
+							</div>
+							</div>
+							</div>
+						</div>
+						
+						</div>
+					</li>
+				</ul>
+		</div>
+</section>
+
+<!-- End Here -->
+<!-- Flash Deal New Design -->
+<section class="flash-deal slider-flash-deal margin-top-order no-padding banner-slider1">
+	<div class="container-fluid">
+		<div class="row no-margin">
+			<div class="col s12 m12 no-padding">
+				<div class="card no-margin">
+					<div class="card-content no-padding">
+						<ul class="flash-deal-slider">
+							<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
+								<a href="{{item.imageurl}}" target="_blank">
+									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
+								</a>
+							</li>
+						</ul>
+						<ul class="tabs" id="select-slide" *ngIf="filter_banners('main-banner')">
+							<li class="tab hide"><a href="javascript:"></a></li>
+							<li class="tab" *ngFor="let item of filter_banners('main-banner');let i = index"><span class="data-slide hide">{{i+1}}</span><a [class.active]="i==0" href="javascript:"><p class="font-size-change1 font600 black-text" title="{{item.title}}">{{item.title}}</p><span class="grey-text" title="{{item.description}}">{{item.description}}</span></a></li>		
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</section>
