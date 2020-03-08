@@ -47,15 +47,7 @@ export class HomeComponent implements OnInit {
   dthmaxlength : number = 0;
   viewrange : number = 0;
   showstd : number = 0;
-  mobilegroup : FormGroup;
-  dthgroup : FormGroup;
-  datacardgroup : FormGroup;
-  landlinegroup : FormGroup;
-  broadbandgroup : FormGroup;
-  electricitygroup : FormGroup;
   banners : any = [];
-  gasgroup : FormGroup;
-  watergroup : FormGroup;
   order : any = {};
   recommended : any;
   package_item : Package;
@@ -222,11 +214,12 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     var width = $(window).width(); 
-    // if(width < 450)
-    // {
-    //   this.router.navigate(['/mhome']);
-    //   return false;
-    // }
+    console.log(width);
+    if(width < 450)
+    {
+      this.router.navigate(['/mhome']);
+      return false;
+    }
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -235,51 +228,9 @@ export class HomeComponent implements OnInit {
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
         this.authservice.authenticate();
-   }, 4000);
+    }, 4000);
     }
-    // this.mobilegroup = this.fb.group({
-    //   'amount' : [null,Validators.compose([Validators.required])],
-    //    'operator' : [null,Validators.compose([Validators.required])],
-    //    'recharge_id' : [null,Validators.compose([Validators.required])],
-    //    'circle_area' : [null,Validators.compose([Validators.required])]
-    //  });
-    //  this.dthgroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   });
-    //   this.datacardgroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   });
-    //   this.landlinegroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   });
-    //   this.broadbandgroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   });
-    //   this.electricitygroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   });
-    //   this.gasgroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   });
-    //   this.watergroup = this.fb.group({
-    //    'amount' : [null,Validators.compose([Validators.required])],
-    //     'operator' : [null,Validators.compose([Validators.required])],
-    //     'recharge_id' : [null,Validators.compose([Validators.required])]
-    //   }); 
   this.spinner.show();  
-	//this.fetch_operators();
   this.fetch_home_data();
   if(!this.get_token())
   {

@@ -11,13 +11,52 @@ import { Observable} from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Package } from '../packages.entities.service';
 @Component({
   selector: 'app-mobile-home',
   templateUrl: './mobile-home.component.html',
   styles: []
 })
 export class MobileHomeComponent implements OnInit {
-
+  public userinfo = {wallet:'',phone:'',name:''};
+  public operators : any = {};
+  public loop : boolean = false;
+  public selectedOperator : number ;
+  public rechargeAmount : number ;
+  public rechargeId : number ;
+  public op_list = '';
+  public recharge_ini : number = 1;
+  public deal_timer : number = 0;
+  no_dues = 0;
+  bill_amt : number;
+  due_msg : string = 'No pending dues.';
+  rechargeData : any ;
+  flash_deals : any;
+  tata_slides : any;
+  dishtv_slides : any;
+  videcone_slides : any;
+  airtel_slides : any;
+  instant_checked : boolean = true;
+  circles : any;
+  pay_step : number = 1;
+  prepaid_list : number = 1;
+  dthminlength : number = 0;
+  dthmaxlength : number = 0;
+  viewrange : number = 0;
+  showstd : number = 0;
+  banners : any = [];
+  order : any = {};
+  recommended : any;
+  package_item : Package;
+  packages : Package[];
+  product_mpackages : Package[];
+  user_cashback : any ;
+  region :number = 0;
+  activity : number = 0;
+  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  filteredOptions: Observable<object>;
+  filterdList : boolean = false;
+  ratings : any;
   constructor(
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
@@ -35,7 +74,441 @@ export class MobileHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spinner.hide();
+    var width = $(window).width(); 
+    // if(width < 450)
+    // {
+    //   this.router.navigate(['/mhome']);
+    //   return false;
+    // }
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // ); 
+    if(this.router.url == '/home#login' || this.router.url == '/home%23login')
+    {
+      setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.authservice.authenticate();
+    }, 4000);
+    }
+  this.spinner.show();  
+  this.fetch_home_data();
+  if(!this.get_token())
+  {
+    this.todoservice.set_user_data({name:''});
+  } 
+   
+    $('#search').focus(function(){
+      $('.search-result').removeClass('hide');
+    });
+    $('#search').focusout(function(){
+      $('.search-result').addClass('hide');
+    });
   }
 
+  private _filter(value: string): object {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
+  }
+  fetch_home_data()
+  {   
+      let data = {};
+      if(this.get_token())
+      {
+        data = {token : this.get_token()};
+      }
+      this.spinner.show();
+      this.todoservice.fetch_home_data(data)
+      .subscribe(
+        data => 
+        {
+          if(!$.isEmptyObject(data))
+          {
+            let page_data = data.PAGEDATA[0];
+            this.ratings = data.rating; 
+            if(page_data)
+            {
+              this.meta.addTag({ name: 'description', content: page_data.metaDesc });
+              this.meta.addTag({ name: 'keywords', content: page_data.metaKeyword });
+              this.title.setTitle(page_data.metaTitle);
+            }
+            this.user_cashback = data.cashback;
+            this.banners          = data.banners;
+            this.tata_slides      = this.filter_product('tata',data.products); 
+            this.airtel_slides    = this.filter_product('airtel',data.products);  
+            this.dishtv_slides    = this.filter_product('dish',data.products);  
+            this.videcone_slides  = this.filter_product('videocon',data.products); 
+            this.recommended  = this.filter_recommended(data.products); 
+            
+            this.init_page();
+            $('#mobile').css('display','');  
+            $('#select-item').css('display',''); 
+            //this.tick_deal_timer();
+            this.filter_banners('Big Tv');
+            this.spinner.hide();
+          }
+          
+        }
+      )  
+  }
+
+  check_if_favorite(product_id)
+  {
+    if(localStorage.getItem('favourite') == null)
+    {
+      return false;
+    }
+    let products = JSON.parse(localStorage.getItem('favourite'));
+    var exist = products.items.filter(product => product.prod_id == product_id);
+   
+    if(exist.length > 0)
+      return 'orange-text';  
+    return ''; 
+  }
+  add_to_favorite(product)
+  {
+
+    $('.wishlist').addClass('active');
+
+    if(!this.get_token())
+    {
+      $('.logup.modal-trigger')[0].click();
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
+      return false;
+    }
+
+    this.spinner.show() 
+    this.todoservice.add_to_favorite({product : product,token : this.get_token()})
+    .subscribe(
+    data => 
+    {
+      this.spinner.hide();
+      this.toastr.successToastr(data.msg);
+      if(data.status == true)
+        localStorage.setItem('favourite', JSON.stringify(data.favourites));
+    }
+    ) 
+  }
+
+  product_rating(product_id)
+  {
+    let j : any = 0;
+    let rate : any = 0;
+    //console.log(this.ratings);
+    for(var i = 0;i < this.ratings.length;i++)
+    {
+      if(product_id == this.ratings[i].product_id)
+      {
+        rate = Number(rate) + Number(this.ratings[i].reting);
+        j = Number(j) + 1;
+      }
+    }
+    if(j == 0)
+      j = 1;
+    let rating = (rate/j);
+    if(rating == 0)
+      return 0;
+    else
+      return rating.toFixed(1)+'('+j+')';  
+  }
+  
+  filter_recommended(categories)
+  {
+    let slide = categories.filter(x => x.recommended == 1);
+    slide = slide.slice(0,8)
+    return slide;
+  }
+
+  filter_product(key,categories)
+  {
+    let temp :any = [];
+    let new_slides = [];
+    for(var i=0;i<categories.length ;i++)
+    {
+        temp = categories[i];
+        let startIndex = temp.title.toLowerCase().indexOf(key.toLowerCase());
+        if (startIndex != -1) {
+          new_slides.push(categories[i]); 
+        }
+    }
+    return new_slides;
+  } 
+
+  init_page() 
+  {
+    if($('#init-page-script'))
+    {
+      $('#init-page-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-page-script`;
+    script.text = `
+      $(document).ready(function(){
+        $('.slider-5').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          pause: 3000,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+        $('.slider-66').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          pause: 3000,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+        $('.slider-7').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+        $('.slider-8').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+      })
+        
+        $(document).on("click",".recharge-section",function($event) {
+          var x = $event.target.nodeName;
+          if(!$(x).hasClass("more-clik"))
+            $('.dropdown-more').hide();
+        });
+        $('.tooltipped').tooltip({delay: 50});
+        $('.modal').modal();
+        $('.mobile-slider').lightSlider({
+          item: 1,
+          auto: true,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true,
+         
+         
+        });
+        var flashdeal = $('.flash-deal-slider').lightSlider({
+          item: 1,
+          auto: true,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:1	
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }, 
+         
+          ],
+          onBeforeSlide: function (el) {
+            $('#select-slide li a').removeClass('active');
+            $('#select-slide li:nth-child('+(el.getCurrentSlideCount()+1)+') a').addClass('active');
+            
+        }
+        });
+        $('#select-slide').delegate('li','click',function(){
+          var child = $(this).find('.data-slide').text();
+          flashdeal.goToSlide(Number(child));
+        });
+        var product = $('.product-slider').lightSlider({
+          item: 1,
+          auto: false,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true
+        });
+        $('.mob-retailer-slider').lightSlider({
+          item: 1,
+          auto: true,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true
+        });
+        $('.bottom-slider').lightSlider({
+          item: 3,
+          auto: true,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true,
+          responsive: [
+            {
+              breakpoint:900,
+              settings: {
+                item:3	
+              }
+            },
+            {
+              breakpoint:600,
+              settings: {
+                item:2
+              }
+            },
+            {
+              breakpoint:380,
+              settings: {
+                item:1
+              }
+            }, 
+           
+            ],
+        });
+             
+      // Hide sideNav
+      $('.button-collapse1').on('click', function () {
+        $('.side-nav').sideNav('hide');
+      });
+    
+      $('.modal-close').on('click', function(){
+       $('.modal').modal('close');
+      });
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
+  filter_banners(position,from = 0,limit = 0)
+  {
+    let banner: any = [];
+    let ln = limit;
+    if(limit == 0)
+    {
+      ln =  this.banners.length
+    }
+   
+    for(var i = from; i < this.banners.length ;i++)
+    {
+        if(this.banners[i].position == position)
+        {   
+            banner.push(this.banners[i]);
+        }
+        if(banner.length == ln)
+        {
+          break;
+        }
+    } 
+    return banner;
+  }
+
+  get_token()
+  {
+    return this.authservice.auth_token();
+  }
 }
