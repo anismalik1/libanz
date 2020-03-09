@@ -214,7 +214,6 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     var width = $(window).width(); 
-    console.log(width);
     if(width < 450)
     {
       this.router.navigate(['/mhome']);
