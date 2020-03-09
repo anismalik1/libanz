@@ -103,8 +103,8 @@
                             <td>{{recharge.remark}}</td>
                           <td>
                             <div *ngIf="recharge.complaint_id == null">
-                                <span class="orange white-text" *ngIf="check_delay(recharge.order_date) == 2">Please Wait...</span>
-                                <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Complaint</a></span>
+                                <span class="orange white-text" *ngIf="check_delay(recharge.history_time) == 2">Please Wait...</span>
+                                <span *ngIf="check_delay(recharge.history_time) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Complaint</a></span>
                             </div>
                             <div *ngIf="recharge.complaint_id != null">
                                 <span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
@@ -135,7 +135,7 @@
       <div class="row no-margin">
         <div class="input-field col s12">
             <mat-form-field>
-                <mat-select placeholder="Select Operator" formControlName="title">
+                <mat-select placeholder="Select reason" formControlName="title">
                     <mat-option [value]="1">
                         Balance did not receive by customer
                     </mat-option>
@@ -150,10 +150,6 @@
                     </mat-option>
                 </mat-select>
               </mat-form-field>
-        </div>
-        <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea" formControlName="description" ngModel></textarea>
-          <label for="textarea1" class="font-size-change">Description</label>
         </div>
       </div>
     

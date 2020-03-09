@@ -3,7 +3,7 @@ import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router'
+import { Router,ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-complaint-box',
@@ -16,10 +16,10 @@ export class ComplaintBoxComponent implements OnInit{
   loop_info : boolean = false;
   complaints : object = {};
   complaint_info : any ;
-  type : number = 1;
+  type : string = 'all';
   p: number = 1;
   complaints_counts : number ;
-  constructor( private _renderer2: Renderer2,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router) { }
+  constructor( private _renderer2: Renderer2,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { }
   ngOnInit() {
     if(!this.get_token())
     {
@@ -31,13 +31,17 @@ export class ComplaintBoxComponent implements OnInit{
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
       return false;
     } 
+    this.route.params.subscribe(params => {
+      this.type = params['name']; //log the value of id
+      this.fetch_complaints(this.type,1);
+    });
     $(document).ready(function() {
         $('.filter-show').on('click',function(){
             $('.filter-he').removeClass('hide');
             $('.filter-he').toggle(500);
         });
     });
-    this.fetch_complaints(this.type,1);
+    
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.text = `
@@ -69,8 +73,7 @@ export class ComplaintBoxComponent implements OnInit{
             this.authservice.clear_session();
             this.router.navigate(['/proceed/login']);
           }
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
+
           this.spinner.hide();
           if(!jQuery.isEmptyObject(data))
           {
@@ -82,6 +85,19 @@ export class ComplaintBoxComponent implements OnInit{
         }
       )  
     } 
+  }
+
+  navigate_to(url)
+  {
+    if(url == url)
+      {
+        this.router.routeReuseStrategy.shouldReuseRoute = function(){
+          return false;
+        }
+      //console.log(url) 
+      this.router.navigated = false;
+      this.router.navigate([url]);
+    }
   }
 
   complaint_invoice(id)
@@ -98,8 +114,6 @@ export class ComplaintBoxComponent implements OnInit{
             this.authservice.clear_session();
             this.router.navigate(['/proceed/login']);
           }
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
           this.complaint_info = data.COMPLAINT; 
           if(!jQuery.isEmptyObject(this.complaints))
           {

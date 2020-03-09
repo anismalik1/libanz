@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'orders', component: RechargeOrdersComponent },
   { path: 'complaints', component: ComplaintBoxComponent },
+  { path: 'complaints/:name', component: ComplaintBoxComponent },
   { path: 'value-transfer', component: ValueTransferComponent },
   { path: 'add-money', component: AddMoneyComponent },
   { path: 'topup-request', component: TopupRequestComponent },
@@ -42,7 +43,7 @@ const routes: Routes = [
   { path: 'dth-orders', component: DthOrdersComponent },
   { path: 'book-dth-order', component: BookDthOrderComponent },
   { path: 'booked-order-list', component: BookedOrderListComponent }, 
-  //{path: '**', redirectTo: '/error/404'},
+  {path: '**', redirectTo: '/error/404'},
 ];
 @NgModule({
   imports: [
