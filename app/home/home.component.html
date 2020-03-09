@@ -317,87 +317,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		</div>
 	</div>
 </section>
-<section *ngIf="recharge_ini == 3">
-	<div class="row no-margin">
-		<div class="col s12 m10 l7 offset-l2">
-			<div class="card no-margin">
-				<div class="card-content" *ngIf="order">
-					<span class="card-title">Payment of RS. {{order.amount}} recevied by MyDthShop!</span>
-					<div class="row border-on-bottom padd-bottom">
-						<div class="col s8 no-padding">
-							<span class="font-size-change">Order Number</span>&nbsp;
-							<span class="font-size-change1 font600">{{order.order_id}}</span>&nbsp;
-						</div>
-						<div class="col s4 right-align">
-							<span class="font-size-change">Amount</span><br>
-							<span class="font-size-change font600">&#x20B9; {{order.amount}}</span><br>
-						</div>
-					</div>
-					<div class="row no-margin border-on-bottom padd-bottom">
-						<div class="col s9  no-padding" >
-							<span class="font-size-change" *ngIf="order.recharge_status == 1">Your Order is Successful</span>
-							<span class="font-size-change" *ngIf="order.recharge_status == 2">Your Order is Failed</span>
-							<span class="font-size-change" *ngIf="order.recharge_status == 3">Your Order is Pending</span>
-						</div>
-						<div class="col s3 right right-align">
-							<!-- <span class="font-size-change1 font600"><i class="fa fa-inr" aria-hidden="true"></i> {{order.wallet_amount}}</span><br> -->
-							<a *ngIf="order.payment_status == 3" href="javascript:" class="orange-text font-size-change no-box-shadow success">Pending</a>
-							<a *ngIf="order.payment_status == 2"href="javascript:" class="red-text font-size-change no-box-shadow success">Refunded</a>
-							<a *ngIf="order.payment_status == 1"href="javascript:" class="green-text no-box-shadow font-size-change success">Successful</a>
-						</div>
-					</div>		        
-				</div>
-				<div class="card-action right-align">
-					<a href="javascript:" (click)="continue_back()" class="btn orange">Proceed To Pay</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<section *ngIf="recharge_ini == 2">
-	<div class="container-fluid">
-		<div class="row mar-row responsive-kro">
-			<a class="modal-close recharge-close" href="javascript:" (click)="back_to_recharge()"><i class="material-icons">close</i></a>
-			<div class="col s12 m12 l6">
-				<img src="https://mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images" alt="airtel" width="50px">
-				<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <span class="font600">Rs. {{rechargeData.recharge_amount}}</span></h4>
-				<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
-			</div>
-			<div class="col s12 m12 l4">
-				<div class="payment-method" *ngIf="pay_step==1">
-
-					<p class="inline-block margin-right fast-forwad relative">
-						<input type="radio" class="with-gap" id="instant-recharge"  name="payment_type" value="wallet" checked/>
-						<label for="instant-recharge" class="black-text"><span class="fast"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
-					</p>
-					<p class="inline-block margin-right">
-						<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
-						<label for="other-option" class="black-text">Other</label>
-					</p>
-				</div>
-				<div class="payment-method1"  *ngIf="pay_step==2">
-					<p class="inline-block margin-right ">
-						<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-						<label for="paytm" class="black-text">Paytm</label>
-					</p>
-					<p class="inline-block margin-right ">
-						<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card"/>
-						<label for="credit-card" class="black-text">Cards & Netbanking</label>
-					</p>
-					<p class="inline-block margin-right ">
-						<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
-					</p>
-				</div>                                                                                                      
-
-			</div>
-			<div class="col s12 m12 l2">
-				<button type="submit" class="btn orange btn-large" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount}}</button>
-			</div>
-		</div>
-	</div>
-</section>
-
-
 
 <!-- End Here -->
 <!-- Tata Sky section -->
@@ -611,21 +530,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	</div>
 </section>
 <!-- end here -->
-
-<div class="container-fluid">
-	<div class="row">
-		<ul class="bottom-slider">
-			<li *ngFor="let banner of filter_banners('mobile_bottom_banner')">
-				<div class="col m12 s12">
-					<div class="shadow-box">
-							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
-
-</div>
 <!-- Reccomended For You -->
 <section class="flash-deal recomended-wrapper white margin-top-order sldr-txt hide-on-mobile" *ngIf="this.recommended">
 		<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
