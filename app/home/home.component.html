@@ -249,27 +249,30 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 
 
 <!-- Flash Deal New Design -->
-<section class="flash-deal  margin-top-order no-padding banner-slider1">
-	<div class="container-fluid">
-		<div class="row no-margin">
+<section class="flash-deal slider-flash-deal margin-top-order no-padding banner-slider1">
+		<div class="container-fluid">
+		  <div class="row no-margin">
 			<div class="col s12 m12 no-padding">
-				<div class="card no-margin">
-					<div class="card-content no-padding">
-						<ul class="mobile-slider">
-							<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
-								<a href="{{item.imageurl}}" target="_blank">
-									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
-								</a>
-							</li>
-
-						</ul> 
-					</div>
+			  <div class="card no-margin">
+				<div class="card-content no-padding">
+				  <ul class="flash-deal-slider">
+					<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
+					  <a href="{{item.imageurl}}" target="_blank">
+						<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
+					  </a>
+					</li>
+				  </ul>
+				  <ul class="tabs" id="select-slide" *ngIf="filter_banners('main-banner')">
+					<li class="tab hide"><a href="javascript:"></a></li>
+					<li class="tab" *ngFor="let item of filter_banners('main-banner');let i = index"><span class="data-slide hide">{{i+1}}</span><a [class.active]="i==0" href="javascript:"><p class="font-size-change1 font600 black-text" title="{{item.title}}">{{item.title}}</p><span class="grey-text" title="{{item.description}}">{{item.description}}</span></a></li>   
+				  </ul>
 				</div>
+			  </div>
 			</div>
 			
+		  </div>
 		</div>
-	</div>
-</section>
+	  </section>
 <!-- End Here -->
 
 
@@ -320,7 +323,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 
 <!-- End Here -->
 <!-- Tata Sky section -->
-<section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="padd border-bottom font600 heading-txt">Tata Sky Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/tata-sky']" target="_blank">View All</a></span></h2>
 	<div class="container-fluid">
 		<div class="row no-margin">
@@ -427,7 +430,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 </section>
 <!-- end here -->
 <!-- Airtel Dish section -->
-<section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="border-bottom font600 padd heading-txt">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/airtel']" target="_blank">View All</a></span></h2>
 	<div class="container-fluid">
 			<div class="row no-margin home-product-card">
@@ -477,7 +480,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 </section>
 <!-- end here -->
 <!-- Videocon D2H section -->
-<section class="flash-deal white margin-top-order sldr-txt hide-on-mobile">
+<section class="flash-deal white margin-top-order sldr-txt">
 	<h2 class="border-bottom font600 padd heading-txt">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/videocon']" target="_blank">View All</a></span></h2>
 	<div class="container-fluid">
 		<div class="row no-margin home-product-card">
@@ -531,7 +534,22 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 </section>
 <!-- end here -->
 <!-- Reccomended For You -->
-<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt hide-on-mobile" *ngIf="this.recommended">
+<section class="white no-padding margin-top-order">
+	<div class="container-fluid">
+		<div class="row no-margin">
+		<ul class="mob-retailer-slider">
+			<li *ngFor="let banner of filter_banners('user-type')">
+			<div class="no-margin">
+				<div class="col s12 m12 l12 no-padding">
+				<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" alt="{{banner.imageAlt}}"></a>
+				</div>
+			</div>
+			</li>       
+		</ul>
+		</div>
+	</div>
+</section>
+<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt" *ngIf="this.recommended">
 		<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
 	<div class="container-fluid">
 		<div class="row no-margin home-product-card recomm">
