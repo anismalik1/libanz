@@ -16,7 +16,9 @@
                 <div class="card">
               <div class="card-content user-content">
                   <div class="user-image">
-                      <img src="{{this.todoservice.get_user_avatar()}}" class="responsive-img" alt="User-icon" width="50">
+                      <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                      <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+			                <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
                   </div>
                   <div class="user-name">
                       <span>Welcome,</span><br>
@@ -153,7 +155,7 @@
     <div class="modal-content nopadding">
       <span class="modal-close close-then"><i class="material-icons font-size-change1">close</i></span>
           <h3>Are You Sure You Want to Remove Avatar?</h3>
-          <input class="btn orange" type="button" value="Yes" (click)="remove_avatar();">
+          <input class="btn orange modal-close" type="button" value="Yes" (click)="remove_avatar();">
      </div>
   </div>
 <app-footer-min></app-footer-min>

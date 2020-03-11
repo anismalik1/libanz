@@ -221,15 +221,22 @@ loadImageFailed() {
   {
     if(this.authservice.retrieveToken())
     {
-      var data ;
-      data.token =  this.get_token();
+      var data :any = { token : this.get_token()};
       this.todoservice.remove_avatar(data)
       .subscribe(
         data => 
         {
-          if(data.status == 'true')
+          if(data.status == true)
           {
             this.toastr.successToastr('Updated ', 'Success!');
+            if(1 == 1)
+            {
+              this.router.routeReuseStrategy.shouldReuseRoute = function(){
+                return false;
+              }
+              this.router.navigated = false;	
+              this.router.navigate(['/dashboard/edit-profile']);
+            }  
           }
         }
       )  
