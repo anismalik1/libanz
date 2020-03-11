@@ -22,6 +22,7 @@ export class RechargeOrdersComponent implements OnInit {
   r_p: number = 1;
   recharge_counts : number;
   complaint_id : number;
+  go_to_complaint : number = 0;
   ranges: any = {
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -74,6 +75,28 @@ export class RechargeOrdersComponent implements OnInit {
   do_complaint(order_id)
   {
     this.complaint_id = order_id;
+    this.go_to_complaint = 0;
+    let data = {order : this.complaint_id , token : this.get_token()};
+    this.todoservice.check_complaint(data)
+		.subscribe(
+			data => 
+			{
+				this.spinner.hide();
+			  if(data.status == 'Invalid Token')
+			  {
+          this.authservice.clear_session();
+          this.router.navigate(['/proceed/login']);
+			  }
+			  if(!jQuery.isEmptyObject(data))
+			  {	
+          if(data.status == 1)		
+            this.go_to_complaint = 1;
+          else
+            this.go_to_complaint = 2;  
+        }
+      }  
+		  );
+
   }
   add_complaint(data)
   {

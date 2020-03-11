@@ -32,6 +32,8 @@ export class MobileHomeComponent implements OnInit {
   due_msg : string = 'No pending dues.';
   rechargeData : any ;
   flash_deals : any;
+  all_products : any;
+  product_ratings : any = [];
   tata_slides : any;
   dishtv_slides : any;
   videcone_slides : any;
@@ -133,6 +135,8 @@ export class MobileHomeComponent implements OnInit {
             }
             this.user_cashback = data.cashback;
             this.banners          = data.banners;
+            this.all_products    = data.products;
+            this.calculate_ratings();
             this.tata_slides      = this.filter_product('tata',data.products); 
             this.airtel_slides    = this.filter_product('airtel',data.products);  
             this.dishtv_slides    = this.filter_product('dish',data.products);  
@@ -142,7 +146,6 @@ export class MobileHomeComponent implements OnInit {
             this.init_page();
             $('#mobile').css('display','');  
             $('#select-item').css('display',''); 
-            //this.tick_deal_timer();
             this.filter_banners('Big Tv');
             this.spinner.hide();
           }
@@ -191,24 +194,36 @@ export class MobileHomeComponent implements OnInit {
 
   product_rating(product_id)
   {
+    let rate = this.product_ratings.filter(x => x.id == product_id);
+    //console.log(rate)
+    return rate;  
+  }
+
+  calculate_ratings()
+  {
     let j : any = 0;
     let rate : any = 0;
     //console.log(this.ratings);
-    for(var i = 0;i < this.ratings.length;i++)
+    for(var i = 0;i < this.all_products.length;i++)
     {
-      if(product_id == this.ratings[i].product_id)
+      for(var k = 0;k < this.ratings.length;k++)
       {
-        rate = Number(rate) + Number(this.ratings[i].reting);
-        j = Number(j) + 1;
+        if(this.all_products[i].id == this.ratings[k].product_id)
+        {
+          rate = Number(rate) + Number(this.ratings[k].reting);
+          j = Number(j) + 1;
+        }
       }
-    }
-    if(j == 0)
-      j = 1;
-    let rating = (rate/j);
-    if(rating == 0)
-      return 0;
-    else
-      return rating.toFixed(1)+'('+j+')';  
+      if(j == 0)
+        j = 1;
+      let rating = (rate/j);
+      if(rating == 0)
+        var prate =  '0';
+      else
+        var prate = rating.toFixed(1);
+      this.product_ratings.push({id : this.all_products[i].id,rate : prate, rate_count : j});
+    }  
+    //console.log(this.product_ratings);
   }
   
   filter_recommended(categories)
@@ -440,36 +455,13 @@ export class MobileHomeComponent implements OnInit {
           enableDrag: true
         });
         $('.bottom-slider').lightSlider({
-          item: 3,
-          auto: true,
-          pauseOnHover: true,
+          item: 1,
           loop: true,
-          pause: 5000,
           keyPress: true,
           controls: true,
           pager: false,
           enableDrag: true,
-          responsive: [
-            {
-              breakpoint:900,
-              settings: {
-                item:3	
-              }
-            },
-            {
-              breakpoint:600,
-              settings: {
-                item:2
-              }
-            },
-            {
-              breakpoint:380,
-              settings: {
-                item:1
-              }
-            }, 
-           
-            ],
+
         });
              
       // Hide sideNav

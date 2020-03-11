@@ -5101,3 +5101,6 @@ a.logup.modal-trigger.black-text {
     font-size: 26px;
     padding-bottom: 8px;
 }
+#name-characters {background: #d0cbcb;
+	padding: 9px 7px;
+	border-radius: 50%;}

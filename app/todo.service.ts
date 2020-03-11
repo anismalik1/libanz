@@ -165,6 +165,16 @@ export class TodoService {
     } 
     return ''; 
   }
+
+  get_user_characters()
+  {
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      return data.user.capital_chars; 
+    } 
+    return ''; 
+  }
   
   get_user_email()
   {
@@ -691,6 +701,11 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/fetch_transactions';
     return this.send_post_request(data,url) ;
   }
+  check_complaint(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/check_complaint';
+    return this.send_post_request(data,url) ;
+  }
   add_complaint(data)
   {
     let url = this.server_url+'accounts/apis/orders/add_complaint';
@@ -779,6 +794,11 @@ export class TodoService {
   add_to_favorite(data)
   {
     let url = this.server_url+'accounts/apis/product/add_to_favorite';
+    return this.send_post_request(data,url) ; 
+  }
+  remove_avatar(data)
+  {
+    let url = this.server_url+'accounts/apis/home/remove_avatar';
     return this.send_post_request(data,url) ; 
   }
 }

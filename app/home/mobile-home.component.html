@@ -312,7 +312,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	
 	<div class="container-fluid">
 		<ul class="product-slider">
-			<li *ngFor="let item of tata_slides">
+			<li *ngFor="let item of tata_slides" class="product-list-{{item.id}}">
 				<div class="row no-margin 1">
 					<div class="col s12 m4 list-{{item.id}}" >
 					<div class="product-image">
@@ -336,7 +336,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rechare-section-list">
 								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
-								<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span> </div><span class="line-ht"> &nbsp; (10)</span>
+								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
 								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
 								
@@ -388,7 +388,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rechare-section-list">
 									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-									<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div><span class="line-ht"> &nbsp; (25)</span>
+									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
 									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
 									
@@ -433,7 +433,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rechare-section-list">
 								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
-								<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div><span class="line-ht"> &nbsp; (50)</span>
+								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
 								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
 								
@@ -486,7 +486,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rechare-section-list">
 									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-									<div class="rating-green">{{product_rating(item.id)}} <span class="fa fa-star"></span></div><span class="line-ht"> &nbsp; (50)</span>
+									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
 									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
 									

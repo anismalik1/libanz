@@ -217,6 +217,24 @@ loadImageFailed() {
       )  
     }
   }
+  remove_avatar()
+  {
+    if(this.authservice.retrieveToken())
+    {
+      var data ;
+      data.token =  this.get_token();
+      this.todoservice.remove_avatar(data)
+      .subscribe(
+        data => 
+        {
+          if(data.status == 'true')
+          {
+            this.toastr.successToastr('Updated ', 'Success!');
+          }
+        }
+      )  
+    }
+  }
   update_details(formdata)
   {
     if(this.authservice.retrieveToken())

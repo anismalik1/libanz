@@ -126,7 +126,15 @@
 </div>
 <!-- <a href="#complaints" class="modal-trigger com" (click)="do_complaint(1)">Complaint</a> -->
 <div id="complaints" class="modal complaint-modal">
-  <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="add_complaint(complaintform.value)">
+    <div class="modal-content" *ngIf="go_to_complaint == 0">
+        <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+        <h3>Please Wait...</h3>
+    </div>
+    <div class="modal-content" *ngIf="go_to_complaint == 2">
+        <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+        <h3>Complaint In this Order is Already been Registered.</h3>
+    </div>      
+  <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="add_complaint(complaintform.value)" *ngIf="go_to_complaint == 1">
   <div class="modal-content">
     <h3 class="font600">Add Complaint</h3>
     <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
