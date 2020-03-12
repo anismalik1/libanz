@@ -1,746 +1,767 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
 
 
 <style>
 
-.issue-menu a.logup.modal-trigger {
-    color: #fff;
-    border-radius: 20px;
-}
-
-.rounded-btn{
-
-	border-radius:20px;
-}
-.mobile-footer-menu ul li.active span {
-    color: #ff6a00 !important;
-}
-.cst-name {
-    height: 100px;
-    width: 100px;
-	background: #ececec;
-	color:#333;
-    padding: 5px;
-	border-radius: 50%;
-	font-size:16px;
-}
-
-.phone-pay-icon li span{
-
-	font-size:20px;
-	padding-right:10px;
-}
-.phone-pay-icon li::before{
-
-	background-image:transparent;
-}
-.phone-pay-icon li a {
-	border-bottom: 1px solid #ececec;
-	padding:7px;
-}
-.phone-pay-icon li:nth-last-child(0) {
-	border-bottom:transparent
+	.issue-menu a.logup.modal-trigger {
+		color: #fff;
+		border-radius: 20px;
+	}
 	
-}
-/* .user-after-login{
-
-	background: #ececec;
-    border-radius: 50%;
-    width: 50px;
-    margin: 0px 8px 0px 0px;
-
-} */
-.mobile-footer ul li a ::before {
-    content: 'o' ;
-    color: #7d7c7c;
-    padding-right: 6px ;
-}
-@media only screen and (max-width: 767px){
-	.mobile-footer-menu ul li a span {
-    display: block;
-    color: #4d4e4e;
-}
-.mobile-footer ul li a ::before {
-    content: 'o' ;
-    color: #7d7c7c;
-    padding-right: 6px ;
-}
-.icon-cst-clr-1{
-	font-size: 18px;
-}
-#mobile-header {
-    background-color: #ff6a00;
-    padding: 15px 0px 0px 15px;
-    height: 100px;
-    color: #fff;
-}
-.hide-left-menu-mb{
-
-	display: none !important;
-}
-.dashboard-menu-mobile li {
-
-list-style-type: none;
-
-}
-.dashboard-menu-mobile li a {
-
-    list-style-type: none;
-    font-size: 15px !important;
-    padding: 7px 0px 7px 0px;
-    border-bottom: 1px solid #ececec;
-
-}
-
-}
-
-
-
-	</style>
-<!-- Header Start Here -->
-<div class="mobile-wrapper">
-	<!-- mobile header start-->
-	<div class="mobile-mask"></div>
-	<header id="mobile-header" class="clearfix">
-		<div class="mobile-header-left">
-			<ul>
-			<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
-			<li class="mobile-search">
-				<mat-form-field class="example-full-width">
-				<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px;">
-				<span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
-				 <mat-autocomplete #auto="matAutocomplete">
-						<span *ngIf="filterdList">
-						<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-							<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
-						</mat-option>
-					</span>
-					</mat-autocomplete>
-				</mat-form-field>
-			</li>
-		</ul>
-		</div>
+	.rounded-btn{
+	
+		border-radius:20px;
+	}
+	.mobile-footer-menu ul li.active span {
+		color: #ff6a00 !important;
+	}
+	.cst-name {
+		height: 100px;
+		width: 100px;
+		background: #ececec;
+		color:#333;
+		padding: 5px;
+		border-radius: 50%;
+		font-size:16px;
+	}
+	
+	.phone-pay-icon li span{
+	
+		font-size:20px;
+		padding-right:10px;
+	}
+	.phone-pay-icon li::before{
+	
+		background-image:transparent;
+	}
+	.phone-pay-icon li a {
+		border-bottom: 1px solid #ececec;
+		padding:7px;
+	}
+	.phone-pay-icon li:nth-last-child(0) {
+		border-bottom:transparent
 		
-		<div class="mobile-header-right">
-				
-			<ul>
-			<li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span></a> </li>
-			<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
-			<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">{{this.productservice.favorite_count()}}</span></li>
-			<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
-				<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
-						<li class="notificatoins-dropdown-container">
-							<ul  *ngIf="notifications  && notifications.length > 0">
-								<li *ngFor="let item of notifications;" >
-									<div class="notification-drop-image">
-										<img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" class="responsive-img">
-									</div>
-									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
-										<p [innerHTML]="item.visitor_comment"></p>
-										<time class="grey-text">{{time_ago(item.history_time)}}</time>
-									</div>
-								</li>							
-								<li><a class="modal-trigger font600" href="#loadmore-modal">Load More</a></li>
-							</ul>
-						</li>
-					</ul>
-			</li>
-		</ul>
-		</div>
-		<div id="loadmore-modal" class="modal white" style="width:100%;height:100%">
-				<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
-			<div class="modal-content">
-				<div class="modal-header">
-				<h4>Notification's</h4>
-				<div class="modal-close right-align"><i class="material-icons">close</i></div>
-				</div>
-				<ul *ngIf="notifications  && notifications.length > 0">
-				<li *ngFor="let item of notifications;" >
-				<div class="notification-drop-image">
-				<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
-				</div>
-				<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
-				<p [innerHTML]="item.visitor_comment"></p>
-				<time class="grey-text">{{time_ago(item.history_time)}}</time>
-				</div>
-				</li>
-				</ul>										
-				<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
-			</div>
-		</div>	
-		<div class="clearfix"></div>
-	</header>
+	}
+	/* .user-after-login{
 	
-	<!-- mobile header end-->
-	<!-- mobile top menu start-->	
-	<div class="mobile-top-menu">
-		<ul id="mobile-dashboard-menus" style="height:72px !important">
-			<li>
+		background: #ececec;
+		border-radius: 50%;
+		width: 50px;
+		margin: 0px 8px 0px 0px;
+	
+	} */
+	.mobile-footer ul li a ::before {
+		content: 'o' ;
+		color: #7d7c7c;
+		padding-right: 6px ;
+	}
+	@media only screen and (max-width: 767px){
+		.mobile-footer-menu ul li a span {
+		display: block;
+		color: #4d4e4e;
+	}
+	.mobile-footer ul li a ::before {
+		content: 'o' ;
+		color: #7d7c7c;
+		padding-right: 6px ;
+	}
+	.icon-cst-clr-1{
+		font-size: 18px;
+	}
+	#mobile-header {
+		background-color: #ff6a00;
+		padding: 15px 0px 0px 15px;
+		height: 100px;
+		color: #fff;
+	}
+	.hide-left-menu-mb{
+	
+		display: none !important;
+	}
+	.dashboard-menu-mobile li {
+	
+	list-style-type: none;
+	
+	}
+	.dashboard-menu-mobile li a {
+	
+		list-style-type: none;
+		font-size: 15px !important;
+		padding: 7px 0px 7px 0px;
+		border-bottom: 1px solid #ececec;
+	
+	}
+	
+	}
+	@media only screen and (max-width: 767px){
+	.mobile-header-right ul li {
+		margin-right:18px !important;
+		cursor: pointer;
+	}
+	.mobile-header-right span.noti-circle {
+		width: 18px !important;
+		height: 18px !important;;
+		background: #fff;
+		display: block;
+		color: #000;
+		border-radius: 50%;
+		line-height: 22px;
+		position: absolute;
+		top: -7px;
+		right: -11px !important;;
+		text-align: center;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	}
+	
+	
+	
+		</style>
+	<!-- Header Start Here -->
+	<div class="mobile-wrapper">
+		<!-- mobile header start-->
+		<div class="mobile-mask"></div>
+		<header id="mobile-header" class="clearfix">
+			<div class="mobile-header-left">
 				<ul>
-					<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span> Pay </a></li>
-					<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
-					<li><a [routerLink]="['/dashboard/orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
-					<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
-					
-				</ul>
-			</li>
-		</ul>
-	</div>
-	
-	<!-- mobile top menu end-->
-	
-	<div class="mobile-footer-menu">
-		<ul>
-			<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="fa fa-home" style="font-size:18px;"></span><span class="mobile-footer-text">Home</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"></span><span class="mobile-footer-text">Products</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="fa fa-gift" style="font-size:18px;"></span><span class="mobile-footer-text">Packages</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-question-circle" style="font-size:18px;"></span><span class="mobile-footer-text">FAQS</span></a></li>
-			<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger </span></a></li>
-		</ul>
-	</div>
-	
-</div>
-	<div class="side-menu" id="mobile-side-menu">
-		<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
-			<div class="side-profile-details">
-			<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-			
-			<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-			<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-				<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
-			<p>{{this.todoservice.get_user_phone()}}</p>
-			<div class="clearfix"></div>
-			</div>
-			<div class="wallet-mobile">
-				<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
-			</div>
-
-			<ul class="dashboard-menu-mobile">
-				<li><a [routerLink]="['/dashboard']"> <span class="fa fa-tachometer"></span>  &nbsp; Dashboard </a></li>
-				<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Recharge </a></li>
-				<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders </a></li>
-			   
-				<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><span class="fa fa-envelope"></span> &nbsp;  Value Transfer</a></li>
-		  
-				<!-- <li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><span class="fa fa-gift"></span> &nbsp;  Manage Retailer </a></li> -->
-				
-				<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Complaint Box </a></li>
-		  
-				<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money </a></li>
-		  
-				<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Topup Request </a></li>
-				<!-- <li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li> -->
-					<!-- <li><a [routerLink]="['/dashboard/commission-structure']"><span class="fa fa-sitemap"></span> Commission </a></li> -->
-					<!-- <li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li> -->
-					
-					
-					<!-- <li><a href="#"><span class="fa fa-language"></span> My Language </a></li> -->
-					
-				
-					<!-- <li><a href="#"><span class="fa fa-lock"></span> Enable Screen Lock </a></li> -->
-				
-					<!-- <li><a href="#"><span class="fa fa-check"></span> KYC Verify </a></li> -->
-					<!-- <li><a [routerLink]="['/dashboard/complaints']"><span class="fa fa-envelope"></span> complaints </a></li> -->
-
-		  
-				<li *ngIf="this.todoservice.get_user_type() == 2"><a routerLink="/dashboard/commission-structure" routerLinkActive="active" class="font-size-change"> <span class="fa fa-sitemap"></span> &nbsp;  Commission Structure </a></li>
-		  
-				<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History </a></li>
-		  
-		  
-				<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Account </a></li>
-				
+				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
+				<li class="mobile-search">
+					<mat-form-field class="example-full-width">
+					<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px;">
+					<span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
+					 <mat-autocomplete #auto="matAutocomplete">
+							<span *ngIf="filterdList">
+							<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
+								<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
+							</mat-option>
+						</span>
+						</mat-autocomplete>
+					</mat-form-field>
+				</li>
 			</ul>
-			<ul class="logout">	
-				
-				<li><a [routerLink]="['/logout']">Logout</a></li>
-			</ul>		
-			
-		</div>
-		<div class="side-menu-body">
-			<div class="login-section" >
-				<!-- <h3>Navigation Menu</h3>
-				<a routerLink="/proceed/login" class="btn waves-effect waves-light orange rounded-btn" type="button">Login</a>
-				<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
-				 -->
-			<ul class="phone-pay-icon"  *ngIf="this.todoservice.get_user_name() == ''">	
-					<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up </a></li>
-					<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login </a></li>
-			</ul>		
-			<ul class="phone-pay-icon">	
-				<li>
-					<select class="form-control">
-						<option>My Information</option>
-						<option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></option>
-						<option>Option</option>
-						<option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></option>
-						<option><a [routerLink]="['/p/24-7']">Help & Support </a></option>
-						<option> <a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></option>
-						<option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></option>
-						<option><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></option>
-						<option><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></option>
-						<option><a [routerLink]="['/blog/all']">Blog</a></option>
-						<option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></option>
-						
-					</select>
-				</li>
-
-				<li>
-					<select class="form-control">
-						<option>All Product Packages</option>
-						<option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></option>
-						<option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></option>
-						<option><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></option>
-						<option><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></option>
-				
-					</select>
-				</li>
-				<li>
-					<select class="form-control">
-						<option>Categories</option>
-						<option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></option>
-						<option><a [routerLink]="['/product/listing/videocon']">Videocon</a></option>
-						<option><a [routerLink]="['/product/listing/airtel']">Airtel</a></option>
-						<option><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></option>
-						<option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></option>
-						<option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></option>
-						<option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></option>
-				
-					</select>
-				</li>
-				
-			</ul>	
 			</div>
 			
-		<h3 class="hide-left-menu-mb">Information</h3>	
-			<ul class="information hide-left-menu-mb">	
-				<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
-				<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
-				<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
-				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
-				<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
-				<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
-				<li><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></li>
-				<li><a [routerLink]="['/blog/all']">Blog</a></li>
-				<li><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></li>
-			
-			</ul>	
-		
-		<h3 class="hide-left-menu-mb">Categories</h3>
-			<ul class="mb-menu-txt category-txt hide-left-menu-mb">	
-				<li><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></li>
-				<li><a [routerLink]="['/product/listing/videocon']">Videocon</a></li>
-				<li><a [routerLink]="['/product/listing/airtel']">Airtel</a></li>
-				<li><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></li>
-				<li><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></li>
-				<li><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></li>
-				<li><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></li>
-			</ul>	
-		<ul class="product-txt hide-left-menu-mb">	
-			<h3>All Product Packages</h3>
-			<li><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages</a></li>
-			<li><a [routerLink]="['/package-list/airtel']">Airtel Packages</a></li>
-			<li><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></li>
-			<li><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></li>
-		</ul>	
-		
-		<h3 class="hide-left-menu-mb">Follow Us</h3>
-		<ul class="side-social hide-left-menu-mb">	
-			<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/facebook1.png" /></a></li>
-			<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
-			<li><a href="https://twitter.com/mydthshop"><img src="{{this.todoservice.base_url}}assets/images/twitter.png" /></a></li>
-			<li><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA"><img src="{{this.todoservice.base_url}}assets/images/youtube.png" /></a></li>
-			<li><a href="https://in.pinterest.com/jain2221/pins/"><img src="{{this.todoservice.base_url}}assets/images/pinterest.png" /></a></li>
-			<li><a href="https://www.instagram.com/mydthshopindia/"><img src="{{this.todoservice.base_url}}assets/images/instagram.png" /></a></li>
-			<li><a href="https://mydthshopp.blogspot.com/"><img src="{{this.todoservice.base_url}}assets/images/blogger.png" /></a></li>
-		</ul>	
-						
-		</div>
-	</div>
-		
-<!--########################## mobile menu #############################-->
-<header class="navigation header">
-	<div class="header-strip grey lighten-3">
-		<div class="container">
-			<div class="strip-right-text left google-translater">
-				<div id="google_translate_element"></div>
-			</div>
-			<div class="strip-right-text right">
-				<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
-				<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant on Mydth</a> |</span>
-				<span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span>
-				<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank">Testimonial</a> |</span>
-				<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">FAQ </a> |</span>
-				<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank">Blog</a> |</span>
-				<span><a href="javascript:void(0);" class="grey-text"> KYC</a> |</span>
-				<span><a class="grey-text" [routerLink]="['/p/24-7']" target="_blank">24x7 support</a></span>
-				
-			</div>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-		<div class="container">
-			<nav>
-			<div class="nav-wrapper" id="primary-nav">										
-				<a routerLink="/" href="javascript:" class="brand-logo">
-					<img src="https://mydthshop.com/accounts/assets/img/logo.png" class="responsive-img" alt="Mydthshop Logo">			
-				</a>
-			
-				
-			  <ul id="nav-mobile" class="mar inline-block">		        
-				<li class="search-input" >
-					<form >
-						  <div class="row no-margin">
-							<div class="input-field col s12" >
-								<div class="search-box" *ngIf="!href.includes('/help/faqs')">
-										<button type="submit" class="btn-flat"><i class="material-icons white-text">search</i></button>
-										<mat-form-field class="example-full-width test1">
-											<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
-											<mat-autocomplete #auto="matAutocomplete">
-												<span *ngIf="filterdList">
-												<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-													<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
-												</mat-option>
-											</span>
-											</mat-autocomplete>
-										</mat-form-field>
-								</div>
-							</div>
-						  </div>
-						</form>
-				</li>
-				<li *ngIf="href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
-				<li class="craft relative">
-					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
-					<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a>
-				</li>
-			
-				<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
-					<a routerLink="/product/favorites"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
-				</li>	
+			<div class="mobile-header-right">
 					
-				<li class="craft relative" >
-					<a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
-					<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
-						<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
-					</ul> -->
-					<ul id="dropdown-notice" class="dropdown-content notifications-dropdown">
-						<li class="notificatoins-dropdown-container">
-							<ul class="notification-drop-ul" *ngIf="notifications  && notifications.length > 0">
-								<li *ngFor="let item of notifications;">
-									<div class="notification-drop-image">
-										<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
-									</div>
-									<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
-										<p [innerHTML]="item.visitor_comment"></p>
-										<time class="grey-text">{{time_ago(item.history_time)}}</time>
-									</div>
-								</li>							
-								<li><a class="modal-trigger font600" data-target="loadmore-modal2" href="#loadmore-modal2">Load More</a></li>
-							</ul>
-						</li>
+				<ul>
+				<li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span></a> </li>
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">{{this.productservice.favorite_count()}}</span></li>
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
+					<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
+							<li class="notificatoins-dropdown-container">
+								<ul  *ngIf="notifications  && notifications.length > 0">
+									<li *ngFor="let item of notifications;" >
+										<div class="notification-drop-image">
+											<img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" class="responsive-img">
+										</div>
+										<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
+											<p [innerHTML]="item.visitor_comment"></p>
+											<time class="grey-text">{{time_ago(item.history_time)}}</time>
+										</div>
+									</li>							
+									<li><a class="modal-trigger font600" href="#loadmore-modal">Load More</a></li>
+								</ul>
+							</li>
+						</ul>
+				</li>
+			</ul>
+			</div>
+			<div id="loadmore-modal" class="modal white" style="width:100%;height:100%">
+					<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
+				<div class="modal-content">
+					<div class="modal-header">
+					<h4>Notification's</h4>
+					<div class="modal-close right-align"><i class="material-icons">close</i></div>
+					</div>
+					<ul *ngIf="notifications  && notifications.length > 0">
+					<li *ngFor="let item of notifications;" >
+					<div class="notification-drop-image">
+					<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+					</div>
+					<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
+					<p [innerHTML]="item.visitor_comment"></p>
+					<time class="grey-text">{{time_ago(item.history_time)}}</time>
+					</div>
+					</li>
+					</ul>										
+					<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
+				</div>
+			</div>	
+			<div class="clearfix"></div>
+		</header>
+		
+		<!-- mobile header end-->
+		<!-- mobile top menu start-->	
+		<div class="mobile-top-menu">
+			<ul id="mobile-dashboard-menus" style="height:72px !important">
+				<li>
+					<ul>
+						<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span> Pay </a></li>
+						<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
+						<li><a [routerLink]="['/dashboard/orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
+						<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
 						
 					</ul>
 				</li>
-				</ul>
-				<div id="loadmore-modal2" class="modal white" style="width:40%;height:100%">
-						<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
-						<div class="modal-content">
-						<div class="modal-header">
-						<h4>Notification's</h4>
-						<div class="modal-close right-align"><i class="material-icons">close</i></div>
-						</div>
-						<ul *ngIf="notifications  && notifications.length > 0">
-						<li *ngFor="let item of notifications;" >
-						<div class="notification-drop-image">
-						<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
-						</div>
-						<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
-						<p [innerHTML]="item.visitor_comment"></p>
-						<time class="grey-text">{{time_ago(item.history_time)}}</time>
-						</div>
-						</li>
-						
-						</ul>										
-						<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
-						</div>
-						</div>
-			  <ul id="nav-mobile" class="inline-block log-sig right">
-				<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Log In/Sign Up </a></li>
+			</ul>
+		</div>
+		
+		<!-- mobile top menu end-->
+		
+		<div class="mobile-footer-menu">
+			<ul>
+				<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="fa fa-home" style="font-size:18px;"></span><span class="mobile-footer-text">Home</span></a></li>
+				<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="icon-products"></span><span class="mobile-footer-text">Products</span></a></li>
+				<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="fa fa-gift" style="font-size:18px;"></span><span class="mobile-footer-text">Packages</span></a></li>
+				<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-question-circle" style="font-size:18px;"></span><span class="mobile-footer-text">FAQS</span></a></li>
+				<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger </span></a></li>
+			</ul>
+		</div>
+		
+	</div>
+		<div class="side-menu" id="mobile-side-menu">
+			<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
+				<div class="side-profile-details">
+				<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
 				
-				<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> 
-					<img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a>
-				</li>
-				<!-- <li>
-					<span class="cst-name">RG</span>
-				</li> -->
-				<li id="user-nav">
-					<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
-						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-						<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
-						<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-					</a>
-				</li>
-			  </ul>
-			</div>
-		  </nav>		        
-		</div>		
+				<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+				<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+					<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
+				<p>{{this.todoservice.get_user_phone()}}</p>
+				<div class="clearfix"></div>
+				</div>
+				<div class="wallet-mobile">
+					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
+				</div>
+	
+				<ul class="dashboard-menu-mobile">
+					<li><a [routerLink]="['/dashboard']"> <span class="fa fa-tachometer"></span>  &nbsp; Dashboard </a></li>
+					<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Recharge </a></li>
+					<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders </a></li>
+				   
+					<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><span class="fa fa-envelope"></span> &nbsp;  Value Transfer</a></li>
+			  
+					<!-- <li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><span class="fa fa-gift"></span> &nbsp;  Manage Retailer </a></li> -->
 					
-</header>
-<!-- End Here -->
-<!-- Login Modal -->
-<div id="login-modal" class="modal">
-	<div class="modal-content no-padding">
-		<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
-		<div class="row no-margin">
-			<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url(https://www.mydthshop.com/web-app/assets/images/login-banner.jpg);background-size: cover;">
-				<div class="login-modal">
-					<div class="padd-rem1 login-text" *ngIf="signup != 1">
-						<h2 class="black-text no-margin">LOGIN</h2>
-						<p class="black-text font-size-change1">Welcome Back to Mydthshop, We make sure you enjoy our services!!</p>
-					</div>
-					<div class="padd-rem1 signup-text" *ngIf="signup == 1">
-						<h2 class="black-text no-margin">SIGN UP</h2>
-						<p class="black-text font-size-change1">The whole part is just after your registration!!</p>
-					</div>
+					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Complaint Box </a></li>
+			  
+					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money </a></li>
+			  
+					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Topup Request </a></li>
+					<!-- <li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li> -->
+						<!-- <li><a [routerLink]="['/dashboard/commission-structure']"><span class="fa fa-sitemap"></span> Commission </a></li> -->
+						<!-- <li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li> -->
+						
+						
+						<!-- <li><a href="#"><span class="fa fa-language"></span> My Language </a></li> -->
+						
+					
+						<!-- <li><a href="#"><span class="fa fa-lock"></span> Enable Screen Lock </a></li> -->
+					
+						<!-- <li><a href="#"><span class="fa fa-check"></span> KYC Verify </a></li> -->
+						<!-- <li><a [routerLink]="['/dashboard/complaints']"><span class="fa fa-envelope"></span> complaints </a></li> -->
+	
+			  
+					<li *ngIf="this.todoservice.get_user_type() == 2"><a routerLink="/dashboard/commission-structure" routerLinkActive="active" class="font-size-change"> <span class="fa fa-sitemap"></span> &nbsp;  Commission Structure </a></li>
+			  
+					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History </a></li>
+			  
+			  
+					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Account </a></li>
+					
+				</ul>
+				<ul class="logout">	
+					
+					<li><a [routerLink]="['/logout']">Logout</a></li>
+				</ul>		
+				
+			</div>
+			<div class="side-menu-body">
+				<div class="login-section" >
+					<!-- <h3>Navigation Menu</h3>
+					<a routerLink="/proceed/login" class="btn waves-effect waves-light orange rounded-btn" type="button">Login</a>
+					<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
+					 -->
+				<ul class="phone-pay-icon"  *ngIf="this.todoservice.get_user_name() == ''">	
+						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up </a></li>
+						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login </a></li>
+				</ul>		
+				<ul class="phone-pay-icon">	
+					<li>
+						<select class="form-control">
+							<option>My Information</option>
+							<option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></option>
+							<option>Option</option>
+							<option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></option>
+							<option><a [routerLink]="['/p/24-7']">Help & Support </a></option>
+							<option> <a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></option>
+							<option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></option>
+							<option><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></option>
+							<option><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></option>
+							<option><a [routerLink]="['/blog/all']">Blog</a></option>
+							<option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></option>
+							
+						</select>
+					</li>
+	
+					<li>
+						<select class="form-control">
+							<option>All Product Packages</option>
+							<option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></option>
+							<option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></option>
+							<option><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></option>
+							<option><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></option>
+					
+						</select>
+					</li>
+					<li>
+						<select class="form-control">
+							<option>Categories</option>
+							<option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></option>
+							<option><a [routerLink]="['/product/listing/videocon']">Videocon</a></option>
+							<option><a [routerLink]="['/product/listing/airtel']">Airtel</a></option>
+							<option><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></option>
+							<option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></option>
+							<option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></option>
+							<option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></option>
+					
+						</select>
+					</li>
+					
+				</ul>	
+				</div>
+				
+			<h3 class="hide-left-menu-mb">Information</h3>	
+				<ul class="information hide-left-menu-mb">	
+					<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
+					<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
+					<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
+					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
+					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
+					<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
+					<li><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></li>
+					<li><a [routerLink]="['/blog/all']">Blog</a></li>
+					<li><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></li>
+				
+				</ul>	
+			
+			<h3 class="hide-left-menu-mb">Categories</h3>
+				<ul class="mb-menu-txt category-txt hide-left-menu-mb">	
+					<li><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></li>
+					<li><a [routerLink]="['/product/listing/videocon']">Videocon</a></li>
+					<li><a [routerLink]="['/product/listing/airtel']">Airtel</a></li>
+					<li><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></li>
+					<li><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></li>
+					<li><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></li>
+					<li><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></li>
+				</ul>	
+			<ul class="product-txt hide-left-menu-mb">	
+				<h3>All Product Packages</h3>
+				<li><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages</a></li>
+				<li><a [routerLink]="['/package-list/airtel']">Airtel Packages</a></li>
+				<li><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></li>
+				<li><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></li>
+			</ul>	
+			
+			<h3 class="hide-left-menu-mb">Follow Us</h3>
+			<ul class="side-social hide-left-menu-mb">	
+				<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/facebook1.png" /></a></li>
+				<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
+				<li><a href="https://twitter.com/mydthshop"><img src="{{this.todoservice.base_url}}assets/images/twitter.png" /></a></li>
+				<li><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA"><img src="{{this.todoservice.base_url}}assets/images/youtube.png" /></a></li>
+				<li><a href="https://in.pinterest.com/jain2221/pins/"><img src="{{this.todoservice.base_url}}assets/images/pinterest.png" /></a></li>
+				<li><a href="https://www.instagram.com/mydthshopindia/"><img src="{{this.todoservice.base_url}}assets/images/instagram.png" /></a></li>
+				<li><a href="https://mydthshopp.blogspot.com/"><img src="{{this.todoservice.base_url}}assets/images/blogger.png" /></a></li>
+			</ul>	
+							
+			</div>
+		</div>
+			
+	<!--########################## mobile menu #############################-->
+	<header class="navigation header">
+		<div class="header-strip grey lighten-3">
+			<div class="container">
+				<div class="strip-right-text left google-translater">
+					<div id="google_translate_element"></div>
+				</div>
+				<div class="strip-right-text right">
+					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
+					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant on Mydth</a> |</span>
+					<span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span>
+					<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank">Testimonial</a> |</span>
+					<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">FAQ </a> |</span>
+					<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank">Blog</a> |</span>
+					<span><a href="javascript:void(0);" class="grey-text"> KYC</a> |</span>
+					<span><a class="grey-text" [routerLink]="['/p/24-7']" target="_blank">24x7 support</a></span>
+					
 				</div>
 			</div>
-			<div class="col s12 m8 white"> 
-				<div class="tabs-sign-up">
-					<ul id="tabs-swipe-demo" class="tabs">
-						<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to MyDthShop</a></li>
-						<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
-					</ul>
-					<div id="login" class="col s12">
-						<div class="login" *ngIf="step == 1">
-						<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix margin-top-cart2">phone</i>
-										<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
-										<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
-										<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
+			<div class="clearfix"></div>
+		</div>
+			<div class="container">
+				<nav>
+				<div class="nav-wrapper" id="primary-nav">										
+					<a routerLink="/" href="javascript:" class="brand-logo">
+						<img src="https://mydthshop.com/accounts/assets/img/logo.png" class="responsive-img" alt="Mydthshop Logo">			
+					</a>
+				
+					
+				  <ul id="nav-mobile" class="mar inline-block">		        
+					<li class="search-input" >
+						<form >
+							  <div class="row no-margin">
+								<div class="input-field col s12" >
+									<div class="search-box" *ngIf="!href.includes('/help/faqs')">
+											<button type="submit" class="btn-flat"><i class="material-icons white-text">search</i></button>
+											<mat-form-field class="example-full-width test1">
+												<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
+												<mat-autocomplete #auto="matAutocomplete">
+													<span *ngIf="filterdList">
+													<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
+														<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
+													</mat-option>
+												</span>
+												</mat-autocomplete>
+											</mat-form-field>
 									</div>
-								
-								<div class="input-field col s12 forget-click">
-									<i class="material-icons prefix margin-top-cart2">lock</i>
-									<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
-									<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
 								</div>
-								<div class="col s12 m6">
-									<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
-								<label for="remember-me">Remember Me</label>
-								</div>
-								<div class="col s12 m6 right-align">
-									<span class="tab"><a routerLink="/proceed/forgot-password" class="orange-text font-size-change">Forgot Password?</a></span>
-								</div>
-								<div class="col s12 center margin-top">
-									<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
-								</div>
-							</div>
+							  </div>
+							</form>
+					</li>
+					<li *ngIf="href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
+					<li class="craft relative">
+						<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
+						<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a>
+					</li>
+				
+					<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
+						<a routerLink="/product/favorites"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
+					</li>	
+						
+					<li class="craft relative" >
+						<a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
+						<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
+							<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
+						</ul> -->
+						<ul id="dropdown-notice" class="dropdown-content notifications-dropdown">
+							<li class="notificatoins-dropdown-container">
+								<ul class="notification-drop-ul" *ngIf="notifications  && notifications.length > 0">
+									<li *ngFor="let item of notifications;">
+										<div class="notification-drop-image">
+											<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+										</div>
+										<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
+											<p [innerHTML]="item.visitor_comment"></p>
+											<time class="grey-text">{{time_ago(item.history_time)}}</time>
+										</div>
+									</li>							
+									<li><a class="modal-trigger font600" data-target="loadmore-modal2" href="#loadmore-modal2">Load More</a></li>
+								</ul>
+							</li>
 							
-						</form>
+						</ul>
+					</li>
+					</ul>
+					<div id="loadmore-modal2" class="modal white" style="width:40%;height:100%">
+							<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
+							<div class="modal-content">
+							<div class="modal-header">
+							<h4>Notification's</h4>
+							<div class="modal-close right-align"><i class="material-icons">close</i></div>
+							</div>
+							<ul *ngIf="notifications  && notifications.length > 0">
+							<li *ngFor="let item of notifications;" >
+							<div class="notification-drop-image">
+							<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+							</div>
+							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
+							<p [innerHTML]="item.visitor_comment"></p>
+							<time class="grey-text">{{time_ago(item.history_time)}}</time>
+							</div>
+							</li>
+							
+							</ul>										
+							<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
+							</div>
+							</div>
+				  <ul id="nav-mobile" class="inline-block log-sig right">
+					<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Log In/Sign Up </a></li>
+					
+					<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> 
+						<img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span></a>
+					</li>
+					<!-- <li>
+						<span class="cst-name">RG</span>
+					</li> -->
+					<li id="user-nav">
+						<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
+							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+							<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
+							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+						</a>
+					</li>
+				  </ul>
+				</div>
+			  </nav>		        
+			</div>		
+						
+	</header>
+	<!-- End Here -->
+	<!-- Login Modal -->
+	<div id="login-modal" class="modal">
+		<div class="modal-content no-padding">
+			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
+			<div class="row no-margin">
+				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url(https://www.mydthshop.com/web-app/assets/images/login-banner.jpg);background-size: cover;">
+					<div class="login-modal">
+						<div class="padd-rem1 login-text" *ngIf="signup != 1">
+							<h2 class="black-text no-margin">LOGIN</h2>
+							<p class="black-text font-size-change1">Welcome Back to Mydthshop, We make sure you enjoy our services!!</p>
 						</div>
-						<div class="otp-step margin-top1" *ngIf="step == 2">
-							<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
-							<div class="upper-text center">
-								<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-								<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-							</div> 
-							<div class="row">
-								<div class="input-field col s12 center otp-inputa" id="inputs">
-										<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-										<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-										<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-										<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
-								</div>
-								<div class="col s12 center margin-top">
-									<span class="font-size-change1">Don't recieve OTP </span>
-									<!-- <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span> -->
-									<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp()" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button>
-								</div>			
-							</div>
-							<div class="row">
-								<div class="col s12 center">
-									<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
-									<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
-								</div>
-							</div>
-						</form>
+						<div class="padd-rem1 signup-text" *ngIf="signup == 1">
+							<h2 class="black-text no-margin">SIGN UP</h2>
+							<p class="black-text font-size-change1">The whole part is just after your registration!!</p>
 						</div>
 					</div>
-					<div id="signup" class="col s12">
-						<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
-							<div class="col s12 border-every">
-								<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
-									<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
-									<span class="font-size-change1 font600">Become a User</span>
-								</a>
-							</div>
-							<div class="col s12  center or-for-span">
-								<span class="font-size-change relative">OR</span>
-							</div>
-							<div class="col s12  border-every">
-								<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
-									<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
-									<span class="font-size-change1 font600">Become a Retailer</span>
-								</a>
-							</div>
-						</div>
-						<div id="stepep2" *ngIf="signup == 1">
-							<div *ngIf="signupverify == 0">
-							<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
+				</div>
+				<div class="col s12 m8 white"> 
+					<div class="tabs-sign-up">
+						<ul id="tabs-swipe-demo" class="tabs">
+							<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to MyDthShop</a></li>
+							<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
+						</ul>
+						<div id="login" class="col s12">
+							<div class="login" *ngIf="step == 1">
+							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
 								<div class="row">
 									<div class="input-field col s12">
-										<i class="material-icons prefix margin-top-cart2">person</i>
-										<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
-										<label for="name">Enter Name*</label>
-										<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
-											<span class="red-text ">*Name is Required.</span>
-										</div>
-									</div>
-									<div class="input-field col s6">
 										<i class="material-icons prefix margin-top-cart2">phone</i>
-										<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
-										<label for="phn_number">Phone Number*</label>
-										<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
-											<span class="red-text"> Phone Number is not valid.</span>
+											<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
+											<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
+											<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
 										</div>
-									</div>
-									<div class="input-field col s6">
-										<i class="material-icons prefix margin-top-cart2">mail</i>
-										<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
-										<label for="enter_email">Enter Email</label>
-										<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
-											<span class="red-text"> Email is not valid.</span>
-										</div>
-									</div>
-									<div class="input-field col s6">
-										<i class="material-icons prefix margin-top-cart2">lock</i>
-										<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
-										<label for="enter_passcode">Enter Password</label>
-										<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
-											<span class="red-text">Password is Required.</span> 
-										</div>
-									</div>
-									<div class="input-field col s6">
-										<i class="material-icons prefix margin-top-cart2">lock</i>
-										<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
-										<label for="confirm_passcode">Confirm Password</label>
-										<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
-											<span class="red-text">Check Confirm Password.</span>
-										</div>
-									</div>
-									<div class="col s12 m6">
-										<p>
-											<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
-											<label for="test1">Become User</label>
-										</p>
-									</div>
-									<div class="col s12 m6">
-										<p>
-											<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
-											<label for="test2">Become Merchant</label>
-										</p>
-									</div>
-									<!-- <div class="col s12 m6">
-										<p>
-											<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
-											<label for="test3">Become Partner</label>
-										</p>
-									</div> -->
 									
+									<div class="input-field col s12 forget-click">
+										<i class="material-icons prefix margin-top-cart2">lock</i>
+										<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
+										<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
+									</div>
+									<div class="col s12 m6">
+										<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
+									<label for="remember-me">Remember Me</label>
+									</div>
+									<div class="col s12 m6 right-align">
+										<span class="tab"><a routerLink="/proceed/forgot-password" class="orange-text font-size-change">Forgot Password?</a></span>
+									</div>
 									<div class="col s12 center margin-top">
-										<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
-										<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
+										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
+									</div>
+								</div>
+								
+							</form>
+							</div>
+							<div class="otp-step margin-top1" *ngIf="step == 2">
+								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
+								<div class="upper-text center">
+									<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
+									<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+								</div> 
+								<div class="row">
+									<div class="input-field col s12 center otp-inputa" id="inputs">
+											<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
+											<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
+											<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+											<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+									</div>
+									<div class="col s12 center margin-top">
+										<span class="font-size-change1">Don't recieve OTP </span>
+										<!-- <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span> -->
+										<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp()" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button>
+									</div>			
+								</div>
+								<div class="row">
+									<div class="col s12 center">
+										<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
+										<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
 									</div>
 								</div>
 							</form>
-							</div>	
-							<div class="otp-step margin-top1" *ngIf="signupverify == 1">
-									<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
-									<div class="upper-text center">
-										<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-										<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-									</div>
+							</div>
+						</div>
+						<div id="signup" class="col s12">
+							<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
+								<div class="col s12 border-every">
+									<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
+										<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
+										<span class="font-size-change1 font600">Become a User</span>
+									</a>
+								</div>
+								<div class="col s12  center or-for-span">
+									<span class="font-size-change relative">OR</span>
+								</div>
+								<div class="col s12  border-every">
+									<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
+										<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
+										<span class="font-size-change1 font600">Become a Retailer</span>
+									</a>
+								</div>
+							</div>
+							<div id="stepep2" *ngIf="signup == 1">
+								<div *ngIf="signupverify == 0">
+								<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
 									<div class="row">
-										<div class="input-field col s12 center otp-inputa" id="inputs">
-												<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-												<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-												<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-												<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+										<div class="input-field col s12">
+											<i class="material-icons prefix margin-top-cart2">person</i>
+											<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
+											<label for="name">Enter Name*</label>
+											<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
+												<span class="red-text ">*Name is Required.</span>
+											</div>
 										</div>
+										<div class="input-field col s6">
+											<i class="material-icons prefix margin-top-cart2">phone</i>
+											<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
+											<label for="phn_number">Phone Number*</label>
+											<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
+												<span class="red-text"> Phone Number is not valid.</span>
+											</div>
+										</div>
+										<div class="input-field col s6">
+											<i class="material-icons prefix margin-top-cart2">mail</i>
+											<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
+											<label for="enter_email">Enter Email</label>
+											<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
+												<span class="red-text"> Email is not valid.</span>
+											</div>
+										</div>
+										<div class="input-field col s6">
+											<i class="material-icons prefix margin-top-cart2">lock</i>
+											<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
+											<label for="enter_passcode">Enter Password</label>
+											<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
+												<span class="red-text">Password is Required.</span> 
+											</div>
+										</div>
+										<div class="input-field col s6">
+											<i class="material-icons prefix margin-top-cart2">lock</i>
+											<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
+											<label for="confirm_passcode">Confirm Password</label>
+											<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
+												<span class="red-text">Check Confirm Password.</span>
+											</div>
+										</div>
+										<div class="col s12 m6">
+											<p>
+												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
+												<label for="test1">Become User</label>
+											</p>
+										</div>
+										<div class="col s12 m6">
+											<p>
+												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
+												<label for="test2">Become Merchant</label>
+											</p>
+										</div>
+										<!-- <div class="col s12 m6">
+											<p>
+												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
+												<label for="test3">Become Partner</label>
+											</p>
+										</div> -->
+										
 										<div class="col s12 center margin-top">
-											<span class="font-size-change1">Don't recieve OTP 
-											<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
-										</div>			
-									</div>
-									<div class="row">
-										<div class="col s12 center">
-											<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
-											<button type="Submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
+											<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
 										</div>
 									</div>
 								</form>
-							</div>
-					</div>
-				</div>
-				<!-- <div id="forget-password" class="col s12 hide">
-					<div class="login">
-						<form class="login-step">
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix margin-top-cart2">email</i>
-										<input id="icon_prefix" type="number" class="validate">
-										<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
-										
-									</div>
-								<div class="col s12 center margin-top">
-									<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
+								</div>	
+								<div class="otp-step margin-top1" *ngIf="signupverify == 1">
+										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
+										<div class="upper-text center">
+											<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
+											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+										</div>
+										<div class="row">
+											<div class="input-field col s12 center otp-inputa" id="inputs">
+													<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
+													<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
+													<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+													<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+											</div>
+											<div class="col s12 center margin-top">
+												<span class="font-size-change1">Don't recieve OTP 
+												<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+											</div>			
+										</div>
+										<div class="row">
+											<div class="col s12 center">
+												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
+												<button type="Submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
+											</div>
+										</div>
+									</form>
 								</div>
-							</div>
-						</form>
+						</div>
 					</div>
-				</div> -->
+					<!-- <div id="forget-password" class="col s12 hide">
+						<div class="login">
+							<form class="login-step">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix margin-top-cart2">email</i>
+											<input id="icon_prefix" type="number" class="validate">
+											<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
+											
+										</div>
+									<div class="col s12 center margin-top">
+										<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-<!-- End Here -->
-<!-- Side Navigation -->
-<ul id="slide-out" class="side-nav">
-	<div class="user-view no-padding">
-			<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login / Sign Up</a></li>
+	</div>
+	<!-- End Here -->
+	<!-- Side Navigation -->
+	<ul id="slide-out" class="side-nav">
+		<div class="user-view no-padding">
+				<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login / Sign Up</a></li>
+			</div>
+		<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
+			<ul>
+				<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
+					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/></a>
+				<li class="inline-block user-after-login-text">
+					<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''">{{this.todoservice.get_user_name()}}</p>
+					<span >{{this.todoservice.get_user_phone()}}</span>
+				</li>
+			</ul>
 		</div>
-	<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
-		<ul>
-			<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
-				<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-				<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/></a>
-			<li class="inline-block user-after-login-text">
-				<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''">{{this.todoservice.get_user_name()}}</p>
-				<span >{{this.todoservice.get_user_phone()}}</span>
-			</li>
-		</ul>
-	</div>
-	<li><div class="divider another-balance"></div></li>
-	<div class="user-detail grey lighten-4 another-balance" *ngIf="this.todoservice.user.storage">
-		<ul>
-			<li class="inline-block"><span class="font-size-change">Balance</span></li>
-			<li class="inline-block right"><span class="font-size-change"><i class="icon-inr"></i>{{this.todoservice.user.storage.wallet}}</span></li>
-		</ul>
-	</div>
-	<li><div class="divider"></div></li>
-	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
-	<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
-	<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
+		<li><div class="divider another-balance"></div></li>
+		<div class="user-detail grey lighten-4 another-balance" *ngIf="this.todoservice.user.storage">
+			<ul>
+				<li class="inline-block"><span class="font-size-change">Balance</span></li>
+				<li class="inline-block right"><span class="font-size-change"><i class="icon-inr"></i>{{this.todoservice.user.storage.wallet}}</span></li>
+			</ul>
+		</div>
+		<li><div class="divider"></div></li>
+		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
+		<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
+		<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
+		
+		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
+	</ul>
+	<!-- End Here -->
 	
-	<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
-</ul>
-<!-- End Here -->
-
-
 	
 		
+			
