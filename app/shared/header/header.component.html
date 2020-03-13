@@ -65,6 +65,7 @@
 		color: #7d7c7c;
 		padding-right: 6px ;
 	}
+
 	.icon-cst-clr-1{
 		font-size: 18px;
 	}
@@ -91,7 +92,18 @@
 		border-bottom: 1px solid #ececec;
 	
 	}
-	
+	.cst-edit-pro{
+
+		position: absolute;
+    top: 66px;
+    left: 81px;
+    background: #ff6a00;
+    color: #fff;
+    padding: 7px;
+    border-radius: 50%;
+    font-size: 10px;
+	}
+
 	}
 	@media only screen and (max-width: 767px){
 	.mobile-header-right ul li {
@@ -232,6 +244,7 @@
 				<p>{{this.todoservice.get_user_phone()}}</p>
 				<div class="clearfix"></div>
 				</div>
+				<a routerLink="/dashboard/edit-profile"> <span class="fa fa-camera cst-edit-pro"></span> </a>
 				<div class="wallet-mobile">
 					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 				</div>
@@ -744,6 +757,7 @@
 					<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''">{{this.todoservice.get_user_name()}}</p>
 					<span >{{this.todoservice.get_user_phone()}}</span>
 				</li>
+				<li> <span class="fa fa-user"></span> </li>
 			</ul>
 		</div>
 		<li><div class="divider another-balance"></div></li>

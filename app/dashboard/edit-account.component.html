@@ -1,3 +1,22 @@
+<style>
+  @media screen and (max-width: 767px){
+
+    .user-name {
+    font-size: 22px;
+    padding-left: 30px;
+    text-transform: capitalize;
+    position: absolute;
+    top: 11px;
+}
+.btn-w100{
+
+  width:100%;
+}
+.img-space{
+  padding:10px;
+}
+  }
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
   <ngx-spinner
@@ -84,6 +103,7 @@
                       <div class="row edit-acc">
                         <div class="inline">
                             <input type="file" (change)="fileChangeEvent($event)" /> <a href="#remove-avatar" class="font-size-change modal-trigger inline-block margin-left1">Remove Avatar</a>
+                           <!-- <label><span class="fa fa-camera fa-3x"></span></label> -->
                             <image-cropper
                                 [imageChangedEvent]="imageChangedEvent"
                                 [maintainAspectRatio]="true"
@@ -94,7 +114,7 @@
                             ></image-cropper>
                             
                             <img [src]="croppedImage" />
-                          <div class="form-group">                              
+                          <div class="form-group img-space">                              
                               <img width="43" src="{{this.todoservice.server_url}}{{userinfo.avatar}}" alt="user-icon" id="change-icon" *ngIf="userinfo.avatar && !userinfo.avatar.includes('data:image/png')"/>
                               <img width="43" src="{{userinfo.avatar}}" alt="user-icon" id="change-icon" *ngIf="userinfo.avatar && userinfo.avatar.includes('data:image/png')"/>
                               <p>Max Size(100x100) </p>
@@ -107,8 +127,9 @@
                       <div class="row edit-acc">
                           <div class="col s12 m12 l8 center">
                               <!-- <button type="Submit" class="btn orange btn-large" [disabled]="!isvalid">Update Details</button> -->
-                              <button type="submit" [disabled]="form.invalid || loading" class="btn orange btn-large">Save <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
-                          </div>
+                              <button type="submit" [disabled]="form.invalid || loading" class="btn orange btn-large btn-w100">Save <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+                              <br/>
+                             </div>
                       </div>
                     </form>
                     </div>
