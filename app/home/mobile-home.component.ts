@@ -126,24 +126,18 @@ export class MobileHomeComponent implements OnInit {
           if(!$.isEmptyObject(data))
           {
             let page_data = data.PAGEDATA[0];
-            this.ratings = data.rating; 
+            
             if(page_data)
             {
               this.meta.addTag({ name: 'description', content: page_data.metaDesc });
               this.meta.addTag({ name: 'keywords', content: page_data.metaKeyword });
               this.title.setTitle(page_data.metaTitle);
             }
-            this.user_cashback = data.cashback;
-            this.banners          = data.banners;
-            this.all_products    = data.products;
-            this.calculate_ratings();
-            this.tata_slides      = this.filter_product('tata',data.products); 
-            this.airtel_slides    = this.filter_product('airtel',data.products);  
-            this.dishtv_slides    = this.filter_product('dish',data.products);  
-            this.videcone_slides  = this.filter_product('videocon',data.products); 
-            this.recommended  = this.filter_recommended(data.products); 
             
+            this.banners          = data.banners;
             this.init_page();
+            this.fetch_home_products();
+            
             $('#mobile').css('display','');  
             $('#select-item').css('display',''); 
             this.filter_banners('Big Tv');
@@ -152,6 +146,53 @@ export class MobileHomeComponent implements OnInit {
           
         }
       )  
+  }
+
+  init_products()
+  {
+    if($('#init-product-script'))
+    {
+      $('#init-product-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-product-script`;
+    script.text = `
+      $(document).ready(function(){
+        var product = $('.product-slider').lightSlider({
+          item: 1,
+          auto: false,
+          pauseOnHover: true,
+          loop: true,
+          pause: 5000,
+          keyPress: true,
+          controls: true,
+          pager: false,
+          enableDrag: true
+        });
+      });  
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
+  fetch_home_products()
+  {
+    this.todoservice.fetch_home_products({token : this.get_token()})
+    .subscribe(
+    data => 
+    {
+      this.ratings          = data.rating; 
+      this.user_cashback    = data.cashback;
+      this.all_products     = data.products;
+      this.calculate_ratings();
+      this.tata_slides      = this.filter_product('tata',data.products); 
+      this.airtel_slides    = this.filter_product('airtel',data.products);  
+      this.dishtv_slides    = this.filter_product('dish',data.products);  
+      this.videcone_slides  = this.filter_product('videocon',data.products); 
+      this.recommended      = this.filter_recommended(data.products); 
+      this.init_products();
+    }
+    ) 
   }
 
   check_if_favorite(product_id)
@@ -258,119 +299,7 @@ export class MobileHomeComponent implements OnInit {
     script.type = `text/javascript`;
     script.id = `init-page-script`;
     script.text = `
-      $(document).ready(function(){
-        $('.slider-5').lightSlider({
-          item: 4,
-          auto: false,
-          loop: false,
-          pause: 3000,
-          controls: true,
-          pager: false,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:3
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-        $('.slider-66').lightSlider({
-          item: 4,
-          auto: false,
-          loop: false,
-          pause: 3000,
-          controls: true,
-          pager: false,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:3
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-        $('.slider-7').lightSlider({
-          item: 4,
-          auto: false,
-          loop: false,
-          controls: true,
-          pager: false,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:3
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-        $('.slider-8').lightSlider({
-          item: 4,
-          auto: false,
-          loop: false,
-          controls: true,
-          pager: false,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:3
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }
-          ]
-        });
-      })
-        
+      
         $(document).on("click",".recharge-section",function($event) {
           var x = $event.target.nodeName;
           if(!$(x).hasClass("more-clik"))
@@ -388,82 +317,19 @@ export class MobileHomeComponent implements OnInit {
           controls: true,
           pager: false,
           enableDrag: true,
-         
-         
-        });
-        var flashdeal = $('.flash-deal-slider').lightSlider({
-          item: 1,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 5000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-          responsive: [
-          {
-            breakpoint:900,
-            settings: {
-              item:1	
-            }
-          },
-          {
-            breakpoint:600,
-            settings: {
-              item:1
-            }
-          },
-          {
-            breakpoint:380,
-            settings: {
-              item:1
-            }
-          }, 
-         
-          ],
-          onBeforeSlide: function (el) {
-            $('#select-slide li a').removeClass('active');
-            $('#select-slide li:nth-child('+(el.getCurrentSlideCount()+1)+') a').addClass('active');
-            
-        }
-        });
-        $('#select-slide').delegate('li','click',function(){
-          var child = $(this).find('.data-slide').text();
-          flashdeal.goToSlide(Number(child));
-        });
-        var product = $('.product-slider').lightSlider({
-          item: 1,
-          auto: false,
-          pauseOnHover: true,
-          loop: true,
-          pause: 5000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true
-        });
-        $('.mob-retailer-slider').lightSlider({
-          item: 1,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 5000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true
         });
         $('.bottom-slider').lightSlider({
           item: 1,
+          auto: true,
+          pauseOnHover: true,
           loop: true,
+          pause: 5000,
           keyPress: true,
           controls: true,
           pager: false,
           enableDrag: true,
-
         });
-             
+  
       // Hide sideNav
       $('.button-collapse1').on('click', function () {
         $('.side-nav').sideNav('hide');
