@@ -182,16 +182,16 @@ right: 36px;
 						<table class="table ">
 							<tr>
 								<th nowrap="nowrap" >S.No.</th>
-													<th nowrap="nowrap">Order No.</th>
-													<th nowrap="nowrap" >Recharge No.</th>
-													<th nowrap="nowrap" >Service Provider</th>
-													<th nowrap="nowrap" >Amount</th>
-													<th nowrap="nowrap" >Out Standing</th>
-													<th nowrap="nowrap" >Order Date</th>
-													<th nowrap="nowrap" >Payment Method</th>
-													<th nowrap="nowrap" >Payment Status</th>
-													<th nowrap="nowrap" >Recharge Status</th>
-													<th nowrap="nowrap" >Complaint</th>
+								<th nowrap="nowrap">Order No.</th>
+								<th nowrap="nowrap" >Recharge No.</th>
+								<th nowrap="nowrap" >Service Provider</th>
+								<th nowrap="nowrap" >Amount</th>
+								<th nowrap="nowrap" >Out Standing</th>
+								<th nowrap="nowrap" >Order Date</th>
+								<th nowrap="nowrap" >Payment Method</th>
+								<th nowrap="nowrap" >Payment Status</th>
+								<th nowrap="nowrap" >Recharge Status</th>
+													<!-- <th nowrap="nowrap" >Complaint</th> -->
 							</tr>
 							<tr *ngFor="let recharge of recharges;let i = index">
 								<td>{{i+1}}</td>
@@ -212,7 +212,7 @@ right: 36px;
 								<td *ngIf="recharge.recharge_status == 1"><span class="green white-text padd1">Success</span></td>
 								<td *ngIf="recharge.recharge_status == 2"><span class="red white-text padd1">Fail</span></td>
 								<td *ngIf="recharge.recharge_status == 3"><span class="orange white-text padd1">Progress</span></td>
-								<td><a href="#complaints" class="modal-trigger com">Complaint</a></td>
+								<!-- <td><a href="#complaints" class="modal-trigger com">Complaint</a></td> -->
 						</tr>
 						
 						</table>
