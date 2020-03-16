@@ -40,7 +40,15 @@ export class FooterComponent implements OnInit{
 
    navigate_to(url)
   {
-    
+    if(1 == 1)
+    {
+      this.router.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+      }
+    //console.log(url) 
+    this.router.navigated = false;
+    this.router.navigate([url]);
+    } 
   }
 
    fetch_page_data()

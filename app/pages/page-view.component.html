@@ -1,10 +1,4 @@
-<!-- <style>
-	@media only screen and (max-width: 767px){
-.cs-page1{
-	display: none !important;
-}
-}
-</style> -->
+
 <app-header></app-header>
 <div class="spinner-wrapper">
         <ngx-spinner
@@ -42,30 +36,22 @@
 								<div class="input-field col s12 m6">
 									<input id="first_name" name="name" type="text" class="validate" formControlName="name">
 									<label for="first_name">Name*</label>
-									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['name'].valid && contactgroup.controls['name'].touched">Enter Name*.</div>
+									<div class="red-text accent-4 center absolute" *ngIf="!contactgroup.controls['name'].valid && contactgroup.controls['name'].touched">Enter Name*.</div>
 								</div>
 								<div class="input-field col s12 m6">
 									<input id="email" name="email" type="email" class="validate"  formControlName="email">
 									<label for="email">Email*</label>
-									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['email'].valid && contactgroup.controls['email'].touched">Enter a Valid Email*.</div>
+									<div class="red-text accent-4 center absolute" *ngIf="!contactgroup.controls['email'].valid && contactgroup.controls['email'].touched">Enter a Valid Email*.</div>
 								</div>            
 								<div class="input-field col s12 m6">
 									<input id="phone" name="phone" type="number" class="validate"  formControlName="phone">
 									<label for="phone">Phone No.*</label>
-									<div class="red-text accent-4 center" *ngIf="!contactgroup.controls['phone'].valid && contactgroup.controls['phone'].touched">Enter a Valid Phone*.</div>
+									<div class="red-text accent-4 center absolute" *ngIf="!contactgroup.controls['phone'].valid && contactgroup.controls['phone'].touched">Enter a Valid Phone*.</div>
 								</div>                        
 								<div class="input-field col s12 m6">
 									<input id="company-name" name="company-name" type="text" class="validate"  formControlName="subject">
 									<label for="company-name">Company Name</label>
 								</div>                                    
-								<!-- <div class="input-field col s12 m6">
-									<input id="company-address" name="company-address" type="text" class="validate">
-									<label for="company-address">Company Address</label>
-								</div>                                    
-								<div class="input-field col s12 m6">
-									<input id="company-phone" name="company-phone" type="number" class="validate">
-									<label for="company-phone">Company Phone No.</label>
-								</div>             -->
 								<div class="input-field col s12">
 									<input id="home-address" name="home-address" type="text" class="validate"  formControlName="message">
 									<label for="home-address">Address</label>
@@ -79,90 +65,4 @@
 				</div>
 			</div>
 		</section>
-	<!-- <section class="new-form-register no-padding">
-		<div class="container-fluid no-padding">
-			<div class="row no-margin">
-				<div class="col s12 m7 no-padding">
-					<img src="https://www.mydthshop.com/web-app/assets/images/testimonial-bg.jpg" alt="new" class="img-responsive full-width">
-				</div>
-				<div class="col s12 m5 no-padding">
-					<div class="card no-margin">
-						<div class="card-content">
-							<h3 class="font600 center">Just earn without investment, and hassle free with the lowest selling price.</h3>
-							<form>
-								<div class="row">
-									<div class="input-field col s12 m6">
-										<input id="name" type="text" class="validate">
-										<label for="name">Name</label>
-									</div>
-									<div class="input-field col s12 m6">
-										<input id="email" type="email" class="validate">
-										<label for="email">Email</label>
-									</div>
-									<div class="input-field col s12 m6">
-										<input id="phone" type="number" class="validate">
-										<label for="phone">Phone</label>
-									</div>
-									<div class="input-field col s12 m6">
-										<input id="subject" type="text" class="validate">
-										<label for="subject">Subject</label>
-									</div>
-									<div class="input-field col s12">
-										<textarea id="textarea1" class="materialize-textarea"></textarea>
-										<label for="textarea1">Massage</label>
-									</div>
-									<div class="input-field col s12 center">
-										<button type="submit" class="btn orange">Submit</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!-- For Backup Design -->
-	<!-- <section class="new-jio-fiber">
-		<div class="container">
-			<div class="row no-margin">
-				<div class="col s12 m6 no-padding">
-					<img src="https://www.mydthshop.com/web-app/assets/images/high_net.jpg" alt="Jio high speed internet" class="full-width">
-				</div>
-				<div class="col s12 m6 no-padding new-jio-fiber">
-					<div class="card no-margin">
-						<div class="card-content">
-							<h3 class="card-title">High Speed internet Ever!</h3>
-							<p>For the first time in India, get up to 1 Gbps internet across every corner of your home. Reliable and fast internet that matches with your speed.</p>
-							<ul>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row no-margin">				
-				<div class="col s12 m6 no-padding new-jio-fiber">
-					<div class="card no-margin grey lighten-3">
-						<div class="card-content grey lighten-3">
-							<h3 class="card-title">Free High Speed Voice Calling!</h3>
-							<p>For the first time in India, get up to 1 Gbps internet across every corner of your home. Reliable and fast internet that matches with your speed.</p>
-							<ul>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-								<li>JioFiber is the Fastest Broadband with speeds up to 1Gbps</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col s12 m6 no-padding">
-					<img src="https://www.mydthshop.com/web-app/assets/images/high_net.jpg" alt="Jio high speed internet" class="full-width">
-					</div>
-			</div>
-		</div>
-	</section> -->
   <app-footer></app-footer>
