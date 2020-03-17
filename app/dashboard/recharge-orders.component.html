@@ -64,8 +64,9 @@
                           <th nowrap="nowrap" width="140px">Payment Method</th>
                           <th nowrap="nowrap" width="130px">Payment Status</th>
                           <th nowrap="nowrap" width="135px">Recharge Status</th>
+                          <th nowrap="nowrap" width="135px">Deliver to</th>
                           <th nowrap="nowrap" width="135px">Remark</th>
-                          <th nowrap="nowrap" width="95px">Complaint</th>
+                          <th nowrap="nowrap" width="95px">Query</th>
                       </tr>
                   </thead>
                   <tfoot>
@@ -81,8 +82,9 @@
                           <th nowrap="nowrap" width="140px">Payment Method</th>
                           <th nowrap="nowrap" width="130px">Payment Status</th>
                           <th nowrap="nowrap" width="135px">Recharge Status</th>
+                          <th nowrap="nowrap" width="135px">Deliver to</th>
                           <th nowrap="nowrap" width="135px">Remark</th>
-                          <th nowrap="nowrap" width="95px">Complaint</th>
+                          <th nowrap="nowrap" width="95px">Query</th>
                       </tr>
                   </tfoot>
                   <tbody>
@@ -102,11 +104,12 @@
                               <span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
                               <span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
                             </td>
+                            <td>{{recharge.deliver_to}}</td>
                             <td>{{recharge.remark}}</td>
                           <td>
                             <div *ngIf="recharge.complaint_id == null">
                                 <span class="orange white-text" *ngIf="check_delay(recharge.history_time) == 2">Please Wait...</span>
-                                <span *ngIf="check_delay(recharge.history_time) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Complaint</a></span>
+                                <span *ngIf="check_delay(recharge.history_time) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
                             </div>
                             <div *ngIf="recharge.complaint_id != null">
                                 <span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
@@ -144,8 +147,8 @@
     
       <div class="row no-margin">
         <div class="input-field col s12">
-            <mat-form-field>
-                <mat-select placeholder="Select reason" formControlName="title">
+            <mat-form-field *ngIf="display == 1">
+                <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
                     <mat-option [value]="1">
                         Balance did not receive by customer
                     </mat-option>
@@ -155,11 +158,12 @@
                     <mat-option [value]="3">
                         Wrong Recharge No/ID but correct opreater
                     </mat-option>
-                    <mat-option [value]="4">
+                    <mat-option [value]=""> 
                         Other
                     </mat-option>
                 </mat-select>
               </mat-form-field>
+              <input type="text" formControlName="title" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
         </div>
       </div>
     

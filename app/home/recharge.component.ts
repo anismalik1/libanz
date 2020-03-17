@@ -80,6 +80,7 @@ export class RechargeComponent implements OnInit {
   plans : any;
   alloperators : any;
   selected_operator : number = 0;
+  pagetitle : string;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
@@ -199,7 +200,7 @@ export class RechargeComponent implements OnInit {
     this.plans = [];
       if(tab == 'mobile' || tab == 'mobile-postpaid')
       {
-       
+        this.pagetitle = "Mobile Recharge & Bill Payments";
         this.recharge_type.mobile = true;
 
         if(this.operator_id > 0 && this.region > 0)
@@ -209,34 +210,42 @@ export class RechargeComponent implements OnInit {
       }
       else if(tab == 'dth-recharge')
       {
+        this.pagetitle = "DTH Recharge";
         this.recharge_type.dth = true;
       }
       else if(tab == 'electricity')
       {
+        this.pagetitle = "Pay Electricity Bill";
         this.recharge_type.electricity = true;
       }
       else if(tab == 'water')
       {
+        this.pagetitle = "Pay Water Bill";
         this.recharge_type.water = true;
       }
       else if(tab == 'gas')
       {
+        this.pagetitle = "Pay Gas Bill Payment";
         this.recharge_type.gas = true;
       }
       else if(tab == 'broadband')
       {
+        this.pagetitle = "Pay Landline OR Broadband Bill";
         this.recharge_type.broadband = true;
       }
       else if(tab == 'cable')
       {
+        this.pagetitle = "Cable TV Recharge OR Bill Payment";
         this.recharge_type.cable = true;
       }
       else if(tab == 'datacard' || tab == 'datacard-postpaid')
       {
+        this.pagetitle = "Data Recharge & Bill Payments";
         this.recharge_type.datacard = true;
       }
       else if(tab == 'landline')
       {
+        this.pagetitle = "Pay Landline OR Broadband Bill";
         this.recharge_type.landline = true;
       }
       this.fetch_promocode(tab);
@@ -335,11 +344,11 @@ export class RechargeComponent implements OnInit {
     .subscribe(
       data => 
       {
-        if(data.PAGEDATA)
+        if(data.PAGEDATA) 
         {
           $('#short-content').html(data.PAGEDATA[0].shortDescription);
           $('#long-content').html(data.PAGEDATA[0].description);
-          $('#page-title').html(data.PAGEDATA[0].title);
+          //$('#page-title').html(data.PAGEDATA[0].title);
           this.meta.addTag({ name: 'description', content: data.PAGEDATA[0].metaDesc });
           this.meta.addTag({ name: 'keywords', content: data.PAGEDATA[0].metaKeyword });
           this.title.setTitle(data.PAGEDATA[0].metaTitle);

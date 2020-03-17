@@ -15,10 +15,10 @@
                 <div class="card">
               <div class="card-content user-content">
                     <div class="user-image">
-                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                                  <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-                        </div>
+                        <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                        <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                        <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+                    </div>
                   <div class="user-name">
                       <span>Welcome,</span><br>
                       <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
@@ -50,21 +50,23 @@
                 </div> -->
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="font600 inline-block">Complaint Box</h3>
-                        <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart"><button type="button" class="btn orange no-box-shadow">All</button></a>
-                        <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class="right inline-block margin-top-cart"><button type="button" class="btn orange no-box-shadow margin-right">In Progress</button></a>
-                        <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class="right inline-block margin-top-cart"><button type="button" class="btn orange no-box-shadow margin-right">Resolved</button></a>
-                        <div class="overflow-scroll">							
+                        <h3 class="font600 inline-block">Tickets</h3>
+                        <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart"><button type="button" [className]="(type == 'all')?'btn orange no-box-shadow':'btn grey no-box-shadow'">All</button></a>
+                        <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class="right inline-block margin-top-cart"><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow'">In Progress</button></a>
+                        <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class="right inline-block margin-top-cart"><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow'">Resolved</button></a>
+                        <div class="overflow-scroll">							 
                             <table id="datatable" class="display responsive-table datatable-example">
                                 <thead>
                                     <tr>
                                         <th nowrap="nowrap" width="60px">S.No.</th>
+                                        <th nowrap="nowrap">Ticket ID</th>
                                         <th nowrap="nowrap">Order ID</th>
                                         <th nowrap="nowrap">Status</th>
                                         <th nowrap="nowrap" width="115px">Recharge No.</th>
                                         <th nowrap="nowrap" width="81px">Amount</th>
                                         <th nowrap="nowrap" width="145px">Comment</th>
-                                        <th nowrap="nowrap" width="123px">Complain date</th>
+                                        <th nowrap="nowrap" width="123px">Created</th>
+                                        <th nowrap="nowrap" width="123px">Last Update</th>
                                         <th nowrap="nowrap" width="35px" class="center"></th>
                                         <th nowrap="nowrap" width="70px;">Option</th>
                                     </tr>
@@ -72,12 +74,14 @@
                                 <tfoot>
                                     <tr>
                                         <th nowrap="nowrap" width="60px">S.No.</th>
+                                        <th nowrap="nowrap">Ticket ID</th>
                                         <th nowrap="nowrap">Order ID</th>
                                         <th nowrap="nowrap">Status</th>
                                         <th nowrap="nowrap" width="115px">Recharge No.</th>
                                         <th nowrap="nowrap" width="81px">Amount</th>
                                         <th nowrap="nowrap" width="145px">Comment</th>
-                                        <th nowrap="nowrap" width="123px">Complain date</th>
+                                        <th nowrap="nowrap" width="123px">Created</th>
+                                        <th nowrap="nowrap" width="123px">Last Update</th>
                                         <th nowrap="nowrap" width="35px" class="center"></th>
                                         <th nowrap="nowrap" width="70px;">Option</th>
                                     </tr>
@@ -85,13 +89,15 @@
                                 <tbody *ngIf="complaints_counts > 0">
                                     <tr *ngFor="let complaint of complaints | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: complaints_counts };let i=index">
                                         <td>{{i+1}}</td>
+                                        <td>{{complaint.id}}</td>
                                         <td>{{complaint.order_id}}</td>
                                         <td>{{complaint.status}}</td>
                                         <td>{{complaint.subcriber_id}}</td>
                                         <td><i class="fa fa-inr"></i> {{complaint.grand_total}}</td>
                                         <td>{{complaint.comment}}</td>
-                                        <td><span>{{complaint.history_time | date: date:'dd M, Y h:i a'}}</span></td>
-                                        <td><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 1"></i><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0"></i></td>
+                                        <td><span>{{complaint.history_time | date: date:'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
+                                        <td><span>{{complaint.last_update | date: date:'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
+                                        <td><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 1 || complaint.seen == 2"></i><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 3"></i></td>
                                         <td class="center">
                                             <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change">visibility</i></a>
                                         </td>
@@ -99,7 +105,7 @@
                                 </tbody>
                                 <tbody *ngIf="complaints_counts == 0">
                                     <tr>
-                                        <td colspan="12" class="center">No Active Complaints</td>
+                                        <td colspan="12" class="center">No Active Ticket</td>
                                     </tr>
                                 </tbody>	
                             </table>

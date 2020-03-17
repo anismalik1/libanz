@@ -23,6 +23,7 @@ export class RechargeOrdersComponent implements OnInit {
   recharge_counts : number;
   complaint_id : number;
   go_to_complaint : number = 0;
+  display : number = 1;
   ranges: any = {
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -135,6 +136,10 @@ export class RechargeOrdersComponent implements OnInit {
 		  );
   }
 
+  check_val(val)
+  {
+    this.display = 2;
+  }
   decode_data(data)
   {
     let jsondecode : any = [];
