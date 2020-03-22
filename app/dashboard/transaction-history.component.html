@@ -1,3 +1,56 @@
+<style>
+    .cst-table tr:nth-child(odd) {
+    background-color: rgba(242,242,242,0.5);
+}
+.theader-cst{
+    background: #ececec;
+    white-space: nowrap;
+   
+}
+.cst-table tr td {
+    border: 1px solid #e2e2e2;
+}
+.cst-table{
+    white-space: nowrap;
+}
+.fix-welcome{
+    padding: 10px;
+    font-size: 16px;
+    color: #7b7a7a;
+  }
+  .user-image{
+      padding:9px;
+  }
+  
+  label.lbl-num {
+    line-height: 33px;
+    font-size: 16px !important;
+    }
+    .cst-dname{
+  
+  font-size: 16px !important;
+    padding: 10px;
+    text-transform: capitalize;
+  }
+  .heading-txt-1{
+    font-weight: bold;
+    color: #424242 !important;
+    line-height: 0 !important;
+    margin: 6px;
+  }
+@media only screen and (max-width: 767px){
+
+    .btn-mb-respo{
+        width: 100%;
+    border-radius: 20px;
+    }
+    .pt-top-mb{
+        padding-top:22px !important;
+        white-space: nowrap;
+    font-size: 19px !important;
+    }
+}
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
         <ngx-spinner
@@ -20,10 +73,10 @@
                             <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
                                   <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
                         </div>
-                  <div class="user-name">
-                      <span>Welcome,</span><br>
-                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user().name}}</span>
-                  </div>
+                        <div class="user-name">
+                            <span class="fix-welcome">Welcome,</span><br>
+                            <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
+                        </div>
               </div>        
             </div>
                 <app-side-nav></app-side-nav>			    
@@ -34,98 +87,90 @@
                         <div class="card-content">
                             <form class="date-export">
                                 <div class="row no-margin">
+                                    <div class="col s12 m4">
+                                        <h4 class="heading-txt-1"><span class="fa fa-calendar"></span> &nbsp; Please Choose Data Range :</h4>
+                                    </div>
                                     <div class="col s12 m3">
                                         <input placeholder="Choose date range" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd [(ngModel)]="selected" name="daterange" class="form-control"/>
                                     </div>
                                     <div class="col s12 m2">
-                                        <button type="Search" class="btn orange no-box-shadow" (click)="export_transactions()">Export</button>
+                                        <button type="Search" class="btn orange no-box-shadow btn-mb-respo" (click)="export_transactions()">Export &nbsp; <span class="fa fa-file"></span></button>
                                     </div>
                                     
                                 </div>
                             </form>
                         </div>
                     </div>
+
+                    <!-- table start -->
+                    
                     <div class="card">
                         <div class="card-content">
-                            <h3 class="font600 inline-block">Wallet Transaction History</h3>
-                            <!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a> -->
-                            <div class="overflow-scroll">							
-                                <table id="datatable2" class="display responsive-table datatable-example">
-                                    <thead>
-                                        <tr>
-                                            <th nowrap="nowrap" width="57px">S.No.</th>
-                                            <th nowrap="nowrap" width="130px">Order No.</th>
-                                            <th nowrap="nowrap" width="130px">Transaction Id</th>
-                                            <th nowrap="nowrap" width="130px">Subscriber Id</th>
-                                          <th nowrap="nowrap" width="135px">Trans date/time</th>
-                                            <th nowrap="nowrap" width="115px">Trans Name</th>
-                                            <th nowrap="nowrap" width="102px">Trans Type</th>
-                                            <th nowrap="nowrap" width="170px">Balance Before Trns</th>
-                                            <th nowrap="nowrap" width="130px">Trans Amount</th>
-                                            <th nowrap="nowrap" width="205px">Commission/ Surcharge/ Cashback</th>
-                                            <th nowrap="nowrap" width="160px">Balance After Trans</th>
-                                            <th nowrap="nowrap" width="140px">Payment Method</th>
-                                            <th nowrap="nowrap" width="95px">Payment Status</th>
-                                            <th nowrap="nowrap" width="95px">Order Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th nowrap="nowrap" width="57px">S.No.</th>
-                                            <th nowrap="nowrap" width="130px">Order No.</th>
-                                            <th nowrap="nowrap" width="130px">Transaction Id</th>
-                                            <th nowrap="nowrap" width="130px">Subscriber Id</th>
-                                           <th nowrap="nowrap" width="135px">Trans date/time</th>
-                                            <th nowrap="nowrap" width="115px">Trans Name</th>
-                                            <th nowrap="nowrap" width="102px">Trans Type</th>
-                                            <th nowrap="nowrap" width="170px">Balance Before Trns</th>
-                                            <th nowrap="nowrap" width="130px">Trans Amount</th>
-                                            <th nowrap="nowrap" width="205px">Commission/ Surcharge/ Cashback</th>
-                                            <th nowrap="nowrap" width="160px">Balance After Trans</th>
-                                            <th nowrap="nowrap" width="140px">Payment Method</th>
-                                            <th nowrap="nowrap" width="95px">Payment Status</th>
-                                            <th nowrap="nowrap" width="95px">Order Status</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr *ngFor="let row of transactions | paginate: { id: 'wallet-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: w_p, totalItems: wallet_counts }; let i=index">
-                                            <td>{{i+1}}</td>
-                                            <td>{{row.order_id}}</td>
-                                            <td>{{row.transaction_id}}</td>
-                                            <td>{{row.subscriber_id}}</td>
-                                           <td>{{row.history_time | date: date:'dd M, Y'}}<br><time>{{row.history_time | date:'hh:mm a'}}</time></td>
-                                            <td>{{row.comment}}</td>
-                                            <td *ngIf="row.transaction_type == 1">Credit</td>
-                                            <td *ngIf="row.transaction_type == 2">Debit</td>
-                                            <td *ngIf="row.transaction_type == 3">Online</td>
-                                            <td> <i class="icon-inr"></i>{{row.balance_before }}</td>
-                                            <td *ngIf="row.transaction_type == 2" class="red-text"> <i class="icon-inr"></i>{{row.amount }}</td>
-                                            <td *ngIf="row.transaction_type == 1" class="green-text"> <i class="icon-inr"></i>{{row.amount}}</td>
-                                            <td *ngIf="row.transaction_type == 3" class="green-text"> <i class="icon-inr"></i>{{row.amount }}</td>
-                                            <td> <i class="icon-inr"></i>{{row.commission_surcharge}}</td>
-                                            <td *ngIf="row.transaction_type == 1 && row.payment_status == 1"> <i class="icon-inr"></i>{{row.balance_before*1+row.amount*1+row.commission_surcharge*1 }}</td>
-                                            <td *ngIf="(row.transaction_type == 1 && row.payment_status == 2) ||(row.transaction_type == 1 && row.payment_status == 3)"> <i class="icon-inr"></i>{{row.balance_before }}</td>
-                                            <td *ngIf="row.transaction_type == 2"> <i class="icon-inr"></i>{{row.balance_before*1-row.amount*1+row.commission_surcharge*1 }}</td>
-                                            <td *ngIf="row.transaction_type == 3"> <i class="icon-inr"></i>{{row.balance_before+row.commission_surcharge*1 }}</td>
-                                            <td *ngIf="row.paymethod == 1">Wallet</td>
-                                            <td *ngIf="row.paymethod == 3">MYDTH</td>
-                                            <td *ngIf="row.paymethod == 4">PAYTM</td>
-                                            <td *ngIf="row.paymethod == 5">COD</td>
-                                            <td *ngIf="row.paymethod == 2">Gateway</td>
-                                            <td *ngIf="row.payment_status == 1"><span class="green white-text padd1">Success</span></td>
-                                            <td *ngIf="row.payment_status == 2"><span class="red white-text padd1">Fail</span></td>
-                                            <td *ngIf="row.payment_status == 0"><span class="orange white-text padd1">Pending</span></td>
-                                            <td *ngIf="row.payment_status == 3"><span class="orange white-text padd1">Pending</span></td>
-                                            <td><span class="padd1">{{row.status}}</span></td> 
-                                        </tr>
-                                    </tbody>	
-                                </table>
-                                <div class="has-text-centered right-align">
-                                    <pagination-controls (pageChange)="getPage($event,'w')" id="wallet-p"></pagination-controls>
-                                </div>
+                            <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-edit"></span> &nbsp; Wallet Transaction History</h3>
+                            <!-- <hr/> -->
+
+                            <div class="responsive-table" style="width:100%; overflow:auto;">
+                             <table class="table striped  cst-table">
+                                <tr class="theader-cst">
+                                    <th >S.No.</th>
+                                    <th >Order No.</th>
+                                    <th >Transaction Id</th>
+                                    <th >Subscriber Id</th>
+                                  <th >Trans date/time</th>
+                                    <th >Trans Name</th>
+                                    <th >Trans Type</th>
+                                    <th >Balance Before Trns</th>
+                                    <th >Trans Amount</th>
+                                    <th >Commission/ Surcharge/ Cashback</th>
+                                    <th >Balance After Trans</th>
+                                    <th >Payment Method</th>
+                                    <th>Payment Status</th>
+                                    <th >Order Status</th>
+                                </tr>
+
+                                <tr *ngFor="let row of transactions | paginate: { id: 'wallet-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: w_p, totalItems: wallet_counts }; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{row.order_id}}</td>
+                                    <td>{{row.transaction_id}}</td>
+                                    <td>{{row.subscriber_id}}</td>
+                                   <td>{{row.history_time | date: date:'dd M, Y'}}<br><time>{{row.history_time | date:'hh:mm a'}}</time></td>
+                                    <td>{{row.comment}}</td>
+                                    <td *ngIf="row.transaction_type == 1">Credit</td>
+                                    <td *ngIf="row.transaction_type == 2">Debit</td>
+                                    <td *ngIf="row.transaction_type == 3">Online</td>
+                                    <td> <i class="icon-inr"></i>{{row.balance_before }}</td>
+                                    <td *ngIf="row.transaction_type == 2" class="red-text"> <i class="icon-inr"></i>{{row.amount }}</td>
+                                    <td *ngIf="row.transaction_type == 1" class="green-text"> <i class="icon-inr"></i>{{row.amount}}</td>
+                                    <td *ngIf="row.transaction_type == 3" class="green-text"> <i class="icon-inr"></i>{{row.amount }}</td>
+                                    <td> <i class="icon-inr"></i>{{row.commission_surcharge}}</td>
+                                    <td *ngIf="row.transaction_type == 1 && row.payment_status == 1"> <i class="icon-inr"></i>{{row.balance_before*1+row.amount*1+row.commission_surcharge*1 }}</td>
+                                    <td *ngIf="(row.transaction_type == 1 && row.payment_status == 2) ||(row.transaction_type == 1 && row.payment_status == 3)"> <i class="icon-inr"></i>{{row.balance_before }}</td>
+                                    <td *ngIf="row.transaction_type == 2"> <i class="icon-inr"></i>{{row.balance_before*1-row.amount*1+row.commission_surcharge*1 }}</td>
+                                    <td *ngIf="row.transaction_type == 3"> <i class="icon-inr"></i>{{row.balance_before+row.commission_surcharge*1 }}</td>
+                                    <td *ngIf="row.paymethod == 1">Wallet</td>
+                                    <td *ngIf="row.paymethod == 3">MYDTH</td>
+                                    <td *ngIf="row.paymethod == 4">PAYTM</td>
+                                    <td *ngIf="row.paymethod == 5">COD</td>
+                                    <td *ngIf="row.paymethod == 2">Gateway</td>
+                                    <td *ngIf="row.payment_status == 1"><span class="green white-text padd1">Success</span></td>
+                                    <td *ngIf="row.payment_status == 2"><span class="red white-text padd1">Fail</span></td>
+                                    <td *ngIf="row.payment_status == 0"><span class="orange white-text padd1">Pending</span></td>
+                                    <td *ngIf="row.payment_status == 3"><span class="orange white-text padd1">Pending</span></td>
+                                    <td><span class="padd1">{{row.status}}</span></td> 
+                                </tr>
+
+
+                            </table>
+                            </div>
+                            <div class="has-text-centered right-align">
+                                <pagination-controls (pageChange)="getPage($event,'w')" id="wallet-p"></pagination-controls>
                             </div>
                         </div>
                     </div>
+
+                  
+
+
                 </div>
             </div>
         </div>

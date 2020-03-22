@@ -138,6 +138,12 @@ margin: 2px;
 
 @media only screen and (max-width: 767px){
 
+	.fixed-space-mb{
+
+		margin-top:-20px !important;
+		
+		margin-bottom: -8px !important;
+	}
 
 .card .card-content {
   
@@ -228,6 +234,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 
 	display: none !important;
 }
+
 
 
  
@@ -534,7 +541,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 </section>
 
 <!-- End Here -->
-<div class="container-fluid">
+<div class="container-fluid fixed-space-mb">
 	<div class="row">
 		<ul class="bottom-slider">
 			<li *ngFor="let banner of filter_banners('mobile_bottom_banner')">

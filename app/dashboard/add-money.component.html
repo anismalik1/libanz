@@ -1,3 +1,160 @@
+<style>
+   @media only screen and  (max-width: 767px){
+  
+  .cst-dname{
+
+font-size: 16px !important;
+padding: 10px;
+text-transform: capitalize;
+}
+.fix-welcome{
+padding: 10px;
+font-size: 16px;
+color: #7b7a7a;
+}
+.user-image{
+  padding:9px;
+}
+.w-100{
+
+width:100%;
+}
+label.lbl-num {
+line-height: 33px;
+font-size: 16px !important;
+}
+
+.web-view{
+    width:100% !important;
+min-height: 320px;
+}
+}
+.web-view{
+    width: 45%;
+min-height: 320px;
+}
+
+.btn-dfix{
+
+    width:100%;
+    margin-top:20px;
+}
+.circle-box1{
+
+height: 40px;
+width: 40px;
+border-radius: 50%;
+background-color: #ff6a00;
+color: #fff;
+text-align: center;
+padding: 10px;
+font-size: 14px;
+float: left;
+margin-left: 10px;
+}
+.circle-box2{
+
+    height: 40px;
+width: 40px;
+border-radius: 50%;
+background-color: #a504b8;
+color: #fff;
+text-align: center;
+padding: 10px;
+font-size: 14px;
+float: left;
+margin-left:15px;
+
+}
+.circle-box3{
+
+height: 40px;
+width: 40px;
+border-radius: 50%;
+background-color: #1a9dd4;
+color: #fff;
+text-align: center;
+padding: 10px;
+font-size: 14px;
+float: left;
+margin-left: 15px;
+
+}
+
+.circle-box4{
+
+height: 40px;
+width: 40px;
+border-radius: 50%;
+background-color: #f51b7c;
+color: #fff;
+text-align: center;
+padding: 10px;
+font-size: 14px;
+float: left;
+margin-left: 15px;
+
+}
+.cst-table tr td {
+    border: 1px solid #e2e2e2;
+    white-space: nowrap;
+}
+.cst-table tr th{
+  background-color:#ececec;
+  color:#333;
+  white-space: nowrap;
+}
+
+.recent-txt{
+    font-size: 13px;
+}
+
+.money-txt{
+
+    font-size: 16px;
+margin-bottom: 10px !important;
+font-weight: bold;
+color: #757272;
+}
+
+.fix-welcome{
+padding: 10px;
+font-size: 16px;
+color: #7b7a7a;
+}
+.user-image{
+  padding:9px;
+}
+
+label.lbl-num {
+line-height: 33px;
+font-size: 16px !important;
+}
+.cst-dname{
+
+font-size: 16px !important;
+padding: 10px;
+text-transform: capitalize;
+}
+.hdfc-txt{
+
+  font-size: 15px !important;
+    padding: 7px !important;
+}
+.block-fund{
+  box-shadow: 1px 1px 10px #ececec;
+  margin: 10px 10px 10px 0px;
+    padding: 0px 20px 20px 20px;
+}
+
+@media only screen and (max-width: 767px){
+
+  .mb-pt-25{
+    padding-top: 25px;
+  }
+}
+</style>
+
 <app-header></app-header>
 <section class="flash-deal">
     <div class="container">
@@ -10,9 +167,9 @@
                       <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 			                <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
                   </div>
-                  <div class="user-name">
-                      <span>Welcome,</span><br>
-                      <span class="font-size-change font600">{{this.todoservice.get_user_name()}}</span>
+                 <div class="user-name">
+                      <span class="fix-welcome">Welcome,</span><br>
+                      <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
                   </div>
               </div>
             </div>
@@ -39,13 +196,14 @@
                     </div>
                     <div class="clearfix"></div>
                       <div class="card-content" *ngIf="!order_id">
-                        <h3 class="font600 inline-block">TopUp Request </h3>
+                        <h3 class="font600 inline-block mb-pt-25" style="margin-top:-15px;"><span class="fa fa-credit-card"></span> &nbsp;  TopUp Request </h3>
                         <div class="row sec-7">
-                            <div class="col s12 m7">
+                            <div class="col s12 m7 ">
+                              <div class="block-fund" >
                                 <form #addmoneyform = "ngForm" (ngSubmit)="add_money(addmoneyform.value)">
                               
 							                <div class="row"> 
-                                <div class="input-field col s12 m10">
+                                <div class="input-field col s12 m12">
                                     <mat-form-field>
                                         <mat-select placeholder="Select Payment Method" (selectionChange)='check_method($event.value)'  [(ngModel)]="paymethod" name="paymethod">
                                           <mat-option [value]="">Select  </mat-option>
@@ -58,7 +216,7 @@
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="input-field col s12 m10">
+                                <div class="input-field col s12 m12">
                                   <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin" (keyup)="calc_percentage()">
                                   <label for="enter-amount">Enter Amount*</label>
                                 </div>
@@ -68,7 +226,7 @@
                               </div>
                               <div class="default-hide hide">
 							                <div class="row" >
-                                <div class="input-field col s12 m10">
+                                <div class="input-field col s12 m12">
                                   <input id="bank-id" name="ref_id" ngModel type="text" class="validate no-margin" autocomplete="off">
                                   <label for="bank-id">Reference ID/TXN ID*</label>
                                 </div>
@@ -76,36 +234,46 @@
                              <div class="clearfix"></div>
                             </div>
                               <div class="row send-topup hide">
-                                <div class="input-field col s12 m10 center">
+                                <div class="input-field col s12 m12 center">
                                   <button type="submit" class="btn btn-large orange white-text">Send TopUp Request</button>
                                 </div>
                               </div>
                               <div class="row send-gateway hide">
-                                  <div class="input-field col s12 m10 center">
+                                  <div class="input-field col s12 m12 center">
                                     <button type="submit" class="btn btn-large orange white-text">Proceed</button>
                                   </div>
                                 </div>
                             </form>
                             </div>
-                            <div class="col s12 m5 axis-bank">
-                                <h3 class="orange white-text padd no-margin"><i class="fa fa-edit"></i> HDFC BANK LTD</h3>
-                                <table class="responsive-table bordered striped">
-                            <tbody>
+                            </div>
+                          
+
+                            <div class="col s12 m12 axis-bank">
+                              <div class="tab-bankd">
+                                <h3 class="font600 inline-block" style="margin-top:10px;"><span class="fa fa-university"></span> &nbsp; Bank Details </h3>
+                                <div class="responsive-table" style="width:100%; overflow:auto;">
+                                <table class="table cst-table">
+                           
                               <tr>
-                                <td>Account Name</td>
+                                <th>Bank Name </th>
+                                <th>Account Name</th>
+                                <th>Account Number</th>
+                                <th>IFSC Code</th>
+                                
+                               
+                              </tr>
+                              <tr>
+                                <td>HDFC BANK </td>
                                 <td>Libanz International</td>
-                              </tr>
-                              <tr>
-                                <td>Account Number</td>
                                 <td>50200029494213</td>
-                              </tr>
-                              <tr>
-                                <td>IFSC Code</td>
                                 <td>HDFC0002072</td>
                               </tr>
+                          
                               
-                            </tbody>
+                            
                           </table>
+                            </div>
+                            </div>
                             </div>
                         </div>
                     </div>
