@@ -262,7 +262,7 @@
 				<p>{{this.todoservice.get_user_phone()}}</p>
 				<div class="clearfix"></div>
 				</div>
-				<a routerLink="/dashboard/edit-profile"> <span class="fa fa-camera cst-edit-pro"></span> </a>
+				<a class="modal-trigger" href="#modal1" ><i class="material-icons">photo_camera</i></a>
 				<div class="wallet-mobile">
 					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 				</div>
@@ -772,9 +772,12 @@
 				<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
 					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/></a>
-				<li class="inline-block user-after-login-text only-txt-name">
+					<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+					<a class="modal-trigger" href="#modal1"><i class="material-icons">photo_camera</i></a>
+				</li>
+					<li class="inline-block user-after-login-text only-txt-name">
 					<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''"> {{this.todoservice.get_user_name()}}</p>
-					+91-<span >{{this.todoservice.get_user_phone()}}</span>
+					+91-<span >{{this.todoservice.get_user_phone()}}</span> 
 				</li>
 				<!-- <li> <span class="fa fa-user"></span> </li> -->
 			</ul>
@@ -793,6 +796,20 @@
 		
 		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
 	</ul>
+	<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Change Icon</h4>
+      <div class="file-field input-field">
+				<div class="btn">
+					<span>File</span>
+					<input type="file">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+    </div>
+  </div>
 	<!-- End Here -->
 	
 	

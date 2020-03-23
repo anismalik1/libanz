@@ -73,13 +73,52 @@ export class DashboardComponent implements OnInit{
         else
         {
           this.orders         = data.ORDERS;
-          this.recharges      = data.RECHARGES;
+         // this.recharges      = data.RECHARGES;
         }
       }
     ) 
   }
 
+  decode_data(data)
+  {
+    let jsondecode : any = [];
+    if(data != '')
+    {
+      jsondecode = JSON.parse(data);
+      if(jsondecode.operator_title)
+      {
+        return jsondecode.operator_title;
+      }
+      else if(jsondecode.product_title)
+      {
+        let pack = '';
+        for(var i = 0;i < jsondecode.pack_selected.length;i++)
+        {
+          if(jsondecode.product_title.toLowerCase().includes('multi'))
+            pack += jsondecode.pack_selected[i].title+'('+jsondecode.pack_selected[i].multi_price+')';
+          else
+            pack += jsondecode.pack_selected[i].title+'('+jsondecode.pack_selected[i].price+')';  
+        }
+        return jsondecode.product_title +'('+ pack+')';
+      }
+    }
+    return '';
+  }
 
+  check_delay(order_date)
+  {
+    let date1 = new Date();
+    let date2 = new Date(order_date);
+    let diffTime : Number = Math.abs(Number(date2) - Number(date1));
+    if(Number(diffTime) / (1000 * 60 ) > 15)
+    {
+      return 1;
+    }
+    else
+    {
+      return 2;
+    }
+  }
 
   fetch_transactions()
   {
