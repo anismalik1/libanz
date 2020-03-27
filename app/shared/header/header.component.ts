@@ -1,4 +1,4 @@
-	import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject } from '@angular/core';
+import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { map, startWith} from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Authparams } from '../../authparams';
 import { User } from '../../user';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+
 
 @Component({
   selector: 'app-header',
@@ -25,6 +27,9 @@ export class HeaderComponent implements OnInit{
   more_display : boolean = true;
   signupdisabled : boolean= false; 
   verifydisabled : boolean= false; 
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  form: FormGroup;
   remember : any = {rm:false,ph:'',pw : ''};
     private token_params : Authparams;
     public phone : number;
@@ -81,7 +86,27 @@ export class HeaderComponent implements OnInit{
         'cpassword' : [null,Validators.compose([Validators.required])],
       });
       this.get_remember();
+      this.createForm();
     }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.form.get('avatar').setValue(this.croppedImage);
+      //console.log(this.croppedImage)
+  }
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+    //console.log(this.imageChangedEvent)
+} 
+  createForm() {
+    this.form = this.fb.group({
+      avatar: null
+    });
+  } 
+  onSubmit()
+  {
+    
+  }
   login_submit(login)
   {
     if(this.step == 2)
@@ -500,6 +525,7 @@ export class HeaderComponent implements OnInit{
     script.text = ` 
     $(document).ready(function(){
       $('select').material_select();
+      $('.modal').modal();
       //$(".side-menu").swipe( {fingers:1} );
       $('#mobile-dashboard-menus').lightSlider({
         item: 1,

@@ -802,7 +802,19 @@
       <div class="file-field input-field">
 				<div class="btn">
 					<span>File</span>
-					<input type="file">
+					<form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()"> 
+						<input type="file" (change)="fileChangeEvent($event)" />
+            <!-- <image-cropper
+								[imageChangedEvent]="imageChangedEvent"
+								[maintainAspectRatio]="true"
+								[aspectRatio]="1/1"
+								[resizeToWidth]="100"
+								format="png"
+								(imageCropped)="imageCropped($event)"
+						></image-cropper>
+						
+						<img [src]="croppedImage" /> -->
+					</form>
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">
