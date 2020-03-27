@@ -1,3 +1,59 @@
+<style>
+
+    .cst-table tr:nth-child(odd) {
+        background-color: rgba(242,242,242,0.5);
+    }
+    .theader-cst{
+        background: #ececec;
+        white-space: nowrap;
+       
+    }
+    .cst-table tr td {
+        border: 1px solid #e2e2e2;
+    }
+    .cst-table{
+        white-space: nowrap;
+    }
+    .fix-welcome{
+        padding: 10px;
+        font-size: 16px;
+        color: #7b7a7a;
+      }
+      .user-image{
+          padding:9px;
+      }
+      
+      label.lbl-num {
+        line-height: 33px;
+        font-size: 16px !important;
+        }
+        .cst-dname{
+      
+      font-size: 16px !important;
+        padding: 10px;
+        text-transform: capitalize;
+      }
+      .heading-txt-1{
+        font-weight: bold;
+        color: #424242 !important;
+        line-height: 0 !important;
+        margin: 6px;
+      }
+    
+      @media only screen and (max-width: 767px){
+    
+    .btn-mb-respo{
+        width: 100%;
+    border-radius: 20px;
+    }
+    .pt-top-mb{
+        padding-top:22px !important;
+        white-space: nowrap;
+    font-size: 19px !important;
+    }
+    }
+        </style>
+
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -19,10 +75,10 @@
                             <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
                                   <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
                         </div>
-                  <div class="user-name">
-                      <span>Welcome,</span><br>
-                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
-                  </div>
+                        <div class="user-name">
+                            <span class="fix-welcome">Welcome,</span><br>
+                            <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
+                        </div>
               </div>
             </div>
             <app-side-nav></app-side-nav>
@@ -58,40 +114,26 @@
                 </div>
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="font600 inline-block">Topup Request</h3>
+                        <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-edit"></span> &nbsp; Topup Request</h3>
                         <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a>
-                        <div class="overflow-scroll">
-                            <table id="datatable" class="display responsive-table datatable-example">
+                        <div class="overflow-scroll cst-table">
+                            <table id="datatable" class="table display  datatable-example">
                                 <thead>
                                     <tr>
                                        
-                                        <th width="60px" nowrap="nowrap">S.No.</th>
-                                        <th width="80px" nowrap="nowrap">Order Id</th>
-                                        <th width="100px" nowrap="nowrap">Order Date</th>
+                                        <th >S.No.</th>
+                                        <th >Order Id</th>
+                                        <th >Order Date</th>
                                         <!-- <th width="100px" nowrap="nowrap">Name</th>
                                         <th width="100px" nowrap="nowrap">Contact No.</th> -->
-                                        <th width="80px" nowrap="nowrap">Amount</th>
-                                        <th width="80px" nowrap="nowrap">Commission/Surcharge</th>
-                                        <th width="125px" nowrap="nowrap">Payment Type</th>
-                                        <th nowrap="nowrap">TXN ID</th>
-                                        <th nowrap="nowrap">Status</th>
+                                        <th >Amount</th>
+                                        <th >Commission/Surcharge</th>
+                                        <th >Payment Type</th>
+                                        <th >TXN ID</th>
+                                        <th >Status</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        
-                                        <th width="60px" nowrap="nowrap">S.No.</th>
-                                        <th width="80px" nowrap="nowrap">Order Id</th>
-                                        <th width="100px" nowrap="nowrap">Order Date</th>
-                                        <!-- <th width="100px" nowrap="nowrap">Name</th>
-                                        <th width="100px" nowrap="nowrap">Contact No.</th> -->
-                                        <th width="80px" nowrap="nowrap">Amount</th>
-                                        <th width="80px" nowrap="nowrap">Commission/Surcharge</th>
-                                        <th width="125px" nowrap="nowrap">Payment Type</th> 
-                                        <th nowrap="nowrap">TXN ID</th>
-                                        <th nowrap="nowrap">Status</th>
-                                    </tr>
-                                </tfoot>
+                               
                                 <tbody *ngIf="topup_counts > 0">			
 									<tr *ngFor="let topup of topups | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: topup_counts };let i = index">
                                         

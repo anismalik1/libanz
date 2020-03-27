@@ -4827,8 +4827,9 @@ span.fa.fa-edit.fa-2x {
 
 a.pack-price {
     border: 1px solid #ececec;
-    padding: 10px 20px;
+    padding: 10px 25px;
     border-radius: 5px;
+    float: right;
 }
 
 a.pack-price:hover{
@@ -5101,6 +5102,36 @@ a.logup.modal-trigger.black-text {
     font-size: 26px;
     padding-bottom: 8px;
 }
-#name-characters {background: #d0cbcb;
-	padding: 9px 7px;
-	border-radius: 50%;}
+#name-characters {
+	
+	background: #d0cbcb;
+    padding: 12px 1px 15px 1px;
+    border-radius: 50%;
+}
+
+
+	.lSSlideWrapper {
+		max-width: 100%;
+		overflow: visible;
+		padding: 0 20px 0 0;
+	}
+
+
+
+	#circles-content .tab:after {
+		content: '>';
+		padding-left: 205px;
+		color: #8c8c8c;
+	}
+
+	.cst-desc{
+
+		background: #e3e1e1;
+    color: #494949;
+    font-size: 12px;
+    padding: 10px;
+    overflow: hidden;
+    width: 93%;
+    font-weight: 600;
+    margin: -10px 27px;
+	}

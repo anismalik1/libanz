@@ -103,7 +103,8 @@
 	
 		list-style-type: none;
 		font-size: 15px !important;
-		padding: 7px 0px 7px 0px;
+		
+		padding: 10px 0px 22px 0px;
 		border-bottom: 1px solid #ececec;
 	
 	}
@@ -140,9 +141,30 @@
 		top: -7px;
 		right: -11px !important;;
 		text-align: center;
-		font-size: 12px;
+		font-size: 11px;
 		font-weight: bold;
 	}
+
+	span.fa.fa-chevron-right.cs-right {
+    float: right;
+    font-weight: normal;
+	color: #d4d2d2;
+    font-size: 12px;
+    padding-top: 7px;
+}
+	/* .dashboard-menu-mobile{
+
+		position: relative;
+	}
+	.icon-text{
+
+		position: absolute;
+    top: 34px;
+    left: 27px;
+    font-size: 10px;
+    color: #8c8c8c;
+    text-transform: capitalize;
+	} */
 	}
 	
 	
@@ -158,7 +180,7 @@
 				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
 				<li class="mobile-search">
 					<mat-form-field class="example-full-width">
-					<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px;">
+					<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
 					<span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
 					 <mat-autocomplete #auto="matAutocomplete">
 							<span *ngIf="filterdList">
@@ -243,7 +265,7 @@
 		<div class="mobile-footer-menu">
 			<ul>
 				<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="fa fa-home" style="font-size:18px;"></span><span class="mobile-footer-text">Home</span></a></li>
-				<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="fa fa-gear" style="font-size:18px;"></span><span class="mobile-footer-text">Products</span></a></li>
+				<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="fa fa-stack-overflow" style="font-size:18px;"></span><span class="mobile-footer-text">Products</span></a></li>
 				<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="fa fa-gift" style="font-size:18px;"></span><span class="mobile-footer-text">Packages</span></a></li>
 				<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-question-circle" style="font-size:18px;"></span><span class="mobile-footer-text">FAQS</span></a></li>
 				<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger </span></a></li>
@@ -268,19 +290,23 @@
 				</div>
 	
 				<ul class="dashboard-menu-mobile">
-					<li><a [routerLink]="['/dashboard']"> <span class="fa fa-tachometer"></span>  &nbsp; Dashboard </a></li>
-					<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Recharge </a></li>
-					<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders </a></li>
-				   
+					<li><a [routerLink]="['/dashboard']"> <span class="fa fa-tachometer"></span>  &nbsp; Dashboard  <span class="fa fa-chevron-right cs-right"></span></a>
+						
+					</li>
+					<!-- <span class="icon-text">Say hello to mydthshop </span> -->
+					<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Recharge <span class="fa fa-chevron-right cs-right"></span> </a></li>
+				
+					<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders  <span class="fa fa-chevron-right cs-right"></span></a></li>
+				
 					<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><span class="fa fa-envelope"></span> &nbsp;  Value Transfer</a></li>
-			  
+					
 					<!-- <li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><span class="fa fa-gift"></span> &nbsp;  Manage Retailer </a></li> -->
 					
-					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Complaint Box </a></li>
-			  
-					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money </a></li>
-			  
-					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Topup Request </a></li>
+					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Complaint Box <span class="fa fa-chevron-right cs-right"></span></a></li>
+				
+					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					
+					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Topup Request <span class="fa fa-chevron-right cs-right"></span> </a></li>
 					<!-- <li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li> -->
 						<!-- <li><a [routerLink]="['/dashboard/commission-structure']"><span class="fa fa-sitemap"></span> Commission </a></li> -->
 						<!-- <li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li> -->
@@ -294,19 +320,16 @@
 						<!-- <li><a href="#"><span class="fa fa-check"></span> KYC Verify </a></li> -->
 						<!-- <li><a [routerLink]="['/dashboard/complaints']"><span class="fa fa-envelope"></span> complaints </a></li> -->
 	
+						
+					<li *ngIf="this.todoservice.get_user_type() == 2"><a routerLink="/dashboard/commission-structure" routerLinkActive="active" class="font-size-change"> <span class="fa fa-sitemap"></span> &nbsp;  Commission Structure <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					
+					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History <span class="fa fa-chevron-right cs-right"></span> </a></li>
 			  
-					<li *ngIf="this.todoservice.get_user_type() == 2"><a routerLink="/dashboard/commission-structure" routerLinkActive="active" class="font-size-change"> <span class="fa fa-sitemap"></span> &nbsp;  Commission Structure </a></li>
-			  
-					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History </a></li>
-			  
-			  
-					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Account </a></li>
+					
+					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Account  <span class="fa fa-chevron-right cs-right"></span></a></li>
 					
 				</ul>
-				<ul class="logout">	
-					
-					<li><a [routerLink]="['/logout']">Logout</a></li>
-				</ul>		
+			
 				
 			</div>
 			<div class="side-menu-body">
@@ -322,7 +345,7 @@
 				<ul class="phone-pay-icon">	
 					<li>
 						<select class="form-control">
-							<option>My Information</option>
+							<option>My Information  </option>
 							<option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></option>
 							<option>Option</option>
 							<option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></option>
@@ -362,6 +385,11 @@
 					</li>
 					
 				</ul>	
+
+				<ul class="logout">	
+					
+					<li><a [routerLink]="['/logout']">Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
+				</ul>		
 				</div>
 				
 			<h3 class="hide-left-menu-mb">Information</h3>	
@@ -531,8 +559,7 @@
 							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
 							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 							<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
-							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()"><span *ngIf="this.todoservice.get_user_characters() ==''"><i class="material-icons">dehaze
-							</i></span><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
+							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()"><span *ngIf="this.todoservice.get_user_characters() ==''"><img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png"></span><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
 						</a>
 					</li>
 				  </ul>

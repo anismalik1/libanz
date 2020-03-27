@@ -4,6 +4,35 @@
     margin-right: 1rem;
     border-radius: 50%;
 }
+@media only screen and (max-width: 767px){
+
+	
+
+.mobile-hide{
+
+	display: none;
+}
+
+.footer-button-buy{
+
+	position: fixed;
+	bottom: 64px;
+	padding: 10px 0px 6px 15px;
+    z-index: 999999;
+    /* left: 7%; */
+    background: #fff;
+    width: 100%;
+}
+
+}
+
+@media only screen and (min-width: 1024px){
+
+	.footer-button-buy{
+
+		display: none;
+	}
+}
 
 </style>
 <app-header></app-header>
@@ -63,7 +92,7 @@
 						<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a></span>
                         
                       </div>
-                      <div class="product-btn center">
+                      <div class="product-btn center mobile-hide">
                       	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
                       	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
                       </div>
@@ -435,8 +464,15 @@
 	</div>
 </div>
 </div>
+
 </div>
 </section>
+
+<div class="footer-button-buy">
+	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+
+</div>
 <!-- Modal Structure -->
 <div id="review" class="modal">
  <div class="modal-content no-padding" *ngIf="display == 1">
@@ -513,6 +549,8 @@
 </div>
 </div>
 </div>
+
+
 <div class="modal-footer orange center no-box-shadow" *ngIf="rating == 1">
  <button type="submit" class="modal-action white-text font-size-change btn-flat modal-close" *ngIf="rate_data.review == ''">Submit Review</button>
  <button type="submit" class="modal-action white-text font-size-change btn-flat modal-close" *ngIf="rate_data.review != ''">Update Review</button>

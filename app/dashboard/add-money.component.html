@@ -146,12 +146,134 @@ text-transform: capitalize;
   margin: 10px 10px 10px 0px;
     padding: 0px 20px 20px 20px;
 }
+.select-pay {
+    margin-left: -9px !important;
+}
+
+.icon-design-1{
+
+height: 25px;
+width: 25px;
+padding: 6px;
+border-radius: 50%;
+background-color: #3F51B5;
+color: #fff;
+display: block;
+font-size: 10px;
+
+}
+.icon-design-2{
+
+height: 25px;
+width: 25px;
+padding: 6px;
+border-radius: 50%;
+background-color: #e91e63;
+color: #fff;
+display: block;
+font-size: 10px;
+
+}
+
+.icon-design-3{
+
+height: 25px;
+width: 25px;
+padding: 6px;
+border-radius: 50%;
+background-color: #2196f3;
+color: #fff;
+display: block;
+font-size: 10px;
+
+}
+.add-money-history{
+
+margin-bottom: 5px !important;
+  height: 32px;
+  border-bottom: 1px solid #ececec;
+}
+.money-history{
+
+margin: 10px !important;
+  width: 55% !important;
+padding: 25px;
+box-shadow: 1px 1px 10px #ececec;
+margin-left: 10px;
+font-size: 14px;
+}
 
 @media only screen and (max-width: 767px){
 
-  .mb-pt-25{
+
+  .money-history{
+
+margin: 10px !important;
+  width: 90% !important;
+padding: 25px;
+box-shadow: 1px 1px 10px #ececec;
+margin-left: 10px;
+font-size: 14px;
+}
+
+ .mb-pt-25{
     padding-top: 25px;
   }
+  .icon-sp span{
+
+    position: absolute;
+    background: #ececec;
+    height: 40px;
+    width: 40px;
+    padding: 11px;
+    border-radius: 50%;
+    right: 40px;
+    z-index: 999;
+    top:25px;
+    font-size: 18px;
+  }
+  
+  .txt-hide{
+
+    display:none !important;
+  }
+  .cs-box-pay{
+
+
+    padding:10px 0px;
+  }
+  .wallt-txt{
+
+    padding: 5px 0;
+    font-weight: bold;
+    font-size: 17px;
+  }
+  .enter-amt{
+
+    font-size: 18px !important;
+    margin-top: -15px;  
+  }
+ .mb-btn-100{
+
+  width: 100%;
+   line-height: 0;
+ }
+ 
+
+}
+
+
+
+
+
+@media only screen and (min-width: 767px){
+
+  .cs-box-pay{
+
+    display:none;
+  }
+  
+  
 }
 </style>
 
@@ -196,7 +318,15 @@ text-transform: capitalize;
                     </div>
                     <div class="clearfix"></div>
                       <div class="card-content" *ngIf="!order_id">
-                        <h3 class="font600 inline-block mb-pt-25" style="margin-top:-15px;"><span class="fa fa-credit-card"></span> &nbsp; Add Money Request </h3>
+                        <h3 class="font600 inline-block mb-pt-25 txt-hide" style="margin-top:-15px;"><span class="fa fa-credit-card"></span> &nbsp; Add Money to Mydth Wallet  </h3>
+                       <div class="cs-box-pay">
+
+                        <p >Add Money to</p>
+                       <p class="icon-sp"> <span class="fa fa-credit-card"></span>  </p>
+                        <p class="wallt-txt"> MyDth Wallet </p> 
+                        <p>Available Balance <span class="fa fa-inr"></span>0 </p>
+                       </div>
+
                         <div class="row sec-7">
                             <div class="col s12 m7 ">
                               <div class="block-fund" >
@@ -204,7 +334,8 @@ text-transform: capitalize;
                               
 							                <div class="row"> 
                                 <div class="input-field col s12 m12">
-                                    <mat-form-field>
+                                  <div class="select-pay">
+                                  <mat-form-field>
                                         <mat-select placeholder="Select Payment Method" (selectionChange)='check_method($event.value)'  [(ngModel)]="paymethod" name="paymethod">
                                           <mat-option [value]="">Select  </mat-option>
                                           <mat-option [value]="'FUND TRANSFER'">NEFT/IMPS/RTGS/FUND TRANSFER </mat-option>
@@ -212,15 +343,18 @@ text-transform: capitalize;
                                           <mat-option [value]="'Gateway'">Gateway </mat-option>
                                           <mat-option [value]="'Paytm'">Paytm </mat-option>
                                         </mat-select>
-                                      </mat-form-field>    
+                                      </mat-form-field>   
+                                      </div>
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="input-field col s12 m12">
                                   <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin" (keyup)="calc_percentage()">
-                                  <label for="enter-amount">Enter Amount*</label>
+                                  <label for="enter-amount" class="enter-amt"><span class="fa fa-inr"></span> &nbsp; Amount*</label>
                                 </div>
                               </div>
+
+                              <button type="submit" class="btn btn-large orange white-text mb-btn-100 cs-box-pay">Proceed</button>
                               <div class="row additional-charge hide">
                                  
                               </div>
@@ -235,18 +369,41 @@ text-transform: capitalize;
                             </div>
                               <div class="row send-topup hide">
                                 <div class="input-field col s12 m12 center">
-                                  <button type="submit" class="btn btn-large orange white-text">Send TopUp Request</button>
+                                  <!-- <button type="submit" class="btn btn-large orange white-text">Send TopUp Request</button> -->
                                 </div>
                               </div>
                               <div class="row send-gateway hide">
                                   <div class="input-field col s12 m12 center">
-                                    <button type="submit" class="btn btn-large orange white-text">Proceed</button>
+                                    <!-- <button type="submit" class="btn btn-large orange white-text">Proceed</button> -->
                                   </div>
                                 </div>
                             </form>
                             </div>
                             </div>
                           
+                            <div class="col s12 m6 money-history">
+                              <div class="row">
+                                
+                                <div class="add-money-history">
+                                <div class="col s3"><span class="fa fa-card icon-design-1">OP</span></div>
+                                <div class="col s8">Online Payment</div>
+                                <div class="col s1"><span class="fa fa fa-chevron-right"></span></div>
+                              </div>
+                              <div class="add-money-history" >
+                                <div class="col s3"><span class="fa fa-card icon-design-2">CD</span></div>
+                                <div class="col s8">Cash On Deleivery</div>
+                                <div class="col s1"><span class="fa fa fa-chevron-right"></span></div>
+                              </div>
+
+                              <div class="add-money-history" >
+                                <div class="col s3"><span class="fa fa-card icon-design-3">PM</span></div>
+                                <div class="col s8">Paytm </div>
+                                <div class="col s1"><span class="fa fa fa-chevron-right"></span></div>
+                              </div>
+                            </div>
+                            </div>
+
+
 
                             <div class="col s12 m12 axis-bank">
                               <div class="tab-bankd">
