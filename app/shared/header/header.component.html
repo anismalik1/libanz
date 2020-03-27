@@ -2,7 +2,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-
+#name-characters {
+    background: #d0cbcb;
+    padding: 11px 8px;
+    border-radius: 50%;
+    text-transform: uppercase;
+}
 	.issue-menu a.logup.modal-trigger {
 		color: #fff;
 		border-radius: 20px;
@@ -279,9 +284,13 @@
 				<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
 				
 				<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+				
 				<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-					<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
+						<div class="user-name-mb">
+				<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
 				<p>{{this.todoservice.get_user_phone()}}</p>
+
+				</div>
 				<div class="clearfix"></div>
 				</div>
 				<a class="modal-trigger" href="#modal1" onclick="$('.side-menu').removeClass('open-menu');$('.mobile-mask').hide();"><i class="material-icons">photo_camera</i></a>
