@@ -19,6 +19,7 @@ import { TruncatePipe } from './truncatePipe';
 import { BlogComponent } from './blog.component';
 import { BlogDetailComponent } from './blog-detail.component';
 import { MobileHomeComponent } from './mobile-home.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 const routes: Routes = [
   
   //{ path: 'recharge/:name/proceed', component: RechargeComponent },
@@ -42,7 +43,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    SharedCommonModule
+    SharedCommonModule,
+    ImageCropperModule
   ],
   declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe,TruncatePipe, BlogComponent, BlogDetailComponent, MobileHomeComponent],
   providers : [TodoService,AuthService,User,Params,RechargeType]

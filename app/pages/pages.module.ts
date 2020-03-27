@@ -23,6 +23,7 @@ import { PackageViewComponent } from './package-view.component';
 import { UserDetailComponent } from './user-detail.component';
 import { TestimonialsComponent } from './testimonials.component';
 import { TruncatePipe } from './truncatePipe';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const routes: Routes = [
   { path: '', component: PageViewComponent },

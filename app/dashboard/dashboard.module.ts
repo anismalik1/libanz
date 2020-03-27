@@ -28,6 +28,8 @@ import { DthOrdersComponent } from './dth-orders.component';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxPaginationModule} from 'ngx-pagination';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'orders', component: RechargeOrdersComponent },
@@ -55,7 +57,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule,
     MatDatepickerModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    ImageCropperModule 
   ],
   declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent, RechargeOrdersComponent, DthOrdersComponent],
   providers : [ExcelService,AuthService,TodoService,User,ProductService]

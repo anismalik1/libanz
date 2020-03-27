@@ -2,6 +2,7 @@ import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject} from '@angul
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { map, startWith} from 'rxjs/operators';
+import { Http } from '@angular/http';
 import { AuthService } from '../../auth.service';
 import { TodoService } from '../../todo.service';
 import { ProductService } from '../../product.service';
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit{
   imageChangedEvent: any = '';
   croppedImage: any = '';
   form: FormGroup;
+  disabled : boolean = false;
   remember : any = {rm:false,ph:'',pw : ''};
     private token_params : Authparams;
     public phone : number;
@@ -62,7 +64,8 @@ export class HeaderComponent implements OnInit{
     private toastr : ToastrManager,
     private vcr: ViewContainerRef,
     private router : Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http : Http
   ) 
     {
       if(!this.get_token())
@@ -103,10 +106,43 @@ export class HeaderComponent implements OnInit{
       avatar: null
     });
   } 
-  onSubmit()
-  {
-    
+  
+  onSubmit() {
+    this.disabled = true;
+    const formModel = this.prepareSave();
+    this.http.post('https://www.mydthshop.com/accounts/apis/home/upload_profile', formModel)
+    .subscribe(
+      data => {
+        
+        let response = $.parseJSON(data['_body'])
+        if(response.status == true)
+        {
+          this.toastr.successToastr("Updated Successfully",'Success!');
+          let url = window.location.pathname;
+          if(url == url)
+          {
+            this.router.routeReuseStrategy.shouldReuseRoute = function(){
+              return false;
+            }
+          }  
+          this.router.navigated = false;
+          this.router.navigate([url]);
+        }
+        else
+        {
+          this.toastr.errorToastr(response.msg);
+        }
+      }
+  )
   }
+
+  private prepareSave(): any {
+    let input = new FormData();
+    input.append('avatar', this.form.get('avatar').value);
+    input.append('token', this.get_token());
+    return input;
+  }
+
   login_submit(login)
   {
     if(this.step == 2)
@@ -717,7 +753,8 @@ export class HeaderComponent implements OnInit{
     else
     {
       window.sntchChat.Init(70574);
-      setTimeout("$('#sntch_webchat').css('width','350px');$('#sntch_iframe')[0].setAttribute('style', 'width:350px; height:425px; border:0');$('#sntch_webchat').css('height','400')", 5000);
+      if($('#sntch_iframe').length > 0)
+        setTimeout("$('#sntch_webchat').css('width','350px');$('#sntch_iframe')[0].setAttribute('style', 'width:350px; height:425px; border:0');$('#sntch_webchat').css('height','400')", 5000);
     }
   }
   openchat();

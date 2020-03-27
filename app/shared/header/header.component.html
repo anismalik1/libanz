@@ -284,7 +284,7 @@
 				<p>{{this.todoservice.get_user_phone()}}</p>
 				<div class="clearfix"></div>
 				</div>
-				<a class="modal-trigger" href="#modal1" ><i class="material-icons">photo_camera</i></a>
+				<a class="modal-trigger" href="#modal1" onclick="$('.side-menu').removeClass('open-menu');$('.mobile-mask').hide();"><i class="material-icons">photo_camera</i></a>
 				<div class="wallet-mobile">
 					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 				</div>
@@ -826,12 +826,16 @@
 	<div id="modal1" class="modal">
     <div class="modal-content">
       <h4>Change Icon</h4>
-      <div class="file-field input-field">
-				<div class="btn">
-					<span>File</span>
 					<form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()"> 
-						<input type="file" (change)="fileChangeEvent($event)" />
-            <!-- <image-cropper
+						<div class="file-field input-field">
+							<div class="btn">
+								<span>File</span>
+								<input type="file" (change)="fileChangeEvent($event)" />
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text">
+							</div>
+							<image-cropper
 								[imageChangedEvent]="imageChangedEvent"
 								[maintainAspectRatio]="true"
 								[aspectRatio]="1/1"
@@ -839,14 +843,12 @@
 								format="png"
 								(imageCropped)="imageCropped($event)"
 						></image-cropper>
-						
-						<img [src]="croppedImage" /> -->
+						<img [src]="croppedImage" />
+						</div>
+
+						<div class="clearfix"></div>
+						<input type="submit" value="Set" class="btn" [disabled] = "disabled">
 					</form>
-				</div>
-				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text">
-				</div>
-			</div>
     </div>
   </div>
 	<!-- End Here -->

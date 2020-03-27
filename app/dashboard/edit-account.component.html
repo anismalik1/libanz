@@ -104,14 +104,14 @@
                         <div class="inline">
                             <input type="file" (change)="fileChangeEvent($event)" /> <a href="#remove-avatar" class="font-size-change modal-trigger inline-block margin-left1">Remove Avatar</a>
                            <!-- <label><span class="fa fa-camera fa-3x"></span></label> -->
-                            <!-- <image-cropper
+                            <image-cropper
                                 [imageChangedEvent]="imageChangedEvent"
                                 [maintainAspectRatio]="true"
                                 [aspectRatio]="1/1"
                                 [resizeToWidth]="100"
                                 format="png"
                                 (imageCropped)="imageCropped($event)"
-                            ></image-cropper> -->
+                            ></image-cropper>
                             
                             <img [src]="croppedImage" />
                           <div class="form-group img-space">                              

@@ -8,6 +8,7 @@ import { ToastrModule } from 'ng6-toastr-notifications';
 import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { SideNavComponent } from '../shared/side-nav/side-nav.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({ 
   imports: [CommonModule,
@@ -19,6 +20,7 @@ import { SideNavComponent } from '../shared/side-nav/side-nav.component';
     RouterModule,
     ToastrModule.forRoot(),
     NgxDaterangepickerMd.forRoot(),
+    ImageCropperModule
 ],
   declarations: [
     HeaderComponent,
