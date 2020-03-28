@@ -7,6 +7,16 @@
     padding: 10px;
     text-transform: capitalize;
   }
+  .btn-value{  
+  width: 100%;
+    margin-right: 0;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+table.striped>tbody>tr:nth-child(odd) {
+    background-color: transparent;
+}
   .w-100-btn{
 
       width: 100%;
@@ -230,7 +240,7 @@ margin-left: 15px;
                         <ng-template #transfertemp>
                         <div class="value-transfer col s12 m12 margin-top">
                                 <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
-                            <table class="responsive-table striped bordered">
+                            <table class="responsive-table1 striped bordered">
                                 <tbody> 
                                     <tr>
                                         <td><span class="font600 font-size-change">Name</span></td>
@@ -245,13 +255,13 @@ margin-left: 15px;
                                         <td>
                                         <div class="input-field">
                                             <input id="amount" type="text" class="validate" maxlength="6" name="amount" ngModel>
-                                            <label for="amount">Enter amount to be transfered</label>
+                                            <label for="amount">Enter Amount Here </label>
                                         </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                    <td colspan="2"><button type="Submit" class="btn orange">Transfer Now</button>
-                                        <button type="button" class="btn orange" (click)="cancel()">Cancel</button></td>
+                                    <td colspan="2"><button type="Submit" class="btn orange btn-value">Transfer Now</button>
+                                        <button type="button" class="btn orange btn-value" (click)="cancel()">Cancel</button></td>
                                     </tr>
                                 </tbody>    
                                 </table>
