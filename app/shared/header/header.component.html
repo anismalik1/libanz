@@ -267,7 +267,7 @@
 		
 		<!-- mobile top menu end-->
 		
-		<div class="mobile-footer-menu">
+		<div class="mobile-footer-menu cst-hide-only">
 			<ul>
 				<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']"><span class="fa fa-home" style="font-size:18px;"></span><span class="mobile-footer-text">Home</span></a></li>
 				<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="fa fa-stack-overflow" style="font-size:18px;"></span><span class="mobile-footer-text">Products</span></a></li>
@@ -311,11 +311,11 @@
 					
 					<!-- <li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><span class="fa fa-gift"></span> &nbsp;  Manage Retailer </a></li> -->
 					
-					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Complaint Box <span class="fa fa-chevron-right cs-right"></span></a></li>
+					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Tickets <span class="fa fa-chevron-right cs-right"></span></a></li>
 				
 					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money <span class="fa fa-chevron-right cs-right"></span> </a></li>
 					
-					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Topup Request <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Add Money Request <span class="fa fa-chevron-right cs-right"></span> </a></li>
 					<!-- <li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li> -->
 						<!-- <li><a [routerLink]="['/dashboard/commission-structure']"><span class="fa fa-sitemap"></span> Commission </a></li> -->
 						<!-- <li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li> -->
@@ -335,10 +335,13 @@
 					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History <span class="fa fa-chevron-right cs-right"></span> </a></li>
 			  
 					
-					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Account  <span class="fa fa-chevron-right cs-right"></span></a></li>
+					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Profile  <span class="fa fa-chevron-right cs-right"></span></a></li>
 					
 				</ul>
-			
+				<ul class="logout">	
+					
+					<li><a [routerLink]="['/logout']">Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
+				</ul>	
 				
 			</div>
 			<div class="side-menu-body">
@@ -395,10 +398,7 @@
 					
 				</ul>	
 
-				<ul class="logout">	
 					
-					<li><a [routerLink]="['/logout']">Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
-				</ul>		
 				</div>
 				
 			<h3 class="hide-left-menu-mb">Information</h3>	

@@ -3306,7 +3306,7 @@ tbody img{
 	position: absolute;
     top: 2%;
     left: 3%;
-	color: #05ff05;
+	color: #0ebd0e;
 	font-size: 2rem;
 	cursor: pointer;
 	z-index: 9;
@@ -3331,7 +3331,7 @@ tbody img{
 	display: none;
 }
 .when-check.grey-text{
-	color: #f3f3f3 !important;
+	color: #bbb7b7 !important;
 }
 .xzoom-thumbs ul li{
 	width: 100px;
@@ -4397,7 +4397,7 @@ background: #ff6a00;
 .mobile-search button{background:none;outline:0;border:0;cursor:pointer;padding: 6px 30px;}
  .mobile-search .mobile-search-icon {position: absolute;right: 0;top: 0;  }
 /*=======header right============*/
-.mobile-header-right{float:right;}
+.mobile-header-right{float:right; padding-right: 15px;}
 
 
 .mobile-header-right span.noti-circle {width: 22px;height: 22px;background: #fff;display: block;color: #000;border-radius: 50%;line-height: 22px;position: absolute;top: -7px;right: -24px;text-align: center;font-size: 12px;font-weight: bold;}
@@ -4529,6 +4529,14 @@ body{padding-bottom: 80px;}
 		color: #666;
 		font-size: 25px;
 		text-align: center !important;
+	}
+
+	.side-menu .side-menu-header .profile {
+		width: 51px;
+		border-radius: 50%;
+		float: left;
+		margin-right: 9px;
+		margin-top: 10px;
 	}
 	.hide-img{
 
@@ -4809,7 +4817,7 @@ span.fa.fa-edit.fa-2x {
     border-radius: 50%;
 	text-transform: uppercase;
 	position: absolute;
-    top: 22px;
+    top: 8px;
     width: 44px;
     font-size: 15px;
 }
@@ -4821,8 +4829,18 @@ a.modal-trigger i {
     width: 30px;
     display: block;
 }
-.side-nav li>a:hover {
-    background-color: transparent !important;
+.side-nav li a:hover {
+    background-color:transparent !important;
+}
+a.modal-trigger i {
+    position: absolute;
+	top: 52px !important;
+	
+    padding-top: 16px;
+    left: 55px !important;
+    height: 30px;
+    width: 30px;
+    display: block;
 }
 	}
 
@@ -5157,7 +5175,7 @@ a.logup.modal-trigger.black-text {
 } */
 a.modal-trigger i {
     position: absolute;
-    top: 35px;
+    top: 35px !important;
     left: 40px;
     height: 30px;
     width: 30px;

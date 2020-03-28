@@ -1,4 +1,18 @@
 <style>
+	.cst-table tr:nth-child(odd) {
+    background-color: rgba(242,242,242,0.5);
+}
+.theader-cst{
+    background: #ececec;
+    white-space: nowrap;
+   
+}
+.cst-table tr td {
+    border: 1px solid #e2e2e2;
+}
+.cst-table{
+    white-space: nowrap;
+}
 tr.ng-star-inserted {
     border-bottom: 1px solid #bbb9b9;
 }
@@ -141,8 +155,8 @@ right: 36px;
 						<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a> -->
 						<a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a>
 						<hr/>
-	
-						<table id="datatable" class="display responsive-table datatable-example">
+						<div class="responsive-table">
+						<table id="datatable" class="table display  datatable-example cst-table">
 							<thead>
 									<tr>
 											<th nowrap="nowrap" width="57px">S.No.</th>
@@ -211,6 +225,7 @@ right: 36px;
 									</tr>
 							</tbody>	
 					</table>
+				</div>
 				</div>
 	
 					
