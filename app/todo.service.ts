@@ -806,4 +806,15 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/fetch_home_products';
     return this.send_post_request(data,url) ; 
   }
+
+  search_order(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/search_order';
+    return this.send_post_request(data,url) ; 
+  }
+  fetch_recent_transfer(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_recent_transfer';
+    return this.send_post_request(data,url) ; 
+  }
 }

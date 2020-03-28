@@ -5172,10 +5172,13 @@ a.modal-trigger i {
 
 
 
-	#circles-content .tab:after {
+	#circles-content .tab.active:after {
 		content: '>';
 		padding-left: 205px;
 		color: #8c8c8c;
+		position: absolute;
+    right: 10px;
+    margin-top: -45px;
 	}
 
 	.cst-desc{

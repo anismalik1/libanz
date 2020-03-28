@@ -219,7 +219,7 @@ export class RechargeOrdersComponent implements OnInit {
   check_delay(order_date)
   {
     let date1 = new Date();
-    let date2 = new Date(order_date);
+    let date2 = order_date * 1000;
     let diffTime : Number = Math.abs(Number(date2) - Number(date1));
     if(Number(diffTime) / (1000 * 60 ) > 15)
     {
@@ -231,6 +231,33 @@ export class RechargeOrdersComponent implements OnInit {
     }
   }
 
+  seach_order()
+  {
+    var key = $("#order-id").val();
+    if(key != null)
+    {
+      this.spinner.show();
+    let data =  {token : this.get_token(),key : key};
+    this.todoservice.search_order(data)
+		.subscribe(
+			data => 
+			{
+				this.spinner.hide();
+			  if(data.status == 'Invalid Token')
+			  {
+          this.authservice.clear_session();
+          this.router.navigate(['/proceed/login']);
+			  }
+			  if(!jQuery.isEmptyObject(data))
+			  {
+          this.recharges      = data.ORDERS;
+          this.recharge_counts  = this.recharges.length;	
+        }
+        this.init_script();
+			}
+		  );
+    } 
+  }
   fetch_recharge_history(page)
   {
     if(!this.authservice.authenticate())

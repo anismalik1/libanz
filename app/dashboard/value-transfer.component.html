@@ -218,28 +218,72 @@ margin-left: 15px;
                     <div class="card-content">
                         <span class="money-txt">Add Money To Pay </span>
                         <br/>
+                        <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
+                        <ng-template #transfertemp>
+                        <div class="value-transfer col s12 m12 margin-top">
+                                <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
+                            <table class="responsive-table striped bordered">
+                                <tbody> 
+                                    <tr>
+                                        <td><span class="font600 font-size-change">Name</span></td>
+                                    <td><span class="font-size-change">{{fetch_user.name}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="font600 font-size-change">Phone No.</span></td>
+                                        <td><span class="font-size-change">{{fetch_user.phone}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="font600 font-size-change">Enter Amount</span></td>
+                                        <td>
+                                        <div class="input-field">
+                                            <input id="amount" type="text" class="validate" maxlength="6" name="amount" ngModel>
+                                            <label for="amount">Enter amount to be transfered</label>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2"><button type="Submit" class="btn orange">Transfer Now</button>
+                                        <button type="button" class="btn orange" (click)="cancel()">Cancel</button></td>
+                                    </tr>
+                                </tbody>    
+                                </table>
+                            </form>
+                        </div>
+                    </ng-template>
+                        <ng-template #fetchtemp>
+                            <div class="value-transfer col s12 m12 margin-top">
+                                <form class="padd" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
+                                    <div class="row">
+                                        <div class="col s2"><label class="lbl-num">  +91- </label> </div>
+                                        <div class="col s9">
+                                        <input id="first_name" type="number" placeholder="Enter Mobile Number" class="validate" name="phone" [(ngModel)]="fetch_user.phone">
+                                        </div>
+                                        <div class="col s1"> <span class="fa fa-address-book"></span> </div>
+                                    <div class="input-field col s12 center">
+                                        <button type="submit" class="btn btn-large white-text value-sub orange" id="fetch-form">Submit</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </ng-template>
 
-
-                        <div class="form-group" style="padding-top:15px;">
+                        <!-- <div class="form-group" style="padding-top:15px;">
                             <div class="col s2"><label class="lbl-num">  +91- </label> </div>
                             <div class="col s9"><input type="text" placeholder="Enter Mobile Number"/></div>
                             <div class="col s1"> <span class="fa fa-address-book"></span> </div>
-                        </div>
-
-
-                        <div class="recent-details">
-                            <h4 class="recent-txt">Recents </h4>
-
-                            <div class="row">
-                                <div class="circle-box1">MS </div>
-                                <div class="circle-box2">PS </div>
-                                <div class="circle-box3">BM </div>
-                                <div class="circle-box4">LK </div>
-                            </div>
-                        </div>
-
-                        <div class="input-field col s12 center">
+                        </div> -->
+                        
+                        <!-- <div class="input-field col s12 center">
                             <button type="submit" class="btn btn-large white-text value-sub orange btn-dfix">Proceed To Pay</button>
+                        </div> -->
+                        <div class="recent-details" *ngIf="recent_transfer && recent_transfer.length > 0">
+                            <h4 class="recent-txt">Recents </h4>
+                            <div class="row">
+                                <div class="{{this.classes[i%4]}}" *ngFor="let item of recent_transfer;let i = index"> <a href="javascript:" class="white-text" (click)="select_partner(item.subscriber_id)" *ngIf="check_user(item.partner) != null">{{check_user(item.partner)}}</a> </div>
+                                <!-- <div class="circle-box2">PS </div>
+                                <div class="circle-box3">BM </div>
+                                <div class="circle-box4">LK </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
