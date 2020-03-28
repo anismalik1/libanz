@@ -104,7 +104,7 @@ type="ball-clip-rotate">
 			<div class="col s12 m4" *ngFor="let item of blogs;">
 				<div class="card blog-min-hei">
 					<div class="card-image">
-						<img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+						<a target="_blank" [routerLink]="['/blog-detail/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
 					</div>
 					<div class="card-content">
 						<div class="author">
@@ -118,7 +118,7 @@ type="ball-clip-rotate">
 							</p>
 						</div>
 						<div class="blog-content"> 
-						<span class="blog-title" title="{{item.title}}">{{item.title | slice:0:32}}<span *ngIf="item.title.length>32">...</span></span>
+						<span class="blog-title" title="{{item.title}}"><a target="_blank" [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
 						<div class="clearfix"></div>
 						<span class="blog-description-{{item.id}}" [innerHTML]="decode_html(item.shortDescription) | truncate : 225 : '...'"> </span>
 						</div>

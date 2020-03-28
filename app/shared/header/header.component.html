@@ -568,7 +568,8 @@
 							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
 							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
 							<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
-							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()"><span *ngIf="this.todoservice.get_user_characters() ==''"><img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png"></span><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
+							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() && this.todoservice.get_user_name() != ''"><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
+							<span *ngIf="this.todoservice.get_user_name() == ''"><img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png"></span>
 						</a>
 					</li>
 				  </ul>
