@@ -1,4 +1,20 @@
-﻿<app-header></app-header>
+﻿<style>
+
+	@media only screen and (max-width: 767px){
+	.cst-addbtn{
+		line-height: 45px !important;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: -webkit-center;
+    padding-right: 43px;
+	}
+	.w-100-btn{
+
+		width:100%;
+	}
+}
+</style>
+<app-header></app-header>
 <section class="flash-deal border-bottom">
     <div class="container">
         <div class="row no-margin">
@@ -66,8 +82,8 @@
 					</div>
 				</div>
 				<div class="card-action right-align cart-card-padd" *ngIf="this.productservice.cartItemsCount() > 0">
-						<a href="javascript:" [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
-						<a href="javasctipt:" routerLink="/product/checkout" class="btn sign orange btn-large font-size-change waves-effect waves-light"> Place Order</a>
+						<a href="javascript:" [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change cst-addbtn"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
+						<a href="javasctipt:" routerLink="/product/checkout" class="btn sign orange btn-large font-size-change waves-effect waves-light w-100-btn"> Place Order</a>
 					</div>
                 </div>
             </div>

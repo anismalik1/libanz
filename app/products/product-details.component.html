@@ -5,7 +5,10 @@
     border-radius: 50%;
 }
 
+.rating-center{
 
+	line-height: 40px !important;
+}
 
 
 @media only screen and (max-width: 767px){
@@ -23,11 +26,12 @@
 
 	position: fixed;
 	bottom: 0;
-	padding: 10px 0px 6px 15px;
+	padding: 10px 0px 6px 0px;
     z-index: 999999;
     /* left: 7%; */
     background: #fff;
-    width: 100%;
+	width: 100%;
+	text-align:center;
 }
 
  
@@ -160,7 +164,8 @@
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
                   		<li>
                   			<span class="font-size-change1 font600 grey-text">Packages selected</span>
-                  		</li>
+						  </li>
+						  <br/>
                   		<li *ngFor="let item of package_month;let i = index">
                   			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
                   		</li>
@@ -240,7 +245,7 @@
               			<span class="font-size-change2 font600">Ratings and Reviews</span>
               		</div>
               		<div class="col s12 m4">
-              			<a href="#write-review" class="modal-trigger white btn black-text" (click)="fetch_review_data()">Rate This Product</a>
+              			<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate This Product</a>
               		</div>
               	</div>
               	<div class="row">
