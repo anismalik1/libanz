@@ -2193,7 +2193,8 @@ tbody img{
     width: 100%;
     display: inline-block;
     height: 35px;
-    line-height: 32px!important;
+	line-height: 32px!important;
+	border-radius: 20px;
 }
 .grey-txt-package{
 	color: #313131 !important;
