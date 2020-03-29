@@ -4861,7 +4861,7 @@ a.modal-trigger i {
 
 		.beard .breadcrumb:before {
 			color: #000;
-			padding:30px 0 0 0 !important;
+			padding:0px 0 0 0 !important;
 		}
 
 		.cst-back{
@@ -5088,7 +5088,7 @@ a.logup.modal-trigger.black-text {
 
 	font-size: 16px;
 	color: #333 !important;
-	line-height: 0px;
+	line-height: 4z0px;
 	padding-right:7px;
 }
 .white-spc-txt {

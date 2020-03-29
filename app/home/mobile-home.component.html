@@ -27,9 +27,10 @@ li.clogin.ng-star-inserted {
 
 .shadow-box img{
 
-	width: 92%;
+	width: 106%;
     border-radius: 20px;
-    padding:  5px 10px 5px 4px !important;
+    padding: 5px 10px 5px 4px !important;
+    margin-left: -6px !important;
 }
 .tabs .tab {
     display: inline-block;
@@ -152,19 +153,14 @@ margin: 2px;
 }
 .shadow-box{
 
-	/* width: 110%;
-    margin-top: 0px;
-    overflow: visible;
-	padding-left: 0px !important; */
-	
-	width: 115% !important;
+	width: 100%;
     border-radius: 20px;
     padding: 5px 10px 5px 4px !important;
-    margin-left: 200px;
 }
-.shadow-box:nth-child(1) {
+
+/* .shadow-box:nth-child(1) {
     margin-left: -57px;
-}
+} */
 .card-content.no-padding{
 
 	padding-left: 0px !important;
@@ -383,7 +379,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		
 								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
-								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 								
 								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 							</div>
@@ -435,7 +431,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			
 									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
-									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}}</span> </p>
 									
 									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 								</div>
@@ -480,7 +476,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		
 								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
-								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 								
 								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 							</div>
@@ -533,7 +529,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			
 									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
-									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> &nbsp; {{item.price}}</span> </p>
+									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 									
 									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 								</div>

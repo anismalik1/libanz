@@ -11,6 +11,9 @@
 }
 
 
+.rating-li li {
+    line-height: 0px;
+}
 @media only screen and (max-width: 767px){
 
 	
@@ -258,7 +261,7 @@
               			<span class="font-size-change1 grey-text">{{rev_count}} Reviews</span>
               		</div>
               		<div class="col s12 m9 l6">
-              			<ul *ngIf="grouped_rating">
+              			<ul *ngIf="grouped_rating" class="rating-li">
               				<li>
               					<a href="javascript:" class="black-text">
               						<div class="row no-margin">
@@ -420,8 +423,9 @@
 			<ul class="pt-all-10">
 				<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
 				<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
-				<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+				<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold;">FTA Pack is mandatory, you cannot remove it.</li>
 			</ul>
+			<hr class="horizontal">
 			
 </div>
 </div>
