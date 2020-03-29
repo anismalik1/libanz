@@ -251,7 +251,7 @@ section{
 	vertical-align: middle;
 }
 .margin-checkout{
-	margin-top: 5px !important;
+	margin-top: 10px !important;
 }
 .margin-top{
 	margin-top:9px !important;
@@ -2195,6 +2195,7 @@ tbody img{
     height: 35px;
 	line-height: 32px!important;
 	border-radius: 20px;
+	box-shadow: 0px 1px 5px #ececec;
 }
 .grey-txt-package{
 	color: #313131 !important;
@@ -3624,7 +3625,10 @@ canvas {
 	.last-footer .right-align{text-align: center !important;}
  }
  #footer-content .equalize5{min-height:201px;}
- .products-list{min-height: 410px;}
+ .products-list {
+    min-height: 460px;
+    overflow: auto;
+}
  #brand-category li{ margin-right: 35px;}
  .include-multi-box img{width:auto!important;}
  .font-18{font-size: 18px;}
@@ -3638,7 +3642,7 @@ canvas {
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
  .banner-slider1 .full-width{height: 265px;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
- #wallet-type .mydth-wallet img{width: 80px; margin-top:3px;}
+ #wallet-type .mydth-wallet img{width:55px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
  .blog-page .card-content{padding: 0;}
  .blog-page .card-content .author{padding: 1rem;border-bottom: 1px solid #e6e6e6;}
@@ -4304,7 +4308,10 @@ a.btn-floating.btn-large.orange.dropdown-button.white-text {
 .recommended-section .card-image{background: #f9f9f9;}
 .recomm .card-title{background-image: none !important;font-size: 18px;color: #000;border: 1px solid #d6d6d6;border-right: 0;border-left: 0;}
 .recomm .btn-new1 .btn{width: 100% !important;border-radius: 0 !important;box-shadow: none;margin: 0;}
-.recomm .card{border: 1px solid #d6d6d6; transition: .3s all linear;}
+.recomm .card{height: 450px !important;
+    overflow: auto;
+    border: 1px solid #d6d6d6;
+    transition: .3s all linear; }
 .recomm .card:hover{border: none;box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.31) !important;}
 .new-airtel-x ul{column-count: 1 !important;}
 .new-airtel-x ul li{padding: 1rem 2rem !important;}
@@ -5225,4 +5232,13 @@ a.modal-trigger i {
 	}
 	.money-history {
 		display: none;
+	}
+	.search-link i {
+		position: absolute;
+		right: 30px;
+		font-size: 18px;
+	}
+	.modal-trigger i {
+		color: #333;
+		font-size: 20px !important;
 	}

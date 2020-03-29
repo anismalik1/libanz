@@ -37,6 +37,15 @@
 	text-align:center;
 }
 
+.align-center{
+
+	margin: auto 56px !important;
+}
+.cst-size-rate{
+
+	font-size:15px !important;
+}
+
  
 }
 
@@ -244,11 +253,11 @@
 					</div>																				
 			<div class="review-ratings margin-top1">
               	<div class="row rew-sta-rat">
-              		<div class="col s12 m8">
-              			<span class="font-size-change2 font600">Ratings and Reviews</span>
+              		<div class="col s8 m8">
+              			<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
               		</div>
-              		<div class="col s12 m4">
-              			<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate This Product</a>
+              		<div class="col s4 m4">
+              			<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate Product</a>
               		</div>
               	</div>
               	<div class="row">
@@ -376,7 +385,7 @@
       <div class="channels-accoriadn">
        <div class="center">	
 				<h1 class="center font600 text-orange">Available Packs</h1>
-				<span class="chip green white-text">Please Select Your Basic Pack</span>
+				<span class="chip green white-text align-center">Please Select Your Basic Pack</span>
 			</div>
 			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
@@ -391,9 +400,13 @@
 									<h4 class="grey-text">{{item.title}}</h4>
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+									<br/>
 									<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
+								
 								</div>
+								
 							</div>
+							<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li>
 							<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
 								<div class="card-content center" >
 									<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
@@ -451,11 +464,13 @@
 					<p class="inline-block font600">{{item.title}} :</p>
 					<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
+					<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap; font-size:12px;">FTA Pack is mandatory, you cannot remove it.</li>
 				</div>
 				<div class="subtotal" *ngIf="this.product && this.product.promos">
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
+				
 				</div>
 				<!-- <div class="subtotal">
 					<p class="inline-block font600">Cashback<i class="red-text"> *</i> :</p>
@@ -467,6 +482,7 @@
 			<div class="subtotal payable margin-top">
 				<p class="inline-block font600">Amount Payable :</p>
 				<p class="inline-block right font-size-change"> <i class="icon-inr"></i> {{calculate_amount() }}</p>
+				
 				<div class="clearfix"></div>
 				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
 				<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>

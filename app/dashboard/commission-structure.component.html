@@ -1,3 +1,33 @@
+<style>
+
+    .cst-table tr:nth-child(odd) {
+        background-color: rgba(242,242,242,0.5);
+    }
+    .theader-cst{
+        background: #ececec;
+        white-space: nowrap;
+       
+    }
+    .cst-table tr td {
+        border: 1px solid #e2e2e2;
+    }
+    .cst-table{
+        white-space: nowrap;
+    }
+
+    @media only screen and (max-width: 767px){
+
+        .responsive-table {
+    width: 100%;
+    overflow: auto;
+}
+.cst-h3{
+
+    padding-top: 25px;
+}
+    }
+</style>
+
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -12,7 +42,7 @@
     <div class="container">
         <div class="row no-margin">
             <div class="col s12 m3">
-                <div class="card">
+                <!-- <div class="card">
               <div class="card-content user-content">
                     <div class="user-image">
                             <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
@@ -24,20 +54,20 @@
                       <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user().name}}</span>
                   </div>
               </div>
-            </div>
+            </div> -->
                 <app-side-nav></app-side-nav>			    
             </div>
             <div class="col s12 m9">
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="font600 inline-block">Commision Structure</h3>
+                        <h3 class="font600 inline-block cst-h3" style="margin-top:-15px;">Commision Structure</h3>
                   <ul class="tabs commision">
                     <li class="tab col s12 m4"><a href="#test1" class="black-text">DTH</a></li>
                     <li class="tab col s12 m4"><a href="#test2" class="black-text">Recharge &amp; Bill Payments </a></li>
                     <li class="tab col s12 m4"><a href="#test3" class="black-text">MyDthShop Values</a></li>
                   </ul>
-                    <div id="test1" class="margin-top">
-                        <table id="datatable" class="display responsive-table datatable-example">
+                    <div id="test1" class="margin-top responsive-table">
+                        <table id="datatable" class="display datatable-example cst-table">
                                 <thead>
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>
@@ -70,8 +100,8 @@
                                 </tbody>	
                             </table>
                     </div>
-                    <div id="test2" class="margin-top">
-                        <table id="datatable1" class="display responsive-table datatable-example">
+                    <div id="test2" class="margin-top responsive-table">
+                        <table id="datatable1" class="display  datatable-example cst-table">
                                 <thead>
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>
@@ -104,8 +134,8 @@
                                 </tbody>	
                             </table>
                     </div>
-                    <div id="test3" class="margin-top">
-                        <table id="datatable2" class="display responsive-table datatable-example">
+                    <div id="test3" class="margin-top responsive-table">
+                        <table id="datatable2" class="display responsive-table datatable-example cst-table">
                                 <thead>
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>

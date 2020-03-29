@@ -383,7 +383,7 @@
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout" *ngIf="cod == false">
 						<span *ngIf="this.todoservice.get_user_wallet_amount() > this.productservice.calculateCartAmount()"><a href="javascript:" class="btn orange btn-large ctn-che1" (click)="checkout_items(1)">Continue Checkout</a></span>
-						<span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a> <span class="red-text">!Insufficient Balance.</span> <a class="blue-text" [routerLink]="['/dashboard/add-money']">Add Money</a></span>
+						<span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a> <br/> <span class="red-text">!Insufficient Balance.</span> <a class="blue-text" [routerLink]="['/dashboard/add-money']">Add Money</a></span>
 					</div>
 					<div class="name margin-checkout" *ngIf="cod == true">
 						<span><a href="javascript:" class="btn orange btn-large cod-check" (click)="checkout_items(2)">Continue Checkout</a></span>

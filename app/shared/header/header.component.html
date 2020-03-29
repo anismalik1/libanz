@@ -157,6 +157,8 @@
     font-size: 12px;
     padding-top: 7px;
 }
+
+
 	/* .dashboard-menu-mobile{
 
 		position: relative;
@@ -172,7 +174,9 @@
 	} */
 	}
 	
-	
+	.side-nav li>a:hover {
+    background-color: transparent !important;
+}
 	
 		</style>
 	<!-- Header Start Here -->
@@ -829,7 +833,7 @@
 		<li><div class="divider"></div></li>
 		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
 		<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
-		<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
+		<li><a routerLink="/p/24-7" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
 		
 		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
 	</ul>
