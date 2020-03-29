@@ -466,7 +466,7 @@ export class ProductDetailsComponent implements OnInit{
         if(typeof data.PACKAGEMONTH != 'undefined' )
         {
           this.package_month = data.PACKAGEMONTH;
-          console.log(this.package_month)
+          //console.log(this.package_month)
           if(this.package_month)
           {
             this.monthdata = [this.package_month[0]];
@@ -830,40 +830,40 @@ export class ProductDetailsComponent implements OnInit{
         }
         if($(window).width() >767){
         var scroll = $(window).scrollTop();
-        if(scroll >= 132)
+        if(scroll >= 1)
         {
           if($('#footer-content').isInViewport())
           {
             if($(window).scrollTop() - $('#footer-content').offset().top > -300)
             {
-              $('.images-product').css('position','relative');
-              $('.order-summary').css('position','relative');
+              $('.images-product').css({'position':'relative','top':'0'});
+              //$('.order-summary').css('position','relative');
               return;
             }
             
           }
 
-          if ($('.product-detail').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top < -400)) {
-            $('.images-product').css('position','fixed').css('top','0');
-            $('.order-summary').css('position','relative');
+          if ($('.product-img').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top < -400)) {
+            $('.images-product').css({"position":"fixed","top":"106px"});
+            //$('.order-summary').css('position','relative');
           }
           else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top > -400) && ($(window).scrollTop() - $('#channel-list').offset().top < 0))
           {
-            $('.images-product').css('position','relative');
+            $('.images-product').css({'position':'relative','top':'0'});
           }
           else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top > 0))
           {
-            $('.order-summary').css('position','fixed').css('top','0').css('right','0');
+            //$('.order-summary').css({'position':'fixed'});
           }
           else 
           {
-            $('.images-product').css('position','relative');
-            $('.order-summary').css('position','relative');
+            $('.images-product').css({'position':'relative','top':'0'});
+            //$('.order-summary').css('position','relative');
           }
         }
         else
         {
-          $('.images-product').css('position','relative');
+          $('.images-product').css({'position':'relative','top':'0'});
         }
       }
     });
@@ -1144,8 +1144,8 @@ export class ProductDetailsComponent implements OnInit{
   go_to_channel_section(opt)
   {
     $('html, body').animate({
-      scrollTop: $("#channel-list").offset().top
-    }, 1000);
+      scrollTop: $("#channel-list").offset().top -100
+    }, 2000);
     if(opt == 2)
     {
       $('.multi-text').text("Include Multibox");

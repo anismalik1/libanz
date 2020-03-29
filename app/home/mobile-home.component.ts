@@ -170,7 +170,8 @@ export class MobileHomeComponent implements OnInit {
           pager: false,
           enableDrag: true
         });
-      });  
+      });
+      $('select').material_select(); 
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

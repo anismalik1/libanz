@@ -357,36 +357,46 @@
 				<ul class="phone-pay-icon"  *ngIf="this.todoservice.get_user_name() == ''">	
 						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up </a></li>
 						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login </a></li>
-				</ul>		
-				<ul class="phone-pay-icon">	
-					<li>
-						<select class="form-control">
-							<option>My Information  </option>
-							<option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></option>
-							<option>Option</option>
-							<option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></option>
-							<option><a [routerLink]="['/p/24-7']">Help & Support </a></option>
-							<option> <a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></option>
-							<option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></option>
-							<option><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></option>
-							<option><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></option>
-							<option><a [routerLink]="['/blog/all']">Blog</a></option>
-							<option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></option>
+				</ul>
+				<div class="phone-pay-icon">	
+				<mat-form-field>
+						<mat-label>My Information</mat-label>
+						<mat-select>
+							<mat-option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></mat-option>
+							<mat-option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></mat-option>
+							<mat-option><a [routerLink]="['/p/24-7']">Help & Support </a></mat-option>
+							<mat-option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></mat-option>
+							<mat-option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></mat-option>
+							<mat-option><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></mat-option>
+							<mat-option><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></mat-option>
+							<mat-option><a [routerLink]="['/blog/all']">Blog</a></mat-option>
+							<mat-option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></mat-option>
+						</mat-select>
+				</mat-form-field>	
+				<mat-form-field>
+						<mat-label>All Product Packages</mat-label>
+						<mat-select>
+							<mat-option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></mat-option>
+							<mat-option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></mat-option>
+							<mat-option><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></mat-option>
+							<mat-option><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></mat-option>
 							
-						</select>
-					</li>
-	
-					<li>
-						<select class="form-control">
-							<option>All Product Packages</option>
-							<option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></option>
-							<option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></option>
-							<option><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></option>
-							<option><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></option>
-					
-						</select>
-					</li>
-					<li>
+						</mat-select>
+				</mat-form-field>
+				<mat-form-field>
+						<mat-label>Categories</mat-label>
+						<mat-select>
+							<mat-option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></mat-option>
+							<mat-option><a [routerLink]="['/product/listing/videocon']">Videocon</a></mat-option>
+							<mat-option><a [routerLink]="['/product/listing/airtel']">Airtel</a></mat-option>
+							<mat-option><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></mat-option>
+							<mat-option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></mat-option>
+							<mat-option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></mat-option>
+							<mat-option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></mat-option>
+							
+						</mat-select>
+				</mat-form-field>		
+				</div>
 						<select class="form-control">
 							<option>Categories</option>
 							<option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></option>
@@ -396,13 +406,7 @@
 							<option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></option>
 							<option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></option>
 							<option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></option>
-					
 						</select>
-					</li>
-					
-				</ul>	
-
-					
 				</div>
 				
 			<h3 class="hide-left-menu-mb">Information</h3>	

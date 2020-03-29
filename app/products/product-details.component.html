@@ -118,7 +118,7 @@
                       </div>
                       <div class="product-btn center mobile-hide">
                       	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
                       </div>
                     </div>
                   </div>
@@ -380,13 +380,15 @@
       </section>
  <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
    <div class="container">
-    <div class="row no-margin">				
+    <div class="row no-margin">
+			<div class="col s12 m12">
+					<div class="center">	
+							<h2 class="center font600 text-orange">Available Packs</h2>
+							<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+						</div>
+			</div>			
      <div class="col s12 m8 channel-list-box">				
       <div class="channels-accoriadn">
-       <div class="center">	
-				<h1 class="center font600 text-orange">Available Packs</h1>
-				<span class="chip green white-text align-center">Please Select Your Basic Pack</span>
-			</div>
 			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
@@ -442,7 +444,7 @@
 			
 </div>
 </div>
-<div class="col s12 m4 order-summary ord-mar">
+<div class="col s12 m4 order-summary">
 	<div class="card">
 		<div class="card-content black-text no-padding">
 			<span class="card-title inline-block">Order Summary</span>
