@@ -5088,7 +5088,7 @@ a.logup.modal-trigger.black-text {
 
 	font-size: 16px;
 	color: #333 !important;
-	line-height: 4z0px;
+	line-height: 40px;
 	padding-right:7px;
 }
 .white-spc-txt {
@@ -5220,7 +5220,7 @@ a.modal-trigger i {
     overflow: hidden;
     width: 93%;
     font-weight: 600;
-    margin: -10px 27px;
+    margin: -15px 27px;
 	}
 	.money-history {
 		display: none;
