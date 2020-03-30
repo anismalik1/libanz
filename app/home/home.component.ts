@@ -552,6 +552,35 @@ toTimestamp(strDate){
     script.id = `init-product-script`;
     script.text = `
       $(document).ready(function(){
+        
+        $('#recommended-items').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          pause: 3000,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
         $('.slider-5').lightSlider({
           item: 4,
           auto: false,
