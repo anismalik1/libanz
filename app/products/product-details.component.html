@@ -29,12 +29,34 @@
 
 	position: fixed;
 	bottom: 0;
-	padding: 10px 0px 6px 0px;
+	padding:0;
     z-index: 999999;
     /* left: 7%; */
     background: #fff;
 	width: 100%;
 	text-align:center;
+	box-shadow: 1px 1px 5px #8c8c8c;
+	height: 65px;
+}
+.fix-btnd{
+	height: 65px;
+    line-height: 65px;
+
+    width: 49%;
+    background: #ff6a00 !important;
+}
+.fix-btnd i{
+
+	display: none !important;
+}
+.fix-btnd2{
+	color: #000 !important;
+    background: transparent !important;
+    box-shadow: none;
+}
+.fix-btnd2 i{
+
+	color:#333;
 }
 
 .align-center{
@@ -175,7 +197,7 @@
 					<br/>
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
                   		<li>
-                  			<span class="font-size-change1 font600 grey-text">Packages selected</span>
+                  			<span class="font-size-change1 font600 grey-text">Select Month</span>
 						  </li>
 						  <br/>
                   		<li *ngFor="let item of package_month;let i = index">
@@ -466,7 +488,11 @@
 					<p class="inline-block font600">{{item.title}} :</p>
 					<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
-					<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap; font-size:12px;">FTA Pack is mandatory, you cannot remove it.</li>
+					<li class="grey-txt-package" style="list-style-type: none;
+
+							white-space: nowrap;
+							margin-top: 7px;
+							font-size: 12px;">FTA Pack is mandatory, you cannot remove it.</li>
 				</div>
 				<div class="subtotal" *ngIf="this.product && this.product.promos">
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
@@ -504,8 +530,8 @@
 </section>
 
 <div class="footer-button-buy">
-	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
 
 </div>
 <!-- Modal Structure -->
