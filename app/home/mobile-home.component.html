@@ -296,11 +296,10 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 					<div class="card-content no-padding">
 						<ul class="mobile-slider">
 							<li *ngFor="let item of this.filter_banners('mobile-main-banner');let i = index;">
-								<a href="{{item.imageurl}}" target="_blank">
+								<a href="{{item.imageurl}}">
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li>
-
 						</ul> 
 					</div>
 				</div>
@@ -361,6 +360,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="product-slider">
 			<li *ngFor="let item of tata_slides" class="product-list-{{item.id}}">
 				<div class="row no-margin 1">
+					<a [routerLink]="['/product/'+item.url]">
 					<div class="col s12 m4 list-{{item.id}}" >
 					<div class="product-image">
 					
@@ -383,9 +383,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rechare-section-list">
 								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
-								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
-								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
+								<p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 								
 								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 							</div>
@@ -393,7 +393,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						</div>
 						</div>
 					</div>
-					
+					</a>
 					</div>
 				</li>
 			</ul>
@@ -406,6 +406,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<ul class="product-slider">
 				<li *ngFor="let item of dishtv_slides">
 					<div class="row no-margin 1">
+						<a [routerLink]="['/product/'+item.url]">
 						<div class="col s12 m4 list-{{item.id}}" >
 						<div class="product-image">
 							<div class="row" style="margin-bottom:10px;">
@@ -416,14 +417,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
 								</div>
 							</div>
-							<!-- <div class="row" style="margin-bottom:10px;">
-								<div class="col s10">
-									<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
-								</div>
-								<div class="col s2">
-									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
-								</div>
-							</div> -->
 							<div class="row">
 							
 							<div class="col s2">
@@ -435,9 +428,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rechare-section-list">
 									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
-									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}}</span> </p>
+									<p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}}</span> </p>
 									
 									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 								</div>
@@ -445,7 +438,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							</div>
 							</div>
 						</div>
-						
+						</a>
 						</div>
 					</li>
 				</ul>
@@ -458,6 +451,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="product-slider">
 			<li *ngFor="let item of airtel_slides">
 				<div class="row no-margin 1">
+					<a [routerLink]="['/product/'+item.url]">
 					<div class="col s12 m4 list-{{item.id}}" >
 					<div class="product-image">
 					
@@ -480,9 +474,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rechare-section-list">
 								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
-								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
-								<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
+								<p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 								
 								<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 							</div>
@@ -490,7 +484,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						</div>
 						</div>
 					</div>
-					
+					</a>
 					</div>
 				</li>
 			</ul>
@@ -503,6 +497,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<ul class="product-slider">
 				<li *ngFor="let item of videcone_slides">
 					<div class="row no-margin 1">
+						<a [routerLink]="['/product/'+item.url]">
 						<div class="col s12 m4 list-{{item.id}}" >
 						<div class="product-image">
 						
@@ -533,9 +528,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rechare-section-list">
 									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
-									<p class="price-cut1" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
+									<p class="price-cut1 black-text"><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 									
 									<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 								</div>
@@ -543,7 +538,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							</div>
 							</div>
 						</div>
-						
+						</a>
 						</div>
 					</li>
 				</ul>
@@ -553,7 +548,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- End Here -->
 <div class="container-fluid fixed-space-mb">
 	<div class="row">
-		<ul class="bottom-slider">
+		<ul class="bottom-slider" id="bottom-slider">
 			<li *ngFor="let banner of filter_banners('mobile_bottom_banner')">
 				<div class="col m12 s12">
 					<div class="shadow-box">

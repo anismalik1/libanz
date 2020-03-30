@@ -1145,7 +1145,7 @@ export class ProductDetailsComponent implements OnInit{
   {
     $('html, body').animate({
       scrollTop: $("#channel-list").offset().top -100
-    }, 2000);
+    }, 1000);
     if(opt == 2)
     {
       $('.multi-text').text("Include Multibox");

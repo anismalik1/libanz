@@ -136,6 +136,10 @@ export class MobileHomeComponent implements OnInit {
             
             this.banners          = data.banners;
             this.init_page();
+            //this.make_slider();
+            setTimeout(()=>{    //<<<---    using ()=> syntax
+              this.make_slider();
+         }, 50);
             this.fetch_home_products();
             
             $('#mobile').css('display','');  
@@ -290,6 +294,7 @@ export class MobileHomeComponent implements OnInit {
     return new_slides;
   } 
 
+  
   init_page() 
   {
     if($('#init-page-script'))
@@ -300,7 +305,6 @@ export class MobileHomeComponent implements OnInit {
     script.type = `text/javascript`;
     script.id = `init-page-script`;
     script.text = `
-      
         $(document).on("click",".recharge-section",function($event) {
           var x = $event.target.nodeName;
           if(!$(x).hasClass("more-clik"))
@@ -308,29 +312,6 @@ export class MobileHomeComponent implements OnInit {
         });
         $('.tooltipped').tooltip({delay: 50});
         $('.modal').modal();
-        $('.mobile-slider').lightSlider({
-          item: 1,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 5000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-        });
-        $('.bottom-slider').lightSlider({
-          item: 1,
-          auto: true,
-          pauseOnHover: true,
-          loop: true,
-          pause: 5000,
-          keyPress: true,
-          controls: true,
-          pager: false,
-          enableDrag: true,
-        });
-  
       // Hide sideNav
       $('.button-collapse1').on('click', function () {
         $('.side-nav').sideNav('hide');
@@ -340,6 +321,43 @@ export class MobileHomeComponent implements OnInit {
        $('.modal').modal('close');
       });
     `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
+  make_slider()
+  {
+    if($('#slider-script'))
+    {
+      $('#slider-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `slider-script`;
+    script.text = `$('.mobile-slider').lightSlider({
+      item: 1,
+      auto: true,
+      slideMove: 1,
+      loop: true,
+      pause: 5000,
+      controls: false,
+      keyPress: false,
+      enableDrag: true,
+      pager: true,
+      gallery: false,
+      galleryMargin: 5,
+      thumbMargin: 5,
+      currentPagerPosition: 'middle',
+      responsive : [],
+    });
+    
+    $('#bottom-slider').lightSlider({
+      autoWidth:true,
+      loop:true,
+      auto: true,
+      onSliderLoad: function() {
+          $('#autoWidth').removeClass('cS-hidden');
+      } 
+  });  `;
     this._renderer2.appendChild(this._document.body, script);
   }
 

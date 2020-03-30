@@ -33,7 +33,7 @@ strong{font-weight: 600;word-break: break-all;}
 .custom-noti li:last-child{padding-bottom:0; border-bottom:0;} 
 
 i.left{margin-left:10px;}
-.cdk-overlay-container{z-index: 9999!important}
+.cdk-overlay-container{z-index: 99999!important}
 select{display: block;} 
 h1{
 	font-size: 3.157rem;
@@ -4526,6 +4526,7 @@ body{padding-bottom: 80px;}
 	.login-side-image{display:block}
 	.on-web{display:block;}	
 	.on-mobile{display:none;}
+	.channel-list-box{height: 362px;overflow: scroll;}
 }
 
 @media only screen and (max-width:766px){
