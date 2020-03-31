@@ -38,7 +38,7 @@ export class FooterComponent implements OnInit{
      } 
    }
 
-   navigate_to(url)
+  navigate_to(url)
   {
     if(1 == 1)
     {

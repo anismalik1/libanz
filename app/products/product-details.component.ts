@@ -837,28 +837,32 @@ export class ProductDetailsComponent implements OnInit{
             if($(window).scrollTop() - $('#footer-content').offset().top > -300)
             {
               $('.images-product').css({'position':'relative','top':'0'});
-              //$('.order-summary').css('position','relative');
+              $('.order-summary').css('position','relative');
               return;
             }
             
           }
-
+          //console.log($(window).scrollTop() - $('#channel-list').offset().top)
+          //console.log($('#channel-list').offset().top);
           if ($('.product-img').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top < -400)) {
             $('.images-product').css({"position":"fixed","top":"106px"});
-            //$('.order-summary').css('position','relative');
+            $('.order-summary').css('position','relative');
           }
           else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top > -400) && ($(window).scrollTop() - $('#channel-list').offset().top < 0))
           {
             $('.images-product').css({'position':'relative','top':'0'});
           }
-          else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top > 0))
+          else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top >= -98))
           {
-            //$('.order-summary').css({'position':'fixed'});
+            //console.log('fixed');
+           // $('#pack-heading').css({'position':'fixed','top': '107px','background':'#fff','left':'0'});
+            $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
           }
           else 
           {
             $('.images-product').css({'position':'relative','top':'0'});
-            //$('.order-summary').css('position','relative');
+            $('.order-summary').css('position','relative');
+            $("#channel-list").css({'':''});
           }
         }
         else

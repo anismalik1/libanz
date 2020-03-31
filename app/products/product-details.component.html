@@ -270,7 +270,7 @@
 						<span class="font-size-change" [innerHTML] ="product.short_description"></span>
 							
 					</div>																				
-			<div class="review-ratings margin-top1">
+						<div class="review-ratings margin-top1">
               	<div class="row rew-sta-rat">
               		<div class="col s8 m8">
               			<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
@@ -400,16 +400,17 @@
  <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
    <div class="container">
     <div class="row no-margin">
-			<div class="col s12 m12">
-					<div class="center">	
-							<h2 class="center font600 text-orange">Available Packs</h2>
-							<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
-						</div>
-			</div>			
-     <div class="col s12 m8 channel-list-box">				
+						
+     <div class="col s12 m8 channel-list-box">
+				<div class="col s12 m12" id="pack-heading">
+						<div class="center">	
+								<h2 class="center font600 text-orange">Available Packs</h2>
+								<span class="chip green white-text">Select Your Basic Pack</span>
+							</div>
+				</div>				
       <div class="channels-accoriadn">
 			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
-				<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li>
+				<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
 					<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
