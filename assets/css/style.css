@@ -1156,8 +1156,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 }
 @media (max-width:375px) {
 	.add-new-address{
-		width:100% !important;
-		margin: 2rem 0 0 0 !important;
+		width:123% !important;
+		margin: 1.5rem 0 0 0 !important;
 	}
 }
 .add-add{
@@ -3642,7 +3642,7 @@ canvas {
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
  .banner-slider1 .full-width{height: 265px;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
- #wallet-type .mydth-wallet img{width:55px; margin-top:3px;}
+ #wallet-type .mydth-wallet img{width:59px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
  .blog-page .card-content{padding: 0;}
  .blog-page .card-content .author{padding: 1rem;border-bottom: 1px solid #e6e6e6;}
@@ -5243,3 +5243,75 @@ a.modal-trigger i {
 		color: #333;
 		font-size: 20px !important;
 	}
+
+	.dotted ul.lSPager.lSpg {
+		text-align: center !important;
+		position: absolute !important;
+		left: 35% !important;
+		bottom: -3px !important;
+	}
+
+	.login-section ul li a {
+		padding: 3px 0 15px 0 !important;
+		line-height: 17px;
+	}
+	.phone-pay-icon.dropdown-list-cst {
+		margin-top: -45px;
+		padding: 10px 0px 10px 0px;
+	}
+
+	.phone-pay-icon.dropdown-list-cst .mat-select-arrow{
+
+	
+			width: 25px !important;
+			height: 25px !important;
+			opacity: 0 !important;
+			border-left: none !important;
+			border-right: none !important;
+			border-top: none !important;
+			margin: 0 4px;
+			background-image: url(https://mydthshop.com/web-app/assets/images/arrow-down.png);
+			background-position: right;
+			background-repeat: no-repeat;
+			transform: rotate(90deg);
+			margin-top: 5px !important;
+			opacity: .5 !important;
+		}
+	
+		.dropdown-list-cst .mat-select-value {
+			display: table-cell;
+			max-width: 0;
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			padding-top: 10px !important;
+		}
+
+	@media only screen and (max-width: 767px){
+
+		.bottom-slider-dot ul.lSPager.lSpg {
+			position: absolute;
+			bottom: 16px;
+			left: 35%;
+		}
+		.channels-accoriadn .card-content {
+			border: 1px solid #e3e3e3;
+			text-align: center;
+			padding: 15px;
+			margin-bottom: 15px;
+			min-height: auto;
+		}
+		.complaint-modal {
+			width: 90%;
+			border-radius: 5px;
+		}
+		ul.rating-li {
+			white-space: nowrap;
+		}
+		a.modal-trigger.white.btn.black-text.rating-center {
+			padding: 0px 25px;
+		}
+
+	
+}

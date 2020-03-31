@@ -27,7 +27,7 @@ li.clogin.ng-star-inserted {
 
 .shadow-box img{
 
-	width: 106%;
+	width: 113%;
     border-radius: 20px;
     padding: 5px 10px 5px 4px !important;
     margin-left: -6px !important;
@@ -246,6 +246,10 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 }
 
 
+.bottom-slider-dot{
+
+	position:relative;
+}
 
  
 }
@@ -288,13 +292,13 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		</div>
 	</div>
 </section>
-<section class="flash-deal  margin-top-order no-padding banner-slider1">
+<section class="flash-deal  margin-top-order no-padding banner-slider1 ">
 	<div class="container-fluid">
 		<div class="row no-margin">
 			<div class="col s12 m12 no-padding">
 				<div class="card no-margin">
-					<div class="card-content no-padding">
-						<ul class="mobile-slider">
+					<div class="card-content no-padding dotted">
+						<ul class="mobile-slider ">
 							<li *ngFor="let item of this.filter_banners('mobile-main-banner');let i = index;">
 								<a href="{{item.imageurl}}">
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
@@ -548,15 +552,18 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- End Here -->
 <div class="container-fluid fixed-space-mb">
 	<div class="row">
-		<ul class="bottom-slider" id="bottom-slider">
+		<div class="bottom-slider-dot">
+		<ul class="bottom-slider " id="bottom-slider">
 			<li *ngFor="let banner of filter_banners('mobile_bottom_banner')">
 				<div class="col m12 s12">
 					<div class="shadow-box">
 							<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
 					</div>
 				</div>
+				
 			</li>
 		</ul>
+	</div>
 	</div>
 
 </div>

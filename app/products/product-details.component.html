@@ -16,7 +16,9 @@
 }
 @media only screen and (max-width: 767px){
 
-	
+	.rating-li li a {
+    line-height: 10px;
+}
 
 .mobile-hide{
 
@@ -279,19 +281,19 @@
               			<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
               		</div>
               		<div class="col s4 m4">
-              			<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate Product</a>
+              			<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate</a>
               		</div>
               	</div>
               	<div class="row">
               		<div class="col s12 m3 l2 res-cen" *ngIf="all_rating == 0">
               			No Ratings given. 
               		</div>	
-              		<div class="col s12 m3 l2 res-cen" *ngIf="all_rating > 0">
+              		<div class="col s6 m3 l2 res-cen" *ngIf="all_rating > 0">
               			<span class="font-size-change3 font500" *ngIf="avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}}<i class="material-icons">star</i></span><br/>
               			<span class="font-size-change1 grey-text">{{all_rating}} Ratings &</span><br/>
               			<span class="font-size-change1 grey-text">{{rev_count}} Reviews</span>
               		</div>
-              		<div class="col s12 m9 l6">
+              		<div class="col s6 m9 l6">
               			<ul *ngIf="grouped_rating" class="rating-li">
               				<li>
               					<a href="javascript:" class="black-text">

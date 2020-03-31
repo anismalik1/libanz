@@ -356,15 +356,15 @@
 					<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
 					 -->
 				<ul class="phone-pay-icon"  *ngIf="this.todoservice.get_user_name() == ''">	
-						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up </a></li>
-						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login </a></li>
-						<li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language  </a></li>
-						<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial  </a></li>
+						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
+						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
+						<li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language  <span class="fa fa-chevron-right cs-right"></span></a></li>
+						<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial  <span class="fa fa-chevron-right cs-right"></span></a></li>
 				</ul>
-				<div class="phone-pay-icon">	
+				<div class="phone-pay-icon dropdown-list-cst">	
 				<mat-form-field>
-						<mat-label>My Information</mat-label>
-						<mat-select>
+						<mat-label><span class="fa fa-bell"></span> &nbsp; My Information</mat-label>
+						<mat-select class="select-lbl">
 							<mat-option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></mat-option>
 							<mat-option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></mat-option>
 							<mat-option><a [routerLink]="['/p/24-7']">Help & Support </a></mat-option>
@@ -377,7 +377,7 @@
 						</mat-select>
 				</mat-form-field>	
 				<mat-form-field>
-						<mat-label>All Product Packages</mat-label>
+						<mat-label><span class="fa fa-file"></span> &nbsp; All Product Packages</mat-label>
 						<mat-select>
 							<mat-option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></mat-option>
 							<mat-option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></mat-option>
@@ -387,7 +387,7 @@
 						</mat-select>
 				</mat-form-field>
 				<mat-form-field>
-						<mat-label>Categories</mat-label>
+						<mat-label><span class="fa fa-diamond"></span> &nbsp; Categories</mat-label>
 						<mat-select>
 							<mat-option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></mat-option>
 							<mat-option><a [routerLink]="['/product/listing/videocon']">Videocon</a></mat-option>
