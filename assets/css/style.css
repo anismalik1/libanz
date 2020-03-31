@@ -4526,6 +4526,7 @@ body{padding-bottom: 80px;}
 	.login-side-image{display:block}
 	.on-web{display:block;}	
 	.on-mobile{display:none;}
+	.channel-list-box{height: 362px;overflow: scroll;}
 }
 
 @media only screen and (max-width:766px){

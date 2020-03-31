@@ -15,6 +15,9 @@
     line-height: 12px;
 }
 @media only screen and (max-width: 767px){
+
+	
+
 .mobile-hide{
 
 	display: none;
@@ -35,10 +38,10 @@
 	box-shadow: 1px 1px 5px #8c8c8c;
 	height: 65px;
 }
-#checkout-web{display: none;}
 .fix-btnd{
 	height: 65px;
     line-height: 65px;
+
     width: 49%;
     background: #ff6a00 !important;
 }
@@ -137,7 +140,7 @@
                       </div>
                       <div class="product-btn center mobile-hide">
                       	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT PACKAGES</a>
+                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
                       </div>
                     </div>
                   </div>
@@ -270,7 +273,7 @@
 						<span class="font-size-change" [innerHTML] ="product.short_description"></span>
 							
 					</div>																				
-						<div class="review-ratings margin-top1">
+			<div class="review-ratings margin-top1">
               	<div class="row rew-sta-rat">
               		<div class="col s8 m8">
               			<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
@@ -400,17 +403,15 @@
  <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
    <div class="container">
     <div class="row no-margin">
-						
-     <div class="col s12 m8 channel-list-box">
-				<div class="col s12 m12" id="pack-heading">
-						<div class="center">	
-								<h2 class="center font600 text-orange">Available Packs</h2>
-								<span class="chip green white-text">Select Your Basic Pack</span>
-							</div>
-				</div>				
+			<div class="col s12 m12">
+					<div class="center">	
+							<h2 class="center font600 text-orange">Available Packs</h2>
+							<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+						</div>
+			</div>			
+     <div class="col s12 m8 channel-list-box">				
       <div class="channels-accoriadn">
 			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
-				<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
 				<li *ngFor="let packs of channels_packs;let j = index" class="active">
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
 					<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
@@ -429,7 +430,7 @@
 								</div>
 								
 							</div>
-							
+							<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li>
 							<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
 								<div class="card-content center" >
 									<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
@@ -515,7 +516,7 @@
 				<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>
 			</div>
 			<hr>
-			<div class="subtotal" id="checkout-web">
+			<div class="subtotal inline-block">
 				<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
 				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
 				<a href="javascript:" class="btn orange" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a>
@@ -529,13 +530,9 @@
 </section>
 
 <div class="footer-button-buy">
-	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-	<div class="subtotal inline-block">
-			<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-			<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn margin-left red btn-large font-size-change1 rounded-btn" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i>Buy Now</a>
-			<a href="javascript:" class="btn margin-left red btn-large font-size-change1 rounded-btn" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" ><i class="material-icons white-text">flash_on</i>Buy Now </a>
-		</div>
-	<!-- <a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">flash_on</i>  BUY NOW</a> -->
+	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+
 </div>
 <!-- Modal Structure -->
 <div id="review" class="modal">
