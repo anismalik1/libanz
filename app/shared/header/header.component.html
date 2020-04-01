@@ -307,9 +307,9 @@
 						
 					</li>
 					<!-- <span class="icon-text">Say hello to mydthshop </span> -->
-					<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Recharge <span class="fa fa-chevron-right cs-right"></span> </a></li>
-				
-					<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders  <span class="fa fa-chevron-right cs-right"></span></a></li>
+					<li><a routerLink="/dashboard/value-transfer" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Pay  <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					
 				
 					<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><span class="fa fa-envelope"></span> &nbsp;  Value Transfer</a></li>
 					
@@ -317,7 +317,7 @@
 					
 					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Tickets <span class="fa fa-chevron-right cs-right"></span></a></li>
 				
-					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders  <span class="fa fa-chevron-right cs-right"></span></a></li>
 					
 					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Add Money Request <span class="fa fa-chevron-right cs-right"></span> </a></li>
 					<!-- <li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li> -->
@@ -338,8 +338,20 @@
 					
 					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History <span class="fa fa-chevron-right cs-right"></span> </a></li>
 			  
+<<<<<<< .mine
+					
+					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Profile  <span class="fa fa-chevron-right cs-right"></span></a></li>
+					
+					<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> Testimonial <span class="fa fa-chevron-right cs-right"></span> </a></li>
+||||||| .r379
+					
+					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Profile  <span class="fa fa-chevron-right cs-right"></span></a></li>
+					<li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial <span class="fa fa-chevron-right cs-right"></span> </a></li>
+=======
 					<!-- <li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language <span class="fa fa-chevron-right cs-right"></span> </a></li> -->
 					<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial <span class="fa fa-chevron-right cs-right"></span> </a></li>
+>>>>>>> .r380
 				</ul>
 				
 				
@@ -353,12 +365,12 @@
 				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">	
 						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
-						<li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language  <span class="fa fa-chevron-right cs-right"></span></a></li>
+						
 						<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial  <span class="fa fa-chevron-right cs-right"></span></a></li>
 				</ul>
 				<div class="phone-pay-icon dropdown-list-cst">	
 				<mat-form-field>
-						<mat-label><span class="fa fa-bell"></span> &nbsp; My Information</mat-label>
+						<mat-label class="color-blk"><span class="fa fa-bell bell-black"></span> &nbsp; My Information</mat-label>
 						<mat-select class="select-lbl">
 							<mat-option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></mat-option>
 							<mat-option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></mat-option>
@@ -372,7 +384,7 @@
 						</mat-select>
 				</mat-form-field>	
 				<mat-form-field>
-						<mat-label><span class="fa fa-file"></span> &nbsp; All Product Packages</mat-label>
+						<mat-label class="color-blk"><span class="fa fa-file bell-black"></span> &nbsp; All Product Packages</mat-label>
 						<mat-select>
 							<mat-option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></mat-option>
 							<mat-option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></mat-option>
@@ -382,7 +394,7 @@
 						</mat-select>
 				</mat-form-field>
 				<mat-form-field>
-						<mat-label><span class="fa fa-diamond"></span> &nbsp; Categories</mat-label>
+						<mat-label class="color-blk"><span class="fa fa-diamond bell-black"></span> &nbsp; Categories</mat-label>
 						<mat-select>
 							<mat-option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></mat-option>
 							<mat-option><a [routerLink]="['/product/listing/videocon']">Videocon</a></mat-option>
