@@ -137,6 +137,8 @@ margin: 2px;
 	
 }
 
+
+
 @media only screen and (max-width: 767px){
 
 	.fixed-space-mb{
@@ -251,7 +253,22 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	position:relative;
 }
 
- 
+ .sky-relative{
+
+	 position: relative;
+ }
+ .sky-heading{
+
+	 position:absolute;
+	 top: -10px;
+	 z-index: 99;
+	 width: 100%;
+ }
+ .down-mode{
+
+	margin-top: 25px;
+ }
+
 }
 </style>
 <app-header></app-header>
@@ -357,8 +374,8 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	</div>
 </section>
 
-<section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35">
-	<h2 class=" font600 padd center txt-pro cst-top-space">Tata Sky Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/tata-sky']">View All</a></span></h2>
+<section class="flash-deal white margin-top-order sldr-txt hide-on-desktop bg-transparent mt-35 sky-relative">
+	<h2 class=" font600 padd center txt-pro cst-top-space sky-heading ">Tata Sky Products <span class="absolute font-size-change view-category"><a class="cst-btn-link pull-right" [routerLink]="['/product/listing/tata-sky']">View All</a></span></h2>
 	
 	<div class="container-fluid">
 		<ul class="product-slider">
@@ -366,7 +383,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 				<div class="row no-margin 1">
 					<a [routerLink]="['/product/'+item.url]">
 					<div class="col s12 m4 list-{{item.id}}" >
-					<div class="product-image">
+					<div class="product-image down-mode">
 					
 						<div class="row" style="margin-bottom:10px;">
 							<div class="col s10">

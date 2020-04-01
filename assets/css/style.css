@@ -4506,7 +4506,7 @@ ul#product-pack li{width:33.333%;}
 body{padding-bottom: 80px;}
 .mobile-footer {
     display: block;
-    margin-top: -20px;
+	margin-top: -14px;
     margin-bottom: 0px !important;
 }
 .on-web{display:none;}	
@@ -5230,9 +5230,7 @@ a.modal-trigger i {
     font-weight: 600;
     margin: -15px 27px;
 	}
-	.money-history {
-		display: none;
-	}
+	
 	.search-link i {
 		position: absolute;
 		right: 30px;
@@ -5286,13 +5284,41 @@ a.modal-trigger i {
 			white-space: nowrap;
 			padding-top: 10px !important;
 		}
+		i.material-icons.font-size-change.eye {
+			position: initial !important;
+			padding-top: 4px;
+		}
 
 	@media only screen and (max-width: 767px){
 
 		.bottom-slider-dot ul.lSPager.lSpg {
 			position: absolute;
-			bottom: 16px;
+			bottom: -3px;
 			left: 35%;
+		}
+		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li.active a, .lSSlideOuter .lSPager.lSpg>li:hover a {
+			background-color: #000000 !important;
+		}
+		.add-new-address {
+			padding: 16px !important;
+			box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+			margin: 1rem 0 0 2rem!important;
+			width: 104% !important;
+		}
+
+		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li a {
+			/* background-color: #ff6a00; */
+			background-color: #cec6c6;
+			border: 2px solid #cec6c6;
+			border-radius: 50% !important;
+			display: inline-block;
+			height: 8px;
+			overflow: hidden;
+			text-indent: -999em;
+			width: 8px;
+			position: relative;
+			/* z-index: 99; */
+			transition: all .5s linear 0s;
 		}
 		.channels-accoriadn .card-content {
 			border: 1px solid #e3e3e3;
@@ -5311,6 +5337,54 @@ a.modal-trigger i {
 		a.modal-trigger.white.btn.black-text.rating-center {
 			padding: 0px 25px;
 		}
-
+		.orange{
 	
+			background-color: #FF6A00 !important;
+		}
+		.red{
+
+			background-color: #ff0000 !important;
+		}
+		.phone-pay-icon.dropdown-list-cst .mat-select-arrow {
+			width: 25px !important;
+			height: 25px !important;
+			opacity: 0 !important;
+			border-left: none !important;
+			border-right: none !important;
+			border-top: none !important;
+			margin: 0 -8px;
+			background-image: url(https://mydthshop.com/web-app/assets/images/arrow-down.png);
+			background-position: right;
+			background-repeat: no-repeat;
+			transform: rotate(90deg);
+			margin-top: 5px !important;
+			opacity: .5 !important;
+		}
+		
+		.bell-black{
+			color: #333;
+    padding-right: 3px;
+		}
+
+		.color-blk{
+
+			color:#333 !important;
+		}
+		.icon-blast {
+			position: relative;
+		}
+
+		a.modal-trigger.eye {
+			position: absolute !important;
+			top: 35px !important;
+			left: 40px;
+			height: 30px;
+			width: 30px;
+			display: block;
+		}
+
+		i.material-icons.font-size-change.eye {
+			position: initial !important;
+			padding-top: 4px;
+		}
 }

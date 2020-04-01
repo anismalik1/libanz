@@ -75,13 +75,22 @@
     overflow: auto;
 	
 	}
+
+	.cst-border2{
+
+		border: none !important;
+    height:auto;
+    box-shadow: 1px 1px 10px #9c9c9c !important;
+	overflow: auto;
+	padding:10px 0px;
+	}
 	.cst-desc {
     background: #e3e1e1;
     color: #494949;
     font-size: 12px;
     padding: 10px;
     overflow: hidden;
-    width: 85%;
+    width: 87%;
     font-weight: 600;
     margin: 11px 14px;
 }
@@ -782,7 +791,7 @@ div#circles-content ul li a {
 				</div>
 
 				<br/>
-				<div class=" mobile no-margin cst-border1 mt-top-txt hide-on-desktop" *ngIf="last_recharges && last_recharges.length > 0">
+				<div class=" mobile no-margin cst-border2 mt-top-txt hide-on-desktop" *ngIf="last_recharges && last_recharges.length > 0">
 					<div class="inner-recharge" *ngFor="let item of last_recharges;" (click)="selected_recharge(item)">
 						<div class="row">
 						<div class="col s2">
@@ -872,7 +881,7 @@ div#circles-content ul li a {
 						</div>
 						<div class="clearfix"></div>
 					</div>
-					<p class="cst-desc"><strong>Description : </strong> Disclaimer : While we support most recharges, we request you to verify with your operator once before proceeding. ' Best Offers For You ' are offers available for a class of Airtel subscribers.</p>
+					<p class="cst-desc"><strong>Disclaimer : </strong> While we support most recharges, we request you to verify with your operator once before proceeding. ' Best Offers For You ' are offers available for a class of Airtel subscribers.</p>
 				</div>
 
 				

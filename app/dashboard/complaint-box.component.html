@@ -157,7 +157,7 @@
                                         <td><span>{{complaint.last_update | date: date:'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
                                         <td><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 1 || complaint.seen == 2"></i><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 3"></i></td>
                                         <td class="center">
-                                            <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change">visibility</i></a>
+                                            <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a>
                                         </td>
                                     </tr>
                                 </tbody>

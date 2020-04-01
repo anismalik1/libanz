@@ -55,6 +55,7 @@
 	color: #000 !important;
     background: transparent !important;
     box-shadow: none;
+	width: calc(100% - 255px);
 }
 .fix-btnd2 i{
 
@@ -69,7 +70,10 @@
 
 	font-size:15px !important;
 }
-
+span#offer-price {
+    font-size: 17px;
+    padding-right: 10px;
+}
  
 }
 
@@ -439,6 +443,7 @@
 									<h4 class="grey-text">{{item.title}}</h4>
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+									<br/>
 									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
 									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
 								</div>
@@ -449,6 +454,7 @@
 									<h4 class="grey-text">{{item.title}}</h4>
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+									<br/>
 									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
 									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
 								</div>
@@ -462,7 +468,7 @@
 			<ul class="pt-all-10">
 				<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
 				<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
-				<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold;">FTA Pack is mandatory, you cannot remove it.</li>
+				<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
 			</ul>
 			<hr class="horizontal">
 			

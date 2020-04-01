@@ -1,6 +1,25 @@
 <style>
    @media only screen and  (max-width: 767px){
   
+    .margin-fix{
+
+      margin-top:-14px;
+    }
+
+    label.black-text.nttf-txt {
+    font-size: 13px !important;
+}
+
+
+    .reference-txt{
+
+      padding-left: 33px;
+    font-size: 10px;
+    }
+    .nttf-txt{
+
+      padding-top:6px;
+    }
   .cst-dname{
 
 font-size: 16px !important;
@@ -193,14 +212,14 @@ font-size: 10px;
 .add-money-history{
 
 margin-bottom: 5px !important;
-  height: 32px;
-  border-bottom: 1px solid #ececec;
+
+  
 }
 .money-history{
 
 margin: 10px !important;
   width: 55% !important;
-padding: 25px;
+/* padding: 25px; */
 box-shadow: 1px 1px 10px #ececec;
 margin-left: 10px;
 font-size: 14px;
@@ -212,6 +231,11 @@ font-size: 14px;
 
   display:none;
 }
+.web-hide{
+
+  padding:10px;
+
+}
 .responsive-table {
     overflow: auto;
 }
@@ -219,7 +243,7 @@ font-size: 14px;
 
 margin: 10px !important;
   width: 90% !important;
-padding: 25px;
+/* padding: 25px; */
 box-shadow: 1px 1px 10px #ececec;
 margin-left: 10px;
 font-size: 14px;
@@ -267,12 +291,57 @@ font-size: 14px;
   width: 100%;
    line-height: 0;
  }
- 
+ .top-logo-block{
+
+position: relative;
+  top:0x;
+  width: 100%;
+    background: #f4faff;
+}
+.top-logo-block img {
+  width: 65px;
+    position: relative;
+    left: 34%;
+    top: 6px;
 
 }
 
+.top-logo-block h4{
+  margin-top: -5px;
+    margin-bottom: 33px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+}
+
+.bottom-option{
+
+  padding-top:20px;
+}
+.cst-spacing{
+
+  width: calc(100% - 42px);
+    margin-left: 22px;
+
+}
+.amt-inr{
+
+  float:right;
+}
+.mb-btn{
+
+  width: 86%;
+    margin-left: 6%;
+}
+.uwa.imps-box {
+    padding: 8px 0;
+}
+.uwa.Online-box {
+    padding: 8px 0;
+}
 
 
+}
 
 
 @media only screen and (min-width: 767px){
@@ -281,6 +350,40 @@ font-size: 14px;
 
     display:none;
   }
+  .uwa.imps-box {
+    padding: 8px 0;
+}
+.uwa.Online-box {
+    padding: 8px 0;
+}
+  .mb-btn{
+
+width: 100%;
+ 
+}
+  .top-logo-block .amt-inr{
+
+float: right;
+/* padding:10px; */
+}
+
+  .top-logo-block img {
+    padding-top:20px;
+    padding-left: 29px;
+    width: 130px;
+    position: relative;
+    left: 34%;
+    
+}
+.money-history {
+    padding: 20px;
+}
+
+
+  .web-hide{
+
+    display: none;
+  }
   .cst-table tr th{
   background-color:#fff;
   color:#333;
@@ -288,6 +391,7 @@ font-size: 14px;
   border: 1px solid #e2e2e2;
     white-space: nowrap;
 }
+
   
 }
 </style>
@@ -369,7 +473,9 @@ font-size: 14px;
                                 </div>
                               </div>
 
-                              <button type="submit" class="btn btn-large orange white-text mb-btn-100 cs-box-pay">Proceed To Add Money</button>
+                              <button type="submit" class="btn orange btn-large btn-full "  style="width:100%;">Proceed To Add Money </button>
+                              
+                              <!-- <button type="submit" class="btn orange btn-large btn-full "  style="width:100%;">Proceed To Add Money </button> -->
                               <div class="row additional-charge hide">
                                  
                               </div>
@@ -395,26 +501,64 @@ font-size: 14px;
                             </form>
                             </div>
                             </div>
-                          
+                            <p class="web-hide"><strong>Note : </strong>There is no any additional charge of NEFT, RTGS, IMPS .</p>
                             <div class="col s12 m6 money-history">
                               <div class="row">
-                                
+                                <div class="top-logo-block">
+                               <img src="https://www.mydthshop.com/web-app/assets/images/final-logo.png"/>
+                                  <h4>Add Money to wallet <span class="amt-inr"><span class="fa fa-inr"></span> 100 </span></h4>
+                                </div>
+                               
                                 <div class="add-money-history">
-                                <div class="col s3"><span class="fa fa-card icon-design-1">OP</span></div>
-                                <div class="col s8">Online Payment</div>
-                                <div class="col s1"><span class="fa fa fa-chevron-right"></span></div>
-                              </div>
-                              <div class="add-money-history" >
-                                <div class="col s3"><span class="fa fa-card icon-design-2">CD</span></div>
-                                <div class="col s8">Cash On Deleivery</div>
-                                <div class="col s1"><span class="fa fa fa-chevron-right"></span></div>
-                              </div>
+                                <div class="col s12">
+                                  <div class="uwa margin-fix">
+                                    <input type="radio" id="" name="payment_type" class="with-gap " value="paytm" checked/>
+                                    <label for="uwa" class="black-text nttf-txt">NEFT / RTGS Payment</label>
+                                  
+                                  </div>
+                                  <p class="reference-txt">Reference No : AXBP09R4000</p>
+                                  <br/>
+                                  
+                                </div>
+                                </div>
 
-                              <div class="add-money-history" >
-                                <div class="col s3"><span class="fa fa-card icon-design-3">PM</span></div>
-                                <div class="col s8">Paytm </div>
-                                <div class="col s1"><span class="fa fa fa-chevron-right"></span></div>
-                              </div>
+                                <!-- <button type="submit" class="btn btn-large orange white-text mb-btn-100 cs-box-pay cst-spacing">Pay <span class="fa fa-inr"></span> 100 </button> -->
+                                <button type="submit" class="btn orange btn-large btn-full mb-btn"  >Pay <span class="fa fa-inr"></span> 100 </button>
+                                <div class="add-money-history bottom-option">
+                                  <div class="col s12">
+                                    <div class="uwa imps-box">
+                                      <input type="radio" id="imps" name="payment_type" class="with-gap " value="imps" />
+                                      <label for="imps" class="black-text nttf-txt">IMPS / NEFT </label>
+                                    
+                                    </div>
+                                 
+                                   
+                                     
+                                  
+
+                                    <div class="uwa Online-box">
+                                      <input type="radio" id="imps" name="payment_type" class="with-gap " value="imps" />
+                                      <label for="imps" class="black-text nttf-txt"> Online Payment </label>
+                                    
+                                    </div>
+                                    <div class="uwa Online-box">
+                                      <input type="radio" id="imps" name="payment_type" class="with-gap " value="imps" />
+                                      <label for="imps" class="black-text nttf-txt"> Paytm Payment </label>
+                                    
+                                    </div>
+                                    <div class="uwa Online-box">
+                                      <input type="radio" id="imps" name="payment_type" class="with-gap " value="imps" />
+                                      <label for="imps" class="black-text nttf-txt"> Cash Deposit </label>
+                                    
+                                    </div>
+                                  </div>
+                                
+                                
+                                </div>
+             
+
+
+
                             </div>
                             </div>
 
