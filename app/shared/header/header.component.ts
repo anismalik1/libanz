@@ -532,11 +532,6 @@ export class HeaderComponent implements OnInit{
   } 
   init_page()
   {
-    if($('#side-nav-script'))
-    {
-      $('#side-nav-script').remove();
-    }
-
     if($('#snatchbot-script') && $(window).width() > 767)
     {
       $('#snatchbot-script').remove();
@@ -546,14 +541,9 @@ export class HeaderComponent implements OnInit{
       script1.src = `https://account.snatchbot.me/script.js`;
       this._renderer2.appendChild(this._document.body, script1);
     }
-    if($('#translater-script'))
+    if($('#side-nav-script'))
     {
-      $('#translater-script').remove();
-      let script1 = this._renderer2.createElement('script');
-      script1.type = `text/javascript`;
-      script1.id = `translater-script`;
-      script1.src = `//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
-      this._renderer2.appendChild(this._document.body, script1);
+      $('#side-nav-script').remove();
     }
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
@@ -586,7 +576,8 @@ export class HeaderComponent implements OnInit{
     });
     
     $(document).on('click',function(e){
-      if (e.target.id == "mobile-side-menu" || $(e.target).parents("#mobile-side-menu").length) {
+      console.log(e.target);
+      if (e.target.id == "mobile-side-menu" || e.target.className == "cdk-overlay-backdrop cdk-overlay-transparent-backdrop" || $(e.target).parents("#mobile-side-menu").length) {
         return false;
       }
       $('.side-menu').removeClass('open-menu');
@@ -643,7 +634,7 @@ export class HeaderComponent implements OnInit{
     }); 
   $('.tabs').tabs();
   function googleTranslateElementInit() {
-    if(typeof google != 'undefined')
+    if(google)
       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     else
       setTimeout("googleTranslateElementInit()", 1000);
@@ -743,7 +734,7 @@ export class HeaderComponent implements OnInit{
       $(".goog-te-combo option[value='yo']").remove();
       $(".goog-te-combo option[value='zu']").remove();
   }
-  setTimeout("googleTranslateElementInit()", 1000);
+  setTimeout("googleTranslateElementInit()", 2000);
   function openchat()
   {
     if(!window.sntchChat)

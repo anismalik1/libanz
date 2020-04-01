@@ -338,15 +338,10 @@
 					
 					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History <span class="fa fa-chevron-right cs-right"></span> </a></li>
 			  
-					
-					<li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Profile  <span class="fa fa-chevron-right cs-right"></span></a></li>
-					<li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					<!-- <li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language <span class="fa fa-chevron-right cs-right"></span> </a></li> -->
 					<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial <span class="fa fa-chevron-right cs-right"></span> </a></li>
 				</ul>
-				<ul class="logout">	
-					
-					<li><a [routerLink]="['/logout']">Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
-				</ul>	
+				
 				
 			</div>
 			<div class="side-menu-body">
@@ -355,7 +350,7 @@
 					<a routerLink="/proceed/login" class="btn waves-effect waves-light orange rounded-btn" type="button">Login</a>
 					<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
 					 -->
-				<ul class="phone-pay-icon"  *ngIf="this.todoservice.get_user_name() == ''">	
+				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">	
 						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						<li><a routerLink="#" class="font-size-change"><span class="fa fa-font"></span> &nbsp; Language  <span class="fa fa-chevron-right cs-right"></span></a></li>
@@ -400,7 +395,7 @@
 						</mat-select>
 				</mat-form-field>		
 				</div>
-						<select class="form-control">
+						<!-- <select class="form-control">
 							<option>Categories</option>
 							<option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></option>
 							<option><a [routerLink]="['/product/listing/videocon']">Videocon</a></option>
@@ -409,7 +404,11 @@
 							<option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></option>
 							<option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></option>
 							<option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></option>
-						</select>
+						</select> -->
+						<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() != ''">	
+								<li><a class="font-size-change" [routerLink]="['/edit-profile']"><span class="fa fa-user"></span> &nbsp; Edit Profile <span class="fa fa-chevron-right cs-right"></span></a></li>
+								<li><a [routerLink]="['/logout']"><span class="fa fa-sign-out"></span> &nbsp;Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
+							</ul>	
 				</div>
 				
 			<h3 class="hide-left-menu-mb">Information</h3>	

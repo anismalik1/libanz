@@ -339,7 +339,7 @@ font-size: 14px;
                         <p >Add Money to</p>
                        <p class="icon-sp"> <span class="fa fa-credit-card"></span>  </p>
                         <p class="wallt-txt"> MyDth Wallet </p> 
-                        <p>Available Balance <span class="fa fa-inr"></span>0 </p>
+                        <p>Available Balance <span class="fa fa-inr"></span>{{this.todoservice.get_user_wallet()}} </p>
                        </div>
 
                         <div class="row sec-7">
@@ -384,12 +384,12 @@ font-size: 14px;
                             </div>
                               <div class="row send-topup hide">
                                 <div class="input-field col s12 m12 center">
-                                  <!-- <button type="submit" class="btn btn-large orange white-text">Send TopUp Request</button> -->
+                                  <button type="submit" class="btn btn-large orange white-text">Send TopUp Request</button>
                                 </div>
                               </div>
                               <div class="row send-gateway hide">
                                   <div class="input-field col s12 m12 center">
-                                    <!-- <button type="submit" class="btn btn-large orange white-text">Proceed</button> -->
+                                    <button type="submit" class="btn btn-large orange white-text">Proceed</button>
                                   </div>
                                 </div>
                             </form>

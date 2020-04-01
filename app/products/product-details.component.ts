@@ -815,16 +815,18 @@ export class ProductDetailsComponent implements OnInit{
           $('.cdk-overlay-container').css('z-index','99999999!important');
         });
         $.fn.isInViewport = function() {
+          if($(this).length == 0 )
+          {
+            return false;
+          }
           var elementTop = $(this).offset().top;
           var elementBottom = elementTop + $(this).outerHeight();
-      
           var viewportTop = $(window).scrollTop();
           var viewportBottom = viewportTop + $(window).height();
-      
           return elementBottom > viewportTop && elementTop < viewportBottom;
       };
       $(window).scroll(function (event) {
-        if(!$.fn.isInViewport)
+        if(!$.fn.isInViewport )
         {
           return false;
         }
@@ -840,7 +842,6 @@ export class ProductDetailsComponent implements OnInit{
               $('.order-summary').css('position','relative');
               return;
             }
-            
           }
           //console.log($(window).scrollTop() - $('#channel-list').offset().top)
           //console.log($('#channel-list').offset().top);
@@ -854,15 +855,12 @@ export class ProductDetailsComponent implements OnInit{
           }
           else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top >= -98))
           {
-            //console.log('fixed');
-           // $('#pack-heading').css({'position':'fixed','top': '107px','background':'#fff','left':'0'});
             $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
           }
           else 
           {
             $('.images-product').css({'position':'relative','top':'0'});
             $('.order-summary').css('position','relative');
-            $("#channel-list").css({'':''});
           }
         }
         else
