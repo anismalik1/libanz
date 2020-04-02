@@ -17,7 +17,7 @@ export class AddMoneyComponent implements OnInit{
 	paymethod : string;
 	order_id : any;
 	order_data : any;
-	add_data : any = {proceed : 1,method : 'FUND TRANSFER'};
+	add_data : any = {proceed : 1,paymethod : 'FUND TRANSFER',send : 0};
 	add_amount : number;
   constructor( private toastr : ToastrManager,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
     
@@ -83,7 +83,7 @@ export class AddMoneyComponent implements OnInit{
 
 	select_method(method)
 	{
-		this.add_data.method = method;
+		this.add_data.paymethod = method;
 	}
 	back_to_addmoney()
 	{
@@ -146,12 +146,7 @@ export class AddMoneyComponent implements OnInit{
 	
 	add_money(formdata)
 	{
-		if(formdata.amount == '' || formdata.amount == null)
-		{
-			this.toastr.errorToastr("Enter Amount", 'Failed!');
-			return false;
-		}
-		if(formdata.paymethod == 'FUND TRANSFER' || formdata.paymethod == "Cash Deposit")
+		if(this.add_data.paymethod == 'FUND TRANSFER' || this.add_data.paymethod == "Cash Deposit")
 		{
 			if(formdata.ref_id == '')
 			{
@@ -159,14 +154,10 @@ export class AddMoneyComponent implements OnInit{
 				return false;
 			}
 		}
-		console.log(formdata);
-		console.log(this.add_data);
-		return;
 
-		formdata.paymethod 		= this.paymethod;
-		formdata.paybankaccount = $('#paybankaccount').val();
-		//formdata.yourbankname 	= $('#yourbankname').val(); 
-		$('.send-topup button,.send-gateway button').text('Wait...').attr("disabled","disabled");	
+		formdata.paymethod 		= this.add_data.paymethod;
+		formdata.amount 		= this.add_data.amount;
+		this.add_data.send = 1;
 		if(this.authservice.retrieveToken())
 		{
 		  formdata.token =  this.get_token();
@@ -174,8 +165,7 @@ export class AddMoneyComponent implements OnInit{
 		  .subscribe( 
 			data => 
 			{
-				$('.send-topup button,.send-gateway button').text('Send Topup Request').prop("disabled", false);	
-			  if(data.status == 'success')
+				if(data.status == 'success')
 			  {
 					this.toastr.successToastr(data.msg, 'Success!');
 					if(1 == 1)
