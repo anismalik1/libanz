@@ -576,7 +576,7 @@ export class HeaderComponent implements OnInit{
     });
     
     $(document).on('click',function(e){
-      console.log(e.target);
+      //console.log(e.target);
       if (e.target.id == "mobile-side-menu" || e.target.className == "cdk-overlay-backdrop cdk-overlay-transparent-backdrop" || $(e.target).parents("#mobile-side-menu").length) {
         return false;
       }

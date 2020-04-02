@@ -17,6 +17,8 @@ export class AddMoneyComponent implements OnInit{
 	paymethod : string;
 	order_id : any;
 	order_data : any;
+	add_data : any = {proceed : 1,method : 'FUND TRANSFER'};
+	add_amount : number;
   constructor( private toastr : ToastrManager,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
     
   }
@@ -66,6 +68,23 @@ export class AddMoneyComponent implements OnInit{
     this._renderer2.appendChild(this._document.body, script);
   }
 	
+	proceed_to_add()
+	{
+		var amount = $("#enter-amount").val();
+		if(amount == "")
+		{
+			this.toastr.errorToastr("Enter Amount ",'Failed');
+			return false;
+		}
+			
+		this.add_data.amount = amount;
+		this.add_data.proceed = 2;
+	}
+
+	select_method(method)
+	{
+		this.add_data.method = method;
+	}
 	back_to_addmoney()
 	{
 		if(1 == 1)
@@ -77,53 +96,53 @@ export class AddMoneyComponent implements OnInit{
 		this.router.navigated = false;
 		this.router.navigate(['/dashboard/add-money']);
 	}
-	calc_percentage()
-	{
-		var amount = $('#enter-amount').val()
-		if((this.paymethod) && (this.paymethod == 'Gateway' || this.paymethod == 'Paytm' || this.paymethod == 'Cash Deposit'))
-		{
-			$('.additional-charge').html('<div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i></div>');
-		}
-	}
+	// calc_percentage()
+	// {
+	// 	var amount = $('#enter-amount').val()
+	// 	if((this.paymethod) && (this.paymethod == 'Gateway' || this.paymethod == 'Paytm' || this.paymethod == 'Cash Deposit'))
+	// 	{
+	// 		$('.additional-charge').html('<div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i></div>');
+	// 	}
+	// }
 
-	check_method(data)
-	{
-		this.paymethod = data;
-		if(data == undefined)
-		{
-			$('.default-hide').addClass('hide');
-			$('.send-topup').addClass('hide');
-			$('.send-gateway').addClass('hide');
-		}
-		else if( data == 'Gateway' || data == "Paytm" || data == "Cash Deposit")
-		{
+	// check_method(data)
+	// {
+	// 	this.paymethod = data;
+	// 	if(data == undefined)
+	// 	{
+	// 		$('.default-hide').addClass('hide');
+	// 		$('.send-topup').addClass('hide');
+	// 		$('.send-gateway').addClass('hide');
+	// 	}
+	// 	else if( data == 'Gateway' || data == "Paytm" || data == "Cash Deposit")
+	// 	{
 			
-			var amount = $('#enter-amount').val();
-			$('.additional-charge').removeClass('hide');
-			if(Number(amount) > 0)
-				$('.additional-charge ').html('<div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i></div>');
-			$('.default-hide').addClass('hide');
+	// 		var amount = $('#enter-amount').val();
+	// 		$('.additional-charge').removeClass('hide');
+	// 		if(Number(amount) > 0)
+	// 			$('.additional-charge ').html('<div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount '+(Number(amount) - (Number(amount)*2)/100)+' Will be credited.<i class="close material-icons">close</i></div>');
+	// 		$('.default-hide').addClass('hide');
 			
-			$('.send-gateway').removeClass('hide');
-			$('.send-topup').addClass('hide');
-			if(data == "Cash Deposit")
-				$('.default-hide').removeClass('hide');
-		}
-		else if(data == 'FUND TRANSFER')
-		{
-			$('.default-hide').removeClass('hide');
-			$('.send-topup').removeClass('hide');
-			$('.additional-charge').addClass('hide');
-			$('.send-gateway').addClass('hide');
-		}
-		else
-		{
-			$('.default-hide').removeClass('hide');
-			$('.additional-charge').removeClass('hide');
-			$('.send-topup').removeClass('hide');
-			$('.send-gateway').addClass('hide');
-		}
-	}
+	// 		$('.send-gateway').removeClass('hide');
+	// 		$('.send-topup').addClass('hide');
+	// 		if(data == "Cash Deposit")
+	// 			$('.default-hide').removeClass('hide');
+	// 	}
+	// 	else if(data == 'FUND TRANSFER')
+	// 	{
+	// 		$('.default-hide').removeClass('hide');
+	// 		$('.send-topup').removeClass('hide');
+	// 		$('.additional-charge').addClass('hide');
+	// 		$('.send-gateway').addClass('hide');
+	// 	}
+	// 	else
+	// 	{
+	// 		$('.default-hide').removeClass('hide');
+	// 		$('.additional-charge').removeClass('hide');
+	// 		$('.send-topup').removeClass('hide');
+	// 		$('.send-gateway').addClass('hide');
+	// 	}
+	// }
 	
 	add_money(formdata)
 	{
@@ -140,7 +159,10 @@ export class AddMoneyComponent implements OnInit{
 				return false;
 			}
 		}
-		
+		console.log(formdata);
+		console.log(this.add_data);
+		return;
+
 		formdata.paymethod 		= this.paymethod;
 		formdata.paybankaccount = $('#paybankaccount').val();
 		//formdata.yourbankname 	= $('#yourbankname').val(); 
