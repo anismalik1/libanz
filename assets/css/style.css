@@ -4869,7 +4869,7 @@ a.modal-trigger i {
 
 		.beard .breadcrumb:before {
 			color: #000;
-			padding:0px 0 0 0 !important;
+			padding:15px 0 0 0 !important;
 		}
 
 		.cst-back{
@@ -4959,7 +4959,7 @@ span.fa.fa-star.pull-right.icn-clr1:hover {
 }
 .blog-content{
 
-	height: 150px !important;
+	height: 250px !important;
     overflow: auto;
 }
 
