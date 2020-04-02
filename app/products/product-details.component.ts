@@ -61,6 +61,7 @@ export class ProductDetailsComponent implements OnInit{
   promos : any;
   thumbs : any;
   filterdList : boolean = false;
+  recommended : any;
   myControl = new FormControl();
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
@@ -391,6 +392,7 @@ export class ProductDetailsComponent implements OnInit{
         this.channels_packs = data.package;
         this.fta_pack = {};
         this.product = data.PRODUCTDATA;
+        this.recommended = data.RECOMMENDED;
         this.filter_channel_subpack();
         if(data.cashback && data.cashback.length > 0 )
         {

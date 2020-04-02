@@ -544,6 +544,55 @@ span#offer-price {
 </div>
 </section>
 
+<section>
+		<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt" *ngIf="this.recommended">
+				<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
+			<div class="container-fluid">
+				<div class="row no-margin home-product-card recomm">
+					<div *ngFor="let item of recommended">
+						<div class="card">
+							<div class="row" style="margin-bottom:10px;">
+								<div class="col s10">
+									<div class="rating-green-content" >Free Home Delievery </div>
+								</div>
+								<div class="col s2" *ngIf="item.new_product == 1">
+									<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
+									<img src="https://www.mydthshop.com/web-app/assets/images/new.gif" class="img-responsive pt-img"/>
+								</div>
+							</div>
+							<div class="card-image padd center">
+									<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
+								</div>
+								<div class="clearfix"></div>
+								<div class="card-stacked">
+									<div class="card-content no-padding">
+										<span class="card-title">{{item.title}}</span>								
+										<div class="row center">
+											<div class="col s12 m12">
+												<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+												<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+												<!-- <span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span> -->
+											</div>
+											<div class="col s12 m12">
+												<!-- <div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div> -->
+												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="col s12 m12 ">
+												<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+											</div>
+										</div> 									 
+										<div class="btn-new1 center">
+											<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+</section>
 <div class="footer-button-buy">
 	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
 	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  Pakages </a>

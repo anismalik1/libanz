@@ -299,7 +299,6 @@ export class TodoService {
 
   fetch_commissions(data)
   {
-    
     let url = this.server_url+'accounts/apis/home/fetch_commission_listing_by_category';
     return this.send_post_request(data,url) ; 
   }
