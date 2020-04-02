@@ -840,17 +840,17 @@ export class ProductDetailsComponent implements OnInit{
             {
               $('.images-product').css({'position':'relative','top':'0'});
               $('.order-summary').css('position','relative');
+              //console.log(3);
               return;
             }
           }
-          //console.log($(window).scrollTop() - $('#channel-list').offset().top)
-          //console.log($('#channel-list').offset().top);
-          if ($('.product-img').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top < -400)) {
+          if ($('.product-img').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top < -500)) {
             $('.images-product').css({"position":"fixed","top":"106px"});
             $('.order-summary').css('position','relative');
           }
-          else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top > -400) && ($(window).scrollTop() - $('#channel-list').offset().top < 0))
+          else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top >= -500) && ($(window).scrollTop() - $('#channel-list').offset().top < 0))
           {
+            //console.log($(window).scrollTop() - $('#channel-list').offset().top);
             $('.images-product').css({'position':'relative','top':'0'});
           }
           else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top >= -98))
@@ -859,6 +859,7 @@ export class ProductDetailsComponent implements OnInit{
           }
           else 
           {
+            //console.log(1);
             $('.images-product').css({'position':'relative','top':'0'});
             $('.order-summary').css('position','relative');
           }
@@ -931,10 +932,10 @@ export class ProductDetailsComponent implements OnInit{
             this.product.pincode = pincode;
             $('.religon-overlay').hide();
             this.pincode = pincode;
-            this.toastr.errorToastr('Great! '+data.msg);
+            this.toastr.successToastr('Great! '+data.msg);
             //console.log(this.circles);
             let circle_exist = this.circles.filter(circles => circles.name.includes(data.circle));
-            if(circle_exist)
+            if(circle_exist.length > 0)
             {
               this.region  = circle_exist[0].circle_id;
             }
@@ -947,6 +948,7 @@ export class ProductDetailsComponent implements OnInit{
       }
     )
   }
+  
   select_pack(pack)
   { 
     if(this.fta_pack.length > 0)

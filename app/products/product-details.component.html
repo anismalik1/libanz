@@ -437,7 +437,7 @@ span#offer-price {
 								</div>
 								
 							</div>
-							<li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li>
+							<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
 							<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
 								<div class="card-content center" >
 									<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
@@ -498,10 +498,9 @@ span#offer-price {
 					<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
 					<li class="grey-txt-package" style="list-style-type: none;
-
 							white-space: nowrap;
 							margin-top: 7px;
-							font-size: 12px;">FTA Pack is mandatory, you cannot remove it.</li>
+							font-size: 12px;" *ngIf="item.title && item.title.includes('FTA')">FTA Pack is mandatory, you cannot remove it.</li>
 				</div>
 				<div class="subtotal" *ngIf="this.product && this.product.promos">
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
