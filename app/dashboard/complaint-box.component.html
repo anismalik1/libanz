@@ -42,6 +42,14 @@
       .complain a.right.inline-block.margin-top-cart {
     margin: 0 5px 10px 0px;
 }
+.complaint-modal {
+    width: 45%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.order-date.margin-top-cart {
+    margin-bottom: -3px;
+}
     
       @media only screen and (max-width: 767px){
     
@@ -117,7 +125,7 @@
                 </div> -->
                 <div class="card">
                     <div class="card-content complain">
-                        <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-envelope"></span> &nbsp; Compaint Request</h3>
+                        <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-envelope"></span> &nbsp; Ticket Status </h3>
                         
                         <div class="button-block">
                             <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == 'all')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
@@ -251,8 +259,11 @@
       		</div>
       		<div class="order-date margin-top-cart">
       			<span class="font600">Total Amount : </span>
-      			<span><i class="fa fa-inr"></i> {{complaint_info[0].grand_total}}</span>
-      		</div>
+                  <span><i class="fa fa-inr"></i> {{complaint_info[0].grand_total}}</span>
+                  <br/>
+              </div>
+              
+            
       	</div>
       </div>
     </div>

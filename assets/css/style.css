@@ -5289,6 +5289,12 @@ a.modal-trigger i {
 			padding-top: 4px;
 		}
 
+
+		.clc-btn {
+			margin-left: 30px;
+		}
+
+		
 	@media only screen and (max-width: 767px){
 
 		.bottom-slider-dot ul.lSPager.lSpg {
