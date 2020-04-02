@@ -834,34 +834,42 @@ export class ProductDetailsComponent implements OnInit{
         }
         if($(window).width() >767){
         var scroll = $(window).scrollTop();
+        console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
         if(scroll >= 1)
         {
           if($('#footer-content').isInViewport())
           {
-            if($(window).scrollTop() - $('#footer-content').offset().top > -300)
+            if(scroll - $('#footer-content').offset().top > -300)
             {
               $('.images-product').css({'position':'relative','top':'0'});
               $('.order-summary').css('position','relative');
-              //console.log(3);
               return;
             }
+            
           }
-          if ($('.product-img').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top < -500)) {
+          if($('.order-summary').isInViewport() && ($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height() >= 0 || $('.order-summary').offset().top - $('#channel-list').offset().top < 0))
+            {
+              $('.order-summary').css({'position':'relative','top':0,'right':0});
+              return;
+            }
+          if ($('.product-img').isInViewport() && (scroll - $('#channel-list').offset().top < -500)) {
             $('.images-product').css({"position":"fixed","top":"106px"});
             $('.order-summary').css('position','relative');
+            console.log(4);
           }
-          else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top >= -500) && ($(window).scrollTop() - $('#channel-list').offset().top < 0))
+          else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -500) && (scroll - $('#channel-list').offset().top < 0))
           {
-            //console.log($(window).scrollTop() - $('#channel-list').offset().top);
+            //console.log(scroll - $('#channel-list').offset().top);
             $('.images-product').css({'position':'relative','top':'0'});
+            console.log(2)
           }
-          else if($('.order-summary').isInViewport() && ($(window).scrollTop() - $('#channel-list').offset().top >= -98))
+          else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -98))
           {
             $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
           }
           else 
           {
-            //console.log(1);
+            console.log(1);
             $('.images-product').css({'position':'relative','top':'0'});
             $('.order-summary').css('position','relative');
           }
