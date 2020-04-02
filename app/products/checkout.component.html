@@ -1,3 +1,14 @@
+<style>
+@media only screen and (max-width: 767px){
+
+	.check-btn{
+
+		width: 100%;
+    white-space: nowrap;
+    padding: 1px;
+	}
+}
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
     <ngx-spinner
@@ -227,7 +238,7 @@
 														</div>
 											</div>
 											<div class="modal-footer">
-												<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!addressformgroup.valid">Save and Deliver Here</button>
+												<button type="Submit" class="modal-action btn orange btn-large check-btn" [disabled]="!addressformgroup.valid">Save and Deliver Here</button>
 												<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 											</div>
 									</form>

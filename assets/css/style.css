@@ -4308,7 +4308,7 @@ a.btn-floating.btn-large.orange.dropdown-button.white-text {
 .recommended-section .card-image{background: #f9f9f9;}
 .recomm .card-title{background-image: none !important;font-size: 18px;color: #000;border: 1px solid #d6d6d6;border-right: 0;border-left: 0;}
 .recomm .btn-new1 .btn{width: 100% !important;border-radius: 0 !important;box-shadow: none;margin: 0;}
-.recomm .card{height: 450px !important;
+.recomm .card{height: 440px !important;
     overflow: auto;
     border: 1px solid #d6d6d6;
     transition: .3s all linear; }
@@ -5096,7 +5096,7 @@ a.logup.modal-trigger.black-text {
 
 	font-size: 16px;
 	color: #333 !important;
-	line-height: 40px;
+	line-height: 30px;
 	padding-right:7px;
 }
 .white-spc-txt {
@@ -5294,7 +5294,7 @@ a.modal-trigger i {
 			margin-left: 30px;
 		}
 
-		
+
 	@media only screen and (max-width: 767px){
 
 		.bottom-slider-dot ul.lSPager.lSpg {

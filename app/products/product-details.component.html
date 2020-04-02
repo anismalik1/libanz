@@ -9,10 +9,17 @@
 
 	line-height: 40px !important;
 }
+.mt-round-btn{
 
+	border-radius: 20px;
+	
+}
 
 .rating-li li a {
     line-height: 12px;
+}
+.include-multi-box {
+    padding-bottom: 20px;
 }
 @media only screen and (max-width: 767px){
 
@@ -410,9 +417,9 @@ span#offer-price {
  <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
    <div class="container">
     <div class="row no-margin">
-			<div class="col s12 m12">
+			<div class="col s12 m8">
 					<div class="center">	
-							<h2 class="center font600 text-orange">Available Packs</h2>
+							<h2 class="center font600 text-orange">Select Package </h2>
 							<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
 						</div>
 			</div>			
@@ -724,7 +731,7 @@ span#offer-price {
 								</div>
 								
 								<div class="clearfix"></div>
-								<a class="modal-close btn right orange" href="javascript:" (click)="continue_to_select(item)">Select</a>
+								<a class="modal-close btn right orange mt-round-btn" href="javascript:" (click)="continue_to_select(item)">Select</a>
 							</div>
 							<div class="clearfix"></div>
 							
