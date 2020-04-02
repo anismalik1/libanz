@@ -543,9 +543,14 @@ div#circles-content ul li a {
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 							</p>
 						</div> -->
-						<label for="instant-recharge" class="orange-text mt-bt-20 pt-left-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-									<br/><label class="label-txt pt-left-20">Instant payment from your wallet </label>
-									<br/>
+						<div class="input-field col s12 m12 margin-btm no-padding">
+							<p class="inline-block margin-right fast-forwad relative">
+								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
+								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<label class="label-txt">Instant payment from your wallet </label>
+							</p>
+						</div> 
 						<div class="col s12 m12 continue no-padding orange " style="margin-top:20px;">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
@@ -597,9 +602,14 @@ div#circles-content ul li a {
 								<input placeholder="Customer Account Number" formControlName="recharge_id" type="text" class="validate no-margin"> 
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['recharge_id'].valid && electricitygroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
 							</div>
-							<label for="instant-recharge" class="orange-text mt-bt-20 pt-left-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-							<br/><label class="label-txt pt-left-20">Instant payment from your wallet </label>
-							<br/>
+								<div class="input-field col s12 m12 margin-btm no-padding">
+							<p class="inline-block margin-right fast-forwad relative">
+								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
+								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<label class="label-txt">Instant payment from your wallet </label>
+							</p>
+						</div> 
 
 							<div class="col s12 m12 right continue no-padding orange electric-cls-btn" >
 								<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('electricity');">Proceed to Pay</button>
@@ -713,9 +723,15 @@ div#circles-content ul li a {
 							<input placeholder="K NO" formControlName="recharge_id"  type="text" class="validate no-margin">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter K NO" id="mobid" *ngIf="!watergroup.controls['recharge_id'].valid && watergroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
 						</div>
-						<label for="instant-recharge" class="orange-text mt-bt-20 pt-left-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-						<br/><label class="label-txt pt-left-20">Instant payment from your wallet </label>
-						<br/>
+						<div class="input-field col s12 m12 margin-btm no-padding">
+							<p class="inline-block margin-right fast-forwad relative">
+								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
+								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+									<label class="label-txt">Instant payment from your wallet </label>
+							</p>
+						</div> 
+
 
 						<div class="col s12 m12 right continue no-padding orange electric-cls-btn" >
 							<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('water');">Proceed to Pay</button>
