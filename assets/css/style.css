@@ -4720,7 +4720,7 @@ ul.lSPager.lSpg {
 .cst-bg-color ul li a{
 
 	
-	color:#000 !important;
+	color:#fff !important;
 	font-size:15px !important;
 }
 .black-text {
@@ -4778,8 +4778,8 @@ span.fa.fa-edit.fa-2x {
 
 
 	.cst-bg-color{
-		background: #fff !important;
-    padding-top: 10px !important;
+		background: #ff6a00 !important;
+		padding-top: 8px !important;
 }
 
 .banner-slider1 .card-content {
@@ -4810,9 +4810,13 @@ span.fa.fa-edit.fa-2x {
 }
 .cst-back{
 
-	background: #fff;
+	background: #ff6a00;
     height: 40px;
     padding: 8px;
+}
+.cst-back ul li a{
+
+	color:#fff !important;
 }
 .bk-icon{
 	font-size: 16px !important;
