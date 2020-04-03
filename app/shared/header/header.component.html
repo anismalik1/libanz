@@ -111,14 +111,7 @@ span.fa.fa-lock.pt-right-fix {
 hr.line1 {
     line-height: 10px !important;
     position: absolute;
-    top: 186px;
-    width: 86%;
-    opacity: 0.3;
-}
-hr.line2 {
-    line-height: 10px !important;
-    position: absolute;
-	top: 234px;
+    margin-top: 8px;
     width: 86%;
     opacity: 0.3;
 }
@@ -339,44 +332,16 @@ hr.line2 {
 				</div>
 	
 				<ul class="dashboard-menu-mobile">
-					<li><a [routerLink]="['/dashboard']"> <span class="fa fa-tachometer"></span>  &nbsp; Dashboard  <span class="fa fa-chevron-right cs-right"></span></a>
-						
-					</li>
-					<!-- <span class="icon-text">Say hello to mydthshop </span> -->
+					<li><a [routerLink]="['/dashboard']"> <span class="fa fa-tachometer"></span>  &nbsp; Dashboard  <span class="fa fa-chevron-right cs-right"></span></a></li>
 					<li><a routerLink="/dashboard/value-transfer" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp; Pay  <span class="fa fa-chevron-right cs-right"></span> </a></li>
 					<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"> <span class="fa fa-plus"></span> &nbsp;  Add Money <span class="fa fa-chevron-right cs-right"></span> </a></li>
-					
-				
 					<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><span class="fa fa-envelope"></span> &nbsp;  Value Transfer</a></li>
-					
-					<!-- <li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><span class="fa fa-gift"></span> &nbsp;  Manage Retailer </a></li> -->
-					
 					<li><a routerLink="/dashboard/complaints" routerLinkActive="active" class="font-size-change"> <span class="fa fa-edit"></span> &nbsp;  Tickets <span class="fa fa-chevron-right cs-right"></span></a></li>
-				
 					<li><a routerLink="/dashboard/orders" routerLinkActive="active" class="font-size-change"><span class="fa fa-file"></span> &nbsp;  My Orders  <span class="fa fa-chevron-right cs-right"></span></a></li>
-					
 					<li><a routerLink="/dashboard/topup-request" routerLinkActive="active" class="font-size-change"> <span class="fa fa-diamond"></span> &nbsp;  Add Money Request <span class="fa fa-chevron-right cs-right"></span> </a></li>
-					<!-- <li><a [routerLink]="['/dashboard/topup-request']"><span class="fa fa-credit-card"></span> Top Up </a></li> -->
-						<!-- <li><a [routerLink]="['/dashboard/commission-structure']"><span class="fa fa-sitemap"></span> Commission </a></li> -->
-						<!-- <li><a href="#"><span class="fa fa-barcode"></span> My QR Code </a></li> -->
-						
-						
-						<!-- <li><a href="#"><span class="fa fa-language"></span> My Language </a></li> -->
-						
-					
-						<!-- <li><a href="#"><span class="fa fa-lock"></span> Enable Screen Lock </a></li> -->
-					
-						<!-- <li><a href="#"><span class="fa fa-check"></span> KYC Verify </a></li> -->
-						<!-- <li><a [routerLink]="['/dashboard/complaints']"><span class="fa fa-envelope"></span> complaints </a></li> -->
-	
-						
 					<li *ngIf="this.todoservice.get_user_type() == 2"><a routerLink="/dashboard/commission-structure" routerLinkActive="active" class="font-size-change"> <span class="fa fa-sitemap"></span> &nbsp;  Commission Structure <span class="fa fa-chevron-right cs-right"></span> </a></li>
-					
 					<li><a routerLink="/dashboard/transactions" routerLinkActive="active" class="font-size-change"> <span class="fa fa-credit-card"></span> &nbsp;  Transaction History <span class="fa fa-chevron-right cs-right"></span> </a></li>
-					
-					<!-- <li><a routerLink="/dashboard/edit-profile" routerLinkActive="active" class="font-size-change"> <span class="fa fa-user"></span> &nbsp;  Edit Profile  <span class="fa fa-chevron-right cs-right"></span></a></li> -->
-					
-					<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> Testimonial <span class="fa fa-chevron-right cs-right"></span> </a></li>
+					<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial <span class="fa fa-chevron-right cs-right"></span> </a></li>
 
 				</ul>
 				
@@ -384,10 +349,6 @@ hr.line2 {
 			</div>
 			<div class="side-menu-body">
 				<div class="login-section" >
-					<!-- <h3>Navigation Menu</h3>
-					<a routerLink="/proceed/login" class="btn waves-effect waves-light orange rounded-btn" type="button">Login</a>
-					<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
-					 -->
 				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">	
 						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						<li><a routerLink="/proceed/login"><span class="fa fa-lock pt-right-fix"></span>Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
@@ -420,7 +381,7 @@ hr.line2 {
 							
 						</mat-select>
 				</mat-form-field>
-				<hr class="line2" />
+				<hr class="line1" />
 				<mat-form-field>
 						<mat-label class="color-blk"><span class="fa fa-diamond bell-black pt-right-fix"></span>Categories</mat-label>
 						<mat-select>

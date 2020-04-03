@@ -1980,6 +1980,9 @@ main.container{
 .mat-form-field-underline{
 	background-color: transparent !important;
 }
+#mobile-side-menu .mat-form-field-underline{
+	background-color: #333;
+}
 .mat-option-text img{
 	width: 38px;
 	height: 38px;
