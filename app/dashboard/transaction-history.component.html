@@ -108,7 +108,9 @@
                         <div class="card-content">
                             <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-edit"></span> &nbsp; Wallet Transaction History</h3>
                             <!-- <hr/> -->
-
+                            <div class="right">
+                                <span>Search Order: </span><input type="text" placeholder="Enter Order Id/Subscriber Id" id="order-id"><a href="javascript:" class="search-link" (click)="seach_order()"><i class="material-icons">search</i></a>
+                            </div>
                             <div class="responsive-table" style="width:100%; overflow:auto;">
                              <table class="table striped  cst-table">
                                 <tr class="theader-cst">

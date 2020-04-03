@@ -87,6 +87,40 @@ export class ComplaintBoxComponent implements OnInit{
     } 
   }
 
+  seach_ticket()
+  {
+    var key = $("#ticket-id").val();
+    if(key == "")
+    {
+      return false;
+    }
+    this.spinner.show();
+    if(this.authservice.retrieveToken())
+    {
+      let data = {token : this.get_token(),key : key};
+      this.todoservice.fetch_complaint_by_key(data)
+      .subscribe(
+        data => 
+        {
+          if(data == 'Invalid Token')
+          {
+            this.authservice.clear_session();
+            this.router.navigate(['/proceed/login']);
+          }
+
+          this.spinner.hide();
+          if(!jQuery.isEmptyObject(data))
+          {
+            this.complaints = data.COMPLAINTS;
+            this.complaints_counts = data.COMPLAINTS.length;
+          }
+
+          
+        }
+      )  
+    } 
+  }
+
   navigate_to(url)
   {
     if(url == url)

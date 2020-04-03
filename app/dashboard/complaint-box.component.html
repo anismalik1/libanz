@@ -126,7 +126,10 @@
                 <div class="card">
                     <div class="card-content complain">
                         <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-envelope"></span> &nbsp; Tickets</h3>
-                        
+                        <div class="right">
+                            <span>Search Ticket: </span><input type="text" placeholder="Enter Order Id/Subscriber Id" id="ticket-id"><a href="javascript:" class="search-link" (click)="seach_ticket()"><i class="material-icons">search</i></a>
+                        </div>
+                        <div class="clearfix"></div>
                         <div class="button-block">
                             <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == 'all')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
                             <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">In Progress</button></a>
@@ -142,7 +145,7 @@
                                         <th >Ticket ID</th>
                                         <th >Order ID</th>
                                         <th >Status</th>
-                                        <th >Recharge No.</th>
+                                        <th >Subcriber ID/Recharge No</th>
                                         <th >Amount</th>
                                         <th >Comment</th>
                                         <th >Created</th>

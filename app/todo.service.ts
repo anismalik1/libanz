@@ -679,6 +679,13 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/paging_transaction_history';
     return this.send_post_request(data,url) ;
   }
+
+  fetch_transaction_by_key(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_transaction_by_key';
+    return this.send_post_request(data,url) ;
+  }
+
   export_recharge(data)
   {
     let url = this.server_url+'accounts/apis/export/export_recharge';
@@ -714,6 +721,13 @@ export class TodoService {
   {
     
     let url = this.server_url+'accounts/apis/orders/fetch_complaints_listing';
+    return this.send_post_request(data,url) ;
+  }
+
+  fetch_complaint_by_key(data)
+  {
+    
+    let url = this.server_url+'accounts/apis/orders/fetch_complaint_by_key';
     return this.send_post_request(data,url) ;
   }
 

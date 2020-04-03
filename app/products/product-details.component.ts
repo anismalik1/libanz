@@ -834,7 +834,7 @@ export class ProductDetailsComponent implements OnInit{
         }
         if($(window).width() >767){
         var scroll = $(window).scrollTop();
-        console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
+        //console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
         if(scroll >= 1)
         {
           if($('#footer-content').isInViewport())

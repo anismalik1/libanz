@@ -47,6 +47,33 @@ export class TransactionHistoryComponent implements OnInit{
     
   }
   
+  seach_order()
+  {
+    if(!this.authservice.authenticate())
+    {
+        this.router.navigate(['/proceed/login']);
+    }
+    var key = $("#order-id").val();
+    this.spinner.show();
+    let data =  {token : this.get_token(),key : key};
+    this.todoservice.fetch_transaction_by_key(data)
+		.subscribe(
+			data => 
+			{
+				this.spinner.hide();
+			  if(data.status == 'Invalid Token')
+			  {
+          this.authservice.clear_session();
+          this.router.navigate(['/proceed/login']);
+			  }
+			  if(!jQuery.isEmptyObject(data))
+			  {		
+          this.transactions   = data.TRANSACTIONS;
+          this.wallet_counts  = data.TRANSACTIONS_COUNT;						
+			  }
+			}
+		  );
+  }
   fetch_transaction_history(page)
   {
     if(!this.authservice.authenticate())
