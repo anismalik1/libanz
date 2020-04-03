@@ -5393,4 +5393,7 @@ a.modal-trigger i {
 			position: initial !important;
 			padding-top: 4px;
 		}
-}
+		.channels-basic {
+			padding: 0;
+		}
+	}
