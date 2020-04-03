@@ -4778,6 +4778,7 @@ span.fa.fa-edit.fa-2x {
 
 
 	.cst-bg-color{
+		position: relative;
 		background: #ff6a00 !important;
 		padding-top: 8px !important;
 }
@@ -5249,7 +5250,7 @@ a.modal-trigger i {
 		text-align: center !important;
 		position: absolute !important;
 		left: 35% !important;
-		bottom: -3px !important;
+		bottom: -21px;
 	}
 
 	.login-section ul li a {
@@ -5297,7 +5298,9 @@ a.modal-trigger i {
 		.clc-btn {
 			margin-left: 30px;
 		}
-
+		.chip a.black-text.btn-contu {
+			font-size: 13px;
+		}
 
 	@media only screen and (max-width: 767px){
 
@@ -5399,5 +5402,30 @@ a.modal-trigger i {
 		}
 		.channels-basic {
 			padding: 0;
+		}
+
+		.religon-overlay .religon-modal .chip {
+			margin-bottom: -10px !important;
+		}
+
+		.religon-modal {
+			padding-bottom: 40px !important;
+		}
+		.religon-overlay .religon-modal h3 {
+			font-size: 2rem;
+			margin: 0;
+		}
+
+		.left-icn-mb {
+			position: absolute;
+			left:2px;
+		}
+
+		span.fa.fa-search.search-mb-btn {
+			position: absolute;
+			font-size: 16px;
+			color: #fff;
+			right: 14px;
+			top: 10px;
 		}
 	}
