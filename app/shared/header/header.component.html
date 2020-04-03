@@ -85,7 +85,43 @@
 		color: #7d7c7c;
 		padding-right: 6px ;
 	}
+	/* span.fa.fa-sitemap {
+    padding-right: 7px;
+} */
+.pt-right-fix{
 
+	padding-right:7px;
+	position: relative;
+}
+.pt-right-fix1{
+
+padding-right:10px;
+position: relative;
+}
+.pt-right-fix2 {
+    padding-right: 13px;
+	position: relative;
+}
+span.fa.fa-diamond.bell-black.pt-right-fix {
+    padding-right: 9px;
+}
+span.fa.fa-lock.pt-right-fix {
+    padding-right: 14px;
+}
+hr.line1 {
+    line-height: 10px !important;
+    position: absolute;
+    top: 186px;
+    width: 86%;
+    opacity: 0.3;
+}
+hr.line2 {
+    line-height: 10px !important;
+    position: absolute;
+	top: 234px;
+    width: 86%;
+    opacity: 0.3;
+}
 	.icon-cst-clr-1{
 		font-size: 18px;
 	}
@@ -353,14 +389,14 @@
 					<a routerLink="/proceed/signup" class="btn waves-effect waves-light grey rounded-btn" type="button">Signup</a>
 					 -->
 				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">	
-						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out"></span> Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
-						<li><a routerLink="/proceed/login"><span class="fa fa-lock"></span> &nbsp; Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
+						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
+						<li><a routerLink="/proceed/login"><span class="fa fa-lock pt-right-fix"></span>Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						
-						<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap"></span> &nbsp; Testimonial  <span class="fa fa-chevron-right cs-right"></span></a></li>
+						<li><a routerLink="#" class="font-size-change"><span class="fa fa-sitemap pt-right-fix"></span>Testimonial  <span class="fa fa-chevron-right cs-right"></span></a></li>
 				</ul>
 				<div class="phone-pay-icon dropdown-list-cst">	
 				<mat-form-field>
-						<mat-label class="color-blk"><span class="fa fa-bell bell-black"></span> &nbsp; My Information</mat-label>
+						<mat-label class="color-blk"><span class="fa fa-bell bell-black pt-right-fix1"></span>My Information</mat-label>
 						<mat-select class="select-lbl">
 							<mat-option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></mat-option>
 							<mat-option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></mat-option>
@@ -373,8 +409,9 @@
 							<mat-option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></mat-option>
 						</mat-select>
 				</mat-form-field>	
+				<hr class="line1" />
 				<mat-form-field>
-						<mat-label class="color-blk"><span class="fa fa-file bell-black"></span> &nbsp; All Product Packages</mat-label>
+						<mat-label class="color-blk"><span class="fa fa-file bell-black pt-right-fix2"></span>All Product Packages</mat-label>
 						<mat-select>
 							<mat-option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></mat-option>
 							<mat-option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></mat-option>
@@ -383,8 +420,9 @@
 							
 						</mat-select>
 				</mat-form-field>
+				<hr class="line2" />
 				<mat-form-field>
-						<mat-label class="color-blk"><span class="fa fa-diamond bell-black"></span> &nbsp; Categories</mat-label>
+						<mat-label class="color-blk"><span class="fa fa-diamond bell-black pt-right-fix"></span>Categories</mat-label>
 						<mat-select>
 							<mat-option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></mat-option>
 							<mat-option><a [routerLink]="['/product/listing/videocon']">Videocon</a></mat-option>

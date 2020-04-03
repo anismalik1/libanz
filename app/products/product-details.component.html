@@ -27,6 +27,28 @@
     line-height: 10px;
 }
 
+.recomm .card {
+    height: 360px !important;
+    padding: 5px;
+    overflow: hidden;
+    border: 1px solid #d6d6d6;
+    transition: .3s all linear;
+    line-height: 20px;
+    border-radius: 5px;
+	position: relative;
+	
+}
+img.img-responsive.pt-img {
+    position: absolute;
+    right: 4px;
+    top: 10px;
+}
+.rating-green-content {
+    white-space: nowrap;
+    font-size: 11px;
+    color: #333;
+}
+
 .mobile-hide{
 
 	display: none;
@@ -549,7 +571,7 @@ span#offer-price {
 				<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
 			<div class="container-fluid">
 				<div class="row no-margin home-product-card recomm">
-					<div *ngFor="let item of recommended">
+					<div *ngFor="let item of recommended" class="col s6">
 						<div class="card">
 							<div class="row" style="margin-bottom:10px;">
 								<div class="col s10">
