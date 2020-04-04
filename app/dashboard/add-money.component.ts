@@ -4,6 +4,7 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { CssSelector } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-money',
@@ -81,10 +82,16 @@ export class AddMoneyComponent implements OnInit{
 		this.add_data.proceed = 2;
 	}
 
-	select_method(method)
+	select_method(method,ele,margin)
 	{
 		this.add_data.paymethod = method;
+		var checked = ele.target.parentNode.parentNode.innerHTML;
+			$('#method-selected').html(checked);
+			$('#method-selected input').remove();
+			$('#method-selected label').before('<i class="material-icons orange-text">check_circle</i>&nbsp;');
+			window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
 	}
+
 	back_to_addmoney()
 	{
 		if(1 == 1)

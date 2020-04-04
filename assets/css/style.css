@@ -1983,6 +1983,9 @@ main.container{
 #mobile-side-menu .mat-form-field-underline{
 	background-color: #333;
 }
+.additional-charge{margin-top:5px;}
+/* .position-first{position :absolute;margin-top: -60px;;}
+.add-money-history{margin-top: 100px;} */
 .mat-option-text img{
 	width: 38px;
 	height: 38px;
@@ -3754,7 +3757,7 @@ canvas {
 #circles-content .tabs{height: auto; white-space: normal;}
 #circles-content .tab{display: block; width: 100%; border-bottom: 1px solid #f0f0f0;}
 .responsive-compare-table .feature-image-wrapper{
-	min-height: 250px;
+	min-height: 264px;
     padding-top: 5rem;
 }
 .responsive-compare-table .croses{
@@ -5442,3 +5445,9 @@ a.modal-trigger i {
 			top: 10px;
 		}
 	}
+	#add-methods-list {margin-top: 25px;}
+	#method-selected{margin-bottom:10px;}
+	#method-selected i{font-size:20px;}
+	#method-selected .input-field{margin-top:none}
+	#method-selected .uwa.Online-box,#method-selected .uwa.imps-box{border:none;}
+	.btm-menu{margin-top: 10px;}

@@ -362,25 +362,25 @@ hr.line1 {
 				<mat-form-field>
 						<mat-label class="color-blk"><span class="fa fa-info-circle bell-black pt-right-fix1"></span>My Information</mat-label>
 						<mat-select class="select-lbl">
-							<mat-option><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></mat-option>
-							<mat-option><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></mat-option>
-							<mat-option><a [routerLink]="['/p/24-7']">Help & Support </a></mat-option>
-							<mat-option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></mat-option>
-							<mat-option><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></mat-option>
-							<mat-option><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></mat-option>
-							<mat-option><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></mat-option>
-							<mat-option><a [routerLink]="['/blog/all']">Blog</a></mat-option>
-							<mat-option><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/about-us')"><a [routerLink]="['/p/about-us']" > About Us</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/dth-connection-refund-policy')"><a [routerLink]="['/p/dth-connection-refund-policy']" > Refund Policy</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/24-7')"><a [routerLink]="['/p/24-7']">Help & Support </a></mat-option>
+							<mat-option (click)="go_to_nav('/p/know-about-my-dth-shop')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Who We Are</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/mydthshop-terms-and-conditions')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Terms &amp; Conditions</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/privacy-policy')"><a [routerLink]="['/p/privacy-policy']" >Privacy policy</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/mydthshop-disclaimer')"><a [routerLink]="['/p/mydthshop-disclaimer']" >Disclaimer</a></mat-option>
+							<mat-option (click)="go_to_nav('/blog/all')"><a [routerLink]="['/blog/all']">Blog</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/sitemap-on-mydthshop')"><a [routerLink]="['/p/sitemap-on-mydthshop']" >Sitemap</a></mat-option>
 						</mat-select>
 				</mat-form-field>	
 				<hr class="line1" />
 				<mat-form-field>
 						<mat-label class="color-blk"><span class="fa fa-gift bell-black pt-right-fix2"></span>All Product Packages</mat-label>
 						<mat-select>
-							<mat-option><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></mat-option>
-							<mat-option><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></mat-option>
-							<mat-option><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></mat-option>
-							<mat-option><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></mat-option>
+							<mat-option (click)="go_to_nav('/package-list/airtel')"><a [routerLink]="['/package-list/airtel']">Airtel Packages </a></mat-option>
+							<mat-option (click)="go_to_nav('/package-list/tata-sky')"><a [routerLink]="['/package-list/tata-sky']">Tata Sky Packages </a></mat-option>
+							<mat-option (click)="go_to_nav('/package-list/videocon')"><a [routerLink]="['/package-list/videocon']">Videocon Packages</a></mat-option>
+							<mat-option (click)="go_to_nav('/package-list/dish-tv')"><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></mat-option>
 							
 						</mat-select>
 				</mat-form-field>
@@ -388,16 +388,17 @@ hr.line1 {
 				<mat-form-field>
 						<mat-label class="color-blk"><span class="fa fa-diamond bell-black pt-right-fix"></span>Categories</mat-label>
 						<mat-select>
-							<mat-option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></mat-option>
-							<mat-option><a [routerLink]="['/product/listing/videocon']">Videocon</a></mat-option>
-							<mat-option><a [routerLink]="['/product/listing/airtel']">Airtel</a></mat-option>
-							<mat-option><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></mat-option>
-							<mat-option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></mat-option>
-							<mat-option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></mat-option>
-							<mat-option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></mat-option>
+							<mat-option (click)="go_to_nav('/product/listing/tata-sky')"><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></mat-option>
+							<mat-option (click)="go_to_nav('/product/listing/videocon')"><a [routerLink]="['/product/listing/videocon']">Videocon</a></mat-option>
+							<mat-option (click)="go_to_nav('/product/listing/airtel')"><a [routerLink]="['/product/listing/airtel']">Airtel</a></mat-option>
+							<mat-option (click)="go_to_nav('/product/listing/dish-tv')"><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/jio-fiber')"><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/airtel-xstream')"><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/dishsmrt-hub')"><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></mat-option>
 							
 						</mat-select>
-				</mat-form-field>		
+				</mat-form-field>	
+				<hr class="line1" />	
 				</div>
 						<!-- <select class="form-control">
 							<option>Categories</option>
@@ -409,7 +410,7 @@ hr.line1 {
 							<option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></option>
 							<option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></option>
 						</select> -->
-						<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() != ''">	
+						<ul class="dashboard-menu-mobile btm-menu"  *ngIf="this.todoservice.get_user_name() != ''">	
 								<li><a class="font-size-change" [routerLink]="['/edit-profile']"><span class="fa fa-user"></span> &nbsp; Edit Profile <span class="fa fa-chevron-right cs-right"></span></a></li>
 								<li><a [routerLink]="['/logout']"><span class="fa fa-sign-out"></span> &nbsp;Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
 							</ul>	
@@ -852,12 +853,12 @@ hr.line1 {
       <h4>Change Icon</h4>
 					<form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()"> 
 						<div class="file-field input-field">
-							<div class="btn">
+							<div class="btn orange">
 								<span>File</span>
 								<input type="file" (change)="fileChangeEvent($event)" />
 							</div>
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text">
+								<input class="file-path validate " type="text">
 							</div>
 							<image-cropper
 								[imageChangedEvent]="imageChangedEvent"
@@ -871,7 +872,7 @@ hr.line1 {
 						</div>
 
 						<div class="clearfix"></div>
-						<input type="submit" value="Set" class="btn" [disabled] = "disabled">
+						<input type="submit" value="Set" class="btn orange" [disabled] = "disabled">
 					</form>
     </div>
   </div>

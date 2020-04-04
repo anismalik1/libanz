@@ -490,52 +490,61 @@ float: right;
                               
                             <div class="col s12 m12" *ngIf="this.add_data.proceed == 2">
                                 <div class="row">
-                                    <div class="row additional-charge" *ngIf="this.add_data.paymethod == 'Gateway' || this.add_data.paymethod == 'Paytm' || this.add_data.paymethod == 'Cash Deposit'"><div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount {{ 1 * this.add_data.amount - (this.add_data.amount*2)/100 }}Will be credited.<i class="close material-icons">close</i></div></div>
+                                    
                                   <div class="top-logo-block">
                                  <img src="https://www.mydthshop.com/web-app/assets/images/final-logo.png"/>
                                     <h4>Add Money to wallet <span class="amt-inr"><span class="fa fa-inr"></span> {{this.add_data.amount}} </span></h4>
                                   </div>
                           
-                                  <div class="add-money-history bottom-option">
-                                    <div class="col s12">
-                                      <div class="uwa margin-fix">
-                                        <input type="radio" id="fund" name="payment_type" class="with-gap " value="paytm" checked (change)="select_method('FUND TRANSFER')"/>
-                                        <label for="fund" class="black-text nttf-txt">NEFT/IMPS/RTGS/FUND TRANSFER</label>
-                                      </div>
-                                      <div class="default-hide" *ngIf="this.add_data.paymethod == 'FUND TRANSFER'">
-                                          <div class="row" >
-                                            <div class="input-field col s12 m12">
-                                              <input id="bank-id" name="ref_id" ngModel type="text" class="validate no-margin" autocomplete="off">
-                                              <label for="bank-id">Reference ID/TXN ID*</label>
-                                            </div>
+                                  <div class=" bottom-option">
+                                    <div class="col s12 add-money-history">
+                                        <div id="method-selected">
+                                          <div class="uwa margin-fix" *ngIf="this.add_data.paymethod == 'FUND TRANSFER'">
+                                            <i class="material-icons orange-text">check_circle</i>&nbsp;
+                                            <label for="funddd" class="black-text nttf-txt">NEFT/IMPS/RTGS/FUND TRANSFER</label>
                                           </div>
-                                         <div class="clearfix"></div>
-                                        </div>  
-                                      <div class="uwa imps-box">
-                                        <input type="radio" id="imps-1" name="payment_type" class="with-gap " value="imps" (change)="select_method('Cash Deposit')"/>
-                                        <label for="imps-1" class="black-text nttf-txt">Cash Deposit </label>
-                                      </div>
-                                        <div class="default-hide" *ngIf="this.add_data.paymethod == 'Cash Deposit'">
-                                          <div class="row" >
-                                            <div class="input-field col s12 m12">
-                                              <input id="bank-id" name="ref_id" ngModel type="text" class="validate no-margin" autocomplete="off">
-                                              <label for="bank-id">Reference ID/TXN ID*</label>
-                                            </div>
-                                          </div>
-                                         <div class="clearfix"></div>
+                                        
                                         </div>
-                                      <div class="uwa Online-box">
-                                        <input type="radio" id="imps-3" name="payment_type" class="with-gap " value="imps" (change)="select_method('Paytm')" />
-                                        <label for="imps-3" class="black-text nttf-txt"> Paytm Payment </label>
-                                      
-                                      </div>
-                                      <div class="uwa Online-box">
-                                        <input type="radio" id="imps-4" name="payment_type" class="with-gap " value="imps" (change)="select_method('Gateway')"/>
-                                        <label for="imps-4" class="black-text nttf-txt"> Gateway</label>
-                                      </div>
+                                        <div class="default-hide" *ngIf="this.add_data.paymethod == 'FUND TRANSFER' || this.add_data.paymethod == 'Cash Deposit'">
+                                            <div class="row" >
+                                              <div class="input-field col s12 m12">
+                                                <input id="bank-id" name="ref_id" ngModel type="text" class="validate no-margin" autocomplete="off">
+                                                <label for="bank-id">Reference ID/TXN ID*</label>
+                                              </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                          </div>
+                                          <button type="submit" class="btn orange btn-large btn-full mb-btn" [disabled]="this.add_data.send == 1"><span *ngIf="add_data.paymethod =='Cash Deposit' || add_data.paymethod == 'FUND TRANSFER'">Send Request</span> <span *ngIf="add_data.paymethod =='Paytm' || add_data.paymethod == 'Gateway'">Proceed</span> <span class="fa fa-inr"></span> {{this.add_data.amount}} </button>
+                                          <div class="row additional-charge" *ngIf="this.add_data.paymethod == 'Gateway' || this.add_data.paymethod == 'Paytm' || this.add_data.paymethod == 'Cash Deposit'"><div class="chip orange white-text">Additional 2% Amount Will be Deducted. Effective Amount {{ 1 * this.add_data.amount - (this.add_data.amount*2)/100 }}Will be credited.<i class="close material-icons">close</i></div></div>
+                                      <ul id="add-methods-list">
+                                        <li class="position-first">
+                                          <div class="uwa margin-fix imps-box">
+                                            <input type="radio" id="fund" name="payment_type" class="with-gap " value="paytm" checked (change)="select_method('FUND TRANSFER',$event,60)"/>
+                                            <label for="fund" class="black-text nttf-txt">NEFT/IMPS/RTGS/FUND TRANSFER</label>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="uwa imps-box">
+                                            <input type="radio" id="imps-1" name="payment_type" class="with-gap " value="imps" (change)="select_method('Cash Deposit',$event,124)"/>
+                                            <label for="imps-1" class="black-text nttf-txt">Cash Deposit </label>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="uwa Online-box">
+                                            <input type="radio" id="imps-3" name="payment_type" class="with-gap " value="imps" (change)="select_method('Paytm',$event,116)" />
+                                            <label for="imps-3" class="black-text nttf-txt"> Paytm Payment </label>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="uwa Online-box">
+                                            <input type="radio" id="imps-4" name="payment_type" class="with-gap " value="imps" (change)="select_method('Gateway',$event,160)"/>
+                                            <label for="imps-4" class="black-text nttf-txt"> Gateway</label>
+                                          </div>
+                                        </li>
+                                      </ul>
                                     </div>
                                   </div>
-                                  <button type="submit" class="btn orange btn-large btn-full mb-btn" [disabled]="this.add_data.send == 1"><span *ngIf="add_data.paymethod =='Cash Deposit' || add_data.paymethod == 'FUND TRANSFER'">Send Request</span> <span *ngIf="add_data.paymethod =='Paytm' || add_data.paymethod == 'Gateway'">Proceed</span> <span class="fa fa-inr"></span> {{this.add_data.amount}} </button>
+                                  
                               </div>
                               </div>
                             </form>
