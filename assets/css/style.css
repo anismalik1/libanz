@@ -4817,7 +4817,7 @@ span.fa.fa-edit.fa-2x {
 .cst-back{
 
 	background: #ff6a00;
-    height: 45px;
+    height: 55px;
     padding: 10px;
 }
 .cst-back ul li a{
@@ -4833,7 +4833,7 @@ span.fa.fa-edit.fa-2x {
 	display: none;
 }
 .wallet-mobile {
-	margin: 10px -17px !important;
+	margin: 10px -17px 6px -17px !important;
 	border-bottom: 1px solid #e3e3e3;
 	padding: 0 0 10px 15px;
 }
@@ -4969,7 +4969,7 @@ span.fa.fa-star.pull-right.icn-clr1:hover {
 }
 .blog-content{
 
-	height: 250px !important;
+	height:150px !important;
     overflow: auto;
 }
 
@@ -5434,15 +5434,56 @@ a.modal-trigger i {
 			font-size: 16px;
 			color: #fff;
 			right: 14px;
-			top: 12px;
+			top: 18px;
 		}
 		span.fa.fa-search.search-mb-btn1 {
 			position: absolute;
 			font-size: 15px;
 			color: #fff;
 			right: 26px;
-			top: 10px;
+			top: 16px;
 		}
+
+		.back-icon li {
+			
+			padding: 11px 2px;
+		}
+		.bk-fund {
+			padding-top: 18px;
+			
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		.block-fund{
+
+			padding:0px !important;
+		}
+
+		.tabs-sign-up {
+			padding: 2.5rem 1rem 0;
+			display: inline-block;
+			width: 100%;
+			height: calc(73vh - 103px);
+		}
+		.payment-method1 {
+			display: flex;
+			justify-content: center;
+		}
+
+		.cstm-img {
+			width: 35px;
+			height: 35px;
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+			transition: .3s ease-in;
+			padding: 2px;
+			border-radius: 50%;
+			vertical-align: middle;
+			margin-bottom: 10px;
+			border: 1px solid #c2c2c2;
+			display: flex;
+		}
+	
 	}
 	#add-methods-list {margin-top: 25px;}
 	#method-selected{margin-bottom:10px;}

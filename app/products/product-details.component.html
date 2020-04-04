@@ -26,6 +26,23 @@
 	.rating-li li a {
     line-height: 10px;
 }
+.round-btmobile{
+
+	width: calc(100% + 128px);
+    margin-top: 10px;
+	border-radius:20px !important;
+}
+
+.channels-accoriadn .card-content a{
+	background: #ff6a00;
+    color: #fff;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 0;
+    border-radius: 20px;
+    width: 93px;
+    margin-top: 10px;
+}
 
 .recomm .card {
     height: 360px !important;
@@ -53,7 +70,7 @@ img.img-responsive.pt-img {
 
 	display: none;
 }
-.rounded-btn {
+.end-btn {
     border-radius: 0!important;
 }
 .footer-button-buy{
@@ -452,7 +469,7 @@ span#offer-price {
 					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
 					<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
 						<div class="row">
-							<div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
+							<div class="col s6 m4" *ngFor="let item of packs.child;let i = index;">
 							<!-- <div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
 							<div class="card product-new" *ngIf="item.default_selected == 2">
 								<div class="card-content center">
@@ -555,8 +572,8 @@ span#offer-price {
 			<hr>
 			<div class="subtotal inline-block">
 				<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
-				<a href="javascript:" class="btn orange" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a>
+				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
+				<a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a>
 			</div>				
 		</div>
 	</div>
@@ -617,7 +634,7 @@ span#offer-price {
 </section>
 <div class="footer-button-buy">
 	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  Packages </a>
+	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 end-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  Packages </a>
 
 </div>
 <!-- Modal Structure -->

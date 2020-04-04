@@ -2,11 +2,11 @@
 	<div class="card-content">
 		<ul class="side-bar-naviagtion no-margin">
 			<li><a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/dashboard.png" class="responsive-img vertical-align-middle"> Dashboard <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
-			<li><a routerLink="/dashboard/value-transfer" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/smartphone-call.png" class="responsive-img vertical-align-middle"> Pay <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
-			
+			<li><a routerLink="/recharge/for/mobile" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/smartphone-call.png" class="responsive-img vertical-align-middle"> Recharge & Bill Payments <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
+			<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/transfer.png" class="responsive-img vertical-align-middle"> Pay  <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
 			<li><a routerLink="/dashboard/add-money" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/free-delivery.png" class="responsive-img vertical-align-middle"> Add Money <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
 			<!-- <li><a routerLink="/dashboard/dth-orders" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/dth1.png" class="responsive-img vertical-align-middle"> DTH Orders <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li> -->
-			<li *ngIf="this.todoservice.get_user_type() == 2 || this.todoservice.get_user_type() == 3"><a routerLink="/dashboard//value-transfer" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/transfer.png" class="responsive-img vertical-align-middle"> Pay  <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
+			
 
 			<li *ngIf="this.todoservice.get_user_type() == 3"><a routerLink="/manage-retailer" routerLinkActive="active" class="font-size-change"><img  src="{{this.todoservice.base_url}}assets/images/recharge-icon/collaboration.png" class="responsive-img vertical-align-middle"> Manage Retailer <i class="material-icons font-size-change1 right">keyboard_arrow_right</i></a></li>
 			

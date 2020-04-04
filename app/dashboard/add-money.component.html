@@ -401,6 +401,11 @@ float: right;
     white-space: nowrap;
 }
 
+
+.black-fund #enter-amount{
+
+  padding-top: 16px;
+}
   
 }
 </style>
@@ -475,8 +480,8 @@ float: right;
                                       </div>
                                 </div>
                               </div> -->
-                              <div class="row" *ngIf="this.add_data.proceed == 1">
-                                <div class="input-field col s12 m12">
+                              <div class="row bk-fund" *ngIf="this.add_data.proceed == 1">
+                                <div class="input-field col s12 m12 ">
                                   <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin">
                                   <label for="enter-amount" class="enter-amt"><span class="fa fa-inr"></span> &nbsp; Amount*</label>
                                 </div>
