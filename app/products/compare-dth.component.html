@@ -1,3 +1,14 @@
+<style>
+@media only screen and (max-width: 767px){
+
+
+
+  .products-list {
+    min-height: 0;
+    overflow: unset;
+}
+}
+</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
@@ -74,7 +85,7 @@
             <span>{{item.title}}</span>
           </div>
           <a href="javascript:" class="grey-text right croses" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a>
-			<div class="compare-table">
+			<div class="compare-table tbt2">
 			<table class="table centered bordered ">
           <tbody>
             <tr>
@@ -110,7 +121,7 @@
             </div>
 			</div>
 			<!-- Responsive Compare -->
-			<div class="row show-on-medium-and-down hide-on-med-and-up">
+			<div class="row show-on-medium-and-down hide-on-med-and-up tbt1">
 				<div class="products-list" *ngFor="let item of compare_products;let i = index;">
 				<div class="col s6 compare-table responsive-compare-table">
 					<table class="table centered bordered">

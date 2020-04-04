@@ -4815,8 +4815,8 @@ span.fa.fa-edit.fa-2x {
 .cst-back{
 
 	background: #ff6a00;
-    height: 40px;
-    padding: 8px;
+    height: 45px;
+    padding: 10px;
 }
 .cst-back ul li a{
 
@@ -5423,12 +5423,22 @@ a.modal-trigger i {
 			position: absolute;
 			left:2px;
 		}
-
+		.left-icn-mb1 {
+			position: absolute;
+			left:23px;
+		}
 		span.fa.fa-search.search-mb-btn {
 			position: absolute;
 			font-size: 16px;
 			color: #fff;
 			right: 14px;
+			top: 12px;
+		}
+		span.fa.fa-search.search-mb-btn1 {
+			position: absolute;
+			font-size: 15px;
+			color: #fff;
+			right: 26px;
 			top: 10px;
 		}
 	}
