@@ -546,7 +546,7 @@ span#offer-price {
 					<li class="grey-txt-package" style="list-style-type: none;
 							white-space: nowrap;
 							margin-top: 7px;
-							font-size: 12px;" *ngIf="item.title && item.title.includes('FTA')">FTA Pack is mandatory, you cannot remove it.</li>
+							font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</li>
 				</div>
 				<div class="subtotal" *ngIf="this.product && this.product.promos">
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
