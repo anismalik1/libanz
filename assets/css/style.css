@@ -5339,6 +5339,8 @@ a.modal-trigger i {
 			transition: all .5s linear 0s;
 		}
 		.channels-accoriadn .card-content {
+			height: 250px;
+    overflow: auto;
 			border: 1px solid #e3e3e3;
 			text-align: center;
 			padding: 15px;
@@ -5483,7 +5485,40 @@ a.modal-trigger i {
 			border: 1px solid #c2c2c2;
 			display: flex;
 		}
+
+		.responsive-compare-table .feature-image-wrapper {
+			min-height: 192px;
+			padding-top: 5rem;
+		}
+
+		.terms-conds p{
+
+		
+			height: calc(100%);
+				text-overflow: ellipsis;
+		
+		}
+
+		#promo-content .promo-ul {
+			overflow-Y: auto;
+			height: auto;
+			padding: 1rem;
+		}
+		#circles-content{
+			
+			height: 360px !important;
+    overflow: auto;
+		}
 	
+
+		.chng a {
+			border: 1px solid #c2c2c2;
+			color: #ff6a00;
+			margin-right: -16px;
+			margin-left: 10px;
+			text-align: center;
+			padding: 0 8px 0 8px;
+		}
 	}
 	#add-methods-list {margin-top: 25px;}
 	#method-selected{margin-bottom:10px;}
