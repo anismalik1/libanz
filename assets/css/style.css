@@ -5526,3 +5526,136 @@ a.modal-trigger i {
 	#method-selected .input-field{margin-top:none}
 	#method-selected .uwa.Online-box,#method-selected .uwa.imps-box{border:none;}
 	.btm-menu{margin-top: 10px;}
+
+	.regis-txt{
+
+		font-size: 22px;
+    font-weight: 500;
+    color: rgb(34, 34, 34);
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0px !important;
+    text-align: center;
+	}
+	.in-txt{
+
+		font-size: 15px;
+		font-weight: 300;
+		color: #8c8c8c;
+		margin-bottom: 10px;
+		line-height: 22px;
+		text-align: center;
+		margin-top: 5px;
+	}
+	.row .register.valign-wrapper{
+
+		margin-bottom:8px !important;
+	}
+	.register li.s10 {
+		background-color:#eeeeee;
+		font-weight: 400;
+		line-height: 16px;
+		margin-left: 0px !important;
+		padding: 0px 12px 10px 12px;
+	}
+	.register li.s1 {
+		background-color:#ff6a00;
+		color:#fff;
+		height: 53px;
+		line-height: 53px;
+		font-size: 23px;
+		text-align: center;
+		font-weight: 400;
+	}
+	.background-merchant{
+
+		background-color: #fff;;
+
+	}
+	.valign h2 {
+		line-height: 10px;
+    font-size: 20px;
+	}
+	button#fetch-form {
+		border-radius: 0;
+		width: 90%;
+		margin-left: 33px;
+		margin-bottom: 22px;
+		background: #ff6a00 !important;
+	}
+
+	.buyer-blk span {
+		padding: 50px 75px 40px 65px;
+		font-size: 107px;
+		background: #fff;
+		border-radius: 50%;
+		width: 193px;
+		line-height: 97px;
+		border: 2px solid #e8e1e1;
+	}
+	.seller-blk span {
+    padding: 50px 75px 40px 40px;
+    font-size: 107px;
+    background: #fff;
+    border-radius: 50%;
+    width: 193px;
+    line-height: 97px;
+    border: 2px solid #e8e1e1;
+}
+.seller-blk{
+
+	text-align: center;
+}
+	h3.buyer-tx {
+		font-size: 25px;
+	}
+
+	.buyer-tx{
+		font-size: 26px;
+    color: #5a5959;
+    font-weight: bold;
+    line-height: 24px;
+	}
+	.buyer-blk{
+
+		text-align:center;
+		
+	}
+	.num-count{
+
+	font-size: 22px;
+    line-height: 14px;
+	color: #383737;
+	margin-bottom: 20px;
+	}
+	.video-content{
+
+		padding-top:30px;
+	}
+	.bg-white {
+
+		background-color:#fff;
+	}
+	.txt-merchant{
+
+		color:#666;
+		font-size: 13px;
+	}
+	.merchant-li li{
+
+		list-style-type: disc;
+		padding-top:10px;
+	}
+	.video-bk{
+		padding:30px;
+	}
+	ul.merchant-li {
+		list-style-type: disc;
+		font-size: 13px;
+		color: #666;
+		padding-bottom: 8px;
+	}
+	.heading-content{
+
+		padding:30px;
+	}
