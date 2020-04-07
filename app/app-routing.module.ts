@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
   { path: 'product', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
   { path: 'proceed',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
+  { path: 'merchant',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
   { path: 'help',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'p/:name',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'home#login',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)}, 
