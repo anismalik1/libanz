@@ -25,6 +25,8 @@ import { TestimonialsComponent } from './testimonials.component';
 import { TruncatePipe } from './truncatePipe';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MerchantRegistrationComponent } from './merchant-registration.component';
+import { PricingComponent } from './pricing.component';
+
 
 const routes: Routes = [
   { path: '', component: PageViewComponent },
@@ -37,8 +39,10 @@ const routes: Routes = [
   { path: 'p/contact-us/:name', component: ContactUsComponent },
   { path: 'faqs', component: FaqsComponent },
   { path: 'faqs/:name', component: FaqsComponent },
+
   { path: 'testimonials', component: TestimonialsComponent },
   { path: 'user-detail', component: UserDetailComponent },
+  { path: 'pricing', component: PricingComponent },
   { path: 'merchant-on-mydthshop', component: MerchantComponent },
   { path: 'partner-on-mydthshop', component: MerchantComponent },
   { path: 'registration', component: MerchantRegistrationComponent },
@@ -63,7 +67,7 @@ const routes: Routes = [
     MatInputModule,
     SharedCommonModule, 
   ],
-  declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent],
+  declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent, PricingComponent],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 
