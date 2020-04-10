@@ -21,6 +21,7 @@ export class MerchantComponent implements OnInit {
      private vcr: ViewContainerRef,
     private toastr: ToastrManager) { 
       this.page = 'accounts/'+route.snapshot.url[0].path;
+      console.log(this.page);
       this.spinner.show();
       this.fetch_page_data();
       window.scroll(0,0);
