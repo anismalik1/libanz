@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KycComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spinner : NgxSpinnerService) {
+    
+   }
 
   ngOnInit() {
+    this.spinner.hide();
   }
 
 }
