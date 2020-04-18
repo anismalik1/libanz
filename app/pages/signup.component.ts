@@ -1,5 +1,5 @@
 import { Component, OnInit ,ViewContainerRef} from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms'
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Meta ,Title} from '@angular/platform-browser';
 import { TodoService } from '../todo.service';
@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit{
   name : string;
   signupgroup : FormGroup;
   post :any;
+  referer :string = '';
   signupverify : number = 0
   signupdisabled : boolean = false;
   verifydisabled : boolean = false;
@@ -38,6 +39,9 @@ export class SignupComponent implements OnInit{
     private authservice : AuthService,
     vcr: ViewContainerRef,
     private router : Router) {
+    this.referer = String(this.todoservice.get_param('ref'));
+    if(this.referer && this.referer == 'merchant')
+      this.page = "merchant-signup";
     this.user_type = route.snapshot.params['id'];
     this.signupgroup = fb.group({
       'name':[null,Validators.required],
@@ -70,9 +74,8 @@ export class SignupComponent implements OnInit{
       data => 
       {
         if(data.PAGEDATA)
-        {
+        { 
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-          
           $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });

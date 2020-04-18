@@ -91,6 +91,23 @@ export class HeaderComponent implements OnInit{
       this.get_remember();
       this.createForm();
     }
+    ngOnInit()
+    {  
+      this.href = this.router.url;
+      //console.log(this.href);                                   
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      ); 
+      this.init_page(); 
+      if(!this.get_token())
+      {
+        return false;
+      }
+      this.todoservice.get_user_data();
+      this.user_notification(this.start);
+      this.user_favourites();
+    }  
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
@@ -418,23 +435,7 @@ export class HeaderComponent implements OnInit{
         }
       ) 
     }                                     
-  ngOnInit()
-  {  
-    this.href = this.router.url;
-    //console.log(this.href);                                   
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    ); 
-    this.init_page(); 
-    if(!this.get_token())
-    {
-      return false;
-    }
-    this.todoservice.get_user_data();
-    this.user_notification(this.start);
-    this.user_favourites()
-  }
+  
 
   user_notification(start)
   {

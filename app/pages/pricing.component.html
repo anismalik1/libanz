@@ -14,7 +14,7 @@
 
 .package-bx1{
 
-height:461px;
+height:523px;
 width:100%;
 border-radius: 4px;
 margin: 0 0 20px;
@@ -298,96 +298,70 @@ button.btn.cst-btn.w-100 {
   </div>
 
   <div class="container">
-  <div class="row">
-    <div class="col s12 m12">
-        <h4 class="cst-headline-price"> Choose the best package to generate lead</h4>
+    <div class="row">
+        <div class="col s12 m12">
+            <h4 class="cst-headline-price"> Choose the best package to generate lead</h4>
+            <div class="center">
+                <label>
+                    <input name="group1" id="check-1" type="radio" checked (change)="change_plan(15)"/>
+                    <label for="check-1">15 Days</label>
+                </label>
+                <label>
+                    <input name="group1" id="check-2" type="radio" (change)="change_plan(45)"/>
+                    <label for="check-2">45 Days</label>
+                </label>
+                <label>
+                    <input name="group1" id="check-3" type="radio" (change)="change_plan(60)"/>
+                    <label for="check-3">45 Days</label>
+                </label>
+                <label>
+                    <input name="group1" id="check-4" type="radio" (change)="change_plan(90)"/>
+                    <label for="check-4">90 Days</label>
+                </label>
+            </div>
+        </div>
     </div>
-
-</div>
 
 
 
 <div class="row">
     <div class="pricing-box">
-
-    <div class="col s12 m3">
+    <!-- <div class="col s12 m3">
         <div class="package-bx1">
-                <h4 class="trial">TRIAL PACK</h4>
+            <h4 class="trial">TRIAL PACK</h4>
             <div class="inner-desc-pg">
-                <p class="time-limit">15 Days </p>
-               <h3 class="earn-title">Earn Upto <span class="fa fa-inr"></span> &nbsp; 5,000 * </h3> 
-
-               <ul class="pack-item-li">
-                   <li>Free CRM Software  </li>
-                   <li> No Target   </li>
-                   <li> Lowest Selling Price   </li>
-                   <li> Assure Gift Package  </li>
-                   <li> 24 x 7 Customer Support  </li>
-                   <li class="addcart">Add To Cart </li>
-               </ul>
+                <p class="time-limit">Valid for 15 Days </p>
+                <h3 class="earn-title">Price <span class="fa fa-inr"></span>0 </h3> 
+                <h3 class="earn-title"> <span id="plan-leads">Number of leads 20</span> </h3>
+                <ul class="pack-item-li">
+                    <li>Free CRM Software  </li>
+                    <li> No Target   </li>
+                    <li> Lowest Selling Price   </li>
+                    <li> Assure Gift Package  </li>
+                    <li> 24 x 7 Customer Support  </li>
+                    <li class="addcart"><a class="white-text" [routerLink]="['/merchant/checkout']" [queryParams]= "{plan: 1,days : 15 }">Start Trial</a> </li>
+                </ul>
             </div>
 
         </div>
-    </div>
-  
-    <div class="col s12 m3">
-        <div class="package-bx2">
-                <h4 class="starter">STARTER PACK</h4>
-
-                <div class="inner-desc-pg">
-                    <p class="time-limit">45 Days </p>
-                    <h3 class="earn-title">Earn Upto <span class="fa fa-inr"></span> &nbsp; 5,000 * </h3> 
-
-                    <ul class="pack-item-li">
-                        <li>Free CRM Software  </li>
-                        <li> No Target   </li>
-                        <li> Lowest Selling Price   </li>
-                        <li> Assure Gift Package  </li>
-                        <li> 24 x 7 Customer Support  </li>
-                        <li class="addcart">Add To Cart </li>
-                     
-                    </ul>
-                </div>
-        </div>
-    </div>
-
-    <div class="col s12 m3">
-        <div class="package-bx3">
-                <h4 class="deluxe">DELUXE PACK</h4>
-
-                <div class="inner-desc-pg">
-                    <p class="time-limit">60 Days </p>
-                    <h3 class="earn-title">Earn Upto <span class="fa fa-inr"></span> &nbsp; 5,000 * </h3> 
-
-                    <ul class="pack-item-li">
-                        <li>Free CRM Software  </li>
-                        <li> No Target   </li>
-                        <li> Lowest Selling Price   </li>
-                        <li> Assure Gift Package  </li>
-                        <li> 24 x 7 Customer Support  </li>
-                        <li class="addcart">Add To Cart </li>
-                    </ul>
-                </div>
-        </div>
-    </div>
-
-    <div class="col s12 m3">
-        <div class="package-bx4">
-                <h4 class="super-deluxe">SUPER DELUXE PACK</h4>
-
-                <div class="inner-desc-pg">
-                    <p class="time-limit">90 Days </p>
-                    <h3 class="earn-title">Earn Upto <span class="fa fa-inr"></span> &nbsp; 5,000 * </h3> 
-
+    </div>     -->
+    <div class="col s12 m3" *ngFor="let item of plan_codes">
+        <div class="package-bx1">
+            <h4 class="trial">{{item.plan_code}}</h4>
+            <div class="inner-desc-pg">
+                <p class="time-limit" id="plan-days-{{item.id}}"></p>
+               <h3 class="earn-title"> <span class="fa fa-inr"></span> <span id="plan-rate-{{item.id}}"></span> </h3> 
+               <h3 class="earn-title"> <span id="plan-leads-{{item.id}}"></span> </h3> 
                <ul class="pack-item-li">
                    <li>Free CRM Software  </li>
                    <li> No Target   </li>
                    <li> Lowest Selling Price   </li>
                    <li> Assure Gift Package  </li>
                    <li> 24 x 7 Customer Support  </li>
-                   <li class="addcart">Add To Cart </li>
+                   <li class="addcart"><a class="white-text" href="javascript:" (click)="select_plan(item.id)" >Proceed</a> </li>
                </ul>
-                </div>
+            </div>
+
         </div>
     </div>
 

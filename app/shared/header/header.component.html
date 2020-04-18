@@ -473,13 +473,16 @@ hr.line1 {
 				<div class="strip-right-text right">
 					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
 					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant on Mydth</a> |</span>
-					<span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span>
+					<!-- <span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span> -->
 					<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank">Testimonial</a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">FAQ </a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank">Blog</a> |</span>
 					<span><a href="javascript:void(0);" class="grey-text"> KYC</a> |</span>
-					<span><a class="grey-text" [routerLink]="['/p/24-7']" target="_blank">24x7 support</a></span>
-					
+					<span><a class="grey-text" [routerLink]="['/p/24-7']" target="_blank">24x7 support</a> </span>
+					<span id="renew-section" *ngIf="this.todoservice.get_user_type() == 3 && this.todoservice.get_days_left() <= 14"> | {{this.todoservice.get_days_left()}} days left 
+						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() == '10000')" [routerLink] = "['/merchant/pricing']">Upgrade</a>
+						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() != '10000')" [routerLink] = "['/merchant/checkout']" [queryParams]="{plan : this.todoservice.get_active_pack()}">Renew</a>
+					</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -709,8 +712,8 @@ hr.line1 {
 										</div>
 										<div class="input-field col s6">
 											<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
-											<label for="phn_number">Phone Number*</label>
+											<input id="pop-phone-number" type="text" class="validate" formControlName="phone" autocomplete="off">
+											<label for="pop-phone-number">Phone Number*</label>
 											<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
 												<span class="red-text"> Phone Number is not valid.</span>
 											</div>

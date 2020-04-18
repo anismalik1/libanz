@@ -15,5 +15,5 @@ export class ProductListingComponent implements OnInit {
 }
 
 $(document).ready(function(){
-  $('.tabs').tabs();
+  //$('.tabs').tabs();
 });

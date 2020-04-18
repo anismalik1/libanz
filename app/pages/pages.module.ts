@@ -28,6 +28,7 @@ import { MerchantRegistrationComponent } from './merchant-registration.component
 import { PricingComponent } from './pricing.component';
 import { KycComponent } from './kyc.component';
 import { ProductListingComponent } from './product-listing.component';
+import { PlanCheckoutComponent } from './plan-checkout.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'login/ref/:name', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'signup/:id', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'p/contact-us/:name', component: ContactUsComponent },
@@ -45,6 +47,7 @@ const routes: Routes = [
   { path: 'testimonials', component: TestimonialsComponent },
   { path: 'user-detail', component: UserDetailComponent },
   { path: 'pricing', component: PricingComponent },
+  { path: 'checkout', component: PlanCheckoutComponent },
   { path: 'merchant-on-mydthshop', component: MerchantComponent },
   { path: 'partner-on-mydthshop', component: MerchantComponent },
   { path: 'registration', component: MerchantRegistrationComponent },
@@ -71,7 +74,7 @@ const routes: Routes = [
     MatInputModule,
     SharedCommonModule, 
   ],
-  declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent, PricingComponent, KycComponent, ProductListingComponent],
+  declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent, PricingComponent, KycComponent, ProductListingComponent, PlanCheckoutComponent],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 

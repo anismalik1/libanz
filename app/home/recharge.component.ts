@@ -485,13 +485,15 @@ export class RechargeComponent implements OnInit {
             this.circles  = data.CIRCLES;
             this.spinner.hide();
             let recharge_data  = this.todoservice.get_recharge();
+            if(recharge_data == null)
+              return false;
             if(recharge_data && !recharge_data.operator_id )
             {
               localStorage.removeItem('recharge_cart');
               return false;
             }
             this.recharge_cart = recharge_data;
-            if(recharge_data.circle_id)
+            if(recharge_data.circle_id != null)
               this.region        = recharge_data.circle_id;
             if(this.recharge_cart != null)
             {
@@ -690,6 +692,7 @@ export class RechargeComponent implements OnInit {
 			data => 
 			{
         this.spinner.hide();
+        window.scroll(0,0);
         if(data.comm_p)
           this.rechargeData.commission = data.comm_p;
         else

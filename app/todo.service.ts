@@ -104,6 +104,23 @@ export class TodoService {
       return '';  
   }
 
+  get_days_left() 
+  {
+    //console.log(this.get_user().user_type);
+    if(this.get_user() != null)
+      return Number(this.get_user().days_left);
+    else
+      return 0;  
+  }
+
+  get_active_pack()
+  {
+    if(this.get_user() != null)
+      return this.get_user().pack_active;
+    else
+      return '';  
+  }
+
   set_user_data(data)
   {
       this.user.storage =  data;
@@ -829,5 +846,25 @@ export class TodoService {
   {
     let url = this.server_url+'accounts/apis/orders/fetch_recent_transfer';
     return this.send_post_request(data,url) ; 
+  }
+  fetch_rental_plan(data)
+  {
+    let url = this.server_url+'accounts/apis/page/fetch_rental_plan';
+    return this.send_post_request(data,url) ; 
+  }
+  fetch_plan_data(data)
+  {
+    let url = this.server_url+'accounts/apis/page/fetch_plan_data';
+    return this.send_post_request(data,url) ; 
+  }
+  subcribe_plan(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/subcribe_plan';
+    return this.send_post_request(data,url) ; 
+  }
+  check_if_user_exist(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/check_if_user_exist';
+    return this.send_post_request(data,url) ;
   }
 }
