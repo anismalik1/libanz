@@ -21,11 +21,44 @@
 .include-multi-box {
     padding-bottom: 20px;
 }
+.product-detail{
+	position: relative;
+}
+.cpro a{
+
+	color:#333;
+}
+ .cpro{
+
+	position: absolute;
+	top: 82px;
+    font-size: 13px;
+    left: 76px;
+    font-weight: bold;
+
+ }
 @media only screen and (max-width: 767px){
 
 	.rating-li li a {
     line-height: 10px;
 }
+.cpro {
+	position:absolute;
+    top: 86px;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    left: 17%;
+}
+
+.review-ratings {
+    border: 1px solid #f0f0f0;
+    padding: 2rem;
+    border-radius: 2px;
+    margin-top: 20px;
+}
+
+
 .round-btmobile{
 
 	
@@ -121,7 +154,7 @@ span#offer-price {
     font-size: 17px;
     padding-right: 10px;
 }
- 
+
 }
 
 @media only screen and (min-width: 1024px){
@@ -200,12 +233,15 @@ span#offer-price {
                   <div class="col s12 m12 l7 product-detail" *ngIf="product">
                   	<h3 class="font600" *ngIf="product">{{product.title}}</h3>
 						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span>
+						
 						<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
+						<p class="cpro"><a href="#">Compare Products </a></p>
 						<ul id='dropdown1' class='dropdown-content'>
 							<li *ngFor="let item of product_category_list;">
 								<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
 							</li>
 						</ul>
+					
 						<!-- <a href="#chng-base-pack" class="font-size-change1 modal-trigger">Change Basepack</a> -->
 						<a href="javascript:" class="white-text" (click)="go_to_channel_section(1)">
 							<div class="chip red white-text right">
@@ -213,7 +249,8 @@ span#offer-price {
 								<i class="material-icons">keyboard_arrow_down</i>
 							</div>
 						</a>
-                  	<br/>
+					  <br/>
+					  <br/>
                   	<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
                   	<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
                   	<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
