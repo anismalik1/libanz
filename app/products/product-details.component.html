@@ -15,6 +15,22 @@
 	
 }
 
+.list-data{
+	padding:5px 0 0 60px;
+	 font-size:16px; color:#333;
+	z-index:99999;
+}
+.list-data a{
+
+color: #333;
+font-size: 12px;
+font-weight: bold;
+border: 1px solid #ececec;
+padding: 2px 10px;
+border-radius: 5px;
+z-index: 99999;
+}
+
 .rating-li li a {
     line-height: 12px;
 }
@@ -42,6 +58,12 @@
 	.rating-li li a {
     line-height: 10px;
 }
+
+.chip.red.white-text.right {
+    margin-top: 2px;
+}
+
+
 .cpro {
 	position:absolute;
     top: 86px;
@@ -154,7 +176,21 @@ span#offer-price {
     font-size: 17px;
     padding-right: 10px;
 }
+.list-data{
+	padding-top:6px;
+	padding-bottom:10px; font-size:16px; color:#333;
+	z-index:99999;
+}
+.list-data a{
 
+color: #333;
+font-size: 12px;
+font-weight: bold;
+border: 1px solid #ececec;
+padding: 2px 10px;
+border-radius: 5px;
+z-index: 99999;
+}
 }
 
 @media only screen and (min-width: 1024px){
@@ -235,7 +271,8 @@ span#offer-price {
 						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span>
 						
 						<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
-						<p class="cpro"><a href="#">Compare Products </a></p>
+						<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
+						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" > <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 						<ul id='dropdown1' class='dropdown-content'>
 							<li *ngFor="let item of product_category_list;">
 								<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>

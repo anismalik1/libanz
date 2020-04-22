@@ -7,6 +7,7 @@
     padding: 10px;
     text-transform: capitalize;
   }
+ 
   .btn-value{  
   width: 100%;
     margin-right: 0;
@@ -152,7 +153,7 @@ margin-left: 15px;
     text-transform: capitalize;
   }
   </style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
 	  bdColor="rgba(255,255,255,0.8)"
@@ -162,6 +163,22 @@ margin-left: 15px;
 	  type="ball-clip-rotate">
 	</ngx-spinner>
 </div>
+<div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+    <div class="container">
+        <div class="col s12">
+        <ul class="back-icon">
+            <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> Pay </span></a> </li>
+        </ul>
+        </div>	
+        <div class="clearfix"></div>
+    </div>
+    </div>
+
+<!-- <div class="col s12 cst-back">
+    <ul class="back-icon">
+        <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Value Transfer </a> <span class="fa fa-search search-mb-btn"></span> </li>
+    </ul>
+  </div>	 -->
 <section class="flash-deal">
     <div class="container">
         <div class="row no-margin">
@@ -182,16 +199,7 @@ margin-left: 15px;
             <app-side-nav></app-side-nav>
             </div>
             <div class="col s12 m9">
-                <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-                    <div class="container">
-                        <div class="col s12">
-                        <ul class="back-icon">
-                            <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Add Money</span></a> </li>
-                        </ul>
-                        </div>	
-                        <div class="clearfix"></div>
-                    </div>
-                    </div>
+               
                 <div class="card inline-block w-100 web-view">
                     <!-- <div class="card-content inline-block no-padding">
                         <h3 class="font600 center">Value Transfer</h3>

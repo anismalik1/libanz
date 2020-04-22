@@ -49,9 +49,15 @@
         white-space: nowrap;
     font-size: 19px !important;
     }
+
+  
+.flash-deal{
+
+padding:0;
+}
 }
 </style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
         <ngx-spinner
           bdColor="rgba(255,255,255,0.8)"
@@ -61,7 +67,16 @@
           type="ball-clip-rotate">
         </ngx-spinner>
     </div>
-
+    <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+        <div class="container">
+            <div class="col s12">
+            <ul class="back-icon">
+                <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">History  </span></a> </li>
+            </ul>
+            </div>	
+            <div class="clearfix"></div>
+        </div>
+        </div>
 <section class="flash-deal">
     <div class="container">
         <div class="row no-margin">
@@ -82,16 +97,7 @@
                 <app-side-nav></app-side-nav>			    
             </div>
             <div class="col s12 m9">
-                <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-                    <div class="container">
-                        <div class="col s12">
-                        <ul class="back-icon">
-                            <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Add Money</span></a> </li>
-                        </ul>
-                        </div>	
-                        <div class="clearfix"></div>
-                    </div>
-                    </div>
+                
                 <div id="wallet">
                     <div class="card export-and-import">
                         <div class="card-content">

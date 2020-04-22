@@ -1,4 +1,14 @@
-<app-header></app-header>
+<style>
+  @media only screen and (max-width: 767px){
+
+    .mobile-wrapper{
+
+      display:none !important;
+    }
+  }
+</style>
+
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 <ngx-spinner
 bdColor="rgba(255,255,255,1)"
@@ -8,6 +18,12 @@ loadingText="Loading..."
 type="ball-clip-rotate">
 </ngx-spinner>
 </div>
+
+<div class="col s12 cst-back">
+  <ul class="back-icon">
+      <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <span class="fa fa-search search-mb-btn"></span> </li>
+  </ul>
+</div>	
 <!-- Blog Page New Design -->
 <div id="fb-root"></div>
 <!-- <section class="hero">

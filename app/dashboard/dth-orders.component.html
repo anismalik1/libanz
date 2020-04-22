@@ -1,4 +1,14 @@
-<app-header></app-header>
+<style>
+    @media only screen and (max-width: 767px){
+
+        .container{
+
+width:100%;
+
+}
+    }
+</style>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
 	  bdColor="rgba(255,255,255,0.8)"
@@ -32,7 +42,7 @@
             <div class="container">
                 <div class="col s12">
                 <ul class="back-icon">
-                    <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Add Money</span></a> </li>
+                    <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> Orders </span></a> </li>
                 </ul>
                 </div>	
                 <div class="clearfix"></div>
