@@ -388,7 +388,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="product-slider">
 			<li *ngFor="let item of tata_slides" class="product-list-{{item.id}}">
 				<div class="row no-margin 1">
-					<a [routerLink]="['/product/'+item.url]">
 					<div class="col s12 m4 list-{{item.id}}" >
 					<div class="product-image down-mode">
 					
@@ -404,12 +403,12 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						
 						<div class="col s2">
 							<div class="product-img1">
-							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+								<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 							</div>
 						</div>
 						<div class="col s10">
 							<div class="rechare-section-list">
-								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+								<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
 								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
@@ -421,7 +420,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						</div>
 						</div>
 					</div>
-					</a>
 					</div>
 				</li>
 			</ul>
@@ -434,7 +432,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<ul class="product-slider">
 				<li *ngFor="let item of dishtv_slides">
 					<div class="row no-margin 1">
-						<a [routerLink]="['/product/'+item.url]">
 						<div class="col s12 m4 list-{{item.id}}" >
 						<div class="product-image">
 							<div class="row" style="margin-bottom:10px;">
@@ -449,12 +446,12 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							
 							<div class="col s2">
 								<div class="product-img1">
-								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+									<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 								</div>
 							</div>
 							<div class="col s10">
 								<div class="rechare-section-list">
-									<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+									<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
 									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
@@ -466,7 +463,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							</div>
 							</div>
 						</div>
-						</a>
 						</div>
 					</li>
 				</ul>
@@ -479,7 +475,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="product-slider">
 			<li *ngFor="let item of airtel_slides">
 				<div class="row no-margin 1">
-					<a [routerLink]="['/product/'+item.url]">
 					<div class="col s12 m4 list-{{item.id}}" >
 					<div class="product-image">
 					
@@ -495,12 +490,12 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						
 						<div class="col s2">
 							<div class="product-img1">
-							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+								<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 							</div>
 						</div>
 						<div class="col s10">
 							<div class="rechare-section-list">
-								<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+								<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
 								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
@@ -512,7 +507,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						</div>
 						</div>
 					</div>
-					</a>
 					</div>
 				</li>
 			</ul>
@@ -524,7 +518,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<ul class="product-slider">
 				<li *ngFor="let item of videcone_slides">
 					<div class="row no-margin 1">
-						<a [routerLink]="['/product/'+item.url]">
+						
 						<div class="col s12 m4 list-{{item.id}}" >
 						<div class="product-image">
 						
@@ -539,12 +533,12 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="row">
 								<div class="col s2">
 									<div class="product-img1">
-									<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image">
+										<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 									</div>
 								</div>
 								<div class="col s10">
 									<div class="rechare-section-list">
-										<p class="heading-txt1"><a [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
+										<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 				
 										<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
 										<br/>
@@ -556,7 +550,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							</div>
 							</div>
 						</div>
-						</a>
 						</div>
 					</li>
 				</ul>

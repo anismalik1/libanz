@@ -52,8 +52,8 @@
       <div class="col s12 m12 center">
         <h2 class="font600" id="compare-title">Compare Your DTH Box Plans</h2>
       </div>      
-      <div class="row my-compair hide-on-med-and-down">
-          <div class="col s12 l2 m2 my-compair">
+      <div class="row my-compair">
+          <div class="col l2 m2 my-compair">
           <div class="compare-table features">
           <table class="table centered bordered ">
               <tbody>
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-        <div [className]="i == 0 ? 'col s12 l3 my-compair no-padding':'col s12 l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
+        <div [className]="i == 0 ? 'col m2 l3 my-compair no-padding':'col m2 l3 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
           
           <div class="compare-text left">
             <span>{{item.title}}</span>
@@ -121,7 +121,7 @@
             </div>
 			</div>
 			<!-- Responsive Compare -->
-			<div class="row show-on-medium-and-down hide-on-med-and-up tbt1">
+			<!-- <div class="row show-on-medium-and-down hide-on-med-and-up tbt1">
 				<div class="products-list" *ngFor="let item of compare_products;let i = index;">
 				<div class="col s6 compare-table responsive-compare-table">
 					<table class="table centered bordered">
@@ -184,7 +184,7 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 			<!-- End Here -->
 			
     </div>
