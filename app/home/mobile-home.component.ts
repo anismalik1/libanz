@@ -332,7 +332,7 @@ export class MobileHomeComponent implements OnInit {
     }
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
-    script.id = `slider-script`;
+    script.id = `slider-script`; 
     script.text = `$('.mobile-slider').lightSlider({
       item: 1,
       auto: true,
@@ -355,7 +355,7 @@ export class MobileHomeComponent implements OnInit {
       loop:true,
       auto: true,
       onSliderLoad: function() {
-          $('#autoWidth').removeClass('cS-hidden');
+        //  $('#autoWidth').removeClass('cS-hidden');
       } 
   });  `;
     this._renderer2.appendChild(this._document.body, script);
