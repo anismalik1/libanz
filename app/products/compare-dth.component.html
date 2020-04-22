@@ -7,9 +7,22 @@
     min-height: 0;
     overflow: unset;
 }
+
+.compare-table.features {
+    background: #ff6a00;
+    color: #fff;
+    margin-bottom: 30px !important;
+    width: calc(100% + 265px);
+}
+
+.col.m2.l3.my-compair.no-padding.ng-star-inserted {
+    width: 100%;
+}
+
+
 }
 </style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
 	bdColor="rgba(255,255,255,0.8)"
@@ -19,7 +32,16 @@
 	type="ball-clip-rotate">
 </ngx-spinner>
 </div>
-
+<div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+  <div class="container">
+    <div class="col s12">
+      <ul class="back-icon">
+        <li> <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Commpare Products </span></a> </li>
+      </ul>
+    </div>	
+    <div class="clearfix"></div>
+  </div>
+</div>
 <section class="compare-dth white">
   <div class="container">
     <div class="row">
