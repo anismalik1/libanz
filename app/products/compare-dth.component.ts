@@ -24,8 +24,8 @@ export class CompareDthComponent implements OnInit {
   constructor(
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
-    private todoservice  : TodoService,
-    private productservice: ProductService,
+    public todoservice  : TodoService,
+    private productservice: ProductService, 
     private spinner: NgxSpinnerService,
     private router: Router,
     private title: Title,
