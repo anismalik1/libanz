@@ -132,7 +132,7 @@ white-space: nowrap;
         </div>
       </div>
 
-        <div [className]="i == 0 ? 'col m2 l3 my-compair no-padding':'col m2 l3 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
+        <div [className]="i == 0 ? 'col m3 l3 my-compair no-padding':'col m2 l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
           
           <div class="compare-text left">
             <span>{{item.title}}</span>
@@ -154,7 +154,7 @@ white-space: nowrap;
             </tr>
 			      <tr *ngFor="let feature of to_json(item.specifications);">
               <td>
-                <span title="{{feature.value}}"[className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{trim_text(feature.value)}}</span>
+                <span title="{{feature.value}}" [className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{trim_text(feature.value)}}</span>
               </td>
             </tr>
             <tr>
@@ -164,153 +164,37 @@ white-space: nowrap;
         </table>
 		</div>
   </div>
-  <div class="col s12 m3" *ngIf="!disable_compare">
-              <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown2'>Add Set Top Box</a>
-              <ul id='dropdown2' class='dropdown-content'>
-                <li *ngFor="let item of product_category_list;">
-                  <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
-                </li>
-              </ul>
-            </div>
-			</div>
-			<!-- Responsive Compare -->
-			<!-- <div class="row show-on-medium-and-down hide-on-med-and-up tbt1">
-				<div class="products-list" *ngFor="let item of compare_products;let i = index;">
-				<div class="col s6 compare-table responsive-compare-table">
-					<table class="table centered bordered">
-						<tbody>
-							<tr>
-								<td>
-									<div class="compare-table features">
-										<div class="feature-image-wrapper">
-											<i class="material-icons">format_list_bulleted</i>
-											<h3>Feature Options</h3>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr *ngFor="let feature of all_specifications;">
-								<td>
-									<span title="{{feature.title}}">{{trim_text(feature.title)}}</span>
-								</td>
-              </tr>
-              <tr>
-                <td><span class="font-size-change-order font600 inline-block margin-top-order"> Channel Available</span></td>
-              </tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="col s6 compare-table responsive-compare-table">
-					<table class="table centered bordered">
-						<tbody>
-							<tr>
-								<td>
-									<div class="compare-text left">
-										<span>{{item.title}}</span>
-									</div>
-									<a class="grey-text right croses" href="javascript:" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a>
-									<div class="image-wrapper">
-										<a target="_blank" ng-reflect-target="_blank"  [routerLink]="['/product/'+item.url]"><img class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" alt="{{item.title}}"></a><br>
-										<i class="icon-inr font-size-change1">{{item.offer_price}}</i>
-										<div class="clearfix"></div>
-										<div class="btn-new1 center"><a class="btn" target="_blank"  [routerLink]="['/product/'+item.url]">Book Now</a></div>
-									</div>
-								</td>
-							</tr>
-							<tr *ngFor="let feature of to_json(item.specifications);">
-								<td>
-									<span title="{{feature.value}}"[className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{trim_text(feature.value)}}</span>
-								</td>
-							</tr>
-							<tr>
-								<td><span class="font-size-change-order font600 inline-block margin-top-order"><a class="blue-text" [routerLink]="['/product/'+item.url]" target="_blank">View Channel Packs</a></span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				</div>
-				<div class="col s12 m12 center btn-new1" *ngIf="!disable_compare">
-					<a href="#" class="font-size-change1 chng-set dropdown-button btn" data-activates='dropdown3'>Add Set Top Box</a>
-					<ul id='dropdown3' class='dropdown-content'>
-						<li *ngFor="let item of product_category_list;">
-							<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
-						</li>
-					</ul>
-				</div>
-			</div> -->
-			<!-- End Here -->
-			
+      <div class="col s12 m3" *ngIf="!disable_compare">
+        <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown2'>Add Set Top Box</a>
+        <ul id='dropdown2' class='dropdown-content'>
+          <li *ngFor="let item of product_category_list;">
+            <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
+          </li>
+        </ul>
+      </div>
+			</div>	
     </div>
 
-
+    <div class="col s12 m3" *ngIf="!disable_compare">
+        <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown2'>Add Set Top Box</a>
+        <ul id='dropdown2' class='dropdown-content'>
+          <li *ngFor="let item of product_category_list;">
+            <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
+          </li>
+        </ul>
+      </div>
     <div class="row  fix-size-table" style="width:100%;overflow:auto;">
-
         <table class=" cst-table">
           <tr>
-            <th>Feature Options  </th>
-            <th>Service Type </th>
-            <th>Covered in Warranty  </th>
-            <th>Not Covered in Warranty  </th>
-            <th>Box Type  </th>
-            <th>Display  </th>
-            <th>Sound  </th>
-            <th>Recording Features            </th>
-            <th>Movie On Demand  </th>
-            <th>Live Channel Recording  </th>
-            <th>Pause & Rewind Live Channel
-            </th>
-            <th>Remote Features</th>
-            <th>Parental Control Feature</th>
-            <th>Set Your Favorite Channels...</th>
-            <th>MPEG 4/FM/Radio/DVB S2/HEVC
-            </th>
-            <th>Multi Language Features
-            </th>
-            <th>Program Alarm/ Program Guide
-            </th>
-            <th>Enjoy Karaoke With All The...
-            </th>
-            <th>Convert Normal TV into Smart...
-            </th>
-            <th>True colour
-            </th>
-            <th>Active Services On Demand
-            </th>
-            <th>Games On Demand
-            </th>
-
+            <th >Feature Options  </th>
+            <th *ngFor="let feature of all_specifications;" title="{{feature.title}}">{{trim_text(feature.title)}} </th>
           </tr>
-
-          <tr>
-
-            <td><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2702501551270412.png" class="responsive-img"></td>
-            <td>One Year Repair Warranty </td>
-            <td>Set Top Box</td>
-            <td>Antenna,Remote,Adapter,LNB etc.</td>
-            <td>HD RF Box</td>
-            <td>5 Times The Usual Digital...</td>
-            <td>Dolby Digital Surround</td>
-            <td>Unlimited Recording & Pause...</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-            <td>Available</td>
-
           
+          <tr *ngFor="let item of compare_products;let i = index;">
+            <td><a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a> <a href="javascript:" class="grey-text right croses" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a></td>
+            <td *ngFor="let feature of to_json(item.specifications);" title="{{feature.value}}" [className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{feature.value}} </td>
           </tr>
-          </table>
+        </table>
       
     </div>
   </div>

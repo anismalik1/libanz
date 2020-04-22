@@ -333,31 +333,35 @@ export class MobileHomeComponent implements OnInit {
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.id = `slider-script`; 
-    script.text = `$('.mobile-slider').lightSlider({
-      item: 1,
-      auto: true,
-      slideMove: 1,
-      loop: true,
-      pause: 5000,
-      controls: false,
-      keyPress: false,
-      enableDrag: true,
-      pager: true,
-      gallery: false,
-      galleryMargin: 5,
-      thumbMargin: 5,
-      currentPagerPosition: 'middle',
-      responsive : [],
+    script.text = `
+    $(document).ready(function(){
+      $('.mobile-slider').lightSlider({
+        item: 1,
+        auto: true,
+        slideMove: 1,
+        loop: true,
+        pause: 5000,
+        controls: false,
+        keyPress: false,
+        enableDrag: true,
+        pager: true,
+        gallery: false,
+        galleryMargin: 5,
+        thumbMargin: 5,
+        currentPagerPosition: 'middle',
+        responsive : [],
+      });
+      
+      $('#bottom-slider').lightSlider({
+        autoWidth:true,
+        loop:true,
+        auto: true,
+        onSliderLoad: function() {
+          //  $('#autoWidth').removeClass('cS-hidden');
+        } 
     });
-    
-    $('#bottom-slider').lightSlider({
-      autoWidth:true,
-      loop:true,
-      auto: true,
-      onSliderLoad: function() {
-        //  $('#autoWidth').removeClass('cS-hidden');
-      } 
-  });  `;
+    })
+      `;
     this._renderer2.appendChild(this._document.body, script);
   }
 
