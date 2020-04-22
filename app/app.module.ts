@@ -8,12 +8,15 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { LogoutComponent } from './shared/logout.component';
+import { SplashScreenComponent } from './pages/splash-screen.component';
+import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { NgxPaginationModule} from 'ngx-pagination';
-
+import { environment } from './../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
+    SplashScreenComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -27,9 +30,10 @@ import { NgxPaginationModule} from 'ngx-pagination';
     MatAutocompleteModule,
     MatInputModule,
     ReactiveFormsModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [SwUpdate],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

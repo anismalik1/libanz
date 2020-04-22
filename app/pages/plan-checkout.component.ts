@@ -102,10 +102,9 @@ export class PlanCheckoutComponent implements OnInit {
       .subscribe(
         data => 
         {
-          if(data.status == 'true')
+          if(data.store)
           {
-            let store = data.store;
-            this.authservice.storage(store);
+              this.authservice.storage(data.store);
           }
           if(data.status == 'true' && (data.red == 'trial' || data.red == 'wallet'))
           {

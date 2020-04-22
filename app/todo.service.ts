@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Headers,Http } from '@angular/http';
 import { AuthService } from './auth.service';
@@ -9,6 +9,7 @@ import { User} from './user';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class TodoService {
@@ -22,6 +23,8 @@ export class TodoService {
   public page_data : Pages;
   public page : Pages;
   public footer_data : Pages ;
+  public previousUrl: string;
+  public currnetURL : string;
   public dropdown_add_money = {paymethod: '',paybankaccount:'',yourbankname : '' };
   public login_urls : any = ['/book-order','/booked-order-list','/recharge-status','/order-status',
   '/manage-account','/transaction-history','/commission-structure','/topup-request','/add-money',
@@ -104,6 +107,22 @@ export class TodoService {
       return '';  
   }
 
+  set_urls(url)
+  {
+    let urls = {previousUrl : url[0],currnetURL : url[1]};
+    localStorage.setItem('urls',JSON.stringify(urls));
+  }
+
+  get_urls()
+  {
+    let urls = JSON.parse(localStorage.getItem('urls'));
+    if(urls != null)
+    {
+      return urls; 
+    } 
+    return null; 
+  }
+  
   get_days_left() 
   {
     //console.log(this.get_user().user_type);
@@ -165,10 +184,9 @@ export class TodoService {
 
   get_user_name()
   {
-    let data = JSON.parse(localStorage.getItem('app_token'));
-    if(data != null)
+    if(this.get_user() != null)
     {
-      return data.user.name; 
+      return this.get_user().name; 
     } 
     return ''; 
   }

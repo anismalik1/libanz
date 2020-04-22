@@ -7,12 +7,12 @@ import { AuthService } from '../../auth.service';
 import { TodoService } from '../../todo.service';
 import { ProductService } from '../../product.service';
 import { Observable} from 'rxjs';
-import { Router } from '@angular/router';
+import { Router ,RoutesRecognized} from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Authparams } from '../../authparams';
 import { User } from '../../user';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-
+import { filter, pairwise } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -68,6 +68,15 @@ export class HeaderComponent implements OnInit{
     private http : Http
   ) 
     {
+      this.router.events
+        .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
+        .subscribe((events: RoutesRecognized[]) => {
+          
+          this.todoservice.previousUrl =  events[0].urlAfterRedirects;
+          this.todoservice.currnetURL = events[1].urlAfterRedirects;
+          let url :any = [this.todoservice.previousUrl,this.todoservice.currnetURL];
+          this.todoservice.set_urls(url);
+        });
       if(!this.get_token())
       {
         this.authService.clear_session();

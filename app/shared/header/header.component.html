@@ -226,7 +226,7 @@ hr.line1 {
 					 <mat-autocomplete #auto="matAutocomplete">
 							<span *ngIf="filterdList">
 							<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-								<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
+								<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text">{{option.title}}</a>
 							</mat-option>
 						</span>
 						</mat-autocomplete>

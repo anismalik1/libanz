@@ -781,17 +781,11 @@ div#circles-content ul li a {
 							</mat-form-field>
 						</div>
 						<div class="input-field col s12 m12">
-							<input placeholder="Customer ID" name="recharge_id" type="text" class="validate no-margin" formControlName="recharge_id">
+							<input placeholder="Customer ID" name="recharge_id" type="text" class="validate no-margin" pattern="[a-z]+" formControlName="recharge_id">
 						</div>
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin"  formControlName="amount">
 						</div>
-						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
-							<p class="inline-block margin-right fast-forwad relative">
-								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-							</p>
-						</div> -->
 						<div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />

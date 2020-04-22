@@ -139,7 +139,7 @@ export class MobileHomeComponent implements OnInit {
             //this.make_slider();
             setTimeout(()=>{    //<<<---    using ()=> syntax
               this.make_slider();
-         }, 50);
+         }, 800);
             this.fetch_home_products();
             
             $('#mobile').css('display','');  

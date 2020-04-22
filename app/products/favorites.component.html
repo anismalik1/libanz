@@ -58,8 +58,11 @@
                                     <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
                                 </div>
                             </div>
-                            <div class="divider"></div> 
-					        </div>
+                            <div class="divider"></div>
+                            <div class="card-action right-align cart-card-padd" *ngIf="this.productservice.cartItemsCount() > 0">
+                                <a [routerLink]="['/product/'+convert_to_object(item.save_json).url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack}" class="btn sign orange btn-large font-size-change waves-effect waves-light w-100-btn"> Book Now</a>
+                            </div> 
+					</div>
 				</div>										
 				
         <div class="card-content black-text padd-only no-margin" *ngIf="favourites.length == 0">

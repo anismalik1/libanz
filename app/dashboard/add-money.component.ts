@@ -18,6 +18,7 @@ export class AddMoneyComponent implements OnInit{
 	paymethod : string;
 	order_id : any;
 	order_data : any;
+	previousUrl: string;
 	add_data : any = {proceed : 1,paymethod : 'FUND TRANSFER',send : 0};
 	add_amount : number;
   constructor( private toastr : ToastrManager,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
@@ -66,7 +67,7 @@ export class AddMoneyComponent implements OnInit{
     script.text = `
 			$('select').material_select();
     `;
-    this._renderer2.appendChild(this._document.body, script);
+		this._renderer2.appendChild(this._document.body, script);
   }
 	
 	proceed_to_add()
@@ -210,7 +211,7 @@ export class AddMoneyComponent implements OnInit{
 		  .subscribe( 
 			data => 
 			{
-			  this.order_data = data.TOPUP;
+				this.order_data = data.TOPUP;
 			}
 		) 
 	}

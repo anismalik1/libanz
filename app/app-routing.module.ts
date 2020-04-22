@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './shared/logout.component';
+import { SplashScreenComponent } from './pages/splash-screen.component';
 import { ContactUsComponent } from './pages/contact-us.component';
 import { FaqsComponent } from './pages/faqs.component';
 
@@ -14,6 +15,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password.component';
 const routes: Routes = [
   
   { path: 'logout', component: LogoutComponent },
+  { path: '', component: SplashScreenComponent },
+  { path: 'splash-screen', component: SplashScreenComponent },
   { path: 'error', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
   { path: 'product', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
