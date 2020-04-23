@@ -7,6 +7,8 @@
     padding: 10px;
     text-transform: capitalize;
   }
+
+ 
  
   .btn-value{  
   width: 100%;
@@ -152,6 +154,13 @@ margin-left: 15px;
     padding: 10px;
     text-transform: capitalize;
   }
+
+  .resp-btn{
+
+border-radius: 20px !important;
+width: 100% !important;
+margin: auto;
+}
   </style>
 <app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
@@ -173,6 +182,7 @@ margin-left: 15px;
         <div class="clearfix"></div>
     </div>
     </div>
+  
 
 <!-- <div class="col s12 cst-back">
     <ul class="back-icon">
@@ -199,6 +209,8 @@ margin-left: 15px;
             <app-side-nav></app-side-nav>
             </div>
             <div class="col s12 m9">
+               
+
                
                 <div class="card inline-block w-100 web-view">
                     <!-- <div class="card-content inline-block no-padding">
@@ -255,7 +267,7 @@ margin-left: 15px;
                     </ng-template>
                     </div> -->
                 
-                
+              
                 
                     <div class="card-content">
                         <span class="money-txt"> Pay </span>
@@ -284,7 +296,7 @@ margin-left: 15px;
                                         </td>
                                     </tr>
                                     <tr>
-                                    <td colspan="2"><button type="Submit" class="btn orange btn-value">Transfer Now</button>
+                                    <td colspan="2"><button type="Submit" class="btn orange btn-value resp-btn">Transfer Now</button>
                                         <button type="button" class="btn orange btn-value clc-btn" (click)="cancel()">Cancel</button></td>
                                     </tr>
                                 </tbody>    
@@ -302,7 +314,7 @@ margin-left: 15px;
                                         </div>
                                         <div class="col s1"> <span class="fa fa-address-book"></span> </div>
                                     <div class="input-field col s12 center">
-                                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn" id="fetch-form">Submit</button>
+                                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form">Submit</button>
                                     </div>
                                 </div>
                                 </form>
@@ -333,4 +345,9 @@ margin-left: 15px;
         </div>
     </div>
 </section>
+
+<div class="row">
+    <img src="../../assets/images/kyc-inner-banner.png" class="responsive-img" style="width:100%;"/>
+</div>
+
 <app-footer-min></app-footer-min>
