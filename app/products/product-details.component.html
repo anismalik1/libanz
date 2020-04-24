@@ -202,6 +202,15 @@ z-index: 99999;
 	
 }
 
+@media only screen and (max-width: 767px){
+.cst-bg-color {
+    position: absolute !important;
+    width: 100%;
+    z-index: 99999;
+}
+
+}
+
 </style>
 <app-header [className]="(this.todoservice.get_user_name() =='') ? '' : 'hide-on-mobile'"></app-header>
 <div class="spinner-wrapper">
