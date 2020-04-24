@@ -27,6 +27,8 @@ export class MobileHomeComponent implements OnInit {
   public op_list = '';
   public recharge_ini : number = 1;
   public deal_timer : number = 0;
+  public mainbanners : any = [{image: "dth-recharge-banner_1.png",imageurl: "https://www.mydthshop.com/recharge/for/dth-recharge",position: "mobile-main-banner"}];
+  public bottombanners : any = [{image: "rechargebill-11.jpg",imageurl: "",position: "mobile_bottom_banner"}];
   no_dues = 0;
   bill_amt : number;
   due_msg : string = 'No pending dues.';
@@ -73,26 +75,17 @@ export class MobileHomeComponent implements OnInit {
      public params : Params,
      private location : Location,
      private route : ActivatedRoute
-  ) { }
+  ) {
+    this.spinner.hide();
+   }
 
   ngOnInit() {
-    var width = $(window).width(); 
-    // if(width < 450)
-    // {
-    //   this.router.navigate(['/mhome']);
-    //   return false;
-    // }
-    // this.filteredOptions = this.myControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value))
-    // ); 
     if(this.router.url == '/home#login' || this.router.url == '/home%23login')
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
         this.authservice.authenticate();
     }, 4000);
-    }
-  this.spinner.show();  
+    }  
   this.fetch_home_data();
   if(!this.get_token())
   {
@@ -118,7 +111,7 @@ export class MobileHomeComponent implements OnInit {
       {
         data = {token : this.get_token()};
       }
-      this.spinner.show();
+      //this.spinner.show();
       this.todoservice.fetch_home_data(data)
       .subscribe(
         data => 
@@ -134,23 +127,23 @@ export class MobileHomeComponent implements OnInit {
               this.title.setTitle(page_data.metaTitle);
             }
             
-            this.banners          = data.banners;
-            this.init_page();
-            //this.make_slider();
-            setTimeout(()=>{    //<<<---    using ()=> syntax
+            this.banners  = data.banners;
+            this.mainbanners =  this.filter_banners('mobile-main-banner',0, 0);
+            this.bottombanners = this.filter_banners('mobile_bottom_banner',0, 0);
+            setTimeout(()=>{   
               this.make_slider();
-         }, 800);
-            this.fetch_home_products();
-            
+            }, 200);
+            this.init_page();
+            this.fetch_home_products(); 
             $('#mobile').css('display','');  
             $('#select-item').css('display',''); 
-            this.filter_banners('Big Tv');
+            //this.filter_banners('Big Tv');
             this.spinner.hide();
           }
-          
         }
       )  
   }
+
 
   init_products()
   {
@@ -341,6 +334,7 @@ export class MobileHomeComponent implements OnInit {
         slideMove: 1,
         loop: true,
         pause: 5000,
+        speed : 1200,
         controls: false,
         keyPress: false,
         enableDrag: true,
@@ -350,15 +344,27 @@ export class MobileHomeComponent implements OnInit {
         thumbMargin: 5,
         currentPagerPosition: 'middle',
         responsive : [],
+        onSliderLoad : function()
+        {
+          $('.mobile-slider li').css('display','block');
+        }
       });
       
       $('#bottom-slider').lightSlider({
         autoWidth:true,
+        item: 1,
+        speed : 1200,
+        pause : 5000,
         loop:true,
         auto: true,
-        onSliderLoad: function() {
-          //  $('#autoWidth').removeClass('cS-hidden');
-        } 
+        controls: false,
+        keyPress: false,
+        enableDrag: true,
+        pager: true,
+        gallery: false,
+        galleryMargin: 5,
+        thumbMargin: 5,
+        currentPagerPosition: 'middle',
     });
     })
       `;

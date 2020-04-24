@@ -6000,3 +6000,4 @@ text-align: center;
 margin-top: 27px;
 }
 }
+.mobile-slider li:nth-child(n+2){display:none;}

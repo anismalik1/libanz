@@ -15,7 +15,7 @@ import {PwaService} from '../pwa.service';
         trigger('fadeOut', [
             transition(':leave', [
                 query(':leave', animateChild(), {optional: true}),
-                animate('1200ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .5,transform: 'translateY(-100%)'})),
+                animate('1100ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .5,transform: 'translateY(-100%)'})),
             ]),
         ]),
     ],
@@ -48,7 +48,7 @@ export class SplashScreenComponent implements OnInit {
                 if(!result)
                 {
                     setTimeout(()=>{    //<<<---    using ()=> syntax
-                        this.router.navigate(['/home']);
+                        this.router.navigate(['/mhome']);
                    }, 1000); 
                 }
                 this.show = result;

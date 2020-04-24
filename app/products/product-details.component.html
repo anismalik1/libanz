@@ -203,7 +203,7 @@ z-index: 99999;
 }
 
 </style>
-<app-header></app-header>
+<app-header [className]="(this.todoservice.get_user_name() =='') ? '' : 'hide-on-mobile'"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
 	bdColor="rgba(255,255,255,0.8)"
@@ -213,7 +213,15 @@ z-index: 99999;
 	type="ball-clip-rotate">
 </ngx-spinner>
 </div>
-
+<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+		<div class="container">
+			<div class="col s12">
+				<ul class="back-icon">
+					<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">{{product.title}}</span></a> </li>
+				</ul>
+			</div>	
+		</div>
+	</section>
 <section class="no-padding grey lighten-2 beard">
 	<div class="container">
 		<div class="row no-margin">
@@ -272,7 +280,7 @@ z-index: 99999;
 						
 						<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
 						<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" > <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 						<ul id='dropdown1' class='dropdown-content'>
 							<li *ngFor="let item of product_category_list;">
 								<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
@@ -552,7 +560,7 @@ z-index: 99999;
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 									<br/>
-									<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
+									<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
 								
 								</div>
 								
@@ -565,7 +573,7 @@ z-index: 99999;
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 									<br/>
-									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
 									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
 								</div>
 							</div>
@@ -576,7 +584,7 @@ z-index: 99999;
 									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
 									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 									<br/>
-									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" target="_blank" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
+									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
 									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
 								</div>
 							</div>
@@ -692,11 +700,11 @@ z-index: 99999;
 											</div>
 											<div class="clearfix"></div>
 											<div class="col s12 m12 ">
-												<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+												<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
 											</div>
 										</div> 									 
 										<div class="btn-new1 center">
-											<a [routerLink]="['/product/'+item.url]" target="_blank" class="btn">Book Now</a>
+											<a [routerLink]="['/product/'+item.url]" class="btn">Book Now</a>
 										</div>
 									</div>
 								</div>

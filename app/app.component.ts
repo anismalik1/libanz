@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
     this.router.events.subscribe(event => {
         if (event instanceof RouteConfigLoadStart) {
             this.loadingRouteConfig = true;
-            this.spinner.show();
+            //this.spinner.show();
         } else if (event instanceof RouteConfigLoadEnd) {
             this.loadingRouteConfig = false;
             this.spinner.hide();

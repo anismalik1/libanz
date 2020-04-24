@@ -120,7 +120,7 @@ white-space: nowrap;
       <div class="col s12 m12 center">
         <h2 class="font600" id="compare-title">Compare Your DTH Box Plans</h2>
       </div>      
-      <div class="row my-compair">
+      <div class="row my-compair hide-on-mobile">
           <div class="col l2 m2 my-compair">
           <div class="compare-table features">
           <table class="table centered bordered ">
@@ -192,15 +192,15 @@ white-space: nowrap;
 			</div>	
     </div>
 
-    <div class="col s12 m3" *ngIf="!disable_compare">
-        <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown2'>Add Set Top Box</a>
+    <div class="col s12 m3 hide-on-desktop center" *ngIf="!disable_compare">
+        <a href="#" class="font-size-change1 chng-set dropdown-button btn orange" data-activates='dropdown2'>Add Set Top Box</a>
         <ul id='dropdown2' class='dropdown-content'>
           <li *ngFor="let item of product_category_list;">
             <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
           </li>
         </ul>
       </div>
-    <div class="row  fix-size-table" style="width:100%;overflow:auto;">
+    <div class="row  fix-size-table hide-on-desktop" style="width:100%;overflow:auto;">
         <table class=" cst-table">
           <tr>
             <th >Feature Options  </th>
@@ -208,7 +208,10 @@ white-space: nowrap;
           </tr>
           
           <tr *ngFor="let item of compare_products;let i = index;">
-            <td><a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a> <a href="javascript:" class="grey-text right croses" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a></td>
+            <td>
+              <a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a> <a href="javascript:" class="grey-text right croses" (click)="unbox_me(item.url);"><i class="material-icons">highlight_off</i></a>
+              <div class="btn-new1 center"><a class="btn" [routerLink]="['/product/'+item.url]">Book Now</a></div>
+            </td>
             <td *ngFor="let feature of to_json(item.specifications);" title="{{feature.value}}" [className]="feature.value.includes('Not Available')?'font600 red-text':'font600 green-text'">{{feature.value}} </td>
           </tr>
         </table>
