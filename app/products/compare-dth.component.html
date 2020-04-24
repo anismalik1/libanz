@@ -19,11 +19,26 @@ white-space:nowrap;
 
 white-space: nowrap;
 padding: 7px;
+border: 1px solid #ececec;
+
 }
 
+.table.cst-table tr:nth-child(2) {
+    background: #ececec !important;
+    height: auto;
+
+}
+table.cst-table tr th {
+    height: 45px;
+    color: #fff;
+    background: #ff6a00;
+}
+.cst-table{
+
+  border:1px solid #ececec;
+}
 
 @media only screen and (max-width: 767px){
-
 
 
   .products-list {
@@ -122,6 +137,8 @@ white-space: nowrap;
                 <tr *ngFor="let feature of all_specifications;">
                   <td>
                     <span title="{{feature.title}}">{{trim_text(feature.title)}}</span>
+
+                   
                   </td>
                 </tr>
                 <tr>
