@@ -21,7 +21,7 @@ type="ball-clip-rotate">
 
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <span class="fa fa-search search-mb-btn"></span> </li>
+      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> </li>
   </ul>
 </div>	
 <!-- Blog Page New Design -->
@@ -148,7 +148,7 @@ type="ball-clip-rotate">
           <hr class="detail-hr">
           <ul>
             <li *ngFor="let item of recent_posts;">
-              <a [routerLink]="['/blog-detail/'+item.url]" target="_blank">
+              <a [routerLink]="['/blog-detail/'+item.url]">
                 <div class="post-img">
                   <img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
                 </div>

@@ -55,7 +55,7 @@ type="ball-clip-rotate">
 </div>
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <span class="fa fa-search search-mb-btn"></span> </li>
+      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a></li>
   </ul>
 </div>	
 <!-- <section class="compare-dth white">
@@ -110,7 +110,7 @@ type="ball-clip-rotate">
 			<div class="col s12 m4" *ngFor="let item of blogs;">
 				<div class="card blog-min-hei">
 					<div class="card-image">
-						<a target="_blank" [routerLink]="['/blog-detail/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
+						<a [routerLink]="['/blog-detail/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
 					</div>
 					<div class="card-content">
 						<div class="author">
@@ -124,13 +124,13 @@ type="ball-clip-rotate">
 							</p>
 						</div>
 						<div class="blog-content"> 
-						<span class="blog-title" title="{{item.title}}"><a target="_blank" [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
+						<span class="blog-title" title="{{item.title}}"><a [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
 						<div class="clearfix"></div>
 						<span class="blog-description-{{item.id}}" [innerHTML]="decode_html(item.shortDescription) | truncate : 225 : '...'"> </span>
 						</div>
 					</div>
 					<div class="card-action center">
-						<a target="_blank" [routerLink]="['/blog-detail/'+item.url]" class="orange-text font-size-change1">Read More</a>
+						<a [routerLink]="['/blog-detail/'+item.url]" class="orange-text font-size-change1">Read More</a>
 					</div>
 				</div>
 			</div>

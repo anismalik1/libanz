@@ -238,8 +238,8 @@ hr.line1 {
 			<div class="mobile-header-right">
 					
 				<ul>
-				<li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span></a> </li>
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
+				<!-- <li *ngIf="this.todoservice.get_user_name() == ''"><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">0</span></a> </li> -->
+				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
 				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">{{this.productservice.favorite_count()}}</span></li>
 				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
 					<!-- <li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a> -->
@@ -519,8 +519,8 @@ hr.line1 {
 					</li>
 					<li *ngIf="href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
 					<li class="craft relative">
-						<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() != ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
-						<a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a>
+						<a routerLink="/product/cart"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
+						<!-- <a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a> -->
 					</li>
 				
 					<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">

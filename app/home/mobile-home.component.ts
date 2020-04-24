@@ -133,6 +133,10 @@ export class MobileHomeComponent implements OnInit {
             setTimeout(()=>{   
               this.make_slider();
             }, 200);
+            setTimeout(()=>{   
+              this.bottom_slider()
+            }, 1000);
+            
             this.init_page();
             this.fetch_home_products(); 
             $('#mobile').css('display','');  
@@ -349,7 +353,22 @@ export class MobileHomeComponent implements OnInit {
           $('.mobile-slider li').css('display','block');
         }
       });
-      
+    })
+      `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
+  bottom_slider()
+  {
+    if($('#bottom-slider-script'))
+    {
+      $('#bottom-slider-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `bottom-slider-script`; 
+    script.text = `
+    $(document).ready(function(){
       $('#bottom-slider').lightSlider({
         autoWidth:true,
         item: 1,

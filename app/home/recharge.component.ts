@@ -417,7 +417,7 @@ export class RechargeComponent implements OnInit {
       if(data == 68)
       {
         this.validationtext = "Please Enter Registered Mobile No./ Viewing Card No.";
-        this.dthpattern = "[0-9]{10}$";
+        this.dthpattern = "[6-9][0-9]{9}$|[0][0-9]{10}$";
       }else if(data == 69)
       {
         this.validationtext = "Please Enter 11 digits long Smart Card Number .";
