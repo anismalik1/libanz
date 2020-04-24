@@ -5999,5 +5999,55 @@ width: 100%;
 text-align: center;
 margin-top: 27px;
 }
+
+.cst-bg-color {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+}
+.cst-back {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+}
+
+h2#compare-title {
+    padding-top: 50px;
+}
+
+
+.btn-new1 .btn {
+    background-image: -webkit-linear-gradient( 0deg, rgb(242,125,33) 0%, rgb(227,35,45) 30%, rgb(197, 43, 8) 61%, rgb(255, 3, 15) 100%);
+    width: 80%;
+    padding-left: 11px;
+    font-size: 9px !important;
+    line-height: 25px;
+    margin-bottom: 1rem;
+    height: 24px;
+    font-size: 10px;
+    border-radius: 50px;
+}
+
+.beard {
+
+	padding-top:50px !important;
+}
+
+
+
+.fix-mb-top {
+    padding-top: 50px !important;
+}
+
+.new-faq-mar {
+	padding-top: 50px !important;
+	margin: 0;
+	
+}
+
+.pos-right{
+
+	float: right;
+}
 }
 .mobile-slider li:nth-child(n+2){display:none;}
