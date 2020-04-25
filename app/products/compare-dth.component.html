@@ -6,6 +6,8 @@
 width:100%;
 overflow: auto;
 white-space:nowrap;
+position: relative;
+
 }
 .cst-table tr th{
 
@@ -38,6 +40,12 @@ table.cst-table tr th {
   border:1px solid #ececec;
 }
 
+.grey-text.right.croses {
+    position: absolute !important;
+    left: 27%;
+}
+
+
 @media only screen and (max-width: 767px){
 
 
@@ -46,6 +54,10 @@ table.cst-table tr th {
     overflow: unset;
 }
 
+.icon-right{
+
+  float:right;
+}
 .fix-size-table{
 
   width:100%;
@@ -67,14 +79,14 @@ white-space: nowrap;
 }
 
 a.font-size-change1.chng-set.dropdown-button.btn.orange {
-    position: absolute;
-    bottom: 110px;
+  position: absolute;
+    bottom: 138px;
     left: 18%;
-    margin-bottom:29px;
 }
 section.compare-dth.white {
     margin-bottom:76px;
 }
+
 
 }
 </style>
@@ -92,8 +104,17 @@ section.compare-dth.white {
   <div class="container">
     <div class="col s12">
       <ul class="back-icon">
-        <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Compare Products </span></a> </li>
+        <li> <a class="black-text" ><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Compare Products </span> <span class="fa fa-ellipsis-v pull-right"></span> </a> </li>
       </ul>
+
+      <!-- <mat-form-field>
+          <mat-label class="color-blk"> <span class="fa fa-ellipsis-v pull-right icon-fix-top"></span> </mat-label>
+          <mat-select class="select-lbl">
+            <mat-option (click)="go_to_nav('/p/about-us')"><a [routerLink]="['/p/about-us']" > Cart</a></mat-option>
+            <mat-option (click)="go_to_nav('/p/dth-connection-refund-policy')"><a [routerLink]="['/p/dth-connection-refund-policy']" > Search</a></mat-option>
+            
+          </mat-select>
+        </mat-form-field> -->
     </div>	
     <div class="clearfix"></div>
   </div>

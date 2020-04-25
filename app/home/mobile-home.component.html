@@ -140,7 +140,10 @@ margin: 2px;
 	font-size:22px;
 	
 }
-
+.btn-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 
 @media only screen and (max-width: 767px){
@@ -278,6 +281,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	margin-top: 25px;
  }
 
+ 
 }
 </style>
 <app-header></app-header>
@@ -290,6 +294,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	type="ball-clip-rotate">
 </ngx-spinner>
 </div>
+ <!-- Modal Structure -->
 
 <section class="recharge-section1 hide-on-med-and-down cs-bg-color set-height" *ngIf="recharge_ini == 1" >
 	<div class="container">
@@ -581,4 +586,23 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	</div>
 
 </div>
+
+<!--   
+  <div class="btn-center">
+
+<a class="waves-effect waves-light btn modal-trigger text-center" href="#modal3">PLAYSTORE</a>
+
+</div>
+
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <img src="../../assets/images/mobile-popup.png" class="responsive-image"/>
+    </div>
+   
+  </div> -->
+
+
+  
+        
+
 <app-footer [baseUrl]="this.params.base_url"></app-footer>

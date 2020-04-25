@@ -6051,3 +6051,10 @@ h2#compare-title {
 }
 }
 .mobile-slider li:nth-child(n+2){display:none;}
+
+
+.fix-img-pt{
+
+	width: 125px;
+    padding-top: 15px;
+}
