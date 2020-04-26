@@ -96,12 +96,6 @@
     margin: 11px 14px;
 }
 
-.operator-img{
-
-position: absolute;
-top:10px;
-left:10%;
-}
 
 .border-bottom{
 
@@ -111,7 +105,78 @@ left:10%;
 
 }
 	</style>
-<app-header [className]="(this.todoservice.get_user_name() =='') ? '' : 'hide-on-mobile'"></app-header>
+	<style>
+		.mat-select-arrow-wrapper {
+		vertical-align: middle;
+		display: none !important;
+	}
+	.cst-label {
+		font-size:.8rem;
+		color:#222 !important;
+	}
+	.mat-form-field-wrapper {
+		padding: 0px !important;
+	}
+	.card .card-content {
+		padding: 8px 24px 24px 24px;
+		border-radius: 0 0 2px 2px;
+	}
+	span.card-title {
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.electric-cls-btn {
+		width: 90% !important;
+		margin: 10px 15px;
+	}
+	#mobile-form{
+	
+		margin-top:15px;
+	}
+	div#circles-content ul li a {
+		background: #f3f7f8;
+		color: #333 !important;
+	}
+	#circles-content .tab.active {
+		border-bottom: 2px solid #00b9f5;
+	}
+	
+	@media only screen and (max-width: 767px){
+	
+		.mb-txt {
+		font-size: 16px;
+		padding: 0px 0px 0px 3px;
+		font-weight: 600;
+	}
+	.electric-cls-btn {
+		width: 90% !important;
+		margin: 10px 15px;
+	}
+	.btn-full{
+	
+		width:100%;
+		margin-top:20px;
+	}
+	.recharge-lbl label.black-text {
+    line-height: 26px !important;
+}
+
+.recharge-lbl .operator-img{
+
+position: absolute;
+top:10px;
+left:5%;
+}
+
+.cst-flb{
+
+	font-size: 20px;
+    line-height: 40px !important;
+}
+
+	}
+	</style>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner
 	bdColor="rgba(255,255,255,1)"
@@ -120,61 +185,17 @@ left:10%;
 	loadingText="Loading..."
 	type="ball-clip-rotate">
 </ngx-spinner>
-<style>
-	.mat-select-arrow-wrapper {
-    vertical-align: middle;
-    display: none !important;
-}
-.cst-label {
-    font-size:.8rem;
-    color:#222 !important;
-}
-.mat-form-field-wrapper {
-    padding: 0px !important;
-}
-.card .card-content {
-    padding: 8px 24px 24px 24px;
-    border-radius: 0 0 2px 2px;
-}
-span.card-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-.electric-cls-btn {
-	width: 90% !important;
-	margin: 10px 15px;
-}
-#mobile-form{
 
-	margin-top:15px;
-}
-div#circles-content ul li a {
-    background: #f3f7f8;
-	color: #333 !important;
-}
-#circles-content .tab.active {
-    border-bottom: 2px solid #00b9f5;
-}
-
-@media only screen and (max-width: 767px){
-
-	.mb-txt {
-    font-size: 16px;
-    padding: 0px 0px 0px 3px;
-    font-weight: 600;
-}
-.electric-cls-btn {
-	width: 90% !important;
-	margin: 10px 15px;
-}
-.btn-full{
-
-	width:100%;
-	margin-top:20px;
-}
-}
-</style>
 </div>
+<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+	<div class="container">
+		<div class="col s12">
+			<ul class="back-icon">
+				<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">{{pagetitle}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+			</ul>
+		</div>	
+	</div>
+</section>
 <section class="recharge-section hide-on-med-and-down testinh" *ngIf="recharge_ini == 1">
 	<div class="container">
 		<div class="row mar-row"> 
@@ -204,30 +225,22 @@ div#circles-content ul li a {
 </section> 
 
 <!-- Responsive icon -->
-<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-	<div class="container">
-		<div class="col s12">
-			<ul class="back-icon">
-				<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">{{pagetitle}}</span></a> </li>
-			</ul>
-		</div>	
-	</div>
-</section>
+
 <!-- End Here -->
 <div class="fix-mb-top"></div>
 <section *ngIf="recharge_ini == 2" class="relative">
 	<div class="container">
-		<div class="row mar-row responsive-kro ">
+		<div class="row mar-row responsive-kro recharge-lbl">
 			<div class="col m12">
 			<div class="card">
 					<div class="card-content ">
 					<div class="col s12 m12 l5 border-bottom">
 						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images operator-img" alt="airtel" width="50px">
-						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <br/> <span class="font600">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
+						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <br/> <span class="font600 cst-flb">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
 					
-					<div class="col s12 m12 l5 margin-top">
+					<div class="col s12 m12 l5 margin-top ">
 						<div class="payment-method" *ngIf="pay_step==1">
 							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 0">
 								<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
