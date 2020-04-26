@@ -12,6 +12,7 @@ import { Product } from '../product.entities';
 import { ProductService } from '../product.service';
 import { Package } from '../packages.entities.service';
 import * as $ from 'jquery'; 
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -78,7 +79,9 @@ export class ProductDetailsComponent implements OnInit{
     public productservice : ProductService,
     private router : ActivatedRoute, private route : Router ) {
     this.product_categories();
+    //this.init_overlay();
    }
+
   ngOnInit() {
     this.cat_id = this.todoservice.get_param('cat_id');
     this.pack_id = Number(this.todoservice.get_param('id'));
@@ -428,7 +431,9 @@ export class ProductDetailsComponent implements OnInit{
         {
           if(!this.productservice.get_region())
           {
-            $('.religon-overlay').show();
+            setTimeout(()=>{    //<<<---    using ()=> syntax
+              $('.religon-overlay').show();
+            }, 2000);
           }
           else
           {
@@ -880,9 +885,9 @@ export class ProductDetailsComponent implements OnInit{
         }
       }
     });
-    $(window).on('load', function(){ 
-			$('.religon-overlay').css('display', 'block');
-		});
+    // $(window).on('load', function(){ 
+		// 	$('.religon-overlay').css('display', 'block');
+		// });
 		$(document).ready(function(){
 			$('.more').on('click', function(){
 				$('.chip').removeClass('hide');

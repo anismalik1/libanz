@@ -32,7 +32,7 @@ import {PwaService} from '../pwa.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SplashScreenComponent implements OnInit {
-    show = true;
+    show = false;
 
     constructor(
         private pwaService: PwaService,
@@ -43,6 +43,13 @@ export class SplashScreenComponent implements OnInit {
     }
 
     ngOnInit() {
+        var width = $(window).width(); 
+        if(width > 767)
+        {
+            this.router.navigate(['/home']);
+            return false;
+        }
+        this.show  = true;
         this.pwaService.checkForUpdate()
             .subscribe(result => {
                 if(!result)

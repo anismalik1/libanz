@@ -25,6 +25,7 @@ export class TodoService {
   public footer_data : Pages ;
   public previousUrl: string;
   public currnetURL : string;
+  public cartItems : any;
   public dropdown_add_money = {paymethod: '',paybankaccount:'',yourbankname : '' };
   public login_urls : any = ['/book-order','/booked-order-list','/recharge-status','/order-status',
   '/manage-account','/transaction-history','/commission-structure','/topup-request','/add-money',
@@ -182,13 +183,24 @@ export class TodoService {
     return null; 
   }
 
-  get_user_name()
+  get_user_name() 
   {
     if(this.get_user() != null)
     {
       return this.get_user().name; 
     } 
     return ''; 
+  }
+
+  cartItemsCount() 
+  {
+    if(localStorage.getItem('cart') != null)
+    {
+      let cart :any = JSON.parse(localStorage.getItem('cart'));
+      this.cartItems =  Object.keys(cart).length;
+      return this.cartItems;
+    }
+    return 0;
   }
 
   get_user_avatar()

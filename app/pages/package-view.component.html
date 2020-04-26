@@ -98,7 +98,7 @@
         <div class="card" *ngFor="let item of package_list;">
           <div class="card-header" *ngIf="details == false">
             <div class="col s12">
-              <h2 class="font600 no-margin"><a routerLink="/package-list/{{this.url}}/{{item.id}}" target="_blank">{{item.title}}</a></h2>
+              <h2 class="font600 no-margin"><a routerLink="/package-list/{{this.url}}/{{item.id}}">{{item.title}}</a></h2>
               <ul class="share-us-on">
                 <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}/{{item.id}}" ><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"></a></li>
                 <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
@@ -118,8 +118,8 @@
           <h4 class="grey-text">{{channel_pack.title}}</h4>
           <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{channel_pack.price}}</span><span *ngIf="multienable">{{channel_pack.multi_price}}</span>  <small>@ {{channel_pack.month}} Month</small></span>
           <span class="font-size-change1" [innerHTML] = "remove_new_line(channel_pack.short_description)"></span>
-          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" target="_blank" class="font-size-change1 chng-set"><i class="material-icons white-text">shop_two </i> Channels</a>
-          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" target="_blank" class="font-size-change1  ct-btn"><i class="material-icons white-text">flash_on</i> Buy Now</a>
+          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="font-size-change1 chng-set"><i class="material-icons white-text">shop_two </i> Channels</a>
+          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="font-size-change1  ct-btn"><i class="material-icons white-text">flash_on</i> Buy Now</a>
           <!-- <a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set grey lighten-3 black-text modal-trigger cst-btn" (click)="choose_box_for_this_pack(item.id,channel_pack.id)"><i class="material-icons white-text">flash_on</i> Buy Now</a> -->
 				  
 				  </div>

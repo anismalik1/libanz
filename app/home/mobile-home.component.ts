@@ -98,6 +98,13 @@ export class MobileHomeComponent implements OnInit {
     $('#search').focusout(function(){
       $('.search-result').addClass('hide');
     });
+    
+    if(document.URL.indexOf('https://') === -1)
+    {
+      setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.open_model()
+      }, 4000);
+    }
   }
 
   private _filter(value: string): object {
@@ -173,6 +180,25 @@ export class MobileHomeComponent implements OnInit {
         });
       });
       $('select').material_select(); 
+
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
+  open_model()
+  {
+    if($('#init-open_model-script'))
+    {
+      $('#init-open_model-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-open_model-script`;
+    script.text = `
+      $(document).ready(function(){
+        $('.modal').modal();
+        $('#modal-app').modal('open');
+      }); 
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
@@ -370,7 +396,6 @@ export class MobileHomeComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('#bottom-slider').lightSlider({
-        autoWidth:true,
         item: 1,
         speed : 1200,
         pause : 5000,

@@ -6058,3 +6058,12 @@ h2#compare-title {
 	width: 125px;
     padding-top: 15px;
 }
+.cart-strip{margin-right: 20px;position: absolute;
+	right: 0;
+	margin-top: -18px;}
+.strip-circle{background: #fff;
+	border-radius: 50%;
+	color: #ff6a00;
+	padding: 0px 5px;
+	margin-top: -12px;
+	float: right;}

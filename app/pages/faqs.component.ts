@@ -37,7 +37,7 @@ export class FaqsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private todoservice: TodoService,
+    public todoservice: TodoService,
     private spinner : NgxSpinnerService,
     private toastr: ToastrManager,
     private vcr: ViewContainerRef,
