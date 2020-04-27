@@ -1,13 +1,7 @@
 <app-header></app-header>
 <title>Mydthshop Signup</title>
 <div class="spinner-wrapper">
-	<ngx-spinner
-	bdColor="rgba(255,255,255,0.8)"
-	size="default"
-	color="#ec9737"
-	loadingText="Loading..."
-	type="ball-clip-rotate">
-</ngx-spinner>
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
 <!-- Header End Here -->
 <div class="work" *ngIf="verify==0;then signup else otpverify"></div>

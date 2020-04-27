@@ -40,17 +40,21 @@ width: 35% !important;
 
 </style>
 
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
-	<ngx-spinner
-	bdColor="rgba(255,255,255,0.8)"
-	size="default"
-	color="#ec9737"
-	loadingText="Loading..."
-	type="ball-clip-rotate">
-</ngx-spinner>
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<section class="hero">
+<div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+  <div class="container">
+    <div class="col s12">
+      <ul class="back-icon">
+        <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Testimonials </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+      </ul>
+    </div>	
+    <div class="clearfix"></div>
+  </div>
+</div>
+<section class="hero beard">
     <img src="" class="responsive-img">
     <div class="container"> 
         <h2 class="center font600 white-text margin-top"></h2>

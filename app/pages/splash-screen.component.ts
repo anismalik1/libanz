@@ -7,7 +7,7 @@ import {PwaService} from '../pwa.service';
     selector: 'app-splash-screen',
     template: `
         <div class="splash-screen" *ngIf="show" @fadeOut>
-            <img width="100%" height="100%" src="https://www.mydthshop.com/web-app/assets/images/splash-screen.png" alt="Splash Screen Mydthshop">
+            <img width="100%" height="100%" src="/web-app/assets/images/splash-screen.png" alt="Splash Screen Mydthshop">
         </div>
     `,
     animations: [

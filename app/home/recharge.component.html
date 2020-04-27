@@ -168,7 +168,7 @@ top:10px;
 left:5%;
 }
 
-.cst-flb{
+.cst-flb{ 
 
 	font-size: 20px;
     line-height: 40px !important;
@@ -176,15 +176,9 @@ left:5%;
 
 	}
 	</style>
-<app-header class="hide-on-mobile"></app-header>
+<app-header [className]="(this.todoservice.get_user_name() =='') ? '' : 'hide-on-mobile'"></app-header>
 <div class="spinner-wrapper">
-	<ngx-spinner
-	bdColor="rgba(255,255,255,1)"
-	size="default"
-	color="#ec9737"
-	loadingText="Loading..."
-	type="ball-clip-rotate">
-</ngx-spinner>
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 
 </div>
 <section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
@@ -236,7 +230,7 @@ left:5%;
 					<div class="card-content ">
 					<div class="col s12 m12 l5 border-bottom">
 						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images operator-img" alt="airtel" width="50px">
-						<h4 class="inline-block">Recharge of {{rechargeData.title}} {{rechargeData.recharge_bill_type}} {{rechargeData.recharge_id}} for <br/> <span class="font600 cst-flb">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
+						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
 					
