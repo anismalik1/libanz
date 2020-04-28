@@ -6049,6 +6049,12 @@ h2#compare-title {
 
 	float: right;
 }
+
+.border-bottom{
+
+	border-bottom:1px solid #ececec;
+	
+}
 }
 .mobile-slider li:nth-child(n+2){display:none;}
 

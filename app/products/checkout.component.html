@@ -7,6 +7,10 @@
     white-space: nowrap;
     padding: 1px;
 	}
+
+	.cod-text {
+    line-height: 27px !important ;
+}
 }
 </style>
 <app-header></app-header>
@@ -209,7 +213,7 @@
 															<div class="input-field col s12 m6">
 																<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
 																<label for="city">City/District/Town*</label>
-																<div class="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
+																<div cl	ass="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
 																	<span class="red-text ">*City is Required.</span>
 																</div>
 															</div>
@@ -318,14 +322,14 @@
           		<div class="row" *ngIf="this.productservice.cod_invalid == false">
           			<div class="col s12 m10 offset-m1">
           				<input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.check_cashon_delivery()"/>
-						<label for="cod" class="font-size-change black-text">Cash on Delivery / ( COD )</label>
+						<label for="cod" class="font-size-change black-text cod-text">Cash on Delivery / ( COD )</label>
 					</div>
           		</div>
           		<!-- Credit Card -->
           		<div class="row">
           			<div class="col s12 m10 offset-m1">
           				<input name="wallet_type" class="with-gap" value="card" type="radio" id="card" (change)="cod_apply()"/>
-    							<label for="card" class="font-size-change black-text">Cards & Netbanking</label>
+    							<label for="card" class="font-size-change black-text cod-text">Cards & Netbanking</label>
 				        </div>
           		</div>
 				</form>

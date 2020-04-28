@@ -36,14 +36,24 @@ overflow:hidden !important;
 			text-align: center;
     font-size: 20px;
 		}
+
+		.fix-top-box{
+
+			margin-top:-20px;
+		}
+
+		.order-list {
+    
+    margin: 0px !important;
+}
 	}
 </style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
 <!-- End Here -->
-<section class="middle white">
+<section class="middle white fix-top-box">
 	<div class="row no-margin">
 		<div class="col s12 m10 l6 offset-l3 fix-padding">
 			<div class="card no-margin">

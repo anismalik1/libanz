@@ -1,4 +1,50 @@
 
+<style>
+
+	@media only screen and (max-width: 767px){
+
+		.border {
+    border: 1px solid #e0e0e0;
+    padding: 7px;
+    border-radius: 10%;
+}
+.font-size-change-order {
+    font-size: 1.35rem !important;
+    text-transform: capitalize;
+}
+
+a.back-to-retailer-page.grey.lighten-3.btn.black-text {
+    padding: 10px !important;
+    font-weight: bold;
+    width: 100% !important;
+    border-radius: 20px;
+    font-size: 13px !important;
+}
+.mb-style{
+
+	font-weight: bold;
+    margin-top:5px;
+    text-align: center;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 10px;
+}
+	}
+	a.back-to-retailer-page.grey.lighten-3.btn.black-text {
+		padding: 5px;
+    font-weight: bold;
+    width: 35%;
+    border-radius: 20px;
+    font-size: 13px !important;
+}
+.mb-style{
+
+font-weight: bold;
+margin-top:0px;
+text-align: center;
+border-bottom: 1px solid #ececec;
+padding-bottom: 10px;
+}
+</style>
 <app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
@@ -11,24 +57,26 @@
 				<div class="card no-margin">
 					<div class="card-content" *ngIf="order">
 						<div class="row no-margin border-on-bottom padd-bottom">
+							<h3 class="mb-style">Recharge Status </h3>
 							<div class="col s8 no-padding">
+							
 								<span class="font-size-change-order font600" >{{order.status}}</span><br>
 								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span><br>
 								<span class="font-size-change1 grey-text">{{order.order_date | date: date:'dd M, Y h:i'}}</span>
 							</div>
 							<div class="col s1 offset-s3 no-padding">
 								<i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
-								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'pending'">error</i>
-								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'failed'">close</i>
+								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Pending'">error</i>
+								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i>
 							</div>
 						</div>
 						<div class="row border-on-bottom padd-bottom margin-top">						
-							<div class="col s12 m10 no-padding">
+							<div class="col s8 m10 no-padding">
 								<span class="font-size-change grey-text">PAID AT</span><br>
 								<span class="font600 font-size-change-order margin-top-cart1">{{operator(order.order_data,'title')}} Mobile No. {{order.subcriber_id}}</span><br>
 								<p class="font-size-change grey-text margin-top-cart1">Order ID: {{order.id}}</p>
 							</div>
-							<div class="col s12 m2 right-align">
+							<div class="col s4 m2 right-align">
 								<a href="javascript:">
 									<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{operator(order.order_data,'image')}}" class="responsive-img vertical-align-middle border" alt="Airtel logo">
 								</a>
@@ -36,7 +84,7 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="row padd-bottom margin-top">						
-							<div class="col s12 m10 no-padding">
+							<div class="col s8 m10 no-padding">
 								<span class="font-size-change grey-text">PAID FROM</span><br>
 								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 1">Mydth Wallet</span><br>
 								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 2">Gateway</span><br>
@@ -49,7 +97,7 @@
 
 								<p class="font-size-change grey-text margin-top-cart1">Wallet Txn ID: {{order.transaction_id}}</p>
 							</div>
-							<div class="col s12 m2 right-align">
+							<div class="col s4 m2 right-align">
 								<a href="javascript:">
 									<img src="https://mydthshop.com/web-app/assets/images/recharge-icon/wallet-with-money.png" class="responsive-img vertical-align-middle border operator-img" alt="Airtel logo">
 								</a>
