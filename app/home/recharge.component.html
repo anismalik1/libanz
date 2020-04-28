@@ -170,6 +170,17 @@ left:5%;
     line-height: 40px !important;
 }
 
+.fix-right{
+
+	position: relative;
+    left: 36px !important;
+}
+
+.pt-15{
+
+	padding-top: 15px;
+}
+
 	}
 	</style>
 <app-header [className]="(this.todoservice.get_user_name() =='') ? '' : 'hide-on-mobile'"></app-header>
@@ -224,17 +235,15 @@ left:5%;
 			<div class="col m12">
 			<div class="card">
 					<div class="card-content ">
-					<div class="col s12 m12 l5 ">
+					<div class="col s12 m8 l5 border-bottom">
 						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images operator-img" alt="airtel" width="50px">
 						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
 					
-					<div class="col s12 m12 l5 margin-top ">
+					<!-- <div class="col s12 m12 l5 margin-top ">
 						<div class="payment-method" *ngIf="pay_step==1">
-							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 0">
-								<a href="#promo-code-apply" class="modal-trigger">have a promo</a>
-							</p>
+							
 							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
 								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span> 
 								<a href="#promo-code-apply" class="modal-trigger">change</a>
@@ -242,13 +251,13 @@ left:5%;
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="radio" class="with-gap" id="instant-recharge"  name="payment_type" value="wallet" checked/>
 								<label for="instant-recharge" class="black-text"><span class="fast"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				
-							</p>
-							<p class="inline-block margin-right">
+							</p> -->
+							<!-- <p class="inline-block margin-right">
 								<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
 								<label for="other-option" class="black-text">Other</label>
-							</p> 
-						</div>
-						<div class="payment-method1"  *ngIf="pay_step==2">
+							</p>  -->
+						<!-- </div> -->
+						<!-- <div class="payment-method1"  *ngIf="pay_step==2">
 							<p class="inline-block margin-right ">
 								<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
 								<label for="credit-card" class="black-text">Cards & Netbanking</label>
@@ -260,9 +269,28 @@ left:5%;
 							<p class="inline-block margin-right" *ngIf="(rechargeData.recharge_amount + rechargeData.commission) <= this.todoservice.get_user_wallet_amount()">
 								<a href="javascript:" class="black-text" (click)="other_to_pay(1)"><< Back</a>
 							</p>
-						</div>                                                                                                      
+						</div>                                                                                                       -->
 						
+					<!-- </div> -->
+
+					<div class="row col s12 m4">
+						<p class=" margin-right fix-right">
+							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
+							<label for="credit-card" class="black-text">Cards & Netbanking</label>
+						</p>
+						<p class=" margin-right ">
+							<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
+							<label for="paytm" class="black-text">Paytm</label>
+						</p>
+						<p class=" margin-right">
+							<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
+							<label for="other-option" class="black-text">Other</label>
+						</p> 
+						<p class=" margin-right fast-forwad relative pt-15" *ngIf="promo_selected == 0">
+							<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
+						</p>
 					</div>
+
 					<div class="no-proceed red-text" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
 						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 					</div>
