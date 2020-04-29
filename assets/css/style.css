@@ -2142,6 +2142,8 @@ tbody img{
 	padding:2.5rem 1rem 0;
 	display:inline-block;
 	width: 100%;
+
+
 }
 .login-modal{
 	height: 70vh;
@@ -4717,6 +4719,7 @@ ul.lSPager.lSpg {
     color: #333;
 
 }
+
 /* .cst-bg-color{
 
 	background-color: #ff6c01  !important;
@@ -5688,7 +5691,7 @@ a.modal-trigger i {
 
 		.cst-merchant-bx{
 
-	height:100vh;
+			height:88vh;
     width: 100%;
     background-color: #ffff;
     /* border-top: 5px solid #18aea5;
@@ -5703,7 +5706,7 @@ a.modal-trigger i {
 
 	font-size: 31px;
     color: #484545;
-	padding-top: 28px;
+	padding-top: 0;
 	font-weight: bold;
 }
 .sub-txt{
@@ -5712,6 +5715,19 @@ a.modal-trigger i {
     color: #9E9E9E;
     line-height: 4px;
     padding-left: 1px;
+}
+.regis-btn-fix{
+
+	width: 40%;
+    margin-top: 30px;
+}
+.ask-login{
+	padding-top: 10px;
+    font-size: 12px;
+    color: #333 !important;
+}
+.col.s12.m6.background-merchant.cst-fix-btn {
+    height: 90vh;
 }
 .btn-bt-30{
 
@@ -6073,3 +6089,7 @@ h2#compare-title {
 	padding: 0px 5px;
 	margin-top: -12px;
 	float: right;}
+
+	.col.s12.m6.background-merchant.cst-fix-btns {
+		height: 85.5vh !important;
+	}
