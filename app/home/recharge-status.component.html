@@ -28,13 +28,29 @@ a.back-to-retailer-page.grey.lighten-3.btn.black-text {
     border-bottom: 1px solid #ececec;
     padding-bottom: 10px;
 }
+
+.cst-clr-btn{
+
+    background-color: #ff6a00!important;
+    color: #fff !important;
+}
+
+.grey-text {
+    color: #424141 !important;
+}
+
+a img {
+    width: 50px;
+}
+
+
 	}
 	a.back-to-retailer-page.grey.lighten-3.btn.black-text {
 		padding: 5px;
     font-weight: bold;
     width: 35%;
     border-radius: 20px;
-    font-size: 13px !important;
+    font-size: 14px !important;
 }
 .mb-style{
 
@@ -69,7 +85,7 @@ padding-bottom: 10px;
 								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span><br>
 								<span class="font-size-change1 grey-text">{{order.order_date | date: date:'dd M, Y h:i'}}</span>
 							</div>
-							<div class="col s1 offset-s3 no-padding">
+							<div class="col s4 offset-s3 no-padding">
 								<i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
 								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Pending'">error</i>
 								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i>
@@ -108,7 +124,7 @@ padding-bottom: 10px;
 								</a>
 							</div>
 							<div class="clearfix"></div><br/>
-							<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="back_to_home()"> << Back</a>
+							<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text cst-clr-btn" (click)="back_to_home()"> Go Back To Home &nbsp; <span class="fa fa-home"></span> </a>
 						</div>
 						<p class="red-text">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>						
 					</div>
