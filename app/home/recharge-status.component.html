@@ -55,6 +55,11 @@ padding-bottom: 10px;
 		<div class="row no-margin">
 			<div class="col s12 m10 l6 offset-l3">
 				<div class="card no-margin">
+					<div class="card-content center" *ngIf="spin_show">
+						<span class="large material-icons orange-text">access_time</span>
+						<div class="clearfix"></div>
+						<span>Processing...</span>
+					</div>
 					<div class="card-content" *ngIf="order">
 						<div class="row no-margin border-on-bottom padd-bottom">
 							<h3 class="mb-style">Recharge Status </h3>

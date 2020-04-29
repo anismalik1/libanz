@@ -754,6 +754,12 @@ export class ProductDetailsComponent implements OnInit{
 
     if(!this.get_token())
     {
+      var width = $(window).width(); 
+      if(width < 767)
+      {
+        this.open_model();
+        return false;
+      }
       $('.logup.modal-trigger')[0].click();
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
       return false;
@@ -771,6 +777,23 @@ export class ProductDetailsComponent implements OnInit{
     this.route.navigate(['product/checkout']);
   }
 
+  open_model()
+  {
+    if($('#init-open_model-script'))
+    {
+      $('#init-open_model-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-open_model-script`;
+    script.text = `
+      $(document).ready(function(){
+        $('.modal').modal();
+        $('#login-modal').modal('open');
+      }); 
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
   change_count(p_id,op)
   {
     let val: any = $('#update_count1').text();

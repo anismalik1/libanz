@@ -730,10 +730,32 @@ export class RechargeComponent implements OnInit {
 		
   }
 
+  open_model()
+  {
+    if($('#init-open_model-script'))
+    {
+      $('#init-open_model-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-open_model-script`;
+    script.text = `
+      $(document).ready(function(){
+        $('.modal').modal();
+        $('#login-modal').modal('open');
+      }); 
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
 recharge_handle()
  {
   if(!this.authservice.authenticate())
   {
+      var width = $(window).width(); 
+      if(width < 767)
+      {
+        this.open_model()
+      }
       return false;
   }
   this.spinner.show();

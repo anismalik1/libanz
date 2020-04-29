@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit{
     public productservice : ProductService,
     private toastr : ToastrManager,
     private vcr: ViewContainerRef,
-    private router : Router,
+    public router : Router,
     private fb: FormBuilder,
     private http : Http
   ) 

@@ -10,10 +10,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styles: []
 })
 export class RechargeStatusComponent implements OnInit {
-
+  public spin_type :string = 'ball-beat';
   private order_id : string;
-  private iterate : number = 0;
+  public iterate : number = 0;
   public tick_clock : number = 25;
+  public spin_show : boolean = false;
   order : any;
   constructor( public todoservice : TodoService,
   private spinner : NgxSpinnerService,  
@@ -39,26 +40,28 @@ export class RechargeStatusComponent implements OnInit {
 		  .subscribe(
         data => 
         {
-          this.spinner.hide();
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/&nbsp;/g, ''));
           this.order = data.ORDER[0];
           this.todoservice.set_user_data(data.USER);
-          this.spinner.hide();
-          if(this.order.recharge_status ==3 && this.iterate < 25)
+          if(this.order.status == 'Failed' && this.order.payment_status == 2 && this.iterate < 10)
           {
             this.iterate++;
-            setTimeout(()=>{    
+            setTimeout(()=>{   
              this.fetch_recharge_order_status(this.order_id);
             }, 5000);
             if(this.iterate == 1)
             {
+              this.spin_show = true;
               setTimeout(()=>{    
                 this.tick_tick_clock();
                }, 1000);
             }
            
           }
+          else
+          {
+            this.spin_show = false;
+          }
+          this.spinner.hide();
         }
 		  ) 
   }

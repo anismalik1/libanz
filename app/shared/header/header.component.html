@@ -12,9 +12,7 @@
 		color: #fff;
 		border-radius: 20px;
 	}
-	
 	.rounded-btn{
-	
 		border-radius:20px;
 	}
 	.mobile-footer-menu ul li.active span {
@@ -215,7 +213,7 @@ hr.line1 {
 	<div class="mobile-wrapper">
 		<!-- mobile header start-->
 		<div class="mobile-mask"></div>
-		<header id="mobile-header" class="clearfix">
+		<header id="mobile-header" [className]="(!this.router.url.includes('mhome')) ? 'clearfix hide-on-mobile' : 'clearfix'">
 			<div class="mobile-header-left">
 				<ul>
 				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
@@ -288,7 +286,7 @@ hr.line1 {
 		
 		<!-- mobile header end-->
 		<!-- mobile top menu start-->	
-		<div class="mobile-top-menu">
+		<div [className]="(!this.router.url.includes('mhome')) ? 'mobile-top-menu hide-on-mobile' : 'mobile-top-menu'">
 			<ul id="mobile-dashboard-menus" style="height:72px !important">
 				<li>
 					<ul>

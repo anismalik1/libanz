@@ -98,8 +98,8 @@ export class MobileHomeComponent implements OnInit {
     $('#search').focusout(function(){
       $('.search-result').addClass('hide');
     });
-    
-    if(document.URL.indexOf('https://') === -1)
+
+    if(document.URL.indexOf('https://') !== -1)
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
         this.open_model()
@@ -118,7 +118,7 @@ export class MobileHomeComponent implements OnInit {
       {
         data = {token : this.get_token()};
       }
-      //this.spinner.show();
+      this.spinner.show();
       this.todoservice.fetch_home_data(data)
       .subscribe(
         data => 
@@ -150,6 +150,7 @@ export class MobileHomeComponent implements OnInit {
             $('#select-item').css('display',''); 
             //this.filter_banners('Big Tv');
             this.spinner.hide();
+            window.scroll(0,0);
           }
         }
       )  
@@ -406,7 +407,6 @@ export class MobileHomeComponent implements OnInit {
         enableDrag: true,
         pager: true,
         gallery: false,
-        galleryMargin: 5,
         thumbMargin: 5,
         currentPagerPosition: 'middle',
     });
