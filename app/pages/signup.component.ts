@@ -29,6 +29,10 @@ export class SignupComponent implements OnInit{
   signupdisabled : boolean = false;
   verifydisabled : boolean = false;
   page :string =  "/signup";
+  plans_data : any ;
+  plan_codes : any ;
+  days       : number = 15;
+  selected_plans : any;
   constructor(private toast: ToastrManager, 
     private fb : FormBuilder,
     public todoservice : TodoService,
@@ -86,6 +90,25 @@ export class SignupComponent implements OnInit{
       }
     ) 
  }
+
+ change_plan(days)
+  {
+    this.days = days;
+    this.selected_plans = this.plans_data.filter(x => x.days == days);
+    if(this.selected_plans.length == 0)
+      return false;
+       
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      for(var i = 0;i < this.selected_plans.length;i++)
+      {
+        $('#plan-rate-'+this.selected_plans[i].plan_code).text(this.selected_plans[i].price);
+        $('#plan-leads-'+this.selected_plans[i].plan_code).text('Number of leads '+this.selected_plans[i].leads_no);
+        $('#plan-days-'+this.selected_plans[i].plan_code).text('Valid for '+this.selected_plans[i].days+' days');
+      }
+ }, 2000);
+    
+  }
+
   set_user_type(user_type)
   {
     this.user_type_enabled = true;

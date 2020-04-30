@@ -13,6 +13,7 @@ import { Authparams } from '../../authparams';
 import { User } from '../../user';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { filter, pairwise } from 'rxjs/operators';
+declare var window: any;
 
 @Component({
   selector: 'app-header',
@@ -225,6 +226,7 @@ export class HeaderComponent implements OnInit{
             {
               this.step = 2;
               this.tick_clock(60);
+              this.watchSMS();
             }
             else
             {
@@ -234,6 +236,34 @@ export class HeaderComponent implements OnInit{
          // this.spinner.hide();
         }
       )  
+  }
+
+  watchSMS() {
+    let _scope = this;
+    if(window.SMS) window.SMS.startWatch(function(){
+        console.log('Succeed to start watching SMS');
+        document.addEventListener('onSMSArrive', _scope.smsArived);
+      }, function(){
+        console.log('failed to start watching SMS');
+      });
+  }
+
+  stopWatchSMS() {
+    if(window.SMS) window.SMS.stopWatch(function(){
+        console.log('Succeed to stop watching SMS');
+      }, function(){
+        console.log('failed to stop watching SMS');
+      });
+  }
+
+  smsArived = (result: any) => {
+    let sms = result.data;
+    console.log('sms', sms);
+    let sender = sms.address;
+    console.log('sender', sender);
+    let otp_text = sms.body;
+    console.log('OTP', otp_text);
+    this.stopWatchSMS();
   }
 
   time_ago(time) {
