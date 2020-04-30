@@ -256,7 +256,7 @@ left:5%;
 								<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
 								<label for="other-option" class="black-text">Other</label>
 							</p> 
-						</div> 
+						</div>  
 						<div class="payment-method1"  *ngIf="pay_step==2">
 							<p class="inline-block margin-right ">
 								<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
@@ -635,7 +635,12 @@ left:5%;
 							<div class="input-field col s12 m12 electric-cls1" >
 								<mat-form-field>
 									<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'electricity')" formControlName="operator">
-										<span *ngFor="let item of filter_operators(61);">
+										<span *ngIf="!this.electricity_operators">
+											<mat-option [value]="0">
+												Select
+											</mat-option>
+										</span>
+										<span *ngFor="let item of this.electricity_operators;">
 											<mat-option [value]="item.id">
 												<span *ngIf="item.api_img != ''"><img class="operator-img" src="https://www.mydthshop.com/accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
 											</mat-option>

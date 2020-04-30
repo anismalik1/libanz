@@ -860,13 +860,12 @@ recharge_handle()
 		  );
   }
   filter_operator(value)
-  {
+  { 
     if(value > 0){
       $('.inner-electricity').removeClass('hide');
       this.electricity_operators = this.filter_operators(61);
       this.electricity_operators = this.electricity_operators.filter(x => x.circle_id == value);
     }
-    
   }
 check_amount(s)
  {
