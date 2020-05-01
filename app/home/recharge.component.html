@@ -831,9 +831,12 @@ left:5%;
 						</div>
 						<div class="input-field col s12 m12">
 							<input placeholder="Customer ID" name="recharge_id" type="text" class="validate no-margin" pattern="[a-z]+" formControlName="recharge_id">
+							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter a Valid Customer ID" id="mobid" *ngIf="!cablegroup.controls['recharge_id'].valid && cablegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span> 
+							<span class="red-text" *ngIf="!cablegroup.controls['recharge_id'].valid && cablegroup.controls['recharge_id'].touched">Enter a Valid Customer ID</span> 
 						</div>
 						<div class="input-field col s12 m12">
 							<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin"  formControlName="amount">
+							<span class="red-text" *ngIf="!cablegroup.controls['amount'].valid && cablegroup.controls['amount'].touched">Enter a Valid Amount</span>
 						</div>
 						<div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">

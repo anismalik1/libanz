@@ -595,7 +595,7 @@ export class RechargeComponent implements OnInit {
   }
   recharge_init(s,formdata)
   {
-    
+    console.log(this.dthgroup.valid)
     if(s == 'mobile' && !this.mobilegroup.valid)
     {
       Object.keys(this.mobilegroup.controls).forEach(field => { // {1}
