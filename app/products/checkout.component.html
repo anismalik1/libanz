@@ -11,6 +11,13 @@
 	.cod-text {
     line-height: 27px !important ;
 }
+.pt-left-35{
+
+	padding-left: 35px;
+}
+a.btn.orange.btn-large.ctn-che1 {
+    margin-bottom: 10px;
+}
 }
 </style>
 <app-header></app-header>
@@ -324,7 +331,7 @@
           				<input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.check_cashon_delivery()"/>
 									<label for="cod" class="font-size-change black-text cod-text">Cash on Delivery / ( COD )</label>
 									<div class="clearfix"></div>
-									<span class="red-text" *ngIf="this.productservice.check_cashon_delivery()">COD Not Available.</span>
+									<span class="red-text pt-left-35" *ngIf="this.productservice.check_cashon_delivery()">COD Not Available.</span>
 								</div>
           		</div>
           		<!-- Credit Card -->
