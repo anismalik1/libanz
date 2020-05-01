@@ -595,7 +595,6 @@ export class RechargeComponent implements OnInit {
   }
   recharge_init(s,formdata)
   {
-    console.log(this.dthgroup.valid)
     if(s == 'mobile' && !this.mobilegroup.valid)
     {
       Object.keys(this.mobilegroup.controls).forEach(field => { // {1}
@@ -717,13 +716,7 @@ export class RechargeComponent implements OnInit {
 				this.rechargeData.cat_title = data.cat_title;	
 				this.rechargeData.recharge_name = data.recharge_name;	
 				this.rechargeData.title = data.title;
-        this.recharge_ini = 2;
-        //console.log(this.rechargeData.recharge_amount)
-        if(this.todoservice.get_user_wallet_amount() < this.rechargeData.recharge_amount)
-        {
-          this.other_to_pay(2);
-        }
-        //this.router.navigate(['/recharge/'+this.url_name+'/proceed']);				
+        this.recharge_ini = 2;				
 			  }
 			}
 		  );
@@ -795,10 +788,7 @@ recharge_handle()
         }
       )
  }
-  other_to_pay(paystep)
-  {
-    this.pay_step = paystep;
-  }
+
   addto_recharge_cart(data)
   {
     localStorage.setItem('recharge_cart',JSON.stringify(data));
