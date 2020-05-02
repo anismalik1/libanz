@@ -161,6 +161,15 @@ border-radius: 20px !important;
 width: 100% !important;
 margin: auto;
 }
+
+
+@media only screen and (min-width: 767px){
+
+.hide-img1{
+
+    display:none !important;
+}
+}
   </style>
 <app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
@@ -291,7 +300,7 @@ margin: auto;
                                     </tr>
                                     <tr>
                                     <td colspan="2"><button type="Submit" class="btn orange btn-value resp-btn">Transfer Now</button>
-                                        <button type="button" class="btn orange btn-value clc-btn" (click)="cancel()">Cancel</button></td>
+                                        <!-- <button type="button" class="btn orange btn-value clc-btn" (click)="cancel()">Cancel</button></td> -->
                                     </tr>
                                 </tbody>    
                                 </table>
@@ -341,7 +350,7 @@ margin: auto;
         </div>
     
         <div class="row">
-            <img src="https://www.mydthshop.com/web-app/assets/images/kyc-inner-banner.png" class="responsive-img" style="width: 90%; height: 130px; margin: 17px;"/>
+            <img src="https://www.mydthshop.com/web-app/assets/images/kyc-inner-banner.png" class="responsive-img hide-img1" style="width: 90%; height: 130px; margin: 17px;"/>
         </div>
     </div>
 

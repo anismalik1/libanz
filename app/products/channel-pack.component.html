@@ -17,13 +17,27 @@
     padding-left: 10px;
     padding-bottom: 19px;
 }
+.channels-basic{
+
+	padding-top:50px;
+}
  }
 </style>
 <app-header></app-header>
-<div class="spinner-wrapper">
+
+<div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+	<div class="container">
+	  <div class="col s12">
+		<ul class="back-icon">
+		  <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Channel </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+		</ul>
+	  </div>	
+	  <div class="clearfix"></div>
+	</div>
+  </div>
+  <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-
 <section class="channels-basic">
 	<div class="container center">
 		<h1 class="cst-font-size"><span class="pt-top-20"> {{product_pack_info.title}}  </span>

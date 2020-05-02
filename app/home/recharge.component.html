@@ -181,6 +181,17 @@ left:5%;
 	padding-top: 15px;
 }
 
+.net-banking{
+	padding-left:36px;
+}
+	}
+
+	@media only screen and (min-width: 767px){
+
+		.border-bottom{
+
+			border:transparent;
+		}
 	}
 	</style>
 <app-header></app-header>
@@ -254,15 +265,15 @@ left:5%;
 							</p> 
 							 
 						</div>  
-						<p class="inline-block margin-right ">
+						
+						<p class=" ">
+							<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
+							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="width:72px;"></label>
+						</p>
+						<p class="net-banking">
 							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
 							<label for="credit-card" class="black-text">Cards & Netbanking</label>
-						</p>
-						<p class="inline-block margin-right ">
-							<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"></label>
-						</p>
-						                                                                                                 
+						</p>                                                                                              
 						
 					</div>
 

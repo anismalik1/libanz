@@ -1,12 +1,33 @@
 
 <style>
+.cs-fix-img-1{
 
+width:58px;
+float:right;
+}
+a.back-to-retailer-page.grey.lighten-3.btn.black-text {
+    padding: 10px 0px !important;
+    font-weight: bold;
+    height: 45px;
+    width: 100% !important;
+    border-radius: 20px;
+    font-size: 14px !important;
+    background: #ff6a00 !important;
+    color: #fff !important;
+    /* margin: 0 auto !important; */
+}
 	@media only screen and (max-width: 767px){
 
 		.border {
     border: 1px solid #e0e0e0;
     padding: 7px;
     border-radius: 10%;
+}
+
+.cs-fix-img-1{
+
+	width:50px;
+	float:right;
 }
 .font-size-change-order {
     font-size: 1.35rem !important;
@@ -85,10 +106,11 @@ padding-bottom: 10px;
 								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span><br>
 								<span class="font-size-change1 grey-text">{{order.order_date | date: date:'dd M, Y h:i'}}</span>
 							</div>
-							<div class="col s4 offset-s3 no-padding">
-								<i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
+							<div class="col s4  no-padding">
+								<img src="../../assets/images/success.gif" class="responsive-img cs-fix-img-1"/>
+								<!-- <i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
 								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Pending'">error</i>
-								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i>
+								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i> -->
 							</div>
 						</div>
 						<div class="row border-on-bottom padd-bottom margin-top">						
@@ -108,8 +130,9 @@ padding-bottom: 10px;
 							<div class="col s8 m10 no-padding">
 								<span class="font-size-change grey-text">PAID FROM</span><br>
 								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 1">Mydth Wallet</span><br>
-								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 2">Gateway</span><br>
 								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 4">Paytm Wallet</span>
+								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 2">Gateway</span><br>
+								
 								<div class="clearfix"></div>
 								<span class="margin-top-cart1 green-text" *ngIf="order.payment_status == 1">Successful</span><br>
 								<span class="margin-top-cart1 green-text" *ngIf="order.payment_status == 2">Failed</span><br>
