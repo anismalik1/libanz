@@ -432,7 +432,7 @@ p.ask-login {
 </ng-template>
 <ng-template #otpverify>
 	<section class="login-page">
-		<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
+		<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)" id="header-signup">
 
 			<div class="container">	
 				<div class="row">
@@ -453,8 +453,8 @@ p.ask-login {
 										<div class="input-field col s12 center otp-inputa" id="inputs">
 											<input type="number" id="opt1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
 											<input type="number" id="opt2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
-											<input type="number" id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
-											<input type="number" id="opt4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
+											<input type="number" id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
+											<input type="number" id="otp4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
 										</div>
 										<div class="col s12 center margin-top">
 											<span class="font-size-change1">Don't recieve OTP <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
@@ -462,7 +462,7 @@ p.ask-login {
 									</div>
 									<div class="row">
 										<div class="col s12 center">
-											<button type="Submit" class="btn orange waves-effect waves-light" [disabled]="verifydisabled">Submit</button>
+											<button id="signup-submit" type="Submit" class="btn orange waves-effect waves-light" [disabled]="verifydisabled">Submit</button>
 										</div>
 									</div>
 								</div>

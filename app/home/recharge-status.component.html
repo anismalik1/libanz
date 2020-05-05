@@ -104,10 +104,12 @@ padding-bottom: 10px;
 							
 								<span class="font-size-change-order font600" >{{order.status}}</span><br>
 								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span><br>
-								<span class="font-size-change1 grey-text">{{order.order_date | date: date:'dd M, Y h:i'}}</span>
+								<span class="font-size-change1 grey-text">{{order.history_time | date: date:'dd M, Y'}} {{order.history_time | date: 'h:mm a'}}</span>
 							</div>
 							<div class="col s4  no-padding">
-								<img src="../../assets/images/success.gif" class="responsive-img cs-fix-img-1"/>
+								<img src="https://www.mydthshop.com/web-app/assets/images/success.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase() == 'successful'"/>
+								<img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase() == 'pending'"/>
+								<img src="https://www.mydthshop.com/web-app/assets/images/close.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase() == 'failed'"/>
 								<!-- <i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
 								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Pending'">error</i>
 								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i> -->

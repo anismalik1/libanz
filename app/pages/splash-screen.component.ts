@@ -15,7 +15,7 @@ import {PwaService} from '../pwa.service';
         trigger('fadeOut', [
             transition(':leave', [
                 query(':leave', animateChild(), {optional: true}),
-                animate('1200ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .7,transform: 'translateY(-100%)'})),
+                animate('1200ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .9,transform: 'translateY(-100%)'})),
             ]),
         ]),
     ],
@@ -43,6 +43,7 @@ export class SplashScreenComponent implements OnInit {
     }
 
     ngOnInit() {
+        //console.log(document.URL);
         var width = $(window).width(); 
         if(width > 767)
         {

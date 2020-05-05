@@ -32,7 +32,7 @@ export class ChannelPackComponent implements OnInit {
     private toastr: ToastrManager,
     private authservice : AuthService,
     private productservice : ProductService,
-    private todoservice : TodoService,
+    public todoservice : TodoService,
     private router : ActivatedRoute, private route : Router
   ) { 
 

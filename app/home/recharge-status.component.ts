@@ -40,9 +40,13 @@ export class RechargeStatusComponent implements OnInit {
 		  .subscribe(
         data => 
         {
+          if(data.status == 'Invalid Token')
+          {
+            this.router.navigate(['/mhome']);
+          }
           this.order = data.ORDER[0];
           this.todoservice.set_user_data(data.USER);
-          if(this.order.status == 'Failed' && this.order.payment_status == 2 && this.iterate < 10)
+          if(this.order.status == 'Pending' && this.order.payment_status == 1 && this.iterate < 10)
           {
             this.iterate++;
             setTimeout(()=>{   
@@ -104,6 +108,6 @@ export class RechargeStatusComponent implements OnInit {
   }
   back_to_home()
   {
-    this.router.navigate(['/'])    
+    this.router.navigate(['/mhome'])    
   }
 }

@@ -36,6 +36,7 @@ export class FooterComponent implements OnInit{
        this.page = 'footer';
        this.fetch_page_data();
      } 
+
    }
 
   navigate_to(url)

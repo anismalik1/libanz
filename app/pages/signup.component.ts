@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from '../user';
 import { Router ,ActivatedRoute} from '@angular/router'
 import * as $ from 'jquery';
+declare var window: any;
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -122,26 +123,25 @@ export class SignupComponent implements OnInit{
 
   resend_otp()
   {
-    //this.spinner.show();
+    this.spinner.show();
     let data : any = {phone : this.phone, password : this.password};
     this.todoservice.resend_otp(data)
       .subscribe(
         data => 
         {
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
           if(!jQuery.isEmptyObject(data))
           {
             if(data.status == true)
             {
               this.toast.successToastr(data.message);
+              this.watch_sms('signup');
             }
             else
             {
               this.toast.errorToastr(data.message);
             }
           }
-          //this.spinner.hide();
+          this.spinner.hide();
         }
       ) 
   }
@@ -160,13 +160,20 @@ export class SignupComponent implements OnInit{
     this.phone = formdata.phone;
     this.password = formdata.password;
     this.signupdisabled = true; 
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      formdata.device = 'android';
+    }
+    this.spinner.show();
     this.todoservice.signup(formdata)
       .subscribe(
         data => 
         {
+          this.spinner.hide();
           if(data.status == 'success')
           {
             this.verify = 1;
+            this.watch_sms('signup');
           }
           else
           {
@@ -199,6 +206,37 @@ export class SignupComponent implements OnInit{
           }
         }
       ) 
+  }
+
+  watch_sms(section)
+  {
+      if(window.SMSRetriever)
+      {
+        document.addEventListener('onSMSArrive', function(args : any) {
+          var otp1 = substring(args.message,13, 14);
+          var otp2 = substring(args.message,14, 15);
+          var otp3 = substring(args.message,15, 16);
+          var otp4 = substring(args.message,16, 17);
+          $('#header-'+section+' #otp1').val(otp1);
+          $('#header-'+section+' #otp2').val(otp2);
+          $('#header-'+section+' #otp3').val(otp3);
+          $('#header-'+section+' #otp4').val(otp4);
+          $('#header-'+section+' #'+section+'-submit').click();
+          function substring(string, start, end) {
+            var result = '',
+                length = Math.min(string.length, end),
+                i = start;
+          
+            while (i < length) result += string[i++];
+            return result;
+          }  
+        });
+        window.SMSRetriever.startWatch(function(msg) {
+          console.log(msg);
+        }, function(err) {
+          
+        });
+      }
   }
 
   keytab(event){

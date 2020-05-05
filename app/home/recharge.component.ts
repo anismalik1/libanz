@@ -864,10 +864,12 @@ check_amount(s)
   {
     $('#'+s+' .calc-amount-btn').text('Please Wait...');
     let data : any = {phone: v,operator: this.selectedOperator};
+    this.spinner.show();
     this.todoservice.check_amount(data)
 	  .subscribe(
         data => 
         {
+          this.spinner.hide();
           $('#'+s+' .calc-amount-btn').text('PROCEED');
           let b = JSON.stringify(data);
           data =  JSON.parse(b.replace(/\\/g, ''));

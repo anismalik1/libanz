@@ -651,7 +651,7 @@ hr.line1 {
 							</form>
 							</div>
 							<div class="otp-step margin-top1" *ngIf="step == 2">
-								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
+								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)" id="header-login">
 								<div class="upper-text center">
 									<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
 									<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
@@ -660,19 +660,19 @@ hr.line1 {
 									<div class="input-field col s12 center otp-inputa" id="inputs">
 											<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
 											<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-											<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-											<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+											<input id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+											<input id="otp4" maxlength="1" ngModel name="otp4" ngModel>
 									</div>
 									<div class="col s12 center margin-top">
 										<span class="font-size-change1">Don't recieve OTP </span>
 										<!-- <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span> -->
-										<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp()" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button>
+										<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp('login')" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button>
 									</div>			
 								</div>
 								<div class="row">
 									<div class="col s12 center">
 										<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
-										<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+										<button id="login-submit" type="Submit" class="btn waves-effect waves-light orange">Submit</button>
 									</div>
 								</div>
 							</form>
@@ -767,7 +767,7 @@ hr.line1 {
 								</form>
 								</div>	
 								<div class="otp-step margin-top1" *ngIf="signupverify == 1">
-										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)">
+										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)" id="header-signup">
 										<div class="upper-text center">
 											<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
 											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
@@ -776,18 +776,18 @@ hr.line1 {
 											<div class="input-field col s12 center otp-inputa" id="inputs">
 													<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
 													<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-													<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-													<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+													<input id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+													<input id="otp4" maxlength="1" ngModel name="otp4" ngModel>
 											</div>
 											<div class="col s12 center margin-top">
 												<span class="font-size-change1">Don't recieve OTP 
-												<a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+												<a href="javascript:" (click)="resend_otp('signup')" class="orange-text">Resend OTP?</a></span>
 											</div>			
 										</div>
 										<div class="row">
 											<div class="col s12 center">
 												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
-												<button type="Submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
+												<button type="Submit" id="signup-submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
 											</div>
 										</div>
 									</form>

@@ -36,6 +36,7 @@ export class AppComponent implements OnInit{
             .then(() => document.location.reload());
     });
 }
+
 onActivate(event) {
   window.scroll(0,0);
 }

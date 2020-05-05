@@ -1,4 +1,5 @@
-import { Component, OnInit,ViewContainerRef } from '@angular/core';
+import { Component, OnInit,ViewContainerRef,Renderer2,Inject } from '@angular/core';
+import { DOCUMENT} from "@angular/common";
 import { Router ,ActivatedRoute} from '@angular/router';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { Meta ,Title} from '@angular/platform-browser';
@@ -6,14 +7,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
+import {  CordovaService } from '../cordova.service';
 import { Authparams } from '../authparams';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import * as $ from 'jquery';
+declare var window : any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styles: [],
-  providers: [TodoService,User,AuthService]
+  providers: [TodoService,User,AuthService,CordovaService]
 })
 export class LoginComponent implements OnInit{
   private token_params : Authparams;
@@ -32,6 +35,9 @@ export class LoginComponent implements OnInit{
   notification : string = '';
   remember : any = {rm:false,ph:'',pw : ''};  
 constructor( public todoservice : TodoService,
+  private _renderer2: Renderer2,
+  private cordovaserve : CordovaService, 
+   @Inject(DOCUMENT) private _document, 
   private toastr: ToastrManager,
   private authService : AuthService,
   private spinner : NgxSpinnerService,
@@ -41,8 +47,7 @@ constructor( public todoservice : TodoService,
   private title : Title,
   private route : ActivatedRoute,
   private fb: FormBuilder
-) {
-  //console.log(this.route.snapshot.params['name']);  
+) {  
   if(this.route.snapshot.params['name'])
   {
     this.ref = this.route.snapshot.params['name'];
@@ -63,6 +68,7 @@ constructor( public todoservice : TodoService,
   }
  }
 ngOnInit() {
+  this.ini_list()
   if(this.todoservice.get_param('reset') && this.todoservice.get_param('reset') == 'true')
     this.notification = "Your Password Reset Successful. Login here.";
      
@@ -72,6 +78,7 @@ ngOnInit() {
     }
     this.fetch_page_data();
 }
+
 
 fetch_page_data()
  {
@@ -101,9 +108,17 @@ fetch_page_data()
 
 login_submit(login)
 {
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      login.device = 'android';
+    }
     if(this.step == 2)
     {
-      login.otp = login.otp1.toString() + login.otp2.toString() + login.otp3.toString() + login.otp4.toString();
+      var otp1 = $('#login-page-otps #otp1').val();
+      var otp2 = $('#login-page-otps #otp2').val();
+      var otp3 = $('#login-page-otps #otp3').val();
+      var otp4 = $('#login-page-otps #otp4').val();
+      login.otp = otp1.toString()+otp2.toString()+otp3.toString()+otp4.toString();
       login.phone = this.phone;
       login.password = this.password;
       login.step = 2;
@@ -153,6 +168,7 @@ login_submit(login)
           if(typeof data.step != 'undefined' &&  data.step == 'verify')
           {
             this.step = 2;
+            this.watch_sms();
           }
           else
           {
@@ -162,6 +178,37 @@ login_submit(login)
         this.spinner.hide();
       }
     )  
+}
+
+watch_sms()
+{
+    if(window.SMSRetriever)
+    {
+      document.addEventListener('onSMSArrive', function(args : any) {
+        var otp1 = substring(args.message,13, 14);
+        var otp2 = substring(args.message,14, 15);
+        var otp3 = substring(args.message,15, 16);
+        var otp4 = substring(args.message,16, 17);
+        $('#login-page-otps #otp1').val(otp1);
+        $('#login-page-otps #otp2').val(otp2);
+        $('#login-page-otps #otp3').val(otp3);
+        $('#login-page-otps #otp4').val(otp4);
+        $('#login-page-form #login-submit').click();
+        function substring(string, start, end) {
+          var result = '',
+              length = Math.min(string.length, end),
+              i = start;
+        
+          while (i < length) result += string[i++];
+          return result;
+        }  
+      });
+      window.SMSRetriever.startWatch(function(msg) {
+        console.log(msg);
+      }, function(err) {
+        
+      });
+    }
 }
 
 user_favourites()
@@ -185,19 +232,23 @@ user_favourites()
 }
 resend_otp()
 {
+  
   this.spinner.show();
   let data : any = {phone : this.phone, password : this.password};
+  if(document.URL.indexOf('android_asset') !== -1)
+  {
+    data.device = 'android';
+  }
   this.todoservice.resend_otp(data)
     .subscribe(
       data => 
       {
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           if(data.status == true)
           {
             this.toastr.successToastr(data.message);
+            this.watch_sms();
           }
           else
           {
@@ -219,6 +270,35 @@ get_remember()
     this.remember.pw = data.pd; 
   }
 }
+
+ini_list()
+  {
+    if($('#init-list-script'))
+    {
+      $('#init-list-script').remove();
+    }
+	  let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-list-script`;
+    script.text = `
+    $('.tabs').tabs();
+
+    $(document).ready(function(){
+    $('.dropdown-more-click').click(function(){
+      $('.dropdown-more').toggle();
+    });
+    // $(".dropdown-more").delegate('li','click',function(e){
+    //   e.preventDefault();
+    //   var targetli = $('#select-item > li:nth-child(9)').html();
+    //   $('#select-item > li:nth-child(9)').html(this.innerHTML);
+    //   this.innerHTML = targetli;
+    //   $('#select-item > li:nth-child(9) a')[0].click();
+    //   $('.dropdown-more-click').click()
+    // }); 
+    });
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
 
 keytab(event){
   if(event.keyCode == 8 || event.keyCode == 46)

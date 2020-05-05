@@ -102,7 +102,20 @@ export class HeaderComponent implements OnInit{
       this.createForm();
     }
     ngOnInit()
-    {  
+    {   
+      if(document.URL.indexOf('android_asset') !== -1)
+      {
+        if(window.cordova)
+          return false;
+        $('#cordova-js').remove();
+        let script1 = this._renderer2.createElement('script');
+        script1.type = `text/javascript`;
+        script1.id = `cordova-js`;
+        script1.src = `cordova.js`;
+        this._renderer2.appendChild(this._document.body, script1);
+      }
+      
+
       this.href = this.router.url;
       //console.log(this.href);                                   
       this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -172,9 +185,18 @@ export class HeaderComponent implements OnInit{
 
   login_submit(login)
   {
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      login.device = 'android';
+    }
     if(this.step == 2)
       {
-        login.otp = login.otp1.toString() + login.otp2.toString() + login.otp3.toString() + login.otp4.toString();
+        var otp1 = $('#header-login #otp1').val();
+        var otp2 = $('#header-login #otp2').val();
+        var otp3 = $('#header-login #otp3').val();
+        var otp4 = $('#header-login #otp4').val();
+        login.otp = otp1.toString()+otp2.toString()+otp3.toString()+otp4.toString();
+        // login.otp = login.otp1.toString() + login.otp2.toString() + login.otp3.toString() + login.otp4.toString();
         login.phone = this.phone;
         login.password = this.password;
         login.step = 2;
@@ -226,7 +248,7 @@ export class HeaderComponent implements OnInit{
             {
               this.step = 2;
               this.tick_clock(60);
-              this.watchSMS();
+              this.watch_sms('login');
             }
             else
             {
@@ -238,32 +260,35 @@ export class HeaderComponent implements OnInit{
       )  
   }
 
-  watchSMS() {
-    let _scope = this;
-    if(window.SMS) window.SMS.startWatch(function(){
-        console.log('Succeed to start watching SMS');
-        document.addEventListener('onSMSArrive', _scope.smsArived);
-      }, function(){
-        console.log('failed to start watching SMS');
-      });
-  }
-
-  stopWatchSMS() {
-    if(window.SMS) window.SMS.stopWatch(function(){
-        console.log('Succeed to stop watching SMS');
-      }, function(){
-        console.log('failed to stop watching SMS');
-      });
-  }
-
-  smsArived = (result: any) => {
-    let sms = result.data;
-    console.log('sms', sms);
-    let sender = sms.address;
-    console.log('sender', sender);
-    let otp_text = sms.body;
-    console.log('OTP', otp_text);
-    this.stopWatchSMS();
+  watch_sms(section)
+  {
+      if(window.SMSRetriever)
+      {
+        document.addEventListener('onSMSArrive', function(args : any) {
+          var otp1 = substring(args.message,13, 14);
+          var otp2 = substring(args.message,14, 15);
+          var otp3 = substring(args.message,15, 16);
+          var otp4 = substring(args.message,16, 17);
+          $('#header-'+section+' #otp1').val(otp1);
+          $('#header-'+section+' #otp2').val(otp2);
+          $('#header-'+section+' #otp3').val(otp3);
+          $('#header-'+section+' #otp4').val(otp4);
+          $('#header-'+section+' #'+section+'-submit').click();
+          function substring(string, start, end) {
+            var result = '',
+                length = Math.min(string.length, end),
+                i = start;
+          
+            while (i < length) result += string[i++];
+            return result;
+          }  
+        });
+        window.SMSRetriever.startWatch(function(msg) {
+          console.log(msg);
+        }, function(err) {
+          
+        });
+      }
   }
 
   time_ago(time) {
@@ -324,22 +349,24 @@ export class HeaderComponent implements OnInit{
     this.step = 1;
   }
 
-  resend_otp()
+  resend_otp(section)
   {
-    //this.spinner.show();
     let data : any = {phone : this.phone, password : this.password};
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      data.device = 'android';
+    }
     this.todoservice.resend_otp(data)
       .subscribe(
         data => 
         {
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
           if(!jQuery.isEmptyObject(data))
           {
             if(data.status == true)
             {
               this.toastr.successToastr(data.message);
               this.tick_clock(60);
+              this.watch_sms(section);
             }
             else
             {
@@ -386,6 +413,10 @@ export class HeaderComponent implements OnInit{
       this.toastr.errorToastr("Password does not match with Confirm Password", 'Failed');
         return false;
     }
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      formdata.device = 'android';
+    }
     this.phone = formdata.phone;
     this.password = formdata.password;
     this.signupdisabled = true;
@@ -396,6 +427,7 @@ export class HeaderComponent implements OnInit{
           if(data.status == 'success')
           {
             this.signupverify = 1;
+            this.watch_sms('signup');
           }
           else
           {
@@ -674,7 +706,12 @@ export class HeaderComponent implements OnInit{
     }); 
   $('.tabs').tabs();
   function googleTranslateElementInit() {
-    if(google)
+    var width = $(window).width(); 
+    if(width <= 767)
+    {
+      return false;
+    }
+    if(google != 'undefined')
       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     else
       setTimeout("googleTranslateElementInit()", 1000);

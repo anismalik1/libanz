@@ -121,7 +121,7 @@ padding-top:50px;
 </ng-template>
 <ng-template #otpverify>
 	<section class="login-form">
-		<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)">
+		<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)" id="login-page-form">
 			<div class="container">
 				<div class="row">
 					<div class="col s12 m6 offset-m3">
@@ -133,12 +133,12 @@ padding-top:50px;
 										<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
 									</div>
 
-									<div class="row">
+									<div class="row" id="login-page-otps">
 										<div class="input-field col s12 center otp-inputa" id="inputs">
 											<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
 											<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-											<input id="opt3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-											<input id="opt4" maxlength="1" ngModel name="otp4" ngModel>
+											<input id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
+											<input id="otp4" maxlength="1" ngModel name="otp4" ngModel>
 										</div>
 										<div class="col s12 center margin-top">
 											<span class="font-size-change1">Don't recieve OTP 
@@ -147,10 +147,9 @@ padding-top:50px;
 										</div>
 										<div class="row">
 											<div class="col s12 center">
-												<button type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+												<button type="Submit" id="login-submit" class="btn waves-effect waves-light orange">Submit</button>
 											</div>
-										</div>
-
+										</div>	
 									</div>
 								</div>
 							</div>
