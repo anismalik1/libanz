@@ -6093,3 +6093,14 @@ h2#compare-title {
 	.col.s12.m6.background-merchant.cst-fix-btns {
 		height: 85.5vh !important;
 	}
+
+
+	.card.on-web {
+		background: #242b33 !important;
+		height:100vh;
+	}
+
+	.side-bar-naviagtion li a {
+		color: #fff !important;
+		font-size: 14px !important;
+	}

@@ -7,6 +7,15 @@
     white-space: nowrap;
    
 }
+.pt-15-fix{
+
+padding-top:15px;
+}
+.card.on-web {
+    height: 100vh;
+    
+}
+
 .upgrade-now{
 
 	border: 2px dotted #ff5000;
@@ -42,22 +51,62 @@
 tr.ng-star-inserted {
     border-bottom: 1px solid #bbb9b9;
 }
+
+.left-sq-1{
+
+	
+	background-color:#1cb4d9;
+    height: 120px;
+}
+.left-sq-2{
+
+	
+background-color:#df4f3b;
+height: 120px;
+}
+.left-sq-3{
+
+	
+background-color:#30ac5c;
+height: 120px;
+}
+
+.download-sq-2 {
+    color: #fff;
+    padding: 30px 0px 0px 6px;
+    font-size: 40px !important;
+}
+.download-sq-1{
+
+	color: #fff;
+    padding: 30px 0px 0px 12px;
+    font-size: 40px !important;
+}
+.right-sq-1{
+	padding: 30px 0px 0px 20px;
+    font-size: 24px;
+    line-height: 20px;
+}
+.font-20{
+
+	font-size: 20px !important;
+}
 	.cashback-box{
-	background-image: linear-gradient(45deg, red, #ff6a00);
-		color: #fff;
-		border-radius: 10px;
-		height: auto;
-		padding:5px 0px;
-		}
+	
+		color: #333;
+		border-radius: 2px;
+		height: 120px;
+		box-shadow: 1px 1px 10px #ececec;
+		
+	
+	}
 		.cashback-box-1{
 			background-image: linear-gradient( 45deg ,#6dbfef, #5736f4);
 		color: #fff;
 		border-radius: 10px;
 		padding:5px 0px;
 		}
-		.cashback-box-1 span{
-			font-size: 20px !important;
-		}
+	
 	
 		.cashback-box-2{
 			background-image: linear-gradient(45deg, #4CAF50, #d6ff43);
@@ -66,14 +115,8 @@ tr.ng-star-inserted {
 		padding:5px 0px;
 	
 		}
-		.cashback-box-2 span{
-			font-size: 20px !important;
-		}
+		
 	
-		.cashback-box span{
-	
-				font-size: 20px !important;
-		}
 		.pt-left-icon{
 
 position: absolute;
@@ -94,6 +137,16 @@ right: 36px;
     z-index: 999;
     right: 36px;
 			}
+			.upgrade-now{
+    border: 2px dotted #ff5000;
+    height: 150px;
+    width: 95%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 22px;
+}
+
+
 			.card-content.user-content {
     min-height: 61px;
     padding: 16px !important;
@@ -104,6 +157,7 @@ right: 36px;
 font-size:13px;
 font-weight: bold;
 }
+
 		}
 	</style>
 	<app-header class="hide-on-mobile"></app-header>
@@ -148,59 +202,103 @@ font-weight: bold;
 				<div class="col s12 m9">
 					
 					<div class="row">
-						<div class="box-date" style="padding-top:10px;">
-						<div class="col s3 m9 right">
-								<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button>
-						</div>
-						<div class="col s9 m3 right">
-							<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/>
-						</div>
-						</div>
+						
 						
 						<div class="clearfix"></div>
 						<div class="col s12 m4">
-							<div class="card cashback-box">
-								<div class="card-content">
-									<span class="card-title inline-block font-size-change1">Cashback Received <span class="fa fa-download pt-left-icon"></span></span>
-									<div class="slaes-rup margin-top-cart">
-										<span class="font-size-change2"><i class="icon-inr"></i>{{this.sales_obj.cashback_sale + this.sales_obj.promo_sale}}</span>
+							<div class="card cashback-box ">
+							
+
+									<div class="col s3 left-sq-1">
+										<span class="fa fa-download download-sq-1"></span>
 									</div>
-								</div>
+									<div class="col s9 right-sq-1">
+										<span class="card-title inline-block font-size-change1 font-20">Cashback Received </span>
+									
+										<div class="slaes-rup margin-top-cart">
+											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.cashback_sale + this.sales_obj.promo_sale}}</span>
+										</div>
+
+									</div>
+
+
+									
+									
+								
 							</div>
+							
 						</div>
+						<div class="col s12 m4">
+							<div class="card cashback-box ">
+							
+
+									<div class="col s3 left-sq-2">
+										<span class="fa fa-edit download-sq-1"></span>
+									</div>
+									<div class="col s9 right-sq-1">
+										<span class="card-title inline-block font-size-change1 font-20">DTH Orders ({{sales_obj.order_count}})</span>
+									
+										<div class="slaes-rup margin-top-cart">
+											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.order_sale }}</span>
+										</div>
+
+									</div>
+
+
+									
+									
+								
+							</div>
+							
+						</div>
+
+						<div class="col s12 m4">
+							<div class="card cashback-box ">
+							
+
+									<div class="col s3 left-sq-3">
+										<span class="fa fa-diamond download-sq-2"></span>
+									</div>
+									<div class="col s9 right-sq-1">
+										<span class="card-title inline-block font-size-change1 font-20">Recharge Orders ({{sales_obj.recharge_count}}) </span>
+									
+										<div class="slaes-rup margin-top-cart">
+											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.recharge_sale}}</span>
+										</div>
+
+									</div>
+
+
+									
+									
+								
+							</div>
+							
+						</div>
+
+
 						
-						<div class="col s12 m4">
-							<div class="card cashback-box-1">
-								<div class="card-content">
-									<span class="card-title inline-block font-size-change1">DTH Orders ({{sales_obj.order_count}}) <span class="fa fa-file pt-left-icon"></span></span>
-									<div class="slaes-rup margin-top-cart">
-										<span class="font-size-change2"> <i class="icon-inr"></i> {{sales_obj.order_sale }}</span>
-										<!-- <div class="percent-info green-text inline-block right margin-top-cart1">8% <i class="material-icons">trending_up</i></div> -->
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 m4">
+						<!-- <div class="col s12 m4">
 							<div class="card cashback-box-2">
 								<div class="card-content">
-									<span class="card-title inline-block font-size-change1">Recharge Orders ({{sales_obj.recharge_count}}) <span class="fa fa-diamond pt-left-icon"></span></span>
+									<span class="card-title inline-block font-size-change1"> <span class="fa fa-diamond pt-left-icon"></span></span>
 									<div class="slaes-rup margin-top-cart">
 										<span class="font-size-change2"><i class="icon-inr"></i> {{sales_obj.recharge_sale}}</span>
-										 <!-- <div class="percent-info green-text inline-block right margin-top-cart1">8% <i class="material-icons">trending_up</i></div> -->
+										
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="row ">
 							<div class="upgrade-now">
 					
-								<div class="col s10">
+								<div class="col s12 m10">
 							<div class="">
 									<h3 class="cst-up-txt"><span class="num-days"> 14 DAYS </span> LEFT TO UPGRADE THIS PACKAGE</h3>
 							</div>
 							</div>
-							<div class="col s2">
+							<div class="col s12 m2">
 								<div class="upgrade-now-btn">
 									
 									<button type="submit" class="btn orange no-box-shadow" id="export-order-txt">UPDRADE NOW</button>
@@ -213,9 +311,24 @@ font-weight: bold;
 
 					
 					<div class="responsive-table table-box-design" style="width: 100%; overflow:auto;">
-						<h3 class="font600 inline-block">Recent Orders</h3>
+						
 						<!-- <a href="javascript:" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" (click)="orders_to_export()" id="export-order-txt">Export All Data</button></a> -->
-						<a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a>
+					
+					
+								
+						
+							
+						
+						
+						
+
+						<div class="row">
+							<div class="col m5 s12"><h3 class="font600 inline-block">Recent Orders</h3></div>
+							<div class="col m3 s6 pt-15-fix">	<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/></div>
+							<div class="col m1 s3 pt-15-fix">	<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button></div>
+							<div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
+						</div>
+						
 						<hr/>
 						<div class="responsive-table">
 						<table id="datatable" class="table display  datatable-example cst-table">
