@@ -76,7 +76,10 @@
     overflow: auto;
 	
 	}
+	.pay-tm{
 
+		padding-left:5px;
+	}
 	.cst-border2{
 
 		border: none !important;
@@ -266,9 +269,10 @@ left:5%;
 							 
 						</div>  
 						
-						<p class=" ">
+						<p class="pay-tm">
 							<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="width:72px;"></label>
+							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
+								float: left;"></label>
 						</p>
 						<p class="net-banking">
 							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>

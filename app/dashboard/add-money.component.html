@@ -445,22 +445,28 @@ float: right;
             <div class="col s12 m9">
                
                 <div class="card">
-                    <div class="card-content" *ngIf="order_id">
-                        <ul class="back-icon">
-                          <li><a class="black-text" href="javascript:" (click)="back_to_addmoney()">Back</a></li>
-                        </ul>
+                    <div class="card-content cst-invoice" *ngIf="order_id">
+                      
                         <div  class="mb-1">
-                            <h3 class="font600 inline-block">Invoice </h3>
+                            <h2 class="font600 inline-block">Invoice </h2>
                         </div>
-                        <ul *ngIf="order_data">
+                        <ul *ngIf="order_data" class="font-li">
+                          <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="https://www.mydthshop.com/web-app/assets/images/failed.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="https://www.mydthshop.com/web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" style="width:40px;"></span></li>
+                          <li><strong>Payment Status </strong></li>
                           <li><strong>Invoice No: </strong> #{{order_data.id}}</li>
                           <li><strong>Amount: </strong> {{order_data.amount}}</li>
                           <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
-                          <li><strong>Payment Status: </strong><span *ngIf="order_data.payment_status == 2" class="red-text">Failed</span><span *ngIf="order_data.payment_status == 1" class="green-text">Successful</span><span *ngIf="order_data.payment_status == 3" class="orange-text">Pending</span></li>
+                          
                           <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Mydth</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
                           <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li>
-                          <li><strong>Comment: </strong>{{order_data.comment}}</li>
+                          <!-- <li><strong>Comment: </strong>{{order_data.comment}}</li> -->
                         </ul>
+
+                        <div class="clearfix"></div> <br/>
+                        <ul class="back-icon desktop-hide">
+                          <li><a class="btn btn-orange black-text cst-ibtn" href="javascript:" (click)="back_to_addmoney()">Back </a></li>
+                        </ul>
+                        
                     </div>
                     <div class="clearfix"></div>
                       <div class="card-content" *ngIf="!order_id">
