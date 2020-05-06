@@ -102,7 +102,16 @@ export class HeaderComponent implements OnInit{
       this.createForm();
     }
     ngOnInit()
-    {   
+    { 
+      this.todoservice.createOnline$().subscribe(isOnline => 
+        {
+          if(isOnline == false)
+          {
+            alert("You Are Offine.");
+            return false;
+          }
+        } 
+        );  
       if(document.URL.indexOf('android_asset') !== -1)
       {
         if(window.cordova)

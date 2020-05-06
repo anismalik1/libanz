@@ -246,7 +246,7 @@ left:5%;
 <section *ngIf="recharge_ini == 2" class="relative">
 	<div class="container">
 		<div class="row mar-row responsive-kro recharge-lbl">
-			<div class="col m12">
+			<div class="col s12 m12">
 			<div class="card">
 					<div class="card-content ">
 					<div class="col s12 m8 l5 border-bottom">
@@ -254,7 +254,10 @@ left:5%;
 						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
-					
+					<div class="clearfix"></div>
+					<p class=" margin-right fast-forwad relative pt-15" *ngIf="promo_selected == 0">
+						<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
+					</p>
 					<div class="col s12 m12 l5 margin-top ">
 						<div class="payment-method" *ngIf="pay_step==1">
 							

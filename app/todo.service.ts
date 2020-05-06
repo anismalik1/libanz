@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router} from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable, } from 'rxjs/Observable';
+import { fromEvent, merge ,Observer} from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Headers,Http } from '@angular/http';
 import { AuthService } from './auth.service';
 import {Pages} from './pages';
@@ -9,7 +11,6 @@ import { User} from './user';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class TodoService {
@@ -32,10 +33,28 @@ export class TodoService {
   '/complaints','/manage-retailer','/value-transfer','/dashboard','/checkout']; 
   constructor(private http : Http, private router : Router ,public user : User,private authservice : AuthService)
   {
+    
     window.scrollTo(0, 0);
     this.current_url = this.router.url;
+    this.createOnline$().subscribe(isOnline => 
+    {
+      if(isOnline == false)
+      {
+        return false;
+      }
+    } 
+    );
   }
 
+  createOnline$() {
+    return merge<boolean>(
+      fromEvent(window, 'offline').pipe(map(() => false)),
+      fromEvent(window, 'online').pipe(map(() => true)),
+      new Observable((sub: Observer<boolean>) => {
+        sub.next(navigator.onLine);
+        sub.complete();
+      }));
+  }
   get_user_data()
   {
     if(this.get_token())
