@@ -21,17 +21,18 @@ export class PricingComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.spinner.hide();
     this.page_data();
     this.plans();
   }
 
   plans()
   {
+    this.spinner.show();
     this.todoservice.fetch_rental_plan({})
      .subscribe(
        data => 
        {
+         this.spinner.hide();
          if(data.plans_data)
          {
            this.plans_data = data.plans_data; 
@@ -73,7 +74,7 @@ export class PricingComponent implements OnInit {
     this.selected_plans = this.plans_data.filter(x => x.days == days);
     if(this.selected_plans.length == 0)
       return false;
-       
+    this.spinner.show();    
     setTimeout(()=>{    //<<<---    using ()=> syntax
       for(var i = 0;i < this.selected_plans.length;i++)
       {
@@ -81,7 +82,8 @@ export class PricingComponent implements OnInit {
         $('#plan-leads-'+this.selected_plans[i].plan_code).text('Number of leads '+this.selected_plans[i].leads_no);
         $('#plan-days-'+this.selected_plans[i].plan_code).text('Valid for '+this.selected_plans[i].days+' days');
       }
- }, 2000);
+      this.spinner.hide(); 
+ }, 1000);
     
   }
 

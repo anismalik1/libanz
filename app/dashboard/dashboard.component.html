@@ -290,18 +290,21 @@ font-weight: bold;
 							</div>
 						</div> -->
 					</div>
-					<div class="row ">
+					<div class="row" *ngIf="this.todoservice.get_user_type() == 3 && this.todoservice.get_days_left() <= 14">
 							<div class="upgrade-now">
 					
 								<div class="col s12 m10">
 							<div class="">
-									<h3 class="cst-up-txt"><span class="num-days"> 14 DAYS </span> LEFT TO UPGRADE THIS PACKAGE</h3>
+									<h3 class="cst-up-txt" *ngIf="this.todoservice.get_days_left() > 0"><span class="num-days"> {{this.todoservice.get_days_left()}} DAYS </span> LEFT TO UPGRADE THIS PACKAGE</h3>
+									<h3 class="cst-up-txt" *ngIf="this.todoservice.get_days_left() == 0">YOUR PLAN HAS EXPIRED. TO ENJOY ALL SERVICES UPGRADE NOW</h3>
 							</div>
 							</div>
 							<div class="col s12 m2">
 								<div class="upgrade-now-btn">
-									
-									<button type="submit" class="btn orange no-box-shadow" id="export-order-txt">UPDRADE NOW</button>
+									<span id="renew-section"> 
+										<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() == '10000')" [routerLink] = "['/merchant/pricing']">Upgrade</a>
+										<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() != '10000')" [routerLink] = "['/merchant/checkout']" [queryParams]="{plan : this.todoservice.get_active_pack()}">Renew</a>
+									</span>
 							</div>
 						</div>
 						
