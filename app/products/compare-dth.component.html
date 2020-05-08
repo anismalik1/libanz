@@ -83,8 +83,13 @@ a.font-size-change1.chng-set.dropdown-button.btn.orange {
 
 .grey-text.right.croses {
   position: absolute !important;
-    left: 18.2%;
+    right: 0;
     font-size: 17px;
+    padding-right: 5px
+}
+.cst-relative{
+
+  position: relative;
 }
 
 
@@ -229,7 +234,7 @@ ul#dropdown2 li {
           </tr>
           
           <tr *ngFor="let item of compare_products;let i = index;">
-            <td>
+            <td class="cst-relative">
               <a href="javascript:" class="grey-text right croses" (click)="unbox_me(item.url);"><i class="material-icons Medium">highlight_off</i></a>
               <a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a>
               
