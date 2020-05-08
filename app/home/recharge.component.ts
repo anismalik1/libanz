@@ -128,6 +128,18 @@ export class RechargeComponent implements OnInit {
     return '';
   }
 
+  pay_amount()
+  {
+    var wallet_used = '';
+    if($('[name="include_wallet"]:checked').length > 0)
+      wallet_used = 'wallet';
+    if((this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
+    {
+      return Math.ceil(this.rechargeData.recharge_amount * 1 - this.todoservice.get_user_wallet_amount());
+    }
+    return Math.ceil(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
+  }
+
   get_last_recharges()
   {
     this.todoservice.get_last_recharges({token : this.get_token(),category: this.url_name})
@@ -752,7 +764,10 @@ recharge_handle()
       return false;
   }
   this.spinner.show();
-  this.rechargeData.payment_type = $('[name="payment_type"]:checked').val(); 
+  this.rechargeData.payment_type = $('[name="payment_type"]:checked').val();
+  if($('[name="include_wallet"]:checked').length > 0)
+    this.rechargeData.include_wallet = 1;
+
 	this.todoservice.recharge_handler(this.rechargeData)
 	.subscribe(
         data => 

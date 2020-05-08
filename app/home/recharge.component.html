@@ -260,54 +260,32 @@ left:5%;
 					</p>
 					<div class="col s12 m12 l5 margin-top ">
 						<div class="payment-method" *ngIf="pay_step==1">
-							
 							<p class="inline-block margin-right fast-forwad relative" *ngIf="promo_selected == 1">
 								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span> 
 								<a href="#promo-code-apply" class="modal-trigger">change</a>
 							</p>	
 							<p class="inline-block margin-right fast-forwad relative">
-								<input type="radio" class="with-gap" id="instant-recharge"  name="payment_type" value="wallet" checked/>
-								<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label>    				
+								<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" checked/>
+								<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Available Balance {{this.todoservice.get_user_wallet_amount()}}</label>    				
 							</p> 
-							 
 						</div>  
-						
+						<p class="net-banking">
+							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
+							<label for="credit-card" class="black-text">Cards & Netbanking</label>
+						</p> 
 						<p class="pay-tm">
 							<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
 							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
 								float: left;"></label>
 						</p>
-						<p class="net-banking">
-							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
-							<label for="credit-card" class="black-text">Cards & Netbanking</label>
-						</p>                                                                                              
 						
 					</div>
-
-					<!-- <div class="row col s12 m4">
-						<p class=" margin-right fix-right">
-							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
-							<label for="credit-card" class="black-text">Cards & Netbanking</label>
-						</p>
-						<p class=" margin-right ">
-							<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-							<label for="paytm" class="black-text">Paytm</label>
-						</p>
-						<p class=" margin-right">
-							<input type="radio" class="with-gap" id="other-option" (change)="other_to_pay(2)"  name="payment_type" value="other"/>
-							<label for="other-option" class="black-text">Other</label>
-						</p> 
-						<p class=" margin-right fast-forwad relative pt-15" *ngIf="promo_selected == 0">
-							<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
-						</p>
-					</div> -->
-
 					<div class="no-proceed red-text" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
 						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 					</div>
 					<br/>
 					<div class="col s12 m12 l2" *ngIf="!rechargeData.record_exist">
-						<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()">Proceed to pay {{rechargeData.recharge_amount * 1 + rechargeData.commission * 1}}</button>
+						<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()">Proceed to pay {{pay_amount()}}</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>	
