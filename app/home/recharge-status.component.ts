@@ -42,7 +42,7 @@ export class RechargeStatusComponent implements OnInit {
         {
           if(data.status == 'Invalid Token')
           {
-            this.router.navigate(['/mhome']);
+            this.router.navigate(['/']);
           }
           this.order = data.ORDER[0];
           this.todoservice.set_user_data(data.USER);
@@ -108,6 +108,6 @@ export class RechargeStatusComponent implements OnInit {
   }
   back_to_home()
   {
-    this.router.navigate(['/mhome'])    
+    this.router.navigate(['/'])    
   }
 }
