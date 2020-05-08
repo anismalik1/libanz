@@ -18,7 +18,7 @@ export class LogoutComponent implements OnInit{
   ngOnInit() {
     this.clear_session();
     this.todoservice.set_user_data({name:''});
-    this.router.navigate(['/mhome']);
+    this.router.navigate(['/']);
   }
 
 public clear_session()

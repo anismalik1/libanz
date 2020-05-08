@@ -608,17 +608,14 @@ hr.line1 {
 							<h2 class="black-text no-margin">LOGIN</h2>
 							<p class="black-text font-size-change1">Welcome Back to Mydthshop, We make sure you enjoy our services!!</p>
 						</div>
-						<div class="padd-rem1 signup-text" *ngIf="signup == 1">
-							<h2 class="black-text no-margin">SIGN UP</h2>
-							<p class="black-text font-size-change1">The whole part is just after your registration!!</p>
-						</div>
+						
 					</div>
 				</div>
 				<div class="col s12 m8 white"> 
 					<div class="tabs-sign-up">
 						<ul id="tabs-swipe-demo" class="tabs">
 							<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to MyDthShop</a></li>
-							<li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li>
+							<!-- <li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li> -->
 						</ul>
 						<div id="login" class="col s12">
 							<div class="login" *ngIf="step == 1">
@@ -647,7 +644,12 @@ hr.line1 {
 										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
 									</div>
 								</div>
-								
+								<div class="row no-margin">
+									<div class="col s12 m12 center">
+										<span class="font-size-change">Don't have MyDthShop account?</span>
+										<a routerLink="/proceed/signup" class="orange-text font-size-change font600"> REGISTER</a><br>
+									</div>
+								</div>
 							</form>
 							</div>
 							<div class="otp-step margin-top1" *ngIf="step == 2">
@@ -678,7 +680,7 @@ hr.line1 {
 							</form>
 							</div>
 						</div>
-						<div id="signup" class="col s12">
+						<!-- <div id="signup" class="col s12">
 							<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
 								<div class="col s12 border-every">
 									<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
@@ -757,10 +759,10 @@ hr.line1 {
 												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
 												<label for="test3">Become Partner</label>
 											</p>
-										</div> -->
+										</div> 
 										
 										<div class="col s12 center margin-top">
-											<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+											 <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> 
 											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
 										</div>
 									</div>
@@ -793,7 +795,7 @@ hr.line1 {
 									</form>
 								</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- <div id="forget-password" class="col s12 hide">
 						<div class="login">
 							<form class="login-step">
