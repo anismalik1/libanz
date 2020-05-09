@@ -346,8 +346,46 @@ position: relative;
     border-bottom: 1px solid #ececec;
     
 }
+ul.font-li li:nth-child(2) {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 4px;
+}
+ul.font-li li:nth-child(3) {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 4px;
+}
+ul.font-li li:nth-child(4) {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 4px;
+}
+ul.font-li li:nth-child(5) {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 4px;
+}
+ul.font-li li:nth-child(6) {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 4px;
+}
+ul.font-li li:nth-child(7) {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 4px;
+}
+  .uwa.imps-box {
+    padding: 8px 0;
+    border-bottom: 1px solid #ececec;
+}
+.uwa.Online-box {
+    padding: 8px 0;
+    border-bottom: 1px solid #ececec;
+}
 
 
+.cst-top-signle{
+
+  font-size: 20px;
+    line-height: 49px;
+    color: #3a3a3a;
+}
 }
 
 
@@ -357,14 +395,8 @@ position: relative;
 
     display:none;
   }
-  .uwa.imps-box {
-    padding: 8px 0;
-    border-bottom: 1px solid #ececec;
-}
-.uwa.Online-box {
-    padding: 8px 0;
-    border-bottom: 1px solid #ececec;
-}
+
+ 
   .mb-btn{
 
 width: 100%;
@@ -452,8 +484,8 @@ float: right;
                         </div>
                         <ul *ngIf="order_data" class="font-li">
                           <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="https://www.mydthshop.com/web-app/assets/images/failed.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="https://www.mydthshop.com/web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" style="width:40px;"></span></li>
-                          <li><strong>Payment Status </strong></li>
-                          <li><strong>Invoice No: </strong> #{{order_data.id}}</li>
+                          <li class="cst-top-signle"><strong>Payment Status </strong></li>
+                          <li><strong>Invoice No: </strong>  #{{order_data.id}} </li>
                           <li><strong>Amount: </strong> {{order_data.amount}}</li>
                           <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
                           

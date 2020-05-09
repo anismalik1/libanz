@@ -6,7 +6,21 @@
 	} */
 
 
+	.price-wt{
 
+		font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: bold;
+	}
+	.fix-pt-15{
+		padding-top:15px;
+	
+	}
+
+	.fix-pt-12{
+		padding-top:12px;
+	
+	}
 
 	.cst-border1{
 		border: none !important;
@@ -256,7 +270,7 @@ left:5%;
 					</div>
 				
 					
-					<div class="col s12  l7 margin-top ">
+					<div class="col s12  l7 margin-top fix-pt-15">
 						<div class="payment-method" *ngIf="pay_step==1">
 							<p class="inline-block col s3" *ngIf="promo_selected == 1">
 								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span> 
@@ -264,21 +278,24 @@ left:5%;
 							</p>	
 							
 						</div>
-						<p class="inline-block col m3 col s12">
+						<p class="inline-block col m2 col s12">
 							<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
-							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</label>    				
-						</p>   
+							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label>    				
+						</p> 
+						<p class="inline-block col m2 col s12 price-wt">
+							Balance Rs.{{this.todoservice.get_user_wallet_amount()}}
+						</p>  
 						<p class="net-banking col s12 col m4">
 							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
 							<label for="credit-card" class="black-text">Cards & Netbanking</label>
 						</p> 
-						<p class="pay-tm col s12 col m3">
+						<p class="pay-tm col s12 col m2">
 							  <input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
 							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
 								float: left;"></label>
 						</p>
 						
-						<p class=" col s12  col m3" *ngIf="promo_selected == 0">
+						<p class=" col s12  col m2" *ngIf="promo_selected == 0">
 							<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
 						</p>
 					</div>
@@ -286,7 +303,7 @@ left:5%;
 						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 					</div>
 					
-					<div class="col s12 m12 l2" *ngIf="!rechargeData.record_exist">
+					<div class="col s12 m12 l2 fix-pt-12" *ngIf="!rechargeData.record_exist">
 						<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()">Proceed to pay {{pay_amount()}}</button>
 					</div>
 					<div class="clearfix"></div>

@@ -6125,7 +6125,10 @@ h2#compare-title {
 		font-size: 14px !important;
 		
 	}
-
+	input#otp1, #otp2, #otp3, #otp4 {
+		border: 1px solid #ececec !important;
+	
+	}
 	@media only screen and (min-width: 1024px){
 
 		.cst-ibtn {
