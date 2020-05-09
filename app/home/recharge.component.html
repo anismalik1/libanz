@@ -263,7 +263,11 @@ left:5%;
 								<a href="#promo-code-apply" class="modal-trigger">change</a>
 							</p>	
 							
-						</div>  
+						</div>
+						<p class="inline-block col m3 col s12">
+							<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
+							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</label>    				
+						</p>   
 						<p class="net-banking col s12 col m4">
 							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
 							<label for="credit-card" class="black-text">Cards & Netbanking</label>
@@ -273,10 +277,7 @@ left:5%;
 							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
 								float: left;"></label>
 						</p>
-						<p class="inline-block col m3 col s12">
-							<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
-							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Balance {{this.todoservice.get_user_wallet_amount()}}</label>    				
-						</p> 
+						
 						<p class=" col s12  col m3" *ngIf="promo_selected == 0">
 							<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
 						</p>
