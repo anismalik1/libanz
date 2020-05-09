@@ -207,6 +207,17 @@ ngOnInit() {
   this.todoservice.get_user_data();
   
 }
+pay_amount()
+{
+  var wallet_used = '';
+    if($('[name="include_wallet"]:checked').length > 0)
+      wallet_used = 'wallet';
+    if((this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
+    {
+      return Math.ceil(this.productservice.calculateCartAmount() - this.todoservice.get_user_wallet_amount());
+    }
+    return Math.ceil(this.productservice.calculateCartAmount());
+}
 cod_apply()
 {
   let a = 0;
@@ -485,9 +496,10 @@ checkout_items(type)
 
   this.spinner.show();
   let address_id = this.tab_address
-  let wallet_type = $('#wallet-type input:checked').val();
-  let data  = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
-  
+  let wallet_type = $('#wallet-type input[type="radio"]:checked').val();
+  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
+  if($('#wallet-type [name="include_wallet"]:checked').length > 0)
+    data.include_wallet = 1; 
   this.todoservice.checkout_items(data)
     .subscribe(
       data => 
@@ -504,7 +516,6 @@ checkout_items(type)
         {
           if(data.status == true)
           {
-            let cart_amount = this.productservice.calculateCartAmount();
             if(typeof data.red_auth != 'undefined' && data.red_auth == 'ptm')
             {
               if(typeof data.for_tsk != 'undefined' && data.for_tsk == 1)
@@ -513,7 +524,7 @@ checkout_items(type)
               }
               else
               {
-                window.location.href = "https://www.mydthshop.com/web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+cart_amount;
+                window.location.href = "https://www.mydthshop.com/web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount;
               }
       
             }
