@@ -275,7 +275,7 @@ left:5%;
 						</p>
 						<p class="inline-block col m3 col s12">
 							<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
-							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Available Balance {{this.todoservice.get_user_wallet_amount()}}</label>    				
+							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Balance {{this.todoservice.get_user_wallet_amount()}}</label>    				
 						</p> 
 						<p class=" col s12  col m3" *ngIf="promo_selected == 0">
 							<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
