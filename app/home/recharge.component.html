@@ -259,45 +259,43 @@ left:5%;
 <div class="fix-mb-top"></div>
 <section *ngIf="recharge_ini == 2" class="relative">
 	<div class="container">
-		<div class="row mar-row responsive-kro recharge-lbl">
+		<div class="row mar-row recharge-lbl">
 			<div class="col s12 m12">
 			<div class="card">
-					<div class="card-content ">
+					<div class="card-content" id="recharge-container">
 					<div class="col s12  l3 border-bottom">
-						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img vertical-align-middle margin-right icon-images operator-img" alt="airtel" width="50px">
+						<img src="https://www.mydthshop.com/accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img margin-right icon-images" alt="airtel" width="50px" style="margin-bottom: -10px;">
 						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{rechargeData.recharge_amount * 1 + rechargeData.commission*1 }}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
 				
 					
 					<div class="col s12  l7 margin-top fix-pt-15">
-						<div class="payment-method" *ngIf="pay_step==1">
-							<p class="inline-block col s3" *ngIf="promo_selected == 1">
-								<span class="green-text" *ngIf="this.selected_promo">Promo {{this.selected_promo.unique_code}} Selected</span> 
-								<a href="#promo-code-apply" class="modal-trigger">change</a>
-							</p>	
-							
+						<div class="">
+									
+									<p class="col m2 col s12 recharge-content-box">
+											<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
+											<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label><span class="grey-text absolute">Balance Rs.{{this.todoservice.get_user_wallet_amount()}} </span>   				
+									</p> 
+								
+									<p class="col s12 col m4 recharge-content-box">
+										<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
+										<label for="credit-card" class="black-text">Cards & Netbanking</label>
+									</p> 
+									<p class="col s12 col m3 recharge-content-box">
+											<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
+										<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
+											float: left;"></label>
+									</p>
+									<p class=" col s12  col m3" *ngIf="promo_selected == 0">
+											<a href="#promo-code-apply" class="modal-trigger">Have A Promocode</a>
+									</p>
+									<div class="payment-method" *ngIf="pay_step==1">
+										<p class="col s12 m3 recharge-content-box" *ngIf="promo_selected == 1">
+											<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
+										</p>	
+									</div>
 						</div>
-						<p class="inline-block col m2 col s12">
-							<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
-							<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label>    				
-						</p> 
-						<p class="inline-block col m2 col s12 price-wt">
-							Balance Rs.{{this.todoservice.get_user_wallet_amount()}}
-						</p>  
-						<p class="net-banking col s12 col m4">
-							<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>
-							<label for="credit-card" class="black-text">Cards & Netbanking</label>
-						</p> 
-						<p class="pay-tm col s12 col m2">
-							  <input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-							<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
-								float: left;"></label>
-						</p>
-						
-						<p class=" col s12  col m2" *ngIf="promo_selected == 0">
-							<a href="#promo-code-apply" class="modal-trigger">Have A Promo</a>
-						</p>
 					</div>
 					<div class="no-proceed red-text" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
 						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 

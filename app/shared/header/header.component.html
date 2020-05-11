@@ -213,7 +213,7 @@ hr.line1 {
 	<div class="mobile-wrapper">
 		<!-- mobile header start-->
 		<div class="mobile-mask"></div>
-		<header id="mobile-header" [className]="(!this.router.url.includes('mhome')) ? 'clearfix hide-on-mobile' : 'clearfix'">
+		<header id="mobile-header" class="clearfix {{this.check_to_replace()}}">
 			<div class="mobile-header-left">
 				<ul>
 				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
@@ -286,17 +286,12 @@ hr.line1 {
 		
 		<!-- mobile header end-->
 		<!-- mobile top menu start-->	
-		<div [className]="(!this.router.url.includes('mhome')) ? 'mobile-top-menu hide-on-mobile' : 'mobile-top-menu'">
+		<div class="mobile-top-menu {{this.check_to_replace()}}">
 			<ul id="mobile-dashboard-menus" style="height:72px !important">
-				<li>
-					<ul>
-						<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span> Pay </a></li>
-						<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
-						<li><a [routerLink]="['/dashboard/orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
-						<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
-						
-					</ul>
-				</li>
+				<li><a [routerLink]="['/dashboard/value-transfer']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/money-transfer.png" /></span> Pay </a></li>
+					<li><a [routerLink]="['/dashboard/add-money']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/add-money.png" /></span>Add Money</a></li>
+					<li><a [routerLink]="['/dashboard/orders']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/pay-money.png" /></span>Orders</a></li>
+					<li><a [routerLink]="['/dashboard/transactions']"><span><img src="{{this.todoservice.base_url}}assets/images/mobile-icons/accept-money.png" /></span>History</a></li>
 			</ul>
 		</div>
 		
@@ -498,7 +493,7 @@ hr.line1 {
 						<form >
 							  <div class="row no-margin">
 								<div class="input-field col s12" >
-									<div class="search-box" *ngIf="!href.includes('/help/faqs')">
+									<div class="search-box" *ngIf="href && !href.includes('/help/faqs')">
 											<button type="submit" class="btn-flat"><i class="material-icons white-text">search</i></button>
 											<mat-form-field class="example-full-width test1">
 												<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
@@ -515,7 +510,7 @@ hr.line1 {
 							  </div>
 							</form>
 					</li>
-					<li *ngIf="href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
+					<li *ngIf="href && href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
 					<li class="craft relative">
 						<a routerLink="/product/cart"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
 						<!-- <a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a> -->

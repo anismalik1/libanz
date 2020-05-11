@@ -302,8 +302,15 @@ export class TodoService {
       'Content-Type' : 'application/x-www-form-urlencoded'
     });
     return this.http.post(url,data,{headers: Headers_of_api})
-    .map(res => res.json());
+    .map(res => res.json())
+    .catch(this.handleError);
   }
+
+  private handleError(error: Response) { 
+    alert("Bad Request"); 
+    $('.spinner-wrapper').hide();
+    return Observable.throw(error.json()); 
+ }
   fetch_user_info(data)
   {
     

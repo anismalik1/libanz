@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute ,Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -19,11 +19,15 @@ export class OrderReceiptComponent implements OnInit {
     private spinner : NgxSpinnerService,  
     private authservice : AuthService,
     private productservice : ProductService,
-    private router : ActivatedRoute) {
+    private router : ActivatedRoute,private route : Router) {
       
      }
 
   ngOnInit() {
+    if(!this.get_token())
+    {
+      this.route.navigate(['/']);
+    }
     this.router.params.subscribe(params => {
       this.order_id = params['name']; //log the value of id
     this.fetch_order_status(this.order_id);

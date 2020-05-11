@@ -95,7 +95,7 @@ padding-bottom: 10px;
 					<div class="card-content center" *ngIf="spin_show">
 						<span class="large material-icons orange-text">access_time</span>
 						<div class="clearfix"></div>
-						<span>Processing...</span>
+						<span>Processing...{{this.tick_clock}}</span>
 					</div>
 					<div class="card-content" *ngIf="order">
 						<div class="row no-margin border-on-bottom padd-bottom">
@@ -107,9 +107,9 @@ padding-bottom: 10px;
 								<span class="font-size-change1 grey-text">{{order.history_time | date: date:'dd M, Y'}} {{order.history_time | date: 'h:mm a'}}</span>
 							</div>
 							<div class="col s4  no-padding">
-								<img src="https://www.mydthshop.com/web-app/assets/images/success.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase() == 'successful'"/>
-								<img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase() == 'pending'"/>
-								<img src="https://www.mydthshop.com/web-app/assets/images/close.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase() == 'failed'"/>
+								<img src="https://www.mydthshop.com/web-app/assets/images/success.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase().includes('success')"/>
+								<img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase().includes('pending')"/>
+								<img src="https://www.mydthshop.com/web-app/assets/images/close.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase().includes('fail')"/>
 								<!-- <i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
 								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Pending'">error</i>
 								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i> -->
@@ -151,7 +151,7 @@ padding-bottom: 10px;
 							<div class="clearfix"></div><br/>
 							<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text cst-clr-btn" (click)="back_to_home()"> Go Back To Home &nbsp; <span class="fa fa-home"></span> </a>
 						</div>
-						<p class="grey-text">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>						
+						<p class="grey-text center">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>						
 					</div>
 				</div>
 			</div>

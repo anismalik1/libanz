@@ -103,6 +103,7 @@ export class HeaderComponent implements OnInit{
     }
     ngOnInit()
     { 
+      
       this.todoservice.createOnline$().subscribe(isOnline => 
         {
           if(isOnline == false)
@@ -114,14 +115,15 @@ export class HeaderComponent implements OnInit{
         );  
       if(document.URL.indexOf('android_asset') !== -1)
       {
-        if(window.cordova)
-          return false;
-        $('#cordova-js').remove();
-        let script1 = this._renderer2.createElement('script');
-        script1.type = `text/javascript`;
-        script1.id = `cordova-js`;
-        script1.src = `cordova.js`;
-        this._renderer2.appendChild(this._document.body, script1);
+        if(!window.cordova)
+        {
+          let script1 = this._renderer2.createElement('script');
+          script1.type = `text/javascript`;
+          script1.id = `cordova-js`;
+          script1.src = `cordova.js`;
+          this._renderer2.appendChild(this._document.body, script1);
+        }
+        
       }
       
 
@@ -156,6 +158,14 @@ export class HeaderComponent implements OnInit{
     });
   } 
   
+  check_to_replace()
+  {
+    if(this.router.url.includes('mhome') || this.router.url.includes('home'))
+      return '';
+    else
+      return 'hide-on-mobile';
+  }
+
   onSubmit() {
     this.disabled = true;
     const formModel = this.prepareSave();
@@ -634,12 +644,12 @@ export class HeaderComponent implements OnInit{
       $('select').material_select();
       $('.modal').modal();
       //$(".side-menu").swipe( {fingers:1} );
-      $('#mobile-dashboard-menus').lightSlider({
-        item: 1,
-        auto: false,
-        loop: false,
-        controls: true,
-      });
+      // $('#mobile-dashboard-menus').lightSlider({
+      //   item: 1,
+      //   auto: false,
+      //   loop: false,
+      //   controls: true,
+      // });
       $('#loadmore-modal').modal();
       $('#loadmore-modal2').modal();
       $('#mobile-search').on('focus',function(){

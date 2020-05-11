@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
-import { Router,ActivatedRoute, Route } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

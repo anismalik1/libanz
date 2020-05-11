@@ -35,9 +35,9 @@ export class AddMoneyComponent implements OnInit{
 			this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
 			return false;
 		}
-		if(this.todoservice.get_param('order-id'))
+		if(this.todoservice.get_param('order_id'))
 		{
-			this.order_id = this.todoservice.get_param('order-id');
+			this.order_id = this.todoservice.get_param('order_id');
 			this.fetch_addmoney_order();
 		}
 			
@@ -88,6 +88,10 @@ export class AddMoneyComponent implements OnInit{
 		this.add_data.paymethod = method;
 		var checked = ele.target.parentNode.parentNode.innerHTML;
 			$('#method-selected').html(checked);
+			setTimeout(()=>{   
+				if(method == 'FUND TRANSFER')
+					$('#fund').prop('checked','checked')
+			 }, 300);
 			$('#method-selected input').remove();
 			$('#method-selected label').before('<i class="material-icons orange-text">check_circle</i>&nbsp;');
 			window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
@@ -183,7 +187,7 @@ export class AddMoneyComponent implements OnInit{
 						}
 					}	
 					this.router.navigated = false;
-					this.router.navigate(['/dashboard/add-money']);
+					this.router.navigate(['/dashboard/add-money/'],{ queryParams: { order_id: data.order_id } });
 				}
 				else if(data.status == 'error')
 				{
