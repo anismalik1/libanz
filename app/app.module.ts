@@ -9,9 +9,17 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { LogoutComponent } from './shared/logout.component';
 import { SplashScreenComponent } from './pages/splash-screen.component';
-import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
+// import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { environment } from './../environments/environment';
+
+// let platformImports = [];
+//     if ('navigator' in window && 'serviceWorker' in navigator) {
+//       platformImports.push(
+//         ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+//   );
+// } 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +39,12 @@ import { environment } from './../environments/environment';
     MatInputModule,
     ReactiveFormsModule,
     NgxDaterangepickerMd.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    //platformImports,
+    //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [SwUpdate],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+ }

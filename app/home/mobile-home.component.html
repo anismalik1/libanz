@@ -353,41 +353,41 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 </section>
 <h4 class="paybill-txt hide-on-med-and-up">Recharge & Pay Bills </h4>
 <section class="recharge-section show-on-medium-and-down hide-on-med-and-up" >
-	<div class="container">
+	<div class="container"> 
 		<div class="row">
 			<div class="col s12">				
 				<ul class="center" id="select-item">
 					<div class="row">
 						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/mobile']"><img src="{{this.params.base_url}}assets/images/new-icons/2.png" class="responsive-img" alt="Mobile Recharge Icon"><br><span class="black-text">Mobile</span></a></li>
+							<li class="tab"><a [routerLink]="['/recharge/for/mobile']"><img width="38" src="{{this.services_icons.mobile}}" class="responsive-img" alt="Mobile Recharge Icon"><br><span class="black-text">Mobile</span></a></li>
 						</div>
 						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/dth-recharge']"><img src="{{this.params.base_url}}assets/images/new-icons/7.png" class="responsive-img" alt="DTH Recharge Icon"><br><span class="black-text">DTH</span></a></li>
+							<li class="tab"><a [routerLink]="['/recharge/for/dth-recharge']"><img width="38" src="{{this.services_icons.dth}}" class="responsive-img" alt="DTH Recharge Icon"><br><span class="black-text">DTH</span></a></li>
 						</div>
 						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/electricity']"><img src="{{this.params.base_url}}assets/images/new-icons/3.png" class="responsive-img" alt="Electricity Recharge Icon"><br><span class="black-text">Electricity</span></a></li>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/water']"><img src="{{this.params.base_url}}assets/images/new-icons/1.png" class="responsive-img" alt="Water Recharge Icon"><br><span class="black-text">Water</span></a></li>					
-						</div>
-						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/gas']"><img src="{{this.params.base_url}}assets/images/new-icons/8.png" class="responsive-img" alt="Gas Recharge Icon"><br><span class="black-text">Gas</span></a></li>
-						</div>
-						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/broadband']"><img src="{{this.params.base_url}}assets/images/new-icons/6.png" class="responsive-img" alt="Broadband Recharge Icon"><br><span class="black-text">Broadband</span></a></li>
+							<li class="tab"><a [routerLink]="['/recharge/for/electricity']"><img width="38" src="{{this.services_icons.electricity}}" class="responsive-img" alt="Electricity Recharge Icon"><br><span class="black-text">Electricity</span></a></li>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/cable']" ><img src="{{this.params.base_url}}assets/images/new-icons/4.png" class="responsive-img" alt="Cable Recharge Icon"><br><span class="black-text">Cable Tv</span></a></li>
+							<li class="tab"><a [routerLink]="['/recharge/for/water']"><img width="38" src="{{this.services_icons.water}}" class="responsive-img" alt="Water Recharge Icon"><br><span class="black-text">Water</span></a></li>					
 						</div>
 						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/datacard']"><img src="{{this.params.base_url}}assets/images/new-icons/5.png" class="responsive-img" alt="Data Recharge Icon"><br><span class="black-text">Data Card</span></a></li>
+							<li class="tab"><a [routerLink]="['/recharge/for/gas']"><img width="38" src="{{this.services_icons.gas}}" class="responsive-img" alt="Gas Recharge Icon"><br><span class="black-text">Gas</span></a></li>
 						</div>
 						<div class="col s4">
-							<li class="tab"><a [routerLink]="['/recharge/for/landline']"><img src="{{this.params.base_url}}assets/images/new-icons/9.png" class="responsive-img" alt="Landline Recharge Icon"><br><span class="black-text">Landline</span></a></li>
+							<li class="tab"><a [routerLink]="['/recharge/for/broadband']"><img width="38" src="{{this.services_icons.broadband}}" class="responsive-img" alt="Broadband Recharge Icon"><br><span class="black-text">Broadband</span></a></li>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s4">
+							<li class="tab"><a [routerLink]="['/recharge/for/cable']" ><img width="38" src="{{this.services_icons.cable}}" class="responsive-img" alt="Cable Recharge Icon"><br><span class="black-text">Cable Tv</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a [routerLink]="['/recharge/for/datacard']"><img width="38" src="{{this.services_icons.datacard}}" class="responsive-img" alt="Data Recharge Icon"><br><span class="black-text">Data Card</span></a></li>
+						</div>
+						<div class="col s4">
+							<li class="tab"><a [routerLink]="['/recharge/for/landline']"><img width="38" src="{{this.services_icons.landline}}" class="responsive-img" alt="Landline Recharge Icon"><br><span class="black-text">Landline</span></a></li>
 						</div>
 					</div>
 				</ul>
@@ -425,7 +425,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rechare-section-list">
 								<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
-								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+								<div class="rating-green" id="rating" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
 								<p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 								
@@ -468,7 +468,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rechare-section-list">
 									<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 			
-									<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+									<div class="rating-green" id="rating" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">({{product_rating(item.id)[0].rate_count}})</span>
 									<br/>
 									<p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}}</span> </p>
 									
@@ -512,7 +512,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rechare-section-list">
 								<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 		
-								<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+								<div class="rating-green" id="rating" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">({{product_rating(item.id)[0].rate_count}})</span>
 								<br/>
 								<p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 								
@@ -555,7 +555,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<div class="rechare-section-list">
 										<p class="heading-txt1"><a class="blue-text" [routerLink]="['/product/'+item.url]">{{item.title}}</a> </p>
 				
-										<div class="rating-green" id="rating">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht black-text" id="rating-count">({{product_rating(item.id)[0].rate_count}})</span>
+										<div class="rating-green" id="rating" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div><span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">({{product_rating(item.id)[0].rate_count}})</span>
 										<br/>
 										<p class="price-cut1 black-text"><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri"> {{item.price}}</span> </p>
 										

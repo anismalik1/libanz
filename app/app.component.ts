@@ -1,7 +1,7 @@
 import {Component,OnInit} from "@angular/core";
 import {Router, NavigationEnd,RouteConfigLoadStart, RouteConfigLoadEnd} from "@angular/router";
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SwUpdate } from '@angular/service-worker';
+//import { SwUpdate } from '@angular/service-worker'; 
 
 declare var ga: Function;
 @Component({
@@ -12,7 +12,7 @@ declare var ga: Function;
 export class AppComponent implements OnInit{
   title = '';
   loadingRouteConfig: boolean;
-  constructor(public router: Router,private spinner : NgxSpinnerService,private swUpdate: SwUpdate ) {
+  constructor(public router: Router,private spinner : NgxSpinnerService ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { 
         ga('set', 'page', event.urlAfterRedirects);
@@ -30,11 +30,15 @@ export class AppComponent implements OnInit{
             this.spinner.hide();
         }
     });
-    this.swUpdate.available
-    .subscribe(() => {
-        this.swUpdate.activateUpdate()
-            .then(() => document.location.reload());
-    });
+    // if(document.URL.indexOf('https://') !== -1)
+    // {
+    //   console.log("Enter"+document.URL);
+    //   this.swUpdate.available
+    //   .subscribe(() => {
+    //       this.swUpdate.activateUpdate()
+    //           .then(() => document.location.reload());
+    //   });
+    // }
 }
 
 onActivate(event) {

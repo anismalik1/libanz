@@ -292,6 +292,10 @@ export class TodoService {
     return null; 
   }
 
+  public set_data(storage_name,content:Object) {
+    localStorage.setItem(storage_name, JSON.stringify(content));
+  }
+
   public set_recharge(storage_name,content:Object) {
     localStorage.setItem(storage_name, JSON.stringify(content));
   }
@@ -307,7 +311,8 @@ export class TodoService {
   }
 
   private handleError(error: Response) { 
-    alert("Bad Request"); 
+    alert("Something Wrong.");
+    console.error(error); 
     $('.spinner-wrapper').hide();
     return Observable.throw(error.json()); 
  }

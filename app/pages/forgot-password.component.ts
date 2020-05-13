@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
+declare var window : any;
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -44,15 +45,18 @@ export class ForgotPasswordComponent implements OnInit{
       return false;
     }
     this.phone = data.phone;
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      data.device = 'android';
+    }
       this.todoservice.proceed_to_reset(data)
       .subscribe(
         data => 
         {
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, '')); 
           if(data.status == true)
           {
             this.step = 2;
+            this.watch_sms();
             this.tick_clock(60);
           }
           else
@@ -62,6 +66,32 @@ export class ForgotPasswordComponent implements OnInit{
         }
       )  
   }
+
+  watch_sms()
+  {
+    if(window.SMSRetriever)
+    {
+      document.addEventListener('onSMSArrive', function(args : any) {
+        var otp = substring(args.message,13, 17);
+        //$('#reset-form #forgot-otp').val(otp);
+        this.resetgroup.controls['pin'].setValue(otp);
+        //$('#reset-form #forgot-submit').click();
+        function substring(string, start, end) {
+          var result = '',
+              length = Math.min(string.length, end),
+              i = start;
+        
+          while (i < length) result += string[i++];
+          return result;
+        }  
+      });
+      window.SMSRetriever.startWatch(function(msg) {
+        console.log(msg);
+      }, function(err) {
+        
+      });
+    }
+}
 
   tick_clock(tick)
   {
