@@ -99,7 +99,7 @@ a.btn.orange.btn-large.ctn-che1 {
             			<span class="font600 naam3">{{this.productservice.cartItemsCount()}} Items</span>&nbsp;
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
-            			<a href="javascript:" class="btn btn-flat right chngs3 hide">Change</a>
+            			<a href="javascript:" class="btn btn-flat right chngs3 hide">Change</a> 
             		</div>
             	</div>
             </div>
@@ -112,9 +112,9 @@ a.btn.orange.btn-large.ctn-che1 {
           				<div class="cart-product-image"> 
           					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
           					<div class="product-quantity less-add-btn">
-								<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
+										<!-- <button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
 					            <span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
-					            <button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
+					            <button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button> -->
 					          </div>
           				</div>
           			</div>
@@ -319,7 +319,7 @@ a.btn.orange.btn-large.ctn-che1 {
           		<div class="row">
                 <div class="col s12 m10 offset-m1">
 										<input [type]="(this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'wallet_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>
-										<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</label> 
+										<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> 
                   <!-- <input name="wallet_type" value="wallet" class="with-gap" type="radio" id="wallet" (change)="cod_apply()" checked/>
                   <label for="wallet" class="font-size-change black-text mydth-wallet"> <img src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"> </label> -->
                 </div>
