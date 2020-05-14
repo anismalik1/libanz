@@ -58,17 +58,23 @@ export class OrderReceiptComponent implements OnInit {
     return this.authservice.auth_token();
   }
 
-  pack_list(pack)
+  pack_data(pack,title)
   {
     let data =  JSON.parse(pack);
     var list = 'With <ul>';
     this.pack_amount = 0;
+    let pack_data : any = {} 
     for(var i=0;i<data.length;i++)
     {
       list += '<li>'+data[i].title+'</li>';
-      this.pack_amount = this.pack_amount + Number(data[i].price);
+      if(title && title.toLowerCase().includes('multi'))
+        this.pack_amount = this.pack_amount + Number(data[i].multi_price);
+      else
+        this.pack_amount = this.pack_amount + Number(data[i].price);  
     }
-    return list+'</ul>';
+    
+    list+'</ul>';
+    return pack_data = {list : list ,amount : this.pack_amount};
   }
 
   calculate_amount(order)

@@ -13,7 +13,14 @@ declare var window : any;
   providers: [TodoService,User,AuthService]
 })
 export class ForgotPasswordComponent implements OnInit{
-
+  public proceedresetgroup : FormGroup;
+  public phone : string;
+  public password : string;
+  public step : number = 1;
+  public tick : number;
+  private pin : Number;
+  back_to_login : boolean = false;
+  public resetgroup : FormGroup;
   constructor( public todoservice : TodoService,
               private authservice : AuthService,
               private router : Router,
@@ -23,16 +30,14 @@ export class ForgotPasswordComponent implements OnInit{
   ) {
     this.resetgroup = fb.group({
       'password' : [null,Validators.compose([Validators.required])],
-       'cpassword' : [null,Validators.compose([Validators.required])],
-       'pin' : [null,Validators.compose([Validators.required])]
+       'cpassword' : [null,Validators.compose([Validators.required])]
+     });
+     this.proceedresetgroup = fb.group({
+      'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+      'pin'   : [null]
      });
    }
-  public phone : string;
-  public password : string;
-  public step : number = 1;
-  public tick : number;
-  back_to_login : boolean = false;
-  resetgroup : FormGroup;
+  
   ngOnInit() {
     
   }
@@ -45,6 +50,9 @@ export class ForgotPasswordComponent implements OnInit{
       return false;
     }
     this.phone = data.phone;
+    data.step =  this.step;
+    if(data.pin)
+      this.pin = data.pin
     if(document.URL.indexOf('android_asset') !== -1)
     {
       data.device = 'android';
@@ -55,8 +63,9 @@ export class ForgotPasswordComponent implements OnInit{
         {
           if(data.status == true)
           {
-            this.step = 2;
-            this.watch_sms();
+            this.step = data.step;
+            if(this.step == 2)
+              this.watch_sms();
             this.tick_clock(60);
           }
           else
@@ -73,9 +82,8 @@ export class ForgotPasswordComponent implements OnInit{
     {
       document.addEventListener('onSMSArrive', function(args : any) {
         var otp = substring(args.message,13, 17);
-        //$('#reset-form #forgot-otp').val(otp);
-        this.resetgroup.controls['pin'].setValue(otp);
-        //$('#reset-form #forgot-submit').click();
+        this.proceedresetgroup.controls['pin'].setValue(otp);
+        $('#proceed-reset-form #proceed-submit').click();
         function substring(string, start, end) {
           var result = '',
               length = Math.min(string.length, end),
@@ -110,7 +118,8 @@ export class ForgotPasswordComponent implements OnInit{
   }
   reset_password(form)
   {
-    form.phone = this.phone
+    form.phone = this.phone;
+    form.pin  = this.pin;
     if(form.password != form.cpassword)
     {
       this.toast.errorToastr('Confirm password must be same.');

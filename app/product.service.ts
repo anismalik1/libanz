@@ -346,6 +346,8 @@ export class ProductService {
   check_cashon_delivery()
   {
     let cart :any = JSON.parse(localStorage.getItem('cart'));
+    if(cart == null)
+      return false
     var index = false;
     for(var i =0;i< Object.keys(cart).length;i++)
     {
@@ -395,6 +397,11 @@ export class ProductService {
       }
       else if(op == 'add')
       {
+        if(item_2.quantity == 3)
+        {
+          //alert("You can not buy more that 3 Multi Box on same Contact Number.");
+          return false;
+        }  
         item_2.quantity += 1;
       }
       $('#update_count'+id).text(item_2.quantity);

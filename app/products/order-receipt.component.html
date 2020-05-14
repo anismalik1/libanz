@@ -97,8 +97,8 @@ overflow:hidden !important;
 								</div>
 								<div class="col s4 right-align">
 									<span class="font-size-change1">Amount</span><br>
-									<span class="font-size-change-order font600"><i class="icon-inr"></i><span id="total-amount"></span>{{order.final_price}}</span><br>
-									<span [innerHTML]="pack_list(order.pack_selected)"></span>
+									<span class="font-size-change-order font600"><span id="total-amount"></span><span *ngIf="order.qty > 1">{{order.qty}} x </span>{{order.price}} + {{pack_data(order.pack_selected,order.title).amount}} = <i class="icon-inr"></i>{{order.qty*order.price + pack_data(order.pack_selected,order.title).amount}}</span><br>
+									<span [innerHTML]="pack_data(order.pack_selected).list"></span>
 									
 								</div>
 							</div>

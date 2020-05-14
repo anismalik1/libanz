@@ -58,7 +58,7 @@ constructor( public todoservice : TodoService,
       'city' : [null,Validators.compose([Validators.required])],
       'state' : [null,Validators.compose([Validators.required])],
       'address' : [null,Validators.compose([Validators.required])],
-    });
+    }); 
     this.regaddressformgroup = fb.group({
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
       'pincode' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{6}")])],
