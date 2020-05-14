@@ -6009,6 +6009,14 @@ width: 100%;
 	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
 	padding: 10px 20px!important;vertical-align: middle;
 }
+.promo-txt-mb {
+    text-align: center;
+    font-size: 14px;
+}
+ul#select-item li img {
+	width: 34px;
+}
+
 .seller-bx-11 {
 border: 1px solid #8c8c8c;
 height: auto;
@@ -6146,3 +6154,7 @@ h2#compare-title {
 	#recharge-container{padding: 20px;}
 
 	ul.mob-retailer-slider.lightSlider.lSSlide.lsGrab { margin-bottom: -5px !important; }
+
+	ul#select-item li img {
+		width: 34px;
+	}
