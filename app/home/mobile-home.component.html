@@ -304,23 +304,23 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<div class="row mar-row" style="margin-bottom:50px !important">
 			<div class="col s12"> 
 				<ul class="tabs center cst-ul-list" id="select-item" >
-					<li class="tab"><a [routerLink]="['/recharge/for/mobile']" title="Mobile Recharge"><img width="38" src="{{this.services_icons.mobile}}" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/mobile']" title="Mobile Recharge" (click)="navigate_to('mobile')"><img width="38" src="{{this.services_icons.mobile}}" class="responsive-img" alt="1"><br><span>Mobile</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/dth-recharge']" title="DTH Recharge"><img src="{{this.services_icons.dth}}" class="responsive-img" alt="1"><br><span>DTH</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/dth-recharge']" title="DTH Recharge" (click)="navigate_to('dth-recharge')"><img width="38" src="{{this.services_icons.dth}}" class="responsive-img" alt="1"><br><span>DTH</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/electricity']" title="Electricity Bill Payment"><img src="{{this.services_icons.electricity}}" class="responsive-img" alt="1"><br><span>Electricity</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/electricity']" title="Electricity Bill Payment" (click)="navigate_to('electricity')"><img width="38" src="{{this.services_icons.electricity}}" class="responsive-img" alt="1"><br><span>Electricity</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/water']" title="Water Bill Payment"><img src="{{this.services_icons.water}}" class="responsive-img" alt="1"><br><span>Water</span></a></li>					
+					<li class="tab"><a [routerLink]="['/recharge/for/water']" title="Water Bill Payment" (click)="navigate_to('water')"><img width="38" src="{{this.services_icons.water}}" class="responsive-img" alt="1"><br><span>Water</span></a></li>					
 
-					<li class="tab"><a [routerLink]="['/recharge/for/gas']" title="Gas Bill Payment"><img src="{{this.services_icons.gas}}" class="responsive-img" alt="1"><br><span>Gas</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/gas']" title="Gas Bill Payment" (click)="navigate_to('gas')"><img width="38" src="{{this.services_icons.gas}}" class="responsive-img" alt="1"><br><span>Gas</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/broadband']" title="Broadband Recharge"><img src="{{this.services_icons.broadband}}" class="responsive-img" alt="1"><br><span>Broadband</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/broadband']" title="Broadband Recharge" (click)="navigate_to('broadband')"><img width="38" src="{{this.services_icons.broadband}}" class="responsive-img" alt="1"><br><span>Broadband</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/cable']" title="Cable TV Bill Payment"><img src="{{this.services_icons.cable}}" class="responsive-img" alt="1"><br><span>Cable Tv</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/cable']" title="Cable TV Bill Payment" (click)="navigate_to('cable')"><img width="38" src="{{this.services_icons.cable}}" class="responsive-img" alt="1"><br><span>Cable Tv</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/datacard']" title="Data Card Recharge"><img src="{{this.services_icons.datacard}}" class="responsive-img" alt="1"><br><span>Data Card</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/datacard']" title="Data Card Recharge" (click)="navigate_to('datacard')"><img width="38" src="{{this.services_icons.datacard}}" class="responsive-img" alt="1"><br><span>Data Card</span></a></li>
 
-					<li class="tab"><a [routerLink]="['/recharge/for/landline']" title="Landline Bill Payment"><img src="{{this.services_icons.landline}}" class="responsive-img" alt="1"><br><span>Landline</span></a></li>
+					<li class="tab"><a [routerLink]="['/recharge/for/landline']" title="Landline Bill Payment" (click)="navigate_to('landline')"><img width="38" src="{{this.services_icons.landline}}" class="responsive-img" alt="1"><br><span>Landline</span></a></li>
 				</ul>		
 		</div>
 		</div>
