@@ -311,7 +311,7 @@ export class TodoService {
   }
 
   private handleError(error: Response) { 
-    alert("Something Wrong.");
+    //alert("Something Wrong.");
     console.error(error); 
     $('.spinner-wrapper').hide();
     return Observable.throw(error.json()); 

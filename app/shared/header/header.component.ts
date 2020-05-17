@@ -679,8 +679,8 @@ export class HeaderComponent implements OnInit{
         $('.chat-box-msg').css('transform','translate(0,0)');
         $('.chat-box').addClass('hide');
       });
-      $(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}
-      else{$('.header').removeClass('fixed-header')}});
+      // $(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}
+      // else{$('.header').removeClass('fixed-header')}});
       $('.close-chat').on('click', function(){
         $('.chat-box-msg').css('transform','translate(0,100%)');
         $('.chat-box').removeClass('hide');
