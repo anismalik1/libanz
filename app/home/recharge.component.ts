@@ -898,9 +898,7 @@ check_amount(s)
         data => 
         {
           this.spinner.hide();
-          $('#'+s+' .calc-amount-btn').text('PROCEED');
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
+          $('#'+s+'-form .calc-amount-btn').text('PROCEED');
           if(!$.isEmptyObject(data))
           {
             if(data.status == 1)
@@ -910,27 +908,27 @@ check_amount(s)
                 this.bill_amt = data.amount;
                 if(s == 'landline')
                 {
-                  this.landlinegroup.controls['amount'].setValue(this.bill_amt);
+                  this.landlinegroup.controls['amount'].setValue(Math.round(this.bill_amt));
                 }
                 else if(s == 'electricity')
                 {
-                  this.electricitygroup.controls['amount'].setValue(this.bill_amt);
+                  this.electricitygroup.controls['amount'].setValue(Math.round(this.bill_amt));
                 }
                 else if(s == 'gas')
                 {
-                  this.gasgroup.controls['amount'].setValue(this.bill_amt);
+                  this.gasgroup.controls['amount'].setValue(Math.round(this.bill_amt));
                 }
                 else if(s == 'water')
                 {
-                  this.watergroup.controls['amount'].setValue(this.bill_amt);
+                  this.watergroup.controls['amount'].setValue(Math.round(this.bill_amt));
                 }
                 
-                $('#'+s+' .electric-cls1').removeClass('m5');
-                $('#'+s+' .electric-cls2').removeClass('m5');
-                $('#'+s+' .electric-cls-btn').addClass('hide');
-                $('#'+s+' .electric-cls3').removeClass('hide');
-                $('#'+s+' .electric-cls1').addClass('m3');
-                $('#'+s+' .electric-cls2').addClass('m4');
+                $('#'+s+'-form .electric-cls1').removeClass('m5'); 
+                $('#'+s+'-form .electric-cls2').removeClass('m5');
+                $('#'+s+'-form .electric-cls-btn').addClass('hide');
+                $('#'+s+'-form .electric-cls3').removeClass('hide');
+                $('#'+s+'-form .electric-cls1').addClass('m3');
+                $('#'+s+'-form .electric-cls2').addClass('m4');
               }
             }  
             else if(data.status == 2)
