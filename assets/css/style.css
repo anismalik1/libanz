@@ -4971,11 +4971,7 @@ span.fa.fa-star.pull-right.icn-clr1:hover {
 	padding-top:15px;
 	padding-right:30px;
 }
-.blog-content{
 
-	height:150px !important;
-    overflow: auto;
-}
 
 .hide-on-desktop{
 
@@ -6159,3 +6155,9 @@ h2#compare-title {
 	ul#select-item li img {
 		width: 34px;
 	}
+
+	/* .blog-content{
+
+		height:150px !important;
+		overflow: auto;
+	} */
