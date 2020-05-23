@@ -110,7 +110,7 @@ export class MobileHomeComponent implements OnInit {
       $('.search-result').addClass('hide');
     });
 
-    if(document.URL.indexOf('https://') !== -1)
+    if(document.URL.indexOf('android_asset') === -1)
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
         this.open_model()

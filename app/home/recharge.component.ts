@@ -146,11 +146,11 @@ export class RechargeComponent implements OnInit {
     var wallet_used = '';
     if($('[name="include_wallet"]:checked').length > 0)
       wallet_used = 'wallet';
-    if((this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
+    if((this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 > Math.floor(this.todoservice.get_user_wallet_amount())) && wallet_used == 'wallet')
     {
-      return Math.ceil(this.rechargeData.recharge_amount * 1 - this.todoservice.get_user_wallet_amount());
+      return Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount()));
     }
-    return Math.ceil(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
+    return Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
   }
 
   get_last_recharges()

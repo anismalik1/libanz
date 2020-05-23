@@ -202,76 +202,79 @@ export class HeaderComponent implements OnInit{
     return input;
   }
 
-  login_submit(login)
+  login_submit(login,me)
   {
+    if(!me)
+      me = this;
     if(document.URL.indexOf('android_asset') !== -1)
     {
       login.device = 'android';
     }
-    if(this.step == 2)
+    if(me.step == 2)
       {
         var otp1 = $('#header-login #otp1').val();
         var otp2 = $('#header-login #otp2').val();
         var otp3 = $('#header-login #otp3').val();
         var otp4 = $('#header-login #otp4').val();
+        console.log(otp1);
         login.otp = otp1.toString()+otp2.toString()+otp3.toString()+otp4.toString();
         // login.otp = login.otp1.toString() + login.otp2.toString() + login.otp3.toString() + login.otp4.toString();
-        login.phone = this.phone;
-        login.password = this.password;
+        login.phone = me.phone;
+        login.password = me.password;
         login.step = 2;
       }
       else
       {
-        this.phone = login.phone;
-        this.password = login.password;
+        me.phone = login.phone;
+        me.password = login.password;
         if(login.remember == false)
-          this.authService.clear_remember();
+          me.authService.clear_remember();
       }
 
-      if(typeof this.phone == "undefined" || typeof this.password == "undefined")
+      if(typeof me.phone == "undefined" || typeof me.password == "undefined")
       {
-        this.toastr.errorToastr("Please Enter Valid Details", 'Failed');
+        me.toastr.errorToastr("Please Enter Valid Details", 'Failed');
         return false;
       }
-      //this.spinner.show();
+      //me.spinner.show();
       $('#login-controller').text('Please Wait...');
-      this.authService.dologin(login)
+      me.authService.dologin(login)
       .subscribe(
         data => 
         {
           $('#login-controller').text('LOGIN');
-          this.token_params = data;
+          me.token_params = data;
           if(typeof data.status != 'undefined' && data.status == true)
           {
             $('.modal-close').click();
             $('.modal-overlay').css('display','none');
             let user : any = data.user;
-            this.step = 1;
-            this.authService.AccessToken = this.token_params.accessToken;
-            this.authService.storage(data);
-            this.todoservice.set_user_data(user);
+            me.step = 1;
+            me.authService.AccessToken = me.token_params.accessToken;
+            me.authService.storage(data,me);
+            me.todoservice.set_user_data(user);
             let url = window.location.pathname;
             if(url == url)
             {
-              this.router.routeReuseStrategy.shouldReuseRoute = function(){
+              me.router.routeReuseStrategy.shouldReuseRoute = function(){
                 return false;
              }
             //console.log(url) 
-            this.router.navigated = false;
-            this.router.navigate([url]);
+            me.router.navigated = false;
+            me.router.navigate([me.todoservice.get_urls().currnetURL]);
             }
           }
           else  
           {
             if(typeof data.step != 'undefined' &&  data.step == 'verify')
             {
-              this.step = 2;
-              this.tick_clock(60);
-              this.watch_sms('login');
+              me.step = 2;
+              me.tick_clock(60);
+              me.watch_sms('login');
             }
             else
             {
-              this.toastr.errorToastr(data.message, 'Oops!');
+              me.toastr.errorToastr(data.message, 'Oops!');
             }
           }
          // this.spinner.hide();
@@ -281,18 +284,27 @@ export class HeaderComponent implements OnInit{
 
   watch_sms(section)
   {
-      if(window.SMSRetriever)
+      if(window.SMSReceive)
       {
+        window.me = this;  
+        window.SMSReceive.stopWatch(function() {
+          console.log('stopped');
+        }, function() {
+        });
+        window.SMSReceive.startWatch(function() {
+          console.log('started');
+        }, function() {
+        });
         document.addEventListener('onSMSArrive', function(args : any) {
-          var otp1 = substring(args.message,13, 14);
-          var otp2 = substring(args.message,14, 15);
-          var otp3 = substring(args.message,15, 16);
-          var otp4 = substring(args.message,16, 17);
+          var otp1 = substring(args.data.body,13, 14);
+          var otp2 = substring(args.data.body,14, 15);
+          var otp3 = substring(args.data.body,15, 16);
+          var otp4 = substring(args.data.body,16, 17);
           $('#header-'+section+' #otp1').val(otp1);
           $('#header-'+section+' #otp2').val(otp2);
           $('#header-'+section+' #otp3').val(otp3);
           $('#header-'+section+' #otp4').val(otp4);
-          $('#header-'+section+' #'+section+'-submit').click();
+          window.me.login_submit(window.me.logingroup.value,window.me);
           function substring(string, start, end) {
             var result = '',
                 length = Math.min(string.length, end),
@@ -301,11 +313,6 @@ export class HeaderComponent implements OnInit{
             while (i < length) result += string[i++];
             return result;
           }  
-        });
-        window.SMSRetriever.startWatch(function(msg) {
-          console.log(msg);
-        }, function(err) {
-          
         });
       }
   }
@@ -458,7 +465,11 @@ export class HeaderComponent implements OnInit{
   }
   verify_user(data)
   {
-    data.otp = data.otp1.toString() + data.otp2.toString() + data.otp3.toString() + data.otp4.toString();
+    var otp1 = $('#header-login #otp1').val();
+    var otp2 = $('#header-login #otp2').val();
+    var otp3 = $('#header-login #otp3').val();
+    var otp4 = $('#header-login #otp4').val();
+    data.otp = otp1.toString() + otp2.toString() + otp3.toString() + otp4.toString();
     data.phone = this.phone;
     this.verifydisabled = true;
     this.todoservice.verify_user(data)
@@ -469,7 +480,7 @@ export class HeaderComponent implements OnInit{
           if(data.status == 'true')
           {
             let store = data.store;
-            this.authService.storage(store);
+            this.authService.storage(store,this);
             
             $('.login-modal-close').click();
             localStorage.removeItem('favourite');
@@ -679,8 +690,13 @@ export class HeaderComponent implements OnInit{
         $('.chat-box-msg').css('transform','translate(0,0)');
         $('.chat-box').addClass('hide');
       });
-      // $(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}
-      // else{$('.header').removeClass('fixed-header')}});
+      var width = $(window).width(); 
+      if(width > 767)
+      {
+        $(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}
+        else{$('.header').removeClass('fixed-header')}});
+      }
+      
       $('.close-chat').on('click', function(){
         $('.chat-box-msg').css('transform','translate(0,100%)');
         $('.chat-box').removeClass('hide');
@@ -846,11 +862,11 @@ export class HeaderComponent implements OnInit{
   }
   openchat();
   //setTimeout("$('#sntch_webchat').attr('style','background-color: rgb(255, 255, 255); width: 450x; height: 500px; position: fixed; bottom: 10px; right: 10px; max-height: 100%; max-width: 100%; z-index: 2147483647; transform: translateY(0px); transition: transform 0.5s ease 0s; border-radius: 20px 20px 0px 0px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
-  (function () {
-  $.getScript("https://connect.facebook.net/en_US/all.js#xfbml=1", function () {
-        FB.init({ appId: '1346509102168933', status: true, cookie: true, xfbml: true });
-    });
-  })();
+  // (function () {
+  // $.getScript("https://connect.facebook.net/en_US/all.js#xfbml=1", function () {
+  //       FB.init({ appId: '1346509102168933', status: true, cookie: true, xfbml: true });
+  //   });
+  // })();
 //   (function () {
 //     var options = {
 //         whatsapp: "+918010339339", // WhatsApp number

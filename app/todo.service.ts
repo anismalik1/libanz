@@ -928,4 +928,15 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/check_if_user_exist';
     return this.send_post_request(data,url) ;
   }
+  fetch_order(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_order';
+    return this.send_post_request(data,url) ;
+  }
+
+  app_version(data)
+  {
+    let url = this.server_url+'accounts/apis/home/app_version';
+    return this.send_post_request(data,url) ;
+  }
 }

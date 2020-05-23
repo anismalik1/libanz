@@ -196,83 +196,35 @@ margin: auto;
     <div class="container">
         <div class="row no-margin">
             <div class="col s12 m3">
-                <!-- <div class="card">
-              <div class="card-content user-content">
-                    <div class="user-image">
-                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                                  <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-                        </div>
-                  <div class="user-name">
-                      <span class="fix-welcome">Welcome,</span><br>
-                      <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
-                  </div>
-              </div>
-            </div> -->
+                
             <app-side-nav></app-side-nav>
             </div>
             <div class="col s12 m9">
-               
+               <div class="card inline-block w-100 web-view">
+                    <div class="card-content cst-invoice" *ngIf="order_id">
+                        <div  class="mb-1">
+                            <h2 class="font600 inline-block">Invoice </h2>
+                        </div>
+                        <ul *ngIf="order_data" class="font-li">
+                            <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="https://www.mydthshop.com/web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="https://www.mydthshop.com/web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" style="width:40px;"></span></li>
+                            <li class="cst-top-signle"><strong>Order Status: </strong> {{order_data.status}}</li>
+                            <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
+                            <li><strong>Invoice No: </strong>  #{{order_data.id}} </li>
+                            <li><strong>Amount: </strong> {{order_data.grand_total}}</li>
+                            <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
+                            
+                            <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Mydth</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
+                            <!-- <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li> -->
+                            <li><strong>Comment: </strong>{{order_data.remark}}</li>
+                        </ul>
 
-               
-                <div class="card inline-block w-100 web-view">
-                    <!-- <div class="card-content inline-block no-padding">
-                        <h3 class="font600 center">Value Transfer</h3>
-                        <div class="value-transfer grey lighten-3 col s12 m12 l6 margin-top">
-                            <img src="{{this.todoservice.base_url}}assets/images/recharge-icon/value-transfer.png" class="responsive-img" alt="value-transfer">
-                        </div>
-                        <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
-                        <ng-template #transfertemp>
-                        <div class="value-transfer grey lighten-4 col s12 m12 l6 margin-top">
-                                <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
-                            <table class="responsive-table striped bordered">
-                                <tbody> 
-                                    <tr>
-                                        <td><span class="font600 font-size-change">Name</span></td>
-                                    <td><span class="font-size-change">{{fetch_user.name}}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="font600 font-size-change">Phone No.</span></td>
-                                        <td><span class="font-size-change">{{fetch_user.phone}}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="font600 font-size-change">Enter Amount</span></td>
-                                        <td>
-                                        <div class="input-field">
-                                            <input id="amount" type="text" class="validate" maxlength="6" name="amount" ngModel>
-                                            <label for="amount">Enter amount to be transfered</label>
-                                        </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td colspan="2"><button type="Submit" class="btn orange">Transfer Now</button>
-                                        <button type="button" class="btn orange" (click)="cancel()">Cancel</button></td>
-                                    </tr>
-                                </tbody>    
-                                </table>
-                            </form>
-                        </div>
-                    </ng-template>
-                    <ng-template #fetchtemp>
-                        <div class="value-transfer grey lighten-4 col s12 m12 l6 margin-top">
-                            <form class="padd" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
-                                <div class="row">
-                                <div class="input-field col s12">
-                                <input id="first_name" type="number" class="validate" name="phone" ngModel>
-                                <label for="first_name">Partner Phone</label>
-                                </div>
-                                <div class="input-field col s12 center">
-                                    <button type="submit" class="btn btn-large white-text value-sub orange">Submit</button>
-                                </div>
-                            </div>
-                            </form>
-                        </div>
-                    </ng-template>
-                    </div> -->
+                        <div class="clearfix"></div> <br/>
+                        <ul class="back-icon desktop-hide">
+                            <li><a class="btn btn-orange black-text cst-ibtn" href="javascript:" (click)="back_to_transfer()">Back </a></li>
+                        </ul>
+                    </div>
                 
-              
-                
-                    <div class="card-content">
+                    <div class="card-content" *ngIf="!order_id">
                         <span class="money-txt"> Pay </span>
                         <br/>
                         <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
@@ -323,16 +275,6 @@ margin: auto;
                                 </form>
                             </div>
                         </ng-template>
-
-                        <!-- <div class="form-group" style="padding-top:15px;">
-                            <div class="col s2"><label class="lbl-num">  +91- </label> </div>
-                            <div class="col s9"><input type="text" placeholder="Enter Mobile Number"/></div>
-                            <div class="col s1"> <span class="fa fa-address-book"></span> </div>
-                        </div> -->
-                        
-                        <!-- <div class="input-field col s12 center">
-                            <button type="submit" class="btn btn-large white-text value-sub orange btn-dfix">Proceed To Pay</button>
-                        </div> -->
                         <div class="recent-details" *ngIf="recent_transfer && recent_transfer.length > 0">
                             <h4 class="recent-txt">Recents </h4>
                             <div class="row">

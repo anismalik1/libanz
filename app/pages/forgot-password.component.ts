@@ -42,8 +42,10 @@ export class ForgotPasswordComponent implements OnInit{
     
   }
   
-  process_to_reset(data)
+  process_to_reset(data,me)
   {
+    if(!me)
+      me = this;
     if(data.phone == '')
     {
       this.toast.errorToastr("Enter Registered Phone");
@@ -78,12 +80,25 @@ export class ForgotPasswordComponent implements OnInit{
 
   watch_sms()
   {
-    if(window.SMSRetriever)
+    if(window.SMSReceive)
     {
+      window.me = this; 
+      window.SMSReceive.stopWatch(function() {
+        console.log('stopped');
+      }, function() {
+      });
+      window.SMSReceive.startWatch(function() {
+        console.log('started');
+      }, function() {
+      });
+      console.log(window);
       document.addEventListener('onSMSArrive', function(args : any) {
-        var otp = substring(args.message,13, 17);
-        this.proceedresetgroup.controls['pin'].setValue(otp);
-        $('#proceed-reset-form #proceed-submit').click();
+        var otp = substring(args.data.body,13, 17);
+        console.log("enter");
+        console.log(window);
+        window.me.proceedresetgroup.controls['pin'].setValue(otp);
+        //$('#proceed-reset-form #proceed-submit').click();
+        window.me.process_to_reset(window.me.proceedresetgroup.value,window.me);
         function substring(string, start, end) {
           var result = '',
               length = Math.min(string.length, end),
@@ -92,11 +107,6 @@ export class ForgotPasswordComponent implements OnInit{
           while (i < length) result += string[i++];
           return result;
         }  
-      });
-      window.SMSRetriever.startWatch(function(msg) {
-        console.log(msg);
-      }, function(err) {
-        
       });
     }
 }
@@ -114,7 +124,7 @@ export class ForgotPasswordComponent implements OnInit{
   resend_otp()
   {
     var data = {phone : this.phone};
-    this.process_to_reset(data)
+    this.process_to_reset(data,this)
   }
   reset_password(form)
   {

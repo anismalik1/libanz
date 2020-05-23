@@ -847,6 +847,8 @@ export class ProductDetailsComponent implements OnInit{
         $.fn.isInViewport = function() {
           if($(this).length == 0 )
           {
+            console.log($(this))
+            console.log(1);
             return false;
           }
           var elementTop = $(this).offset().top;
@@ -858,6 +860,7 @@ export class ProductDetailsComponent implements OnInit{
       $(window).scroll(function (event) {
         if(!$.fn.isInViewport )
         {
+          console.log(2);
           return false;
         }
         if($(window).width() >767){

@@ -95,8 +95,10 @@ auth_token()
   }
 }
 
-public storage(data : any)
+public storage(data : any,me)
 {
+  if(!me)
+    me = this;
   data.token_key.expires_in =  Math.floor(Date.now() / 1000) + ( this.ttl * 60 * 60);
   this.store(this.tokenKey,data);
   if(typeof data.rm_ != 'undefined')

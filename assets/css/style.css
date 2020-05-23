@@ -13,6 +13,7 @@
 	body{
 		font-family: 'Muli', sans-serif;
 		background-color:#f3f3f3 !important;
+		-webkit-backface-visibility: hidden;
 	  }
   }
 
@@ -4534,6 +4535,27 @@ body{padding-bottom: 80px;}
 	.login-side-image{display:block}
 	.on-web{display:block;}	
 	.on-mobile{display:none;}
+	
+	::-webkit-scrollbar {
+		width:8px;
+		}
+		
+		/* Track */
+		::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 5px white; 
+		border-radius: 10px;
+		}
+		 
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		background: #ff6a00; 
+		border-radius: 10px;
+		}
+		
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		background: #ff6a00; 
+		}
 }
 
 @media only screen and (max-width:766px){
@@ -5149,26 +5171,6 @@ a.logup.modal-trigger.black-text {
 a.logup.modal-trigger.black-text {
     border-radius: 20px;
 }
-::-webkit-scrollbar {
-	width:8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 5px white; 
-	border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: #ff6a00; 
-	border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: #ff6a00; 
-  }
 
   .mission h1 {
     font-size: 26px;

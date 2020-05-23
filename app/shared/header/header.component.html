@@ -614,7 +614,7 @@ hr.line1 {
 						</ul>
 						<div id="login" class="col s12">
 							<div class="login" *ngIf="step == 1">
-							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)">
+							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)" id="login-input-form">
 								<div class="row">
 									<div class="input-field col s12">
 										<i class="material-icons prefix margin-top-cart2">phone</i>

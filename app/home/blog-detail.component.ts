@@ -90,7 +90,7 @@ export class BlogDetailComponent implements OnInit {
   {
    var textArea = document.createElement('textarea');
    textArea.innerHTML = html;
-   return textArea.value;
+   return textArea.value.replace(/<[^>]*>/g, '');;
   }
   fetch_post_comments()
   {

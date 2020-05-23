@@ -125,6 +125,10 @@ export class SignupComponent implements OnInit{
   {
     this.spinner.show();
     let data : any = {phone : this.phone, password : this.password};
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      data.device = 'android';
+    }
     this.todoservice.resend_otp(data)
       .subscribe(
         data => 
@@ -183,25 +187,40 @@ export class SignupComponent implements OnInit{
         }
       ) 
   }
-  verify_user(data)
+  verify_user(data,me)
   {
-    data.otp = data.otp1.toString() + data.otp2.toString() + data.otp3.toString() + data.otp4.toString();
-    data.phone = this.phone;
-    this.verifydisabled = true;
-    this.todoservice.verify_user(data)
+    if(!me)
+      me = this;
+
+      var otp1 = $('#header-signup #otp1').val();
+      var otp2 = $('#header-signup #otp2').val();
+      var otp3 = $('#header-signup #otp3').val();
+      var otp4 = $('#header-signup #otp4').val();  
+      data.otp = otp1.toString() + otp2.toString() + otp3.toString() + otp4.toString();
+    data.phone = me.phone;
+    me.verifydisabled = true;
+    me.todoservice.verify_user(data)
       .subscribe(
         data => 
         {
-          this.verifydisabled = false;
+          me.verifydisabled = false;
           if(data.status == 'true')
           {
             let store = data.store;
-            this.authservice.storage(store);
-            this.router.navigate(['/home']);
+            me.authservice.storage(store,me);
+            var width = $(window).width(); 
+            if(width > 767)
+            {
+              me.router.navigate(['/home']);
+            }
+            else
+            {
+              me.router.navigate(['/mhome']);
+            }
           }
           else
           {
-            this.toast.errorToastr(data.msg, 'Failed');
+            me.toast.errorToastr(data.msg, 'Failed');
             return false;
           }
         }
@@ -210,18 +229,27 @@ export class SignupComponent implements OnInit{
 
   watch_sms(section)
   {
-      if(window.SMSRetriever)
+      if(window.SMSReceive)
       {
+        window.me = this;
+        window.SMSReceive.stopWatch(function() {
+          console.log('stopped');
+        }, function() {
+        });
+        window.SMSReceive.startWatch(function() {
+          console.log('started');
+        }, function() {
+        });
         document.addEventListener('onSMSArrive', function(args : any) {
-          var otp1 = substring(args.message,13, 14);
-          var otp2 = substring(args.message,14, 15);
-          var otp3 = substring(args.message,15, 16);
-          var otp4 = substring(args.message,16, 17);
+          var otp1 = substring(args.data.body,13, 14);
+          var otp2 = substring(args.data.body,14, 15);
+          var otp3 = substring(args.data.body,15, 16);
+          var otp4 = substring(args.data.body,16, 17);
           $('#header-'+section+' #otp1').val(otp1);
           $('#header-'+section+' #otp2').val(otp2);
           $('#header-'+section+' #otp3').val(otp3);
-          $('#header-'+section+' #otp4').val(otp4);
-          $('#header-'+section+' #'+section+'-submit').click();
+          $('#header-'+section+' #otp4').val(otp4); 
+          window.me.verify_user(window.me.signupgroup.value,window.me)
           function substring(string, start, end) {
             var result = '',
                 length = Math.min(string.length, end),
@@ -230,11 +258,6 @@ export class SignupComponent implements OnInit{
             while (i < length) result += string[i++];
             return result;
           }  
-        });
-        window.SMSRetriever.startWatch(function(msg) {
-          console.log(msg);
-        }, function(err) {
-          
         });
       }
   }

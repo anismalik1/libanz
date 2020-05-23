@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class ValueTransferComponent implements OnInit{
-
+  order_id : any;
+  order_data : any;
   step : number = 1;
   fetch_user : any = {phone: '',name:'',id:''}; 
   recent_transfer : any;
@@ -29,8 +30,39 @@ export class ValueTransferComponent implements OnInit{
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
       return false;
     }
-    this.fetch_value_transfer() 
+    if(this.todoservice.get_param('order_id'))
+		{
+			this.order_id = this.todoservice.get_param('order_id');
+			this.fetch_order();
+		}
+    this.fetch_value_transfer(); 
   }
+
+  back_to_transfer()
+  {
+    if(1 == 1)
+		{
+			this.router.routeReuseStrategy.shouldReuseRoute = function(){
+				return false;
+			}
+		}	
+		this.router.navigated = false;
+		this.router.navigate(['/dashboard/value-transfer']);
+  }
+  fetch_order()
+	{
+		if(!this.get_token())
+		{
+			return false;
+		}	
+		  this.todoservice.fetch_order({token:this.get_token(),order_id: this.order_id})
+		  .subscribe( 
+			data => 
+			{
+				this.order_data = data.order[0];
+			}
+		) 
+	}
   
   choose_random()
   {
@@ -142,6 +174,7 @@ export class ValueTransferComponent implements OnInit{
           }
           if(data.status == 'success')
           {
+            this.order_id = data.order_id;
             this.toastr.successToastr(" Transfer is Successful", 'Success! ');
             if(1 == 1)
             {
@@ -150,7 +183,7 @@ export class ValueTransferComponent implements OnInit{
               }
             }  
             this.router.navigated = false;
-            this.router.navigate(['/dashboard/value-transfer']);
+            this.router.navigate(['/dashboard/value-transfer'],{queryParams : {order_id : this.order_id}});
           }
           else
           {

@@ -394,18 +394,7 @@ p.ask-login {
 													<span class="red-text">Check Confirm Password.</span>
 												</div>
 											</div>
-											<!-- <div class="col s12 m6">
-												<p>
-													<input name="user_type" class="with-gap" formControlName="user_type" type="hidden" value="1" id="test1" [checked]="true"/>
-													<label for="test1">Become User</label>
-												</p>
-											</div>
-											<div class="col s12 m6">
-												<p>
-													<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
-													<label for="test2">Become Merchant</label>
-												</p>
-											</div> -->
+											
 											<input name="user_type" class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 3 : 1"/>
 											<!-- <div class="col s12 m6">
 												<p>
@@ -451,8 +440,8 @@ p.ask-login {
 									</div>
 									<div class="row">
 										<div class="input-field col s12 center otp-inputa" id="inputs">
-											<input type="number" id="opt1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
-											<input type="number" id="opt2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
+											<input type="number" id="otp1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
+											<input type="number" id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
 											<input type="number" id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
 											<input type="number" id="otp4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
 										</div>

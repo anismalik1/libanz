@@ -106,8 +106,12 @@ fetch_page_data()
     ) 
  }
 
-login_submit(login)
+login_submit(login,me)
 {
+    if(!me)
+    {
+      me = this; 
+    }
     if(document.URL.indexOf('android_asset') !== -1)
     {
       login.device = 'android';
@@ -119,47 +123,47 @@ login_submit(login)
       var otp3 = $('#login-page-otps #otp3').val();
       var otp4 = $('#login-page-otps #otp4').val();
       login.otp = otp1.toString()+otp2.toString()+otp3.toString()+otp4.toString();
-      login.phone = this.phone;
-      login.password = this.password;
+      login.phone = me.phone;
+      login.password = me.password;
       login.step = 2;
     }
     else
     {
-      this.phone = login.phone;
-      this.password = login.password;
+      me.phone = login.phone;
+      me.password = login.password;
       if(login.remember == false)
-        this.authService.clear_remember();
+      me.authService.clear_remember();
     }
-    if(typeof this.phone == "undefined" || typeof this.password == "undefined")
+    if(typeof me.phone == "undefined" || typeof me.password == "undefined")
     {
-      this.toastr.errorToastr("Please Enter Valid Details", 'Failed');
+      me.toastr.errorToastr("Please Enter Valid Details", 'Failed');
       return false;
     }
-    this.spinner.show();
-    this.authService.dologin(login)
+    me.spinner.show();
+    me.authService.dologin(login)
     .subscribe(
       data => 
       {
-        this.token_params = data;
+        me.token_params = data;
         if(typeof data.status != 'undefined' && data.status == true)
         {
           let user : any = data.user;
-          this.toastr.successToastr('You are logging in...', 'Success!');
-          this.authService.AccessToken = this.token_params.accessToken;
-          this.authService.storage(data); 
-          this.todoservice.set_user_data(user);
-          this.user_favourites();
-          if(this.ref)
+          me.toastr.successToastr('You are logging in...', 'Success!');
+          me.authService.AccessToken = me.token_params.accessToken;
+          me.authService.storage(data); 
+          me.todoservice.set_user_data(user);
+          me.user_favourites();
+          if(me.ref)
           {
-            if(this.ref.indexOf("order-id") > 0)
-              window.location.href =   '/'+this.ref.replace('#', "/").replace('%3D','=').replace('%3F','?');
-            else
-              this.router.navigate(['/'+this.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
+            //me.router.navigate([me.ref],{ queryParams: { month:  this.monthdata[0].total_month});
+            me.router.navigate(['/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
           }
           else
           {
-            this.router.navigate(['/']);
-            
+            if(login.device == 'android')
+              me.router.navigate(['/mhome']); 
+            else
+              me.router.navigate(['/']);
           }
          
         }
@@ -167,33 +171,43 @@ login_submit(login)
         {
           if(typeof data.step != 'undefined' &&  data.step == 'verify')
           {
-            this.step = 2;
-            this.watch_sms();
+            me.step = 2;
+            me.watch_sms();
           }
           else
           {
-            this.toastr.errorToastr(data.message, 'Oops!');
+            me.toastr.errorToastr(data.message, 'Oops!');
           }
         }
-        this.spinner.hide();
+        me.spinner.hide();
       }
     )  
 }
 
 watch_sms()
 {
-    if(window.SMSRetriever)
+    if(window.SMSReceive)
     {
+      window.me = this;  
+      window.SMSReceive.stopWatch(function() {
+          console.log('stopped');
+      }, function() {
+      });
+      window.SMSReceive.startWatch(function() {
+        console.log('started');
+      }, function() {
+      });
       document.addEventListener('onSMSArrive', function(args : any) {
-        var otp1 = substring(args.message,13, 14);
-        var otp2 = substring(args.message,14, 15);
-        var otp3 = substring(args.message,15, 16);
-        var otp4 = substring(args.message,16, 17);
+        console.log(args);
+        var otp1 = substring(args.data.body,13, 14);
+        var otp2 = substring(args.data.body,14, 15);
+        var otp3 = substring(args.data.body,15, 16);
+        var otp4 = substring(args.data.body,16, 17);
         $('#login-page-otps #otp1').val(otp1);
         $('#login-page-otps #otp2').val(otp2);
         $('#login-page-otps #otp3').val(otp3);
         $('#login-page-otps #otp4').val(otp4);
-        $('#login-page-form #login-submit').click();
+        window.me.login_submit(window.me.logingroup.value,window.me);
         function substring(string, start, end) {
           var result = '',
               length = Math.min(string.length, end),
@@ -202,11 +216,6 @@ watch_sms()
           while (i < length) result += string[i++];
           return result;
         }  
-      });
-      window.SMSRetriever.startWatch(function(msg) {
-        console.log(msg);
-      }, function(err) {
-        
       });
     }
 }
