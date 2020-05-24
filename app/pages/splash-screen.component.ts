@@ -135,12 +135,21 @@ export class SplashScreenComponent implements OnInit {
                     }
                     else
                     {
-                        window.me.to_home();
+                        if(2000 < 2001)
+                        {
+                            $('.mid-btns').removeClass('hide');
+                            return false;
+                        }
+                        else
+                        {
+                            window.me.to_home(); 
+                        } 
+                        //window.me.to_home();
                     }
                 }
                 else
                 {
-                    window.me.to_home(); 
+                    window.me.to_home();
                 }
             }    
         )       
