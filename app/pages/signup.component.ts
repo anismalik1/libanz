@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit{
   days       : number = 15;
   selected_plans : any;
   _bonus_offer : any;
+  device : string;
   constructor(private toast: ToastrManager, 
     private fb : FormBuilder,
     public todoservice : TodoService,
@@ -75,8 +76,8 @@ export class SignupComponent implements OnInit{
 
   check_device()
     {
-      let data : any ={device : 'kdhakshd'};
-      
+      let data : any = { device : 'kdhakshd' };
+      this.device = data.device;
       // if(document.URL.indexOf('android_asset') !== -1)
       // {
         this.todoservice.check_device(data)
@@ -190,11 +191,14 @@ export class SignupComponent implements OnInit{
     this.phone = formdata.phone;
     this.password = formdata.password;
     this.signupdisabled = true; 
+    formdata.device = 'android';
+    formdata.device_id = this.device;
     if(document.URL.indexOf('android_asset') !== -1)
     {
       formdata.device = 'android';
-      
+      formdata.device_id = this.device;
     }
+    
     if(this._bonus_offer.valid)
         formdata.bonus = '_bonus';
     this.spinner.show();

@@ -181,6 +181,22 @@ export class TodoService {
       return 0;
   }
 
+  get_user_recharge_amount()
+  {
+    if(this.get_user() != null)
+      return Number(this.get_user().recharge_bonus_wallet.replace(/\,/g,""));
+    else
+      return 0;
+  }
+
+  get_user_product_amount()
+  {
+    if(this.get_user() != null)
+      return Number(this.get_user().product_bonus_wallet.replace(/\,/g,""));
+    else
+      return 0;
+  }
+
 
   get_user_phone()
   {
@@ -227,7 +243,8 @@ export class TodoService {
     let data = JSON.parse(localStorage.getItem('app_token'));
     if(data != null)
     {
-      return data.user.avatar; 
+      if(data.user)
+        return data.user.avatar;   
     } 
     return ''; 
   }

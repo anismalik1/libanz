@@ -324,7 +324,7 @@ hr.line1 {
 				</div>
 				<a class="modal-trigger" href="#modal1" onclick="$('.side-menu').removeClass('open-menu');$('.mobile-mask').hide();"><i class="material-icons">photo_camera</i></a>
 				<div class="wallet-mobile">
-					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
+					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted orange white-text"> Bonus {{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></span>
 				</div>
 	
 				<ul class="dashboard-menu-mobile">
