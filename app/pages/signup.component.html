@@ -349,6 +349,7 @@ p.ask-login {
 
 							<h4 class="merchant-txt">Merchant Registration</h4>
 							<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Payment</p>
+							<span class="green-text" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulation! Offer of <span class="offer-tag orange white-text">{{_bonus_offer.amount_text}}</span> is Waiting for you. </span>
 						</div>
 						<br/>
 						<div *ngIf="signupverify == 0">

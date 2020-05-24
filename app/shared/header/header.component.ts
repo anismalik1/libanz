@@ -56,6 +56,8 @@ export class HeaderComponent implements OnInit{
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
+  valid_for_bonus : boolean= true;
+  _bonus_text : any ;
   constructor(
     private _renderer2: Renderer2,  
     @Inject(DOCUMENT) private _document,  
@@ -69,6 +71,7 @@ export class HeaderComponent implements OnInit{
     private http : Http
   ) 
     {
+      this.check_device();
       this.router.events
         .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
         .subscribe((events: RoutesRecognized[]) => {
@@ -134,6 +137,7 @@ export class HeaderComponent implements OnInit{
         map(value => this._filter(value))
       ); 
       this.init_page(); 
+      
       if(!this.get_token())
       {
         return false;
@@ -141,7 +145,52 @@ export class HeaderComponent implements OnInit{
       this.todoservice.get_user_data();
       this.user_notification(this.start);
       this.user_favourites();
+      
     }  
+
+    check_device()
+    {
+      let data : any ={device : 'kdhakshd'};
+      let storeddata = JSON.parse(localStorage.getItem('device'));
+      if(storeddata != null)
+      { 
+        if(storeddata.user)
+        {
+          return false
+        }
+        else if(this.get_token())
+        {
+          data.user = this.todoservice.get_user_id();
+        }
+      } 
+
+      
+      if(this.get_token())
+      {
+        data.user = this.todoservice.get_user_id();
+      }
+      // if(document.URL.indexOf('android_asset') !== -1)
+      // {
+        this.todoservice.check_device(data)
+        .subscribe(
+          data => 
+          {
+            if(data.valid == 1)
+            {
+              this.valid_for_bonus = true;
+              this._bonus_text = data.amount_text;
+            }
+            if(data.status == 1 || data.status == 2)
+            {
+
+              localStorage.setItem('device',JSON.stringify(storeddata));
+            }
+              
+          }
+        ) 
+      // }
+      
+    }
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
