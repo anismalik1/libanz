@@ -547,7 +547,9 @@ checkout_items(type)
   let wallet_type = $('#wallet-type input[type="radio"]:checked').val();
   let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
   if($('#wallet-type [name="include_wallet"]:checked').length > 0)
-    data.include_wallet = 1; 
+    data.include_wallet = 1;
+  if(this.calculate_bonus() > 0)
+    data.bonus = 1;   
   this.todoservice.checkout_items(data)
     .subscribe(
       data => 
