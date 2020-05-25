@@ -133,12 +133,13 @@ export class RechargeComponent implements OnInit {
       this.get_last_recharges()  
     if(this.get_token())
     {
+      //console.log(this.todoservice.get_user_recharge_amount())
       if(this.todoservice.get_user_recharge_amount() > 0)
       {
         this.fetch_options()
       }
     }  
-  }
+  } 
 
   fetch_options()
   {
@@ -159,6 +160,15 @@ export class RechargeComponent implements OnInit {
     return '';
   }
 
+  calc_amount_to_pay()
+  {
+    if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+    {
+     return this.rechargeData.recharge_amount * 1 + this.rechargeData.commission*1 - 1 * this.options.how_much_apply_to_recharge;
+    }
+    return this.rechargeData.recharge_amount * 1 + this.rechargeData.commission*1 ;
+  }
+
   pay_amount()
   {
     var wallet_used = '';
@@ -166,8 +176,12 @@ export class RechargeComponent implements OnInit {
       wallet_used = 'wallet';
     if((this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 > Math.floor(this.todoservice.get_user_wallet_amount())) && wallet_used == 'wallet')
     {
+      if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+        return Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount())) - 1*this.options.how_much_apply_to_recharge;
       return Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount()));
     }
+    if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+      return Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1) - 1*this.options.how_much_apply_to_recharge;
     return Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
   }
 
@@ -794,6 +808,10 @@ recharge_handle()
       }
       return false;
   }
+  if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+  {
+    this.rechargeData.bonus = 1;
+  }  
   this.spinner.show();
   this.rechargeData.payment_type = $('[name="payment_type"]:checked').val();
   if($('[name="include_wallet"]:checked').length > 0)
@@ -1062,6 +1080,8 @@ check_amount(s)
   this.activity = recharge_data.activity_id;
  }
  
+
+
  get_plans(circle,operator)
  {
    //console.log(operator);

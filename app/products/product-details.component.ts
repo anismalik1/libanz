@@ -64,7 +64,7 @@ export class ProductDetailsComponent implements OnInit{
   filterdList : boolean = false;
   recommended : any;
   myControl = new FormControl();
-  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  options: any ;
   filteredOptions: Observable<object>;
   constructor(
     private _renderer2: Renderer2, 
@@ -142,8 +142,26 @@ export class ProductDetailsComponent implements OnInit{
       if(this.pack_selected[0])
         $('#collapse-header-'+this.pack_selected[0].parent_id).click();
      }, 2000);
-    
+    if(this.get_token())
+    {
+      if(this.todoservice.get_user_product_amount() > 0)
+      {
+        this.fetch_options()
+      }
+    }
   }
+
+  fetch_options()
+  {
+    this.todoservice.fetch_product_options({token : this.get_token()})
+    .subscribe(
+      data => 
+      {
+        this.options = data; 
+      }
+    )
+  }
+
   check_child_exist(id,childs)
   {
     for(var i = 0;i<childs.length;i++)
@@ -1057,7 +1075,9 @@ export class ProductDetailsComponent implements OnInit{
       {
         amount = amount - Number(this.promos.discount);
       }
-    }  
+    } 
+    if(this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product) 
+      amount = amount - this.options.how_much_apply_to_product;
     return amount;
   }
   

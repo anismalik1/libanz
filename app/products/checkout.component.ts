@@ -40,6 +40,7 @@ export class CheckoutComponent implements OnInit{
   reg_address : number = 0; 
   tab_address : any;
   address : any;
+  options : any;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -207,7 +208,24 @@ ngOnInit() {
   this._renderer2.appendChild(this._document.body, script);
   this.get_checkout_data();
   this.todoservice.get_user_data();
-  
+  if(this.get_token())
+    {
+      if(this.todoservice.get_user_product_amount() > 0)
+      {
+        this.fetch_options()
+      }
+    }
+}
+
+fetch_options()
+{
+  this.todoservice.fetch_product_options({token : this.get_token()})
+  .subscribe(
+    data => 
+    {
+      this.options = data; 
+    }
+  )
 }
 pay_amount()
 {
@@ -220,6 +238,34 @@ pay_amount()
     }
     return Math.ceil(this.productservice.calculateCartAmount());
 }
+
+check_bonus(index,amount)
+{
+  if(this.options && amount >= this.options.apply_minimum_product && this.todoservice.get_user_product_amount() >= index * this.options.how_much_apply_to_product)
+  {
+    return true;
+  }
+  return false;
+}
+
+calculate_bonus()
+{
+  var amount : number = 0;
+  if(this.options && this.productservice.cart_items.length > 0)
+  {
+    var $userwallet = this.todoservice.get_user_product_amount();
+    for(var i = 0; i < this.productservice.cart_items.length;i++)
+    {
+      if( this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product && $userwallet >= this.options.how_much_apply_to_product)
+      {
+        $userwallet = $userwallet -  this.options.how_much_apply_to_product;
+        amount = amount + this.options.how_much_apply_to_product;
+      }
+    }
+  }
+  return amount;
+}
+
 cod_apply()
 {
   let a = 0;

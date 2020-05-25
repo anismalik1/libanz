@@ -343,7 +343,7 @@ a.btn.orange.btn-large.ctn-che1 {
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout">
-						<span><a href="javascript:" class="btn orange btn-large ctn-che1" (click)="checkout_items(1)">Continue Checkout({{pay_amount()}})</a></span>
+						<span><a href="javascript:" class="btn orange btn-large ctn-che1" (click)="checkout_items(1)">Continue Checkout({{pay_amount() - this.calculate_bonus()}})</a></span>
 						<!-- <span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a></span> -->
 					</div>
 					<!-- <div class="name margin-checkout" *ngIf="cod == true">
@@ -386,6 +386,10 @@ a.btn.orange.btn-large.ctn-che1 {
 							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>								
 							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 						</div>
+						<div style="padding-top: 10px;" *ngIf="this.check_bonus(i,item.product.offer_price)">
+								<p class="inline-block grey-text">Congrates! Product Bonus Applied :</p>
+								<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
+							</div>	
 				</div>				
 				
             	<!-- <div class="subtotal">
@@ -400,7 +404,7 @@ a.btn.orange.btn-large.ctn-che1 {
 							<hr class="horizontal">
             	<div class="subtotal payable margin-top">
             		<p class="inline-block font600">Amount Payable :</p>
-            		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}} </p>
+            		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
             	</div>
             	<hr>
             	<div class="subtotal">

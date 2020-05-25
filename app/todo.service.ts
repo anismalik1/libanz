@@ -961,7 +961,7 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/check_device';
     return this.send_post_request(data,url) ;
   }
-  fetch_recharge_options(data)
+  fetch_recharge_options(data) 
   {
     let url = this.server_url+'accounts/apis/home/fetch_recharge_options';
     return this.send_post_request(data,url) ;

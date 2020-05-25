@@ -645,7 +645,10 @@ padding-top: 15px !important;
 					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
 					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
-				
+				</div>
+				<div class="subtotal" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">
+					<p class="inline-block font600">Congrates! One Product Bonus Amount Will be Applied:</p>
+					<p class="inline-block green-text right font-size-change"><i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
 				</div>
 				<!-- <div class="subtotal">
 					<p class="inline-block font600">Cashback<i class="red-text"> *</i> :</p>
@@ -660,6 +663,7 @@ padding-top: 15px !important;
 				
 				<div class="clearfix"></div>
 				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
+				<p class="inline-block red-text" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">Avail Bonus of Amount <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p>
 				<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>
 			</div>
 			<hr>
@@ -899,12 +903,6 @@ padding-top: 15px !important;
 								<div class="card-content">
 									<span>{{item.title}}</span>
 								</div>
-								<!-- <div *ngIf="item.category_id == 1 && this.todoservice.get_user_type() == 2">
-									<input type="radio" value="2" name="tskkit-{{item.id}}" id="multi-tsk-1-{{item.id}}" checked (change)="multi_tsk(item.id);">
-									<label for="multi-tsk-1-{{item.id}}">TSK 599</label>
-									<input type="radio" value="3" name="tskkit-{{item.id}}" id="multi-tsk-2-{{item.id}}" (change)="multi_tsk(item.id);">
-									<label for="multi-tsk-2-{{item.id}}">TSK 999</label>
-								</div> -->
 							</div>
 							<div class="col s12 m3">
 								<div class="card-content">
