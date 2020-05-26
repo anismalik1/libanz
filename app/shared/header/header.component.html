@@ -234,9 +234,9 @@ hr.line1 {
 			</div>
 			
 			<div class="mobile-header-right">
-				<span class="absolute" *ngIf="valid_for_bonus"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">{{_bonus_text}}</a> </span>	
 				<ul>
 				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
+				<li *ngIf="this.todoservice.get_user_name() == '' && valid_for_bonus"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">Get 400</a> </span>	</li>
 				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">{{this.productservice.favorite_count()}}</span></li>
 				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
 					<!-- <li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a> -->
