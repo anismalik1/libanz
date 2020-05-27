@@ -150,46 +150,48 @@ export class HeaderComponent implements OnInit{
 
     check_device()
     {
-      let data : any ={device : 'kdhakshd'};
-      let storeddata = JSON.parse(localStorage.getItem('device'));
-      if(storeddata != null)
-      { 
-        if(storeddata.user)
-        {
-          return false
-        }
-        else if(this.get_token())
-        {
-          data.user = this.todoservice.get_user_id();
-        }
-      } 
-
-      
-      if(this.get_token())
+      if(document.URL.indexOf('android_asset') !== -1)
       {
-        data.user = this.todoservice.get_user_id();
-      }
-      // if(document.URL.indexOf('android_asset') !== -1)
-      // {
-        this.todoservice.check_device(data)
-        .subscribe(
-          data => 
-          {
-            if(data.valid == 1)
+        if(window.device)
+        {
+          let data : any ={ device : window.device.uuid};
+          let storeddata = JSON.parse(localStorage.getItem('device'));
+          if(storeddata != null)
+          { 
+            if(storeddata.user)
             {
-              this.valid_for_bonus = true;
-              this._bonus_text = data.amount_text;
+              return false
             }
-            if(data.status == 1 || data.status == 2)
+            else if(this.get_token())
             {
+              data.user = this.todoservice.get_user_id();
+            }
+          } 
 
-              localStorage.setItem('device',JSON.stringify(storeddata));
-            }
-              
+          if(this.get_token())
+          {
+            data.user = this.todoservice.get_user_id();
           }
-        ) 
-      // }
-      
+          
+            this.todoservice.check_device(data)
+            .subscribe(
+              data => 
+              {
+                if(data.valid == 1)
+                {
+                  this.valid_for_bonus = true;
+                  this._bonus_text = data.amount_text;
+                }
+                if(data.status == 1 || data.status == 2)
+                {
+
+                  localStorage.setItem('device',JSON.stringify(storeddata));
+                }
+                  
+              }
+            ) 
+            }  
+       }
     }
 
   imageCropped(event: ImageCroppedEvent) {

@@ -36,7 +36,7 @@ declare var window: any;
             bottom: 0;
             left: 0;
             z-index: 9999; 
-            background: #89f5d5;
+            background: #ff6a00;
         }
         .mid-btns{
             

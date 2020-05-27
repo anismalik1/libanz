@@ -76,22 +76,42 @@ export class SignupComponent implements OnInit{
 
   check_device()
     {
-      let data : any = { device : 'kdhakshd' };
-      this.device = data.device;
-      // if(document.URL.indexOf('android_asset') !== -1)
-      // {
-        this.todoservice.check_device(data)
-        .subscribe(
-          data => 
-          {
-            if(data.valid == 1)
+      if(document.URL.indexOf('android_asset') !== -1)
+      {
+        if(window.device)
+        {
+          let data : any ={ device : window.device.uuid};
+          this.device = data.device;
+          let storeddata = JSON.parse(localStorage.getItem('device'));
+          if(storeddata != null)
+          { 
+            if(storeddata.user)
             {
-              this._bonus_offer = data;
-            } 
+              return false
+            }
+            else if(this.get_token())
+            {
+              data.user = this.todoservice.get_user_id();
+            }
+          } 
+
+          if(this.get_token())
+          {
+            data.user = this.todoservice.get_user_id();
           }
-        ) 
-      // }
-      
+          
+            this.todoservice.check_device(data)
+            .subscribe(
+              data => 
+              {
+                if(data.valid == 1)
+                {
+                  this._bonus_offer = data;
+                } 
+              }
+            ) 
+            }  
+       }
     }
 
   fetch_page_data()
