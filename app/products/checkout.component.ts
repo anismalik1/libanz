@@ -579,10 +579,10 @@ checkout_items(type)
                   var ref = window.cordova.InAppBrowser.open("https://www.mydthshop.com/web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount, '_blank', 'location=yes');
                   window.me = this;
                   ref.addEventListener('loadstart', function(event) { 
-                    var urlSuccessPage = "recharge-receipt";
+                    var urlSuccessPage = "order-receipt";
                     if (event.url.indexOf(urlSuccessPage) > 0) {
                       ref.close();
-                      var orderid = event.url.replace("https://www.mydthshop.com/orders/recharge-receipt/","");
+                      var orderid = event.url.replace("https://www.mydthshop.com/product/order-receipt/","");
                       window.me.router.navigate(['/product/order-receipt/'+orderid]);    
                     }
                 });
@@ -600,10 +600,10 @@ checkout_items(type)
                   var ref = window.cordova.InAppBrowser.open("https://www.mydthshop.com/accounts/apis/response/product_pay/?order_id="+data.order_id, '_blank', 'location=yes');
                   window.me = this;
                   ref.addEventListener('loadstart', function(event) { 
-                    var urlSuccessPage = "recharge-receipt";
+                    var urlSuccessPage = "order-receipt";
                     if (event.url.indexOf(urlSuccessPage) > 0) {
                       ref.close();
-                      var orderid = event.url.replace("https://www.mydthshop.com/orders/recharge-receipt/","");
+                      var orderid = event.url.replace("https://www.mydthshop.com/product/order-receipt/","");
                       window.me.router.navigate(['/product/order-receipt/'+orderid]);    
                     }
                 });
