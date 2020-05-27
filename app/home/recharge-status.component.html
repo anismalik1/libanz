@@ -102,8 +102,8 @@ padding-bottom: 10px;
 							<h3 class="mb-style">Recharge Status </h3>
 							<div class="col s8 no-padding">
 							
-								<span class="font-size-change-order font600" >{{order.status}}</span><br>
-								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span><br>
+								<span class="font-size-change-order font600" >{{order.status}}</span><br/>
+								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span> <span class="font-size-change-order grey-text" *ngIf="order.bonus_amount > 0"> <span class="orange-text">(<i class="icon-inr"></i>{{order.bonus_amount}} Bonus Included)</span></span><br/>
 								<span class="font-size-change1 grey-text">{{order.history_time | date: date:'dd M, Y'}} {{order.history_time | date: 'h:mm a'}}</span>
 							</div>
 							<div class="col s4  no-padding">
