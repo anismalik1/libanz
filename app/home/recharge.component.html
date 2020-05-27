@@ -153,6 +153,12 @@
 	#circles-content .tab.active {
 		border-bottom: 2px solid #00b9f5;
 	}
+	.cst-gift{
+
+font-size: 23px;
+padding-right: 7px;
+color: #ff6a00;
+}
 	
 	@media only screen and (max-width: 767px){
 	
@@ -161,6 +167,12 @@
 		padding: 0px 0px 0px 3px;
 		font-weight: 600;
 	}
+	.cst-gift{
+
+font-size: 23px;
+padding-right: 7px;
+color: #ff6a00;
+}
 	.electric-cls-btn {
 		width: 90% !important;
 		margin: 10px 15px;
@@ -209,6 +221,7 @@ left:5%;
 
 			border:transparent;
 		}
+		
 	}
 	</style>
 <app-header></app-header>
@@ -274,7 +287,7 @@ left:5%;
 						<div class="">
 							<p class="col s12 col m3 recharge-content-box" *ngIf="this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
 								<input type="checkbox" class="with-gap" id="credit-card" name="bonus_amount" value="1" checked/>
-								<label for="credit-card" class="black-text">Recharge Bonus of <span class="orange-text">{{this.options.how_much_apply_to_recharge}}</span> is Applied.</label>
+								<label for="credit-card" class="black-text"> <span class="fa fa-gift cst-gift"></span> <span class="txt-bonus"> Bonus  Rs. </span> <span class="orange-text">{{this.options.how_much_apply_to_recharge}}</span> is Applied.</label>
 							</p> 
 							<p class="col m2 col s12 recharge-content-box">
 								<input [type]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="(this.todoservice.get_user_wallet_amount() == 0)?false:true" [disabled]="(this.todoservice.get_user_wallet_amount() == 0)?true:false"/>

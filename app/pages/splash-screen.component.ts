@@ -39,15 +39,28 @@ declare var window: any;
             background: #89f5d5;
         }
         .mid-btns{
+            
             position: absolute;
-            top: 50%;
-            width: 100%;}
+    bottom: 45px;
+    width: 100%;
+        }
         .mid-btns a{
-        font-size: 15px;
-        padding: 8px 15px;color:#fff;
-        border: 1px solid #fff;margin-left:5px;} 
-        .update-av{padding-bottom: 12px;
-        display: inherit;}   
+        
+            font-size: 15px;
+            padding: 8px 35px;
+            color: #fff;
+            border: 1px solid #fff;
+            margin-left: 6px;
+            border-radius: 20px;
+            background: #fff;
+            color: #040404;
+            font-weight: bold;
+        } 
+        .update-av{
+            padding-bottom: 16px;
+    display: inherit;
+    font-size: 16px;
+    color: #fff !important;}   
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
