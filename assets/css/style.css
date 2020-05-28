@@ -4876,7 +4876,8 @@ span.fa.fa-edit.fa-2x {
 	position: absolute;
     top: 24px;
     width: 44px;
-    font-size: 15px;
+	font-size: 15px;
+	text-align:center;
 }
 a.modal-trigger i {
     position: absolute;
@@ -5181,7 +5182,8 @@ a.logup.modal-trigger.black-text {
     background: #d0cbcb;
     padding: 11px 8px;
     border-radius: 50%;
-    text-transform: uppercase;
+	text-transform: uppercase;
+	text-align:center;
 }
 .unique-item{
 
