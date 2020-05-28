@@ -663,7 +663,8 @@ padding-top: 15px !important;
 				
 				<div class="clearfix"></div>
 				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
-				<p class="inline-block red-text" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">Avail Bonus of Amount <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p>
+				<p class="inline-block red-text" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">Avail Bonus of Amount </p>
+				<p> <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p>
 				<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>
 			</div>
 			<hr>

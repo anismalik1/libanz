@@ -80,6 +80,11 @@
     font-size: 16px !important;
 }
 
+.cst-cashback{
+
+	font-size: 12px;
+    padding: 1px 7px;
+}
 
 @media only screen and (max-width: 767px){
 
@@ -392,7 +397,7 @@ left:5%;
 						<div class="input-field col s12 m12">
 							<input placeholder=" Amount" maxlength="5" type="number" pattern="[0-9]+" class="validate" minlength="2" formControlName="amount">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Enter Amount" id="amid" *ngIf="!mobilegroup.controls['amount'].valid && mobilegroup.controls['amount'].touched"><i class="material-icons">close</i></span> 
-							<div class="orange-text" *ngIf="this.todoservice.get_user_recharge_amount() > 0 && !url_name.includes('postpaid')">Avail Your Offer With Minimum Recharge Of <span class="green white-text">Rs {{options.apply_minimum_recharge}}</span>.</div>   
+							<div class="orange-text" *ngIf="this.todoservice.get_user_recharge_amount() > 0 && !url_name.includes('postpaid')">Avail Your Offer With Minimum Recharge Of <br/> <span class="green white-text cst-cashback">Rs {{options.apply_minimum_recharge}}</span>.</div>   
 						</div>
 						
 						<div class="input-field col s12 m12 margin-btm no-padding">
