@@ -97,7 +97,8 @@ overflow:hidden !important;
 								</div>
 								<div class="col s4 right-align">
 									<span class="font-size-change1">Amount</span><br>
-									<span class="font-size-change-order font600"><span id="total-amount"></span><span *ngIf="order.qty > 1">{{order.qty}} x </span>{{order.price}} + {{pack_data(order.pack_selected,order.title).amount}} = <i class="icon-inr"></i>{{order.qty*order.price + pack_data(order.pack_selected,order.title).amount}}</span><br>
+									<span [className]="(order.bonus_amount == 0) ? 'font-size-change-order font600' : ''"><span id="total-amount"></span><span *ngIf="order.qty > 1">{{order.qty}} x </span>{{order.price}} + {{pack_data(order.pack_selected,order.title).amount}} = <i class="icon-inr"></i>{{order.qty*order.price + pack_data(order.pack_selected,order.title).amount }}</span><br>
+									<span class="font-size-change-order font600" *ngIf="order.bonus_amount > 0">{{order.qty*order.price + pack_data(order.pack_selected,order.title).amount}} - {{order.bonus_amount}}(Bonus) = {{order.qty*order.price + pack_data(order.pack_selected,order.title).amount - order.bonus_amount}} <br></span>
 									<span [innerHTML]="pack_data(order.pack_selected).list"></span>
 									
 								</div>
@@ -133,7 +134,7 @@ overflow:hidden !important;
 								<!-- <div class="center" *ngIf="order.cashback > 0 && order.payment == 'wallet'"><span class="font-size-change1 margin-top green-text">*Congratulations You Have recieved {{order.cashback}} Cashback on your MyDth Wallet.</span></div>								 -->
 							</div> 
 						</div>
-						<div class="center"><a routerLink="/" class="btn orange white-text full-width rounded-btn">Continue Shopping</a></div>
+						<div class="center"><a href="javascript:" class="btn orange white-text full-width rounded-btn" (click)="back_to_home()">Continue Shopping</a></div>
 						
 						<br/><p class="red-text center margin-checkout">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
 					</div>

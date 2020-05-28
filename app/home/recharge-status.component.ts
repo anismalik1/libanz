@@ -108,6 +108,12 @@ export class RechargeStatusComponent implements OnInit {
   }
   back_to_home()
   {
-    this.router.navigate(['/'])    
+    var width = $(window).width(); 
+    if(width > 767)
+    {
+        this.router.navigate(['/home']);
+        return false;
+    }
+    this.router.navigate(['/mhome'])    
   }
 }

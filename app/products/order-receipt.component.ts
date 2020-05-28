@@ -88,4 +88,15 @@ export class OrderReceiptComponent implements OnInit {
     }
     return Number(order.grand_total)+ this.pack_amount;
   }
+
+  back_to_home()
+  {
+    var width = $(window).width(); 
+    if(width > 767)
+    {
+        this.route.navigate(['/home']);
+        return false;
+    }
+    this.route.navigate(['/mhome'])    
+  }
 }
