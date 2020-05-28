@@ -4874,14 +4874,14 @@ span.fa.fa-edit.fa-2x {
     border-radius: 50%;
 	text-transform: uppercase;
 	position: absolute;
-    top: 8px;
+    top: 24px;
     width: 44px;
     font-size: 15px;
 }
 a.modal-trigger i {
     position: absolute;
     top: 52px !important;
-    left: 40px;
+	left: 45px !important;
     height: 30px;
     width: 30px;
     display: block;
@@ -4894,7 +4894,7 @@ a.modal-trigger i {
 	top: 52px !important;
 	font-size: 19px;
     padding-top: 16px;
-    left: 55px !important;
+    left: 45px !important;
     height: 30px;
     width: 30px;
     display: block;
