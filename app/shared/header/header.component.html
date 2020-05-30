@@ -2,6 +2,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+	ul.cst-list-view li {
+    border-bottom: 1px solid #dedede !important;
+	padding: 5px !important;
+}
+
+
 #name-characters {
     background: #d0cbcb;
     padding: 11px 8px;
@@ -566,7 +572,7 @@ li.txt-fix-mb span a {
 							<h4>Notification's</h4>
 							<div class="modal-close right-align"><i class="material-icons">close</i></div>
 							</div>
-							<ul *ngIf="notifications  && notifications.length > 0">
+							<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 							<li *ngFor="let item of notifications;" >
 							<div class="notification-drop-image">
 							<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
