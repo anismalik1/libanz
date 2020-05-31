@@ -21,6 +21,7 @@ export class ForgotPasswordComponent implements OnInit{
   private pin : Number;
   back_to_login : boolean = false;
   public resetgroup : FormGroup;
+  private watch : Number = 0; 
   constructor( public todoservice : TodoService,
               private authservice : AuthService,
               private router : Router,
@@ -80,22 +81,20 @@ export class ForgotPasswordComponent implements OnInit{
 
   watch_sms()
   {
-    if(window.SMSReceive)
+    if(window.SMSRetriever )
     {
       window.me = this; 
-      window.SMSReceive.stopWatch(function() {
-        console.log('stopped');
-      }, function() {
-      });
-      window.SMSReceive.startWatch(function() {
-        console.log('started');
-      }, function() {
-      });
-      console.log(window);
+      // window.SMSReceive.stopWatch(function() {
+      //   console.log('stopped');
+      // }, function() {
+      // });
+      window.SMSRetriever.startWatch(function() {
+          console.log('started');
+        }, function() {
+        });
+        this.watch = 1;
       document.addEventListener('onSMSArrive', function(args : any) {
-        var otp = substring(args.data.body,13, 17);
-        console.log("enter");
-        console.log(window);
+        var otp = substring(args.message,13, 17);
         window.me.proceedresetgroup.controls['pin'].setValue(otp);
         //$('#proceed-reset-form #proceed-submit').click();
         window.me.process_to_reset(window.me.proceedresetgroup.value,window.me);

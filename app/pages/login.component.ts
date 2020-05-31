@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit{
   logingroup : FormGroup;
   page :string =  "/login";
   notification : string = '';
+  private watch  : Number = 0;
   remember : any = {rm:false,ph:'',pw : ''};  
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2,
@@ -108,6 +109,7 @@ fetch_page_data()
 
 login_submit(login,me)
 {
+    $('#login-submit').prop('disabled',false);
     if(!me)
     {
       me = this; 
@@ -186,23 +188,25 @@ login_submit(login,me)
 
 watch_sms()
 {
-    if(window.SMSReceive)
+    if(window.SMSRetriever)
     {
       window.me = this;  
-      window.SMSReceive.stopWatch(function() {
-          console.log('stopped');
-      }, function() {
-      });
-      window.SMSReceive.startWatch(function() {
-        console.log('started');
-      }, function() {
-      });
+      // window.SMSReceive.stopWatch(function() {
+      //     console.log('stopped');
+      // }, function() {
+      // });
+      window.SMSRetriever.startWatch(function() {
+          console.log('started');
+        }, function() {
+        });
+        this.watch = 1;
       document.addEventListener('onSMSArrive', function(args : any) {
-        console.log(args);
-        var otp1 = substring(args.data.body,13, 14);
-        var otp2 = substring(args.data.body,14, 15);
-        var otp3 = substring(args.data.body,15, 16);
-        var otp4 = substring(args.data.body,16, 17);
+        //console.log(args);
+        var otp1 = substring(args.message,13, 14);
+        var otp2 = substring(args.message,14, 15);
+        var otp3 = substring(args.message,15, 16);
+        var otp4 = substring(args.message,16, 17);
+        //var otp4 = substring(args.data.body,16, 17);
         $('#login-page-otps #otp1').val(otp1);
         $('#login-page-otps #otp2').val(otp2);
         $('#login-page-otps #otp3').val(otp3);
@@ -216,7 +220,7 @@ watch_sms()
           while (i < length) result += string[i++];
           return result;
         }  
-      });
+      }); 
     }
 }
 

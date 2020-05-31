@@ -14,15 +14,14 @@ import { Package } from '../packages.entities.service';
 import * as $ from 'jquery'; 
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.component.html',
+  selector: 'app-product-detail-amp',
+  templateUrl: './product-detail-amp.component.html',
   styles: []
 })
-export class ProductDetailsComponent implements OnInit{
+export class ProductDetailAmpComponent implements OnInit {
   fta_price : number;
   hide : boolean = true;
   region : any;
-  fta_title : string;
   pack_selected : any = [];
   fta_pack : any = {};
   all_packs : any = [];
@@ -79,23 +78,15 @@ export class ProductDetailsComponent implements OnInit{
     public productservice : ProductService,
     private router : ActivatedRoute, private route : Router ) {
     this.product_categories();
-    //this.init_overlay();
    }
 
   ngOnInit() {
-    var width = $(window).width(); 
-    if(width < 767)
-    {
-      let uri = this.route.url.replace('product','product/amp');
-      this.route.navigate([uri]);
-      return false;
-    }
     this.cat_id = this.todoservice.get_param('cat_id');
     this.pack_id = Number(this.todoservice.get_param('id'));
     if(this.todoservice.get_param('month'))
       this.month = Number(this.todoservice.get_param('month'));
     
-    this.router.params.subscribe(params => { 
+    this.router.params.subscribe(params => {
       if (this.route.url.includes('multi')) 
       {  
           this.multienable = true; 
@@ -103,7 +94,6 @@ export class ProductDetailsComponent implements OnInit{
       this.p_id = params['name']; //log the value of id
       this.fetch_product_data(this.p_id,this.cat_id);
     });
-    
     
     $('body').delegate('#stars li','mouseover', function(){
       var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -192,18 +182,19 @@ export class ProductDetailsComponent implements OnInit{
       this.route.navigate(['/product/'+this.p_id])
     }
   }
-  track_record()
-  {
-    let data : any = { id : this.product_id}
-    this.todoservice.track_record(data)
-    .subscribe(
-			data => 
-			{
-        this.spinner.hide();
-        //this.fetch_product_data(this.p_id,this.cat_id);
-      }
-		  ) 
-  }
+
+  // track_record()
+  // {
+  //   let data : any = { id : this.product_id}
+  //   this.todoservice.track_record(data)
+  //   .subscribe(
+	// 		data => 
+	// 		{
+  //       this.spinner.hide();
+  //       //this.fetch_product_data(this.p_id,this.cat_id);
+  //     }
+	// 	  ) 
+  // }
 
   continue_to_change(url)
   {
@@ -211,122 +202,6 @@ export class ProductDetailsComponent implements OnInit{
     this.multienable = false;
     this.route.navigateByUrl('/product/'+url);
   }  
-
-  filter_channel_subpack()
-  { 
-    this.pack_selected = [];
-    if(!this.channels_packs)
-     return false;
-    //console.log(this.channels_packs); 
-    
-    for(var i=0;i<this.channels_packs.length ;i++)
-      {
-        //console.log(this.channels_packs[i])
-        if( this.channels_packs[i].default_selected == 1 || this.pack_id)
-        {
-          if(this.channels_packs[i].child[0])
-          {
-            for(var j=0;j<this.channels_packs[i].child.length ;j++)
-            {
-              //console.log("child"+this.channels_packs[i].child[j]);
-              if(this.channels_packs[i].child[j].default_selected == 2)
-              {
-                this.fta_pack = this.channels_packs[i].child[j];
-              }
-              else if(this.channels_packs[i].child[j].default_selected == 1 || this.pack_id == this.channels_packs[i].child[j].id)
-              {
-                this.pack_selected.push(this.channels_packs[i].child[j]); 
-              }
-            }
-            
-            let fta_exist = this.pack_selected.filter(x => x.id == this.fta_pack.id);
-            if(fta_exist.length == 0)
-            {
-              this.pack_selected.push(this.fta_pack); 
-            }
-            
-          }
-           
-        }
-        if(this.channels_packs[i].title.includes('North-India Super Family') || (this.fta_pack.price == 0  && this.pack_selected.length < 2))
-        {
-          let fta_exist = this.pack_selected.filter(x => x.id == this.channels_packs[i].child[0].id);
-          if(fta_exist.length == 0)
-          {
-            this.pack_selected.push(this.channels_packs[i].child[0]); 
-          }
-        }
-    } 
-    //console.log(this.fta_pack);
-    if(this.fta_pack.price == 0 )
-    {
-      for(var i=0;i < this.channels_packs.length ;i++)
-      {
-        //console.log(this.channels_packs[i]);
-        if(this.channels_packs[1])
-        {
-          this.channels_packs[1].child[0].default_selected = 1;
-          this.channels_packs[1].default_selected = 1;
-        }
-        
-        if(this.product.url.includes('standard'))
-        {
-          this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == false);
-        }
-        
-      }
-    }
-  }
-
-  filter_products(slider_data)
-  {
-    let temp :any = [];
-    let new_slides = [];
-    for(var i=0;i<slider_data.length ;i++)
-    {
-        temp = slider_data[i];
-        if(new_slides.length > 0)
-        {
-          let exist_id = new_slides.filter(x => x.id == temp.id);
-          if(exist_id.length > 0)
-          {
-            continue;
-          }
-        }
-        if(temp.user_id)
-        {
-          let slide = slider_data.filter(x => x.user_id == this.todoservice.get_user_id());
-          if(slide.length > 0)
-          {
-            new_slides.push(slide);  
-          }
-          else
-          {
-            new_slides.push(slider_data[i]);
-          }
-        }
-        else
-        {
-          new_slides.push(slider_data[i]);
-        }
-        
-        
-    }
-    return new_slides;
-  }
-  get_package_of_product(id)
-  {
-    this.product_mpackages = [];
-    for(var i=0;i<this.packages.length ;i++)
-    {
-        if(this.packages[i].product_id == id)
-        {   
-            this.product_mpackages.push(this.packages[i]);
-            //this.packages.splice(i, 1);
-        }
-    }
-    return this.product_mpackages;
-  }
 
   fetch_review_data()
   {
@@ -399,7 +274,6 @@ export class ProductDetailsComponent implements OnInit{
 		  ) 
   }
 
-
   fetch_product_data(p_id,cat_id) 
 	{
     this.channel_display = 0; 
@@ -421,8 +295,8 @@ export class ProductDetailsComponent implements OnInit{
         this.channels_packs = data.package;
         this.fta_pack = {};
         this.product = data.PRODUCTDATA;
-        this.recommended = data.RECOMMENDED;
-        this.filter_channel_subpack();
+        this.recommended = data.RECOMMENDED; 
+        //this.filter_channel_subpack();
         if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
@@ -469,7 +343,7 @@ export class ProductDetailsComponent implements OnInit{
 
           
         this.thumbs = data.THUMBS;
-        this.fta_title = data.fta_title;
+      // this.fta_title = data.fta_title;
         this.fta_price = data.fta_price;
         if(this.product.category_id == 1)
         {
@@ -511,6 +385,19 @@ export class ProductDetailsComponent implements OnInit{
         //this.share_fb_links();
       }
     ) 
+  }
+
+  remove_new_line(str)
+  {
+    //console.log(str.replace(/(\r\n|\n|\r|↵)/g,""));
+    return str.replace(/(\r\n|\n|\r|↵|rn)/g,"");
+  }
+  to_number(string)
+  {
+    return Number(string);
+  }
+  htmlToPlaintext(text) {
+    return text ? String(text).replace(/<[^>]+>/gm, '') : '';
   }
   add_to_favorite()
   {
@@ -559,11 +446,6 @@ export class ProductDetailsComponent implements OnInit{
     ) 
   }
 
-  to_number(string)
-  {
-    return Number(string);
-  }
-
   fetch_all_multi(category_id,product_id)
   {
     if($('[name="pincode"]').length > 0)
@@ -600,6 +482,7 @@ export class ProductDetailsComponent implements OnInit{
     }
     ) 
   }
+
   continue_to_select(multi)
   {
     if(!this.productservice.if_exist_in_cart(this.product.id))
@@ -648,6 +531,7 @@ export class ProductDetailsComponent implements OnInit{
     }
     this.route.navigate(['/product/checkout']);
   }
+
   check_cashback(cashback)
   {
     let exist = cashback.filter(x => x.services_id == this.product.id);
@@ -656,19 +540,6 @@ export class ProductDetailsComponent implements OnInit{
       return exist;
     }
     return false;
-  }
-  circle_selected(circle)
-  {
-    this.region = circle;
-    this.productservice.set_region(circle);
-    this.todoservice.channel_category_by_circle({circle:circle,packages: this.product.channel_packages,month: this.month})
-    .subscribe(
-    data => 
-    {
-      this.channels_packs = data.package;
-      this.filter_channel_subpack();
-    }
-    ) 
   }
 
   product_categories()
@@ -819,6 +690,7 @@ export class ProductDetailsComponent implements OnInit{
     `;
     this._renderer2.appendChild(this._document.body, script);
   }
+
   change_count(p_id,op)
   {
     let val: any = $('#update_count1').text();
@@ -834,7 +706,6 @@ export class ProductDetailsComponent implements OnInit{
     }
     $('#update_count1').text(val);
   }
-
   view_product(cat_id,purl)
   {
     this.route.navigate(['/product/'+purl],{ queryParams: {cat_id:cat_id ,p_id: purl}});
@@ -961,6 +832,7 @@ export class ProductDetailsComponent implements OnInit{
     $('.unhide-link').remove()
     this.hide = false;
   }
+
   search_me(val)
   {
     let data : any = {};
@@ -1014,7 +886,7 @@ export class ProductDetailsComponent implements OnInit{
       }
     )
   }
-  
+
   select_pack(pack)
   { 
     if(this.fta_pack.length > 0)
@@ -1049,12 +921,7 @@ export class ProductDetailsComponent implements OnInit{
     }
     this.calculate_amount();
   }
-  
-  remove_new_line(str)
-  {
-    //console.log(str.replace(/(\r\n|\n|\r|↵)/g,""));
-    return str.replace(/(\r\n|\n|\r|↵|rn)/g,"");
-  }
+
   calculate_amount()
   {
     let amount : number = 0;
@@ -1087,7 +954,7 @@ export class ProductDetailsComponent implements OnInit{
       amount = amount - this.options.how_much_apply_to_product;
     return amount;
   }
-  
+
   init_accordian() 
   {
     if($('#accordian-script'))
@@ -1101,10 +968,6 @@ export class ProductDetailsComponent implements OnInit{
     $('.collapsible').collapsible(); 
     `;
     this._renderer2.appendChild(this._document.body, script);
-  }
-
-  htmlToPlaintext(text) {
-    return text ? String(text).replace(/<[^>]+>/gm, '') : '';
   }
 
   get_token()
@@ -1160,33 +1023,12 @@ export class ProductDetailsComponent implements OnInit{
           this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
           this.channels_packs = data.package;
           this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
-          this.filter_channel_subpack();
+          //this.filter_channel_subpack();
           this.spinner.hide();
         }
       ) 
   }
-  select_kit(kit)
-  {
-    this.kit = kit;
-    this.product.tsk_kit = this.kit;
-    
-    if(this.kit == 3)
-    {
-      $('#cashback-item').hide();
-      this.otf_margin = true;
-      $('#offer-price').text(this.monthdata[0].package_price - 1000 );
-      delete this.product.promos;  
-      this.calculate_amount();
-    }
-    else
-    {
-      $('#offer-price').text(this.monthdata[0].offer_price );
-      $('#cashback-item').show();
-      this.product.promos = this.promos;
-      this.calculate_amount();
-    }
-  }
-  
+
   add_to_cart(id)
   {
     this.apply_package();
@@ -1202,17 +1044,6 @@ export class ProductDetailsComponent implements OnInit{
     this.toastr.infoToastr("Your Item is Added to the Cart");
   }
 
-  multi_tsk(id)
-  {
-    if($('[name="tskkit-'+id+'"]:checked').val() == 3)
-    {
-      this.multi_tsk_kit = 3;
-    }
-    else
-    {
-      this.multi_tsk_kit = 2;
-    }
-  }
   go_to_channel_section(opt)
   {
     $('html, body').animate({
@@ -1223,7 +1054,6 @@ export class ProductDetailsComponent implements OnInit{
       $('.multi-text').text("Include Multibox");
     }
   }
-
   apply_package()
   {
     let data : any  = {};
@@ -1253,37 +1083,4 @@ export class ProductDetailsComponent implements OnInit{
     return $.parseJSON(string);
   }
 
-  show_box()
-  {
-    if($('[name="payment_type"]:checked').val() == 'paytm')
-    {
-      $('#paytm-box').show();
-    }
-    else
-    {
-      $('#paytm-box').hide();
-    }
-  }
-
-  apply_otf_margin()
-  {
-    if($('[name="payment_type"]:checked').val() == 'paytm')
-    {
-      if($('#paytm-ref').val() == '')
-      {
-        this.toastr.errorToastr("Please Enter the Paytm Transaction ID");
-        return false;
-      }
-      var otf_type = 2;
-    }
-    else
-    {
-      var otf_type = 1;
-    }
-    this.product.otf_pay_type = otf_type;
-    //$('.modal-close.close-mode').click();
-  }
-
-
 }
-

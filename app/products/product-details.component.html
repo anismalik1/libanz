@@ -1,1069 +1,961 @@
-
 <style>
-.review-text .green {
-    padding: 5px 3px 6px 5px;
-    margin-right: 1rem;
-    border-radius: 50%;
-}
-
-.rating-center{
-
-	line-height: 40px !important;
-}
-.mt-round-btn{
-
-	border-radius: 20px;
-	
-}
-
-.list-data{
-	padding:5px 0 0 0px;
-	 font-size:16px; color:#333;
-	z-index:99999;
-}
-.list-data-1{
-	padding:5px 0 0 0px;
-	 font-size:16px; color:#333;
-	z-index:99999;
-}
-.list-data a{
-
-color: #333;
-font-size: 12px;
-font-weight: bold;
-border: 1px solid #ececec;
-padding: 2px 10px;
-border-radius: 5px;
-z-index: 99999;
-}
-
-.rating-li li a {
-    line-height: 12px;
-}
-.include-multi-box {
-    padding-bottom: 20px;
-}
-.product-detail{
-	position: relative;
-}
-.cpro a{
-
-	color:#333;
-}
- .cpro{
-
-	position: absolute;
-	top: 82px;
-    font-size: 13px;
-    left: 76px;
-    font-weight: bold;
-
- }
-@media only screen and (max-width: 767px){
-
-	.rating-li li a {
-    line-height: 10px;
-}
-
-.chip.red.white-text.right {
-    margin-top: 2px;
-}
-
-
-.cpro {
-	position:absolute;
-    top: 86px;
-    font-size: 12px;
-    font-weight: bold;
-    position: absolute;
-    left: 17%;
-}
-
-.review-ratings {
-    border: 1px solid #f0f0f0;
-    padding: 2rem;
-    border-radius: 2px;
-    margin-top: 20px;
-}
-
-
-.round-btmobile{
-
-	
-    margin-top: 10px;
-	border-radius:20px !important;
-}
-
-.channels-accoriadn .card-content a{
-	background: #ff6a00;
-    color: #fff;
-    padding: 5px 10px;
-    display: inline-block;
-    margin: 0;
-    border-radius: 20px;
-    width: 93px;
-    margin-top: 10px;
-}
-
-.recomm .card {
-    height: 360px !important;
-    padding: 5px;
-    overflow: hidden;
-    border: 1px solid #d6d6d6;
-    transition: .3s all linear;
-    line-height: 20px;
-    border-radius: 5px;
-	position: relative;
-	
-}
-img.img-responsive.pt-img {
-    position: absolute;
-    right: 4px;
-    top: 10px;
-}
-.rating-green-content {
-    white-space: nowrap;
-    font-size: 11px;
-    color: #333;
-}
-
-.mobile-hide{
-
-	display: none;
-}
-.end-btn {
-    border-radius: 0!important;
-}
-.footer-button-buy{
-
-	position: fixed;
-	bottom: 0;
-	padding:0;
-    z-index: 999999;
-    /* left: 7%; */
-    background: #fff;
-	width: 100%;
-	text-align:center;
-	box-shadow: 1px 1px 5px #8c8c8c;
-	height: 65px;
-}
-.fix-btnd{
-	height: 65px;
-    line-height: 65px;
-	float: right;
-    width: 49%;
-    background: #ff6a00 !important;
-}
-.fix-btnd i{
-
-	display: none !important;
-}
-.fix-btnd2{
-	color: #000 !important;
-    background: transparent !important;
-    box-shadow: none;
-	
-	line-height: 65px;
-}
-.fix-btnd2 i{
-
-	color:#333;
-}
-
-.align-center{
-
-	margin: auto 56px !important;
-}
-.cst-size-rate{
-
-	font-size:15px !important;
-}
-span#offer-price {
-    font-size: 17px;
-    padding-right: 10px;
-}
-.list-data{
-	padding-top:6px;
-	padding-bottom:10px; font-size:16px; color:#333;
-	z-index:99999;
-}
-.list-data a{
-
-color: #333;
-font-size: 12px;
-font-weight: bold;
-border: 1px solid #ececec;
-padding: 2px 10px;
-border-radius: 5px;
-z-index: 99999;
-}
-}
-
-@media only screen and (min-width: 1024px){
-
-	.footer-button-buy{
-
-		display: none;
+	.review-text .green {
+			padding: 5px 3px 6px 5px;
+			margin-right: 1rem;
+			border-radius: 50%;
 	}
 	
-}
-
-@media only screen and (max-width: 767px){
-.cst-bg-color {
-    position: fixed !important;
-    width: 100%;
-    z-index: 99999;
-}
-
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-
-.beard .breadcrumb:before {
-color: #000;
-padding-top: 15px !important;
-}
-}
-
-</style>
-<app-header class="hide-on-mobile"></app-header>
-<div class="spinner-wrapper">
-	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
-</div>
-<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-		<div class="container">
-			<div class="col s12">
-				<ul class="back-icon">
-					<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
-				</ul>
-			</div>	
-		</div>
-	</section>
-<section class="no-padding grey lighten-2 beard">
-	<div class="container">
-		<div class="row no-margin">
-			<div class="col s12">
-				<nav>
-					<div class="nav-wrapper">
-						<div class="col s12" *ngIf="product">
-							<a routerLink="/home" class="breadcrumb black-text">Home</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:1}" class="breadcrumb black-text"*ngIf="product.category_id == 1">Tata Sky</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:2}" class="breadcrumb black-text"*ngIf="product.category_id == 2">Videocon</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:3}" class="breadcrumb black-text"*ngIf="product.category_id == 3">Airtel</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:4}" class="breadcrumb black-text"*ngIf="product.category_id == 4">DishTv</a>
-							<a class="breadcrumb black-text">Details</a>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Flash Deal section -->
-<section class="flash-deal border-bottom white">
-	<div class="container" id="product-detailed-section">
-		<div class="row no-margin">
-			<div class="col s12 m12 l5">
-				<div class="images-product relative">
-					<div class="product-img center">
-							<div class="xzoom-thumbs left" *ngIf="thumbs">
-									<ul>
-										<li *ngFor="let item of thumbs;">
-											<a href="javascript:">
-												<img class="xzoom-gallery" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/100x100{{item.image}}">
-											</a>
-										</li>
-								</ul>
-							</div>
-						<span *ngIf="product">
-								<ngx-image-zoom
-									[thumbImage]="this.todoservice.server_url+'accounts/assets/img/product-img/270x270'+product.image"
-									[fullImage]="this.todoservice.server_url+'accounts/assets/img/product-img/'+product.image"
-							></ngx-image-zoom>
-							<!-- <img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"> -->
-						</span>
-						<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a></span>
-                        
-                      </div>
-                      <div class="product-btn center mobile-hide">
-                      	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m12 l7 product-detail" *ngIf="product">
-                  	<h3 class="font600" *ngIf="product">{{product.title}}</h3>
-						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span>
-						
-						<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
-						<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-						<ul id='dropdown1' class='dropdown-content'>
-							<li *ngFor="let item of product_category_list;">
-								<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
-							</li>
-						</ul>
-					
-						<!-- <a href="#chng-base-pack" class="font-size-change1 modal-trigger">Change Basepack</a> -->
-						<a href="javascript:" class="white-text" (click)="go_to_channel_section(1)">
-							<div class="chip red white-text right">
-								Scroll Down And Select Your Channel List
-								<i class="material-icons">keyboard_arrow_down</i>
-							</div>
-						</a>
-					  <br/>
-					  <br/>
-                  	<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
-                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
-                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
-                  	
-                  	<div class="descripetion-detail margin-top1">
-                  		<span class="font-size-change1 font600 grey-text">Description</span> 
-                  		<p class="font-size-change1 no-margin" id="product-description"></p>
-					</div>
-					<div class="clearfix"></div><br/>
-					<!-- <div class="color-warriation inline-block">
-                  		
-                  		<p class="inline margin-left2">Select Quantity</p>
-                  		<div class="product-quantity">
-                  			<button id="lessButton" (click)="change_count(1,'minus')"><i class="material-icons">remove</i></button>
-                  			<span class="updateCount" id="update_count1">1</span>&nbsp;
-                  			<button id="addButton" (click)="change_count(1,'add')"><i class="material-icons">add</i></button>
-                  		</div>
-                  	</div> -->
-                  	<!-- <ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 5 && product.category_id == 1">
-                  		<li>
-                  			<span class="font-size-change1 font600 grey-text">DTH Kit</span>
-                  		</li>
-                  		<li>
-                  			<a id="kit-2" href="javascript:" [className]="(kit == 2) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(2)">599 Kit</a>
-                  		</li>
-                  		<li>
-                  			<a id="kit-3" href="javascript:" [className]="(kit == 3) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(3)">999 Kit</a>
-                  		</li>
-					  </ul> -->
-					<br/>
-                  	<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
-                  		<li>
-                  			<span class="font-size-change1 font600 grey-text">Select Month</span>
-						  </li>
-						  <br/>
-                  		<li *ngFor="let item of package_month;let i = index">
-                  			<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
-                  		</li>
-					  </ul>
-					<br/>
-					<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable && fta_pack.price != 0">
-						<li>
-							<span class="font-size-change1 font600 grey-text">Add Multi</span>
-						</li>
-						<li>
-							<a href="javascript:" class=" white btn black-text" (click)="go_to_channel_section(2)">Select</a>
-						</li>
-					</ul>
-				<br/>
-					
-					  <div class="clearfix"></div>
-					  <div class="col m4 no-padding" *ngIf="circles"> 
-							<mat-form-field>
-								<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)">
-									<span *ngFor="let item of circles;">
-										<mat-option [value]="item.circle_id" >
-											<span class="operator-name">{{ item.name }}</span>
-										</mat-option>
-									</span> 
-								</mat-select>
-							</mat-form-field>
-					  </div>
-					  <div class="clearfix"></div> 
-					  <ul class="monthly-packages margin-top kit-pack" *ngIf="product && product.title.toLowerCase().includes('multi')">
-						<li>
-							<span class="font-size-change1 font600 grey-text">Pincode</span>
-						</li>
-						<li>
-							<input type="text" style="width:180px" name="pincode" placeholder="Pincode" value="{{this.pincode}}" [disabled]="this.pincode" >
-						</li>
-					</ul>
-					<div class="clearfix"></div> 
-                  	<ul class="monthly-packages" id="monthly-packages" *ngIf="multienable">
-						<li>
-							<span class="font-size-change1 font600 grey-text">Multi</span>
-						</li>
-						<li>
-							<input id="multi-enable" type="checkbox" (change)="tick_multi()" [checked]="multienable" disabled>
-							<label for="multi-enable"></label>
-						</li>
-						<li *ngIf="multienable">
-							<input type="text" style="width:180px" name="subscriber_id" placeholder="Subscriber Id OR Phone No">
-						</li>
-					</ul>
-					<div class="review-ratings">
-                  		<div>
-							<h2>Specifications</h2>
-                  			<ul>
-                  				<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of convert_to_json(product.specifications);let i = index">
-									<div class="row">
-										<div class="col m4 s12">
-											<div class="brand">
-												<span class="font-size-change1 font600 grey-text">{{feature.title}}</span>
-											</div>
-										</div>
-										<div class="col m8 s12">
-											<span class="font-size-change">{{feature.value}}</span>
-										</div>
-									</div>
-									
-								</li>
-								<a class="unhide-link blue-text" href="javascript:" (click)="unhide();">Read More <i class="material-icons">add</i></a>
-							</ul>
-						</div>
-						<h2 *ngIf="product.short_description != ''">Terms & Conditions</h2>
-						<span class="font-size-change terms-conds" [innerHTML] ="product.short_description"></span>
-							
-					</div>																				
-			<div class="review-ratings margin-top1">
-              	<div class="row rew-sta-rat">
-              		<div class="col s8 m8">
-              			<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
-              		</div>
-              		<div class="col s4 m4">
-              			<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate</a>
-              		</div>
-              	</div>
-              	<div class="row">
-              		<div class="col s12 m3 l2 res-cen" *ngIf="all_rating == 0">
-              			No Ratings given. 
-              		</div>	
-              		<div class="col s6 m3 l2 res-cen" *ngIf="all_rating > 0">
-              			<span class="font-size-change3 font500" *ngIf="avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}}<i class="material-icons">star</i></span><br/>
-              			<span class="font-size-change1 grey-text">{{all_rating}} Ratings &</span><br/>
-              			<span class="font-size-change1 grey-text">{{rev_count}} Reviews</span>
-              		</div>
-              		<div class="col s6 m9 l6">
-              			<ul *ngIf="grouped_rating" class="rating-li">
-              				<li>
-              					<a href="javascript:" class="black-text">
-              						<div class="row no-margin">
-              							<div class="col s1 center no-padding">
-              								<span class="font-size-change">5<i class="material-icons">star</i></span>
-              							</div>
-              							<div class="col s9">
-              								<div class="progress">
-              									<div class="determinate" [style.width]="(grouped_rating.rate5/all_rating)*100+'%'"></div>
-              								</div>
-              							</div>
-              							<div class="col s2">
-              								<span class="font-size-change grey-text">{{grouped_rating.rate5}}</span>
-              							</div>
-              						</div>
-              					</a>
-              				</li>
-              				<li>
-              					<a href="javascript:" class="black-text">
-              						<div class="row no-margin">
-              							<div class="col s1 center no-padding">
-              								<span class="font-size-change">4<i class="material-icons">star</i></span>
-              							</div>
-              							<div class="col s9">
-              								<div class="progress">
-              									<div class="determinate" [style.width]="(grouped_rating.rate4/all_rating)*100+'%'"></div>
-              								</div>
-              							</div>
-              							<div class="col s2">
-              								<span class="font-size-change grey-text">{{grouped_rating.rate4}}</span>
-              							</div>
-              						</div>
-              					</a>
-              				</li>
-              				<li>
-              					<a href="javascript:" class="black-text">
-              						<div class="row no-margin">
-              							<div class="col s1 center no-padding">
-              								<span class="font-size-change">3<i class="material-icons">star</i></span>
-              							</div>
-              							<div class="col s9">
-              								<div class="progress">
-              									<div class="determinate" [style.width]="(grouped_rating.rate3/all_rating)*100+'%'"></div>
-              								</div>
-              							</div>
-              							<div class="col s2">
-              								<span class="font-size-change grey-text">{{grouped_rating.rate3}}</span>
-              							</div>
-              						</div>
-              					</a>
-              				</li>
-              				<li>
-              					<a href="javascript:" class="black-text">
-              						<div class="row no-margin">
-              							<div class="col s1 center no-padding">
-              								<span class="font-size-change">2<i class="material-icons">star</i></span>
-              							</div>
-              							<div class="col s9">
-              								<div class="progress">
-              									<div class="determinate orange" [style.width]="(grouped_rating.rate2/all_rating)*100+'%'"></div>
-              								</div>
-              							</div>
-              							<div class="col s2">
-              								<span class="font-size-change grey-text">{{grouped_rating.rate2}}</span>
-              							</div>
-              						</div>
-              					</a>
-              				</li>
-              				<li>
-              					<a href="javascript:" class="black-text">
-              						<div class="row no-margin">
-              							<div class="col s1 center no-padding">
-              								<span class="font-size-change">1<i class="material-icons">star</i></span>
-              							</div>
-              							<div class="col s9">
-              								<div class="progress">
-              									<div class="determinate red" [style.width]="(grouped_rating.rate1/all_rating)*100+'%'"></div>
-              								</div>
-              							</div>
-              							<div class="col s2">
-              								<span class="font-size-change grey-text">{{grouped_rating.rate1}}</span>
-              							</div>
-              						</div>
-              					</a>
-              				</li>
-              			</ul>
-              		</div>
-              	</div>
-              	<div class="review-details">
-              		<div class="review-text margin-top border-bottom" *ngFor="let review of reviews">
-              			<span class="red white-text" *ngIf="review.reting == 1">{{review.reting}}<i class="material-icons">star</i></span>
-              			<span class="orange white-text" *ngIf="review.reting == 2">{{review.reting}}<i class="material-icons">star</i></span>
-              			<span class="green white-text" *ngIf="review.reting == 3">{{review.reting}}<i class="material-icons">star</i></span>
-              			<span class="green white-text" *ngIf="review.reting == 4">{{review.reting}}<i class="material-icons">star</i></span>
-              			<span class="green white-text" *ngIf="review.reting == 5">{{review.reting}}<i class="material-icons">star</i></span>
-              			<span class="font-size-change1">{{review.name}}</span>
-              			<p class="font-size-change1">{{review.review}}</p>
-              		</div>
-              		<div class="margin-top" *ngIf="more_display" id="more-display">
-              			<a href="javascript:" class="font-size-change1" (click)="load_more_review();">View More +</a>
-              		</div>
-              	</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
- <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
-   <div class="container">
-    <div class="row no-margin">
-			<div class="col s12 m8">
-					<div class="center">	
-							<h2 class="center font600 text-orange">Select Package </h2>
-							<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
-						</div>
-			</div>			
-     <div class="col s12 m8 channel-list-box">				
-      <div class="channels-accoriadn">
-			<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
-				<li *ngFor="let packs of channels_packs;let j = index" class="active">
-					<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
-					<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
-						<div class="row">
-							<div class="col s6 m4" *ngFor="let item of packs.child;let i = index;">
-							<!-- <div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
-							<div class="card product-new" *ngIf="item.default_selected == 2">
-								<div class="card-content center">
-									<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
-									<h4 class="grey-text">{{item.title}}</h4>
-									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
-									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
-									<br/>
-									<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
-								
-								</div>
-								
-							</div>
-							<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
-							<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
-								<div class="card-content center" >
-									<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
-									<h4 class="grey-text">{{item.title}}</h4>
-									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
-									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
-									<br/>
-									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
-									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
-								</div>
-							</div>
-							<div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
-								<div class="card-content center" >
-									<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
-									<h4 class="grey-text">{{item.title}}</h4>
-									<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
-									<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
-									<br/>
-									<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
-									<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
-								</div>
-							</div>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
- 
-			<ul class="pt-all-10">
-				<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
-				<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
-				<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
-			</ul>
-			<hr class="horizontal">
-			
-</div>
-</div>
-<div class="col s12 m4 order-summary">
-	<div class="card">
-		<div class="card-content black-text no-padding">
-			<span class="card-title inline-block">Order Summary</span>
-			<hr>
-			<div>
-				<div class="subtotal">
-					<div *ngIf="product && ( kit == 2 || kit == 3) ; then kitblock else nokitblock"></div>
-					<p class="inline-block font600">Product :</p>
-					<ng-template #kitblock>
-						<p class="inline-block right font-size-change green-text" *ngIf="product && kit == 2"> <i class="icon-inr"></i> {{product.offer_price}}</p>
-						<p class="inline-block right font-size-change green-text" *ngIf="product && kit == 3"> <i class="icon-inr"></i> {{product.price - 1000}}</p>
-					</ng-template>
-					<ng-template #nokitblock>
-						<p class="inline-block right font-size-change green-text" *ngIf="product"> <i class="icon-inr"></i> {{product.offer_price}}</p>
-					</ng-template>
-					
-				</div> 
-				<div class="subtotal" *ngFor="let item of pack_selected;">
-					<p class="inline-block font600">{{item.title}} :</p>
-					<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
-					<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
-					<li class="grey-txt-package" style="list-style-type: none;
-							white-space: nowrap;
-							margin-top: 7px;
-							font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</li>
-				</div>
-				<div class="subtotal" *ngIf="this.product && this.product.promos">
-					<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
-					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
-					<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
-				</div>
-				<div class="subtotal" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">
-					<p class="inline-block font600">Congrates! One Product Bonus Amount Will be Applied:</p>
-					<p class="inline-block green-text right font-size-change"><i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
-				</div>
-				<!-- <div class="subtotal">
-					<p class="inline-block font600">Cashback<i class="red-text"> *</i> :</p>
-					<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && product"><i class="icon-inr"></i>{{product.partnerwalletamount}}</p>								
-                	<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && product"> <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>
-				</div> -->
-			</div>
-			<hr class="horizontal">
-			<div class="subtotal payable margin-top">
-				<p class="inline-block font600">Amount Payable :</p>
-				<p class="inline-block right font-size-change"> <i class="icon-inr"></i> {{calculate_amount() }}</p>
-				
-				<div class="clearfix"></div>
-				<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
-				<p class="inline-block red-text" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">Avail Bonus of Amount </p>
-				<p> <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p>
-				<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>
-			</div>
-			<hr>
-			<div class="subtotal inline-block">
-				<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
-				<a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a>
-			</div>				
-		</div>
-	</div>
-</div>
-</div>
-
-</div>
-</section>
-<section class="mobile-view-itm">
-	<div class="row no-margin 1">
-		<div class="col s12 m4" >
-		<div class="product-image">
-			<div class="row">
-				<div class="col s10">
-					<div class="rating-green-content" >Trending </div>
-				</div>
-				<div class="col s2">
-					<span class="fa fa-star pull-right icn-clr1"></span>
-				</div>
-			</div>
-			<div class="row">
-			
-			<div class="col s2">
-				<div class="product-img1">
-					<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-				</div>
-			</div>
-			<div class="col s10">
-				<div class="rechare-section-list">
-					<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+	.rating-center{
 	
-					<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
-					<br/>
-					<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-					<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-				   
-				</div>
-			</div>
-			</div>
-			</div>
-		</div>
-
-		<div class="col s12 m4" >
-			<div class="product-image">
-				<div class="row">
-					<div class="col s10">
-						<div class="rating-green-content" >Trending </div>
-					</div>
-					<div class="col s2">
-						<span class="fa fa-star pull-right icn-clr1"></span>
-					</div>
-				</div>
-				<div class="row">
-				
-				<div class="col s2">
-					<div class="product-img1">
-						<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-					</div>
-				</div>
-				<div class="col s10">
-					<div class="rechare-section-list">
-						<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+		line-height: 40px !important;
+	}
+	.mt-round-btn{
+	
+		border-radius: 20px;
 		
-						<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
-						<br/>
-						<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-					   
-					</div>
-				</div>
-				</div>
-				</div>
-			</div>
-
-			<div class="col s12 m4" >
-				<div class="product-image">
-					<div class="row">
-						<div class="col s10">
-							<div class="rating-green-content" >Trending </div>
-						</div>
-						<div class="col s2">
-							<span class="fa fa-star pull-right icn-clr1"></span>
-						</div>
-					</div>
-					<div class="row">
-					
-					<div class="col s2">
-						<div class="product-img1">
-							<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-						</div>
-					</div>
-					<div class="col s10">
-						<div class="rechare-section-list">
-							<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
-			
-							<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
-							<br/>
-							<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-							<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-						   
-						</div>
-					</div>
-					</div>
-					</div>
-				</div>
-
-				
-		</div>
-
-</section>
-
-<section>
-		<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt" *ngIf="this.recommended">
-				<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
-			<div class="container-fluid">
-				<div class="row no-margin home-product-card recomm">
-					<div *ngFor="let item of recommended" class="col s12 l3">
-						<div class="card">
-							<div class="row" style="margin-bottom:10px;">
-								<div class="col s10">
-									<div class="rating-green-content" >Free Home Delievery </div>
-								</div>
-								<div class="col s2" *ngIf="item.new_product == 1">
-									<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
-									<img src="https://www.mydthshop.com/web-app/assets/images/new.gif" class="img-responsive pt-img"/>
-								</div>
-							</div>
-							<div class="card-image padd center">
-									<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
-								</div>
-								<div class="clearfix"></div>
-								<div class="card-stacked">
-									<div class="card-content no-padding">
-										<span class="card-title">{{item.title}}</span>								
-										<div class="row center">
-											<div class="col s12 m12">
-												<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
-												<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
-												<!-- <span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span> -->
-											</div>
-											<div class="col s12 m12">
-												<!-- <div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div> -->
-												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
-											</div>
-											<div class="clearfix"></div>
-											<div class="col s12 m12 ">
-												<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
-											</div>
-										</div> 									 
-										<div class="btn-new1 center">
-											<a [routerLink]="['/product/'+item.url]" class="btn">Book Now</a>
-										</div>
-									</div>
-								</div>
-						</div>
-					</div>
-				</div>
+	}
+	
+	.list-data{
+		padding:5px 0 0 60px;
+		 font-size:16px; color:#333;
+		z-index:99999;
+	}
+	.list-data a{
+	
+	color: #333;
+	font-size: 12px;
+	font-weight: bold;
+	border: 1px solid #ececec;
+	padding: 2px 10px;
+	border-radius: 5px;
+	z-index: 99999;
+	}
+	
+	.rating-li li a {
+			line-height: 12px;
+	}
+	.include-multi-box {
+			padding-bottom: 20px;
+	}
+	.product-detail{
+		position: relative;
+	}
+	.cpro a{
+	
+		color:#333;
+	}
+	 .cpro{
+	
+		position: absolute;
+		top: 82px;
+			font-size: 13px;
+			left: 76px;
+			font-weight: bold;
+	
+	 }
+	@media only screen and (max-width: 767px){
+	
+		.rating-li li a {
+			line-height: 10px;
+	}
+	
+	.chip.red.white-text.right {
+			margin-top: 2px;
+	}
+	
+	
+	.cpro {
+		position:absolute;
+			top: 86px;
+			font-size: 12px;
+			font-weight: bold;
+			position: absolute;
+			left: 17%;
+	}
+	
+	.review-ratings {
+			border: 1px solid #f0f0f0;
+			padding: 2rem;
+			border-radius: 2px;
+			margin-top: 20px;
+	}
+	
+	
+	.round-btmobile{
+	
+		
+			margin-top: 10px;
+		border-radius:20px !important;
+	}
+	
+	.channels-accoriadn .card-content a{
+		background: #ff6a00;
+			color: #fff;
+			padding: 5px 10px;
+			display: inline-block;
+			margin: 0;
+			border-radius: 20px;
+			width: 93px;
+			margin-top: 10px;
+	}
+	
+	.recomm .card {
+			height: 360px !important;
+			padding: 5px;
+			overflow: hidden;
+			border: 1px solid #d6d6d6;
+			transition: .3s all linear;
+			line-height: 20px;
+			border-radius: 5px;
+		position: relative;
+		
+	}
+	img.img-responsive.pt-img {
+			position: absolute;
+			right: 4px;
+			top: 10px;
+	}
+	.rating-green-content {
+			white-space: nowrap;
+			font-size: 11px;
+			color: #333;
+	}
+	
+	.mobile-hide{
+	
+		display: none;
+	}
+	.end-btn {
+			border-radius: 0!important;
+	}
+	.footer-button-buy{
+	
+		position: fixed;
+		bottom: 0;
+		padding:0;
+			z-index: 999999;
+			/* left: 7%; */
+			background: #fff;
+		width: 100%;
+		text-align:center;
+		box-shadow: 1px 1px 5px #8c8c8c;
+		height: 65px;
+	}
+	.fix-btnd{
+		height: 65px;
+			line-height: 65px;
+		float: right;
+			width: 49%;
+			background: #ff6a00 !important;
+	}
+	.fix-btnd i{
+	
+		display: none !important;
+	}
+	.fix-btnd2{
+		color: #000 !important;
+			background: transparent !important;
+			box-shadow: none;
+		
+		line-height: 65px;
+	}
+	.fix-btnd2 i{
+	
+		color:#333;
+	}
+	
+	.align-center{
+	
+		margin: auto 56px !important;
+	}
+	.cst-size-rate{
+	
+		font-size:15px !important;
+	}
+	span#offer-price {
+			font-size: 17px;
+			padding-right: 10px;
+	}
+	.list-data{
+		padding-top:6px;
+		padding-bottom:10px; font-size:16px; color:#333;
+		z-index:99999;
+	}
+	.list-data a{
+	
+	color: #333;
+	font-size: 12px;
+	font-weight: bold;
+	border: 1px solid #ececec;
+	padding: 2px 10px;
+	border-radius: 5px;
+	z-index: 99999;
+	}
+	}
+	
+	@media only screen and (min-width: 1024px){
+	
+		.footer-button-buy{
+	
+			display: none;
+		}
+		
+	}
+	
+	@media only screen and (max-width: 767px){
+	.cst-bg-color {
+			position: fixed !important;
+			width: 100%;
+			z-index: 99999;
+	}
+	
+	}
+	
+	@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	
+	.beard .breadcrumb:before {
+	color: #000;
+	padding-top: 15px !important;
+	}
+	}
+	
+	</style>
+	<app-header></app-header>
+	<div class="spinner-wrapper">
+		<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+	</div>
+	<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+			<div class="container">
+				<div class="col s12">
+					<ul class="back-icon">
+						<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
+					</ul>
+				</div>	
 			</div>
 		</section>
-</section>
-<div class="footer-button-buy">
-	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 end-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  Packages </a>
-
-</div>
-<!-- Modal Structure -->
-<div id="review" class="modal">
- <div class="modal-content no-padding" *ngIf="display == 1">
-  <div class="border-bottom padd-right-left1 center">
-   <h4 class="no-margin">{{product.title}} Review</h4>
-   <span class="modal-close close-btn"><i class="material-icons font-size-change2">close</i></span>
- </div>
- <div class="review-written margin-top">
-   <div class="row" *ngFor="let review of reviews;">
-    <div class="col s12 m2 center">
-     <img src="{{this.todoservice.base_url}}assets/images/av.png" class="responsive-img vertical-align-middle" alt="User">
-     <br>
-
-     <span class="font-size-change" *ngIf="review.reting <=1"><i class="material-icons orange-text">star</i></span>
-     <span class="font-size-change" *ngIf="review.reting <=2"><i class="material-icons orange-text">star</i></span>
-     <span class="font-size-change" *ngIf="review.reting <=3"><i class="material-icons orange-text">star</i></span>
-     <span class="font-size-change" *ngIf="review.reting <=4"><i class="material-icons orange-text">star</i></span>
-     <span class="font-size-change" *ngIf="review.reting <=5"><i class="material-icons orange-text">star</i></span>
-   </div>
-   <div class="col s12 m10 margin-top">
-     <span class="font-size-change font600">{{review.name}}</span>
-     <p>{{review.review}}</p>
-   </div>
- </div>
-</div>
-</div>
-</div>
-<!-- write-review Modal Structure -->
-<div id="write-review" class="modal">
- <form #reviewform = "ngForm" (ngSubmit)="review_submit(reviewform.value,0)">
-  <div class="modal-content no-padding">
-   <div class="border-bottom padd-right-left1 center">
-    <h4 class="no-margin" *ngIf="rating == 0">OOps!</h4>
-    <h4 class="no-margin" *ngIf="rating == 1">Write a Review</h4>
-    <span class="modal-close close-btn"><i class="material-icons font-size-change2">close</i></span>
-  </div>
-  <div class="review-written padd margin-top" *ngIf="rating == 0">You Are Not Allowed to rate this product.</div>
-  <div class="review-written padd margin-top" *ngIf="rating == 1">
-    <!-- Rating Stars Box -->
-    <div class='rating-stars inline-block text-center' *ngIf="product">
-     <input type="hidden" name="product_id" [(ngModel)]="product.id" value="product.id">  
-     <ul id='stars'>
-      <li [className]="(rate_data.reting >=1) ? 'selected star' : 'star'" title='Poor' data-value='1' (click)="review_submit({},1)">
-       <i class="material-icons">star</i>
-     </li>
-     <li [className]="(rate_data.reting >=2) ? 'selected star' : 'star'" title='Fair' data-value='2' (click)="review_submit({},2)">
-       <i class="material-icons">star</i>
-     </li>
-     <li [className]="(rate_data.reting >=3) ? 'selected star' : 'star'" title='Good' data-value='3' (click)="review_submit({},3)">
-       <i class="material-icons">star</i>
-     </li>
-     <li [className]="(rate_data.reting >=4) ? 'selected star' : 'star'" title='Excellent' data-value='4' (click)="review_submit({},4)">
-       <i class="material-icons">star</i>
-     </li>
-     <li [className]="(rate_data.reting >=5) ? 'selected star' : 'star'" title='WOW!!!' data-value='5' (click)="review_submit({},4)">
-       <i class="material-icons">star</i>
-     </li>
-   </ul>
- </div>			  
- <div class='success-box inline-block'>
-   <div class='clearfix'></div>
-   <div class='text-message' *ngIf="rate_data.reting == 1">Very Bad</div>
-   <div class='text-message' *ngIf="rate_data.reting == 2">Bad</div>
-   <div class='text-message' *ngIf="rate_data.reting == 3">Good</div>
-   <div class='text-message' *ngIf="rate_data.reting == 4">Very Good</div>
-   <div class='text-message' *ngIf="rate_data.reting == 5">Excellent</div>
-   <div class='clearfix'></div>
- </div>
- <div class="row" *ngIf="rating == 1">
-   <div class="input-field">
-    <textarea id="textarea1" class="materialize-textarea" name="review_desc" [(ngModel)]="rate_data.review">{{rate_data.review}}</textarea>
-    <label for="textarea1" [className]="(rate_data.review !='') ? 'active' : ''">Write Your Review</label>
-  </div>
-</div>
-</div>
-</div>
-
-
-<div class="modal-footer orange center no-box-shadow" *ngIf="rating == 1">
- <button type="submit" class="modal-action white-text font-size-change btn-flat modal-close" *ngIf="rate_data.review == ''">Submit Review</button>
- <button type="submit" class="modal-action white-text font-size-change btn-flat modal-close" *ngIf="rate_data.review != ''">Update Review</button>
-</div>
-</form>
-</div>
-
-
-<div id="tata-sky-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
-		<h4>Choose Set Up Box </h4>
-		<div class="row" *ngIf="product_list">
-			<div class="col s6 m3" *ngFor="let item of product_list">
-				<a href="javascript:" class="black-text" (click)="continue_to_change(item.url)">
-					<div class="card choose-set-up-box center">
-						<div class="card-image">
-							<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+	<section class="no-padding grey lighten-2 beard">
+		<div class="container">
+			<div class="row no-margin">
+				<div class="col s12">
+					<nav>
+						<div class="nav-wrapper">
+							<div class="col s12" *ngIf="product">
+								<a routerLink="/home" class="breadcrumb black-text">Home</a>
+								<a routerLink="/product/listing" [queryParams]="{cat_id:1}" class="breadcrumb black-text"*ngIf="product.category_id == 1">Tata Sky</a>
+								<a routerLink="/product/listing" [queryParams]="{cat_id:2}" class="breadcrumb black-text"*ngIf="product.category_id == 2">Videocon</a>
+								<a routerLink="/product/listing" [queryParams]="{cat_id:3}" class="breadcrumb black-text"*ngIf="product.category_id == 3">Airtel</a>
+								<a routerLink="/product/listing" [queryParams]="{cat_id:4}" class="breadcrumb black-text"*ngIf="product.category_id == 4">DishTv</a>
+								<a class="breadcrumb black-text">Details</a>
+							</div>
 						</div>
-						<div class="card-content">
-							<span>{{item.title}}</span> 
-						</div>
-					</div>
-				</a>
+					</nav>
+				</div>
 			</div>
 		</div>
-		<div class="row" *ngIf="!product_list">
-			Loading Products
-		</div>
-		
-	</div>
-	<div class="modal-footer">
-		<a href="javascript:" class="modal-action btn red modal-close">Close</a>
-	</div>
-</div>
-	<style>
-		.cdk-overlay-container {
-			z-index: 99999!important;
-		}
-		</style>
-<div id="chng-set-to-box" class="modal bottom-sheet">
-	<div class="modal-content">
-		<h4>Change Set Top Box</h4>
-		<div class="row">
-			<div class="col s12 m6">
-				<mat-form-field>
-					<mat-select placeholder="Select Operator" (selectionChange)="category_selected($event.value)">
-						<span *ngFor="let item of product_category_list;">
-							<mat-option [value]="item.id">
-								<span class="operator-name">{{ item.title }}</span>
-							</mat-option>
-						</span> 
-					</mat-select>
-				</mat-form-field>
-			</div>
-			<div class="col s12 m6" >
-				<mat-form-field>
-					<mat-select placeholder="Select Product" (selectionChange)="continue_to_change($event.value)">
-						<span *ngFor="let item of product_list;">
-							<mat-option [value]="item.url">
-								<span class="operator-name">{{ item.title }}</span>
-							</mat-option>
-						</span> 
-					</mat-select>
-				</mat-form-field>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="javascript:" class="modal-action btn orange modal-close">Cancel</a>
-	</div>
-</div>
-<div id="multi-add-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
-		<span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
-		<h2 class="center">Do You want to include Multi Box With this Pack?</h2>
-		<div class="clearfix"></div>
-		<div class="row" *ngIf="multi_list">
-			<div class="col s12 m12" *ngFor="let item of multi_list">
-				
-					<div class="card center">
-						<!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
-						<div class="include-multi-box">
-							<div class="col s12 m3">
-								<div class="card-image">
-									<img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+	</section>
+	<!-- Flash Deal section -->
+	<section class="flash-deal border-bottom white">
+		<div class="container" id="product-detailed-section">
+			<div class="row no-margin">
+				<div class="col s12 m12 l5">
+					<div class="images-product relative">
+						<div class="product-img center">
+								<div class="xzoom-thumbs left" *ngIf="thumbs">
+										<ul>
+											<li *ngFor="let item of thumbs;">
+												<a href="javascript:">
+													<img class="xzoom-gallery" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/100x100{{item.image}}">
+												</a>
+											</li>
+									</ul>
 								</div>
-							</div>
-							<div class="col s12 m6">
-								<div class="card-content">
-									<span>{{item.title}}</span>
-								</div>
-							</div>
-							<div class="col s12 m3">
-								<div class="card-content">
-									<span >Rs. {{item.offer_price}} </span>
-								</div>
-								
-								<div class="clearfix"></div>
-								<a class="modal-close btn right orange mt-round-btn" href="javascript:" (click)="continue_to_select(item)">Select</a>
-							</div>
-							<div class="clearfix"></div>
+							<span *ngIf="product">
+									<ngx-image-zoom
+										[thumbImage]="this.todoservice.server_url+'accounts/assets/img/product-img/270x270'+product.image"
+										[fullImage]="this.todoservice.server_url+'accounts/assets/img/product-img/'+product.image"
+								></ngx-image-zoom>
+								<!-- <img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"> -->
+							</span>
+							<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a></span>
+													
+												</div>
+												<div class="product-btn center mobile-hide">
+													<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
+												</div>
+											</div>
+										</div>
+										<div class="col s12 m12 l7 product-detail" *ngIf="product">
+											<h3 class="font600" *ngIf="product">{{product.title}}</h3>
+							<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span>
 							
-						</div>
+							<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
+							<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
+							<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+							<ul id='dropdown1' class='dropdown-content'>
+								<li *ngFor="let item of product_category_list;">
+									<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
+								</li>
+							</ul>
 						
+							<!-- <a href="#chng-base-pack" class="font-size-change1 modal-trigger">Change Basepack</a> -->
+							<a href="javascript:" class="white-text" (click)="go_to_channel_section(1)">
+								<div class="chip red white-text right">
+									Scroll Down And Select Your Channel List
+									<i class="material-icons">keyboard_arrow_down</i>
+								</div>
+							</a>
+							<br/>
+							<br/>
+											<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
+											<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
+											
+											<div class="descripetion-detail margin-top1">
+												<span class="font-size-change1 font600 grey-text">Description</span> 
+												<p class="font-size-change1 no-margin" id="product-description"></p>
+						</div>
+						<div class="clearfix"></div><br/>
+						<!-- <div class="color-warriation inline-block">
+												
+												<p class="inline margin-left2">Select Quantity</p>
+												<div class="product-quantity">
+													<button id="lessButton" (click)="change_count(1,'minus')"><i class="material-icons">remove</i></button>
+													<span class="updateCount" id="update_count1">1</span>&nbsp;
+													<button id="addButton" (click)="change_count(1,'add')"><i class="material-icons">add</i></button>
+												</div>
+											</div> -->
+											<!-- <ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 5 && product.category_id == 1">
+												<li>
+													<span class="font-size-change1 font600 grey-text">DTH Kit</span>
+												</li>
+												<li>
+													<a id="kit-2" href="javascript:" [className]="(kit == 2) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(2)">599 Kit</a>
+												</li>
+												<li>
+													<a id="kit-3" href="javascript:" [className]="(kit == 3) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(3)">999 Kit</a>
+												</li>
+							</ul> -->
+						<br/>
+											<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
+												<li>
+													<span class="font-size-change1 font600 grey-text">Select Month</span>
+								</li>
+								<br/>
+												<li *ngFor="let item of package_month;let i = index">
+													<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
+												</li>
+							</ul>
+						<br/>
+						<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable && fta_pack.price != 0">
+							<li>
+								<span class="font-size-change1 font600 grey-text">Add Multi</span>
+							</li>
+							<li>
+								<a href="javascript:" class=" white btn black-text" (click)="go_to_channel_section(2)">Select</a>
+							</li>
+						</ul>
+					<br/>
+						
+							<div class="clearfix"></div>
+							<div class="col m4 no-padding" *ngIf="circles"> 
+								<mat-form-field>
+									<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)">
+										<span *ngFor="let item of circles;">
+											<mat-option [value]="item.circle_id" >
+												<span class="operator-name">{{ item.name }}</span>
+											</mat-option>
+										</span> 
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div class="clearfix"></div> 
+							<ul class="monthly-packages margin-top kit-pack" *ngIf="product && product.title.toLowerCase().includes('multi')">
+							<li>
+								<span class="font-size-change1 font600 grey-text">Pincode</span>
+							</li>
+							<li>
+								<input type="text" style="width:180px" name="pincode" placeholder="Pincode" value="{{this.pincode}}" [disabled]="this.pincode" >
+							</li>
+						</ul>
+						<div class="clearfix"></div> 
+											<ul class="monthly-packages" id="monthly-packages" *ngIf="multienable">
+							<li>
+								<span class="font-size-change1 font600 grey-text">Multi</span>
+							</li>
+							<li>
+								<input id="multi-enable" type="checkbox" (change)="tick_multi()" [checked]="multienable" disabled>
+								<label for="multi-enable"></label>
+							</li>
+							<li *ngIf="multienable">
+								<input type="text" style="width:180px" name="subscriber_id" placeholder="Subscriber Id OR Phone No">
+							</li>
+						</ul>
+						<div class="review-ratings">
+												<div>
+								<h2>Specifications</h2>
+													<ul>
+														<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of convert_to_json(product.specifications);let i = index">
+										<div class="row">
+											<div class="col m4 s12">
+												<div class="brand">
+													<span class="font-size-change1 font600 grey-text">{{feature.title}}</span>
+												</div>
+											</div>
+											<div class="col m8 s12">
+												<span class="font-size-change">{{feature.value}}</span>
+											</div>
+										</div>
+										
+									</li>
+									<a class="unhide-link blue-text" href="javascript:" (click)="unhide();">Read More <i class="material-icons">add</i></a>
+								</ul>
+							</div>
+							<h2 *ngIf="product.short_description != ''">Terms & Conditions</h2>
+							<span class="font-size-change terms-conds" [innerHTML] ="product.short_description"></span>
+								
+						</div>																				
+				<div class="review-ratings margin-top1">
+									<div class="row rew-sta-rat">
+										<div class="col s8 m8">
+											<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
+										</div>
+										<div class="col s4 m4">
+											<a href="#write-review" class="modal-trigger white btn black-text rating-center" (click)="fetch_review_data()">Rate</a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col s12 m3 l2 res-cen" *ngIf="all_rating == 0">
+											No Ratings given. 
+										</div>	
+										<div class="col s6 m3 l2 res-cen" *ngIf="all_rating > 0">
+											<span class="font-size-change3 font500" *ngIf="avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}}<i class="material-icons">star</i></span><br/>
+											<span class="font-size-change1 grey-text">{{all_rating}} Ratings &</span><br/>
+											<span class="font-size-change1 grey-text">{{rev_count}} Reviews</span>
+										</div>
+										<div class="col s6 m9 l6">
+											<ul *ngIf="grouped_rating" class="rating-li">
+												<li>
+													<a href="javascript:" class="black-text">
+														<div class="row no-margin">
+															<div class="col s1 center no-padding">
+																<span class="font-size-change">5<i class="material-icons">star</i></span>
+															</div>
+															<div class="col s9">
+																<div class="progress">
+																	<div class="determinate" [style.width]="(grouped_rating.rate5/all_rating)*100+'%'"></div>
+																</div>
+															</div>
+															<div class="col s2">
+																<span class="font-size-change grey-text">{{grouped_rating.rate5}}</span>
+															</div>
+														</div>
+													</a>
+												</li>
+												<li>
+													<a href="javascript:" class="black-text">
+														<div class="row no-margin">
+															<div class="col s1 center no-padding">
+																<span class="font-size-change">4<i class="material-icons">star</i></span>
+															</div>
+															<div class="col s9">
+																<div class="progress">
+																	<div class="determinate" [style.width]="(grouped_rating.rate4/all_rating)*100+'%'"></div>
+																</div>
+															</div>
+															<div class="col s2">
+																<span class="font-size-change grey-text">{{grouped_rating.rate4}}</span>
+															</div>
+														</div>
+													</a>
+												</li>
+												<li>
+													<a href="javascript:" class="black-text">
+														<div class="row no-margin">
+															<div class="col s1 center no-padding">
+																<span class="font-size-change">3<i class="material-icons">star</i></span>
+															</div>
+															<div class="col s9">
+																<div class="progress">
+																	<div class="determinate" [style.width]="(grouped_rating.rate3/all_rating)*100+'%'"></div>
+																</div>
+															</div>
+															<div class="col s2">
+																<span class="font-size-change grey-text">{{grouped_rating.rate3}}</span>
+															</div>
+														</div>
+													</a>
+												</li>
+												<li>
+													<a href="javascript:" class="black-text">
+														<div class="row no-margin">
+															<div class="col s1 center no-padding">
+																<span class="font-size-change">2<i class="material-icons">star</i></span>
+															</div>
+															<div class="col s9">
+																<div class="progress">
+																	<div class="determinate orange" [style.width]="(grouped_rating.rate2/all_rating)*100+'%'"></div>
+																</div>
+															</div>
+															<div class="col s2">
+																<span class="font-size-change grey-text">{{grouped_rating.rate2}}</span>
+															</div>
+														</div>
+													</a>
+												</li>
+												<li>
+													<a href="javascript:" class="black-text">
+														<div class="row no-margin">
+															<div class="col s1 center no-padding">
+																<span class="font-size-change">1<i class="material-icons">star</i></span>
+															</div>
+															<div class="col s9">
+																<div class="progress">
+																	<div class="determinate red" [style.width]="(grouped_rating.rate1/all_rating)*100+'%'"></div>
+																</div>
+															</div>
+															<div class="col s2">
+																<span class="font-size-change grey-text">{{grouped_rating.rate1}}</span>
+															</div>
+														</div>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="review-details">
+										<div class="review-text margin-top border-bottom" *ngFor="let review of reviews">
+											<span class="red white-text" *ngIf="review.reting == 1">{{review.reting}}<i class="material-icons">star</i></span>
+											<span class="orange white-text" *ngIf="review.reting == 2">{{review.reting}}<i class="material-icons">star</i></span>
+											<span class="green white-text" *ngIf="review.reting == 3">{{review.reting}}<i class="material-icons">star</i></span>
+											<span class="green white-text" *ngIf="review.reting == 4">{{review.reting}}<i class="material-icons">star</i></span>
+											<span class="green white-text" *ngIf="review.reting == 5">{{review.reting}}<i class="material-icons">star</i></span>
+											<span class="font-size-change1">{{review.name}}</span>
+											<p class="font-size-change1">{{review.review}}</p>
+										</div>
+										<div class="margin-top" *ngIf="more_display" id="more-display">
+											<a href="javascript:" class="font-size-change1" (click)="load_more_review();">View More +</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+				</section>
+	 <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
+		 <div class="container">
+			<div class="row no-margin">
+				<div class="col s12 m8">
+						<div class="center">	
+								<h2 class="center font600 text-orange">Select Package </h2>
+								<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+							</div>
+				</div>			
+			 <div class="col s12 m8 channel-list-box">				
+				<div class="channels-accoriadn">
+				<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
+					<li *ngFor="let packs of channels_packs;let j = index" class="active">
+						<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
+						<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
+							<div class="row">
+								<div class="col s6 m4" *ngFor="let item of packs.child;let i = index;">
+								<!-- <div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
+								<div class="card product-new" *ngIf="item.default_selected == 2">
+									<div class="card-content center">
+										<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
+										<h4 class="grey-text">{{item.title}}</h4>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
+										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+										<br/>
+										<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
+									
+									</div>
+									
+								</div>
+								<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
+								<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
+									<div class="card-content center" >
+										<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+										<h4 class="grey-text">{{item.title}}</h4>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+										<br/>
+										<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+										<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
+									</div>
+								</div>
+								<div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
+									<div class="card-content center" >
+										<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+										<h4 class="grey-text">{{item.title}}</h4>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+										<br/>
+										<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
+										<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+	 
+				<ul class="pt-all-10">
+					<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
+					<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
+					<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+				</ul>
+				<hr class="horizontal">
+				
+	</div>
+	</div>
+	<div class="col s12 m4 order-summary">
+		<div class="card">
+			<div class="card-content black-text no-padding">
+				<span class="card-title inline-block">Order Summary</span>
+				<hr>
+				<div>
+					<div class="subtotal">
+						<div *ngIf="product && ( kit == 2 || kit == 3) ; then kitblock else nokitblock"></div>
+						<p class="inline-block font600">Product :</p>
+						<ng-template #kitblock>
+							<p class="inline-block right font-size-change green-text" *ngIf="product && kit == 2"> <i class="icon-inr"></i> {{product.offer_price}}</p>
+							<p class="inline-block right font-size-change green-text" *ngIf="product && kit == 3"> <i class="icon-inr"></i> {{product.price - 1000}}</p>
+						</ng-template>
+						<ng-template #nokitblock>
+							<p class="inline-block right font-size-change green-text" *ngIf="product"> <i class="icon-inr"></i> {{product.offer_price}}</p>
+						</ng-template>
+						
+					</div> 
+					<div class="subtotal" *ngFor="let item of pack_selected;">
+						<p class="inline-block font600">{{item.title}} :</p>
+						<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
+						<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
+						<li class="grey-txt-package" style="list-style-type: none;
+								white-space: nowrap;
+								margin-top: 7px;
+								font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</li>
+					</div>
+					<div class="subtotal" *ngIf="this.product && this.product.promos">
+						<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
+						<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
+						<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
+					</div>
+					<div class="subtotal" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">
+						<p class="inline-block font600">Congrates! One Product Bonus Amount Will be Applied:</p>
+						<p class="inline-block green-text right font-size-change"><i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
+					</div>
+					<!-- <div class="subtotal">
+						<p class="inline-block font600">Cashback<i class="red-text"> *</i> :</p>
+						<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && product"><i class="icon-inr"></i>{{product.partnerwalletamount}}</p>								
+										<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && product"> <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>
+					</div> -->
+				</div>
+				<hr class="horizontal">
+				<div class="subtotal payable margin-top">
+					<p class="inline-block font600">Amount Payable :</p>
+					<p class="inline-block right font-size-change"> <i class="icon-inr"></i> {{calculate_amount() }}</p>
+					
+					<div class="clearfix"></div>
+					<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
+					<p class="inline-block red-text" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">Avail Bonus of Amount </p>
+					<p *ngIf="this.options"> <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p>
+					<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>
+				</div>
+				<hr>
+				<div class="subtotal inline-block">
+					<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
+					<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
+					<a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a>
+				</div>				
 			</div>
 		</div>
-		<div class="clearfix"></div>
+	</div>
 	</div>
 	
-	<div class="modal-footer">
-		<a href="javascript:" class="modal-action red btn modal-close" (click)="buyNow(product.id)">No</a>
 	</div>
-</div>
-<div class="religon-overlay" *ngIf="circles"> 
-	<div class="religon-modal" >
-		<div *ngIf="product.title.includes('Xstream'); else elseBlock">
-			<h3 class="center">Check Pincode</h3>
-			<mat-form-field class="example-full-width">
-				<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
-				<mat-autocomplete #auto="matAutocomplete">
-					<span *ngIf="filterdList">
-					<mat-option *ngFor="let option of filteredOptions" [value]="option">{{option}}
-					</mat-option>
-				</span>
-				</mat-autocomplete>
-			</mat-form-field>
-			<button class="orange btn check-pincode-btn" (click)="check_pincode()">Check</button>	
+	</section>
+	
+	<section>
+			<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt" *ngIf="this.recommended">
+					<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
+				<div class="container-fluid">
+					<div class="row no-margin home-product-card recomm">
+						<div *ngFor="let item of recommended" class="col s6 l3">
+							<div class="card">
+								<div class="row" style="margin-bottom:10px;">
+									<div class="col s10">
+										<div class="rating-green-content" >Free Home Delievery </div>
+									</div>
+									<div class="col s2" *ngIf="item.new_product == 1">
+										<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
+										<img src="https://www.mydthshop.com/web-app/assets/images/new.gif" class="img-responsive pt-img"/>
+									</div>
+								</div>
+								<div class="card-image padd center">
+										<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
+									</div>
+									<div class="clearfix"></div>
+									<div class="card-stacked">
+										<div class="card-content no-padding">
+											<span class="card-title">{{item.title}}</span>								
+											<div class="row center">
+												<div class="col s12 m12">
+													<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+													<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
+													<!-- <span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span> -->
+												</div>
+												<div class="col s12 m12">
+													<!-- <div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div> -->
+													<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+												</div>
+												<div class="clearfix"></div>
+												<div class="col s12 m12 ">
+													<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+												</div>
+											</div> 									 
+											<div class="btn-new1 center">
+												<a [routerLink]="['/product/'+item.url]" class="btn">Book Now</a>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+	</section>
+	<div class="footer-button-buy">
+		<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+		<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 end-btn fix-btnd"><i class="material-icons white-text">flash_on</i>  Packages </a>
+	
+	</div>
+	<!-- Modal Structure -->
+	<div id="review" class="modal">
+	 <div class="modal-content no-padding" *ngIf="display == 1">
+		<div class="border-bottom padd-right-left1 center">
+		 <h4 class="no-margin">{{product.title}} Review</h4>
+		 <span class="modal-close close-btn"><i class="material-icons font-size-change2">close</i></span>
+	 </div>
+	 <div class="review-written margin-top">
+		 <div class="row" *ngFor="let review of reviews;">
+			<div class="col s12 m2 center">
+			 <img src="{{this.todoservice.base_url}}assets/images/av.png" class="responsive-img vertical-align-middle" alt="User">
+			 <br>
+	
+			 <span class="font-size-change" *ngIf="review.reting <=1"><i class="material-icons orange-text">star</i></span>
+			 <span class="font-size-change" *ngIf="review.reting <=2"><i class="material-icons orange-text">star</i></span>
+			 <span class="font-size-change" *ngIf="review.reting <=3"><i class="material-icons orange-text">star</i></span>
+			 <span class="font-size-change" *ngIf="review.reting <=4"><i class="material-icons orange-text">star</i></span>
+			 <span class="font-size-change" *ngIf="review.reting <=5"><i class="material-icons orange-text">star</i></span>
+		 </div>
+		 <div class="col s12 m10 margin-top">
+			 <span class="font-size-change font600">{{review.name}}</span>
+			 <p>{{review.review}}</p>
+		 </div>
+	 </div>
+	</div>
+	</div>
+	</div>
+	<!-- write-review Modal Structure -->
+	<div id="write-review" class="modal">
+	 <form #reviewform = "ngForm" (ngSubmit)="review_submit(reviewform.value,0)">
+		<div class="modal-content no-padding">
+		 <div class="border-bottom padd-right-left1 center">
+			<h4 class="no-margin" *ngIf="rating == 0">OOps!</h4>
+			<h4 class="no-margin" *ngIf="rating == 1">Write a Review</h4>
+			<span class="modal-close close-btn"><i class="material-icons font-size-change2">close</i></span>
 		</div>
-		<ng-template #elseBlock>
-		<h3 class="center">Select Region</h3>
-	<div *ngFor="let item of circles;let i = index">
-		<div class="chip" *ngIf="i < 5">
-			<a href="javascript:" class="black-text btn-contu" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+		<div class="review-written padd margin-top" *ngIf="rating == 0">You Are Not Allowed to rate this product.</div>
+		<div class="review-written padd margin-top" *ngIf="rating == 1">
+			<!-- Rating Stars Box -->
+			<div class='rating-stars inline-block text-center' *ngIf="product">
+			 <input type="hidden" name="product_id" [(ngModel)]="product.id" value="product.id">  
+			 <ul id='stars'>
+				<li [className]="(rate_data.reting >=1) ? 'selected star' : 'star'" title='Poor' data-value='1' (click)="review_submit({},1)">
+				 <i class="material-icons">star</i>
+			 </li>
+			 <li [className]="(rate_data.reting >=2) ? 'selected star' : 'star'" title='Fair' data-value='2' (click)="review_submit({},2)">
+				 <i class="material-icons">star</i>
+			 </li>
+			 <li [className]="(rate_data.reting >=3) ? 'selected star' : 'star'" title='Good' data-value='3' (click)="review_submit({},3)">
+				 <i class="material-icons">star</i>
+			 </li>
+			 <li [className]="(rate_data.reting >=4) ? 'selected star' : 'star'" title='Excellent' data-value='4' (click)="review_submit({},4)">
+				 <i class="material-icons">star</i>
+			 </li>
+			 <li [className]="(rate_data.reting >=5) ? 'selected star' : 'star'" title='WOW!!!' data-value='5' (click)="review_submit({},4)">
+				 <i class="material-icons">star</i>
+			 </li>
+		 </ul>
+	 </div>			  
+	 <div class='success-box inline-block'>
+		 <div class='clearfix'></div>
+		 <div class='text-message' *ngIf="rate_data.reting == 1">Very Bad</div>
+		 <div class='text-message' *ngIf="rate_data.reting == 2">Bad</div>
+		 <div class='text-message' *ngIf="rate_data.reting == 3">Good</div>
+		 <div class='text-message' *ngIf="rate_data.reting == 4">Very Good</div>
+		 <div class='text-message' *ngIf="rate_data.reting == 5">Excellent</div>
+		 <div class='clearfix'></div>
+	 </div>
+	 <div class="row" *ngIf="rating == 1">
+		 <div class="input-field">
+			<textarea id="textarea1" class="materialize-textarea" name="review_desc" [(ngModel)]="rate_data.review">{{rate_data.review}}</textarea>
+			<label for="textarea1" [className]="(rate_data.review !='') ? 'active' : ''">Write Your Review</label>
+		</div>
+	</div>
+	</div>
+	</div>
+	
+	
+	<div class="modal-footer orange center no-box-shadow" *ngIf="rating == 1">
+	 <button type="submit" class="modal-action white-text font-size-change btn-flat modal-close" *ngIf="rate_data.review == ''">Submit Review</button>
+	 <button type="submit" class="modal-action white-text font-size-change btn-flat modal-close" *ngIf="rate_data.review != ''">Update Review</button>
+	</div>
+	</form>
+	</div>
+	
+	
+	<div id="tata-sky-modal" class="modal modal-fixed-footer">
+		<div class="modal-content">
+			<h4>Choose Set Up Box </h4>
+			<div class="row" *ngIf="product_list">
+				<div class="col s6 m3" *ngFor="let item of product_list">
+					<a href="javascript:" class="black-text" (click)="continue_to_change(item.url)">
+						<div class="card choose-set-up-box center">
+							<div class="card-image">
+								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+							</div>
+							<div class="card-content">
+								<span>{{item.title}}</span> 
+							</div>
+						</div>
+					</a>
+				</div>
 			</div>
-		<div class="chip more" *ngIf="i == 5">
-			<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
+			<div class="row" *ngIf="!product_list">
+				Loading Products
+			</div>
+			
 		</div>
-		<div class="chip hide" *ngIf="i >= 5">
-		<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
+		<div class="modal-footer">
+			<a href="javascript:" class="modal-action btn red modal-close">Close</a>
 		</div>
-	</div>	
-	</ng-template>
 	</div>
-</div>
-<app-footer></app-footer>
+		<style>
+			.cdk-overlay-container {
+				z-index: 99999!important;
+			}
+			</style>
+	<div id="chng-set-to-box" class="modal bottom-sheet">
+		<div class="modal-content">
+			<h4>Change Set Top Box</h4>
+			<div class="row">
+				<div class="col s12 m6">
+					<mat-form-field>
+						<mat-select placeholder="Select Operator" (selectionChange)="category_selected($event.value)">
+							<span *ngFor="let item of product_category_list;">
+								<mat-option [value]="item.id">
+									<span class="operator-name">{{ item.title }}</span>
+								</mat-option>
+							</span> 
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col s12 m6" >
+					<mat-form-field>
+						<mat-select placeholder="Select Product" (selectionChange)="continue_to_change($event.value)">
+							<span *ngFor="let item of product_list;">
+								<mat-option [value]="item.url">
+									<span class="operator-name">{{ item.title }}</span>
+								</mat-option>
+							</span> 
+						</mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="javascript:" class="modal-action btn orange modal-close">Cancel</a>
+		</div>
+	</div>
+	<div id="multi-add-modal" class="modal modal-fixed-footer">
+		<div class="modal-content">
+			<span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
+			<h2 class="center">Do You want to include Multi Box With this Pack?</h2>
+			<div class="clearfix"></div>
+			<div class="row" *ngIf="multi_list">
+				<div class="col s12 m12" *ngFor="let item of multi_list">
+					
+						<div class="card center">
+							<!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
+							<div class="include-multi-box">
+								<div class="col s12 m3">
+									<div class="card-image">
+										<img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+									</div>
+								</div>
+								<div class="col s12 m6">
+									<div class="card-content">
+										<span>{{item.title}}</span>
+									</div>
+								</div>
+								<div class="col s12 m3">
+									<div class="card-content">
+										<span >Rs. {{item.offer_price}} </span>
+									</div>
+									
+									<div class="clearfix"></div>
+									<a class="modal-close btn right orange mt-round-btn" href="javascript:" (click)="continue_to_select(item)">Select</a>
+								</div>
+								<div class="clearfix"></div>
+								
+							</div>
+							
+						</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
+		<div class="modal-footer">
+			<a href="javascript:" class="modal-action red btn modal-close" (click)="buyNow(product.id)">No</a>
+		</div>
+	</div>
+	<div class="religon-overlay" *ngIf="circles"> 
+		<div class="religon-modal" >
+			<div *ngIf="product.title.includes('Xstream'); else elseBlock">
+				<h3 class="center">Check Pincode</h3>
+				<mat-form-field class="example-full-width">
+					<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
+					<mat-autocomplete #auto="matAutocomplete">
+						<span *ngIf="filterdList">
+						<mat-option *ngFor="let option of filteredOptions" [value]="option">{{option}}
+						</mat-option>
+					</span>
+					</mat-autocomplete>
+				</mat-form-field>
+				<button class="orange btn check-pincode-btn" (click)="check_pincode()">Check</button>	
+			</div>
+			<ng-template #elseBlock>
+			<h3 class="center">Select Region</h3>
+		<div *ngFor="let item of circles;let i = index">
+			<div class="chip" *ngIf="i < 5">
+				<a href="javascript:" class="black-text btn-contu" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+				</div>
+			<div class="chip more" *ngIf="i == 5">
+				<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
+			</div>
+			<div class="chip hide" *ngIf="i >= 5">
+			<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
+			</div>
+		</div>	
+		</ng-template>
+		</div>
+	</div>
+	<app-footer></app-footer>

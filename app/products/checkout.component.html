@@ -391,7 +391,7 @@ a.btn.orange.btn-large.ctn-che1 {
 						</div>
 						<div style="padding-top: 10px;" *ngIf="this.check_bonus(i,item.product.offer_price)">
 								<p class="inline-block grey-text">Congrates! Product Bonus Applied :</p>
-								<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
+								<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
 							</div>	
 				</div>				
 				

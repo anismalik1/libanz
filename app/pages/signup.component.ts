@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit{
   selected_plans : any;
   _bonus_offer : any;
   device : string;
+  private watch : Number = 0;
   constructor(private toast: ToastrManager, 
     private fb : FormBuilder,
     public todoservice : TodoService,
@@ -282,22 +283,24 @@ export class SignupComponent implements OnInit{
 
   watch_sms(section)
   {
-      if(window.SMSReceive)
+      if(window.SMSRetriever)
       {
         window.me = this;
-        window.SMSReceive.stopWatch(function() {
-          console.log('stopped');
-        }, function() {
-        });
-        window.SMSReceive.startWatch(function() {
-          console.log('started');
-        }, function() {
-        });
+        // window.SMSReceive.stopWatch(function() {
+        //   console.log('stopped');
+        // }, function() {
+        // });
+        window.SMSRetriever.startWatch(function() {
+            console.log('started');
+          }, function() {
+          });
+          this.watch = 1;
+        
         document.addEventListener('onSMSArrive', function(args : any) {
-          var otp1 = substring(args.data.body,13, 14);
-          var otp2 = substring(args.data.body,14, 15);
-          var otp3 = substring(args.data.body,15, 16);
-          var otp4 = substring(args.data.body,16, 17);
+          var otp1 = substring(args.message,13, 14);
+          var otp2 = substring(args.message,14, 15);
+          var otp3 = substring(args.message,15, 16);
+          var otp4 = substring(args.message,16, 17);
           $('#header-'+section+' #otp1').val(otp1);
           $('#header-'+section+' #otp2').val(otp2);
           $('#header-'+section+' #otp3').val(otp3);
