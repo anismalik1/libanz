@@ -6190,3 +6190,125 @@ h2#compare-title {
 .bonus-amount{margin-left: 43px;
 	margin-top: -18px;
 	font-size: 12px;}	
+
+
+	/* 31-5-2020 */
+
+	
+.rating-green{
+
+	background: #1c851c;
+	padding: 3px 0px 3px 22px;
+	width: 55px;
+    color: #fff;
+    float: left;
+    border-radius: 5px;
+						
+}
+.line-ht{
+
+	line-height: 2;
+}
+.icn-clr1{
+
+	color: #a9a4a1 !important;
+    float: right;
+    /* background: #ececec; */
+    padding: 6px 6px 0px 7px;
+    font-size: 15px;
+    border-radius: 50%;
+    margin-right: 11px;
+    height: 27px;
+	box-shadow: 1px 1px 4px #ececec !important;
+	margin-top:4px;
+}
+.heading-txt1{
+	font-size: 17px;
+						padding-bottom:10px;
+						font-weight: bold;
+						text-overflow: ellipsis;
+}
+.rating-green{
+	background: #1c851c;
+    padding: 3px 0px 3px 12px;
+	width: 55px;
+    color: #fff;
+    float: left;
+	border-radius: 5px;
+	margin-right:2px;
+
+}
+.rating-green-content{
+	background: #ff6a00;
+    padding: 2px 10px 2px 10px;
+    width: auto;
+    color: #fff;
+    float: left;
+    margin-left: -9px !important;
+    font-size: 10px;
+	
+
+}
+.price-cut1{
+
+	padding-bottom:2px; padding-top:10px;
+}
+.list-data{
+	padding-top:6px;
+	padding-bottom:10px; font-size:16px; color:#333;
+	z-index:99999;
+}
+.product-image{
+
+/* padding: 24px 0px 0px 5px; */
+width: 100%;
+box-shadow: 1px 1px 10px #ececec;
+margin-bottom: 20px;
+border: 1px solid #ececec;
+border-radius: 2px;
+	background-color:#fff;
+
+}
+.product-img1 img{
+
+height: 60px;
+width: 60px;
+text-align: center;
+margin: 2px;
+}
+.pt-img{
+	padding:5px;
+}
+
+.heading-txt{
+
+	font-size:22px;
+	
+}
+.shadow-box{
+
+	width: 100%;
+    border-radius: 20px;
+	padding: 0px 10px 5px 4px !important;
+	background-color:#fff;
+	/* margin-top: -11px; */
+}
+
+.offer-txt{
+
+	color:#1c851c;
+	font-size:10px;
+	padding-left:8px;
+}
+
+.rating-green-content{
+	background: #ff6a00;
+    padding: 2px 10px 2px 10px;
+    width: auto;
+    color: #fff !important;
+    float: left;
+    margin-left: -9px !important;
+    font-size: 10px;
+	border-top-left-radius: 10px;
+
+}

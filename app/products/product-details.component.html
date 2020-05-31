@@ -1,3 +1,4 @@
+
 <style>
 .review-text .green {
     padding: 5px 3px 6px 5px;
@@ -16,7 +17,12 @@
 }
 
 .list-data{
-	padding:5px 0 0 60px;
+	padding:5px 0 0 0px;
+	 font-size:16px; color:#333;
+	z-index:99999;
+}
+.list-data-1{
+	padding:5px 0 0 0px;
 	 font-size:16px; color:#333;
 	z-index:99999;
 }
@@ -220,7 +226,7 @@ padding-top: 15px !important;
 }
 
 </style>
-<app-header></app-header>
+<app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
@@ -680,13 +686,115 @@ padding-top: 15px !important;
 
 </div>
 </section>
+<section class="mobile-view-itm">
+	<div class="row no-margin 1">
+		<div class="col s12 m4" >
+		<div class="product-image">
+			<div class="row">
+				<div class="col s10">
+					<div class="rating-green-content" >Trending </div>
+				</div>
+				<div class="col s2">
+					<span class="fa fa-star pull-right icn-clr1"></span>
+				</div>
+			</div>
+			<div class="row">
+			
+			<div class="col s2">
+				<div class="product-img1">
+					<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+				</div>
+			</div>
+			<div class="col s10">
+				<div class="rechare-section-list">
+					<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+	
+					<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
+					<br/>
+					<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
+					<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+				   
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
+
+		<div class="col s12 m4" >
+			<div class="product-image">
+				<div class="row">
+					<div class="col s10">
+						<div class="rating-green-content" >Trending </div>
+					</div>
+					<div class="col s2">
+						<span class="fa fa-star pull-right icn-clr1"></span>
+					</div>
+				</div>
+				<div class="row">
+				
+				<div class="col s2">
+					<div class="product-img1">
+						<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+					</div>
+				</div>
+				<div class="col s10">
+					<div class="rechare-section-list">
+						<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+		
+						<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
+						<br/>
+						<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
+						<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+					   
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+
+			<div class="col s12 m4" >
+				<div class="product-image">
+					<div class="row">
+						<div class="col s10">
+							<div class="rating-green-content" >Trending </div>
+						</div>
+						<div class="col s2">
+							<span class="fa fa-star pull-right icn-clr1"></span>
+						</div>
+					</div>
+					<div class="row">
+					
+					<div class="col s2">
+						<div class="product-img1">
+							<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+						</div>
+					</div>
+					<div class="col s10">
+						<div class="rechare-section-list">
+							<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+			
+							<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
+							<br/>
+							<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
+							<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+						   
+						</div>
+					</div>
+					</div>
+					</div>
+				</div>
+
+				
+		</div>
+
+</section>
 
 <section>
 		<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt" *ngIf="this.recommended">
 				<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
 			<div class="container-fluid">
 				<div class="row no-margin home-product-card recomm">
-					<div *ngFor="let item of recommended" class="col s6 l3">
+					<div *ngFor="let item of recommended" class="col s12 l3">
 						<div class="card">
 							<div class="row" style="margin-bottom:10px;">
 								<div class="col s10">

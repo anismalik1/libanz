@@ -13,6 +13,21 @@
     color: #fff !IMPORTANT;
 
     }
+    .list-data{
+	padding-top:6px;
+	padding-bottom:10px; font-size:16px; color:#333;
+	z-index:99999;
+}
+.list-data a{
+
+color: #333;
+font-size: 12px;
+font-weight: bold;
+border: 1px solid #ececec;
+padding: 2px 10px;
+border-radius: 5px;
+z-index: 99999;
+}
 </style>
 
 <app-header class="hide-on-mobile"></app-header>
@@ -43,7 +58,111 @@
         </div>    
       </div>
   </div>
-</section>      
+</section>  
+
+
+<section class="mobile-view-itm">
+	<div class="row no-margin 1">
+		<div class="col s12 m4" >
+		<div class="product-image">
+			<div class="row">
+				<div class="col s10">
+					<div class="rating-green-content" >Trending </div>
+				</div>
+				<div class="col s2">
+					<span class="fa fa-star pull-right icn-clr1"></span>
+				</div>
+			</div>
+			<div class="row">
+			
+			<div class="col s2">
+				<div class="product-img1">
+					<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+				</div>
+			</div>
+			<div class="col s10">
+				<div class="rechare-section-list">
+					<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+	
+					<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
+					<br/>
+					<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
+					<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+				   
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
+
+		<div class="col s12 m4" >
+			<div class="product-image">
+				<div class="row">
+					<div class="col s10">
+						<div class="rating-green-content" >Trending </div>
+					</div>
+					<div class="col s2">
+						<span class="fa fa-star pull-right icn-clr1"></span>
+					</div>
+				</div>
+				<div class="row">
+				
+				<div class="col s2">
+					<div class="product-img1">
+						<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+					</div>
+				</div>
+				<div class="col s10">
+					<div class="rechare-section-list">
+						<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+		
+						<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
+						<br/>
+						<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
+						<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+					   
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+
+			<div class="col s12 m4" >
+				<div class="product-image">
+					<div class="row">
+						<div class="col s10">
+							<div class="rating-green-content" >Trending </div>
+						</div>
+						<div class="col s2">
+							<span class="fa fa-star pull-right icn-clr1"></span>
+						</div>
+					</div>
+					<div class="row">
+					
+					<div class="col s2">
+						<div class="product-img1">
+							<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+						</div>
+					</div>
+					<div class="col s10">
+						<div class="rechare-section-list">
+							<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+			
+							<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
+							<br/>
+							<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
+							<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+						   
+						</div>
+					</div>
+					</div>
+					</div>
+				</div>
+
+				
+		</div>
+
+</section> 
 <section class="channels-basic">
     <div class="container center">
       <h1 *ngIf="details == false">{{this.package.category}} Packages 
