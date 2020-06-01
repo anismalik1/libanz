@@ -64,6 +64,9 @@ export class ProductDetailAmpComponent implements OnInit {
   recommended : any;
   myControl = new FormControl();
   options: any ;
+  product_ratings : any = [];
+  all_products : any;
+  ratings : any;
   filteredOptions: Observable<object>;
   constructor(
     private _renderer2: Renderer2, 
@@ -196,6 +199,34 @@ export class ProductDetailAmpComponent implements OnInit {
 	// 	  ) 
   // }
 
+  
+  calculate_ratings()
+  {
+    let j : any = 0;
+    let rate : any = 0;
+    //console.log(this.ratings);
+    for(var i = 0;i < this.recommended.length;i++)
+    {
+      for(var k = 0;k < this.ratings.length;k++)
+      {
+        if(this.recommended[i].id == this.ratings[k].product_id)
+        {
+          rate = Number(rate) + Number(this.ratings[k].reting);
+          j = Number(j) + 1;
+        }
+      }
+      if(j == 0)
+        j = 1;
+      let rating = (rate/j);
+      if(rating == 0)
+        var prate =  '0';
+      else
+        var prate = rating.toFixed(1);
+      this.product_ratings.push({id : this.recommended[i].id,rate : prate, rate_count : j});
+    }  
+    //console.log(this.product_ratings);
+  }
+
   continue_to_change(url)
   {
     this.kit = 0;
@@ -290,13 +321,15 @@ export class ProductDetailAmpComponent implements OnInit {
 			{
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
         this.product_features = data.features;
+        this.ratings          = data.rating;
         this.spinner.hide();
         let b = this.htmlToPlaintext(JSON.stringify(data));
         this.channels_packs = data.package;
         this.fta_pack = {};
         this.product = data.PRODUCTDATA;
         this.recommended = data.RECOMMENDED; 
-        //this.filter_channel_subpack();
+        this.calculate_ratings();
+        this.filter_channel_subpack();
         if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
@@ -745,76 +778,7 @@ export class ProductDetailAmpComponent implements OnInit {
           });
           $('.cdk-overlay-container').css('z-index','99999999!important');
         });
-        $.fn.isInViewport = function() {
-          if($(this).length == 0 )
-          {
-            console.log($(this))
-            console.log(1);
-            return false;
-          }
-          var elementTop = $(this).offset().top;
-          var elementBottom = elementTop + $(this).outerHeight();
-          var viewportTop = $(window).scrollTop();
-          var viewportBottom = viewportTop + $(window).height();
-          return elementBottom > viewportTop && elementTop < viewportBottom;
-      };
-      $(window).scroll(function (event) {
-        if(!$.fn.isInViewport )
-        {
-          console.log(2);
-          return false;
-        }
-        if($(window).width() >767){
-        var scroll = $(window).scrollTop();
-        //console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
-        if(scroll >= 1)
-        {
-          if($('#footer-content').isInViewport())
-          {
-            if(scroll - $('#footer-content').offset().top > -300)
-            {
-              $('.images-product').css({'position':'relative','top':'0'});
-              $('.order-summary').css('position','relative');
-              return;
-            }
-            
-          }
-          if($('.order-summary').isInViewport() && ($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height() >= 0 || $('.order-summary').offset().top - $('#channel-list').offset().top < 0))
-            {
-              $('.order-summary').css({'position':'relative','top':0,'right':0});
-              return;
-            }
-          if ($('.product-img').isInViewport() && (scroll - $('#channel-list').offset().top < -500)) {
-            $('.images-product').css({"position":"fixed","top":"106px"});
-            $('.order-summary').css('position','relative');
-            console.log(4);
-          }
-          else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -500) && (scroll - $('#channel-list').offset().top < 0))
-          {
-            //console.log(scroll - $('#channel-list').offset().top);
-            $('.images-product').css({'position':'relative','top':'0'});
-            console.log(2)
-          }
-          else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -98))
-          {
-            $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
-          }
-          else 
-          {
-            console.log(1);
-            $('.images-product').css({'position':'relative','top':'0'});
-            $('.order-summary').css('position','relative');
-          }
-        }
-        else
-        {
-          $('.images-product').css({'position':'relative','top':'0'});
-        }
-      }
-    });
-    // $(window).on('load', function(){ 
-		// 	$('.religon-overlay').css('display', 'block');
-		// });
+        
 		$(document).ready(function(){
 			$('.more').on('click', function(){
 				$('.chip').removeClass('hide');
@@ -1028,10 +992,83 @@ export class ProductDetailAmpComponent implements OnInit {
           this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
           this.channels_packs = data.package;
           this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
-          //this.filter_channel_subpack();
+          this.filter_channel_subpack();
           this.spinner.hide();
         }
       ) 
+  }
+
+  filter_channel_subpack()
+  { 
+    this.pack_selected = [];
+    if(!this.channels_packs)
+     return false;
+    //console.log(this.channels_packs); 
+    
+    for(var i=0;i<this.channels_packs.length ;i++)
+      {
+        //console.log(this.channels_packs[i])
+        if( this.channels_packs[i].default_selected == 1 || this.pack_id)
+        {
+          if(this.channels_packs[i].child[0])
+          {
+            for(var j=0;j<this.channels_packs[i].child.length ;j++)
+            {
+              //console.log("child"+this.channels_packs[i].child[j]);
+              if(this.channels_packs[i].child[j].default_selected == 2)
+              {
+                this.fta_pack = this.channels_packs[i].child[j];
+              }
+              else if(this.channels_packs[i].child[j].default_selected == 1 || this.pack_id == this.channels_packs[i].child[j].id)
+              {
+                this.pack_selected.push(this.channels_packs[i].child[j]); 
+              }
+            }
+            
+            let fta_exist = this.pack_selected.filter(x => x.id == this.fta_pack.id);
+            if(fta_exist.length == 0)
+            {
+              this.pack_selected.push(this.fta_pack); 
+            }
+            
+          }
+           
+        }
+        if(this.channels_packs[i].title.includes('North-India Super Family') || (this.fta_pack.price == 0  && this.pack_selected.length < 2))
+        {
+          let fta_exist = this.pack_selected.filter(x => x.id == this.channels_packs[i].child[0].id);
+          if(fta_exist.length == 0)
+          {
+            this.pack_selected.push(this.channels_packs[i].child[0]); 
+          }
+        }
+    } 
+    //console.log(this.fta_pack);
+    if(this.fta_pack.price == 0 )
+    {
+      for(var i=0;i < this.channels_packs.length ;i++)
+      {
+        //console.log(this.channels_packs[i]);
+        if(this.channels_packs[1])
+        {
+          this.channels_packs[1].child[0].default_selected = 1;
+          this.channels_packs[1].default_selected = 1;
+        }
+        
+        if(this.product.url.includes('standard'))
+        {
+          this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == false);
+        }
+        
+      }
+    }
+  }
+
+  product_rating(product_id)
+  {
+    let rate = this.product_ratings.filter(x => x.id == product_id);
+    //console.log(rate)
+    return rate;  
   }
 
   add_to_cart(id)

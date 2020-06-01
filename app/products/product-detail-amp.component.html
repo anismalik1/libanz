@@ -38,7 +38,42 @@
 	left: 90px;
 	top:45px;
 }
-
+.footer-button-buy{
+	
+	position: fixed;
+	bottom: 0;
+	padding:0;
+		z-index: 999999;
+		/* left: 7%; */
+		background: #fff;
+	width: 100%;
+	text-align:center;
+	box-shadow: 1px 1px 5px #8c8c8c;
+	height: 65px;
+}
+.fix-btnd{
+		height: 65px;
+			line-height: 65px;
+		float: right;
+			width: 49%;
+			background: #ff6a00 !important;
+			border-radius: unset;
+	}
+	.fix-btnd i{
+	
+		display: none !important;
+	}
+	.fix-btnd2{
+		color: #000 !important;
+			background: transparent !important;
+			box-shadow: none;
+		
+		line-height: 65px;
+	}
+	.fix-btnd2 i{
+	
+		color:#333;
+	}
 .black-txt{
 
 	width: 95%;
@@ -517,43 +552,11 @@
      </div>
      </section>
      <section>
-     <div class="col s12 m4" >
-        <div class="product-image">
-            <div class="row" style="margin-bottom:0px;">
-                <div class="col s10">
-                    <div class="rating-green-content" >Trending </div>
-                </div>
-                <div class="col s2">
-                    <span class="fa fa-star pull-right icn-clr1"></span>
-                </div>
-            </div>
-			<div class="row" style="margin-bottom:0px;">
-            
-            <div class="col s2">
-                <div class="product-img1">
-                    <a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-                </div>
-            </div>
-            <div class="col s10">
-                <div class="rechare-section-list">
-                    <p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
-    
-                    <div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">15 </span>
-                    <br/>
-                    <p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-                    <p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-                   
-                </div>
-            </div>
-            </div>
-            </div>
-        </div>
-
         <div class="col s12 m4" >
             <div class="product-image" *ngFor="let item of recommended">
 				<div class="row" style="margin-bottom:0px;">
                     <div class="col s10">
-                        <div class="rating-green-content" >Trending </div>
+                        <div class="rating-green-content">Trending </div>
                     </div>
                     <div class="col s2">
                         <span class="fa fa-star pull-right icn-clr1"></span>
@@ -563,17 +566,17 @@
                 
                 <div class="col s2">
                     <div class="product-img1">
-                        <a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+                        <a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
                     </div>
                 </div>
                 <div class="col s10">
                     <div class="rechare-section-list">
-                        <p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
+                        <p class="heading-txt1"><a class="blue-text" routerLink="/product/amp/{{item.url}}">{{item.title}}</a> </p>
         
-                        <div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count">15 </span>
+                        <div class="rating-green" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate_count}} </span>
                         <br/>
-                        <p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-                        <p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+                        <p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}} </span> </p>
+                        <p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
                        
                     </div>
                 </div>
