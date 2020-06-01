@@ -6175,14 +6175,6 @@ h2#compare-title {
 	}
 
 	@media only screen and (max-width: 767px){
-
-.sky-heading {
-    position: absolute;
-    top: -15px;
-    z-index: 99;
-    width: 100%;
-
-}
 .down-mode {
     margin-top: 28px;
 }

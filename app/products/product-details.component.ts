@@ -552,9 +552,13 @@ export class ProductDetailsComponent implements OnInit{
     data => 
     {
       this.spinner.hide();
-      this.toastr.errorToastr(data.msg);
       if(data.status == true)
+      {
         localStorage.setItem('favourite', JSON.stringify(data.favourites));
+        this.toastr.successToastr(data.msg);
+        return false;
+      }
+      this.toastr.errorToastr(data.msg); 
     }
     ) 
   }
