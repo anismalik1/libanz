@@ -335,39 +335,41 @@ font-weight: bold;
 						<hr/>
 						<div class="responsive-table">
 						<table id="datatable" class="table display  datatable-example cst-table">
-							<thead>
+							<thead class="thead-bg">
 									<tr>
 											<th nowrap="nowrap" width="57px">S.No.</th>
 											<th nowrap="nowrap">Order No.</th>
 											<th nowrap="nowrap" width="113px">SubscriberID</th>
 											<th nowrap="nowrap" width="113px">TXNID/REFID</th>
-											<th nowrap="nowrap" width="137px">Provider/ Brand</th>
+											<th nowrap="nowrap" width="137px"> Operator </th>
 											<th nowrap="nowrap" width="80px">Amount</th>
-											<th nowrap="nowrap" width="115px">Balance Before</th>
+											<th nowrap="nowrap" width="115px">Pre-Balance </th>
 											<th nowrap="nowrap" width="102px">Order Date</th>
+											
+											<th nowrap="nowrap" width="135px">Deliver to</th>
+											<th nowrap="nowrap" width="135px">Remark</th>
 											<th nowrap="nowrap" width="140px">Payment Method</th>
 											<th nowrap="nowrap" width="130px">Payment Status</th>
 											<th nowrap="nowrap" width="135px">Order Status</th>
-											<th nowrap="nowrap" width="135px">Deliver to</th>
-											<th nowrap="nowrap" width="135px">Remark</th>
 											<!-- <th nowrap="nowrap" width="95px">Query</th> -->
 									</tr>
 							</thead>
 							<tfoot>
 									<tr>
-											<th nowrap="nowrap" width="57px">S.No.</th>
+										<th nowrap="nowrap" width="57px">S.No.</th>
 											<th nowrap="nowrap">Order No.</th>
 											<th nowrap="nowrap" width="113px">SubscriberID</th>
 											<th nowrap="nowrap" width="113px">TXNID/REFID</th>
-											<th nowrap="nowrap" width="137px">Provider/ Brand</th>
+											<th nowrap="nowrap" width="137px"> Operator </th>
 											<th nowrap="nowrap" width="80px">Amount</th>
-											<th nowrap="nowrap" width="115px">Balance Before</th>
+											<th nowrap="nowrap" width="115px">Pre-Balance </th>
 											<th nowrap="nowrap" width="102px">Order Date</th>
+											
+											<th nowrap="nowrap" width="135px">Payment Mode</th>
+											<th nowrap="nowrap" width="135px">Remark</th>
 											<th nowrap="nowrap" width="140px">Payment Method</th>
 											<th nowrap="nowrap" width="130px">Payment Status</th>
 											<th nowrap="nowrap" width="135px">Order Status</th>
-											<th nowrap="nowrap" width="135px">Deliver to</th>
-											<th nowrap="nowrap" width="135px">Remark</th>
 											<!-- <th nowrap="nowrap" width="95px">Query</th> -->
 									</tr>
 							</tfoot>
@@ -382,14 +384,15 @@ font-weight: bold;
 											<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
 											<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
 											<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
-											<td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">MYDTH</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
-											<td><span *ngIf="recharge.payment_status == 1">Complete</span><span *ngIf="recharge.payment_status == 2">Fail</span><span *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
-												<td>
-													<span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
-													<span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
-												</td>
+										
 												<td>{{recharge.deliver_to}}</td>
 												<td>{{recharge.remark}}</td>
+												<td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">MYDTH</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
+												<td><span class="green white-text padd1" *ngIf="recharge.payment_status == 1">Complete</span><span class="red white-text padd1" *ngIf="recharge.payment_status == 2">Fail</span><span class="orange white-text padd1" *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
+													<td>
+														<span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
+														<span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
+													</td>
 											<!-- <td>
 												<div *ngIf="recharge.complaint_id == null">
 														<span class="orange white-text" *ngIf="check_delay(recharge.history_time) == 2">Please Wait...</span>

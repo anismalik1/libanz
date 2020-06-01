@@ -6312,3 +6312,12 @@ margin: 2px;
 	border-top-left-radius: 10px;
 
 }
+
+.thead-bg {
+    background: #ececec;
+    border: 1px solid #ececec;
+}
+.thead-bg tr th {
+    background: #ececec;
+    border: 1px solid #dcdcdc !important;
+}
