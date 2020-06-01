@@ -1,3 +1,50 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<style stype="text/css">
+
+.list-data{
+		padding-top:6px;
+		padding-bottom:10px; font-size:16px; color:#333;
+		z-index:99999;
+	}
+	.list-data a{
+	
+	color: #333;
+	font-size: 12px;
+	font-weight: bold;
+	border: 1px solid #ececec;
+	padding: 2px 10px;
+	border-radius: 5px;
+	z-index: 99999;
+	}
+
+	.rechare-section-list {
+    padding-left: 15px;
+}
+
+.xzoom {
+    width: auto !important;
+    max-height: 200px;
+    box-shadow: none !important;
+    margin: 1rem;
+    position: absolute;
+	left: 90px;
+	top:45px;
+}
+
+.black-txt{
+
+	width: 95%;
+    padding-right: 15px;
+}
+
+.back-icon{
+
+	width: 93%;
+    padding-right: 25px;
+}
+</style>
+
+
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
@@ -441,7 +488,7 @@
      <section>
      <div class="col s12 m4" >
         <div class="product-image">
-            <div class="row">
+            <div class="row" style="margin-bottom:0px;">
                 <div class="col s10">
                     <div class="rating-green-content" >Trending </div>
                 </div>
@@ -473,7 +520,7 @@
 
         <div class="col s12 m4" >
             <div class="product-image" *ngFor="let item of recommended">
-                <div class="row">
+				<div class="row" style="margin-bottom:0px;">
                     <div class="col s10">
                         <div class="rating-green-content" >Trending </div>
                     </div>
