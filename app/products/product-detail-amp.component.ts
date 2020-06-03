@@ -152,6 +152,10 @@ export class ProductDetailAmpComponent implements OnInit {
     }
   }
 
+  load_packages()
+  {
+
+  }
   fetch_options()
   {
     this.todoservice.fetch_product_options({token : this.get_token()})
@@ -309,18 +313,19 @@ export class ProductDetailAmpComponent implements OnInit {
 	{
     this.channel_display = 0; 
       this.spinner.show();
+      
       if(this.productservice.get_region())
       {
         this.region = this.productservice.get_region();
       } 
       //console.log(this.month)
-		  let data = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month,region: this.region};
-		  this.productservice.fetch_product_data(data)
+		  let data : any = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month,region: this.region};
+      this.productservice.fetch_product_data(data)
 		  .subscribe(
 			data => 
 			{
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
-        this.product_features = data.features;
+        this.product_features = data.specification;
         this.ratings          = data.rating;
         this.spinner.hide();
         let b = this.htmlToPlaintext(JSON.stringify(data));
@@ -981,7 +986,7 @@ export class ProductDetailAmpComponent implements OnInit {
     this.fetch_package();
   }
 
-  fetch_package()
+  fetch_package(type : string = 'product')
   {
     this.spinner.show();
     let data = {month : this.month,circle: this.region,product: this.product_id};
@@ -989,9 +994,12 @@ export class ProductDetailAmpComponent implements OnInit {
       .subscribe(
         data => 
         {
-          this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
+          if(type == 'product')
+          {
+            this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
+            this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
+          }
           this.channels_packs = data.package;
-          this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
           this.filter_channel_subpack();
           this.spinner.hide();
         }

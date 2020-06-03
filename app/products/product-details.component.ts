@@ -415,7 +415,7 @@ export class ProductDetailsComponent implements OnInit{
 			data => 
 			{
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
-        this.product_features = data.features;
+        this.product_features = data.specification;
         this.spinner.hide();
         let b = this.htmlToPlaintext(JSON.stringify(data));
         this.channels_packs = data.package;

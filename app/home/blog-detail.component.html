@@ -64,7 +64,7 @@
 						<div class="blog-content">
               <span class="blog-title">{{post[0].title}}</span>
               <div class="clearfix"></div>
-              <p [innerHTML]="decode_html(post[0].description)"></p>
+              <p [innerHTML]="post[0].description"></p>
 						</div>
           </div>
           <div class="card-action right-align">
@@ -147,7 +147,7 @@
                   <img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
                 </div>
                 <div class="post-text">
-                  <p class="font-size-change" [innerHTML]="decode_html(item.shortDescription)">               	
+                  <p class="font-size-change" [innerHTML]="item.shortDescription">               	
                   </p>
                     <p class="author-name font-size-change grey-text">
                       <span><i class="material-icons">person</i></span>

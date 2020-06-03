@@ -230,9 +230,9 @@ margin-top: 27px;
     <div class="aadhar-block">
  
     <div class="col s12 m4">
-        <div class="kyc-box-1">
+        <div class="kyc-box-1" appFiledir #fileDrop (fileDropped)="onFileDroped($event)">
             <h3 class="txt-kyc">Aadhar Card Upload </h3>
-            <input type="file" class="form-control" id="fileup" style="display: none;">
+            <input type="file" class="form-control" id="fileup" style="display: none;" #fileDrop (change)="filehandler($event.target.files)">
 
 
          <label for="fileup" class="pointer">  <span class="fa fa-upload fa-5x kyc-icon"></span> </label>

@@ -8,14 +8,21 @@ import { AuthService } from '../auth.service';
   styles: []
 })
 export class KycComponent implements OnInit {
-
+  files : any[] = [];
   constructor(private spinner : NgxSpinnerService, private authService : AuthService) {
     
    }
 
+  onFileDropped($event)
+  {
+    console.log($event);
+    this.files.push($event);
+  } 
+  
   ngOnInit() {
     this.spinner.hide();
   }
+
 
   get_token()
   {

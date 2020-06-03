@@ -364,7 +364,7 @@
 												<div>
 								<h2>Specifications</h2>
 													<ul>
-														<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of convert_to_json(product.specifications);let i = index">
+														<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of product_features;let i = index">
 										<div class="row">
 											<div class="col m4 s12">
 												<div class="brand">

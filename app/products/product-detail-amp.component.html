@@ -110,7 +110,7 @@
 }
 </style>
 
-
+<app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
@@ -265,11 +265,12 @@
 							<input type="text" style="width:180px" name="subscriber_id" placeholder="Subscriber Id OR Phone No">
 						</li>
 					</ul>
+					<!-- <button class="btn" (click)="load_specification()">Specification</button> -->
 					<div class="review-ratings">
                   		<div>
 							<h2>Specifications</h2>
                   			<ul>
-                  				<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of convert_to_json(product.specifications);let i = index">
+                  				<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of product_features;let i = index">
 									<div class="row">
 										<div class="col m4 s12">
 											<div class="brand">
@@ -419,12 +420,12 @@
       <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
         <div class="container">
          <div class="row no-margin">
-                 <div class="col s12 m8">
-                         <div class="center">	
-                                 <h2 class="center font600 text-orange">Select Package </h2>
-                                 <!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
-                             </div>
-                 </div>			
+				<div class="col s12 m8">
+				<div class="center">	
+					<h2 class="center font600 text-orange">Select Package </h2>
+					<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+				</div>
+				</div>			
           <div class="col s12 m8 channel-list-box">				
            <div class="channels-accoriadn">
                  <ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
@@ -433,7 +434,7 @@
                          <div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
                              <div class="row">
                                  <div class="col s6 m4" *ngFor="let item of packs.child;let i = index;">
-                                 <!-- <div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
+                                  <!--<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
                                  <div class="card product-new" *ngIf="item.default_selected == 2">
                                      <div class="card-content center">
                                          <span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>

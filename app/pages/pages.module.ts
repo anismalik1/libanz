@@ -29,6 +29,7 @@ import { PricingComponent } from './pricing.component';
 import { KycComponent } from './kyc.component';
 import { ProductListingComponent } from './product-listing.component';
 import { PlanCheckoutComponent } from './plan-checkout.component';
+import { FiledirDirective } from './filedir.directive';
 
 
 const routes: Routes = [
@@ -74,7 +75,7 @@ const routes: Routes = [
     MatInputModule,
     SharedCommonModule, 
   ],
-  declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent, PricingComponent, KycComponent, ProductListingComponent, PlanCheckoutComponent],
+  declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent, PricingComponent, KycComponent, ProductListingComponent, PlanCheckoutComponent, FiledirDirective],
   providers : [ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 
