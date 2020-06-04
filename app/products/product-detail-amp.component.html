@@ -6,6 +6,10 @@
 		padding-bottom:10px; font-size:16px; color:#333;
 		z-index:99999;
 	}
+	.pt-fix-20{
+
+		padding-top:20px !important;
+	}
 	.product-image {
     /* padding: 24px 0px 0px 5px; */
    
@@ -86,6 +90,7 @@
     padding-right: 25px;
 }
 
+
 @media only screen and (max-width: 767px){
 
 	.channels-accoriadn .card-content a {
@@ -98,6 +103,9 @@
     width: 97px;
     margin-top: 9px;
     font-size: 12px !important;
+}
+ul#dropdown1 li {
+    border-bottom: 1px solid #e8e4e4;
 }
 .when-check {
     position: absolute;
@@ -177,11 +185,11 @@
                   </div>
                   <div class="col s12 m12 l7 product-detail" *ngIf="product">
                   	<h3 class="font600" *ngIf="product">{{product.title}}</h3>
-						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span>
+						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i> </span> <span>&nbsp; (10) </span>
 						
 						<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
 						<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+						<p class="list-data pt-fix-20"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 						<ul id='dropdown1' class='dropdown-content'>
 							<li *ngFor="let item of product_category_list;">
 								<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
@@ -487,7 +495,7 @@
      </div>
      <div class="col s12 m4 order-summary">
          <div class="card">
-             <div class="card-content black-text no-padding">
+             <div class="card-content black-text no-padding space-fix-bottom">
                  <span class="card-title inline-block">Order Summary</span>
                  <hr>
                  <div>
@@ -541,10 +549,15 @@
                  <hr>
                  <div class="subtotal inline-block">
                      <a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-                     <a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
-                     <a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" >Checkout </a>
+                     
+                  
                      <!-- <a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a> -->
-                 </div>				
+				 </div>	
+				 <div class="right-btn">
+
+					<a href="javascript:" class="btn orange round-btmobile " *ngIf="multienable || fta_pack.price == 0" >Checkout </a>
+					<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile fix-right-mb" (click)="fetch_all_multi(product.category_id,product.id)">Checkout</a>
+				</div>			
              </div>
          </div>
      </div>
@@ -577,7 +590,7 @@
                         <div class="rating-green" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate_count}} </span>
                         <br/>
                         <p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}} </span> </p>
-                        <p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+                        <p class="list-data pt-fix-20"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
                        
                     </div>
                 </div>

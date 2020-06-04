@@ -6301,7 +6301,7 @@ margin: 2px;
     float: left;
     margin-left: -9px !important;
     font-size: 10px;
-	border-top-left-radius: 10px;
+	border-top-left-radius:0px;
 
 }
 
@@ -6312,4 +6312,14 @@ margin: 2px;
 .thead-bg tr th {
     background: #ececec;
     border: 1px solid #dcdcdc !important;
+}
+
+div#login-page-otps input {
+    width: 35px !important;
+}
+.fix-right-mb {
+    float: right;
+}
+.space-fix-bottom {
+    height: 48vh;
 }
