@@ -7,7 +7,15 @@
     white-space: nowrap;
     padding: 1px;
 	}
+	.b-fix-top{
 
+		margin-top:-12px;
+	}
+
+	.add-fix{
+
+		margin-top:15px;
+	}
 	.cod-text {
     line-height: 27px !important ;
 }
@@ -231,7 +239,7 @@ a.btn.orange.btn-large.ctn-che1 {
 																	<span class="red-text ">*City is Required.</span>
 																</div>
 															</div>
-															<div class="input-field col s12 m6">
+															<div class="input-field col s12 m6 b-fix-top">
 																<mat-form-field>
 																	<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
 																		<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
@@ -240,7 +248,7 @@ a.btn.orange.btn-large.ctn-che1 {
 															</div>
 														</div>
 														<div class="row no-margin">
-															<div class="input-field col s12">
+															<div class="input-field col s12 add-fix">
 																<input name="address" id="land" type="text" class="validate" formControlName="address">
 																<label for="land">Address*</label>
 																<div class="center" *ngIf="!addressformgroup.controls['address'].valid && addressformgroup.controls['address'].touched">
