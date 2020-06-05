@@ -5,11 +5,9 @@
     margin: 0px !important;
 }
 p.red-text.center.margin-checkout {
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
-    margin: auto;
-    left: 30%;
+	position: absolute;
+    bottom: 12px;
+    justify-content: center !important;
 }
 	body{
 
@@ -90,12 +88,12 @@ overflow:hidden !important;
 						<div class="order-list" *ngFor="let order of orders">							
 							<div class="row no-margin border-on-bottom">
 								
-								<div class="col s8 no-padding">
+								<div class="col s6 no-padding">
 									<span class="font-size-change1">Order Number</span><br>
 									<span class="font-size-change-order font600">{{order.id}}</span><br>
 									<span class="font-size-change1 grey-text">{{order.formated_date}}</span>
 								</div>
-								<div class="col s4 right-align">
+								<div class="col s6 right-align">
 									<span class="font-size-change1">Amount</span><br>
 									<span [className]="(order.bonus_amount == 0) ? 'font-size-change-order font600' : ''"><span id="total-amount"></span><span *ngIf="order.qty > 1">{{order.qty}} x </span>{{order.price}} + {{pack_data(order.pack_selected,order.title).amount}} = <i class="icon-inr"></i>{{order.qty*order.price + pack_data(order.pack_selected,order.title).amount }}</span><br>
 									<span class="font-size-change-order font600" *ngIf="order.bonus_amount > 0">{{order.qty*order.price + pack_data(order.pack_selected,order.title).amount}} - {{order.bonus_amount}}(Bonus) = {{order.qty*order.price + pack_data(order.pack_selected,order.title).amount - order.bonus_amount}} <br></span>
@@ -104,13 +102,13 @@ overflow:hidden !important;
 								</div>
 							</div>
 							<div class="row margin-checkout">						
-								<div class="col s12 m2" >
+								<div class="col s3 m2" >
 									<a href="javascript:">
 										<span ><img src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{order.image}}" class="responsive-img vertical-align-middle border" alt="Tata sky logo"></span>
 									</a>
 									
 								</div>
-								<div class="col s12 m6 no-padding">
+								<div class="col s9 m6 no-padding">
 									<a href="javascript:" class="black-text"><span class="font600 font-size-change-order">{{order.title}}</span></a><br>
 									<span class="font-size-change-order font600">Setup Box</span>
 									<div class="package-section grey-text" *ngIf="order.tsk_type">

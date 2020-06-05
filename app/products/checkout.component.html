@@ -119,7 +119,7 @@ a.btn.orange.btn-large.ctn-che1 {
           <!-- Login Checkout -->
         	<div class="row no-margin white login-checkout checkout_3">
         		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
-          			<div class="col s12 m3 center">
+          			<div class="col s3 m3 center">
           				<div class="cart-product-image"> 
           					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
           					<div class="product-quantity less-add-btn">
@@ -131,7 +131,7 @@ a.btn.orange.btn-large.ctn-che1 {
 					          </div>
           				</div>
           			</div>
-          			<div class="col s12 m5 margin-top" id="item-detail-section-{{i}}">
+          			<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
           				<a href="#" class="black-text">
           					<h4 class="font600">{{item.product.title}}</h4>
           					<span class="font-size-change grey-text">Seller : MyDthShop</span><br>
