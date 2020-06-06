@@ -6112,6 +6112,10 @@ h2#compare-title {
 	.card.on-web {
 		background: #242b33 !important;
 		height:100vh;
+		height: 100vh;
+    width: 262px;
+    margin-top: -8px;
+    left: -9px;
 	}
 
 	.side-bar-naviagtion li a {
@@ -6345,4 +6349,16 @@ div#login-page-otps input {
 }
 .location-add1 label.active {
     margin-top: -6px;
+}
+.cst-heading-fix{
+
+	font-weight: bold; color: #5b5e61; font-size: 19px;
+}
+@media only screen and (min-width: 1200px){
+
+.fix-left-user{
+
+	margin-left:-50px !important;
+}
+
 }
