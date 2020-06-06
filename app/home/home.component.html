@@ -336,7 +336,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						<div class="card">
 							<div class="row" style="margin-bottom:10px;">
 								<div class="col s10">
-									<div class="rating-green-content" >COD / Free Home Delievery </div>
+									<div class="rating-green-content" > Trending  </div>
 								</div>
 								<div class="col s2">
 									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
@@ -359,6 +359,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 											<div class="col s12 m12">
 												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0] && check_cashback(item.id)[0].wallet_tsk_2">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
 												<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+											</div>
+											<div class="col s12 m12 ">
+												<p class="free-txt"> COD / Free Home Delievery</p>							
 											</div>
 											<div class="clearfix"></div>
 											<div class="col s12 m12 ">
@@ -391,7 +394,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 				<div class="card">
 					<div class="row" style="margin-bottom:10px;">
 						<div class="col s10">
-							<div class="rating-green-content" >Free Home Delievery </div>
+							<div class="rating-green-content" > Trending </div>
 						</div>
 						<div class="col s2">
 							<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
@@ -414,6 +417,10 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
 										<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
 									</div>
+									<div class="col s12 m12 ">
+										<p class="free-txt"> Free Home Delievery</p>							
+									</div>
+
 									<div class="clearfix"></div>
 									<div class="col s12 m12 ">
 										<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
@@ -441,7 +448,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 					<div class="card">
 						<div class="row" style="margin-bottom:10px;">
 							<div class="col s10">
-								<div class="rating-green-content" >COD / Free Home Delievery </div>
+								<div class="rating-green-content" > Trending </div>
 							</div>
 							<div class="col s2">
 								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
@@ -463,6 +470,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 										<div class="col s12 m12">
 											<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
 											<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+										</div>
+										<div class="col s12 m12 ">
+											<p class="free-txt"> COD / Free Home Delievery </p>							
 										</div>
 										<div class="clearfix"></div>
 										<div class="col s12 m12 ">
@@ -492,7 +502,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 				<div class="card">
 					<div class="row" style="margin-bottom:10px;">
 						<div class="col s10">
-							<div class="rating-green-content" >Free Home Delievery </div>
+							<div class="rating-green-content" >Trending  </div>
 						</div>
 						<div class="col s2">
 							<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
@@ -518,6 +528,10 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
 									<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
 								</div>
+								<div class="col s12 m12 ">
+									<p class="free-txt"> Free Home Delievery </p>							
+								</div>
+
 								<div class="clearfix"></div>
 								<div class="col s12 m12 ">
 									<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}" target="_blank">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
@@ -561,7 +575,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="card">
 									<div class="row" style="margin-bottom:10px;">
 										<div class="col s10">
-											<div class="rating-green-content" >Free Home Delievery </div>
+											<div class="rating-green-content" > Trending </div>
 										</div>
 										<div class="col s2" *ngIf="item.new_product == 1">
 											<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
@@ -584,6 +598,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 													<div class="col s12 m12">
 														<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div>
 														<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
+													</div>
+													<div class="col s12 m12 ">
+														<p class="free-txt"> Free Home Delievery </p>							
 													</div>
 													<div class="clearfix"></div>
 													<div class="col s12 m12 ">
