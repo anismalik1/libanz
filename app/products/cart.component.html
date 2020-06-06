@@ -87,7 +87,7 @@
             </div>
             <div class="col s12 m12 l4 order-summary" *ngIf="this.productservice.cartItemsCount() > 0">
                 <div class="card">
-                    <div class="card-content black-text no-padding">
+                    <div class="card-content black-text no-padding fix-inne-pad">
                         <span class="card-title inline-block">Order Summary</span> 
                         <hr>
                         <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">

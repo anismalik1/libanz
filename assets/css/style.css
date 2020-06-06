@@ -414,6 +414,7 @@ nav ul a:hover{
 }
 .dropdown-content li>a, .dropdown-content li>span{
 	color: #000;
+	border-bottom: 1px solid #efecec;
 }
 .select-wrapper input.select-dropdown{
 	margin: 0;
@@ -4318,8 +4319,9 @@ a.btn-floating.btn-large.orange.dropdown-button.white-text {
 #no-faq .row{padding: 20px;}
 .recommended-section .card-image{background: #f9f9f9;}
 .recomm .card-title{background-image: none !important;font-size: 18px;color: #000;border: 1px solid #d6d6d6;border-right: 0;border-left: 0;}
-.recomm .btn-new1 .btn{width: 100% !important;border-radius: 0 !important;box-shadow: none;margin: 0;}
-.recomm .card{height: 440px !important;
+.recomm .btn-new1 .btn{width: 67.5% !important;
+    border-radius: 20px !important;box-shadow: none;margin: 0;}
+.recomm .card{height: 445px !important;
     overflow: auto;
     border: 1px solid #d6d6d6;
     transition: .3s all linear; }
@@ -6336,4 +6338,11 @@ div#login-page-otps input {
 
 	font-size: 13px;
     color: #ff6a00 !important;
+}
+.fix-inne-pad{
+
+	padding:20px !important;
+}
+.location-add1 label.active {
+    margin-top: -6px;
 }

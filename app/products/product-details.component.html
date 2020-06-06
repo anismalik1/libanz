@@ -581,7 +581,7 @@
 	</div>
 	<div class="col s12 m4 order-summary">
 		<div class="card">
-			<div class="card-content black-text no-padding">
+			<div class="card-content black-text no-padding fix-inne-pad">
 				<span class="card-title inline-block">Order Summary</span>
 				<hr>
 				<div>
@@ -607,7 +607,7 @@
 								font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</li>
 					</div>
 					<div class="subtotal" *ngIf="this.product && this.product.promos">
-						<p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
+						<p class="inline-block font600">Promocode {{promos.unique_code}} is applied  :</p>
 						<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
 					</div>
@@ -655,7 +655,7 @@
 							<div class="card">
 								<div class="row" style="margin-bottom:10px;">
 									<div class="col s10">
-										<div class="rating-green-content" >Free Home Delievery </div>
+										<div class="rating-green-content" > Trending </div>
 									</div>
 									<div class="col s2" *ngIf="item.new_product == 1">
 										<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
@@ -679,6 +679,10 @@
 													<!-- <div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div> -->
 													<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
 												</div>
+												<div class="col s12 m12 ">
+													<p class="free-txt"> Free Home Delievery </p>							
+												</div>
+
 												<div class="clearfix"></div>
 												<div class="col s12 m12 ">
 													<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
