@@ -48,13 +48,11 @@
                                     </div>
                                 </div>
                                 <div class="col s12 m5 margin-top">
-                                    <a href="#" class="black-text">
-                                        <h4 class="font600"><a [routerLink]="['/product/'+item.product.url]" class="black-text">{{item.product.title}}</a></h4>
-                                        <span class="font-size-change grey-text">Seller : MyDthShop</span><br>
-										<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
-										<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
-          							<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
-                                    </a>
+                                    <h4 class="font600"><a [routerLink]="['/product/'+item.product.url]" class="black-text">{{item.product.title}}</a></h4>
+									<span class="font-size-change grey-text">Seller : MyDthShop</span><br>
+									<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
+									<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
+          							
                                     <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.product.price -1000}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
 									<span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
 									<span class="font-size-change1 black-text inline-block margin-top-cart">Selected Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
@@ -246,5 +244,6 @@
 		  </div>
 	  </div>
 	</div>
+	<app-footer></app-footer>	
 	
   

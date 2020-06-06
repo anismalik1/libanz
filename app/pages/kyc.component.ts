@@ -12,17 +12,15 @@ export class KycComponent implements OnInit {
   constructor(private spinner : NgxSpinnerService, private authService : AuthService) {
     
    }
-
-  onFileDropped($event)
-  {
-    console.log($event);
-    this.files.push($event);
-  } 
   
   ngOnInit() {
     this.spinner.hide();
   }
 
+  filesDropped(evt)
+  {
+    console.log(evt);
+  }
 
   get_token()
   {

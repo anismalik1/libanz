@@ -104,10 +104,6 @@
     margin-top: 9px;
     font-size: 12px !important;
 }
-a.modal-trigger.white.btn.black-text.rating-center {
-			padding: 10px 25px !important;
-		}
-
 ul#dropdown1 li {
     border-bottom: 1px solid #e8e4e4;
 }
@@ -116,7 +112,7 @@ ul#dropdown1 li {
     top: 2%;
     left: 2%;
     color: #0ebd0e;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     cursor: pointer;
 }
 }
@@ -574,7 +570,7 @@ ul#dropdown1 li {
             <div class="product-image" *ngFor="let item of recommended">
 				<div class="row" style="margin-bottom:0px;">
                     <div class="col s10">
-                        <div class="rating-green-content">Trending </div>
+                        <div class="rating-green-content" *ngIf="item.recommended == 1">Trending </div>
                     </div>
                     <div class="col s2">
                         <span class="fa fa-star pull-right icn-clr1"></span>
