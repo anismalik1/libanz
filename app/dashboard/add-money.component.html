@@ -440,6 +440,10 @@ float: right;
 }
   
 }
+.add-money-top{
+
+margin-top:-9px;
+}
 </style>
 
 <app-header class="hide-on-mobile"></app-header>
@@ -478,7 +482,7 @@ float: right;
             </div>
             <div class="col s12 m10">
               <!-- <h4 class="font-bold cst-heading-fix">Welcome To Dashboard </h4> -->
-                <div class="card">
+                <div class="card ">
                     <div class="card-content cst-invoice" *ngIf="order_id">
                       
                         <div  class="mb-1">
@@ -504,7 +508,7 @@ float: right;
                         
                     </div>
                     <div class="clearfix"></div>
-                      <div class="card-content" *ngIf="!order_id">
+                      <div class="card-content add-money-top" *ngIf="!order_id">
                         <h3 class="font600 inline-block mb-pt-25 txt-hide" style="margin-top:-15px;"><span class="fa fa-credit-card"></span> &nbsp; Add Money to Mydth Wallet  </h3>
                        <div class="cs-box-pay">
 

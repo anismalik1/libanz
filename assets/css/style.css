@@ -6181,9 +6181,9 @@ h2#compare-title {
 	}
 
 	@media only screen and (max-width: 767px){
-.down-mode {
+/* .down-mode {
     margin-top: 28px;
-}
+} */
 	}
 .bonus-amount{
 	
@@ -6193,6 +6193,7 @@ h2#compare-title {
 	white-space: nowrap !important;
 	
 }
+
 
 .round-btmobile {
     border-radius: 20px;
