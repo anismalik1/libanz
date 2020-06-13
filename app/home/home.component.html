@@ -584,12 +584,13 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 										</div>
 									</div>
 									<div class="card-image padd center">
-											<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images">
+											<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images" style="">
 										</div>
 										<div class="clearfix"></div>
 										<div class="card-stacked">
 											<div class="card-content no-padding">
-												<span class="card-title">{{item.title}}</span>								
+												<span class="card-title cst-gradient" style="    background-image: -webkit-linear-gradient( 0deg, rgb(242,125,33) 0%, rgb(227,35,45) 30%, rgb(197, 43, 8) 61%, rgb(255, 3, 15) 100%) !important;
+												color: #fff;">{{item.title}}</span>								
 												<div class="row center">
 													<div class="col s12 m12">
 														<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>

@@ -252,8 +252,9 @@
 										</div>
 										<div class="col s12 m12 l7 product-detail" *ngIf="product">
 											<h3 class="font600" *ngIf="product">{{product.title}}</h3>
+
 							<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span>
-							
+								<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
 							<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
 							<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
 							<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
@@ -270,9 +271,8 @@
 									<i class="material-icons">keyboard_arrow_down</i>
 								</div>
 							</a>
-							<br/>
-							<br/>
-											<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
+							
+										
 											<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
 											<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
 											<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
@@ -668,7 +668,8 @@
 									<div class="clearfix"></div>
 									<div class="card-stacked">
 										<div class="card-content no-padding">
-											<span class="card-title">{{item.title}}</span>								
+											<span class="card-title" style=" background-image: -webkit-linear-gradient( 0deg, rgb(242,125,33) 0%, rgb(227,35,45) 30%, rgb(197, 43, 8) 61%, rgb(255, 3, 15) 100%) !important;
+											color: #fff;">{{item.title}}</span>								
 											<div class="row center">
 												<div class="col s12 m12">
 													<span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
@@ -797,7 +798,7 @@
 				<div class="col s6 m3" *ngFor="let item of product_list">
 					<a href="javascript:" class="black-text" (click)="continue_to_change(item.url)">
 						<div class="card choose-set-up-box center">
-							<div class="card-image">
+							<div class="card-image cst-border-1">
 								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
 							</div>
 							<div class="card-content">
