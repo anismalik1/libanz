@@ -46,6 +46,45 @@ export class TodoService {
     );
   }
 
+  payment_template($status)
+  {
+    if($status == 1)
+      return '<span class="green darken-1 padd1 white-text"> Success </span>';
+    else if($status == 2)
+      return '<span class="red darken-1 white-text padd1"> Failed </span>';
+    else
+      return '<span class="orange darken-1 white-text padd1"> Pending </span>';	
+  }
+  order_template($status)
+  {
+    if($status == 'Booked')
+		return '<span class="padd1 teal darken-1 white-text"> '+$status+' </span>';
+	  else if($status == 'Received')
+		return '<span class="padd1 light-blue darken-1 white-text"> '+$status+' </span>';
+	else if($status == 'Incomplete')
+		return '<span class="padd1 orange accent-3 white-text"> '+$status+' </span>';
+	else if($status == 'OnHold')
+		return '<span class="padd1 purple darken-1 white-text"> '+$status+' </span>';
+	else if($status == 'Delivered')
+		return '<span class="padd1 green darken-1 white-text"> '+$status+' </span>';
+	else if(status.toLowerCase() == 'closed')
+		return '<span class="padd1 blue-grey darken-1 white-text"> '+$status+' </span>';
+	else if($status.toLowerCase() == 'cancel')
+		return '<span class="padd1 pink darken-1 white-text"> '+$status+' </span>';
+	else if($status == 'Cancelled')
+		return '<span class="padd1 red darken-1 white-text"> '+$status+' </span>';
+	else if($status == 'Success' || $status == 'Successful')  // for recharge  
+		return '<span class="padd1 green darken-1 white-text"> '+$status+' </span>';
+	else if($status.toLowerCase() == 'pending')  // for recharge  
+		return '<span class="padd1 orange darken-1 white-text"> '+$status+' </span>';	
+	else if(status.toLowerCase() == 'failed')  // for recharge  
+		return '<span class="padd1 red darken-1 white-text"> '+$status+' </span>';
+	else if(status.toLowerCase() == 'Refund')  // for recharge  
+		return '<span class="padd1 lime darken-1 white-text"> '+$status+' </span>';
+	else // for recharge  
+		return '<span class="padd1 lime darken-1 white-text"> '+$status+' </span>';	
+  }
+
   createOnline$() {
     return merge<boolean>(
       fromEvent(window, 'offline').pipe(map(() => false)),
@@ -196,6 +235,7 @@ export class TodoService {
     else
       return 0;
   }
+
 
 
   get_user_phone()
@@ -972,4 +1012,15 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/fetch_product_options';
     return this.send_post_request(data,url) ;
   }
+  cancel_order(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/cancel_order';
+    return this.send_post_request(data,url) ;
+  }
+  fetch_page_categories(data)
+  {
+    let url = this.server_url+'accounts/apis/page/fetch_page_categories';
+    return this.send_post_request(data,url) ;
+  }
+
 }

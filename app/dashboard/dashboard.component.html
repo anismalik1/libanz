@@ -217,12 +217,15 @@ font-weight: bold;
 					<div class="row">
 						
 						<h4 class="font-bold cst-heading-fix">Welcome To Dashboard </h4>
-						
+						<div class="row">
+							<!-- <div class="col m5 s12"><h3 class="font600 inline-block">Leads </h3></div> -->
+							<div class="col m3 s6 pt-15-fix">	<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/></div>
+							<div class="col m1 s3 pt-15-fix">	<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button></div>
+							<!-- <div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div> -->
+						</div>
 						<div class="clearfix"></div>
 						<div class="col s12 m3">
 							<div class="card cashback-box ">
-							
-
 									<div class="col s3 left-sq-1">
 										<span class="fa fa-download download-sq-1"></span>
 									</div>
@@ -234,11 +237,6 @@ font-weight: bold;
 										</div>
 
 									</div>
-
-
-									
-									
-								
 							</div>
 							
 						</div>
@@ -257,11 +255,6 @@ font-weight: bold;
 										</div>
 
 									</div>
-
-
-									
-									
-								
 							</div>
 							
 						</div>
@@ -281,11 +274,6 @@ font-weight: bold;
 										</div>
 
 									</div>
-
-
-									
-									
-								
 							</div>
 							
 						</div>
@@ -305,10 +293,6 @@ font-weight: bold;
 										</div>
 
 									</div>
-
-
-									
-									
 								
 							</div>
 							
@@ -350,18 +334,11 @@ font-weight: bold;
 
 
 					
-					<div class="responsive-table table-box-design" style="width: 100%; overflow:auto;">
-					
-
-						<div class="row">
-							<div class="col m5 s12"><h3 class="font600 inline-block">Leads </h3></div>
-							<div class="col m3 s6 pt-15-fix">	<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/></div>
-							<div class="col m1 s3 pt-15-fix">	<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button></div>
-							<div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
-						</div>
+					<!-- <div class="responsive-table table-box-design" style="width: 100%; overflow:auto;"> -->
+						
 						
 						<hr/>
-						<div class="responsive-table">
+						<!-- <div class="responsive-table">
 						<table id="datatable" class="table display  datatable-example cst-table">
 							<thead class="thead-bg">
 									<tr>
@@ -380,7 +357,6 @@ font-weight: bold;
 											<th>Payment Method</th>
 											<th >Order Status</th>
 											<th>Pyament Status </th>
-											<!-- <th nowrap="nowrap" width="95px">Query</th> -->
 									</tr>
 							</thead>
 							<tfoot>
@@ -409,7 +385,6 @@ font-weight: bold;
 											<td>{{recharge.subcriber_id}}</td>
 											<td>{{recharge.transaction_id}}</td>
 											<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
-											<!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
 											<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
 											<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
 											<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
@@ -422,33 +397,15 @@ font-weight: bold;
 													<span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
 												</td>
 												<td> 	<span class="green white-text padd1">Success </span></td>
-										<!-- <td>
-												<td><span class="green white-text padd1" *ngIf="recharge.payment_status == 1">Complete</span><span class="red white-text padd1" *ngIf="recharge.payment_status == 2">Fail</span><span class="orange white-text padd1" *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
-													
-												<div *ngIf="recharge.complaint_id == null">
-														<span class="orange white-text" *ngIf="check_delay(recharge.history_time) == 2">Please Wait...</span>
-														<span *ngIf="check_delay(recharge.history_time) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
-												</div>
-												<div *ngIf="recharge.complaint_id != null">
-														<span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
-														<span class="orange white-text" *ngIf="recharge.status == 0">Resolved</span>
-												</div>
-											</td> -->
 									</tr>
 							</tbody>	
 					</table>
 				</div>
-
-				
-
-			
-				</div>
+			</div> -->
 	
 				<div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
-					
-
 					<div class="row">
-						<div class="col m9 s9"><h3 class="font600 inline-block">Buy Order </h3></div>
+						<div class="col m9 s9"><h3 class="font600 inline-block">Orders </h3></div>
 						<div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
 					</div>
 					
@@ -459,87 +416,59 @@ font-weight: bold;
 								<tr>
 										<th>S.No </th>
 										<th >Order No</th>
-										<th >Customer Name</th>
-										<th >C. Phone</th>
-										<th >C.Address</th>
 										<th> Product </th>
 										<th >Amount</th>
 										<th>Date </th>
 										<th>Subscriber ID</th>
-										
 										<th >Remarks</th>
-										
+										<th >C.Address</th>
 										<th>Payment Method</th>
 										<th >Order Status</th>
 										<th>Pyament Status </th>
-										<!-- <th nowrap="nowrap" width="95px">Query</th> -->
 								</tr>
 						</thead>
 						<tfoot>
 								<tr>
 									<th>S.No </th>
 										<th >Order No</th>
-										<th >Customer Name</th>
-										<th >C. Phone</th>
-										<th >C.Address</th>
 										<th> Product </th>
 										<th >Amount</th>
 										<th>Date </th>
 										<th>Subscriber ID</th>
-										
 										<th >Remarks</th>
-										
+										<th >C.Address</th>
 										<th>Payment Method</th>
 										<th >Order Status</th>
 										<th>Pyament Status </th>
+										<th >C.Address</th>
 								</tr>
 						</tfoot>
 						<tbody>
 								<tr *ngFor="let recharge of orders; let i = index">
 										<td>{{i+1}}</td>
 										<td>{{recharge.id}}</td>
-										<td>{{recharge.subcriber_id}}</td>
-										<td>{{recharge.transaction_id}}</td>
 										<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
-										<!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
 										<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
-										<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
 										<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
-									
-											<td>{{recharge.deliver_to}}</td>
-											<td>{{recharge.remark}}</td>
+										<td>{{recharge.subcriber_id}}</td>
+										<!-- <td>{{recharge.transaction_id}}</td> -->
+										<td>{{recharge.remark}}</td>
+										<td>{{recharge.deliver_to}}</td>
 											<td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">MYDTH</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
 											<td>
-												<span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
-												<span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
+												<div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
 											</td>
-											<td> 	<span class="green white-text padd1">Success </span></td>
-									<!-- <td>
-											<td><span class="green white-text padd1" *ngIf="recharge.payment_status == 1">Complete</span><span class="red white-text padd1" *ngIf="recharge.payment_status == 2">Fail</span><span class="orange white-text padd1" *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
-												
-											<div *ngIf="recharge.complaint_id == null">
-													<span class="orange white-text" *ngIf="check_delay(recharge.history_time) == 2">Please Wait...</span>
-													<span *ngIf="check_delay(recharge.history_time) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
-											</div>
-											<div *ngIf="recharge.complaint_id != null">
-													<span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
-													<span class="orange white-text" *ngIf="recharge.status == 0">Resolved</span>
-											</div>
-										</td> -->
+											<td>
+												<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
+											</td>
 								</tr>
 						</tbody>	
 				</table>
 			</div>
-
-			
-
-		
-			</div>
+		</div>
 				 
 
-			<div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
-					
-
+			<!-- <div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
 				<div class="row">
 					<div class="col m9 s9"><h3 class="font600 inline-block">Sell Order </h3></div>
 					<div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
@@ -559,13 +488,10 @@ font-weight: bold;
 									<th >Amount</th>
 									<th>Date </th>
 									<th>Subscriber ID</th>
-									
 									<th >Remarks</th>
-									
 									<th>Payment Method</th>
 									<th >Order Status</th>
 									<th>Pyament Status </th>
-									<!-- <th nowrap="nowrap" width="95px">Query</th> -->
 							</tr>
 					</thead>
 					<tfoot>
@@ -579,9 +505,7 @@ font-weight: bold;
 									<th >Amount</th>
 									<th>Date </th>
 									<th>Subscriber ID</th>
-									
 									<th >Remarks</th>
-									
 									<th>Payment Method</th>
 									<th >Order Status</th>
 									<th>Pyament Status </th>
@@ -594,7 +518,6 @@ font-weight: bold;
 									<td>{{recharge.subcriber_id}}</td>
 									<td>{{recharge.transaction_id}}</td>
 									<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
-									<!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
 									<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
 									<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
 									<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
@@ -607,31 +530,14 @@ font-weight: bold;
 											<span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
 										</td>
 										<td> 	<span class="green white-text padd1">Success </span></td>
-								<!-- <td>
-										<td><span class="green white-text padd1" *ngIf="recharge.payment_status == 1">Complete</span><span class="red white-text padd1" *ngIf="recharge.payment_status == 2">Fail</span><span class="orange white-text padd1" *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
-											
-										<div *ngIf="recharge.complaint_id == null">
-												<span class="orange white-text" *ngIf="check_delay(recharge.history_time) == 2">Please Wait...</span>
-												<span *ngIf="check_delay(recharge.history_time) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
-										</div>
-										<div *ngIf="recharge.complaint_id != null">
-												<span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
-												<span class="orange white-text" *ngIf="recharge.status == 0">Resolved</span>
-										</div>
-									</td> -->
 							</tr>
 					</tbody>	
 			</table>
 		</div>
+	</div> -->
 
-		
-
-	
-		</div>
-
-
-				</div>
-			</div>
+	</div>
+</div>
 
 		
 		</div>

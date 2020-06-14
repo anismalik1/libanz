@@ -422,10 +422,12 @@ export class ProductDetailsComponent implements OnInit{
         this.fta_pack = {};
         this.product = data.PRODUCTDATA;
         this.recommended = data.RECOMMENDED;
+        this.recommended_slider();
         this.filter_channel_subpack();
         if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
+          //console.log(user_cashback);
           if(this.product.category_id == 1)
           {
              this.product.partnerwalletamount = user_cashback[0].wallet_tsk_2;
@@ -437,6 +439,7 @@ export class ProductDetailsComponent implements OnInit{
         }
         else
         {
+          //console.log('no cashback')
           if(this.todoservice.get_user_type() == 2)
           {
             this.product.partnerwalletamount = data.PRODUCTDATA.partner_cashback_wallet;
@@ -806,6 +809,49 @@ export class ProductDetailsComponent implements OnInit{
     this.route.navigate(['product/checkout']);
   }
 
+  recommended_slider()
+  {
+    if($('#recommend-slider-script'))
+    {
+      $('#recommend-slider-script').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `recommend-slider-script`;
+    script.text = `
+      $(document).ready(function(){
+        $('#recommended-slider').lightSlider({
+          item: 4,
+          auto: false,
+          loop: false,
+          pause: 3000,
+          controls: true,
+          pager: false,
+          responsive: [
+          {
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:600,
+            settings: {
+              item:1
+            }
+          },
+          {
+            breakpoint:380,
+            settings: {
+              item:1
+            }
+          }
+          ]
+        });
+      }); 
+    `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
   open_model()
   {
     if($('#init-open_model-script'))
@@ -915,13 +961,12 @@ export class ProductDetailsComponent implements OnInit{
           if ($('.product-img').isInViewport() && (scroll - $('#channel-list').offset().top < -500)) {
             $('.images-product').css({"position":"fixed","top":"106px"});
             $('.order-summary').css('position','relative');
-            console.log(4);
           }
           else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -500) && (scroll - $('#channel-list').offset().top < 0))
           {
             //console.log(scroll - $('#channel-list').offset().top);
             $('.images-product').css({'position':'relative','top':'0'});
-            console.log(2)
+            //console.log(2)
           }
           else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -98))
           {
@@ -929,7 +974,7 @@ export class ProductDetailsComponent implements OnInit{
           }
           else 
           {
-            console.log(1);
+            //console.log(1);
             $('.images-product').css({'position':'relative','top':'0'});
             $('.order-summary').css('position','relative');
           }

@@ -6369,6 +6369,10 @@ div#login-page-otps input {
 }
 
 }
+.link-border{border: 1px solid;
+	padding: 3px;
+	border-radius: 10px;display: flex;}
+
 .cst-gradient{
 
 	padding: 1rem;

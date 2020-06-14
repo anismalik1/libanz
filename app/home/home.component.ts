@@ -226,6 +226,12 @@ export class HomeComponent implements OnInit {
     this.pay_step = paystep;
   }
   ngOnInit() {
+    if(this.todoservice.get_param('ref'))
+    {
+      let ref : any = this.todoservice.get_param('ref');
+      this.router.navigate(['/'+ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
+      return false;
+    }
     var width = $(window).width(); 
     if(width < 767)
     {
@@ -305,12 +311,11 @@ export class HomeComponent implements OnInit {
     {
       this.ratings          = data.rating; 
       this.user_cashback    = data.cashback;
-      //this.all_products     = data.products;
-      this.tata_slides      = this.filter_product('tata',data.products); 
-      this.airtel_slides    = this.filter_product('airtel',data.products);  
-      this.dishtv_slides    = this.filter_product('dish',data.products);  
-      this.videcone_slides  = this.filter_product('videocon',data.products); 
-      this.recommended      = this.filter_recommended(data.products); 
+      this.filter_recommended(data.products);
+      this.tata_slides        = data.products.filter(x => x.category_id == 1);
+      this.airtel_slides      = data.products.filter(x => x.category_id == 3);
+      this.dishtv_slides      = data.products.filter(x => x.category_id == 4);
+      this.videcone_slides    = data.products.filter(x => x.category_id == 2);
       this.init_products();
     }
     ) 
@@ -407,8 +412,7 @@ export class HomeComponent implements OnInit {
   filter_recommended(categories)
   {
     let slide = categories.filter(x => x.recommended == 1);
-    slide = slide.slice(0,8)
-    return slide;
+    this.recommended = slide;
   }
 
   filter_products(slider_data)
@@ -565,7 +569,6 @@ toTimestamp(strDate){
     script.id = `init-product-script`;
     script.text = `
       $(document).ready(function(){
-        
         $('#recommended-items').lightSlider({
           item: 4,
           auto: false,

@@ -138,10 +138,10 @@ font-size: 19px !important;
                           <th >Order Date</th>
                           <th >Payment Method</th>
                           <th >Payment Status</th>
-                          <th >Recharge Status</th>
+                          <th >Order Status</th>
                           <th >Deliver to</th>
                           <th >Remark</th>
-                          <th >Query</th>
+                          <th >Action</th>
                             </tr>
 
 
@@ -156,27 +156,26 @@ font-size: 19px !important;
                                 <td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
                                 <td>{{recharge.order_date * 1000 | date }}<br><time>{{recharge.order_date *1000 |date : 'h:mm a' }}</time></td>
                                 <td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">MYDTH</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
-                                <td><span *ngIf="recharge.payment_status == 1">Complete</span><span *ngIf="recharge.payment_status == 2">Fail</span><span *ngIf="recharge.payment_status == 3">Pending</span><span *ngIf="recharge.payment_status == 4">Refunded</span></td>
-                                  <td>
-                                    <span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
-                                    <span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
-                                  </td>
+                                <td>
+                                    <div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
+                                </td>
+                                <td>
+                                    <div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
+                                </td>
                                   <td>{{recharge.deliver_to}}</td>
                                   <td>{{recharge.remark}}</td>
                                 <td>
                                   <div *ngIf="recharge.complaint_id == null">
                                       <span class="orange white-text" *ngIf="check_delay(recharge.order_date) == 2">Please Wait...</span>
-                                      <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
+                                      <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com link-border" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
                                   </div>
                                   <div *ngIf="recharge.complaint_id != null">
                                       <span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
                                       <span class="orange white-text" *ngIf="recharge.status == 0">Resolved</span>
                                   </div>
+                                  <span *ngIf="recharge.status == 'Received'"><a href="#cancel-popup" class="modal-trigger com blue-text link-border" (click)="open_cancel_modal(recharge.id)">cancel</a></span>
                                 </td>
                             </tr>
-
-
-
                         </table>
 
                         <div class="has-text-centered right-align">
@@ -230,7 +229,7 @@ font-size: 19px !important;
                     </mat-option>
                 </mat-select>
               </mat-form-field>
-              <input type="text" formControlName="title" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
+              <input type="text" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
         </div>
       </div>
     
@@ -240,6 +239,37 @@ font-size: 19px !important;
   </div>
 </form>
 </div>
+<div id="cancel-popup" class="modal complaint-modal">
+      <form [formGroup]="cancelgroup" #complaintform = "ngForm" (ngSubmit)="cancel_order(complaintform.value)">
+      <div class="modal-content">
+        <h3 class="font600">Cancel Order</h3>
+        <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+        <p>We will respond your action within 24 hrs after cancellation.</p>
+            <div class="row no-margin">
+            <div class="input-field col s12">
+                <mat-form-field *ngIf="display == 1">
+                    <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
+                        <mat-option [value]="'Product Not Required Anymore'">
+                            Product Not Required Anymore
+                        </mat-option>
+                        <mat-option [value]="'I am not satisfied with your service'">
+                            I am not satisfied with your service
+                        </mat-option>
+                        <mat-option [value]=""> 
+                            Other
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <input type="text" formControlName="title" placeholder="Reason" *ngIf="display == 2" value="">
+            </div>
+          </div>
+        
+      </div>
+      <div class="modal-footer orange center">
+        <button type="submit" class="modal-action btn-flat white-text font-size-change">Confirm</button>
+      </div>
+    </form>
+    </div>
 </section>
 
 <app-footer-min></app-footer-min>

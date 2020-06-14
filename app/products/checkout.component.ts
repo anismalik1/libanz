@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit{
   reg_address : number = 0; 
   tab_address : any;
   address : any;
-  options : any;
+  options : any = {how_much_apply_to_product : 0};
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -241,6 +241,7 @@ pay_amount()
 
 check_bonus(index,amount)
 {
+  index = index + 1;
   if(this.options && amount >= this.options.apply_minimum_product && this.todoservice.get_user_product_amount() >= index * this.options.how_much_apply_to_product)
   {
     return true;

@@ -651,15 +651,13 @@
 					<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
 				<div class="container-fluid">
 					<div class="row no-margin home-product-card recomm">
-						<div *ngFor="let item of recommended" class="col s6 l3">
-							<div class="card">
-								<div class="row" style="margin-bottom:10px;">
-									<div class="col s10">
-										<div class="rating-green-content" > Trending </div>
-									</div>
-									<div class="col s2" *ngIf="item.new_product == 1">
-										<!-- <span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span> -->
-										<img src="https://www.mydthshop.com/web-app/assets/images/new.gif" class="img-responsive pt-img"/>
+						<ul id="recommended-slider">
+							<li *ngFor="let item of recommended" class="col s6 l3">
+								<div class="card">
+									<div class="row absolute" style="margin-bottom:10px;" *ngIf="item.new_product == 1">
+										<div class="col s10">
+											<div class="rating-green-content" > Trending </div>
+										</div>
 									</div>
 								</div>
 								<div class="card-image padd center">
@@ -676,26 +674,12 @@
 													<span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>
 													<!-- <span class="orange-text" *ngIf="item.cod_available == 1">COD Available</span> -->
 												</div>
-												<div class="col s12 m12">
-													<!-- <div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() == 2">Cash Back: <i class="icon-inr"></i> <span *ngIf="check_cashback(item.id) && check_cashback(item.id)[0]">{{check_cashback(item.id)[0].wallet_tsk_2}}</span><span *ngIf="!check_cashback(item.id)">{{item.partner_cashback_wallet}}</span></div> -->
-													<div class="font-16 green-text" *ngIf="this.todoservice.get_user_type() != 2">Cash Back: <i class="icon-inr"></i>{{item.user_cashback_wallet}} </div>
-												</div>
-												<div class="col s12 m12 ">
-													<p class="free-txt"> Free Home Delievery </p>							
-												</div>
-
-												<div class="clearfix"></div>
-												<div class="col s12 m12 ">
-													<a class="txt-compare font-16" [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
-												</div>
-											</div> 									 
-											<div class="btn-new1 center">
-												<a [routerLink]="['/product/'+item.url]" class="btn">Book Now</a>
 											</div>
 										</div>
-									</div>
-							</div>
-						</div>
+								</div>
+							</li>
+						</ul>
+						
 					</div>
 				</div>
 			</section>

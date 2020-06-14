@@ -360,9 +360,9 @@ p.ask-login {
 							
 							-->
 
-							<h4 class="merchant-txt">Merchant Registration</h4>
+							<h4 class="merchant-txt">Register Here </h4>
 							<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Payment</p>
-							<span class="green-text" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulation! Offer of <span class="offer-tag orange white-text">{{_bonus_offer.amount_text}}</span> is Waiting for you. </span>
+							<span class="green-text" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
 						</div>
 						<br/>
 						<div *ngIf="signupverify == 0">
@@ -408,18 +408,15 @@ p.ask-login {
 													<span class="red-text">Check Confirm Password.</span>
 												</div>
 											</div>
-											
-											<input name="user_type" class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 3 : 1"/>
-											<!-- <div class="col s12 m6">
-												<p>
-													<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
-													<label for="test3">Become Partner</label>
-												</p>
-											</div> -->
-											
+											<div class="col s12 col m6">
+												<input id="terms-condi" formControlName="terms" type="checkbox" value="1"/>
+												<label for="terms-condi"><a routerLink="/p/mydthshop-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
+												<div class="cleaarfix"></div>
+											</div>
+											<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 2 : 1"/>
 											<div class="col s12  margin-top">
 												<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
-												<button type="submit" class="btn  orange  regis-btn-fix" >Submit</button>
+												<button type="submit" class="btn  orange  regis-btn-fix" [disabled]="!signupgroup.valid">Submit</button>
 												<p class="ask-login"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
 												<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
 											</div>

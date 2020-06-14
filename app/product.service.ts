@@ -255,15 +255,15 @@ export class ProductService {
     for(var i =0;i< Object.keys(cart).length;i++)
     {
       let item :Item = JSON.parse(cart[i]);
-      //console.log(item);
       if(item.product.tsk_kit && item.product.tsk_kit == 3)
       {
-        amount += (item.product.price -1000) * item.quantity
+        amount += item.product.price -1000 * 1
       }
       else
       {
-        amount += item.product.offer_price * item.quantity;
+        amount += item.product.offer_price* 1;
       }
+
       if(item.product.multi == 1)
       {
         if(item.product.pack_selected[0])
@@ -278,18 +278,19 @@ export class ProductService {
         if(item.product.pack_selected[1])
           amount += Number(item.product.pack_selected[1].price);
       }
-      
       if(item.product.promos)
       {
         if(item.product.promos.discount <= item.product.promos.max_discount)
         {
           amount = amount - Number(item.product.promos.discount);
         }
-      }  
+      } 
+      if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
+        amount = amount - item.product.partnerwalletamount;
+      amount = amount * item.quantity
     }
     return amount; 
   }
-
   
   calculateCartAmountWithoutOffer() : number{
     let cart :any = JSON.parse(localStorage.getItem('cart'));
@@ -325,11 +326,11 @@ export class ProductService {
       mrp_amount += item.product.price * item.quantity;
       if(item.product.tsk_kit && item.product.tsk_kit == 3)
       {
-        offer_amount += (item.product.price -1000) * item.quantity
+        offer_amount += (item.product.price -1000) * 1
       }
       else
       {
-        offer_amount += item.product.offer_price * item.quantity;
+        offer_amount += item.product.offer_price * 1;
       }
       
       if(item.product.promos)
@@ -338,7 +339,10 @@ export class ProductService {
         {
           offer_amount = offer_amount - Number(item.product.promos.discount);
         }
-      }  
+      }
+      if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
+        offer_amount = offer_amount - item.product.partnerwalletamount; 
+      offer_amount = offer_amount * item.quantity   
     }
     return (mrp_amount - offer_amount); 
   }

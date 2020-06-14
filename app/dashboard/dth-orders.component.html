@@ -102,9 +102,12 @@ width:100%;
                                   <td>{{item.subcriber_id}}</td>
                                   <td>{{item.payment}}</td>
                                   <td>{{item.deliver_to}}</td>
-                                  <td *ngIf="item.status == 'Pending'"><span class="orange white-text padd1">Pending</span></td>
+                                  <td>
+                                    <div [innerHTML]="this.todoservice.order_template(item.status)"></div>
+                                </td>
+                                  <!-- <td *ngIf="item.status == 'Pending'"><span class="orange white-text padd1">Pending</span></td>
                                   <td *ngIf="item.status == 'Failed'"><span class="red white-text padd1">Failed</span></td>
-                                  <td *ngIf="item.status != 'Failed' && item.status != 'Pending'"><span class="green white-text padd1">{{item.status}}</span></td>
+                                  <td *ngIf="item.status != 'Failed' && item.status != 'Pending'"><span class="green white-text padd1">{{item.status}}</span></td> -->
                                   <!-- <td>
                                       <a href="#view-more" class="btn tooltipped btn-icon orange modal-trigger" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change">visibility</i></a>
                                   </td> -->

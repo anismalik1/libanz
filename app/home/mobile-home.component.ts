@@ -91,6 +91,12 @@ export class MobileHomeComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(this.todoservice.get_param('ref'))
+    {
+      let ref : any = this.todoservice.get_param('ref');
+      this.router.navigate([ref.replace('#', "/").replace('%3D','=').replace('%3F','?').replace('%2F','/').replace('%252F','/').replace('%252F','/')]);
+      return false;
+    }
     if(this.router.url == '/home#login' || this.router.url == '/home%23login')
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax

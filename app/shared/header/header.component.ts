@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit{
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
-  valid_for_bonus : boolean= true;
+  valid_for_bonus : boolean= false;
   _bonus_text : any ;
   constructor(
     private _renderer2: Renderer2,  

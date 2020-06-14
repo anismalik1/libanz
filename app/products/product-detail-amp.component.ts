@@ -425,6 +425,19 @@ export class ProductDetailAmpComponent implements OnInit {
     ) 
   }
 
+  circle_selected(circle)
+  {
+    this.region = circle;
+    this.productservice.set_region(circle);
+    this.todoservice.channel_category_by_circle({circle:circle,packages: this.product.channel_packages,month: this.month})
+    .subscribe(
+    data => 
+    {
+      this.channels_packs = data.package;
+      this.filter_channel_subpack();
+    }
+    ) 
+  }
   remove_new_line(str)
   {
     //console.log(str.replace(/(\r\n|\n|\r|↵)/g,""));

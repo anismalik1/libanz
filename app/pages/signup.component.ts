@@ -58,6 +58,7 @@ export class SignupComponent implements OnInit{
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
       'user_type':[null],
+      'terms':[null,Validators.requiredTrue],
       'password' : [null,Validators.compose([Validators.required])],
       'cpassword' : [null,Validators.compose([Validators.required])],
     });
@@ -220,7 +221,7 @@ export class SignupComponent implements OnInit{
       formdata.device_id = this.device;
     }
     
-    if(this._bonus_offer.valid)
+    if(this._bonus_offer && this._bonus_offer.valid)
         formdata.bonus = '_bonus';
     this.spinner.show();
     this.todoservice.signup(formdata)
@@ -262,6 +263,8 @@ export class SignupComponent implements OnInit{
           {
             let store = data.store;
             me.authservice.storage(store,me);
+            localStorage.removeItem('favourite');
+            localStorage.removeItem('cart');
             var width = $(window).width(); 
             if(width > 767)
             {

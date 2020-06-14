@@ -58,23 +58,53 @@ export class OrderReceiptComponent implements OnInit {
     return this.authservice.auth_token();
   }
 
-  pack_data(pack,title)
+  pack_data(order)
   {
-    let data =  JSON.parse(pack);
+    let data =  JSON.parse(order.pack_selected);
     var list = 'With <ul>';
     this.pack_amount = 0;
     let pack_data : any = {} 
     for(var i=0;i<data.length;i++)
     {
       list += '<li>'+data[i].title+'</li>';
-      if(title && title.toLowerCase().includes('multi'))
+      if( order.title && order.title.toLowerCase().includes('multi') )
         this.pack_amount = this.pack_amount + Number(data[i].multi_price);
       else
         this.pack_amount = this.pack_amount + Number(data[i].price);  
     }
-    
+    this.pack_amount = this.pack_amount * order.qty
     list+'</ul>';
-    return pack_data = {list : list ,amount : this.pack_amount};
+    return pack_data = { list : list , amount : this.pack_amount };
+  }
+
+  decode_json(pack)
+  {
+    let data =  JSON.parse(pack);
+    return data;
+  }
+
+  amount_payable(order)
+  {
+    //console.log(order);
+    this.pack_data(order);
+    var $amount : number = order.grand_total;
+    if(order.promo_cashback != null && order.promo_cashback > 0)
+    {
+      $amount = 1 * $amount - 1 * order.promo_cashback;
+    }
+    if(order.cashback != null && order.cashback > 0)
+    {
+      $amount = 1*$amount -  1*order.cashback;
+    }
+    if(order.bonus_amount > 0)
+    {
+      $amount = 1*$amount - order.bonus_amount;
+    }
+    if(this.pack_amount > 0)
+    {
+      $amount = 1*$amount +this.pack_amount;
+    }
+    return $amount;
   }
 
   calculate_amount(order)

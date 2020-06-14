@@ -23,6 +23,7 @@ export class PackageViewComponent implements OnInit {
   sharemailgroup : FormGroup;
   sharwhatsappgroup : FormGroup;
   category : any;
+
   constructor(private title: Title, public todoservice : TodoService,
     private spinner: NgxSpinnerService,private router : Router,
     private _renderer2: Renderer2,  
@@ -40,7 +41,6 @@ export class PackageViewComponent implements OnInit {
      }
 
   ngOnInit() {
-    
     this.package = { month : 1,category : ''};
     this.path = window.location.pathname;
     this.route.params.subscribe(params => {

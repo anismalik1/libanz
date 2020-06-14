@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
+import { Meta,Title } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -24,11 +25,14 @@ export class ProductsComponent implements OnInit{
   checked_quality : any = {is_primary: false,is_secondary : false};
   checked_str_quality : any = {is_sd: false,is_hd : false,is_4k:false};
   checked_package : any = {monthly:false,yearly:false};
+  private categories : any;
   constructor( private cartStore: ProductService,
     private spinner : NgxSpinnerService,
     public todoservice : TodoService,
     private authservice : AuthService,private router : Router,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private title: Title,
+    private meta : Meta
     ) { }
   ngOnInit() {
     this.data = {cat_id : '',page_index:0};
@@ -78,6 +82,7 @@ export class ProductsComponent implements OnInit{
       if(arr[i].includes('bigtv'))
         this.checked_filter.is_bigtv = true; 
     }
+    this.fetch_page_data();
     this.apply_product_filter(1);
                   
   }
@@ -105,15 +110,15 @@ export class ProductsComponent implements OnInit{
           this.spinner.hide();
           this.products = data.PRODUCTDATA;
           this.product_counts = data.COUNTS[0].numrows;
+          this.set_metadata(array);
         }
       )  
+
   }
   apply_product_filter(page)
   {
-    //console.log(page)
     var array : any = ''; 
     array = this.data.cat_id;
-
     let filter_data : any = { cat_id : array};
     this.data = filter_data;
     this.data.page_index = page;
@@ -125,9 +130,93 @@ export class ProductsComponent implements OnInit{
           this.spinner.hide();
           this.products = data.PRODUCTDATA;
           this.product_counts = data.COUNTS[0].numrows;
+          this.set_metadata(array);
         }
       )  
   }
+
+  set_metadata(array)
+  {
+    let metadescription  = '';
+    let metakeyword  = '';
+    let metatitle  = '';
+    let row : any;
+     if(array.includes('tata-sky'))
+     {
+       row = this.cat_filter(this.categories,80);
+       if(row)
+       {
+        metadescription += row[0].metaDesc; 
+        metakeyword += row[0].metaKeyword; 
+        metatitle += row[0].metaTitle;
+       }
+     }
+     if(array.includes('videocon'))
+     {
+       row = this.cat_filter(this.categories,82);
+       if(row)
+       {
+        metadescription += ', '+row[0].metaDesc; 
+        metakeyword += ', '+row[0].metaKeyword; 
+        metatitle += ', '+row[0].metaTitle;
+       }
+     }
+     if(array.includes('airtel'))
+     {
+       row = this.cat_filter(this.categories,83);
+       if(row)
+       {
+        metadescription += ', '+row[0].metaDesc; 
+        metakeyword += ', '+row[0].metaKeyword; 
+        metatitle += ', '+row[0].metaTitle;
+       }
+     }
+     if(array.includes('dish-tv'))
+     {
+       row = this.cat_filter(this.categories,81);
+       if(row)
+       {
+        metadescription += ', '+row[0].metaDesc; 
+        metakeyword += ', '+row[0].metaKeyword; 
+        metatitle += ', '+row[0].metaTitle;
+       }
+     }  
+     this.meta.addTag({ name: 'description', content: metadescription });
+     this.meta.addTag({ name: 'keywords', content: metakeyword });
+     this.title.setTitle(metatitle);
+     window.scroll(0,0); 
+  }
+
+  fetch_page_data()
+  {
+    var key = '/listing/';
+   let page = {page : key}; 
+   if(page.page == '')
+   {
+       return false;
+   }
+   this.todoservice.fetch_page_categories(page)
+     .subscribe(
+       data => 
+       {
+         if(data.PAGEDATA)
+         {
+          this.categories = data.PAGEDATA;
+          // $('#page-content').html(this.todoservice.get_page().description);
+          
+         }
+         this.spinner.hide();  
+       }
+     ) 
+  }
+
+  
+  cat_filter(category,id)
+  {
+    let matched = category.filter(x => x.id == id);
+    return matched;
+  }
+
   getPage(page)
   {
     this.spinner.show();

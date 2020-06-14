@@ -19,11 +19,13 @@ export class RechargeOrdersComponent implements OnInit {
   public recharges : any;
   myControl = new FormControl();
   complaintgroup : FormGroup;
+  cancelgroup : FormGroup;
   r_p: number = 1;
   recharge_counts : number;
   complaint_id : number;
   go_to_complaint : number = 0;
   display : number = 1;
+  order_id : number ;
   ranges: any = {
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -47,8 +49,10 @@ export class RechargeOrdersComponent implements OnInit {
 
   ngOnInit() {
     this.complaintgroup = this.fb.group({
-      'title' : [null,Validators.compose([Validators.required])],
-       'description' : [null],
+      'title' : [null,Validators.compose([Validators.required])]
+     });
+     this.cancelgroup = this.fb.group({
+      'title' : [null,Validators.compose([Validators.required])]
      });
     if(!this.get_token())
     {
@@ -73,6 +77,33 @@ export class RechargeOrdersComponent implements OnInit {
     this._renderer2.appendChild(this._document.body, script);
   }
 
+  open_cancel_modal(order_id)
+  {
+    this.order_id = order_id;
+  }
+  cancel_order(form)
+  {
+    let data = {order_id : this.order_id , title : form.title, token : this.get_token()};
+    this.todoservice.cancel_order(data)
+		.subscribe(
+			data => 
+			{
+				this.spinner.hide();
+			  if(data.status == 'Invalid Token')
+			  {
+          this.authservice.clear_session();
+          this.router.navigate(['/proceed/login']);
+			  }
+			  if(!jQuery.isEmptyObject(data))
+			  {	
+          if(data.status == true)
+            this.fetch_recharge_history(this.r_p); 
+          else
+            this.toastr.errorToastr(data.msg);  
+        }
+      }  
+		  );
+  }
   do_complaint(order_id)
   {
     this.complaint_id = order_id;
@@ -138,7 +169,9 @@ export class RechargeOrdersComponent implements OnInit {
 
   check_val(val)
   {
-    this.display = 2;
+    console.log(val)
+    if(typeof val == 'undefined')
+      this.display = 2;
   }
   decode_data(data)
   {
