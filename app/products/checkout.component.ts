@@ -227,17 +227,6 @@ fetch_options()
     }
   )
 }
-pay_amount()
-{
-  var wallet_used = '';
-    if($('[name="include_wallet"]:checked').length > 0)
-      wallet_used = 'wallet';
-    if((this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
-    {
-      return Math.ceil(this.productservice.calculateCartAmount() - this.todoservice.get_user_wallet_amount());
-    }
-    return Math.ceil(this.productservice.calculateCartAmount());
-}
 
 check_bonus(index,amount)
 {
@@ -265,6 +254,18 @@ calculate_bonus()
     }
   }
   return amount;
+}
+
+pay_amount()
+{
+  var wallet_used = '';
+    if($('[name="include_wallet"]:checked').length > 0)
+      wallet_used = 'wallet';
+    if((this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
+    {
+      return Math.ceil(this.productservice.calculateCartAmount() - this.todoservice.get_user_wallet_amount());
+    }
+    return Math.ceil(this.productservice.calculateCartAmount());
 }
 
 cod_apply()

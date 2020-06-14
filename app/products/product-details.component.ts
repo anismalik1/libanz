@@ -424,6 +424,7 @@ export class ProductDetailsComponent implements OnInit{
         this.recommended = data.RECOMMENDED;
         this.recommended_slider();
         this.filter_channel_subpack();
+        let cashback_data : any;
         if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
@@ -431,10 +432,12 @@ export class ProductDetailsComponent implements OnInit{
           if(this.product.category_id == 1)
           {
              this.product.partnerwalletamount = user_cashback[0].wallet_tsk_2;
+             cashback_data = {cashback_wallet : user_cashback[0].wallet_tsk_2,cashback_cod : user_cashback[0].cod_tsk_2};
           }
           else
           {
             this.product.partnerwalletamount = user_cashback[0].amount;
+            cashback_data = {cashback_wallet : user_cashback[0].amount,cashback_cod : user_cashback[0].cod_commission};
           }
         }
         else
@@ -443,13 +446,16 @@ export class ProductDetailsComponent implements OnInit{
           if(this.todoservice.get_user_type() == 2)
           {
             this.product.partnerwalletamount = data.PRODUCTDATA.partner_cashback_wallet;
+            cashback_data = {cashback_wallet : data.PRODUCTDATA.partner_cashback_wallet,cashback_cod : data.PRODUCTDATA.partner_cashback_cod};
           }
           else
           {
             this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet;
+            cashback_data = {cashback_wallet : data.PRODUCTDATA.user_cashback_wallet,cashback_cod : data.PRODUCTDATA.user_cashback_cod};
           }
-          
         }
+        this.product.partnerwalletamount = cashback_data.cashback_wallet;
+        this.product.cashback_data = cashback_data;
         this.circles = data.circles;
         if(data.PROMOS && data.PROMOS.length > 0)
         {
@@ -922,8 +928,6 @@ export class ProductDetailsComponent implements OnInit{
         $.fn.isInViewport = function() {
           if($(this).length == 0 )
           {
-            console.log($(this))
-            console.log(1);
             return false;
           }
           var elementTop = $(this).offset().top;
@@ -935,7 +939,6 @@ export class ProductDetailsComponent implements OnInit{
       $(window).scroll(function (event) {
         if(!$.fn.isInViewport )
         {
-          console.log(2);
           return false;
         }
         if($(window).width() >767){

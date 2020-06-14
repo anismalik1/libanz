@@ -24,6 +24,7 @@ export class Product {
     is_otf : number;
     otf_pay_type : number;
     pack_selected : any;
+    cashback_data : any;
     promos : any;
     multi : Number;
     pincode : any;
