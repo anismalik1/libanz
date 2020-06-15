@@ -341,8 +341,24 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		</div>
 	</div>
 </section>
+<!-- <div class="container-fluid fixed-space-mb">
+	<div class="row">
+		<div class="bottom-slider-dot">
+		<ul class="bottom-slider " id="bottom-slider">
+			<li *ngFor="let banner of this.bottombanners">
+				<div class="col m12 s12">
+					<div class="shadow-box">
+						<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
+					</div>
+				</div>
+				
+			</li>
+		</ul>
+	</div>
+	</div>
+</div> -->
 <section class="flash-deal  margin-top-order no-padding banner-slider1">
-	<div class="container-fluid">
+	<!-- <div class="container-fluid">
 		<div class="row no-margin">
 			<div class="col s12 m12 no-padding">
 				<div class="card no-margin">
@@ -353,16 +369,34 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li>
-							<!-- <li *ngFor="let item of this.filter_banners('mobile-main-banner');let i = index;">
+							< <li *ngFor="let item of this.filter_banners('mobile-main-banner');let i = index;">
 								<a href="{{item.imageurl}}">
 									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
-							</li> -->
+							</li> -
 						</ul> 
 					</div>
 				</div>
 			</div>
 			
+		</div>
+	</div> -->
+	<div class="container-fluid fixed-space-mb">
+		<div class="row">
+			<div class="bottom-slider-dot">
+			<ul class="mobile-slider" id="mobile-slider">
+				<li *ngFor="let item of this.mainbanners;let i = index;">
+					<div class="col m12 s12">
+						<div class="shadow-box">
+							<a href="{{item.imageurl}}">
+								<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}"/>
+							</a>	
+						</div>
+					</div>
+					
+				</li>
+			</ul>
+		</div>
 		</div>
 	</div>
 </section>
@@ -602,7 +636,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		</ul>
 	</div>
 	</div>
-
 </div>
 <div id="modal-app" class="modal">
     <div class="modal-content">
