@@ -183,7 +183,7 @@ ul#dropdown1 li {
 							></ngx-image-zoom> -->
 							<!-- <img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"> -->
 						</span>
-						<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a></span>
+						<span *ngIf="product"><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'center wishlist wishlist-'+product.id+' active tooltipped relative': 'center wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span>
                         
                       </div>
                       <div class="product-btn center mobile-hide">
@@ -582,7 +582,8 @@ ul#dropdown1 li {
                         <div class="rating-green-content" *ngIf="item.new_product == 1">Trending </div>
                     </div>
                     <div class="col s2">
-                        <span class="fa fa-star pull-right icn-clr1"></span>
+						<span [className]="(this.productservice.exist_in_favourite(product.id) == true)?'fa fa-star pull-right icn-clr1 center wishlist-'+product.id+' active': 'fa fa-star pull-right icn-clr1 center wishlist-'+product.id" (click)="add_to_favorite(product.id);"></span>
+						<!-- <span><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'center wishlist wishlist-'+product.id+' active tooltipped relative': 'center wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span> -->
                     </div>
                 </div>
 				<div class="row" style="margin-bottom:0px;">

@@ -131,8 +131,7 @@ export class HeaderComponent implements OnInit{
       }
       
 
-      this.href = this.router.url;
-      //console.log(this.href);                                   
+      this.href = this.router.url;                                  
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value))
@@ -268,7 +267,6 @@ export class HeaderComponent implements OnInit{
         var otp2 = $('#header-login #otp2').val();
         var otp3 = $('#header-login #otp3').val();
         var otp4 = $('#header-login #otp4').val();
-        console.log(otp1);
         login.otp = otp1.toString()+otp2.toString()+otp3.toString()+otp4.toString();
         // login.otp = login.otp1.toString() + login.otp2.toString() + login.otp3.toString() + login.otp4.toString();
         login.phone = me.phone;
@@ -311,9 +309,8 @@ export class HeaderComponent implements OnInit{
               me.router.routeReuseStrategy.shouldReuseRoute = function(){
                 return false;
              }
-            //console.log(url) 
             me.router.navigated = false;
-            me.router.navigate([me.todoservice.get_urls().currnetURL]);
+            me.router.navigate([this.href]);
             }
           }
           else  

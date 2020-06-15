@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="col s12 m5 margin-top">
-                                    <a href="#" class="black-text">
+                                    <a href="javascript:" class="black-text">
                                         <h4 class="font600"><a [routerLink]="['/product/'+convert_to_object(item.save_json).url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack}" class="black-text">{{convert_to_object(item.save_json).title}}</a></h4>
                                         <span class="font-size-change grey-text">Seller : MyDthShop</span><br>
                                         <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available == 1">Cash On Delivery Available</span><br/>

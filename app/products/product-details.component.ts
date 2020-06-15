@@ -521,9 +521,9 @@ export class ProductDetailsComponent implements OnInit{
       }
     ) 
   }
-  add_to_favorite()
+  add_to_favorite(id)
   {
-    $('.wishlist').addClass('active');
+    $('.wishlist-'+id).addClass('active');
     if(this.pack_selected)
       this.product.pack_selected = this.pack_selected;
     if($('#kit-packages').length > 0 )
@@ -540,8 +540,8 @@ export class ProductDetailsComponent implements OnInit{
     }
     if(typeof this.month == 'undefined')
     {
-      this.toastr.errorToastr("Please Select Month Package first");
-        return false;
+      this.month = 1;
+      this.product.month_pack = this.month;
     }
     else
     {
@@ -554,9 +554,18 @@ export class ProductDetailsComponent implements OnInit{
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
       return false;
     }
-
+    if(id != this.product.id)
+    {
+      let product_exist = this.recommended.filter(x => x.id == id);
+      var product_data : any = product_exist[0]; 
+    }
+    else
+    {
+      var product_data : any = this.product; 
+    }
+      
     this.spinner.show() 
-    this.productservice.add_to_favorite({product : this.product,token : this.get_token()})
+    this.productservice.add_to_favorite({product : product_data,token : this.get_token()})
     .subscribe(
     data => 
     {
