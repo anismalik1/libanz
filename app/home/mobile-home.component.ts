@@ -281,7 +281,7 @@ export class MobileHomeComponent implements OnInit {
   add_to_favorite(product)
   {
 
-    $('.wishlist').addClass('active');
+    $('.favorite-'+product.id).addClass('active');
 
     if(!this.get_token())
     {

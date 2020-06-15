@@ -460,7 +460,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 							</div>
 							<div class="col s2">
-								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 							</div>
 						</div>
 						<div class="row">
@@ -503,7 +503,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<div class="rating-green-content" >Free Home Delievery </div>
 								</div>
 								<div class="col s2">
-									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+									<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 								</div>
 							</div>
 							<div class="row">
@@ -547,7 +547,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rating-green-content" *ngIf="item.cod_available == 1">COD / Free Delievery </div>
 							</div>
 							<div class="col s2">
-								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 							</div>
 						</div>
 						<div class="row">
@@ -591,7 +591,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<div class="rating-green-content" >Free Home Delievery </div>
 								</div>
 								<div class="col s2">
-									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+									<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 								</div>
 							</div>
 							<div class="row">
