@@ -280,16 +280,13 @@ export class MobileHomeComponent implements OnInit {
   }
   add_to_favorite(product)
   {
-
-    $('.favorite-'+product.id).addClass('active');
-
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
       return false;
     }
-
+    $('.favorite-'+product.id).addClass('active');
     this.spinner.show() 
     this.todoservice.add_to_favorite({product : product,token : this.get_token()})
     .subscribe(

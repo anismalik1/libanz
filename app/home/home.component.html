@@ -340,7 +340,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 									<div class="rating-green-content" *ngIf="item.new_product == 1"> Trending  </div>
 								</div>
 								<div class="col s2">
-									<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+									<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 								</div>
 							</div>
 
@@ -398,7 +398,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rating-green-content" *ngIf="item.new_product == 1"> Trending </div>
 						</div>
 						<div class="col s2">
-							<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+							<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 						</div>
 					</div>
 					<div class="card-image padd center">
@@ -452,7 +452,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 								<div class="rating-green-content" *ngIf="item.new_product == 1"> Trending </div>
 							</div>
 							<div class="col s2">
-								<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+								<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 							</div>
 						</div>
 						<div class="card-image padd center">
@@ -506,7 +506,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="rating-green-content" *ngIf="item.new_product == 1">Trending  </div>
 						</div>
 						<div class="col s2">
-							<span class="fa fa-star pull-right icn-clr1 {{check_if_favorite(item.id)}}" (click)="add_to_favorite(item);"></span>
+							<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
 						</div>
 					</div>
 					<div class="card-image padd center">
@@ -578,6 +578,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 										<div class="col s10">
 											<div class="rating-green-content" *ngIf="item.new_product == 1"> Trending </div>
 										</div>
+										<div class="col s2">
+												<span class="fa fa-star pull-right icn-clr1 favorite-{{item.id}} {{check_if_favorite(item.id)? 'active' :'' }}" (click)="add_to_favorite(item);"></span>
+											</div>
 									</div>
 									<div class="card-image padd center">
 											<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="images" style="">
