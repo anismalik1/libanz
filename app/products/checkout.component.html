@@ -149,7 +149,7 @@ a.btn.orange.btn-large.ctn-che1 {
 									</div>
         					<span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.quantity*(item.product.price -1000)}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span>
         					<br>
-      						<a href="javascript:" class="font-size-change margin-top inline-block red-text"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
+      						<a href="javascript:" class="font-size-change margin-top inline-block red-text remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
           			</div>
           			<div class="col s12 m4 margin-top padd">
           				<strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>

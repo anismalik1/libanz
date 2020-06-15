@@ -302,7 +302,11 @@ p.ask-login {
     color: #9E9E9E;
     line-height: 18px;
     padding-left: 1px;
-    text-align: center;
+    text-align: left;
+}
+.text-left{
+
+	text-align:left !important;
 }
 .cst-merchant-bx {
     height: 92vh;
@@ -362,7 +366,7 @@ p.ask-login {
 
 							<h4 class="merchant-txt">Register Here </h4>
 							<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Payment</p>
-							<span class="green-text" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
+							<span class="green-text text-left" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
 						</div>
 						<br/>
 						<div *ngIf="signupverify == 0">

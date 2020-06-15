@@ -104,6 +104,12 @@
     margin-top: 9px;
     font-size: 12px !important;
 }
+.back-icon li a {
+    padding: 0px 0 0 5px;
+    display: block;
+    color: #333;
+}
+
 .order-summary {
     height: auto;
     margin-bottom: 25px;
@@ -186,15 +192,15 @@ ul#dropdown1 li {
 						<span *ngIf="product"><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'center wishlist wishlist-'+product.id+' active tooltipped relative': 'center wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span>
                         
                       </div>
-                      <div class="product-btn center mobile-hide">
+                      <div class="product-btn center hide-btns">
                       	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
                       	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
                       </div>
                     </div>
                   </div>
                   <div class="col s12 m12 l7 product-detail" *ngIf="product">
-                  	<h3 class="font600" *ngIf="product">{{product.title}}</h3>
-						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i> </span> <span>&nbsp; (10) </span>
+                  	<h3 *ngIf="product">{{product.title}}</h3>
+						<span class="green white-text stars" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i> </span> <span>&nbsp; 10 Ratings </span>
 						
 						<a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Change Set Top Box</a>
 						<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
@@ -206,12 +212,12 @@ ul#dropdown1 li {
 						</ul>
 					
 						<!-- <a href="#chng-base-pack" class="font-size-change1 modal-trigger">Change Basepack</a> -->
-						<a href="javascript:" class="white-text" (click)="go_to_channel_section(1)">
+						<!-- <a href="javascript:" class="white-text" (click)="go_to_channel_section(1)">
 							<div class="chip red white-text right">
 								Scroll Down And Select Your Channel List
 								<i class="material-icons">keyboard_arrow_down</i>
 							</div>
-						</a>
+						</a> -->
 					  <br/>
 					  <br/>
                   	<span class="font-size-change2 black-text margin-top inline-block"> <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span>
@@ -700,7 +706,7 @@ ul#dropdown1 li {
 	<div class="modal-content">
 		<h4>Choose Set Up Box </h4>
 		<div class="row" *ngIf="product_list">
-			<div class="col s6 m3" *ngFor="let item of product_list">
+			<div class="col s12 m3" *ngFor="let item of product_list">
 				<a href="javascript:" class="black-text" (click)="continue_to_change(item.url)">
 					<div class="card choose-set-up-box center">
 						<div class="card-image">
