@@ -267,18 +267,13 @@ font-size: 10px;
 								></ngx-image-zoom>
 								<!-- <img class="xzoom" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/{{product.image}}"> -->
 							</span>
-<<<<<<< .mine
-							<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a> </span>
-||||||| .r543
-							<span *ngIf="product"><a class="wishlist tooltipped relative" [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist active tooltipped relative': 'wishlist tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite();"><i class="material-icons">star</i></a></span>
-=======
 							<span *ngIf="product"><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist wishlist-'+product.id+' active tooltipped relative': 'wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span>
->>>>>>> .r546
+
 													
 												</div>
 												<div class="product-btn center mobile-hide">
 													<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
+													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT PACKAGES</a>
 												</div>
 											</div>
 										</div>
