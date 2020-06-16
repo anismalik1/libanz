@@ -255,15 +255,7 @@ export class ProductService {
     for(var i =0;i< Object.keys(cart).length;i++)
     {
       let item :Item = JSON.parse(cart[i]);
-      if(item.product.tsk_kit && item.product.tsk_kit == 3)
-      {
-        amount += item.product.price -1000 * 1
-      }
-      else
-      {
-        amount += item.product.offer_price* 1;
-      }
-
+      amount += item.product.offer_price* 1;
       if(item.product.multi == 1)
       {
         if(item.product.pack_selected[0])

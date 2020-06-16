@@ -246,10 +246,10 @@ calculate_bonus()
     var $userwallet = this.todoservice.get_user_product_amount();
     for(var i = 0; i < this.productservice.cart_items.length;i++)
     {
-      if( this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product && $userwallet >= this.options.how_much_apply_to_product)
+      if( this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product && $userwallet * 1 >= this.options.how_much_apply_to_product)
       {
-        $userwallet = $userwallet -  this.options.how_much_apply_to_product;
-        amount = amount + this.options.how_much_apply_to_product;
+        $userwallet = $userwallet * 1 -  1 * this.options.how_much_apply_to_product;
+        amount = amount + this.options.how_much_apply_to_product * 1;
       }
     }
   }
