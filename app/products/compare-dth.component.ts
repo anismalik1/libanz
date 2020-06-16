@@ -20,6 +20,7 @@ export class CompareDthComponent implements OnInit {
   public product_list : any;
   public referer : any;
   private page: string;
+  private change : boolean = false;
   public all_specifications :any;
   constructor(
     private _renderer2: Renderer2, 
@@ -76,8 +77,72 @@ export class CompareDthComponent implements OnInit {
      ) 
   }
 
+  change_compare_list(action)
+  {
+    this.spinner.show();
+    this.productservice.change_compare_list(action)
+    .subscribe(
+			data => 
+			{
+        this.spinner.hide();
+        this.all_specifications = data.SPECIFICATIONS;
+        this.compare_products = data.compare_products;
+        if(this.referer != '')
+        {
+          this.filter_to_first();
+        }
+        if(this.compare_products.length >= 4)
+        {
+          this.disable_compare = true;
+        }
+        if(data.compare_content)
+        {
+          $('#compare-title').text(data.compare_content.title);
+          this.meta.addTag({ name: 'description', content: data.compare_content.meta_description });
+          this.meta.addTag({ name: 'keywords', content: data.compare_content.meta_keyword });
+          this.title.setTitle(data.compare_content.meta_title);
+        }
+        else
+        {
+          this.title.setTitle("Compare List - Mydthshop");
+        }
+        //this.router.navigateByUrl('https://mydthshop.com/product/compare-box?urls='+data.compare_content.url, {skipLocationChange: true});
+        if(data.compare_content)
+        {
+          if(this.referer != '')
+          {
+            this.router.navigate(['/product/compare-box'], { queryParams: { urls: $.trim(data.compare_content.url) , ref: this.referer } });
+          }
+          else
+          {
+            this.router.navigate(['/product/compare-box'], { queryParams: { urls: $.trim(data.compare_content.url) } });
+          }  
+        } 
+      })
+  }
+
+  unbox_me(url)
+  {
+    this.change = true;
+    this.urls = '';
+    for(var i = 0;i < this.compare_products.length;i++)
+    {
+      this.urls += this.compare_products[i].url+'-vs-';
+    }
+    this.urls = this.urls.substring(0,this.urls.length-4);
+    var temp = this.urls.split('-vs-');
+    let arr = temp.filter(item => item !== url);
+    if(arr.length < 4)
+      this.disable_compare = false;
+    this.change_compare_list(arr);
+    this.urls = arr.join("-vs-");
+    this.router.navigate(['/product/compare-box'],{ queryParams: { urls: this.urls}});
+    this. init_script();
+  }
+
   apply_filter(vsurls)
   {
+    console.log(this.change)
     this.spinner.show();
     this.productservice.compare_urls(vsurls)
     .subscribe(
@@ -190,24 +255,7 @@ export class CompareDthComponent implements OnInit {
     this.apply_filter(arr);
   }
 
-  unbox_me(url)
-  {
-    this.urls = '';
-    for(var i = 0;i < this.compare_products.length;i++)
-    {
-      //console.log(this.compare_products[i]);
-      this.urls += this.compare_products[i].url+'-vs-';
-    }
-    this.urls = this.urls.substring(0,this.urls.length-4);
-    var temp = this.urls.split('-vs-');
-    let arr = temp.filter(item => item !== url);
-    if(arr.length < 4)
-      this.disable_compare = false;
-    this.apply_filter(arr);
-    this.urls = arr.join("-vs-");
-    this.router.navigate(['/product/compare-box'],{ queryParams: { urls: this.urls}});
-    this. init_script();
-  }
+  
   init_script()
   {
     if($('#init-page-script'))

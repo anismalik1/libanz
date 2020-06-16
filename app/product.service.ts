@@ -503,6 +503,12 @@ export class ProductService {
     let url = this.server_url+'accounts/apis/product/compare_urls';
     return this.send_post_request(data,url) ;
   } 
+  change_compare_list(data)
+  {
+    this.request_action = '';
+    let url = this.server_url+'accounts/apis/product/change_compare_list';
+    return this.send_post_request(data,url) ;
+  } 
   share_pack_to_mail(data)
   {
     let url = this.server_url+'index.php?/app_services/share_pack_to_mail';
