@@ -6503,3 +6503,9 @@ div#login-page-otps input {
     font-size: 13px;
 
 }
+
+#monthly-packages a {
+    color: #716d6d !important;
+    padding-left: 16px;
+    font-size: 15px;
+}
