@@ -206,7 +206,7 @@ ul#dropdown1 li {
                   <div class="col s12 m12 l7 product-detail" *ngIf="product">
 					<h3 class="margin-fix-bt" *ngIf="product">{{product.title}}</h3>
 					<a href="#" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
-					<div> <span class="font-size-change2 black-text margin-top inline-block">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
+					<div> <span class="font-size-change2 black-text margin-top inline-block" style="padding-bottom:10px;">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
 					
 	<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <a href="javascript:" (click)="goto_reviews();" *ngIf="avg_rating && avg_rating.reting"><span class="rating-txt1"> &nbsp; {{all_rating}} Ratings & {{rev_count}} Reviews </span></a>
 	

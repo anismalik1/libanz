@@ -6507,4 +6507,5 @@ div#login-page-otps input {
 	font-size: 14px;
 	font-weight: bold;
 	text-transform: capitalize;
+	text-align:-webkit-center;
 }
