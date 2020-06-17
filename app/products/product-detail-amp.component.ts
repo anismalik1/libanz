@@ -1133,6 +1133,14 @@ export class ProductDetailAmpComponent implements OnInit {
       $('.multi-text').text("Include Multibox");
     }
   }
+  
+  goto_reviews()
+  {
+    $('html, body').animate({
+      scrollTop: $("#rating-reviews").offset().top -100
+    }, 1000);
+  }
+
   apply_package()
   {
     let data : any  = {};

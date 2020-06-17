@@ -1285,6 +1285,13 @@ export class ProductDetailsComponent implements OnInit{
     }
   }
 
+  goto_reviews()
+  {
+    $('html, body').animate({
+      scrollTop: $("#rating-reviews").offset().top -100
+    }, 1000);
+  }
+
   apply_package()
   {
     let data : any  = {};

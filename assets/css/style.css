@@ -2226,7 +2226,6 @@ tbody img{
     line-height: 36px!important;
     border-radius: 20px;
     box-shadow: 0px 1px 5px #ececec;
-    color: #fff !important;
 }
 .grey-txt-package{
 	color: #313131 !important;
@@ -6505,8 +6504,6 @@ div#login-page-otps input {
 }
 
 #monthly-packages a {
-    color: #716d6d !important;
-    padding-left: 16px;
 	font-size: 14px;
 	font-weight: bold;
 	text-transform: capitalize;

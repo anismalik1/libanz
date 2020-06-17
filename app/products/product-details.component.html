@@ -269,20 +269,19 @@ font-size: 10px;
 							</span>
 							<span *ngIf="product"><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist wishlist-'+product.id+' active tooltipped relative': 'wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span>
 
-													
-												</div>
-												<div class="product-btn center mobile-hide">
+						</div>
+												<!-- <div class="product-btn center mobile-hide">
 													<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNEL</a>
-												</div>
-											</div>
-										</div>
-										<div class="col s12 m12 l7 product-detail" *ngIf="product">
-											<h3 class="margin-fix-bt" *ngIf="product">{{product.title}}</h3>
-											<a href="#" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
-											<div> <span class="font-size-change2 black-text margin-top inline-block">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
+													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"> SELECT PACKAGE</a>
+												</div> -->
+					</div>
+				</div>
+				<div class="col s12 m12 l7 product-detail" *ngIf="product">
+					<h3 class="margin-fix-bt" *ngIf="product">{{product.title}}</h3>
+					<a href="#" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
+					<div> <span class="font-size-change2 black-text margin-top inline-block">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
 											
-							<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <span class="rating-txt1"> &nbsp; 10 Ratings & 23 Reviews </span>
+							<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <a href="javascript:" (click)="goto_reviews();" *ngIf="avg_rating && avg_rating.reting"><span class="rating-txt1"> &nbsp; {{all_rating}} Ratings & {{rev_count}} Reviews </span></a>
 							
 							
 							<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
@@ -308,6 +307,7 @@ font-size: 10px;
 											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons orange-text font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
 											
 											<div class="descripetion-detail margin-top1">
 												<span class="font-size-change1 font600 grey-text">Description</span> 
@@ -341,7 +341,7 @@ font-size: 10px;
 								</li>
 								<br/>
 												<li *ngFor="let item of package_month;let i = index">
-													<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
+													<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
 												</li>
 							</ul>
 						<br/>
@@ -350,23 +350,32 @@ font-size: 10px;
 								<span class="font-size-change1 font600 grey-text">Add Multi</span>
 							</li>
 							<li>
-								<a href="javascript:" class=" white btn black-text" (click)="go_to_channel_section(2)">Select</a>
+								<a href="javascript:" class="grey lighten-2 white btn black-text" (click)="go_to_channel_section(2)">Select</a>
 							</li>
 						</ul>
-					<br/>
+						<br/>
 						
-							<div class="clearfix"></div>
-							<div class="col m4 no-padding" *ngIf="circles"> 
-								<mat-form-field>
-									<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)">
-										<span *ngFor="let item of circles;">
-											<mat-option [value]="item.circle_id" >
-												<span class="operator-name">{{ item.name }}</span>
-											</mat-option>
-										</span> 
-									</mat-select>
-								</mat-form-field>
-							</div>
+						<div class="clearfix"></div>
+						<div class="location monthly-packages" *ngIf="circles">
+							<li>
+								<span class="font-size-change1 font600 grey-text">Location </span>
+							</li>
+							<li><i class="material-icons">location_on</i>
+								<div class="no-padding" *ngIf="circles"> 
+									<mat-form-field>
+										<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)">
+											<span *ngFor="let item of circles;">
+												<mat-option [value]="item.circle_id" >
+													<span class="operator-name">{{ item.name }}</span>
+												</mat-option>
+											</span> 
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</li>
+						</div>
+							
+							
 							<div class="clearfix"></div> 
 							<ul class="monthly-packages margin-top kit-pack" *ngIf="product && product.title.toLowerCase().includes('multi')">
 							<li>
@@ -413,7 +422,7 @@ font-size: 10px;
 							<span class="font-size-change terms-conds" [innerHTML] ="product.short_description"></span>
 								
 						</div>																				
-				<div class="review-ratings margin-top1">
+				<div class="review-ratings margin-top1" id="rating-reviews">
 									<div class="row rew-sta-rat">
 										<div class="col s8 m8">
 											<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>

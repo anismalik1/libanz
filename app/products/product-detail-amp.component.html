@@ -199,7 +199,7 @@ ul#dropdown1 li {
                       </div>
                       <div class="product-btn center hide-btns">
                       	<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT CHANNELS</a>
+                      	<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"><!--<i class="material-icons white-text">flash_on</i>--> SELECT PACKAGE</a>
                       </div>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ ul#dropdown1 li {
 					<a href="#" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
 					<div> <span class="font-size-change2 black-text margin-top inline-block">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
 					
-	<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <span class="rating-txt1"> &nbsp; 10 Ratings & 23 Reviews </span>
+	<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <a href="javascript:" (click)="goto_reviews();" *ngIf="avg_rating && avg_rating.reting"><span class="rating-txt1"> &nbsp; {{all_rating}} Ratings & {{rev_count}} Reviews </span></a>
 	
 	<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
 						
@@ -224,7 +224,7 @@ ul#dropdown1 li {
                   	<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
                   	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
                   	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
-                  	<!-- <p class="font-size-change1 margin-top" id="extra-cashback-item" *ngIf="product.cod_available == '1' && product.cashback_data.cashback_wallet * 1 - product.cashback_data.cashback_cod * 1 > 0"><i class="material-icons orange-text font-size-change1">loyalty</i> <a href="javascript:" class="green-text extra-cashback" onclick="$(this).remove();$('#extra-cashback-info').removeClass('hide')"> Extra {{product.cashback_data.cashback_wallet - product.cashback_data.cashback_cod}} CashBack</a> <span id="extra-cashback-info" class="hide"> Extra <i class="icon-inr"></i>{{product.cashback_data.cashback_wallet - product.cashback_data.cashback_cod}} Cashback With MYDTH wallet.</span></p>								 -->
+                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons orange-text font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
                   	<div class="descripetion-detail margin-top1">
                   		<span class="font-size-change1 font600 grey-text">Description</span> 
                   		<p class="font-size-change1 no-margin" id="product-description"></p>
@@ -310,7 +310,7 @@ ul#dropdown1 li {
 						<span class="font-size-change terms-conds" [innerHTML] ="product.short_description"></span>
 							
 					</div>																				
-			<div class="review-ratings margin-top1">
+			<div class="review-ratings margin-top1" id="rating-reviews">
               	<div class="row rew-sta-rat">
               		<div class="col s8 m8">
               			<span class="font-size-change2 font600 cst-size-rate">Ratings and Reviews</span>
