@@ -6492,3 +6492,14 @@ div#login-page-otps input {
 .fix-inne-pad {
     padding: 10px !important;
 }
+.term-txt {
+    padding-top: 14px !important;
+}
+.cst-bonus-txt{
+
+	z-index: 9999;
+    top: 15px;
+    padding-left: 43px;
+    font-size: 13px;
+
+}
