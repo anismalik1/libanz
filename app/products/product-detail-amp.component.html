@@ -211,20 +211,20 @@ ul#dropdown1 li {
 	<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <a href="javascript:" (click)="goto_reviews();" *ngIf="avg_rating && avg_rating.reting"><span class="rating-txt1"> &nbsp; {{all_rating}} Ratings & {{rev_count}} Reviews </span></a>
 	
 	<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-						
+	<h5 class="beni-txt"> Additional Benefit </h5>
 					<ul id='dropdown1' class='dropdown-content'>
 							<li *ngFor="let item of product_category_list;">
 								<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
 							</li>
 						</ul>
 					
-					<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
-                  	<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
-                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
-                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
-                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons orange-text font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
+					<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons green-icon  font-size-change1">loyalty</i> {{product.param1}}</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons green-icon  font-size-change1">loyalty</i> {{product.param2}}</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons green-icon  font-size-change1">loyalty</i> {{product.param3}}</p>
+                  	<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons green-icon  font-size-change1">loyalty</i> {{product.param4}}</p>
+                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons green-icon  font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
+                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon  font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
+                  	<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon  font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
                   	<div class="descripetion-detail margin-top1">
                   		<span class="font-size-change1 font600 grey-text">Description</span> 
                   		<p class="font-size-change1 no-margin" id="product-description"></p>

@@ -34,7 +34,7 @@ color: #878787
 	font-size: 12px;
 	font-weight: bold;
 	border: 1px solid #ececec;
-	padding: 2px 10px;
+	padding: 6px 10px;
 	border-radius: 5px;
 	z-index: 99999;
 	}
@@ -270,15 +270,17 @@ font-size: 10px;
 							<span *ngIf="product"><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist wishlist-'+product.id+' active tooltipped relative': 'wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span>
 
 						</div>
-												<!-- <div class="product-btn center mobile-hide">
+												<div class="product-btn center mobile-hide">
 													<a href="javascript:" (click)="add_to_cart(product.id)" class="btn orange btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
 													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left red btn-large font-size-change1 rounded-btn"> SELECT PACKAGE</a>
-												</div> -->
+												</div>
 					</div>
 				</div>
 				<div class="col s12 m12 l7 product-detail" *ngIf="product">
 					<h3 class="margin-fix-bt" *ngIf="product">{{product.title}}</h3>
+					
 					<a href="#" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
+					
 					<div> <span class="font-size-change2 black-text margin-top inline-block">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
 											
 							<span class="green white-text stars fix-top-sp" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}} <i class="material-icons">star </i></span> <a href="javascript:" (click)="goto_reviews();" *ngIf="avg_rating && avg_rating.reting"><span class="rating-txt1"> &nbsp; {{all_rating}} Ratings & {{rev_count}} Reviews </span></a>
@@ -286,7 +288,9 @@ font-size: 10px;
 							
 							<!-- <p class="cpro"><a href="#">Compare Products </a></p> -->
 							<p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : product.url,ref:product.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-							<ul id='dropdown1' class='dropdown-content'>
+							<h5 class="beni-txt"> Additional Benefit </h5>
+							<ul id='dropdown1' class='dropdown-content cst-w-fix'>
+								
 								<li *ngFor="let item of product_category_list;">
 									<a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
 								</li>
@@ -301,13 +305,13 @@ font-size: 10px;
 							</a> -->
 							
 											
-											<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param1}}</p>
-											<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param2}}</p>
-											<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param3}}</p>
-											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons orange-text font-size-change1">loyalty</i> {{product.param4}}</p>
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons orange-text font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons orange-text font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
+											<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param1}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param2}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param3}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param4}}</p>
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
 											
 											<div class="descripetion-detail margin-top1">
 												<span class="font-size-change1 font600 grey-text">Description</span> 
@@ -358,7 +362,7 @@ font-size: 10px;
 						<div class="clearfix"></div>
 						<div class="location monthly-packages" *ngIf="circles">
 							<li style="padding-top:16px;">
-								<span class="font-size-change1 font600 grey-text">Location  <i class="material-icons" style="float: right;">location_on</i></span>
+								<span class="font-size-change1 font600 grey-text">Location  <i class="material-icons" style="float: right; padding-top: 2px;">location_on</i></span>
 							</li>
 							<li>
 								<div class="no-padding" *ngIf="circles"> 
@@ -636,7 +640,7 @@ font-size: 10px;
 						
 					</div> 
 					<div class="subtotal" *ngFor="let item of pack_selected;">
-						<p class="inline-block font600">{{item.title}} :</p>
+						<p class="inline-block">{{item.title}} :</p>
 						<p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
 						<li class="grey-txt-package" style="list-style-type: none;
@@ -645,7 +649,7 @@ font-size: 10px;
 								font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</li>
 					</div>
 					<div class="subtotal" *ngIf="this.product && this.product.promos">
-						<p class="inline-block font600">Promocode {{promos.unique_code}} is applied  :</p>
+						<p class="inline-block ">Promocode {{promos.unique_code}} is applied  :</p>
 						<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
 					</div>

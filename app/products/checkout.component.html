@@ -30,6 +30,12 @@ a.btn.orange.btn-large.ctn-che1 {
     margin-bottom: 30px;
 }
 }
+span.icon-locate {
+    position: absolute;
+    right: 0;
+    top: 2px;
+    color: #777777;
+}
 </style>
 <app-header></app-header>
 <div class="spinner-wrapper">
@@ -240,8 +246,9 @@ a.btn.orange.btn-large.ctn-che1 {
 																</div>
 															</div>
 															<div class="input-field col s12 m6 b-fix-top">
+																  
 																<mat-form-field>
-																	<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
+																	<span class="icon-locate"><i class="material-icons" >location_on</i> </span>	<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
 																		<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
 																	</mat-select>
 																</mat-form-field>

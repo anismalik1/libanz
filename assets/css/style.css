@@ -6035,6 +6035,13 @@ width: 100%;
 	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
 	padding: 10px 20px!important;vertical-align: middle;
 }
+#monthly-packages a {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: -webkit-center;
+}
+
 .promo-txt-mb {
     text-align: center;
     font-size: 14px;
@@ -6378,7 +6385,7 @@ div#login-page-otps input {
 }
 .fix-right-mb {
 	float: right;
-	background-color: #F44336 !important;
+	/* background-color: #F44336 !important; */
     margin-top: 5px;
 }
 .space-fix-bottom {
@@ -6505,7 +6512,31 @@ div#login-page-otps input {
 
 #monthly-packages a {
 	font-size: 14px;
-	font-weight: bold;
-	text-transform: capitalize;
-	text-align:-webkit-center;
+
+}
+.cst-w-fix{
+
+	
+    width: 22% !important;
+
+}
+
+.beni-txt{
+
+	font-size:16px;
+}
+.green-icon{
+
+	color: #14be47 !important;
+}
+span#offer-price {
+    font-size: 25px;
+    font-weight: 600;
+}
+.item-locate{
+
+	position: absolute !important;
+    /* left: -14px; */
+    top: 6px !important;
+    right: 0 !important;
 }
