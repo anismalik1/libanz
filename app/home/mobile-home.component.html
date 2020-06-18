@@ -33,7 +33,7 @@ li.clogin.ng-star-inserted {
 	margin-left: 13px; */
     /* margin-left: -6px !important; */
 }
-.bottom-slider-dot{padding: 10px;}
+.bottom-slider-dot{padding: 10px 7px 10px 5px;}
 .modal-footer.cst-center {
     text-align: center;
 }
@@ -154,6 +154,13 @@ margin: 2px;
     margin-bottom: 20px;
 }
 
+.footer-slide{
+
+    width: 98% !important;
+    border-radius: 15px !important;
+    margin-top: -23px !important;
+}
+
 
 @media only screen and (max-width: 767px){
 
@@ -264,7 +271,8 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 
 .bottom-slider-dot{
 
-	position:relative;
+	position: relative;
+    margin-top: -10px;
 }
 
  .sky-relative{
@@ -298,6 +306,8 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
     text-transform: uppercase;
     margin-top: 16px;
  }
+ 
+
  
 }
 </style>
@@ -616,7 +626,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 <!-- End Here -->
 <div class="container-fluid fixed-space-mb">
 	<div class="row">
-		<div class="bottom-slider-dot">
+		<div class="bottom-slider-dot footer-slide">
 		<ul class="bottom-slider " id="bottom-slider">
 			<li *ngFor="let banner of this.bottombanners">
 				<div class="col m12 s12">

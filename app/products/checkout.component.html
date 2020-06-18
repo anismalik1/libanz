@@ -396,8 +396,8 @@ span.icon-locate {
 					</div>
 					<div style="padding-top: 10px;" *ngIf="item.product.promos">
 						<p class="inline-block font600"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
-						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
-						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
+						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
+						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 					</div> 
 					<!-- <div style="padding-top: 10px;">
 							<p class="inline-block grey-text">Extra Cashback<i class="red-text"> *</i> :</p>
@@ -417,12 +417,12 @@ span.icon-locate {
 					<hr class="horizontal"> -->
             	<div class="subtotal">
             		<p class="inline-block">Delivery Charges :</p>
-            		<p class="inline-block green-text right font-size-change"> Free </p>
+            		<p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p>
 							</div>
 							<hr class="horizontal">
             	<div class="subtotal payable margin-top">
             		<p class="inline-block font600">Amount Payable :</p>
-            		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
+            		<p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
             	</div>
             	<hr>
             	<div class="subtotal">
@@ -433,7 +433,7 @@ span.icon-locate {
                 
             </div>
           </div>
-          <div class="security1">
+          <div class="security1" style="padding-top:10px;">
           	<ul>
           		<li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}assets/images/shield.png" class="responsive-img" alt="shield" width="40px"></li>
           		<li class="shield-text inline-block"><span class="no-padding grey-text">Safe and Secure Payments. Easy returns payment on your wallet before activation set top box. 100% Authentic products.</span></li>
