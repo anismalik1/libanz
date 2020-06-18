@@ -130,10 +130,7 @@ overflow:hidden !important;
 										<p class="inline-block font600">Promocode Cashback  :</p>
 										<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> -{{order.promo_cashback}} </p>
 									</div>
-									<div style="padding-top: 10px;" *ngIf="order.cashback > 0">
-										<p class="inline-block grey-text">Extra Cashback<i class="red-text"></i> :</p>
-										<p class="font-size-change right green-text" id="cashback-item"><i class="icon-inr"></i>-{{order.cashback }}</p>		
-									</div>
+									
 									<div style="padding-top: 10px;" *ngIf="order.bonus_amount && order.bonus_amount > 0">
 										<p class="inline-block grey-text">Product Bonus Amount :</p>
 										<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> -{{order.bonus_amount}} </p>
@@ -145,7 +142,7 @@ overflow:hidden !important;
 									</div>	
 								</div>
 								<div class="center"><span class="card-title margin-top orange-text">Your Order Status is {{order.status}}</span></div>								
-								<!-- <div class="center"><span class="font-size-change1 margin-top green-text">*Congratulations You Will receive Rs.{{order.cashback}} Cashback on your MyDth Wallet After Activation.</span></div>								 -->
+								<div class="center"><span class="font-size-change1 margin-top green-text">*Congratulations You Will receive Rs.{{order.cashback * order.qty}} Cashback on your MyDth Wallet After Activation.</span></div>								
 								<!-- <div class="center" *ngIf="order.cashback > 0 && order.payment == 'wallet'"><span class="font-size-change1 margin-top green-text">*Congratulations You Have recieved {{order.cashback}} Cashback on your MyDth Wallet.</span></div>								 -->
 							</div> 
 						</div>

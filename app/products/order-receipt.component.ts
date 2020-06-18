@@ -85,16 +85,11 @@ export class OrderReceiptComponent implements OnInit {
 
   amount_payable(order)
   {
-    //console.log(order);
     this.pack_data(order);
     var $amount : number = order.grand_total;
     if(order.promo_cashback != null && order.promo_cashback > 0)
     {
       $amount = 1 * $amount - 1 * order.promo_cashback;
-    }
-    if(order.cashback != null && order.cashback > 0)
-    {
-      $amount = 1*$amount -  1*order.cashback;
     }
     if(order.bonus_amount > 0)
     {

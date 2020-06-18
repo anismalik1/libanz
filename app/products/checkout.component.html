@@ -227,7 +227,7 @@ span.icon-locate {
 														<div class="row no-margin">
 															<div class="input-field col s12 m6">
 																<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" [(value)]="this.pincode" value="{{this.pincode}}">
-																<label for="pincode">Pincode*</label>
+																<label for="pincode" [className]="(this.pincode)?'active':''">Pincode*</label>
 																<div class="center" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
 																	<span class="red-text ">*Enter a Valid Pincode.</span>
 																</div>
@@ -283,7 +283,7 @@ span.icon-locate {
 														</div>
 														<div class="input-field col s12 m6">
 															<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
-															<label for="pincode-reg">Pincode*</label>
+															<label for="pincode-reg" >Pincode*</label>
 															<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
 																<span class="red-text ">*Enter a Valid Pincode.</span>
 															</div>
