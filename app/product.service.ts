@@ -277,13 +277,31 @@ export class ProductService {
           amount = amount - Number(item.product.promos.discount);
         }
       } 
-      if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
-        amount = amount - item.product.partnerwalletamount;
+      // if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
+      //   amount = amount - item.product.partnerwalletamount;
       amount = amount * item.quantity
     }
     return amount; 
   }
   
+  cashback_amount()
+  {
+    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let index : number = -1;
+    let amount : number = 0;
+    if(cart == null)
+    {
+      return amount;
+    }
+    for(var i =0;i< Object.keys(cart).length;i++)
+    {
+      let item :Item = JSON.parse(cart[i]);
+      if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
+        amount += item.product.partnerwalletamount * item.quantity*1;
+    }
+    return amount; 
+  }
+
   calculateCartAmountWithoutOffer() : number{
     let cart :any = JSON.parse(localStorage.getItem('cart'));
     let index : number = -1;

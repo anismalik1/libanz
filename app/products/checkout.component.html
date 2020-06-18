@@ -139,7 +139,7 @@ span.icon-locate {
           			</div>
           			<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
           				<a href="javascript:" class="black-text">
-          					<h4 class="font600">{{item.product.title}}</h4>
+          					<h4 class="font600"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
           					<span class="font-size-change grey-text">Seller : MyDthShop</span>
           					<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/>
           					<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
@@ -399,11 +399,11 @@ span.icon-locate {
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 					</div> 
-					<div style="padding-top: 10px;">
+					<!-- <div style="padding-top: 10px;">
 							<p class="inline-block grey-text">Extra Cashback<i class="red-text"> *</i> :</p>
 							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>								
 							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-						</div>
+						</div> -->
 						<div style="padding-top: 10px;" *ngIf="this.check_bonus(i,item.product.offer_price)">
 								<p class="inline-block grey-text"> Product Bonus Applied :</p>
 								<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
@@ -416,7 +416,7 @@ span.icon-locate {
 							</div>							
 					<hr class="horizontal"> -->
             	<div class="subtotal">
-            		<p class="inline-block font600">Delivery Charges :</p>
+            		<p class="inline-block">Delivery Charges :</p>
             		<p class="inline-block green-text right font-size-change"> Free </p>
 							</div>
 							<hr class="horizontal">
@@ -426,9 +426,10 @@ span.icon-locate {
             	</div>
             	<hr>
             	<div class="subtotal">
-            		<p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
-            		<p class="inline-block red-text">*You will get cashback After Product Activation.</p>
-                </div>
+									<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount()}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+            		<p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
+            		<!-- <p class="inline-block red-text">*You will get cashback After Product Activation.</p> -->
+              </div>
                 
             </div>
           </div>

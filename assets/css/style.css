@@ -1119,7 +1119,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 	border:1px solid #dadada;
 }
 .subtotal{
-	padding: 10px 1rem;
+	padding: 5px 1rem;
 }
 .horizontal{
 	border:1px dotted #c2c2c2c2;
@@ -1140,6 +1140,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 	padding: 5px 10px;
 	color: #fff;
 }
+#extra-benifits li{
+font-size: 13px;
+}
+.user-cashback-box{border: 1px solid green;
+	margin: 10px 0;
+	padding: 5px 10px;}
 .chng a{
 	border:1px solid #c2c2c2;
 	color: #ff6a00;

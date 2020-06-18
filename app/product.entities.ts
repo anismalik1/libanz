@@ -26,6 +26,7 @@ export class Product {
     pack_selected : any;
     cashback_data : any;
     promos : any;
+    cashback : number;
     multi : Number;
     pincode : any;
 }

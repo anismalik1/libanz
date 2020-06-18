@@ -311,7 +311,8 @@ font-size: 10px;
 											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param4}}</p>
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Extra 3% Cashback With MYDTH wallet.</span>  </p>								
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Buy product with Mydth
+												wallet & get extra 3% off.</span>  </p>								
 											
 											<div class="descripetion-detail margin-top1">
 												<span class="font-size-change1 font600 grey-text">Description</span> 
@@ -629,7 +630,7 @@ font-size: 10px;
 				<div>
 					<div class="subtotal">
 						<div *ngIf="product && ( kit == 2 || kit == 3) ; then kitblock else nokitblock"></div>
-						<p class="inline-block font600">Product :</p>
+						<p class="inline-block" *ngIf="product">{{product.title}}</p>
 						<ng-template #kitblock>
 							<p class="inline-block right font-size-change green-text" *ngIf="product && kit == 2"> <i class="icon-inr"></i> {{product.offer_price}}</p>
 							<p class="inline-block right font-size-change green-text" *ngIf="product && kit == 3"> <i class="icon-inr"></i> {{product.price - 1000}}</p>
@@ -645,7 +646,6 @@ font-size: 10px;
 						<p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
 						<li class="grey-txt-package" style="list-style-type: none;
 								white-space: nowrap;
-								margin-top: 7px;
 								font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</li>
 					</div>
 					<div class="subtotal" *ngIf="this.product && this.product.promos">
@@ -665,14 +665,21 @@ font-size: 10px;
 				</div>
 				<hr class="horizontal">
 				<div class="subtotal payable margin-top">
-					<p class="inline-block font600">Amount Payable :</p>
+					<p class="inline-block">Amount Payable :</p>
 					<p class="inline-block right font-size-change"> <i class="icon-inr"></i> {{calculate_amount() }}</p>
-					
 					<div class="clearfix"></div>
-					<p class="inline-block green-text font600">Including All GST &amp; Taxes</p><div class="clearfix"></div>
-					<p class="inline-block red-text" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">Avail Bonus of Amount </p>
-					<p *ngIf="this.options"> <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p>
-					<p class="inline-block red-text" *ngIf="!this.get_token()">*To avail more exciting cashback and coupons, just login and continue.</p>
+					<p class="inline-block">Including All GST &amp; Taxes</p>
+					 <div class="user-cashback-box">
+						<ul id="extra-benifits">
+							<li *ngIf="product && product.partnerwalletamount > 0">
+								<p><b>Cashback:</b> Amount of Rs. {{product.partnerwalletamount }} Will be added to your wallet after product activation.</p>
+							</li>
+							<li *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product"><p class="inline-block green-text" >Avail Bonus of Amount <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p></li>
+							<li *ngIf="!this.get_token()"><p class="inline-block green-text" >*To avail more exciting cashback and coupons, just login and continue.</p></li>
+							<li *ngIf="product && product.cashback == 1"><p class="inline-block green-text" ><b>Special offer:</b> Avail extra 3% discount on using Mydth wallet while buying selected product.</p></li>
+						</ul>
+					 </div>
+					
 				</div>
 				<hr>
 				<div class="subtotal inline-block">
