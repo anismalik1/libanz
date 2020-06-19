@@ -329,8 +329,20 @@ span.icon-locate {
         		<form class="margin-top">
           		<div class="row">
                 <div class="col s12 m10 offset-m1">
-										<input [type]="( this.productservice.cartItemsCount() == 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="( this.productservice.cartItemsCount() == 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() )? 'include_wallet' : 'wallet_type'" value="wallet" (change)="pay_amount()" [checked]="(this.options.how_much_apply_to_product < this.todoservice.get_user_product_amount() || (this.productservice.cartItemsCount() == 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.options.how_much_apply_to_product < this.todoservice.get_user_product_amount()))?false:true" [disabled]="(( this.options.how_much_apply_to_product <= this.todoservice.get_user_product_amount() && this.productservice.cartItemsCount() == 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) || (this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) )?true:false"/>
-										<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> 
+								<div class="wallet-content left">
+									{{check_wallet_content()}}
+									<!-- <mat-checkbox ></mat-checkbox> -->
+									<span *ngIf="checkbox_text.checkbox ==  true">
+										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+									</span>
+									<span *ngIf="checkbox_text.radio == true">
+										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+									</span>
+									<span *ngIf="checkbox_text.no_input == true">
+										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+									</span>
+								</div>	
+								<!-- <label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>  -->
 										<div class="clearfix"></div>
 										<span class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</span> 
 										<!-- <input name="wallet_type" value="wallet" class="with-gap" type="radio" id="wallet" (change)="cod_apply()" checked/>
@@ -339,23 +351,29 @@ span.icon-locate {
               </div>
               <div class="row">
           			<div class="col s12 m10 offset-m1">
-          				<input name="wallet_type" class="with-gap" value="paytm" type="radio" id="paytm" (change)="cod_apply()" [checked]="(this.todoservice.get_user_wallet_amount() <= 1 || (this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) || (this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.productservice.cartItemsCount() == 1))?true:false"/>
-    							<label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"> </label>
+									<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
+          				<!-- <input name="wallet_type" class="with-gap" value="paytm" type="radio" id="paytm" (change)="cod_apply()" [checked]="(this.todoservice.get_user_wallet_amount() <= 1 || (this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) || (this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.productservice.cartItemsCount() == 1))?true:false"/> -->
+    							<!-- <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"> </label> -->
 				        </div>
           		</div>
           		<!-- Credit Card -->
           		<div class="row">
           			<div class="col s12 m10 offset-m1">
-          				<input name="wallet_type" class="with-gap" value="card" type="radio" id="card" (change)="cod_apply()"/>
-    							<label for="card" class="font-size-change black-text cod-text">Cards & Netbanking</label>
+										<mat-radio-button value="card" name="wallet_type" id="card" (change)="cod_apply()">Cards & Netbanking</mat-radio-button>
+          				<!-- <input name="wallet_type" class="with-gap" value="card" type="radio" id="card" (change)="cod_apply()"/>
+    							<label for="card" class="font-size-change black-text cod-text">Cards & Netbanking</label> -->
 				        </div>
 							</div>
 							<div class="row" *ngIf="this.productservice.cod_invalid == false">
 									<div class="col s12 m10 offset-m1">
-										<input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.check_cashon_delivery()"/>
-										<label for="cod" class="font-size-change black-text cod-text">Cash on Delivery / ( COD )</label>
+										<span *ngIf="!this.productservice.check_cashon_delivery()">
+												<mat-radio-button value="cod" name="wallet_type" id="cod" (change)="cod_apply()"> Cash on Delivery / ( COD )</mat-radio-button>
+										</span>
+										<span *ngIf="this.productservice.check_cashon_delivery()"><i class="material-icons red-text" style="font-size: 22px;">error_outline</i><label> Cash on Delivery / ( COD )</label></span>
+										<!-- <input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.check_cashon_delivery()"/> -->
+										<!-- <label for="cod" class="font-size-change black-text cod-text">Cash on Delivery / ( COD )</label> -->
 										<div class="clearfix"></div>
-										<span class="red-text pt-left-35" *ngIf="this.productservice.check_cashon_delivery()">Not Available On Selected item(s).</span>
+										<span class="red-text pt-left-35" *ngIf="this.productservice.check_cashon_delivery()"> Not Available On Selected item(s).</span>
 									</div>
 								</div>
 				</form>

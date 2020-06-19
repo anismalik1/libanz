@@ -41,6 +41,7 @@ export class CheckoutComponent implements OnInit{
   tab_address : any;
   address : any;
   options : any = {how_much_apply_to_product : 0};
+  checkbox_text : any = {checkbox : false,radio : false,no_input : false};
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
@@ -217,6 +218,32 @@ ngOnInit() {
     }
 }
 
+check_wallet_content()
+{
+  this.checkbox_text = {checkbox : false,radio : false,no_input : false}
+  if(this.productservice.cartItemsCount() == 1)
+  {
+    if(this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.todoservice.get_user_wallet_amount() > 0)
+    {
+      this.checkbox_text.checkbox = true;
+      return;
+    }
+    else if(this.productservice.calculateCartAmount() <= this.todoservice.get_user_wallet_amount())
+    {
+      this.checkbox_text.radio =  true;
+      return;
+    }
+    this.checkbox_text.no_input =  true;
+  }
+  else if(this.productservice.calculateCartAmount() <= this.todoservice.get_user_wallet_amount())
+  {
+    this.checkbox_text.radio =  true;
+  }
+  else
+  {
+    this.checkbox_text.no_input = true;
+  }
+}
 fetch_options()
 {
   this.todoservice.fetch_product_options({token : this.get_token()})
@@ -524,25 +551,25 @@ goto_address()
 
 checkout_items(type)
 {
-  if(type == 2)
-  {
-    let otf_pay : boolean = false; 
-    let count = 0;
-    this.otfquantity = 0;
-    this.productservice.cart_items.forEach( item => {
-      if(item.product.tsk_kit == 3)
-      {
-        otf_pay = true;
-        count++; 
-        this.otfquantity++;
-      }
-    });
-   if($('[name="wallet_type"]:checked').val() == 'cod' && count > 0 && this.otf_margin.option_value > 0)
-    {
-     $('#kit-modal-a').click()
-      return false;
-    }
-  }
+  // if(type == 2)
+  // {
+  //   let otf_pay : boolean = false; 
+  //   let count = 0;
+  //   this.otfquantity = 0;
+  //   this.productservice.cart_items.forEach( item => {
+  //     if(item.product.tsk_kit == 3)
+  //     {
+  //       otf_pay = true;
+  //       count++; 
+  //       this.otfquantity++;
+  //     }
+  //   });
+  //  if($('[name="wallet_type"]:checked').val() == 'cod' && count > 0 && this.otf_margin.option_value > 0)
+  //   {
+  //    $('#kit-modal-a').click()
+  //     return false;
+  //   }
+  // }
 
   this.spinner.show();
   let address_id = this.tab_address

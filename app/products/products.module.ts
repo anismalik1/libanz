@@ -9,6 +9,8 @@ import { ProductService } from '../product.service';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 import { ProductDetailsComponent } from './product-details.component';
 import { ProductsComponent } from './products.component';
 import { CheckoutComponent } from './checkout.component';
@@ -45,6 +47,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
     MatAutocompleteModule,
     MatInputModule
   ],
