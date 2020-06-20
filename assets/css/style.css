@@ -6544,3 +6544,156 @@ span#offer-price {
     top: 6px !important;
     right: 0 !important;
 }
+p.cst-fix-terms {
+    margin-bottom: 20px !important;
+}
+.cst-mwallet{
+
+	min-height:360px;
+}
+.cst-plus-bg {
+    background: #ececec;
+    border-radius: 50%;
+    padding: 3px 4px;
+    position: absolute;
+    left: 45%;
+	margin-top: 5px;
+}
+.extra-rate-1 {
+position: relative;
+top: -54px;
+page-break-after: left;
+left: 50%;
+
+}
+
+.extra-rate-2 {
+    position: relative;
+    top: -88px;
+    page-break-after: left;
+    left: 78%;
+}
+.money-wallet{
+
+	height:0px;
+}
+.error-rtext{
+
+	color:#f00;
+	font-size:13px;
+
+}
+.border-btn{
+
+	background: transparent;
+    color: #2bbbad;
+    border-radius: 25px;
+    border-color: #2bbbad;
+    border: 2px solid #2bbbad;
+	box-shadow: none !important;
+	margin:10px 0px 0px 10px;
+	float:right;
+}
+
+
+.user-name {
+    margin: 0;
+}
+.border-bottom{
+
+	border-bottom: 1px solid #ded1d1ed !important;
+   
+}
+.img-circle1{
+
+	border-radius: 50%;
+	padding: 7px;
+	border: 1px solid #dcd2d2;
+}
+.act-txt{
+
+	color:#a0a0a0 !important;
+	padding-top:3px;
+}
+.wt-100{
+
+	width:100% !important;
+}
+.ifsc-txt{
+
+	color:#2bbbad;
+}
+.ifsc-txt {
+    color: #2bbbad;
+    position: absolute;
+    width: 20%;
+    right: 0;
+    cursor: pointer;
+}
+
+.total-txt{
+
+	font-weight:bold;
+}
+.total-block{
+
+	background: #ececec;
+    padding: 8px;
+    border-bottom: 7px solid #ff6a00;
+}
+.acount-box p {
+    font-size: 15px;
+}
+.cst-p{
+	font-size: 14px;
+}
+.money-sent-box {
+    min-height: 140px;
+	background: #06e674;
+	margin-top: -14px;
+}
+.rupee-txt{
+
+	padding-left: 13px;
+    color: #fff;
+    margin-top: -10px;
+}
+.rupee-txt{
+
+	padding-left: 12px;
+    color: #fff;;
+    margin-top: -11px;
+}
+.cst-view-btn {
+    background: transparent;
+    border-radius: 20px;
+    border: 1px solid #FFF;
+    height: 30px;
+    box-shadow: none !important;
+    line-height: 0;
+    margin: 9px 10px;
+	
+}
+.wallet-bal{
+
+	
+	font-size: 13px;
+    margin-top: -15px;
+    padding: 5px;
+    border-bottom: 1px solid #e2dcdc;
+	
+}
+.inr-txt li {
+    padding: 9px 5px;
+	border-bottom: 1px solid #e2dcdc;
+	font-size: 13px;
+	
+}
+ul.inr-txt li a {
+    color: #333;
+    font-weight: bold;
+}
+.inner-passbook {
+
+	min-height:300px;
+}

@@ -195,12 +195,14 @@ margin: auto;
 <section class="flash-deal">
     <div class="container-fluid">
         <div class="row no-margin">
-            <div class="col s12 m3">
+            <div class="col s12 m2">
                 
             <app-side-nav></app-side-nav>
             </div>
-            <div class="col s12 m9">
-               <div class="card inline-block w-100 web-view">
+            <div class="col s12 m10">
+                <div class="row">
+                <div class="col s12 m5">
+               <div class="card inline-block w-100">
                     <div class="card-content cst-invoice" *ngIf="order_id">
                         <div  class="mb-1">
                             <h2 class="font600 inline-block">Invoice </h2>
@@ -225,7 +227,7 @@ margin: auto;
                     </div>
                 
                     <div class="card-content" *ngIf="!order_id">
-                        <span class="money-txt"> Pay </span>
+                        <span class="money-txt" style="color:#333; font-size:18px;"> Pay </span>
                         <br/>
                         <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
                         <ng-template #transfertemp>
@@ -288,7 +290,301 @@ margin: auto;
                    
                 
                 </div>
+                </div>
+                
+                <div class="col s12 m7">
+
+ <!-- send money to wallet  -->
+
+ <div class="card inline-block w-100">
+                   
+                
+    <div class="card-content cst-mwallet">
+        <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
+        <br/>
+        <span>we pay high fees when you add money to wllet , hence we charge 2% when you take this money to your bank account</span>
+        <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
+        <ng-template #transfertemp>
+     
+    </ng-template>
+        <ng-template #fetchtemp>
+            <div class="value-transfer col s12 m12 margin-top">
+                <form class="" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
+                    <div class="row">
+                        <div class="col s1"><label class="lbl-num"> <span class="fa fa-inr"></span> </label> </div>
+                        <div class="col s11">
+                        <input id="first_name" type="number" placeholder="AMOUNT" class="validate" name="amoutn" [(ngModel)]="fetch_user.phone">
+                        </div>
+                        
+                        
+                    <div class="input-field col s12 center">
+                        <p class="cst-fix-terms">
+                            By Proceeding I agree to the additional 2% charges applicable on this transaction</p>
+                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
+                    </div>
+                </div>
+                </form>
             </div>
+        </ng-template>
+      
+    </div>
+   
+
+</div>
+                </div>
+
+
+                <div class="col s12 m5">
+
+                    <!-- send money to wallet  -->
+                   
+                    <div class="card inline-block w-100">
+                                      
+                                   
+                       <div class="card-content" *ngIf="!order_id">
+                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
+                           <br/>
+                           <span>we pay high fees when you add money to wllet , hence we charge 2% when you take this money to your bank account</span>
+                           <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
+                           <ng-template #transfertemp>
+                        
+                       </ng-template>
+                           <ng-template #fetchtemp>
+                               <div class="value-transfer col s12 m12 margin-top">
+                                   <form class="" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
+                                       <div class="row">
+                                           <div class="col s1"><label class="lbl-num"> <span class="fa fa-inr"></span> </label> </div>
+                                           <div class="col s11">
+                                               <div class="inner-rate">
+                                           <input id="first_name" type="number" placeholder="AMOUNT"  class="validate" name="amoutn" value="100">
+                                           <span class="fa fa-plus cst-plus-bg"> </span>
+                                        </div>
+                                        <div class="money-wallet">   
+                                        <div class="extra-rate-1"> 
+                                            <p>Charge</p>
+                                            <span class="fa fa-inr"></span>. 55   =
+                                        </div>
+                                       
+                                        <div class="extra-rate-2"> 
+                                            <p>Net Payable</p>
+                                            <span class="fa fa-inr"></span> 11.55 
+                                        </div>
+
+                                        </div>
+                                        </div>
+                                           <span class="error-rtext">Please enter a valid amount between <span class="fa fa-inr"></span> 100 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
+                                           
+                                       <div class="input-field col s12 center">
+                                           <p class="cst-fix-terms">
+                                               By Proceeding I agree to the additional 2% charges applicable on this transaction</p>
+                                           <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
+                                       </div>
+                                   </div>
+                                   </form>
+                               </div>
+                           </ng-template>
+                         
+                       </div>
+                      
+                   
+                   </div>
+                                   </div>
+                                   <div class="col s12 m7">
+
+                                    <!-- send money to wallet  -->
+                                   
+                                    <div class="card inline-block wt-100">
+                                                      
+                                                   
+                                       <div class="card-content cst-mwallet">
+                                           <div class="row">
+                                               <div class="col s6 m8">
+                                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Select a Saved Bank Account  </h4>
+                                           </div>
+                                           <div class="col s6 m4">
+                                            <button class="btn border-btn">Add&nbsp;New </button>
+                                           </div>
+                                           </div>
+                                       
+                                           <div class="bank-list">
+                                              <div class="row ">
+                                                  <div class="col s2">
+                                                      <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                  </div> 
+                                                  <div class="col s10 border-bottom">
+                                                      <h4 class="user-name">Praveen Jain </h4>
+                                                      <p class="act-txt">A/C No. XX XX 1317 </p>
+                                                  </div>
+                                              </div>
+                                              <div class="row ">
+                                                <div class="col s2">
+                                                    <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                </div> 
+                                                <div class="col s10 border-bottom">
+                                                    <h4 class="user-name">Praveen Jain </h4>
+                                                    <p class="act-txt">A/C No. XX XX 1317 </p>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col s2">
+                                                    <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                </div> 
+                                                <div class="col s10 border-bottom">
+                                                    <h4 class="user-name">Libanz International </h4>
+                                                    <p class="act-txt">A/C No. XX XX 1984 </p>
+                                                </div>
+                                            </div>
+                                           </div>
+                                          
+                                         
+                                       </div>
+                                      
+                                   
+                                   </div>
+                                                   </div>
+                
+                                                   <div class="col s12 m5">
+
+                                                    <!-- add new bank account  -->
+                                                   
+                                                    <div class="card inline-block wt-100">
+                                                                      
+                                                                   
+                                                       <div class="card-content">
+                                                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Add New Bank Account  </h4>
+                                                           <br/>
+                                                           <div class="form-group">
+
+                                                            <input type="text" class="form-control" placeholder="Enter Account Number"/>
+                                                           </div>
+                                                           <div class="form-group">
+
+                                                            <input type="text" class="form-control" placeholder="Enter IFSC Code"/>
+
+                                                            <span class="ifsc-txt">Find IFSC</span>
+                                                           </div>
+                                                           <div class="form-group">
+
+                                                            <input type="text" class="form-control" placeholder="Account Holder's  Name"/>
+                                                           </div>
+
+                                                           <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
+                                                         
+                                                       </div>
+                                                      
+                                                   
+                                                   </div>
+                                                                   </div>
+
+
+                                                                   <div class="col s12 m7">
+
+                                                                    <!-- send money to wallet  -->
+                                                                   
+                                                                    <div class="card inline-block wt-100">
+                                                                                      
+                                                                                   
+                                                                       <div class="card-content cst-mwallet">
+                                                                           <div class="row">
+                                                                               <div class="col s12 m12">
+                                                                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money from Wallet to  </h4>
+                                                                           </div>
+                                                                           
+                                                                           </div>
+                                                                       
+                                                                           <div class="bank-list">
+                                                                              <div class="row ">
+                                                                                 
+                                                                                  <div class="col s10">
+                                                                                      <h4 class="user-name"><strong> PRAVEEN JAIN </strong> </h4>
+                                                                                      <p class="act-txt">PHONE PAY BANK XX XX 1317 </p>
+                                                                                  </div>
+                                                                                  <div class="col s2">
+                                                                                    <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                                                </div> 
+                                                                              </div>
+                                                                            
+                                                                           
+                                                                           </div>
+
+                                                                           <div class="row acount-box">
+
+                                                                            <div class="col s10">
+                                                                                <p>Amunt to be sent </p>
+                                                                            </div>
+                                                                            <div class="col s2">
+                                                                                <span class="fa fa-inr"></span> 100
+                                                                            </div>
+
+                                                                           </div>
+                                                                          
+                                                                           <div class="row acount-box">
+
+                                                                            <div class="col s10">
+                                                                                <p> Charge &nbsp; <span class="fa fa-info-circle"></span> </p>
+                                                                            </div>
+                                                                            <div class="col s2">
+                                                                                <span class="fa fa-inr"></span> 5
+                                                                            </div>
+
+                                                                           </div>
+                                                                           <div class="row acount-box total-block">
+                                                                           
+                                                                            <div class="col s10">
+                                                                                <p class="total-txt"> Total Payable  </p>
+                                                                            </div>
+                                                                            <div class="col s2">
+                                                                                <span class="fa fa-inr"></span> 105 
+                                                                            </div>
+
+                                                                           </div>
+
+                                                                       </div>
+                                                                      
+                                                                   
+                                                                   </div>
+                                                                                   </div>
+                                                                                   <div class="col s12 m5">
+
+                                                                                    <!-- add new bank account  -->
+                                                                                   
+                                                                                    <div class="card inline-block wt-100">
+                                                                                                      
+                                                                                                   
+                                                                                                <div class="card-content1">
+                                                                                                    <div class="row money-sent-box">
+
+                                                                                                        <h4 class="money-txt" style="color:#fff; font-size:18px; padding:10px;"> Money Sent To Bank Successfully  </h4>
+                                                                                                              <h3 class="rupee-txt"><span class="fa fa-inr"></span> 100</h3>
+                                                                                                        <p class="rupee-txt">Rupees One Hundred only </p>
+
+                                                                                                        <button class="btn cst-view-btn">View Detils </button>
+                                                                                                    </div>
+                                                                                                    <div class="pass-detail">
+                                                                                                        <p class="wallet-bal">Updated MyDTH Wallet Balance <span class="fa fa-inr"></span> 140  </p>
+                                                                                                    </div>
+
+                                                                                                    <div class="inner-passbook">
+                                                                                                        <ul class="inr-txt">
+                                                                                                            <li> <a href="#"><span class="fa fa-book"></span> &nbsp; View Passbook  </a> </li>
+                                                                                                       
+                                                                                                            <li> <a href="#"><span class="fa fa-edit"></span> &nbsp; Add Money To MYDTH Wallet  </a> </li>
+
+                                                                                                            <li> <a href="#"><span class="fa fa-info-circle"></span> &nbsp; 24 x 7 Help  </a> </li>
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                
+                                                                                            
+                                                                                   </div>
+                                                                                                   </div>                                                                                
+
+                
+                                </div>
+            </div>
+
+                
+
         </div>
     
         <div class="row">
