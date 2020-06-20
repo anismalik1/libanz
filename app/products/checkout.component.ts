@@ -221,7 +221,7 @@ ngOnInit() {
 check_wallet_content()
 {
   this.checkbox_text = {checkbox : false,radio : false,no_input : false}
-  if(this.productservice.cartItemsCount() == 1)
+  if(this.productservice.cartItemsCount() == 1 && this.todoservice.get_user_product_amount() < this.options.how_much_apply_to_product)
   {
     if(this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.todoservice.get_user_wallet_amount() > 0)
     {
