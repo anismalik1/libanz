@@ -4743,7 +4743,9 @@ i.material-icons.black-text {
 
 		font-weight: 600;
 		color: #545454;
-    padding-left: 17px;
+		padding-left: 13px;
+		margin-top: -32px;
+	
 		}
 
 		.lSSlideOuter .lSPager.lSpg>li a {
@@ -5348,12 +5350,12 @@ a.modal-trigger i {
 		}
 
 	@media only screen and (max-width: 767px){
-
+/* 
 		.bottom-slider-dot ul.lSPager.lSpg {
 			position: absolute;
 			bottom: -20px;
 			left: 35%;
-		}
+		} */
 		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li.active a, .lSSlideOuter .lSPager.lSpg>li:hover a {
 			background-color: #000000 !important;
 		}
@@ -5745,6 +5747,7 @@ a.modal-trigger i {
     color: #484545;
 	padding-top: 0;
 	font-weight: bold;
+	
 }
 .sub-txt{
 
@@ -6393,7 +6396,7 @@ div#login-page-otps input {
     margin-top: 5px;
 }
 .space-fix-bottom {
-    height: 48vh;
+    height: 62vh;
 }
 
 .free-txt{
@@ -6696,4 +6699,54 @@ ul.inr-txt li a {
 .inner-passbook {
 
 	min-height:300px;
+}
+
+
+@media screen and (orientation:landscape) {
+	.shadow-box img{
+    border-radius: 10px;
+    height: 155px;
+	width:100%;
+   
+}
+.product-image {
+    height: 185px;
+    width: 100vw !important;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.txt-pro {
+    font-weight: 600;
+    color: #545454;
+    float: left;
+    font-size: 17px;
+    padding-bottom: 0px !important;
+    padding-top: 22px !important;
+}
+.sky-heading {
+    
+    width: auto !important;
+   
+    margin-top: -10px;
+
+}
+/* #select-item li {
+    border: 1px solid #d0cfcf;
+    border-radius: 5px;
+    background: #fff;
+    width: 102%;
+    margin-left: -12px;
+    font-size: 8px;
+} */
+
+.mb-txt {
+    font-size: 13px;
+    padding: 13px 0 0 12px;
+    font-weight: 600;
+}
+
+
+}
+.no-wrap{
+	white-space: nowrap;
 }

@@ -228,6 +228,18 @@ left:5%;
 		}
 		
 	}
+
+
+
+	@media screen and (orientation:landscape) {
+
+		.mb-txt {
+    font-size: 15px;
+    padding: 12px 0px 0px 12px;
+    font-weight: 600;
+}
+		
+	}
 	</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
@@ -334,7 +346,7 @@ left:5%;
 <section class="promo-code-section-2" *ngIf="recharge_ini == 1">
 	<div class="container">
 		<div class="row">
-			<div class="col s12 m3">
+			<div class="col s12 m5 l3">
 				<div class=" mobile no-margin cst-border">
 				<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)" *ngIf="this.recharge_type.mobile">
 					<div class="row no-margin">
@@ -895,7 +907,7 @@ left:5%;
 
 
 
-			<div class="col s12 m9 plans-view-details">
+			<div class="col s12 m7 l9 plans-view-details">
 				<div class="card no-margin cst-border1">
 					<div class="card-content">
 						<div id="short-content"></div>

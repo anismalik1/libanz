@@ -90,7 +90,11 @@
     padding-right: 25px;
 }
 
-
+.right-btn {
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
 @media only screen and (max-width: 767px){
 
 	.channels-accoriadn .card-content a {
@@ -136,6 +140,30 @@ ul#dropdown1 li {
     cursor: pointer;
 }
 }
+
+@media screen and (orientation:landscape) {
+
+.channels-accoriadn .card-content {
+    height: 260px;
+    overflow: auto;
+    /* border: 1px solid #e3e3e3; */
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    min-height: auto;
+    width: 23vw;
+
+}
+.user-cashback-box {
+    border: 1px solid green;
+    margin: 10px 0;
+    display: none;
+    padding: 5px 10px;
+}
+
+
+}
+
 </style>
 
 <app-header></app-header>
@@ -454,7 +482,7 @@ ul#dropdown1 li {
 					<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
 				</div>
 				</div>			
-          <div class="col s12 m8 channel-list-box">				
+          <div class="col s12 m6 l8 channel-list-box">				
            <div class="channels-accoriadn">
                  <ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
                      <li *ngFor="let packs of channels_packs;let j = index" class="active">
@@ -513,7 +541,7 @@ ul#dropdown1 li {
                  
      </div>
      </div>
-     <div class="col s12 m4 order-summary">
+     <div class="col s12 l4 m6 order-summary">
          <div class="card">
              <div class="card-content black-text no-padding space-fix-bottom">
                  <span class="card-title inline-block">Order Summary</span>
@@ -575,19 +603,21 @@ ul#dropdown1 li {
 					 </div>
 					 
 					</div>
-                 <hr>
+                
                  <div class="subtotal inline-block">
                      <a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
                      
                   
                      <!-- <a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a> -->
 				 </div>	
-				 			
+						 
+				 
+				 <div class="right-btn">
+					<a href="javascript:" class="btn orange round-btmobile " *ngIf="multienable || fta_pack.price == 0" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
+					<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile fix-right-mb" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i> BUY NOW</a>
+				</div>
 			 </div>
-			 <div class="right-btn">
-				<a href="javascript:" class="btn orange round-btmobile " *ngIf="multienable || fta_pack.price == 0" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
-				<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile fix-right-mb" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i> BUY NOW</a>
-			</div>
+			
          </div>
      </div>
      </div>

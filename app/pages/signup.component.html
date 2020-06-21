@@ -274,6 +274,22 @@ button.btn.cst-btn.w-100 {
 
 @media only screen and (max-width: 767px){
 
+	.merchant-txt{
+
+font-size: 31px;
+color: #484545;
+padding-top: 0;
+font-weight: bold;
+text-align:center;
+
+}
+.upper-text{
+
+text-align:center !important;
+}
+
+
+
     .seller-bx-11 {
     border: 1px solid #8c8c8c;
     height: auto;
@@ -302,14 +318,17 @@ p.ask-login {
     color: #9E9E9E;
     line-height: 18px;
     padding-left: 1px;
-    text-align: left;
+    text-align: center;
 }
 .text-left{
 
 	text-align:left !important;
 }
+.txt-center{
+	text-align:center;
+}
 .cst-merchant-bx {
-    height: 100vh;
+    height: 120vh;
     width: 100%;
 	background-color: #ffff;
 }
@@ -365,8 +384,8 @@ p.ask-login {
 							-->
 
 							<h4 class="merchant-txt">Register Here </h4>
-							<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Payment</p>
-							<span class="green-text text-left" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
+							<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Bill Payment</p>
+							<span class="green-text text-center" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
 						</div>
 						<br/>
 						<div *ngIf="signupverify == 0">
@@ -412,7 +431,7 @@ p.ask-login {
 													<span class="red-text">Check Confirm Password.</span>
 												</div>
 											</div>
-											<div class="col s12 col m6">
+											<div class="col s12 col m12">
 												<div class="term-txt">
 												<!-- <input id="terms-condi" formControlName="terms" type="checkbox" value="1"/> -->
 												<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/mydthshop-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/mydthshop-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
