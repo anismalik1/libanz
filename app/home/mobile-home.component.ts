@@ -208,7 +208,7 @@ export class MobileHomeComponent implements OnInit {
     script.text = `
       $(document).ready(function(){
         var product = $('.product-slider').lightSlider({
-          item: ($(window).width() < 350)? 1 : 2,
+          item: 1,
           auto: false,
           pauseOnHover: true,
           loop: true,
@@ -218,15 +218,20 @@ export class MobileHomeComponent implements OnInit {
           pager: false,
           enableDrag: true,
           responsive: [
-            
             {
-              breakpoint:450,
+              breakpoint:900,
+              settings: {
+                item:3
+              }
+            },
+            {
+              breakpoint:700,
               settings: {
                 item:2
               }
             },
             {
-              breakpoint:350,
+              breakpoint:380,
               settings: {
                 item:1
               }
@@ -413,7 +418,7 @@ export class MobileHomeComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('.mobile-slider').lightSlider({
-        item: ($(window).width() < 350)? 1 : 2,
+        item: 1,
         auto: true,
         slideMove: 1,
         loop: true,
@@ -428,15 +433,20 @@ export class MobileHomeComponent implements OnInit {
         thumbMargin: 5,
         currentPagerPosition: 'middle',
         responsive: [
-            
           {
-            breakpoint:450,
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:700,
             settings: {
               item:2
             }
           },
           {
-            breakpoint:350,
+            breakpoint:380,
             settings: {
               item:1
             }
@@ -458,13 +468,14 @@ export class MobileHomeComponent implements OnInit {
     {
       $('#bottom-slider-script').remove();
     }
+    var $items = 1;
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.id = `bottom-slider-script`; 
     script.text = `
     $(document).ready(function(){
       $('#bottom-slider').lightSlider({
-        item: ($(window).width() < 350)? 1 : 2,
+        item: 1,
         speed : 1200,
         pause : 5000,
         loop:true,
@@ -477,15 +488,20 @@ export class MobileHomeComponent implements OnInit {
         thumbMargin: 5,
         currentPagerPosition: 'middle',
         responsive: [
-            
           {
-            breakpoint:450,
+            breakpoint:900,
+            settings: {
+              item:3
+            }
+          },
+          {
+            breakpoint:700,
             settings: {
               item:2
             }
           },
           {
-            breakpoint:350,
+            breakpoint:380,
             settings: {
               item:1
             }
