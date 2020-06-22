@@ -232,7 +232,7 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/'+ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
       return false;
     }
-    var width = $(window).width(); 
+    var width = $(window).width() + 17; 
     if(width < 767)
     {
       this.router.navigate(['/mhome']);

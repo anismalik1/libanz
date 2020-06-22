@@ -199,6 +199,9 @@ span.icon-locate {
 									<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
 									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label>
 									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() != true">Add Address</label>
+									
+									<input class="with-gap" name="client_address" type="radio" value="row-address"  id="address-row" (change)="change_addr_form('add-row-address')">
+									<label for="address-row" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">Add Row Address</label>
 									<span *ngIf="this.productservice.is_mboss_enable()">
 											<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
 											<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
@@ -297,6 +300,25 @@ span.icon-locate {
 												</div>
 									</form>
 							</div>
+							<div class="add-row-address" id="add-row-address" style="display:none;">
+									<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
+											<div class="modal-content no-padding">
+													<div class="row no-margin">
+														<div class="input-field col s12 m6">
+															<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
+															<label for="textarea1">Paste Address*</label>
+															<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
+																<span class="red-text ">*Enter Address.</span>
+															</div>
+														</div>
+														
+													</div>
+												</div>
+												<div class="modal-footer">
+														<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!rowaddressformgroup.valid">Save and Deliver Here</button>
+												</div>
+										</form>
+								</div>
 							<div class="card" *ngIf="address">
 								<div class="card-content">
 										{{address.address}}, {{address.city}}, {{address.state}}, {{address.pin}}	

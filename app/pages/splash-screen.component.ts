@@ -36,7 +36,7 @@ declare var window: any;
             bottom: 0;
             left: 0;
             z-index: 9999; 
-            background: #ff6a00;
+            background: #ffe2cd;
         }
         .mid-btns{
             
@@ -79,7 +79,7 @@ export class SplashScreenComponent implements OnInit {
 
     ngOnInit() {
         
-        var width = $(window).width(); 
+        var width = $(window).width() + 17; 
         if(width > 767)
         {
             this.router.navigate(['/home']);
@@ -194,7 +194,7 @@ export class SplashScreenComponent implements OnInit {
                 $('.mid-btns').addClass('hide'); 
                 $(".splash-screen img").fadeIn()
                 .css({top:'0',position:'absolute'})
-                .animate({top:'-100%'}, 1600, function() {});
+                .animate({top:'-100%'}, 1600, function() {}).promise().done(function(){alert('end')});
             }, 1000); 
         });     
         `;

@@ -208,7 +208,7 @@ export class MobileHomeComponent implements OnInit {
     script.text = `
       $(document).ready(function(){
         var product = $('.product-slider').lightSlider({
-          item: 1,
+          item: ($(window).width() < 350)? 1 : 2,
           auto: false,
           pauseOnHover: true,
           loop: true,
@@ -216,7 +216,22 @@ export class MobileHomeComponent implements OnInit {
           keyPress: true,
           controls: true,
           pager: false,
-          enableDrag: true
+          enableDrag: true,
+          responsive: [
+            
+            {
+              breakpoint:450,
+              settings: {
+                item:2
+              }
+            },
+            {
+              breakpoint:350,
+              settings: {
+                item:1
+              }
+            }
+            ]
         });
       });
       $('select').material_select(); 
@@ -398,7 +413,7 @@ export class MobileHomeComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('.mobile-slider').lightSlider({
-        item: 1,
+        item: ($(window).width() < 350)? 1 : 2,
         auto: true,
         slideMove: 1,
         loop: true,
@@ -412,7 +427,21 @@ export class MobileHomeComponent implements OnInit {
         galleryMargin: 5,
         thumbMargin: 5,
         currentPagerPosition: 'middle',
-        responsive : [],
+        responsive: [
+            
+          {
+            breakpoint:450,
+            settings: {
+              item:2
+            }
+          },
+          {
+            breakpoint:350,
+            settings: {
+              item:1
+            }
+          }
+          ],
         onSliderLoad : function()
         {
           $('.mobile-slider li').css('display','block');
@@ -435,7 +464,7 @@ export class MobileHomeComponent implements OnInit {
     script.text = `
     $(document).ready(function(){
       $('#bottom-slider').lightSlider({
-        item: 1,
+        item: ($(window).width() < 350)? 1 : 2,
         speed : 1200,
         pause : 5000,
         loop:true,
@@ -447,6 +476,21 @@ export class MobileHomeComponent implements OnInit {
         gallery: false,
         thumbMargin: 5,
         currentPagerPosition: 'middle',
+        responsive: [
+            
+          {
+            breakpoint:450,
+            settings: {
+              item:2
+            }
+          },
+          {
+            breakpoint:350,
+            settings: {
+              item:1
+            }
+          }
+          ]
     });
     })
       `;

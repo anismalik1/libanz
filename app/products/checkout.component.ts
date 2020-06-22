@@ -17,6 +17,7 @@ export class CheckoutComponent implements OnInit{
   myControl = new FormControl();
   addressformgroup : FormGroup;
   regaddressformgroup : FormGroup;
+  rowaddressformgroup : FormGroup;
   addresses : any ;
   only_address :number = 0 ;
   state : string ; 
@@ -64,6 +65,9 @@ constructor( public todoservice : TodoService,
     this.regaddressformgroup = fb.group({
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
       'pincode' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{6}")])],
+    });
+    this.rowaddressformgroup = fb.group({
+      'row_address' : [null,Validators.compose([Validators.required])],
     });
    }
 ngOnInit() {
@@ -456,6 +460,7 @@ change_addr_form(section)
   if(section == 'reg-address')
     this.reg_address = 1;
   $('#add-new-address').hide();
+  $('#add-row-address').hide();
   $('#reg-address').hide();
   $('#'+section).show();
 }
@@ -473,8 +478,6 @@ reg_addr(formdata)
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           this.address = data.address;
@@ -589,8 +592,6 @@ checkout_items(type)
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           if(data.status == true)
