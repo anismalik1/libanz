@@ -4457,7 +4457,7 @@ background: #ff6a00;
 
 .mobile-header-right span.noti-circle {width: 22px;height: 22px;background: #fff;display: block;color: #000;border-radius: 50%;line-height: 22px;position: absolute;top: -7px;right: -24px;text-align: center;font-size: 12px;font-weight: bold;}
 .mobile-header-right ul li{ margin-right:40px; cursor:pointer} 
-.mobile-top-menu {height:70px; z-index: 9;background: #fff;font-size: 12px;margin: -42px 12px 14px 11px;border-radius: 16px;box-shadow: 0 2px 3px 0px #dcdcdc;}
+.mobile-top-menu {height:70px; z-index: 9;background: #fff;font-size: 12px;margin: -42px 9px 14px 8px;border-radius: 16px;box-shadow: 0 2px 3px 0px #dcdcdc;}
 .mobile-top-menu #mobile-dashboard-menus li{display:inline-block;width:24%;text-align:center;}
 .mobile-top-menu #mobile-dashboard-menus li a{color: #000;padding: 8px 0;display: block;} 
 .mobile-top-menu #mobile-dashboard-menus li a span{display: block;background: #ff6a00;width: 31px;color: #ffff;border-radius: 50%;margin: 0 auto 8px auto;padding: 5px;}
@@ -4552,7 +4552,7 @@ ul#product-pack li{width:33.333%;}
 body{padding-bottom: 80px;}
 .mobile-footer {
     display: block;
-	margin-top: 30px;
+	margin-top:0px;
     margin-bottom: 0px !important;
 }
 .on-web{display:none;}	
@@ -6396,7 +6396,7 @@ div#login-page-otps input {
     margin-top: 5px;
 }
 .space-fix-bottom {
-    height: 62vh;
+    height: 56vh;
 }
 
 .free-txt{
