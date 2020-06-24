@@ -87,6 +87,12 @@ export class ProductDetailsComponent implements OnInit{
     if(width < 767)
     {
       let uri = this.route.url.replace('product','product/amp');
+      if(this.todoservice.get_param('month'))
+      {
+        this.month = Number(this.todoservice.get_param('month'));
+        this.route.navigate([uri.split("?")[0]],{queryParams: {month: this.month}});
+        return false;
+      }   
       this.route.navigate([uri]);
       return false;
     }

@@ -201,7 +201,7 @@ span.icon-locate {
 									<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() != true">Add Address</label>
 									
 									<input class="with-gap" name="client_address" type="radio" value="row-address"  id="address-row" (change)="change_addr_form('add-row-address')">
-									<label for="address-row" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">Add Row Address</label>
+									<label for="address-row" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">Paste Address</label>
 									<span *ngIf="this.productservice.is_mboss_enable()">
 											<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
 											<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
@@ -310,6 +310,7 @@ span.icon-locate {
 															<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
 																<span class="red-text ">*Enter Address.</span>
 															</div>
+															<span class="red-text">Please include phone number, pincode in address.</span>
 														</div>
 														
 													</div>

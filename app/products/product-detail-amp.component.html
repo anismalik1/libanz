@@ -549,7 +549,7 @@ ul#dropdown1 li {
                  <div>
                      <div class="subtotal">
                          <div *ngIf="product && ( kit == 2 || kit == 3) ; then kitblock else nokitblock"></div>
-                         <p class="inline-block">Product :</p>
+                         <p class="inline-block" *ngIf="product">{{product.title}}</p>
                          <ng-template #kitblock>
                              <p class="inline-block right font-size-change green-text" *ngIf="product && kit == 2"> <i class="icon-inr"></i> {{product.offer_price}}</p>
                              <p class="inline-block right font-size-change green-text" *ngIf="product && kit == 3"> <i class="icon-inr"></i> {{product.price - 1000}}</p>

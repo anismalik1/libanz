@@ -1,6 +1,6 @@
-import { Component, OnInit,ViewChild ,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit ,Renderer2,Inject} from '@angular/core';
 import {Location} from '@angular/common';
-import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms'; 
+import { FormBuilder } from '@angular/forms'; 
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {Meta,Title } from "@angular/platform-browser";
 import { DOCUMENT} from "@angular/common";
@@ -8,7 +8,6 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Params } from '../shared/config/params.service';
 import { Observable} from 'rxjs';
-import { map, startWith} from 'rxjs/operators';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
@@ -91,6 +90,10 @@ export class MobileHomeComponent implements OnInit {
    }
 
   ngOnInit() {
+    let packageName = 'mydth.app';
+    $.get("https://play.google.com/store/apps/details?id=" + packageName + "&hl=en", function(data){
+        console.log($('<div/>').html(data).contents().find('div[itemprop="softwareVersion"]').text().trim());
+    });
     if(this.todoservice.get_param('ref'))
     {
       let ref : any = this.todoservice.get_param('ref');
@@ -231,7 +234,7 @@ export class MobileHomeComponent implements OnInit {
               }
             },
             {
-              breakpoint:380,
+              breakpoint:420,
               settings: {
                 item:1
               }
@@ -446,7 +449,7 @@ export class MobileHomeComponent implements OnInit {
             }
           },
           {
-            breakpoint:380,
+            breakpoint:420,
             settings: {
               item:1
             }
@@ -501,7 +504,7 @@ export class MobileHomeComponent implements OnInit {
             }
           },
           {
-            breakpoint:380,
+            breakpoint:420,
             settings: {
               item:1
             }

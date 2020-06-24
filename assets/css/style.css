@@ -2031,7 +2031,6 @@ input[type=number]::-webkit-outer-spin-button {
 .mat-select-arrow {
 	width: 25px !important;
 	height: 25px !important;
-	opacity: 0 !important;
 	border-left: none !important;
 	border-right: none !important;
 	border-top: none !important;

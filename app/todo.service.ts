@@ -1023,4 +1023,9 @@ export class TodoService {
     return this.send_post_request(data,url) ;
   }
 
+  get_circles(data)
+  {
+    let url = this.server_url+'accounts/apis/home/get_circles';
+    return this.send_post_request(data,url) ;
+  }
 }

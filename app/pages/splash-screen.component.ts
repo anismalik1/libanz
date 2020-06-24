@@ -194,7 +194,7 @@ export class SplashScreenComponent implements OnInit {
                 $('.mid-btns').addClass('hide'); 
                 $(".splash-screen img").fadeIn()
                 .css({top:'0',position:'absolute'})
-                .animate({top:'-100%'}, 1600, function() {}).promise().done(function(){alert('end')});
+                .animate({top:'-100%'}, 1600, function() {});
             }, 1000); 
         });     
         `;

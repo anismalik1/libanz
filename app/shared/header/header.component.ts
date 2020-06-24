@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit{
   form: FormGroup;
   disabled : boolean = false;
   private watch  : Number = 0;
+  circles : any;
   remember : any = {rm:false,ph:'',pw : ''};
     private token_params : Authparams;
     public phone : number;
@@ -59,6 +60,7 @@ export class HeaderComponent implements OnInit{
   filterdList : boolean = false;
   valid_for_bonus : boolean= false;
   _bonus_text : any ;
+  region : any;
   constructor(
     private _renderer2: Renderer2,  
     @Inject(DOCUMENT) private _document,  
@@ -145,9 +147,25 @@ export class HeaderComponent implements OnInit{
       this.todoservice.get_user_data();
       this.user_notification(this.start);
       this.user_favourites();
-      
+      this.get_circles();
+      this.region = this.productservice.get_region();
     }  
 
+    circle_selected(circle)
+    {
+      this.region = circle;
+      this.productservice.set_region(circle);
+    }
+    get_circles()
+    {
+      this.todoservice.get_circles({})
+      .subscribe(
+        data => 
+        {
+          this.circles = data.CIRCLES;
+        }
+      )
+    }
     check_device()
     {
       if(document.URL.indexOf('android_asset') !== -1)

@@ -483,6 +483,18 @@ li.txt-fix-mb span a {
 			<div class="container">
 				<div class="strip-right-text left google-translater">
 					<div id="google_translate_element"></div>
+					
+				</div>
+				<div class="no-padding left" *ngIf="circles"> 
+					<mat-form-field>
+						<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)" style="padding-left:5px;">
+							<span *ngFor="let item of circles;">
+								<mat-option [value]="item.circle_id" >
+									<span class="operator-name">{{ item.name }}</span>
+								</mat-option>
+							</span> 
+						</mat-select>
+					</mat-form-field>
 				</div>
 				<div class="strip-right-text right">
 					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
