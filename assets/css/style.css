@@ -6796,5 +6796,10 @@ ul.inr-txt li a {
 .recommended-slider a.lSNext {
     top: 43%;
 }
+
+.product-btn {
+    float: left;
+}
+
 }
 .location-wrapper{margin-left: 10px;}
