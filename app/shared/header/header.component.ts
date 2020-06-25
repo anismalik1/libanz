@@ -148,13 +148,30 @@ export class HeaderComponent implements OnInit{
       this.user_notification(this.start);
       this.user_favourites();
       this.get_circles();
-      this.region = this.productservice.get_region();
     }  
+
+    region_selected()
+    {
+      if( localStorage.getItem('region') != null )
+      {
+        return JSON.parse(localStorage.getItem('region'));
+      }
+      return 0;
+    }
 
     circle_selected(circle)
     {
       this.region = circle;
       this.productservice.set_region(circle);
+     let url = window.location.pathname;
+      if(url == url)
+      {
+        this.router.routeReuseStrategy.shouldReuseRoute = function(){
+          return false;
+        }
+      this.router.navigated = false;
+      this.router.navigate([this.href]);
+    }  
     }
     get_circles()
     {

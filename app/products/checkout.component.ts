@@ -68,6 +68,7 @@ constructor( public todoservice : TodoService,
     });
     this.rowaddressformgroup = fb.group({
       'row_address' : [null,Validators.compose([Validators.required])],
+      'state' : [null,Validators.compose([Validators.required])]
     });
    }
 ngOnInit() {
@@ -92,6 +93,7 @@ ngOnInit() {
   {
     this.region = this.productservice.get_region();
     this.addressformgroup.controls['state'].setValue(this.region);
+    this.rowaddressformgroup.controls['state'].setValue(this.region);
   }
   if(this.todoservice.get_param('pincode'))
   {
@@ -315,7 +317,8 @@ cod_apply()
 }
 changeState(state)
 {
-  this.state = state;
+  this.region = state;
+  this.productservice.set_region(state);
 }
 
 get_checkout_data()
@@ -580,6 +583,8 @@ checkout_items(type)
   let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
   if($('#wallet-type [name="include_wallet"]:checked').length > 0)
     data.include_wallet = 1;
+  if(this.region)
+    data.region = this.region;  
   if(this.calculate_bonus() > 0)
     data.bonus = 1;   
   this.todoservice.checkout_items(data)

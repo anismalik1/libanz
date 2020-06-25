@@ -244,18 +244,19 @@ span.icon-locate {
 															<div class="input-field col s12 m6">
 																<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
 																<label for="city">City/District/Town*</label>
-																<div cl	ass="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
+																<div class="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
 																	<span class="red-text ">*City is Required.</span>
 																</div>
 															</div>
 															<div class="input-field col s12 m6 b-fix-top">
-																  
 																<mat-form-field>
-																	<span class="icon-locate"><i class="material-icons" >location_on</i> </span>	<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
-																		<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
-																	</mat-select>
+																	<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
+																		<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
+																			<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																		</mat-select>
 																</mat-form-field>
 															</div>
+															
 														</div>
 														<div class="row no-margin">
 															<div class="input-field col s12 add-fix">
@@ -286,7 +287,7 @@ span.icon-locate {
 														</div>
 														<div class="input-field col s12 m6">
 															<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
-															<label for="pincode-reg" >Pincode*</label>
+															<label for="pincode-reg" [className]="(this.pincode)?'active':''">Pincode*</label>
 															<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
 																<span class="red-text ">*Enter a Valid Pincode.</span>
 															</div>
@@ -301,9 +302,18 @@ span.icon-locate {
 									</form>
 							</div>
 							<div class="add-row-address" id="add-row-address" style="display:none;">
-									<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
+										
+								<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
 											<div class="modal-content no-padding">
 													<div class="row no-margin">
+															<div class="input-field col s12 m6 b-fix-top">
+																	<mat-form-field>
+																		<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
+																			<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" formControlName="state" >
+																				<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																			</mat-select>
+																	</mat-form-field>
+																</div>
 														<div class="input-field col s12 m6">
 															<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
 															<label for="textarea1">Paste Address*</label>

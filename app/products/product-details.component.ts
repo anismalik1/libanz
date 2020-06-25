@@ -410,13 +410,12 @@ export class ProductDetailsComponent implements OnInit{
 	{
     this.channel_display = 0; 
       this.spinner.show();
-      if(this.productservice.get_region())
+		  let data : any = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month};
+      if( this.region_selected())
       {
-        this.region = this.productservice.get_region();
-      } 
-      //console.log(this.month)
-		  let data = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month,region: this.region};
-		  this.productservice.fetch_product_data(data)
+        data.region = this.region_selected();
+      }
+      this.productservice.fetch_product_data(data)
 		  .subscribe(
 			data => 
 			{
@@ -435,16 +434,7 @@ export class ProductDetailsComponent implements OnInit{
         {
           let user_cashback = this.check_cashback(data.cashback);
           //console.log(user_cashback);
-          if(this.product.category_id == 1)
-          {
-             this.product.partnerwalletamount = user_cashback[0].wallet_tsk_2;
-             cashback_data = {cashback_wallet : user_cashback[0].wallet_tsk_2,cashback_cod : user_cashback[0].cod_tsk_2};
-          }
-          else
-          {
-            this.product.partnerwalletamount = user_cashback[0].amount;
-            cashback_data = {cashback_wallet : user_cashback[0].amount,cashback_cod : user_cashback[0].cod_commission};
-          }
+          this.product.partnerwalletamount = user_cashback[0].amount;
         }
         else
         {
@@ -452,15 +442,12 @@ export class ProductDetailsComponent implements OnInit{
           if(this.todoservice.get_user_type() == 2)
           {
             this.product.partnerwalletamount = data.PRODUCTDATA.partner_cashback_wallet;
-            cashback_data = {cashback_wallet : data.PRODUCTDATA.partner_cashback_wallet,cashback_cod : data.PRODUCTDATA.partner_cashback_cod};
           }
           else
           {
             this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet;
-            cashback_data = {cashback_wallet : data.PRODUCTDATA.user_cashback_wallet,cashback_cod : data.PRODUCTDATA.user_cashback_cod};
           }
         }
-        this.product.partnerwalletamount = cashback_data.cashback_wallet;
         this.product.cashback_data = cashback_data;
         this.circles = data.circles;
         if(data.PROMOS && data.PROMOS.length > 0)
@@ -687,16 +674,33 @@ export class ProductDetailsComponent implements OnInit{
   }
   circle_selected(circle)
   {
-    this.region = circle;
     this.productservice.set_region(circle);
-    this.todoservice.channel_category_by_circle({circle:circle,packages: this.product.channel_packages,month: this.month})
-    .subscribe(
-    data => 
+    let url = window.location.pathname;
+      if(url == url)
+      {
+        this.route.routeReuseStrategy.shouldReuseRoute = function(){
+          return false;
+        }
+      this.route.navigated = false;
+      this.route.navigate([url],{queryParams: {month: this.month}});
+      }  
+    // this.todoservice.channel_category_by_circle({circle:circle,packages: this.product.channel_packages,month: this.month})
+    // .subscribe(
+    // data => 
+    // {
+    //   this.channels_packs = data.package;
+    //   this.filter_channel_subpack();
+    // }
+    // ) 
+  }
+  
+  region_selected()
+  {
+    if( localStorage.getItem('region') != null )
     {
-      this.channels_packs = data.package;
-      this.filter_channel_subpack();
+      return JSON.parse(localStorage.getItem('region'));
     }
-    ) 
+    return 0;
   }
 
   product_categories()

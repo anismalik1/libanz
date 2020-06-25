@@ -196,7 +196,7 @@ export class ProductService {
     {
       return JSON.parse(localStorage.getItem('region'));
     }
-    return false;
+    return 0;
   }
   cartItemsCount() 
   {

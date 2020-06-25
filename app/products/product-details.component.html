@@ -371,7 +371,7 @@ font-size: 10px;
 							<li>
 								<div class="no-padding" *ngIf="circles"> 
 									<mat-form-field>
-										<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)" style="padding-left:5px;">
+										<mat-select placeholder="Circle Area" [value]="this.region_selected()" (selectionChange)="circle_selected($event.value)" style="padding-left:5px;">
 											<span *ngFor="let item of circles;">
 												<mat-option [value]="item.circle_id" >
 													<span class="operator-name">{{ item.name }}</span>
