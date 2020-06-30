@@ -120,7 +120,6 @@ export class SplashScreenComponent implements OnInit {
                 let response = $.parseJSON(data['_body'])
                 if(response.version)
                 {
-                    this.updated_version = response.version;
                     window.me = this;
                     window.appversion = response.version;
                     if(document.URL.indexOf('android_asset') !== -1)

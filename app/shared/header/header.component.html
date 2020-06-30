@@ -367,10 +367,10 @@ li.txt-fix-mb span a {
 			</div>
 			<div class="side-menu-body">
 				<div class="login-section" >
-				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">	
-						<li><a routerLink="/proceed/signup"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
+				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">
+						<li *ngIf="valid_for_bonus"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up</a>	</li>	
+						<li *ngIf="!valid_for_bonus"><a routerLink="/proceed/signup"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						<li><a routerLink="/proceed/login"><span class="fa fa-lock pt-right-fix"></span>Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
-						
 						<li><a routerLink="/reviews/testimonials" class="font-size-change"><span class="fa fa-sitemap pt-right-fix"></span>Testimonial  <span class="fa fa-chevron-right cs-right"></span></a></li>
 				</ul>
 				<div class="phone-pay-icon dropdown-list-cst">	

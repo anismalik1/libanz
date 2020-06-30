@@ -6703,17 +6703,14 @@ ul.inr-txt li a {
 	min-height:300px;
 }
 
-
-@media screen and (orientation:landscape) {
-	.shadow-box img{
-    border-radius: 10px;
-    height: 155px;
+.shadow-box img{
+	border-radius: 10px;
+	height: 155px;
 	width:100%;
-   
 }
+@media screen and (orientation:landscape) {
 .product-image {
     height: 185px;
-    width: 100vw !important;
     background-color: #fff;
     border-radius: 10px;
 }

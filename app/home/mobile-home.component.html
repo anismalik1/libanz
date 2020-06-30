@@ -493,7 +493,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="product-slider">
 			<li *ngFor="let item of tata_slides" class="product-list-{{item.id}}">
 				<div class="row no-margin 1">
-					<div class="col s12 m4 list-{{item.id}}" >
+					<div class="col s12 m12 list-{{item.id}}" >
 					<div class="product-image down-mode">
 					
 						<div class="row" style="margin-bottom:10px;">
@@ -537,7 +537,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<ul class="product-slider">
 				<li *ngFor="let item of dishtv_slides">
 					<div class="row no-margin 1">
-						<div class="col s12 m4 list-{{item.id}}" >
+						<div class="col s12 m12 list-{{item.id}}" >
 						<div class="product-image">
 							<div class="row" style="margin-bottom:10px;">
 								<div class="col s10">
@@ -580,7 +580,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="product-slider">
 			<li *ngFor="let item of airtel_slides">
 				<div class="row no-margin 1">
-					<div class="col s12 m4 list-{{item.id}}" >
+					<div class="col s12 m12 list-{{item.id}}" >
 					<div class="product-image">
 					
 						<div class="row" style="margin-bottom:10px;">
@@ -624,7 +624,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 				<li *ngFor="let item of videcone_slides">
 					<div class="row no-margin 1">
 						
-						<div class="col s12 m4 list-{{item.id}}" >
+						<div class="col s12 m12 list-{{item.id}}" >
 						<div class="product-image">
 						
 							<div class="row" style="margin-bottom:10px;">
@@ -667,12 +667,9 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<div class="bottom-slider-dot footer-slide">
 		<ul class="bottom-slider " id="bottom-slider">
 			<li *ngFor="let banner of this.bottombanners">
-				<div class="col m12 s12">
-					<div class="shadow-box">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
-					</div>
+				<div class="shadow-box">
+					<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
 				</div>
-				
 			</li>
 		</ul>
 	</div>

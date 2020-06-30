@@ -23,11 +23,29 @@ export class ProductService {
   public cartItems: number = 0;
   public cart_items : Item[] = [];
   cod_invalid = false; 
+  options : any;
   constructor(private http : Http, private router : Router )
   {
     this.loadCart();
   } 
- 
+  get_user_product_amount()
+  {
+    if(this.get_user() != null)
+      return Number(this.get_user().product_bonus_wallet.replace(/\,/g,""));
+    else
+      return 0;
+  }
+  get_user()
+  {
+    //return this.user.storage;
+    let data = JSON.parse(localStorage.getItem('app_token'));
+    if(data != null)
+    {
+      //console.log(this.user)
+      return data.user; 
+    } 
+    return null; 
+  }
   is_mboss_enable()
   {
     let airtel_all : number = 0; 
@@ -254,32 +272,32 @@ export class ProductService {
     }
     for(var i =0;i< Object.keys(cart).length;i++)
     {
+      var product_amount : number = 0; 
       let item :Item = JSON.parse(cart[i]);
-      amount += item.product.offer_price* 1;
+      product_amount = item.product.offer_price* 1;
       if(item.product.multi == 1)
       {
         if(item.product.pack_selected[0])
-        amount += Number(item.product.pack_selected[0].multi_price);
+        product_amount += Number(item.product.pack_selected[0].multi_price);
         if(item.product.pack_selected[1])
-          amount += Number(item.product.pack_selected[1].multi_price);
+        product_amount += Number(item.product.pack_selected[1].multi_price);
       }
       else
       {
         if(item.product.pack_selected[0])
-        amount += Number(item.product.pack_selected[0].price);
+        product_amount += Number(item.product.pack_selected[0].price);
         if(item.product.pack_selected[1])
-          amount += Number(item.product.pack_selected[1].price);
+        product_amount += Number(item.product.pack_selected[1].price);
       }
       if(item.product.promos)
       {
         if(item.product.promos.discount <= item.product.promos.max_discount)
         {
-          amount = amount - Number(item.product.promos.discount);
+          product_amount = product_amount - Number(item.product.promos.discount);
         }
       } 
-      // if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
-      //   amount = amount - item.product.partnerwalletamount;
-      amount = amount * item.quantity
+      product_amount = product_amount * item.quantity;
+      amount += product_amount;
     }
     return amount; 
   }
@@ -383,10 +401,11 @@ export class ProductService {
   {
     var item : Item = {
       product   : this.product,
-      quantity  : 1 
+      quantity  : 1
     };
     let cart :any = JSON.parse(localStorage.getItem('cart'));
     let index : number = -1;
+    
     for(var i =0;i< Object.keys(cart).length;i++)
     {
       let item :Item = JSON.parse(cart[i]);
@@ -429,7 +448,7 @@ export class ProductService {
   {
     var item : Item = {
       product   : this.product,
-      quantity  : 1 
+      quantity  : 1
     };
     if(!id)
     {

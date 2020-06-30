@@ -305,19 +305,15 @@ ul#dropdown1 li {
 							<span class="font-size-change1 font600 grey-text">Pincode</span>
 						</li>
 						<li>
-							<input type="text" style="width:180px" name="pincode" placeholder="Pincode" value="{{this.pincode}}" [disabled]="this.pincode" >
+							<input type="text" style="width:180px" name="pincode" maxlength="6" placeholder="Pincode" value="{{this.pincode}}" [disabled]="this.pincode" >
 						</li>
 					</ul>
 					<div class="clearfix"></div> 
                   	<ul class="monthly-packages" id="monthly-packages" *ngIf="multienable">
 						<li>
-							<span class="font-size-change1 font600 grey-text">Multi</span>
+							<span class="font-size-change1 font600 grey-text">Subscriber Id</span>
 						</li>
 						<li>
-							<input id="multi-enable" type="checkbox" (change)="tick_multi()" [checked]="multienable" disabled>
-							<label for="multi-enable"></label>
-						</li>
-						<li *ngIf="multienable">
 							<input type="text" style="width:180px" name="subscriber_id" placeholder="Subscriber Id OR Phone No">
 						</li>
 					</ul>
@@ -604,18 +600,11 @@ ul#dropdown1 li {
 					 
 					</div>
                 
-                 <div class="subtotal inline-block">
-                     <a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-                     
-                  
-                     <!-- <a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" >Checkout </a> -->
-				 </div>	
-						 
-				 
-				 <div class="right-btn">
-					<a href="javascript:" class="btn orange round-btmobile " *ngIf="multienable || fta_pack.price == 0" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
-					<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile fix-right-mb" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i> BUY NOW</a>
-				</div>
+					<div class="subtotal inline-block right-btn">
+						<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
+						<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
+						<a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
+					</div>
 			 </div>
 			
          </div>

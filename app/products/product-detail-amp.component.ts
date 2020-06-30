@@ -669,6 +669,18 @@ export class ProductDetailAmpComponent implements OnInit {
 
   buyNow(p_id)
   {
+    if(!this.get_token())
+    {
+      var width = $(window).width(); 
+      if(width < 767)
+      {
+        this.open_model();
+        return false;
+      }
+      $('.logup.modal-trigger')[0].click();
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
+      return false;
+    }
     if($('[name="pincode"]').length > 0)
     {
       var pincode =  $('[name="pincode"]').val();
@@ -684,10 +696,10 @@ export class ProductDetailAmpComponent implements OnInit {
       this.product.pincode = pincode;
       this.productservice.set_pincode(pincode);
     }
-    
 
     if(this.multienable)
     {
+      
       var sub_id =  $('[name="subscriber_id"]').val();
       if(sub_id == null || sub_id == '')
       {
@@ -725,18 +737,7 @@ export class ProductDetailAmpComponent implements OnInit {
       this.product.month_pack = this.month;
     } 
 
-    if(!this.get_token())
-    {
-      var width = $(window).width(); 
-      if(width < 767)
-      {
-        this.open_model();
-        return false;
-      }
-      $('.logup.modal-trigger')[0].click();
-      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
-    }
+    
     if(!this.productservice.if_exist_in_cart(p_id))
     {
       this.productservice.addto_cart(p_id,this.product);

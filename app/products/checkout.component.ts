@@ -4,6 +4,7 @@ import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
+import { Headers,Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
@@ -46,6 +47,7 @@ export class CheckoutComponent implements OnInit{
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
+  private http: Http, 
   private productservice : ProductService,
   private authservice : AuthService,
   private spinner : NgxSpinnerService,
@@ -250,6 +252,7 @@ check_wallet_content()
     this.checkbox_text.no_input = true;
   }
 }
+
 fetch_options()
 {
   this.todoservice.fetch_product_options({token : this.get_token()})
@@ -261,14 +264,31 @@ fetch_options()
   )
 }
 
-check_bonus(index,amount)
+bonus_quantity(index)
 {
-  index = index + 1;
-  if(this.options && amount >= this.options.apply_minimum_product && this.todoservice.get_user_product_amount() >= index * this.options.how_much_apply_to_product)
+  index = index;
+  var $userwallet = this.todoservice.get_user_product_amount();
+  for(var i = 0; i < this.productservice.cart_items.length;i++)
   {
-    return true;
-  }
-  return false;
+    var bonus_amount : number = 0;
+    if(this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product)
+    {
+      for(var j=0;j<this.productservice.cart_items[i].quantity;j++)
+      {
+        if( $userwallet * 1 >= this.options.how_much_apply_to_product)
+        {
+          $userwallet = $userwallet * 1 -  1 * this.options.how_much_apply_to_product;
+          bonus_amount = bonus_amount + this.options.how_much_apply_to_product * 1;
+        }
+      }
+      if(index == i)
+      {
+        var inx = (bonus_amount * 1) / (1 * this.options.how_much_apply_to_product);
+        return inx
+      }
+    }
+  } 
+  return 0;
 }
 
 calculate_bonus()
@@ -279,12 +299,18 @@ calculate_bonus()
     var $userwallet = this.todoservice.get_user_product_amount();
     for(var i = 0; i < this.productservice.cart_items.length;i++)
     {
-      if( this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product && $userwallet * 1 >= this.options.how_much_apply_to_product)
+      if(this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product)
       {
-        $userwallet = $userwallet * 1 -  1 * this.options.how_much_apply_to_product;
-        amount = amount + this.options.how_much_apply_to_product * 1;
+        for(var j=0;j<this.productservice.cart_items[i].quantity;j++)
+        {
+          if( $userwallet * 1 >= this.options.how_much_apply_to_product)
+          {
+            $userwallet = $userwallet * 1 -  1 * this.options.how_much_apply_to_product;
+            amount = amount + this.options.how_much_apply_to_product * 1;
+          }
+        }
       }
-    }
+     }
   }
   return amount;
 }
@@ -315,6 +341,7 @@ cod_apply()
     a = 2;
   } 
 }
+
 changeState(state)
 {
   this.region = state;
@@ -332,21 +359,16 @@ get_checkout_data()
     .subscribe(
       data => 
       {
+        this.app_version();
         if(data.status == 'Invalid Token')
         {                                                     
           this.authservice.clear_session();
           this.router.navigate(['/home']);
         }
-        if(data.OTFMARGIN)
-        {
-          this.otf_margin = data.OTFMARGIN;
-        }
         if(data.CIRCLES)
         {
           this.circles = data.CIRCLES;
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           this.addresses = data.ADDRESSES;
@@ -384,8 +406,6 @@ remove_address(id)
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           this.addresses = data.ADDRESSES;
@@ -414,8 +434,6 @@ edit_address(id)
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           this.edit = true;
@@ -443,8 +461,6 @@ edit_addr(form)
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
           this.addresses = data.ADDRESSES;
@@ -506,8 +522,6 @@ add_new_addr(form)
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
         }
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         if(!jQuery.isEmptyObject(data))
         {
            this.address = data.added_address; 
@@ -557,30 +571,30 @@ goto_address()
 
 checkout_items(type)
 {
-  // if(type == 2)
-  // {
-  //   let otf_pay : boolean = false; 
-  //   let count = 0;
-  //   this.otfquantity = 0;
-  //   this.productservice.cart_items.forEach( item => {
-  //     if(item.product.tsk_kit == 3)
-  //     {
-  //       otf_pay = true;
-  //       count++; 
-  //       this.otfquantity++;
-  //     }
-  //   });
-  //  if($('[name="wallet_type"]:checked').val() == 'cod' && count > 0 && this.otf_margin.option_value > 0)
-  //   {
-  //    $('#kit-modal-a').click()
-  //     return false;
-  //   }
-  // }
-
   this.spinner.show();
-  let address_id = this.tab_address
+  if(this.tab_address)
+    var address_id = this.tab_address;
   let wallet_type = $('#wallet-type input[type="radio"]:checked').val();
-  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, products : this.productservice.cart_items,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount(),tsk_pay : this.tsk_pay};
+  let p_data : any = [];
+  for(var i = 0;i < this.productservice.cart_items.length;i++)
+  {
+    let pkarr = [];
+    for(var j = 0;j < this.productservice.cart_items[i].product.pack_selected.length;j++)
+    {
+      pkarr.push(this.productservice.cart_items[i].product.pack_selected[j].p_id);
+    }
+    let arr = {p_id : this.productservice.cart_items[i].product.id,pk : pkarr,qty: this.productservice.cart_items[i].quantity }
+    if(this.productservice.cart_items[i].product.promos)
+      arr['pr_id'] = this.productservice.cart_items[i].product.promos.id;
+    if(this.productservice.cart_items[i].product.month_pack)
+      arr['month_pack'] = this.productservice.cart_items[i].product.month_pack;
+    if(this.productservice.cart_items[i].product.pincode)
+      arr['pincode'] = this.productservice.cart_items[i].product.pincode;
+    if(this.productservice.cart_items[i].product.subscriber_id)
+      arr['subscriber_id'] = this.productservice.cart_items[i].product.subscriber_id;      
+    p_data.push(arr);  
+  }
+  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, p_data : p_data,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount()};
   if($('#wallet-type [name="include_wallet"]:checked').length > 0)
     data.include_wallet = 1;
   if(this.region)
@@ -599,6 +613,11 @@ checkout_items(type)
         }
         if(!jQuery.isEmptyObject(data))
         {
+          if(data.error && data.error == 'balance_error')
+          {
+            this.toastr.errorToastr("InSufficient Balance.");
+            return false;
+          }
           if(data.status == true)
           {
             if(typeof data.red_auth != 'undefined' && data.red_auth == 'ptm')
@@ -662,6 +681,50 @@ checkout_items(type)
         
       }
     ) 
+}
+
+app_version()
+{
+    var Headers_of_api = new Headers({
+        'Content-Type' : 'application/x-www-form-urlencoded'
+      });
+    this.http.post('https://www.mydthshop.com/accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
+        data => {
+            let response = $.parseJSON(data['_body'])
+            if(response.version && response.alert == 'on')
+            {
+              if(document.URL.indexOf('android_asset') !== -1)
+              {
+                  if(window.cordova.getAppVersion)
+                  {
+                    window.appversion = response.version;
+                    if(response.app_text)
+                    {
+                      window.apptext = response.app_text;
+                    }
+                    window.cordova.getAppVersion.getVersionCode(function(version){
+                        if(version *1 < window.appversion *1 )
+                        {
+                          setTimeout(()=>{    //<<<---    using ()=> syntax
+                            $('.religon-overlay').show();
+                            if(window.apptext && window.apptext != '')
+                            {
+                              $('.religon-overlay #custom-text').text(window.apptext);
+                            }
+                          }, 1000);
+                        } 
+                    });  
+                  }
+                } 
+            }
+        }
+    )
+  }        
+
+update_application()
+{
+  if(window.cordova)
+    window.cordova.plugins.market.open("mydth.app");
 }
 
 check_for_tsk()

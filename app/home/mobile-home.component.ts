@@ -90,10 +90,6 @@ export class MobileHomeComponent implements OnInit {
    }
 
   ngOnInit() {
-    let packageName = 'mydth.app';
-    $.get("https://play.google.com/store/apps/details?id=" + packageName + "&hl=en", function(data){
-        console.log($('<div/>').html(data).contents().find('div[itemprop="softwareVersion"]').text().trim());
-    });
     if(this.todoservice.get_param('ref'))
     {
       let ref : any = this.todoservice.get_param('ref');
@@ -222,19 +218,19 @@ export class MobileHomeComponent implements OnInit {
           enableDrag: true,
           responsive: [
             {
-              breakpoint:900,
+              breakpoint:1349,
               settings: {
                 item:3
               }
             },
             {
-              breakpoint:700,
+              breakpoint:800,
               settings: {
                 item:2
               }
             },
             {
-              breakpoint:420,
+              breakpoint:500,
               settings: {
                 item:1
               }
@@ -275,12 +271,12 @@ export class MobileHomeComponent implements OnInit {
       this.ratings          = data.rating; 
       this.user_cashback    = data.cashback;
       this.all_products     = data.products;
-      this.calculate_ratings();
-      this.tata_slides      = this.filter_product('tata',data.products); 
-      this.airtel_slides    = this.filter_product('airtel',data.products);  
-      this.dishtv_slides    = this.filter_product('dish',data.products);  
-      this.videcone_slides  = this.filter_product('videocon',data.products); 
-      this.recommended      = this.filter_recommended(data.products); 
+      this.calculate_ratings(); 
+      this.tata_slides        = data.products.filter(x => x.category_id == 1);
+      this.airtel_slides      = data.products.filter(x => x.category_id == 3);
+      this.dishtv_slides      = data.products.filter(x => x.category_id == 4);
+      this.videcone_slides    = data.products.filter(x => x.category_id == 2);
+      //this.recommended      = this.filter_recommended(data.products); 
       this.init_products();
       let product_data : any = { ratings : this.ratings, tata : this.tata_slides,airtel : this.airtel_slides,dish : this.dishtv_slides,videocon : this.videcone_slides} 
       this.todoservice.set_data('p_d',product_data);
@@ -437,19 +433,19 @@ export class MobileHomeComponent implements OnInit {
         currentPagerPosition: 'middle',
         responsive: [
           {
-            breakpoint:900,
+            breakpoint:1349,
             settings: {
               item:3
             }
           },
           {
-            breakpoint:700,
+            breakpoint:800,
             settings: {
               item:2
             }
           },
           {
-            breakpoint:420,
+            breakpoint:500,
             settings: {
               item:1
             }
@@ -488,23 +484,22 @@ export class MobileHomeComponent implements OnInit {
         enableDrag: true,
         pager: true,
         gallery: false,
-        thumbMargin: 5,
         currentPagerPosition: 'middle',
         responsive: [
           {
-            breakpoint:900,
+            breakpoint:1349,
             settings: {
               item:3
             }
           },
           {
-            breakpoint:700,
+            breakpoint:800,
             settings: {
               item:2
             }
           },
           {
-            breakpoint:420,
+            breakpoint:500,
             settings: {
               item:1
             }

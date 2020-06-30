@@ -102,10 +102,6 @@ export class ProductDetailsComponent implements OnInit{
       this.month = Number(this.todoservice.get_param('month'));
     
     this.router.params.subscribe(params => { 
-      if (this.route.url.includes('multi')) 
-      {  
-          this.multienable = true; 
-      }
       this.p_id = params['name']; //log the value of id
       this.fetch_product_data(this.p_id,this.cat_id);
     });
@@ -426,6 +422,10 @@ export class ProductDetailsComponent implements OnInit{
         this.channels_packs = data.package;
         this.fta_pack = {};
         this.product = data.PRODUCTDATA;
+        if (this.product.multi == 1) 
+        {  
+            this.multienable = true;
+        }
         this.recommended = data.RECOMMENDED;
         this.recommended_slider();
         this.filter_channel_subpack();
@@ -753,6 +753,18 @@ export class ProductDetailsComponent implements OnInit{
 
   buyNow(p_id)
   {
+    if(!this.get_token())
+    {
+      var width = $(window).width(); 
+      if(width < 767)
+      {
+        this.open_model();
+        return false;
+      }
+      $('.logup.modal-trigger')[0].click();
+      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
+      return false;
+    }
     if($('[name="pincode"]').length > 0)
     {
       var pincode =  $('[name="pincode"]').val();
@@ -808,19 +820,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       this.product.month_pack = this.month;
     } 
-
-    if(!this.get_token())
-    {
-      var width = $(window).width(); 
-      if(width < 767)
-      {
-        this.open_model();
-        return false;
-      }
-      $('.logup.modal-trigger')[0].click();
-      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
-    }
+    
     if(!this.productservice.if_exist_in_cart(p_id))
     {
       this.productservice.addto_cart(p_id,this.product);

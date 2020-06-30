@@ -149,9 +149,9 @@ span.icon-locate {
 										<span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
 										<!-- <a href="javascript:" (click)="show_coupon(i)">Change</a> -->
 										<span class="font-size-change1 black-text inline-block margin-top-cart">Selected Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
-										<div class="coupon-area" style="display:none;">
-											<input id="coupon-code-{{item.product.id}}" placeholder="Enter Coupon Code" type="text" class="validate">
-										</div>
+										<!-- <div class="subscriber-area" *ngIf="item.product.multi == 1">
+											<input id="subscriber-id-{{item.product.id}}" placeholder="Enter Sbuscriber Id" value="{{item.product.subscriber_id}}" type="text" class="validate">
+										</div> -->
 									</div>
         					<!-- <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.quantity*(item.product.price -1000)}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span> -->
         					<!-- <br> -->
@@ -377,7 +377,7 @@ span.icon-locate {
 								</div>	
 								<!-- <label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>  -->
 										<div class="clearfix"></div>
-										<span class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</span> 
+										<div class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</div> 
 										<!-- <input name="wallet_type" value="wallet" class="with-gap" type="radio" id="wallet" (change)="cod_apply()" checked/>
                   <label for="wallet" class="font-size-change black-text mydth-wallet"> <img src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"> </label> -->
                 </div>
@@ -455,9 +455,9 @@ span.icon-locate {
 							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>								
 							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 						</div> -->
-						<div style="padding-top: 10px;" *ngIf="this.check_bonus(i,item.product.offer_price)">
+						<div style="padding-top: 10px;" *ngIf="this.bonus_quantity(i) > 0">
 								<p class="inline-block grey-text"> Product Bonus Applied :</p>
-								<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
+								<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} x {{bonus_quantity(i)}} </p>
 							</div>	
 				</div>				
 				
@@ -578,6 +578,15 @@ span.icon-locate {
 			</div>
 	</form>
 	</div> -->
+	<div class="religon-overlay"> 
+			<div class="religon-modal center" >
+				<p>
+						<span id="custom-text">Your Application is Outdated. Please update it.</span> 
+				</p>
+				<a class="btn-large orange" style="margin-top: 20px;" href="javascript:" (click)="update_application()">Update Now</a> 
+			</div>
+		</div>
+
       <div id="add-address" class="modal">
             <form class="margin-top location-add1" #addnewaddress = "ngForm" (ngSubmit)="edit_addr(addnewaddress.value)">
         <div class="modal-content no-padding" *ngIf="edit == true">
