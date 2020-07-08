@@ -122,8 +122,7 @@ overflow:hidden !important;
 									<br/>
 									<div style="padding-top: 10px;" *ngFor="let pack of decode_json(order.pack_selected)">
 										<p class="font600 left"> <span class="grey-text font500 pack-title">{{pack.title}} :</span></p>
-										<p class="right font-size-change" *ngIf="!order.title.toLowerCase().includes('multi')"> <i class="icon-inr"></i>{{pack.price}}</p>
-										<p class="right font-size-change" *ngIf="order.title.toLowerCase().includes('multi')"> <i class="icon-inr"></i>{{pack.multi_price}}</p>
+										<p class="right font-size-change"> <i class="icon-inr"></i>{{pack.price}}</p>
 										<div class="clearfix"></div>
 									</div>
 									<div style="padding-top: 10px;" *ngIf="order.promo_cashback && order.promo_cashback > 0">
@@ -135,10 +134,14 @@ overflow:hidden !important;
 										<p class="inline-block grey-text">Product Bonus Amount :</p>
 										<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> -{{order.bonus_amount}} </p>
 									</div>
+									<div style="padding-top: 10px;" *ngIf="order.commission_surcharge && to_number(order.commission_surcharge) > 0">
+										<p class="inline-block grey-text">Got Extra Cashback :</p>
+										<p class="inline-block green-text right font-size-change"> <i class="icon-inr"></i> {{-1 * order.commission_surcharge}} </p>
+									</div>
 									<div class="row no-margin border-on-bottom"></div>
 									<div style="padding-top: 10px;">
 										<p class="inline-block grey-text">Amount Payable :</p>
-										<p class="font-size-change right green-text" id="cashback-item"><i class="icon-inr"></i>{{amount_payable(order)}}</p>		
+										<p class="font-size-change right green-text" id="cashback-item"><i class="icon-inr"></i>{{order.grand_total}}</p>		
 									</div>	
 								</div>
 								<div class="center"><span class="card-title margin-top orange-text">Your Order Status is {{order.status}}</span></div>								

@@ -63,14 +63,14 @@ span.icon-locate {
             			<span class="grey-text email1">{{this.todoservice.get_user_email()}}</span>
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
-            			<a href="javascript:" class="btn btn-flat right chngs1">Change</a>
+            			<a href="javascript:" class="btn btn-flat right" (click)="call_change_section('to_login')">Change</a>
             		</div>
             	</div>
             </div>
           </div>
           <!-- End Here -->
           <!-- Address Checkout -->
-        	<div class="row no-margin white login-checkout hide checkout_1">
+        	<div class="row no-margin white login-checkout checkout_1" *ngIf="gosection_data.to_login == true">
         		<div class="col s12 m5 offset-m1">
         			<div class="name margin-top-cart">
         				<span class="inline-block grey-text margin-right">Name</span>
@@ -83,7 +83,7 @@ span.icon-locate {
         			<div class="name margin-top-cart">
         				<a href="javascript:" routerLink="/logout" class="font600">Logout &amp; Sign in to another account</a>
         			</div>
-        			<button class="btn waves-effect waves-light orange margin-top" type="Submit" (click)="goto_orders()">PROCEED</button>
+        			<button class="btn waves-effect waves-light orange margin-top" type="Submit" (click)="call_change_section('to_order_summary')">PROCEED</button>
         		</div>
         		<div class="col s12 m6">
         			<div class="name margin-top-cart">
@@ -116,14 +116,14 @@ span.icon-locate {
             			<span class="font600 naam3">{{this.productservice.cartItemsCount()}} Items</span>&nbsp;
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
-            			<a href="javascript:" class="btn btn-flat right chngs3 hide">Change</a> 
+            			<a href="javascript:" class="btn btn-flat right chngs3 hide" (click)="call_change_section('to_order_summary')">Change</a> 
             		</div>
             	</div>
             </div>
           </div>
           <!-- End Here -->          
           <!-- Login Checkout -->
-        	<div class="row no-margin white login-checkout checkout_3">
+        	<div class="row no-margin white login-checkout checkout_3" *ngIf="gosection_data.to_order_summary == true">
         		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
           			<div class="col s3 m3 center">
           				<div class="cart-product-image"> 
@@ -165,8 +165,8 @@ span.icon-locate {
           		<div class="divider"></div>
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-								<button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="goto_address()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
-								<button class="btn waves-effect waves-light orange right hide button-two" type="Submit" (click)="goto_pay()" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button>
+								<span *ngIf="!topaybutton"><button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_address')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span>
+								<span *ngIf="topaybutton"><button class="btn waves-effect waves-light orange right button-two" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span>
 							</div>
           	
           	<div class="divider"></div>
@@ -186,14 +186,14 @@ span.icon-locate {
             			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
-            			<a href="javascript:" class="btn btn-flat right chngs2 hide">Change</a>
+            			<a href="javascript:" class="btn btn-flat right chngs2 hide" (click)="call_change_section('to_address')">Change</a>
             		</div>
             	</div>
             </div>
           </div>          
           <!-- End Here -->
           <!-- Login Checkout -->
-        	<div class="row no-margin white login-checkout hide checkout_2">
+        	<div class="row no-margin white login-checkout checkout_2" *ngIf="gosection_data.to_address == true">
         		<div class="col s10 m12 ">
 								<div class="name margin-top-cart user-address">
 									<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
@@ -333,7 +333,7 @@ span.icon-locate {
 							<div class="card" *ngIf="address">
 								<div class="card-content">
 										{{address.address}}, {{address.city}}, {{address.state}}, {{address.pin}}	
-										<button type="button" class="btn orange btn-large check-btn" (click)="this.goto_pay()">Continue</button>
+										<button type="button" class="btn orange btn-large check-btn" (click)="call_change_section('to_payment')">Continue</button>
 								</div>
 							</div>						
 						</div>
@@ -351,14 +351,14 @@ span.icon-locate {
             			<span class="font600 naam4">Wallet</span>&nbsp;
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
-            			<a href="javascript:" class="btn btn-flat right chngs4 hide">Change</a>
+            			<a href="javascript:" class="btn btn-flat right chngs4 hide" (click)="call_change_section('to_payment')">Change</a>
             		</div>
             	</div>
             </div>
           </div>
           <!-- End Here -->                    
           <!-- Login Checkout -->
-        	<div class="row white no-margin login-checkout checkout_4 hide" id="wallet-type">
+        	<div class="row white no-margin login-checkout checkout_4" id="wallet-type" *ngIf="gosection_data.to_payment == true">
         		<form class="margin-top">
           		<div class="row">
                 <div class="col s12 m10 offset-m1">
@@ -412,7 +412,7 @@ span.icon-locate {
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout">
-						<span><a href="javascript:" class="btn orange btn-large ctn-che1" (click)="checkout_items(1)">Continue Checkout({{pay_amount() - this.calculate_bonus()}})</a></span>
+						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled">Continue Checkout({{pay_amount() - this.calculate_bonus()}})</button></span>
 						<!-- <span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a></span> -->
 					</div>
 					<!-- <div class="name margin-checkout" *ngIf="cod == true">

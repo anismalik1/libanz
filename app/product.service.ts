@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 @Injectable()
 export class ProductService {
 
-  public server_url : string = "https://www.mydthshop.com/";
+  public server_url : string = "http://www.libanz.com/";
   public base_url : string = 'http://localhost:4200/';
   public service_url : string = 'https://www.mydthshop.com/index.php?/app_services/';
   public request_action : string ;

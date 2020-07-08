@@ -15,9 +15,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TodoService {
 
-  public server_url : string = "https://www.mydthshop.com/";
-  public base_url : string = 'https://www.mydthshop.com/web-app/';
-  public service_url : string = 'https://www.mydthshop.com/index.php?/app_services/';
+  public server_url : string = "http://www.libanz.com/";
+  public base_url : string = 'http://www.libanz.com/web-app/';
   public request_action = "proceed_recharge";
   public current_url : string;
   public footer : boolean = true;

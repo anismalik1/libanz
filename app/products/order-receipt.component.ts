@@ -83,6 +83,11 @@ export class OrderReceiptComponent implements OnInit {
     return data;
   }
 
+  to_number(num)
+  {
+    return 1 * num; 
+  }
+
   amount_payable(order)
   {
     this.pack_data(order);

@@ -322,35 +322,15 @@ font-size: 10px;
 												<p class="font-size-change1 no-margin" id="product-description"></p>
 						</div>
 						<div class="clearfix"></div><br/>
-						<!-- <div class="color-warriation inline-block">
-												
-												<p class="inline margin-left2">Select Quantity</p>
-												<div class="product-quantity">
-													<button id="lessButton" (click)="change_count(1,'minus')"><i class="material-icons">remove</i></button>
-													<span class="updateCount" id="update_count1">1</span>&nbsp;
-													<button id="addButton" (click)="change_count(1,'add')"><i class="material-icons">add</i></button>
-												</div>
-											</div> -->
-											<!-- <ul class="monthly-packages margin-top kit-pack" id="kit-packages" *ngIf="this.todoservice.get_user_type() == 5 && product.category_id == 1">
-												<li>
-													<span class="font-size-change1 font600 grey-text">DTH Kit</span>
-												</li>
-												<li>
-													<a id="kit-2" href="javascript:" [className]="(kit == 2) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(2)">599 Kit</a>
-												</li>
-												<li>
-													<a id="kit-3" href="javascript:" [className]="(kit == 3) ? 'black-text font-size-change1 active-kp' : 'black-text font-size-change1'" (click)="select_kit(3)">999 Kit</a>
-												</li>
-							</ul> -->
 						<br/>
-											<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
-												<li>
-													<span class="font-size-change1 font600 grey-text">Select Month</span>
+							<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
+								<li>
+									<span class="font-size-change1 font600 grey-text">Select Month</span>
 								</li>
 								<br/>
-												<li *ngFor="let item of package_month;let i = index">
-													<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
-												</li>
+								<li *ngFor="let item of package_month;let i = index">
+									<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
+								</li>
 							</ul>
 						<br/>
 						<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable && fta_pack.price != 0">
@@ -844,10 +824,10 @@ font-size: 10px;
 			<h4>Choose Set Up Box </h4>
 			<div class="row" *ngIf="product_list">
 				<div class="col s6 m3" *ngFor="let item of product_list">
-					<a href="javascript:" class="black-text" (click)="continue_to_change(item.url)">
+					<a href="javascript:" class="black-text modal-close" (click)="continue_to_change(item.url)">
 						<div class="card choose-set-up-box center">
 							<div class="card-image">
-								<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+								<img src="{{this.todoservice.server_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
 							</div>
 							<div class="card-content">
 								<span>{{item.title}}</span> 
@@ -909,33 +889,32 @@ font-size: 10px;
 			<div class="clearfix"></div>
 			<div class="row" *ngIf="multi_list">
 				<div class="col s12 m12" *ngFor="let item of multi_list">
-					
-						<div class="card center">
-							<!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
-							<div class="include-multi-box">
-								<div class="col s12 m3">
-									<div class="card-image">
-										<img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
-									</div>
+					<div class="card center">
+						<!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
+						<div class="include-multi-box">
+							<div class="col s12 m3">
+								<div class="card-image">
+									<img height="90" src="{{this.todoservice.server_url}}accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
 								</div>
-								<div class="col s12 m6">
-									<div class="card-content">
-										<span>{{item.title}}</span>
-									</div>
-								</div>
-								<div class="col s12 m3">
-									<div class="card-content">
-										<span >Rs. {{item.offer_price}} </span>
-									</div>
-									
-									<div class="clearfix"></div>
-									<a class="modal-close btn right orange mt-round-btn" href="javascript:" (click)="continue_to_select(item)">Select</a>
-								</div>
-								<div class="clearfix"></div>
-								
 							</div>
+							<div class="col s12 m6">
+								<div class="card-content">
+									<span>{{item.title}}</span>
+								</div>
+							</div>
+							<div class="col s12 m3">
+								<div class="card-content">
+									<span >Rs. {{item.offer_price}} </span>
+								</div>
+								
+								<div class="clearfix"></div>
+								<a class="modal-close btn right orange mt-round-btn" href="javascript:" (click)="continue_to_select(item)">Select</a>
+							</div>
+							<div class="clearfix"></div>
 							
 						</div>
+						
+					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
