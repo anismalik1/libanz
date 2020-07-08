@@ -65,7 +65,7 @@ padding:0;
         <div class="container">
             <div class="col s12">
             <ul class="back-icon">
-                <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">History  </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+                <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">History  </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
             </ul>
             </div>	
             <div class="clearfix"></div>
@@ -161,7 +161,7 @@ padding:0;
                                     <td *ngIf="row.transaction_type == 2"> <i class="icon-inr"></i>{{row.balance_before*1-row.amount*1+row.commission_surcharge*1 }}</td>
                                     <td *ngIf="row.transaction_type == 3"> <i class="icon-inr"></i>{{row.balance_before+row.commission_surcharge*1 }}</td>
                                     <td *ngIf="row.paymethod == 1">Wallet</td>
-                                    <td *ngIf="row.paymethod == 3">MYDTH</td>
+                                    <td *ngIf="row.paymethod == 3">Libanz</td>
                                     <td *ngIf="row.paymethod == 4">PAYTM</td>
                                     <td *ngIf="row.paymethod == 5">COD</td>
                                     <td *ngIf="row.paymethod == 2">Gateway</td>

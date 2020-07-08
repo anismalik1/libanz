@@ -177,7 +177,7 @@
                     <a href="javascript:" class="black-text" (click)="continue_to_change(item.id)">
                       <div class="card choose-set-up-box center">
                         <div class="card-image">
-                          <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+                          <img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
                         </div>
                         <div class="card-content">
                           <span>{{item.title}}</span>

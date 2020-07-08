@@ -389,7 +389,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<li *ngFor="let banner of this.bottombanners">
 				<div class="col m12 s12">
 					<div class="shadow-box">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
+						<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}"/>
 					</div>
 				</div>
 				
@@ -407,12 +407,12 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						<ul class="mobile-slider">
 							<li *ngFor="let item of this.mainbanners;let i = index;">
 								<a href="{{item.imageurl}}">
-									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
+									<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li>
 							< <li *ngFor="let item of this.filter_banners('mobile-main-banner');let i = index;">
 								<a href="{{item.imageurl}}">
-									<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
+									<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 								</a>
 							</li> -
 						</ul> 
@@ -430,7 +430,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 					<div class="col m12 s12" style="padding-right: 1.1%;">
 						<div class="shadow-box">
 							<a href="{{item.imageurl}}">
-								<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img"/>
+								<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{item.image}}" class="responsive-img"/>
 							</a>	
 						</div>
 					</div>
@@ -508,7 +508,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						
 						<div class="col s2">
 							<div class="product-img1">
-								<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
+								<a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 							</div>
 						</div>
 						<div class="col s10">
@@ -551,7 +551,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							
 							<div class="col s2">
 								<div class="product-img1">
-									<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
+									<a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 								</div>
 							</div>
 							<div class="col s10">
@@ -595,7 +595,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 						
 						<div class="col s2">
 							<div class="product-img1">
-								<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
+								<a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 							</div>
 						</div>
 						<div class="col s10">
@@ -638,7 +638,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 							<div class="row">
 								<div class="col s2">
 									<div class="product-img1">
-										<a [routerLink]="['/product/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
+										<a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-image"></a>
 									</div>
 								</div>
 								<div class="col s10">
@@ -668,7 +668,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="bottom-slider " id="bottom-slider">
 			<li *ngFor="let banner of this.bottombanners">
 				<div class="shadow-box">
-					<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}"/>
+					<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}"/>
 				</div>
 			</li>
 		</ul>
@@ -677,7 +677,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 </div>
 <div id="modal-app" class="modal">
     <div class="modal-content">
-      <img class="responsive-img" src="https://www.mydthshop.com/web-app/assets/images/install-app-popup.gif">
+      <img class="responsive-img" src="{{this.todoservice.base_url}}web-app/assets/images/install-app-popup.gif">
     </div>
     <div class="modal-footer cst-center">
 		<!-- <a href="javascript:" class="modal-close waves-effect waves-red btn-flat">Cancel</a>--><a href="https://play.google.com/store/apps/details?id=mydth.app" class="waves-effect waves-green btn-flat orange white-text round-pop">Install Android App</a> 

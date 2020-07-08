@@ -38,7 +38,7 @@
                         <div class="row">
                                 <div class="col s12 m3 center">
                                     <div class="cart-product-image">
-										<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270
+										<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270
 										{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
                                         <!-- <div class="product-quantity less-add-btn">
                                             button type="button" class="count-down" (click)="change_count(item.product.id,'minus');" id="lessButton"><i class="material-icons">remove</i></button>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col s12 m5 margin-top">
                                     <h4 class="font600"><a [routerLink]="['/product/'+item.product.url]" class="black-text">{{item.product.title}}</a></h4>
-									<span class="font-size-change grey-text">Seller : MyDthShop</span><br>
+									<span class="font-size-change grey-text">Seller : Libanz</span><br>
 									<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1">Cash On Delivery Available</span><br/>
 									<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
           							
@@ -72,7 +72,7 @@
 				
                 <div class="card-content black-text padd-only no-margin" *ngIf="this.productservice.cartItemsCount() == 0">
 					<div class="center">
-						<img src="{{this.todoservice.base_url}}assets/images/empty-cart.png" class="responsive-img" width="200px">
+						<img src="{{this.todoservice.base_url}}web-app/assets/images/empty-cart.png" class="responsive-img" width="200px">
 						<br>
 						<p class="font-size-change1">Your Shopping Cart is empty</p>
 						<br>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="security">
                     <ul>
-                        <li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}assets/images/shield.png" class="responsive-img vertical-align-middle" alt="shield" width="40px"></li>
+                        <li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}web-app/assets/images/shield.png" class="responsive-img vertical-align-middle" alt="shield" width="40px"></li>
                         <li class="shield-text inline-block"><span class="no-padding grey-text">Safe and Secure Payments. Easy returns payment on your wallet before activation set top box. 100% Authentic products.</span></li>
                     </ul>
                 </div>

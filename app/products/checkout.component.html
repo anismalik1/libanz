@@ -127,7 +127,7 @@ span.icon-locate {
         		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
           			<div class="col s3 m3 center">
           				<div class="cart-product-image"> 
-          					<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
+          					<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
           					<div class="product-quantity less-add-btn">
 											<div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
 												<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
@@ -140,7 +140,7 @@ span.icon-locate {
           			<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
           				<a href="javascript:" class="black-text">
           					<h4 class="font600"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
-          					<span class="font-size-change grey-text">Seller : MyDthShop</span>
+          					<span class="font-size-change grey-text">Seller : Libanz</span>
           					<span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/>
           					<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
           					<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
@@ -366,27 +366,27 @@ span.icon-locate {
 									{{check_wallet_content()}}
 									<!-- <mat-checkbox ></mat-checkbox> -->
 									<span *ngIf="checkbox_text.checkbox ==  true">
-										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
 									</span>
 									<span *ngIf="checkbox_text.radio == true">
-										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
 									</span>
 									<span *ngIf="checkbox_text.no_input == true">
-										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
 									</span>
 								</div>	
-								<!-- <label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>  -->
+								<!-- <label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>  -->
 										<div class="clearfix"></div>
 										<div class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</div> 
 										<!-- <input name="wallet_type" value="wallet" class="with-gap" type="radio" id="wallet" (change)="cod_apply()" checked/>
-                  <label for="wallet" class="font-size-change black-text mydth-wallet"> <img src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"> </label> -->
+                  <label for="wallet" class="font-size-change black-text mydth-wallet"> <img src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Mydth Wallet"> </label> -->
                 </div>
               </div>
               <div class="row">
           			<div class="col s12 m10 offset-m1">
-									<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
+									<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
           				<!-- <input name="wallet_type" class="with-gap" value="paytm" type="radio" id="paytm" (change)="cod_apply()" [checked]="(this.todoservice.get_user_wallet_amount() <= 1 || (this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) || (this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.productservice.cartItemsCount() == 1))?true:false"/> -->
-    							<!-- <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"> </label> -->
+    							<!-- <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"> </label> -->
 				        </div>
           		</div>
           		<!-- Credit Card -->
@@ -486,7 +486,7 @@ span.icon-locate {
           </div>
           <div class="security1" style="padding-top:10px;">
           	<ul>
-          		<li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}assets/images/shield.png" class="responsive-img" alt="shield" width="40px"></li>
+          		<li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}web-app/assets/images/shield.png" class="responsive-img" alt="shield" width="40px"></li>
           		<li class="shield-text inline-block"><span class="no-padding grey-text">Safe and Secure Payments. Easy returns payment on your wallet before activation set top box. 100% Authentic products.</span></li>
           	</ul>
           </div>
@@ -657,7 +657,7 @@ span.icon-locate {
 				<div class=" inline-block">
 					<span class="multiply">{{otfquantity}}</span>
 					<span class="multiply-sign"><i class="material-icons">close</i></span>
-					<img src="https://mydthshop.com/web-app/assets/images/banner/999kit.png">
+					<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/999kit.png">
 				</div>
 				<div class="otf-margin inline-block">
 					<span *ngIf="otf_margin">{{otf_margin.option_value}}</span>

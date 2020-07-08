@@ -48,7 +48,7 @@ width: 35% !important;
   <div class="container">
     <div class="col s12">
       <ul class="back-icon">
-        <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Testimonials </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+        <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Testimonials </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
       </ul>
     </div>	
     <div class="clearfix"></div>
@@ -71,7 +71,7 @@ width: 35% !important;
     </blockquote>
     </div>
     
-    <div class="card-image testimonial-card-image"><img class="responsive-img" src="https://www.mydthshop.com/web-app/assets/images/recharge-icon/user.svg" />&nbsp;<i>{{item.title}}</i>
+    <div class="card-image testimonial-card-image"><img class="responsive-img" src="{{this.todoservice.base_url}}web-app/assets/images/recharge-icon/user.svg" />&nbsp;<i>{{item.title}}</i>
     
     <p >{{item.user_type}}</p>
     </div>
@@ -86,7 +86,7 @@ width: 35% !important;
             <div class="container-fluid">              
               <div class="row">
                 <div class="col m6 no-padding">
-                  <img class="responsive-img full-width" src="https://www.mydthshop.com/accounts/assets/img/Business-india.jpg">
+                  <img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/Business-india.jpg">
                 </div>
                 <div class="col s12 m6">
                   <form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">

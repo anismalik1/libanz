@@ -18,7 +18,7 @@ export class ContactUsComponent implements OnInit {
   contactgroup : FormGroup;
   page : any;
   constructor(private fb: FormBuilder, 
-    private todoservice: TodoService,
+    public todoservice: TodoService,
     private spinner : NgxSpinnerService,
     private toastr: ToastrManager,
     private meta : Meta,

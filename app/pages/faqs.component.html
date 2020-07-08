@@ -79,10 +79,10 @@ margin-right: 20px;
 </div>
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Frequent Ask Questions</a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Frequent Ask Questions</a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
   </ul>
 </div>	
-<!-- <section class="hero" style="background-image: url(https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg)">
+<!-- <section class="hero" style="background-image: url({{this.todoservice.base_url}}accounts/assets/img/banner/faq1.jpg)">
   <div class="container">
     <h2 class="center font600 white-text margin-top">FAQ'S</h2>
   </div>
@@ -176,7 +176,7 @@ margin-right: 20px;
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
                 <div class="link-faqs">
                   <a routerLink="'/help/faqs/'+{{item.url}}" (click)="print_faq(item.url)">{{item.question}}</a>
-                  <span class="orange-clr">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
+                  <span class="orange-clr">{{this.todoservice.base_url}}help/faqs/{{item.url}}</span>
                   <p [innerHTML]="item.meta_description"></p>
                 </div>
                 
@@ -196,7 +196,7 @@ margin-right: 20px;
                 <div class="link-faqs">
                   <a [routerLink]="'/help/faqs/'+item.url">
                     <h5 class="font600">{{item.meta_title}}</h5>
-                    <span class="orange-clr">https://www.mydthshop.com/help/faqs/{{item.url}}</span>
+                    <span class="orange-clr">{{this.todoservice.base_url}}help/faqs/{{item.url}}</span>
                     <p class="grey-text">{{item.meta_description}}</p>
                   </a>
                 </div>
@@ -207,13 +207,13 @@ margin-right: 20px;
       </div>
       <div class="col s12 m4">
         <div class="images-faqs-new">
-          <!-- <img src="https://www.mydthshop.com/accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs"> -->
+          <!-- <img src="{{this.todoservice.base_url}}accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs"> -->
           <div class="recommended-section" *ngIf="suggested_product && suggested_product.length > 0">
               <h2>Suggested Products</h2>
               <div class="col m4 s12" *ngFor="let item of suggested_product">
                   <div class="card">
                       <div class="card-image padd center">
-                        <img alt="images" class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}">
+                        <img alt="images" class="responsive-img" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}">
                       </div>
                       <div class="clearfix"></div>
                       <div class="card-stacked">
@@ -241,7 +241,7 @@ margin-right: 20px;
           <li *ngFor="let item of product_images">
             <div class="card">
               <div class="card-image padd center">
-                <img alt="images" class="responsive-img" src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{item.image}}">
+                <img alt="images" class="responsive-img" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}">
               </div>
               <div class="clearfix"></div>
               <div class="card-stacked">

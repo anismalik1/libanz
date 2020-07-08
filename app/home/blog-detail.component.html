@@ -15,7 +15,7 @@
 
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
   </ul>
 </div>	
 <!-- Blog Page New Design -->
@@ -48,13 +48,13 @@
       <div class="col s12 m7">
         <div class="card no-box-shadow" *ngIf="post">
 					<div class="card-image detial-images">
-						<img src="https://www.mydthshop.com/accounts/assets/img/cms/{{post[0].image}}" class="responsive-img" alt="{{post[0].title}}">
+						<img src="{{this.todoservice.base_url}}accounts/assets/img/cms/{{post[0].image}}" class="responsive-img" alt="{{post[0].title}}">
 					</div>
 					<div class="card-content">
 						<div class="author">
 							<p class="author-name">
 								<span><i class="material-icons">person</i></span>
-								<span>MYDTHSHOP</span>
+								<span>Libanz</span>
 							</p>
 							<p class="blog-time">
 								<span><i class="material-icons">access_time</i></span>
@@ -69,14 +69,14 @@
           </div>
           <div class="card-action right-align">
             <span>Share On:</span>
-            <div class="fb-share-button" style="vertical-align: text-bottom;"
-            data-href="https://www.mydthshop.com/blog-detail/blog" 
+            <!-- <div class="fb-share-button" style="vertical-align: text-bottom;"
+            data-href="{{this.todoservice.base_url}}blog-detail/blog" 
             data-layout="button_count">
-          </div>
+          </div> -->
             <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/facebook1.png" class="responsive-img"></a> -->
             <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/linkedin.png" class="responsive-img"></a> -->
             <a class="twitter-share-button"
-              href="https://twitter.com/intent/tweet?text=https://www.mydthshop.com/blog-detail/{{post[0].url}}">
+              href="https://twitter.com/intent/tweet?text={{this.todoservice.base_url}}blog-detail/{{post[0].url}}">
              &nbsp; <img src="https://mydthshop.com/web-app/assets/images/twitter.png" class="responsive-img"></a>
               <a class="twitter-share-button" href="#"><img src="https://mydthshop.com/web-app/assets/images/instagram.png" class="responsive-img"></a>
               <a class="twitter-share-button" href="#"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" class="responsive-img"></a>
@@ -144,14 +144,14 @@
             <li *ngFor="let item of recent_posts;">
               <a [routerLink]="['/blog-detail/'+item.url]">
                 <div class="post-img">
-                  <img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+                  <img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
                 </div>
                 <div class="post-text">
                   <p class="font-size-change" [innerHTML]="item.shortDescription">               	
                   </p>
                     <p class="author-name font-size-change grey-text">
                       <span><i class="material-icons">person</i></span>
-                      <span>MYDTHSHOP</span>
+                      <span>Libanz</span>
                     </p>
                 </div>
               </a>

@@ -16,7 +16,7 @@ import 'rxjs/add/operator/map';
 export class TodoService {
 
   public server_url : string = "http://www.libanz.com/";
-  public base_url : string = 'http://www.libanz.com/web-app/';
+  public base_url : string = 'http://www.libanz.com/';
   public request_action = "proceed_recharge";
   public current_url : string;
   public footer : boolean = true;

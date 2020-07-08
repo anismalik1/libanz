@@ -29,7 +29,7 @@
 	<div class="container">
 	  <div class="col s12">
 		<ul class="back-icon">
-		  <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Channel </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+		  <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Channel </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
 		</ul>
 	  </div>	
 	  <div class="clearfix"></div>
@@ -45,19 +45,19 @@
 			<a href="#" class="btn-floating btn-large orange chng-set dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>
 			<ul id='dropdown1' class='dropdown-content'>
 				<li>
-					<a href="#sendmail-modal" class="grey-text modal-trigger no-margin"><img alt="gmail" src="https://mydthshop.com/web-app/assets/images/gmail.png">Send mail</a>
+					<a href="#sendmail-modal" class="grey-text modal-trigger no-margin"><img alt="gmail" src="{{this.todoservice.base_url}}web-app/assets/images/gmail.png">Send mail</a>
 				</li>
 				<li>
-					<a href="https://www.mydthshop.com/accounts/apis/export/export_package_category/{{product_pack_info.parent_id}}" class="grey-text no-margin"><img alt="download" src="https://mydthshop.com/web-app/assets/images/down-arrow.png"> Download Sheet</a>
+					<a href="{{this.todoservice.base_url}}accounts/apis/export/export_package_category/{{product_pack_info.parent_id}}" class="grey-text no-margin"><img alt="download" src="{{this.todoservice.base_url}}web-app/assets/images/down-arrow.png"> Download Sheet</a>
 				</li>
 				<li>
-					<a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&amp;text=https://www.mydthshop.com/package-list/tata-sky/{{channel_id}}"><img alt="whatsapp" src="https://mydthshop.com/web-app/assets/images/whatsapp.png"> Share On Whatsapp</a>
+					<a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&amp;text={{this.todoservice.base_url}}package-list/tata-sky/{{channel_id}}"><img alt="whatsapp" src="{{this.todoservice.base_url}}web-app/assets/images/whatsapp.png"> Share On Whatsapp</a>
 				</li>
 			  	<li>
-				  <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/tata-sky/{{channel_id}}" target="_blank"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"> Share On Facebook</a>
+				  <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/tata-sky/{{channel_id}}" target="_blank"><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png"> Share On Facebook</a>
 				</li>
 			  	<li>
-				  <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="https://twitter.com/share?url=https://www.mydthshop.com/package-list/tata-sky/{{channel_id}}" target="_blank"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"> Share On Twitter</a>
+				  <a class="tooltipped grey-text" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="https://twitter.com/share?url={{this.todoservice.base_url}}package-list/tata-sky/{{channel_id}}" target="_blank"><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png"> Share On Twitter</a>
 				</li>
 			</ul>
 		</span></h1>
@@ -75,8 +75,8 @@
 		</div>
 		<ul>
 			<li class="grey-text" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
-			<li class="grey-text" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
-			<li class="grey-text" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
+			<li class="grey-text" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same Libanz is in no way responsible for that and shall not be liable in any way.</li>
+			<li class="grey-text" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. Libanz is in no way responsible for that and shall not be liable in any way for the same.</li>
 		</ul>
 	</div>
 </section>
@@ -114,7 +114,7 @@
 				  <div class="include-multi-box">
 					<div class="col s12 m3">
 					  <div class="card-image">
-						<img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+						<img height="90" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
 					  </div>
 					</div>
 					<div class="col s12 m6">

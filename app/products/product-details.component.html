@@ -222,7 +222,7 @@ font-size: 10px;
 			<div class="container">
 				<div class="col s12">
 					<ul class="back-icon">
-						<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
+						<li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
 					</ul>
 				</div>	
 			</div>
@@ -314,7 +314,7 @@ font-size: 10px;
 											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param4}}</p>
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Buy product with Mydth
+											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Buy product with Libanz
 												wallet & get extra 3% off.</span>  </p>								
 											
 											<div class="descripetion-detail margin-top1">
@@ -593,8 +593,8 @@ font-size: 10px;
 				</ul>
 	 
 				<ul class="pt-all-10">
-					<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. MYDTHSHOP is in no way responsible for that and shall not be liable in any way for the same.</li>
-					<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same MYDTHSHOP is in no way responsible for that and shall not be liable in any way.</li>
+					<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. Libanz is in no way responsible for that and shall not be liable in any way for the same.</li>
+					<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same Libanz is in no way responsible for that and shall not be liable in any way.</li>
 					<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
 				</ul>
 				<hr class="horizontal">
@@ -656,7 +656,7 @@ font-size: 10px;
 							</li>
 							<li *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product"><p class="inline-block green-text" >Avail Bonus of Amount <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p></li>
 							<li *ngIf="!this.get_token()"><p class="inline-block green-text" >*To avail more exciting cashback and coupons, just login and continue.</p></li>
-							<li *ngIf="product && product.cashback == 1"><p class="inline-block green-text" ><b>Special offer:</b> Avail extra 3% discount on using Mydth wallet while buying selected product.</p></li>
+							<li *ngIf="product && product.cashback == 1"><p class="inline-block green-text" ><b>Special offer:</b> Avail extra 3% discount on using Libanz wallet while buying selected product.</p></li>
 						</ul>
 					 </div>
 					
@@ -743,7 +743,7 @@ font-size: 10px;
 	 <div class="review-written margin-top">
 		 <div class="row" *ngFor="let review of reviews;">
 			<div class="col s12 m2 center">
-			 <img src="{{this.todoservice.base_url}}assets/images/av.png" class="responsive-img vertical-align-middle" alt="User">
+			 <img src="{{this.todoservice.base_url}}web-app/assets/images/av.png" class="responsive-img vertical-align-middle" alt="User">
 			 <br>
 	
 			 <span class="font-size-change" *ngIf="review.reting <=1"><i class="material-icons orange-text">star</i></span>

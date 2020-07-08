@@ -73,7 +73,7 @@ padding-top:50px;
 <ng-template #loginform>
 	<section class="login-form no-padding white">
 		<div class="row no-margin">
-			<div class="col s12 m12 l6 no-padding login-side-image" style="background-image: url(https://mydthshop.com/web-app/assets/images/login.jpg);">
+			<div class="col s12 m12 l6 no-padding login-side-image" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login.jpg);">
 				<!-- <img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images"> -->
 			</div>
 			<div class="col s12 m12 l6 no-padding">
@@ -116,7 +116,7 @@ padding-top:50px;
 								</div>
 								<div class="row no-margin">
 									<div class="col s12 m9 offset-m1">
-										<span class="font-size-change">Don't have MyDthShop account?</span>
+										<span class="font-size-change">Don't have Libanz account?</span>
 										<a routerLink="/proceed/signup" href="javascript:" class="orange-text font-size-change font600"> REGISTER</a><br>
 									</div>
 								</div>
@@ -137,7 +137,7 @@ padding-top:50px;
 						<div class="card">
 							<div class="card-content mt-top-40">
 								<div class="center fix-top-50">
-									<img src="https://www.mydthshop.com/accounts/assets/img/logo.png" class="responsive-img" style="width:70%;"/>
+									<img src="{{this.todoservice.base_url}}accounts/assets/img/logo.png" class="responsive-img" style="width:70%;"/>
 									<div class="upper-text center">
 										<h3>Your Mobile Number is <span class="orange-text">{{phone}}</span></h3>
 										<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>

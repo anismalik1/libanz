@@ -335,7 +335,7 @@ p.ask-login {
 }
 </style>
 <app-header></app-header>
-<title>Mydthshop Signup</title>
+<title>Libanz Signup</title>
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
@@ -352,7 +352,7 @@ p.ask-login {
 				<div class="user-retailer margin-top center" id="stepep1">
 					<div class="col s12 border-every">
 						<a href="javascript:" class="black-text become-user" (click)="set_user_type(1)">
-							<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
+							<img src="{{this.todoservice.base_url}}web-app/assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
 							<span class="font-size-change1 font600">Become a User</span>
 						</a>
 					</div>
@@ -361,7 +361,7 @@ p.ask-login {
 					</div>
 					<div class="col s12  border-every">
 						<a href="javascript:" class="black-text become-user" (click)="set_user_type(2)">
-							<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
+							<img src="{{this.todoservice.base_url}}web-app/assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
 							<span class="font-size-change1 font600">Become a Retailer</span>
 						</a>
 					</div>
@@ -373,7 +373,7 @@ p.ask-login {
 	<section class="login-page no-padding" *ngIf="user_type_enabled">
 		<div class="row">
 			<div class="col s12 m12 l6 no-padding login-side-image1">
-				<img src="https://www.mydthshop.com/web-app/assets/images/merchant-regis.png" class="responsive-img">
+				<img src="{{this.todoservice.base_url}}web-app/assets/images/merchant-regis.png" class="responsive-img">
   			</div>
 			<div class="col s12 m12 l6" style="padding:0;margin-top:-10px;">
 				<div class="card">
@@ -434,7 +434,7 @@ p.ask-login {
 											<div class="col s12 col m12">
 												<div class="term-txt">
 												<!-- <input id="terms-condi" formControlName="terms" type="checkbox" value="1"/> -->
-												<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/mydthshop-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/mydthshop-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
+												<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
 												<div class="cleaarfix"></div>
 											</div>
 											</div>
@@ -466,7 +466,7 @@ p.ask-login {
 							<div class="card-content">
 								<div class="center">
 									<div class="col s12">
-										<img src="{{this.todoservice.base_url}}assets/images/logo.png" class="responsive-img" alt="MyDthShop-logo">
+										<img src="{{this.todoservice.base_url}}web-app/assets/images/logo.png" class="responsive-img" alt="Libanz-logo">
 									</div>
 									<div class="col s12">
 										<div class="upper-text">

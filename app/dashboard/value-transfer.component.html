@@ -179,7 +179,7 @@ margin: auto;
     <div class="container">
         <div class="col s12">
         <ul class="back-icon">
-            <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> Pay </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li> 
+            <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> Pay </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li> 
         </ul>
         </div>	
         <div class="clearfix"></div>
@@ -208,14 +208,14 @@ margin: auto;
                             <h2 class="font600 inline-block">Invoice </h2>
                         </div>
                         <ul *ngIf="order_data" class="font-li">
-                            <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="https://www.mydthshop.com/web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="https://www.mydthshop.com/web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" style="width:40px;"></span></li>
+                            <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/pending.gif" style="width:40px;"></span></li>
                             <li class="cst-top-signle"><strong>Order Status: </strong> {{order_data.status}}</li>
                             <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
                             <li><strong>Invoice No: </strong>  #{{order_data.id}} </li>
                             <li><strong>Amount: </strong> {{order_data.grand_total}}</li>
                             <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
                             
-                            <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Mydth</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
+                            <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Libanz</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
                             <!-- <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li> -->
                             <li><strong>Comment: </strong>{{order_data.remark}}</li>
                         </ul>
@@ -409,7 +409,7 @@ margin: auto;
                                            <div class="bank-list">
                                               <div class="row ">
                                                   <div class="col s2">
-                                                      <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                      <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
                                                   </div> 
                                                   <div class="col s10 border-bottom">
                                                       <h4 class="user-name">Praveen Jain </h4>
@@ -418,7 +418,7 @@ margin: auto;
                                               </div>
                                               <div class="row ">
                                                 <div class="col s2">
-                                                    <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
                                                 </div> 
                                                 <div class="col s10 border-bottom">
                                                     <h4 class="user-name">Praveen Jain </h4>
@@ -427,7 +427,7 @@ margin: auto;
                                             </div>
                                             <div class="row ">
                                                 <div class="col s2">
-                                                    <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
                                                 </div> 
                                                 <div class="col s10 border-bottom">
                                                     <h4 class="user-name">Libanz International </h4>
@@ -500,7 +500,7 @@ margin: auto;
                                                                                       <p class="act-txt">PHONE PAY BANK XX XX 1317 </p>
                                                                                   </div>
                                                                                   <div class="col s2">
-                                                                                    <img src="https://www.mydthshop.com/web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
+                                                                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
                                                                                 </div> 
                                                                               </div>
                                                                             
@@ -561,14 +561,14 @@ margin: auto;
                                                                                                         <button class="btn cst-view-btn">View Detils </button>
                                                                                                     </div>
                                                                                                     <div class="pass-detail">
-                                                                                                        <p class="wallet-bal">Updated MyDTH Wallet Balance <span class="fa fa-inr"></span> 140  </p>
+                                                                                                        <p class="wallet-bal">Updated Libanz Wallet Balance <span class="fa fa-inr"></span> 140  </p>
                                                                                                     </div>
 
                                                                                                     <div class="inner-passbook">
                                                                                                         <ul class="inr-txt">
                                                                                                             <li> <a href="#"><span class="fa fa-book"></span> &nbsp; View Passbook  </a> </li>
                                                                                                        
-                                                                                                            <li> <a href="#"><span class="fa fa-edit"></span> &nbsp; Add Money To MYDTH Wallet  </a> </li>
+                                                                                                            <li> <a href="#"><span class="fa fa-edit"></span> &nbsp; Add Money To Libanz Wallet  </a> </li>
 
                                                                                                             <li> <a href="#"><span class="fa fa-info-circle"></span> &nbsp; 24 x 7 Help  </a> </li>
                                                                                                         </ul>
@@ -588,7 +588,7 @@ margin: auto;
         </div>
     
         <div class="row">
-            <img src="https://www.mydthshop.com/web-app/assets/images/kyc-inner-banner.png" class="responsive-img hide-img1" style="width: 90%; height: 130px; margin: 17px;"/>
+            <img src="{{this.todoservice.base_url}}web-app/assets/images/kyc-inner-banner.png" class="responsive-img hide-img1" style="width: 90%; height: 130px; margin: 17px;"/>
         </div>
     </div>
 

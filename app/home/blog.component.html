@@ -51,7 +51,7 @@
 
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+      <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
   </ul>
 </div>	
 <!-- <section class="compare-dth white">
@@ -60,8 +60,8 @@
 		<div class="col m3 s6" *ngFor="let item of blogs;">
 				<div class="card">
 						<div class="card-content">
-							<img class="img-responsive" src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
-							<h3 class="center"><a href="https://www.mydthshop.com/p/{{item.url}}" class="blue-text">{{item.title}}</a></h3>
+							<img class="img-responsive" src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
+							<h3 class="center"><a href="{{this.todoservice.base_url}}p/{{item.url}}" class="blue-text">{{item.title}}</a></h3>
 							<div class="blog-desc" [innerHTML]="item.shortDescription"></div>
 							<div class=""><strong class="orange-text">Mydthshop</strong>- <span class="grey-text">{{ item.c_date | date}}</span></div>
 						</div>
@@ -106,13 +106,13 @@
 			<div class="col s12 m4" *ngFor="let item of blogs;">
 				<div class="card blog-min-hei">
 					<div class="card-image">
-						<a [routerLink]="['/blog-detail/'+item.url]"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="https://www.mydthshop.com/accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
+						<a [routerLink]="['/blog-detail/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
 					</div>
 					<div class="card-content">
 						<div class="author">
 							<p class="author-name">
 								<span><i class="material-icons">person</i></span>
-								<span>MYDTHSHOP</span>
+								<span>Libanz</span>
 							</p>
 							<p class="blog-time">
 								<span><i class="material-icons">access_time</i></span>

@@ -10,7 +10,7 @@ declare var window: any;
     selector: 'app-splash-screen',
     template: `
         <div class="splash-screen" *ngIf="show" @fadeOut>
-            <img width="100%" height="100%" src="./assets/images/splash-screen.png" alt="Splash Screen Mydthshop">
+            <img width="100%" height="100%" src="./assets/images/splash-screen.gif" alt="Splash Screen Mydthshop">
             <div class="mid-btns center hide">
                 <span class="update-av">Update Available</span>
                 <div class="clearfix"></div>
@@ -107,7 +107,8 @@ export class SplashScreenComponent implements OnInit {
             }
         }
         this.show  = true;  
-        this.app_version();
+        //this.app_version();
+        this.to_home();
     }
 
     app_version()
@@ -149,7 +150,7 @@ export class SplashScreenComponent implements OnInit {
                     {
                         if(2000 < 2001)
                         {
-                            $('.mid-btns').removeClass('hide');
+                            //$('.mid-btns').removeClass('hide');
                             return false;
                         }
                         else
@@ -174,11 +175,11 @@ export class SplashScreenComponent implements OnInit {
 
     to_home()
     {
-        this.init_script();
+        //this.init_script();
         setTimeout(()=>{    //<<<---    using ()=> syntax
             //me.router.navigate(['/mhome']);
             this.router.navigate(['/mhome']);
-        }, 2200); 
+        }, 6000); 
         
     }
 
@@ -194,7 +195,7 @@ export class SplashScreenComponent implements OnInit {
                 $(".splash-screen img").fadeIn()
                 .css({top:'0',position:'absolute'})
                 .animate({top:'-100%'}, 1600, function() {});
-            }, 1000); 
+            }, 6000); 
         });     
         `;
         this._renderer2.appendChild(this._document.body, script);

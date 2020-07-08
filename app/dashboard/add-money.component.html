@@ -451,7 +451,7 @@ margin-top:-9px;
   <div class="container">
     <div class="col s12">
       <ul class="back-icon">
-        <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Add Money</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+        <li> <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Add Money</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
       </ul>
     </div>	
     <div class="clearfix"></div>
@@ -489,14 +489,14 @@ margin-top:-9px;
                             <h2 class="font600 inline-block">Invoice </h2>
                         </div>
                         <ul *ngIf="order_data" class="font-li">
-                          <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="https://www.mydthshop.com/web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="https://www.mydthshop.com/web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="https://www.mydthshop.com/web-app/assets/images/pending.gif" style="width:40px;"></span></li>
+                          <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="{{this.todoservice.base_url}}/web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/pending.gif" style="width:40px;"></span></li>
                           <li class="cst-top-signle"><strong>Order Status: </strong> {{order_data.status}}</li>
                           <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
                           <li><strong>Invoice No: </strong>  #{{order_data.order_id}} </li>
                           <li><strong>Amount: </strong> {{order_data.amount}}</li>
                           <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
                           
-                          <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Mydth</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
+                          <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Libanz</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
                           <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li>
                           <!-- <li><strong>Comment: </strong>{{order_data.comment}}</li> -->
                         </ul>
@@ -509,12 +509,12 @@ margin-top:-9px;
                     </div>
                     <div class="clearfix"></div>
                       <div class="card-content add-money-top" *ngIf="!order_id">
-                        <h3 class="font600 inline-block mb-pt-25 txt-hide" style="margin-top:-15px;"><span class="fa fa-credit-card"></span> &nbsp; Add Money to Mydth Wallet  </h3>
+                        <h3 class="font600 inline-block mb-pt-25 txt-hide" style="margin-top:-15px;"><span class="fa fa-credit-card"></span> &nbsp; Add Money to Libanz Wallet  </h3>
                        <div class="cs-box-pay">
 
                         <p >Add Money to</p>
                        <p class="icon-sp"> <span class="fa fa-credit-card"></span>  </p>
-                        <p class="wallt-txt"> MyDth Wallet </p> 
+                        <p class="wallt-txt"> Libanz Wallet </p> 
                         <p>Available Balance <span class="fa fa-inr"></span>{{this.todoservice.get_user_wallet()}} </p>
                        </div>
 
@@ -555,7 +555,7 @@ margin-top:-9px;
                                 <div class="row">
                                     
                                   <div class="top-logo-block">
-                                 <img src="https://www.mydthshop.com/web-app/assets/images/final-logo.png"/>
+                                 <img src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png"/>
                                     <h4>Add Money to wallet <span class="amt-inr"><span class="fa fa-inr"></span> {{this.add_data.amount}} </span></h4>
                                   </div>
                           

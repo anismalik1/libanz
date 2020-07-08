@@ -7,8 +7,8 @@
 			<div class="container">
 				<div class="col s12">
 					<ul class="back-icon">
-						<li *ngIf="this.ref"> <a class="black-text" routerLink="/mhome" [queryParams]= "{ref : this.ref}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
-						<li *ngIf="!this.ref"> <a class="black-text" routerLink="/mhome" ><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+						<li *ngIf="this.ref"> <a class="black-text" routerLink="/mhome" [queryParams]= "{ref : this.ref}"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+						<li *ngIf="!this.ref"> <a class="black-text" routerLink="/mhome" ><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title"> </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
 					</ul>
 				</div>	
 				<div class="clearfix"></div>
@@ -32,7 +32,7 @@
 			<div class="container-fluid">						
 				<div class="row">
 					<div class="col m6 no-padding cs-page1">
-						<img class="responsive-img full-width" src="https://www.mydthshop.com/accounts/assets/img/Business-india.jpg">
+						<img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/Business-india.jpg">
 					</div>
 					<div class="col s12 m6">
 						<form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">

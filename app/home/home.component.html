@@ -261,7 +261,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 				  <ul class="flash-deal-slider">
 					<li *ngFor="let item of this.filter_banners('main-banner');let i = index;">
 					  <a href="{{item.imageurl}}" target="_blank">
-						<img src="https://www.mydthshop.com/accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
+						<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{item.image}}" class="responsive-img full-width" alt="flash-deal">
 					  </a>
 					</li>
 				  </ul>
@@ -558,7 +558,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<li *ngFor="let banner of filter_banners('user-type')">
 			<div class="no-margin">
 				<div class="col s12 m12 l12 no-padding">
-				<a href="{{banner.imageurl}}" target="_blank"><img src="https://www.mydthshop.com/accounts/assets/img/banner/{{banner.image}}" alt="{{banner.imageAlt}}"></a>
+				<a href="{{banner.imageurl}}" target="_blank"><img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}" alt="{{banner.imageAlt}}"></a>
 				</div>
 			</div>
 			</li>       

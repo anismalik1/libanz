@@ -20,7 +20,7 @@
 
 <div class="mobile-footer">
 	<ul class="cst-footer">
-		<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/p/accounts/merchant-on-mydthshop"><span class="cst-footer-link"> o </span>Merchant On Mydth</a></li>
+		<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/p/accounts/merchant-on-libanz"><span class="cst-footer-link"> o </span>Merchant On Libanz</a></li>
 		<li routerLinkActive="active"><a routerLink="/merchant/kyc"><span class="cst-footer-link"> o </span> KYC</a></li>
 		<li routerLinkActive="active"><a routerLink="/blog/all"><span class="cst-footer-link"> o </span> Blogs</a></li>
 		<li routerLinkActive="active"><a routerLink="/p/24-7"> <span class="cst-footer-link"> o </span> 24x7 Support</a></li>
@@ -37,7 +37,7 @@
 				<div class="col s12 m3 l3">
 					<span class="font600 font-size-change white-text">NEWSLETTER</span>
 					<ul>
-						<li><span class="white-text">Sign Upto get daily email post update of Mydthshop Enter your Email id </span></li>
+						<li><span class="white-text">Sign Upto get daily email post update of Libanz Enter your Email id </span></li>
 						<li class="news-form">
 							<form #newsletterform = "ngForm" (ngSubmit)="subscribe_newsletters(newsletterform.value)">
 								<div class="row no-margin">
@@ -55,15 +55,15 @@
 				<div class="col s12 m3 l3">
 					<span class="font600 font-size-change white-text">PARTNERSHIP PROGRAMS</span>
 					<ul>
-						<li class="padd-right-left"><a class="white-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant On Mydth</a></li>
-						<!-- <li class="padd-right-left"><a class="white-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Patrner on Mydth</a></li> -->
+						<li class="padd-right-left"><a class="white-text" [routerLink]="['/p/accounts/merchant-on-libanz']" target="_blank">Merchant On Libanz</a></li>
+						<!-- <li class="padd-right-left"><a class="white-text" [routerLink]="['/p/accounts/partner-on-libanz']" target="_blank">Patrner on Mydth</a></li> -->
 					</ul>
 				</div>
 				<div class="col s12 m3 l3">
 					<span class="font600 font-size-change white-text">HELPLINE</span>
 					<ul>							
 						<li class="padd-right-left"><a href="tel:8010339339" class="white-text">+91-8010339339</a></li>
-						<li class="padd-right-left"><a href="mailto:help@mydthshop.com" class="white-text">help@mydthshop.com</a></li>
+						<li class="padd-right-left"><a href="mailto:help@libanz.com" class="white-text">help@libanz.com</a></li>
 						<li class="padd-right-left"><a routerLink="/help/faqs" class="white-text">FAQ</a></li>
 					</ul>
 				</div>
@@ -72,7 +72,7 @@
 					<ul>
 						<li><span class="white-text">We give 100% purchase protection to our customers </span></li>
 						<li class="news-form">
-							<img src="{{this.todoservice.base_url}}assets/images/banner/ssl.png" class="responsive-img" alt="SSL">
+							<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/ssl.png" class="responsive-img" alt="SSL">
 					</li>
 					</ul>
 				</div>
@@ -81,7 +81,7 @@
 				<!-- <div class="col s12 m3 l2">
 					<span class="font600 font-size-change white-text">REGISTERED ADDRESS</span>
 					<ul>							
-						<li class="padd-right-left"><span class="white-text">MyDthShop</span></li>
+						<li class="padd-right-left"><span class="white-text">libanz</span></li>
 						<li class="padd-right-left"><span class="white-text">Libanz International</span></li>
 						<li class="padd-right-left"><span class="white-text">Unit No.127 D Mall Sector-10 Rohini<br/> Near Rohini West Metro Station<br/>New Delhi-110085 .</span></li>
 					</ul>
@@ -94,13 +94,13 @@
 						<li class="padd-right-left"><a routerLink="/p/dth-connection-refund-policy"(click)="navigate_to('p/dth-connection-refund-policy')"class="white-text">Refund Policy</a></li>
 						<li class="padd-right-left"><a routerLink="/p/24-7" (click)="navigate_to('/help/contact-us')"  class="white-text">Contact Us</a></li>
 						<li class="padd-right-left"><a routerLink="/p/know-about-my-dth-shop" (click)="navigate_to('/p/know-about-my-dth-shop')"  class="white-text">Who We Are</a></li>
-						<li class="padd-right-left"><a routerLink="/p/mydthshop-terms-and-conditions" (click)="navigate_to('/p/mydthshop-terms-and-conditions')" class="white-text">Terms &amp; Conditions</a></li>
+						<li class="padd-right-left"><a routerLink="/p/libanz-terms-and-conditions" (click)="navigate_to('/p/libanz-terms-and-conditions')" class="white-text">Terms &amp; Conditions</a></li>
 						<li class="padd-right-left"><a routerLink="/p/privacy-policy" (click)="navigate_to('/p/privacy-policy')" class="white-text">Privacy policy</a></li>
-						<li class="padd-right-left"><a routerLink="/p/mydthshop-disclaimer" (click)="navigate_to('/p/mydthshop-disclaimer')"  class="white-text">Disclaimer</a></li>
+						<li class="padd-right-left"><a routerLink="/p/libanz-disclaimer" (click)="navigate_to('/p/libanz-disclaimer')"  class="white-text">Disclaimer</a></li>
 						<!-- <li class="padd-right-left"><a routerLink="/p/download-brochures" target="_blank" class="white-text">Download Brochures</a></li> -->
 						<!-- <li class="padd-right-left"><a routerLink="/user-guide" target="_blank" class="white-text">View User Guide</a></li> -->
 						<li class="padd-right-left"><a routerLink="/blog/all" (click)="navigate_to('/blog/all')"  class="white-text" >Blog</a></li>
-						<li class="padd-right-left"><a href="https://www.mydthshop.com/p/sitemap-on-mydthshop"   class="white-text" >Sitemap</a></li>
+						<li class="padd-right-left"><a href="{{this.todoservice.base_url}}p/sitemap-on-libanz"   class="white-text" >Sitemap</a></li>
 					</ul>
 				</div>
 				<div class="col s5 m2 l3">
@@ -137,13 +137,13 @@
 						<li class="padd-right-left"><a [routerLink]="['/package-list/airtel']" (click)="navigate_to('/package-list/airtel')" class="white-text" target="_blank">Airtel Packages</a></li>
 						<li class="padd-right-left"><a [routerLink]="['/package-list/videocon']" (click)="navigate_to('/package-list/videocon')" class="white-text" target="_blank">Videocon Packages</a></li>
 						<li class="padd-right-left"><a [routerLink]="['/package-list/dish-tv']" (click)="navigate_to('/package-list/dish-tv')" class="white-text" target="_blank">DishTv Packages</a></li>
-						<!-- <li class="padd-right-left"><a href="https://www.mydthshop.com/package-list/tata-sky" class="white-text" target="_blank">Jio Fiber Packages</a></li>
-						<li class="padd-right-left"><a href="https://www.mydthshop.com/package-list/tata-sky" class="white-text" target="_blank">Airtel Xtream Packages</a></li> -->
+						<!-- <li class="padd-right-left"><a href="{{this.todoservice.base_url}}package-list/tata-sky" class="white-text" target="_blank">Jio Fiber Packages</a></li>
+						<li class="padd-right-left"><a href="{{this.todoservice.base_url}}package-list/tata-sky" class="white-text" target="_blank">Airtel Xtream Packages</a></li> -->
 						
 						<span class="font600 font-size-change white-text fix-img-pt">Download Application </span>
 
 						<li class="padd-right-left"><a href="https://play.google.com/store/apps/details?id=mydth.app" class="white-text" target="_blank">
-							<img src="https://www.mydthshop.com/web-app/assets/images/play-store.png" class="responsive-image " style="width: 125px;">
+							<img src="{{this.todoservice.base_url}}web-app/assets/images/play-store.png" class="responsive-image " style="width: 125px;">
 						</a></li>	
 					</ul>
 				</div>
@@ -158,23 +158,23 @@
 				<span class="grey-text font600">PAYMENT METHODS</span>
 			</div> -->
 			<div class="col s12 m12 l4 center">
-				<img src="{{this.todoservice.base_url}}assets/images/banner/bg-payment.png" class="responsive-img" alt="bg-payment">
-				<img src="{{this.todoservice.base_url}}assets/images/banner/paytm-logo.png" class="responsive-img paytm-img-footer" alt="bg-Paytm">
-				<img src="{{this.todoservice.base_url}}assets/images/banner/phone-pe.png" class="responsive-img paytm-img-footer" alt="bg-Phone Pe	">
+				<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/bg-payment.png" class="responsive-img" alt="bg-payment">
+				<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/paytm-logo.png" class="responsive-img paytm-img-footer" alt="bg-Paytm">
+				<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img paytm-img-footer" alt="bg-Phone Pe	">
 			</div>
 			<div class="col s12 m12 l5 center">
 				<span class="font-size-change1">© 2015 - {{year}} All Rights Reserved by My DTH Shop <br/> Under Libanz International</span>
 			</div>
 			<div class="col s12 m12 l3">
 				<ul class="social-icons-footer no-margin center">
-					<li class="inline-block"><a href="https://www.facebook.com/mydthshop/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Facebook"><img src="https://mydthshop.com/web-app/assets/images/facebook1.png" class="responsive-img" alt="facebook"></a></li>
-					<li class="inline-block"><a href="https://www.linkedin.com/company/14611847/admin/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Linkedin"><img src="https://mydthshop.com/web-app/assets/images/linkedin.png" class="responsive-img" alt="linkedin"></a></li>
-					<li class="inline-block"><a href="https://twitter.com/mydthshop" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Twitter"><img src="https://mydthshop.com/web-app/assets/images/twitter.png" class="responsive-img" alt="twitter"></a></li>
+					<li class="inline-block"><a href="https://www.facebook.com/mydthshop/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Facebook"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" class="responsive-img" alt="facebook"></a></li>
+					<li class="inline-block"><a href="https://www.linkedin.com/company/14611847/admin/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Linkedin"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" class="responsive-img" alt="linkedin"></a></li>
+					<li class="inline-block"><a href="https://twitter.com/mydthshop" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Twitter"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" class="responsive-img" alt="twitter"></a></li>
 					<!-- <li class="inline-block"><a href="https://plus.google.com/+Mydthshopmydthshop/about" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Google Plus"><img src="https://mydthshop.com/web-app/assets/images/google-plus.png" class="responsive-img" alt="google-plus"></a></li> -->
-					<li class="inline-block"><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Youtube"><img src="https://mydthshop.com/web-app/assets/images/youtube.png" class="responsive-img" alt="youtube"></a></li>
-					<li class="inline-block"><a href="https://in.pinterest.com/jain2221/pins/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Pinerest"><img src="https://mydthshop.com/web-app/assets/images/pinterest.png" class="responsive-img" alt="pinterest"></a></li>
-					<li class="inline-block"><a href="https://www.instagram.com/mydthshopindia/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Instagram"><img src="https://mydthshop.com/web-app/assets/images/instagram.png" class="responsive-img" alt="instagram"></a></li>
-					<li class="inline-block"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Blogger"><img src="https://mydthshop.com/web-app/assets/images/blogger.png" class="responsive-img" alt="blogger"></a></li>
+					<li class="inline-block"><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Youtube"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" class="responsive-img" alt="youtube"></a></li>
+					<li class="inline-block"><a href="https://in.pinterest.com/jain2221/pins/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Pinerest"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" class="responsive-img" alt="pinterest"></a></li>
+					<li class="inline-block"><a href="https://www.instagram.com/mydthshopindia/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Instagram"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" class="responsive-img" alt="instagram"></a></li>
+					<li class="inline-block"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Blogger"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" class="responsive-img" alt="blogger"></a></li>
 				</ul>
 			</div>
 		</div>

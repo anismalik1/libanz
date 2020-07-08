@@ -37,7 +37,7 @@ z-index: 99999;
 </div>
 <div class="col s12 cst-back">
     <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Package List</a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
+      <li>  <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Package List</a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
     </ul>
 </div>	
 <div class="fix-mb-top" style="padding-top:65px !important;"></div>
@@ -77,7 +77,7 @@ z-index: 99999;
 			
 			<div class="col s2">
 				<div class="product-img1">
-					<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+					<a><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
 				</div>
 			</div>
 			<div class="col s10">
@@ -109,7 +109,7 @@ z-index: 99999;
 				
 				<div class="col s2">
 					<div class="product-img1">
-						<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+						<a><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
 					</div>
 				</div>
 				<div class="col s10">
@@ -141,7 +141,7 @@ z-index: 99999;
 					
 					<div class="col s2">
 						<div class="product-img1">
-							<a><img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
+							<a><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
 						</div>
 					</div>
 					<div class="col s10">
@@ -171,17 +171,17 @@ z-index: 99999;
         <a href="javascript:void(0);" class="btn-floating btn-large orange dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>
         <ul id='dropdown1' class='dropdown-content'>
           <li class="border-bottom3">
-              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}">Share On Facebook</a>        
+              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/{{this.url}}">Share On Facebook</a>        
           </li>
           <li class="border-bottom3">
               <a  href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin"> Share on Whatsapp</a> 
-            <!-- <a target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&text=https://www.mydthshop.com/package-list/{{this.url}}" class="grey-text modal-trigger no-margin"> Share on WhatsApp</a> -->
+            <!-- <a target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&text={{this.todoservice.base_url}}package-list/{{this.url}}" class="grey-text modal-trigger no-margin"> Share on WhatsApp</a> -->
           </li>
           <li class="border-bottom3">
             <a  href="#sharemail-modal" class="grey-text modal-trigger no-margin"> Share on Gmail</a>
           </li>
           <li>
-          <a href="https://www.mydthshop.com/accounts/apis/export/export_category_packages/{{this.url}}" class="grey-text no-margin"> Download All Packages</a>
+          <a href="{{this.todoservice.base_url}}accounts/apis/export/export_category_packages/{{this.url}}" class="grey-text no-margin"> Download All Packages</a>
           </li>
         </ul>
       </span>      
@@ -192,12 +192,12 @@ z-index: 99999;
     <div class="row">
         <div class="col s12 new-share" *ngIf="details == true">
             <ul class="share-us-on center">
-              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}/{{this.pack_id}}" ><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"></a></li>
+              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/{{this.url}}/{{this.pack_id}}" ><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png"></a></li>
               <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
-              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url=https://www.mydthshop.com/package-list/{{this.url}}/{{this.pack_id}}"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"></a></li>
-              <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="https://mydthshop.com/web-app/assets/images/gmail.png" alt="gmail"></a></li>
-              <li><a href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
-              <li><a href="https://www.mydthshop.com/accounts/apis/export/export_package_category/{{this.pack_id}}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="https://mydthshop.com/web-app/assets/images/down-arrow.png" alt="download"></a></li>
+              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url={{this.todoservice.base_url}}package-list/{{this.url}}/{{this.pack_id}}"><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png"></a></li>
+              <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/gmail.png" alt="gmail"></a></li>
+              <li><a href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp"><img src="{{this.todoservice.base_url}}web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
+              <li><a href="{{this.todoservice.base_url}}accounts/apis/export/export_package_category/{{this.pack_id}}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="{{this.todoservice.base_url}}web-app/assets/images/down-arrow.png" alt="download"></a></li>
             </ul>
           </div>
     </div>
@@ -213,12 +213,12 @@ z-index: 99999;
             <div class="col s12">
               <h2 class="font600 no-margin"><a routerLink="/package-list/{{this.url}}/{{item.id}}">{{item.title}}</a></h2>
               <ul class="share-us-on">
-                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.mydthshop.com/package-list/{{this.url}}/{{item.id}}" ><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/facebook1.png"></a></li>
+                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/{{this.url}}/{{item.id}}" ><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png"></a></li>
                 <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
-                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url=https://www.mydthshop.com/package-list/{{this.url}}/{{item.id}}"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/twitter.png"></a></li>
-                <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="https://mydthshop.com/web-app/assets/images/gmail.png" alt="gmail" (click)="ini_pack(item.id)"></a></li>
-                <li><a href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp" (click)="init_id(item.id)"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
-                <li><a href="https://www.mydthshop.com/accounts/apis/export/export_package_category/{{item.id }}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="https://mydthshop.com/web-app/assets/images/down-arrow.png" alt="download"></a></li>
+                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url={{this.todoservice.base_url}}package-list/{{this.url}}/{{item.id}}"><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png"></a></li>
+                <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/gmail.png" alt="gmail" (click)="ini_pack(item.id)"></a></li>
+                <li><a href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp" (click)="init_id(item.id)"><img src="{{this.todoservice.base_url}}web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
+                <li><a href="{{this.todoservice.base_url}}accounts/apis/export/export_package_category/{{item.id }}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="{{this.todoservice.base_url}}web-app/assets/images/down-arrow.png" alt="download"></a></li>
               </ul>
             </div>            
           </div>
@@ -279,7 +279,7 @@ z-index: 99999;
               <div class="include-multi-box">
                 <div class="col s12 m3">
                   <div class="card-image">
-                    <img height="90" src="https://www.mydthshop.com/accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+                    <img height="90" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
                   </div>
                 </div>
                 <div class="col s12 m6">

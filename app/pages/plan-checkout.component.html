@@ -70,7 +70,7 @@ margin-top: 5px;
         <div class="row">
             
             <div class="col m6 s12">
-                <img src="https//www.mydthshop.com/web-app/assets/images/checkou-banner.png" class="responsive-img" />
+                <img src="{{this.todoservice.base_url}}web-app/assets/images/checkou-banner.png" class="responsive-img" />
             </div>
             <div class="col m6 s12">
 
@@ -148,12 +148,12 @@ margin-top: 5px;
                         <div class="payment-methods" *ngIf="this.plan != 'trial' ">
                             <div class="col s12 m10 offset-m1" *ngIf="this.todoservice.get_user_name() != '' && this.selected_plan && this.todoservice.get_user_wallet_amount() >= this.selected_plan[0].price">
                                 <input formControlName="payment_type" value="wallet" class="with-gap" type="radio" id="wallet" [disabled]="(this.todoservice.get_user_wallet_amount() >= this.selected_plan[0].price)? false: true"/>
-                                <label for="wallet" class="font-size-change black-text mydth-wallet"> <img width="80" src="{{this.todoservice.base_url}}assets/images/final-logo.png" alt="Mydth Wallet"> </label>
+                                <label for="wallet" class="font-size-change black-text mydth-wallet"> <img width="80" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"> </label>
                                 <span class="red-text" *ngIf="(this.todoservice.get_user_wallet_amount() < this.selected_plan[0].price)">Not Enough Balance</span>
                             </div>
                             <div class="col s12 m10 offset-m1">
                                 <input formControlName="payment_type" class="with-gap" value="paytm" type="radio" id="paytm" />
-                                <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}assets/images/paytm-logo.png" alt="paytm-wallet"> </label>
+                                <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"> </label>
                             </div>
                             <div class="col s12 m10 offset-m1">
                                 <input formControlName="payment_type" class="with-gap" value="card" type="radio" id="card"/>

@@ -80,7 +80,7 @@
 </div>
 <div class="col s12 cst-back">
     <ul class="back-icon">
-        <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon"></span>&nbsp; Products </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+        <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left bk-icon"></span>&nbsp; Products </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
     </ul>
 </div>	
 
@@ -192,7 +192,7 @@
 <div class="col s12 m6 l3  image-size-chng"  *ngFor="let product of products">
 <div class="card no-box-shadow products-list cs-box-shadow">
 <div class="card-image">
-<img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270{{product.image}}" class="responsive-img" alt="hd-tata-sky">
+<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{product.image}}" class="responsive-img" alt="hd-tata-sky">
 </div>
 <div class="card-content">
 <h5 class="font600">{{product.title}}</h5>

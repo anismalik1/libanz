@@ -35,7 +35,7 @@
                         <div class="row">
                                 <div class="col s12 m3 center">
                                     <div class="cart-product-image">
-										              <img src="https://www.mydthshop.com/accounts/assets/img/product-img/270x270
+										<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270
 										{{convert_to_object(item.save_json).image}}" class="responsive-img" alt="hd-tata-sky"><br>
                                         
                                     </div>
@@ -43,7 +43,7 @@
                                 <div class="col s12 m5 margin-top">
                                     <a href="javascript:" class="black-text">
                                         <h4 class="font600"><a [routerLink]="['/product/'+convert_to_object(item.save_json).url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack}" class="black-text">{{convert_to_object(item.save_json).title}}</a></h4>
-                                        <span class="font-size-change grey-text">Seller : MyDthShop</span><br>
+                                        <span class="font-size-change grey-text">Seller : Libanz</span><br>
                                         <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available == 1">Cash On Delivery Available</span><br/>
                                         <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available != 1">Free Home Delivery</span><br/>
                                         <!-- <span class="font-size-change orange-text" *ngIf="convert_to_object(item.save_json).month_pack">{{convert_to_object(item.save_json).month_pack}} Month Pack</span> -->
@@ -71,7 +71,7 @@
 				
         <div class="card-content black-text padd-only no-margin" *ngIf="favourites.length == 0">
 					<div class="center">
-						<img src="{{this.todoservice.base_url}}assets/images/empty-cart.png" class="responsive-img" width="200px">
+						<img src="{{this.todoservice.base_url}}web-app/assets/images/empty-cart.png" class="responsive-img" width="200px">
 						<br>
 						<p class="font-size-change1">Your Favorites is empty</p>
 						<br>

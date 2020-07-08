@@ -127,7 +127,7 @@ hr.line1 {
 	}
 	#mobile-header {
 		background-color: #ff6a00;
-		padding: 15px 0px 0px 15px;
+		padding: 15px 15px 0px 15px;
 		height: 100px;
 		color: #fff;
 	}
@@ -236,37 +236,25 @@ li.txt-fix-mb span a {
 		<header id="mobile-header" class="clearfix {{this.check_to_replace()}}">
 			<div class="mobile-header-left">
 				<ul>
-				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}assets/images/mobilr-nav.png" /> </li>
-				<li class="mobile-search">
-					<mat-form-field class="example-full-width">
-					<input class="black-text" type="text" id="mobile-search"  matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
-					<span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
-					 <mat-autocomplete #auto="matAutocomplete">
-							<span *ngIf="filterdList">
-							<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-								<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text">{{option.title}}</a>
-							</mat-option>
-						</span>
-						</mat-autocomplete>
-					</mat-form-field>
-				</li>
+				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}web-app/assets/images/mobilr-nav.png" /> </li>
+				<li><img class="app-logo" width="95" src="./assets/images/white-logo.png" /></li>	
 			</ul>
 			</div>
 			
 			<div class="mobile-header-right">
 				<ul>
-				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
+				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png" ><span class="noti-circle">{{this.productservice.cartItemsCount()}}</span></a> </li>
 				<li *ngIf="this.todoservice.get_user_name() == '' && valid_for_bonus" class="txt-fix-mb no-wrap"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">{{_bonus_text}}</a> </span>	</li>
 				<!-- <li class="txt-fix-mb"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">Get Rs 300</a> </span>	</li> -->
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">{{this.productservice.favorite_count()}}</span></li>
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
-					<!-- <li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a> -->
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" style="width:23px;"></a><span class="noti-circle">{{this.productservice.favorite_count()}}</span></li>
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a>
+					<!-- <li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a> -->
 					<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
 							<li class="notificatoins-dropdown-container">
 								<ul  *ngIf="notifications  && notifications.length > 0">
 									<li *ngFor="let item of notifications;" >
 										<div class="notification-drop-image">
-											<img src="https://www.mydthshop.com/web-app/assets/images/favorite-white.png" class="responsive-img">
+											<img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" class="responsive-img">
 										</div>
 										<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 											<p [innerHTML]="item.visitor_comment"></p>
@@ -280,6 +268,20 @@ li.txt-fix-mb span a {
 				</li>
 			</ul>
 			</div>
+			<div class="clearfix"></div>
+			<div class="search-box">
+				<mat-form-field class="example-full-width">
+					<input class="black-text" type="text" id="mobile-search" placeholder="Search Product to Compare" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
+					<span class="mobile-search-icon"><button><i  class="fa fa-search"></i></button></span>
+					 <mat-autocomplete #auto="matAutocomplete">
+							<span *ngIf="filterdList">
+							<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
+								<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text">{{option.title}}</a>
+							</mat-option>
+						</span>
+						</mat-autocomplete>
+					</mat-form-field>
+			</div>
 			<div id="loadmore-modal" class="modal white" style="width:100%;height:100%">
 					<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
 				<div class="modal-content">
@@ -290,7 +292,7 @@ li.txt-fix-mb span a {
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
 					<div class="notification-drop-image">
-					<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png" class="responsive-img">
+					<img src="{{this.todoservice.base_url}}web-app/assets/images/notify-favicon.png" class="responsive-img">
 					</div>
 					<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 					<p [innerHTML]="item.visitor_comment"></p>
@@ -345,7 +347,7 @@ li.txt-fix-mb span a {
 				</div>
 				<a class="modal-trigger" href="#modal1" onclick="$('.side-menu').removeClass('open-menu');$('.mobile-mask').hide();"><i class="material-icons">photo_camera</i></a>
 				<div class="wallet-mobile">
-					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
+					<span class="no-margin font-size-change1 right-align ng-star-inserted"><img alt="wallet" class="responsive-img vertical-align-middle wllt" src="{{this.todoservice.base_url}}web-app/assets/images/new-icons/wallet.png"><span>RS {{this.todoservice.get_user_wallet()}}</span></span>
 					<br/><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted  white-text fix-space-pt absolute"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span>
 				</div>
 	
@@ -381,11 +383,11 @@ li.txt-fix-mb span a {
 							<mat-option (click)="go_to_nav('/p/dth-connection-refund-policy')"><a [routerLink]="['/p/dth-connection-refund-policy']" > Refund Policy</a></mat-option>
 							<mat-option (click)="go_to_nav('/p/24-7')"><a [routerLink]="['/p/24-7']">Help & Support </a></mat-option>
 							<mat-option (click)="go_to_nav('/p/know-about-my-dth-shop')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Who We Are</a></mat-option>
-							<mat-option (click)="go_to_nav('/p/mydthshop-terms-and-conditions')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Terms &amp; Conditions</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/libanz-terms-and-conditions')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Terms &amp; Conditions</a></mat-option>
 							<mat-option (click)="go_to_nav('/p/privacy-policy')"><a [routerLink]="['/p/privacy-policy']" >Privacy policy</a></mat-option>
-							<mat-option (click)="go_to_nav('/p/mydthshop-disclaimer')"><a [routerLink]="['/p/mydthshop-disclaimer']" >Disclaimer</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/libanz-disclaimer')"><a [routerLink]="['/p/libanz-disclaimer']" >Disclaimer</a></mat-option>
 							<mat-option (click)="go_to_nav('/blog/all')"><a [routerLink]="['/blog/all']">Blog</a></mat-option>
-							<mat-option (click)="go_to_nav('/p/sitemap-on-mydthshop')"><a [routerLink]="['/p/sitemap-on-mydthshop']" >Sitemap</a></mat-option>
+							<mat-option (click)="go_to_nav('/p/sitemap-on-libanz')"><a [routerLink]="['/p/sitemap-on-libanz']" >Sitemap</a></mat-option>
 						</mat-select>
 				</mat-form-field>	
 				<hr class="line1" />
@@ -437,11 +439,11 @@ li.txt-fix-mb span a {
 					<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
 					<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
 					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
-					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/mydthshop-terms-and-conditions')">Terms &amp; Conditions</a></li>
+					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/libanz-terms-and-conditions')">Terms &amp; Conditions</a></li>
 					<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
-					<li><a [routerLink]="['/p/mydthshop-disclaimer']" (click)="go_to_nav('/p/mydthshop-disclaimer')">Disclaimer</a></li>
+					<li><a [routerLink]="['/p/libanz-disclaimer']" (click)="go_to_nav('/p/libanz-disclaimer')">Disclaimer</a></li>
 					<li><a [routerLink]="['/blog/all']">Blog</a></li>
-					<li><a [routerLink]="['/p/sitemap-on-mydthshop']" (click)="go_to_nav('/p/sitemap-on-mydthshop')">Sitemap</a></li>
+					<li><a [routerLink]="['/p/sitemap-on-libanz']" (click)="go_to_nav('/p/sitemap-on-libanz')">Sitemap</a></li>
 				
 				</ul>	
 			
@@ -465,13 +467,13 @@ li.txt-fix-mb span a {
 			
 			<h3 class="hide-left-menu-mb">Follow Us</h3>
 			<ul class="side-social hide-left-menu-mb">	
-				<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/facebook1.png" /></a></li>
-				<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}assets/images/linkedin.png" /></a></li>
-				<li><a href="https://twitter.com/mydthshop"><img src="{{this.todoservice.base_url}}assets/images/twitter.png" /></a></li>
-				<li><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA"><img src="{{this.todoservice.base_url}}assets/images/youtube.png" /></a></li>
-				<li><a href="https://in.pinterest.com/jain2221/pins/"><img src="{{this.todoservice.base_url}}assets/images/pinterest.png" /></a></li>
-				<li><a href="https://www.instagram.com/mydthshopindia/"><img src="{{this.todoservice.base_url}}assets/images/instagram.png" /></a></li>
-				<li><a href="https://mydthshopp.blogspot.com/"><img src="{{this.todoservice.base_url}}assets/images/blogger.png" /></a></li>
+				<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" /></a></li>
+				<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" /></a></li>
+				<li><a href="https://twitter.com/mydthshop"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" /></a></li>
+				<li><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" /></a></li>
+				<li><a href="https://in.pinterest.com/jain2221/pins/"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" /></a></li>
+				<li><a href="https://www.instagram.com/mydthshopindia/"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" /></a></li>
+				<li><a href="https://mydthshopp.blogspot.com/"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" /></a></li>
 			</ul>	
 							
 			</div>
@@ -506,8 +508,8 @@ li.txt-fix-mb span a {
 					</div>
 				<div class="strip-right-text right">
 					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
-					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-mydthshop']" target="_blank">Merchant on Mydth</a> |</span>
-					<!-- <span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-mydthshop']" target="_blank">Partner on Mydth</a> |</span> -->
+					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-libanz']" target="_blank">Merchant on Mydth</a> |</span>
+					<!-- <span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-libanz']" target="_blank">Partner on Mydth</a> |</span> -->
 					<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank">Testimonial</a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">FAQ </a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank">Blog</a> |</span>
@@ -525,7 +527,7 @@ li.txt-fix-mb span a {
 				<nav>
 				<div class="nav-wrapper" id="primary-nav">										
 					<a routerLink="/" href="javascript:" class="brand-logo">
-						<img src="https://mydthshop.com/accounts/assets/img/logo.png" class="responsive-img" alt="Mydthshop Logo">			
+						<img src="{{this.todoservice.base_url}}accounts/assets/img/libanz-logo.png" width="150" class="responsive-img" alt="Libanz Logo">			
 					</a>
 				
 					
@@ -558,12 +560,12 @@ li.txt-fix-mb span a {
 					</li>
 				
 					<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
-						<a routerLink="/product/favorites"><img src="https://mydthshop.com/web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
+						<a routerLink="/product/favorites"><img src="{{this.todoservice.base_url}}web-app/assets/images/new-icons/favorite.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
 					</li>	
 						
 					<li class="craft relative" >
 						<!-- <a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a> -->
-						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2" ><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
+						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2" ><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="{{this.todoservice.base_url}}web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
 						<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
 							<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
 						</ul> -->
@@ -572,7 +574,7 @@ li.txt-fix-mb span a {
 								<ul class="notification-drop-ul" *ngIf="notifications  && notifications.length > 0">
 									<li *ngFor="let item of notifications;">
 										<div class="notification-drop-image">
-											<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+											<img src="{{this.todoservice.base_url}}web-app/assets/images/notify-favicon.png">
 										</div>
 										<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 											<p [innerHTML]="item.visitor_comment"></p>
@@ -596,7 +598,7 @@ li.txt-fix-mb span a {
 							<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 							<li *ngFor="let item of notifications;" >
 							<div class="notification-drop-image">
-							<img src="https://www.mydthshop.com/web-app/assets/images/notify-favicon.png">
+							<img src="{{this.todoservice.base_url}}web-app/assets/images/notify-favicon.png">
 							</div>
 							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 							<p [innerHTML]="item.visitor_comment"></p>
@@ -612,7 +614,7 @@ li.txt-fix-mb span a {
 					<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Log In/Sign Up </a></li>
 					
 					<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="black-text"><span class="no-margin font-size-change1 right-align" *ngIf="this.todoservice.get_user_wallet()"> 
-						<img src="https://mydthshop.com/web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span><div class="clearfix"></div><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted orange-text bonus-amount absolute cst-bonus-txt"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></a>
+						<img src="{{this.todoservice.base_url}}web-app/assets/images/new-icons/wallet.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span><div class="clearfix"></div><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted orange-text bonus-amount absolute cst-bonus-txt"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></a>
 					</li>
 					<!-- <li>
 						<span class="cst-name">RG</span>
@@ -638,11 +640,11 @@ li.txt-fix-mb span a {
 		<div class="modal-content no-padding">
 			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
 			<div class="row no-margin">
-				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url(https://www.mydthshop.com/web-app/assets/images/login-banner.jpg);background-size: cover;">
+				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login-banner.jpg);background-size: cover;">
 					<div class="login-modal">
 						<div class="padd-rem1 login-text" *ngIf="signup != 1">
 							<h2 class="black-text no-margin">LOGIN</h2>
-							<p class="black-text font-size-change1">Welcome Back to Mydthshop, We make sure you enjoy our services!!</p>
+							<p class="black-text font-size-change1">Welcome Back to libanz, We make sure you enjoy our services!!</p>
 						</div>
 						
 					</div>
@@ -650,7 +652,7 @@ li.txt-fix-mb span a {
 				<div class="col s12 m8 white"> 
 					<div class="tabs-sign-up">
 						<ul id="tabs-swipe-demo" class="tabs">
-							<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to MyDthShop</a></li>
+							<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to libanz</a></li>
 							<!-- <li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li> -->
 						</ul>
 						<div id="login" class="col s12">
@@ -682,7 +684,7 @@ li.txt-fix-mb span a {
 								</div>
 								<div class="row no-margin">
 									<div class="col s12 m12 center">
-										<span class="font-size-change">Don't have MyDthShop account?</span>
+										<span class="font-size-change">Don't have libanz account?</span>
 										<a routerLink="/proceed/signup" class="orange-text font-size-change font600 modal-close"> REGISTER</a><br>
 									</div>
 								</div>
@@ -720,7 +722,7 @@ li.txt-fix-mb span a {
 							<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
 								<div class="col s12 border-every">
 									<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
-										<img src="{{this.todoservice.base_url}}assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
+										<img src="{{this.todoservice.base_url}}web-app/assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
 										<span class="font-size-change1 font600">Become a User</span>
 									</a>
 								</div>
@@ -729,7 +731,7 @@ li.txt-fix-mb span a {
 								</div>
 								<div class="col s12  border-every">
 									<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
-										<img src="{{this.todoservice.base_url}}assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
+										<img src="{{this.todoservice.base_url}}web-app/assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
 										<span class="font-size-change1 font600">Become a Retailer</span>
 									</a>
 								</div>
