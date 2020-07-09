@@ -7,6 +7,10 @@
 	padding: 5px !important;
 }
 
+/* .mat-form-field-infix label {
+    padding-left: 35px !important;
+    margin-top: -5px !important;
+} */
 
 #name-characters {
     background: #d0cbcb;
@@ -84,6 +88,12 @@
 		display: block;
 		color: #4d4e4e;
 	}
+	.fix-input-place label {
+    margin-top: -5px;
+    padding-left: 35px;
+}
+
+
 	.side-menu ul {
     padding-bottom: 2px;
 }
@@ -538,8 +548,8 @@ li.txt-fix-mb span a {
 								<div class="input-field col s12" >
 									<div class="search-box" *ngIf="href && !href.includes('/help/faqs')">
 											<button type="submit" class="btn-flat"><i class="material-icons white-text">search</i></button>
-											<mat-form-field class="example-full-width test1">
-												<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
+											<mat-form-field class="example-full-width test1 fix-input-place">
+												<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text fix-inner-lbl"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
 												<mat-autocomplete #auto="matAutocomplete">
 													<span *ngIf="filterdList">
 													<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
