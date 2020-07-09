@@ -451,6 +451,7 @@ nav ul a:hover{
 }
 nav .brand-logo{max-width: 200px; margin-top: 12px;}
 nav .brand-logo img{width: 100%;max-width: 150px}
+#modal-update {z-index: 9999999!important}
 .continue{
 	background: #ff9001cf;
 	text-align: center;

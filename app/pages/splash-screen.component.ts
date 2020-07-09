@@ -85,7 +85,7 @@ export class SplashScreenComponent implements OnInit {
             this.router.navigate(['/home']);
             return false;
         }
-        else if(document.URL.indexOf('http://') !== -1 || document.URL.indexOf('https://') !== -1)
+        else if( document.URL.indexOf('https://') !== -1)
         {
             this.router.navigate(['/mhome']);
             return false;
@@ -107,7 +107,7 @@ export class SplashScreenComponent implements OnInit {
             }
         }
         this.show  = true;  
-        //this.app_version();
+        this.app_version();
         this.to_home();
     }
 
@@ -150,7 +150,7 @@ export class SplashScreenComponent implements OnInit {
                     {
                         if(2000 < 2001)
                         {
-                            //$('.mid-btns').removeClass('hide');
+                            $('.mid-btns').removeClass('hide');
                             return false;
                         }
                         else

@@ -687,22 +687,14 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
     </div>
   </div>
 
-<!--   
-  <div class="btn-center">
-
-<a class="waves-effect waves-light btn modal-trigger text-center" href="#modal3">PLAYSTORE</a>
-
-</div>
-
-  <div id="modal3" class="modal">
-    <div class="modal-content">
-      <img src="../../assets/images/mobile-popup.png" class="responsive-image"/>
+  <div id="modal-update" class="modal bottom-sheet">
+    <div class="modal-content center white-text orange">
+	<img class="app-logo" src="./assets/images/white-logo.png" width="95">
+	<h4>An Update is Available.</h4>
+	<div class="clearfix"></div>
+	<a href="javascript:" class="btn red white-text modal-close waves-effect waves-orange btn-flat" (click)="goto_market()">Update</a>
     </div>
-   
-  </div> -->
-
-
-  
+  </div>
         
 
 <app-footer [baseUrl]="this.params.base_url"></app-footer>

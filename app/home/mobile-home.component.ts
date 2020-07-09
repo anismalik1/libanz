@@ -11,6 +11,8 @@ import { Observable} from 'rxjs';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
+import { Headers,Http } from '@angular/http';
+declare var window : any;
 @Component({
   selector: 'app-mobile-home',
   templateUrl: './mobile-home.component.html',
@@ -83,8 +85,7 @@ export class MobileHomeComponent implements OnInit {
      private fb: FormBuilder,
      private spinner: NgxSpinnerService,
      public params : Params,
-     private location : Location,
-     private route : ActivatedRoute
+      private http: Http
   ) {
     this.spinner.hide();
    }
@@ -122,6 +123,7 @@ export class MobileHomeComponent implements OnInit {
       }, 4000);
     }
     this.check_local();
+    this.app_version();
   }
 
   check_local()
@@ -508,6 +510,59 @@ export class MobileHomeComponent implements OnInit {
     });
     })
       `;
+    this._renderer2.appendChild(this._document.body, script);
+  }
+
+  app_version()
+    {
+      if(document.URL.indexOf('android_asset') !== -1)
+      {  
+      var Headers_of_api = new Headers({
+            'Content-Type' : 'application/x-www-form-urlencoded'
+          });
+        this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
+            data => {
+                let response = $.parseJSON(data['_body'])
+                if(response.version)
+                {
+                    window.me = this;
+                    window.appversion = response.version;
+                    if(window.cordova.getAppVersion)
+                    {
+                        window.cordova.getAppVersion.getVersionCode(function(version){
+                            if(version *1 < window.appversion *1)
+                            {
+                                this.open_update_popup()
+                            }  
+                        });  
+                    }
+                }
+                
+            }    
+        ) 
+     }       
+    }
+  
+  goto_market()
+  {
+      window.cordova.plugins.market.open("mydth.app");
+  }
+
+  open_update_popup()
+  {
+    if($('#init-open_model-update'))
+    {
+      $('#init-open_model-update').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `init-open_model-update`;
+    script.text = `
+      $(document).ready(function(){
+        $('.modal').modal();
+        $('#modal-update').modal('open');
+      }); 
+    `;
     this._renderer2.appendChild(this._document.body, script);
   }
 
