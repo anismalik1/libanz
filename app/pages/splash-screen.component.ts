@@ -85,7 +85,7 @@ export class SplashScreenComponent implements OnInit {
             this.router.navigate(['/home']);
             return false;
         }
-        else if(document.URL.indexOf('https://') !== -1)
+        else if(document.URL.indexOf('http://') !== -1 || document.URL.indexOf('https://') !== -1)
         {
             this.router.navigate(['/mhome']);
             return false;
