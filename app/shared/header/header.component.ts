@@ -255,7 +255,7 @@ export class HeaderComponent implements OnInit{
   onSubmit() {
     this.disabled = true;
     const formModel = this.prepareSave();
-    this.http.post('https://www.mydthshop.com/accounts/apis/home/upload_profile', formModel)
+    this.http.post(this.todoservice.base_url+'accounts/apis/home/upload_profile', formModel)
     .subscribe(
       data => {
         

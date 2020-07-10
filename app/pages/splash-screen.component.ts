@@ -10,7 +10,7 @@ declare var window: any;
     selector: 'app-splash-screen',
     template: `
         <div class="splash-screen" *ngIf="show" @fadeOut>
-            <img width="100%" height="100%" src="./assets/images/splash-screen.gif" alt="Splash Screen Mydthshop">
+            <img width="100%" height="100%" src="./assets/images/splash-screen.gif" alt="Splash Screen Libanz">
             <div class="mid-btns center hide">
                 <span class="update-av">Update Available</span>
                 <div class="clearfix"></div>
@@ -116,7 +116,7 @@ export class SplashScreenComponent implements OnInit {
         var Headers_of_api = new Headers({
             'Content-Type' : 'application/x-www-form-urlencoded'
           });
-        this.http.post('https://www.mydthshop.com/accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
+        this.http.post('https://www.libanz.com/accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
             data => {
                 let response = $.parseJSON(data['_body'])
                 if(response.version)

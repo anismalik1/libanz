@@ -104,7 +104,7 @@ export class CompareDthComponent implements OnInit {
         }
         else
         {
-          this.title.setTitle("Compare List - Mydthshop");
+          this.title.setTitle("Compare List - Libanz");
         }
         //this.router.navigateByUrl('https://mydthshop.com/product/compare-box?urls='+data.compare_content.url, {skipLocationChange: true});
         if(data.compare_content)
@@ -168,7 +168,7 @@ export class CompareDthComponent implements OnInit {
         }
         else
         {
-          this.title.setTitle("Compare List - Mydthshop");
+          this.title.setTitle("Compare List - Libanz");
         }
         //this.router.navigateByUrl('https://mydthshop.com/product/compare-box?urls='+data.compare_content.url, {skipLocationChange: true});
         if(data.compare_content)

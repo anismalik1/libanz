@@ -62,7 +62,7 @@ fetch_page_data()
           this.todoservice.set_page_data(data.PAGEDATA[0]);
           if(data.PAGEDATA[0].image != '')
           {
-            $('.hero img').attr('src','https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image);
+            $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);
           }
           $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });

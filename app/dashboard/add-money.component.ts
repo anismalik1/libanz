@@ -195,11 +195,11 @@ export class AddMoneyComponent implements OnInit{
 				}
 				else if(data.status == 'red' && data.red_auth == 'card')
 				{
-					window.location.href = "https://www.mydthshop.com/accounts/apis/response/add_money_pay/?order_id="+data.activity;
+					window.location.href = this.todoservice.base_url+"accounts/apis/response/add_money_pay/?order_id="+data.activity;
 				}
 				else if(data.status == 'red' && data.red_auth == 'paytm')
 				{
-					window.location.href = "https://www.mydthshop.com/web-app/do-paytm/addmoney-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount;
+					window.location.href = this.todoservice.base_url+"web-app/do-paytm/addmoney-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount;
 				}
 			}
 		  )  

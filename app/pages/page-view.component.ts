@@ -55,7 +55,7 @@ constructor(private title: Title, public todoservice : TodoService,
           this.todoservice.set_page_data(data.PAGEDATA[0]);
           if(data.PAGEDATA[0].image != '' && data.PAGEDATA[0].image != undefined)
           {
-            $('.hero img').attr('src','https://www.mydthshop.com/accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
+            $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
           }
           else
           {

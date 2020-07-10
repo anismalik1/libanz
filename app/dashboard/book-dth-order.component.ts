@@ -207,7 +207,7 @@ apply_tsk_margin(value)
       else
       {
           paytm += '<div class="paytm-box">';
-          paytm += '<input type="radio" formControlName="otf_pay_method" value="2" checked> Use Paytm (To 9911811317 (MYDTHSHOP))</br>';
+          paytm += '<input type="radio" formControlName="otf_pay_method" value="2" checked> Use Paytm (To 9911811317 (Libanz))</br>';
           paytm += '<input type="text" formControlName="paytmref" placeholder="Enter Transaction Id">';
           paytm += '</div>';
       }

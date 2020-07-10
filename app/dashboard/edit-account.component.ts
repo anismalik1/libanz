@@ -102,7 +102,7 @@ loadImageFailed() {
     const formModel = this.prepareSave();
     this.loading = true;
     this.spinner.show();
-    this.http.post('https://www.mydthshop.com/accounts/apis/home/upload_avatar', formModel)
+    this.http.post(this.todoservice.base_url+'accounts/apis/home/upload_avatar', formModel)
     .subscribe(
       data => {
         

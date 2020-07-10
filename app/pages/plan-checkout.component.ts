@@ -113,11 +113,11 @@ export class PlanCheckoutComponent implements OnInit {
           }
           else if(data.status == 'true' && data.red == 'paytm')
           {
-            window.location.href = "https://www.mydthshop.com/web-app/do-paytm/checkout-plan-index.php?order_id="+data.order_id+'&pt_t=plan&token='+this.get_token()+'&amount='+data.amount;
+            window.location.href = this.todoservice.base_url+"web-app/do-paytm/checkout-plan-index.php?order_id="+data.order_id+'&pt_t=plan&token='+this.get_token()+'&amount='+data.amount;
           }
           else if(data.status == 'true' && data.red == 'card')
           {
-            window.location.href = "https://www.mydthshop.com/accounts/apis/response/plan_pay/?order_id="+data.order_id;
+            window.location.href = this.todoservice.base_url+"accounts/apis/response/plan_pay/?order_id="+data.order_id;
           }
           else
           {

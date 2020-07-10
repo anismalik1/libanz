@@ -840,13 +840,13 @@ recharge_handle()
             {
               if(document.URL.indexOf('android_asset') !== -1)
               {
-                var ref = window.cordova.InAppBrowser.open("https://www.mydthshop.com/web-app/do-paytm/recharge-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount, '_blank', 'location=yes');
+                var ref = window.cordova.InAppBrowser.open("https://www.libanz.com/web-app/do-paytm/recharge-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount, '_blank', 'location=yes');
                 window.me = this;
                 ref.addEventListener('loadstart', function(event) { 
                   var urlSuccessPage = "recharge-receipt";
                   if (event.url.indexOf(urlSuccessPage) > 0) {
                     ref.close();
-                    var orderid = event.url.replace("https://www.mydthshop.com/orders/recharge-receipt/","");
+                    var orderid = event.url.replace("https://www.libanz.com/orders/recharge-receipt/","");
                     window.me.router.navigate(['/orders/recharge-receipt/'+orderid]);    
                   }
               });
@@ -854,26 +854,26 @@ recharge_handle()
               }
               else
               {
-                window.location.href = "https://www.mydthshop.com/web-app/do-paytm/recharge-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount;
+                window.location.href = "https://www.libanz.com/web-app/do-paytm/recharge-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount;
               }
             }
             else if(typeof data.red_auth != 'undefined' && data.red_auth == 'card')
             {
               if(document.URL.indexOf('android_asset') !== -1)
               {
-                var ref = window.cordova.InAppBrowser.open("https://www.mydthshop.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id, '_blank', 'location=yes');
+                var ref = window.cordova.InAppBrowser.open("https://www.libanz.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id, '_blank', 'location=yes');
                 window.me = this;
                 ref.addEventListener('loadstart', function(event) { 
                   var urlSuccessPage = "recharge-receipt";
                   if (event.url.indexOf(urlSuccessPage) > 0) {
                     ref.close();
-                    var orderid = event.url.replace("https://www.mydthshop.com/orders/recharge-receipt/","");
+                    var orderid = event.url.replace("https://www.libanz.com/orders/recharge-receipt/","");
                     window.me.router.navigate(['/orders/recharge-receipt/'+orderid]);    
                   }
               });
               }
               else
-                window.location.href = "https://www.mydthshop.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id;
+                window.location.href = "https://www.libanz.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id;
             }
           else
           {

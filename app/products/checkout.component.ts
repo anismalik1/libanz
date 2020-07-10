@@ -625,26 +625,26 @@ checkout_items(type)
             {
               if(typeof data.for_tsk != 'undefined' && data.for_tsk == 1)
               {
-                window.location.href = "https://www.mydthshop.com/web-app/do-paytm/tsk-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.tsk_amount;
+                window.location.href = this.todoservice.base_url+"web-app/do-paytm/tsk-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.tsk_amount;
               }
               else
               {
                 if(document.URL.indexOf('android_asset') !== -1)
                 {
-                  var ref = window.cordova.InAppBrowser.open("https://www.mydthshop.com/web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount, '_blank', 'location=yes');
+                  var ref = window.cordova.InAppBrowser.open(this.todoservice.base_url+"web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount, '_blank', 'location=yes');
                   window.me = this;
                   ref.addEventListener('loadstart', function(event) { 
                     var urlSuccessPage = "order-receipt";
                     if (event.url.indexOf(urlSuccessPage) > 0) {
                       ref.close();
-                      var orderid = event.url.replace("https://www.mydthshop.com/product/order-receipt/","");
+                      var orderid = event.url.replace(this.todoservice.base_url+"product/order-receipt/","");
                       window.me.router.navigate(['/product/order-receipt/'+orderid]);    
                     }
                 });
                   
                 }
                 else
-                  window.location.href = "https://www.mydthshop.com/web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount;
+                  window.location.href = this.todoservice.base_url+"web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount;
               }
       
             }
@@ -652,20 +652,20 @@ checkout_items(type)
             {
               if(document.URL.indexOf('android_asset') !== -1)
                 {
-                  var ref = window.cordova.InAppBrowser.open("https://www.mydthshop.com/accounts/apis/response/product_pay/?order_id="+data.order_id, '_blank', 'location=yes');
+                  var ref = window.cordova.InAppBrowser.open(this.todoservice.base_url+"accounts/apis/response/product_pay/?order_id="+data.order_id, '_blank', 'location=yes');
                   window.me = this;
                   ref.addEventListener('loadstart', function(event) { 
                     var urlSuccessPage = "order-receipt";
                     if (event.url.indexOf(urlSuccessPage) > 0) {
                       ref.close();
-                      var orderid = event.url.replace("https://www.mydthshop.com/product/order-receipt/","");
+                      var orderid = event.url.replace(this.todoservice.base_url+"product/order-receipt/","");
                       window.me.router.navigate(['/product/order-receipt/'+orderid]);    
                     }
                 });
                   
                 }
                 else
-                  window.location.href = "https://www.mydthshop.com/accounts/apis/response/product_pay/?order_id="+data.order_id;
+                  window.location.href = this.todoservice.base_url+"accounts/apis/response/product_pay/?order_id="+data.order_id;
             }
             else
             {
@@ -689,7 +689,7 @@ app_version()
     var Headers_of_api = new Headers({
         'Content-Type' : 'application/x-www-form-urlencoded'
       });
-    this.http.post('https://www.mydthshop.com/accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
+    this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
         data => {
             let response = $.parseJSON(data['_body'])
             if(response.version && response.alert == 'on')

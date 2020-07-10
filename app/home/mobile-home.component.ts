@@ -28,7 +28,7 @@ export class MobileHomeComponent implements OnInit {
   public op_list = '';
   public recharge_ini : number = 1;
   public deal_timer : number = 0;
-  public mainbanners : any = [{image: "dth-recharge-banner_1.png",imageurl: "https://www.mydthshop.com/recharge/for/dth-recharge",position: "mobile-main-banner"}];
+  public mainbanners : any = [{image: "dth-recharge-banner_1.png",imageurl: this.todoservice.base_url+"recharge/for/dth-recharge",position: "mobile-main-banner"}];
   public bottombanners : any = [{image: "rechargebill-11.jpg",imageurl: "",position: "mobile_bottom_banner"}];
   no_dues = 0;
   bill_amt : number;

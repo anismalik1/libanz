@@ -427,20 +427,10 @@ li.txt-fix-mb span a {
 				</mat-form-field>	
 				<hr class="line1" />	
 				</div>
-						<!-- <select class="form-control">
-							<option>Categories</option>
-							<option><a [routerLink]="['/product/listing/tata-sky']">Tata Sky</a></option>
-							<option><a [routerLink]="['/product/listing/videocon']">Videocon</a></option>
-							<option><a [routerLink]="['/product/listing/airtel']">Airtel</a></option>
-							<option><a [routerLink]="['/product/listing/dish-tv']">Dish Tv</a></option>
-							<option><a [routerLink]="['/p/jio-fiber']">Jio Fiber</a></option>
-							<option><a [routerLink]="['/p/airtel-xstream']">Airtel Xtream</a></option>
-							<option><a [routerLink]="['/p/dishsmrt-hub']">DishSMRT HUB</a></option>
-						</select> -->
-						<ul class="dashboard-menu-mobile btm-menu"  *ngIf="this.todoservice.get_user_name() != ''">	
-								<li><a class="font-size-change" [routerLink]="['/dashboard/edit-profile']"><span class="fa fa-user"></span> &nbsp; Edit Profile <span class="fa fa-chevron-right cs-right"></span></a></li>
-								<li><a [routerLink]="['/logout']"><span class="fa fa-sign-out"></span> &nbsp;Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
-							</ul>	
+					<ul class="dashboard-menu-mobile btm-menu"  *ngIf="this.todoservice.get_user_name() != ''">	
+						<li><a class="font-size-change" [routerLink]="['/dashboard/edit-profile']"><span class="fa fa-user"></span> &nbsp; Edit Profile <span class="fa fa-chevron-right cs-right"></span></a></li>
+						<li><a [routerLink]="['/logout']"><span class="fa fa-sign-out"></span> &nbsp;Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
+					</ul>	
 				</div>
 				
 			<h3 class="hide-left-menu-mb">Information</h3>	
@@ -518,7 +508,7 @@ li.txt-fix-mb span a {
 					</div>
 				<div class="strip-right-text right">
 					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
-					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-libanz']" target="_blank">Merchant on Mydth</a> |</span>
+					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-libanz']" target="_blank">Merchant on Libanz</a> |</span>
 					<!-- <span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-libanz']" target="_blank">Partner on Mydth</a> |</span> -->
 					<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank">Testimonial</a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">FAQ </a> |</span>
