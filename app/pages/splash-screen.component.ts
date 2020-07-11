@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy,Renderer2,Inject} from '@angular/core';
-import {trigger,transition,query,animate,animateChild,style} from '@angular/animations';
+import {trigger,transition,state,query,animate,group,animateChild,style} from '@angular/animations';
 import { DOCUMENT} from "@angular/common";
 import { Headers,Http } from '@angular/http';
 import { TodoService } from '../todo.service';
@@ -9,38 +9,83 @@ declare var window: any;
     providers : [TodoService],
     selector: 'app-splash-screen',
     template: `
-        <div class="splash-screen" *ngIf="show" @fadeOut>
-            <img width="100%" height="100%" src="./assets/images/splash-screen.gif" alt="Splash Screen Libanz">
-            <div class="mid-btns center hide">
+        <div class="splash-screen" *ngIf="show" >
+            <div class="splash-box" @fadeOut>
+                <img width="100px" src="./assets/images/app-icon.png" alt="Libanz Logo">
+            </div>
+            <!--<div class="mid-btns center hide">
                 <span class="update-av">Update Available</span>
                 <div class="clearfix"></div>
                 <a href="javascript:" (click)="goto_market()" class="pad10">Update</a>
                 <a href="javascript:" (click)="to_home()">Skip</a>
-            </div>
+            </div>-->
         </div>
     `,
     animations: [
-        // the fade-in/fade-out animation.
         trigger('fadeOut', [
-            transition(':leave', [
-                query(':leave', animateChild(), {optional: true}),
-                animate('{{this.slide}}ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .9,transform: 'translateY(-100%)'})),
-            ]),
-        ]),
-    ],
+          state('in', style({
+            width: 120,
+            transform: 'translateX(0)', opacity: 1
+          })),
+          transition('void => *', [
+            style({ width: 10, transform: 'translateX(50px)', opacity: 0 }),
+            group([
+              animate('2s 0.1s ease', style({
+                transform: 'translateX(0)',
+                width: 120
+              })),
+              animate('3s ease', style({
+                opacity: 1
+              }))
+            ])
+          ]),
+          transition('* => void', [
+            group([
+              animate('2s ease', style({
+                transform: 'translateX(50px)',
+                width: 10
+              })),
+              animate('3s 0.2s ease', style({
+                opacity: 0
+              }))
+            ])
+          ])
+        ])
+      ],
+    // animations: [
+    //     // the fade-in/fade-out animation.
+        
+    //         trigger('fadeOut', [
+    //           state('in', style({ transform: 'translateX(0)' })),
+    //           transition('void => *', [
+    //             style({ transform: 'translateX(-100%)' }),
+    //             animate(100)
+    //           ]),
+    //           transition('* => void', [
+    //             animate(100, style({ transform: 'translateX(100%)' }))
+    //           ])
+    //         ])
+        // trigger('fadeOut', [
+        //     transition(':leave', [
+        //         query(':leave', animateChild(), {optional: true}),
+        //         animate('{{this.slide}}ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .9,transform: 'translateY(-100%)'})),
+        //     ]),
+        // ]),
+    //],
     styles: [`
+        .splash-box{}
         .splash-screen {
+            background : linear-gradient(to bottom, #ff1363 0%, #ff572d 50%);
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
             z-index: 9999; 
-            background: #ffe2cd;
         }
         .mid-btns{
             
-            position: absolute;
+    position: absolute;
     bottom: 45px;
     width: 100%;
         }
@@ -65,8 +110,8 @@ declare var window: any;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SplashScreenComponent implements OnInit {
-    show = false;
-    slide : number = 12000;
+    show = true;
+    slide : number = 1200;
     updated_version = 10020;
     
     constructor(
@@ -108,7 +153,7 @@ export class SplashScreenComponent implements OnInit {
         }
         this.show  = true;  
         this.app_version();
-        this.to_home();
+        //this.to_home();
     }
 
     app_version()
@@ -130,7 +175,8 @@ export class SplashScreenComponent implements OnInit {
                             window.cordova.getAppVersion.getVersionCode(function(version){
                                 if(version *1 < window.appversion *1)
                                 {
-                                    $('.mid-btns').removeClass('hide');
+                                    //$('.mid-btns').removeClass('hide');
+                                    return false;
                                 } 
                                 else
                                 {
@@ -150,7 +196,7 @@ export class SplashScreenComponent implements OnInit {
                     {
                         if(2000 < 2001)
                         {
-                            $('.mid-btns').removeClass('hide');
+                            //$('.mid-btns').removeClass('hide');
                             return false;
                         }
                         else
@@ -175,7 +221,7 @@ export class SplashScreenComponent implements OnInit {
 
     to_home()
     {
-        //this.init_script();
+        this.init_script();
         setTimeout(()=>{    //<<<---    using ()=> syntax
             //me.router.navigate(['/mhome']);
             this.router.navigate(['/mhome']);
@@ -191,7 +237,7 @@ export class SplashScreenComponent implements OnInit {
         script.text = `
         $(document).ready(function (me) {
             setTimeout(function(){
-                $('.mid-btns').addClass('hide'); 
+                //$('.mid-btns').addClass('hide'); 
                 $(".splash-screen img").fadeIn()
                 .css({top:'0',position:'absolute'})
                 .animate({top:'-100%'}, 1600, function() {});

@@ -449,7 +449,6 @@ nav ul a:hover{
 	border-bottom: 1px solid #ff9001cf;
 	box-shadow: 0 1px 0 0 #ff9001cf;
 }
-nav .brand-logo{max-width: 200px; margin-top: 12px;}
 nav .brand-logo img{width: 100%;max-width: 150px}
 #modal-update {z-index: 9999999!important}
 .continue{
