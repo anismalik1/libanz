@@ -1,16 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy,Renderer2,Inject} from '@angular/core';
-import {trigger,transition,state,query,animate,group,animateChild,style} from '@angular/animations';
+import {trigger,transition,keyframes,state,query,animate,group,animateChild,style} from '@angular/animations';
 import { DOCUMENT} from "@angular/common";
 import { Headers,Http } from '@angular/http';
 import { TodoService } from '../todo.service';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+import {  stepper } from './splash-animation';
+
 declare var window: any;
+
 @Component({
     providers : [TodoService],
     selector: 'app-splash-screen',
     template: `
-        <div class="splash-screen" *ngIf="show" >
-            <div class="splash-box" @fadeOut>
+        <div class="splash-screen">
+            <div class="splash-box" [@fadeOut]="'out'" (@fadeOut.done)="animationDone($event)">
                 <img width="100px" src="./assets/images/app-icon.png" alt="Libanz Logo">
             </div>
             <!--<div class="mid-btns center hide">
@@ -21,59 +24,78 @@ declare var window: any;
             </div>-->
         </div>
     `,
+    // animations: [
+    //     trigger('fadeOut', [
+    //         transition('* => *', slideBottom)
+    //     ])
+    // ],
+    // animations: [
+    //     trigger('fadeOut', [
+          
+    //       transition('* => isTrue', [
+    //         query(':enter, :leave', [
+    //             style({
+    //               position: 'absolute',
+    //               top: 0,
+    //               left: 0,
+    //               width: '100%'
+    //             })
+    //           ],{ optional: true }),
+    //           query(':enter', [
+    //             style({ transform: `translate(-100%, -100%) rotate(-720deg)`})
+    //           ],{ optional: true }),
+    //           group([
+    //             query(':leave', [
+    //               animate('600ms ease-out', style({ transform: `translate(-100%, -100%) rotate(-720deg)`}))
+    //             ],{ optional: true }),
+    //             query(':enter', [
+    //               animate('600ms ease-out', style({ transform: `translate(0, 0) rotate(0)`}))
+    //             ],{ optional: true })
+    //           ]),
+    //       ]),
+    //       transition('IsTrue => *', [
+    //         query(':enter, :leave', [
+    //             style({
+    //               position: 'absolute',
+    //               top: 0,
+    //               left: 0,
+    //               width: '100%'
+    //             })
+    //           ],{ optional: true }),
+    //           query(':enter', [
+    //             style({ transform: `translate(100%, -100%) rotate(-360deg)`})
+    //           ],{ optional: true }),
+    //           group([
+    //             query(':leave', [
+    //               animate('600ms ease-out', style({ transform: `translate(100%, -100%) rotate(360deg)`}))
+    //             ],{ optional: true }),
+    //             query(':enter', [
+    //               animate('600ms ease-out', style({ transform: `translate(0, 0) rotate(0)`}))
+    //             ],{ optional: true })
+    //           ]),
+    //       ]),
+    //     ])
+    //   ],
     animations: [
-        trigger('fadeOut', [
-          state('in', style({
-            width: 120,
-            transform: 'translateX(0)', opacity: 1
-          })),
-          transition('void => *', [
-            style({ width: 10, transform: 'translateX(50px)', opacity: 0 }),
-            group([
-              animate('2s 0.1s ease', style({
-                transform: 'translateX(0)',
-                width: 120
-              })),
-              animate('3s ease', style({
-                opacity: 1
-              }))
-            ])
-          ]),
-          transition('* => void', [
-            group([
-              animate('2s ease', style({
-                transform: 'translateX(50px)',
-                width: 10
-              })),
-              animate('3s 0.2s ease', style({
-                opacity: 0
-              }))
-            ])
-          ])
-        ])
+        stepper
       ],
     // animations: [
     //     // the fade-in/fade-out animation.
         
-    //         trigger('fadeOut', [
-    //           state('in', style({ transform: 'translateX(0)' })),
-    //           transition('void => *', [
-    //             style({ transform: 'translateX(-100%)' }),
-    //             animate(100)
-    //           ]),
-    //           transition('* => void', [
-    //             animate(100, style({ transform: 'translateX(100%)' }))
-    //           ])
-    //         ])
-        // trigger('fadeOut', [
-        //     transition(':leave', [
-        //         query(':leave', animateChild(), {optional: true}),
-        //         animate('{{this.slide}}ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .9,transform: 'translateY(-100%)'})),
-        //     ]),
-        // ]),
-    //],
+    //     //     trigger('fadeOut', [
+    //     //     transition(':leave', [
+    //     //         query(':leave', animateChild(), {optional: true}),
+    //     //         animate('{{this.slide}}ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: .9,transform: 'translateY(-100%)'})),
+    //     //     ]),
+    //     // ]),
+    // ],
     styles: [`
-        .splash-box{}
+        .splash-box img{position: absolute;}
+        .welcome-text{top: 30%;
+            position: absolute;
+            left: 27%;
+            font-size: 22px;
+            color: #fff;} 
         .splash-screen {
             background : linear-gradient(to bottom, #ff1363 0%, #ff572d 50%);
             position: absolute;
@@ -100,7 +122,8 @@ declare var window: any;
             background: #fff;
             color: #040404;
             font-weight: bold;
-        } 
+        }
+        
         .update-av{
             padding-bottom: 16px;
     display: inherit;
@@ -109,6 +132,7 @@ declare var window: any;
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class SplashScreenComponent implements OnInit {
     show = true;
     slide : number = 1200;
@@ -120,8 +144,14 @@ export class SplashScreenComponent implements OnInit {
         private router : Router,
         private http : Http
     ) 
-    { }
+    { 
 
+    }
+    animationDone(ele)
+    {
+        $('.splash-box').html("<span _ngcontent-serverApp-c1 class='welcome-text'>Welcome to Libanz...</span>")
+        //this.router.navigate(['/mhome']);
+    }
     ngOnInit() {
         
         var width = $(window).width() + 17; 
@@ -152,7 +182,7 @@ export class SplashScreenComponent implements OnInit {
             }
         }
         this.show  = true;  
-        this.app_version();
+        //this.app_version();
         //this.to_home();
     }
 
@@ -217,16 +247,6 @@ export class SplashScreenComponent implements OnInit {
     goto_market()
     {
         window.cordova.plugins.market.open("mydth.app");
-    }
-
-    to_home()
-    {
-        this.init_script();
-        setTimeout(()=>{    //<<<---    using ()=> syntax
-            //me.router.navigate(['/mhome']);
-            this.router.navigate(['/mhome']);
-        }, 6000); 
-        
     }
 
     init_script()
