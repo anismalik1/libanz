@@ -34,16 +34,17 @@ trigger('fadeOut', [
       group([
         query('img', [
           animate('3000ms ease', keyframes([
-            //style({ transform: 'scale(.5) translate(300%,500%)',offset: 0.20}),
-           //style({ transform: 'scale(.5) translateY(500%)',offset: 0.21}),
-           style({
+           style({opacity : 1,
             left: '35%',
             top: '30%'
             , offset: 0.1}),
-            style({ transform: 'scale(0.5) rotate(0)', offset: 0.5}),
-            style({ opacity: 0, transform: 'rotate(180deg) scale(5)', offset: 1 }),
+            style({ opacity: .6, transform: 'rotate(180deg) scale(2)', offset: .5 }),
+            style({ opacity : 1, transform: 'scale(1) rotate(0)', offset: 1})
           ])),
+          
         ],{optional: true}),
+        
       ]),
-    ])
+    ]),
+    
 ]);

@@ -7,6 +7,7 @@ import { SharedCommonModule } from '../shared/common.module';
 import { DashboardComponent } from './dashboard.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ExcelService } from '../export.service';
+import { MatRadioModule } from '@angular/material/radio';
 import { ValueTransferComponent } from './value-transfer.component';
 import { ComplaintBoxComponent } from './complaint-box.component';
 import { AddMoneyComponent } from './add-money.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
+    MatRadioModule,
     MatSelectModule,
     MatDatepickerModule,
     NgxDaterangepickerMd.forRoot(),

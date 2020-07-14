@@ -196,7 +196,6 @@ margin: auto;
     <div class="container-fluid">
         <div class="row no-margin">
             <div class="col s12 m2">
-                
             <app-side-nav></app-side-nav>
             </div>
             <div class="col s12 m10">
@@ -227,12 +226,12 @@ margin: auto;
                     </div>
                 
                     <div class="card-content" *ngIf="!order_id">
-                        <span class="money-txt" style="color:#333; font-size:18px;"> Pay </span>
+                        <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span><a href="javascript:" (click)="goto_step(1)">From Wallet to Wallet</a><a href="javascript:" (click)="goto_step(3)">From Wallet to Bank</a>
                         <br/>
-                        <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
-                        <ng-template #transfertemp>
+                        
+                        <div *ngIf="step == 2">
                         <div class="value-transfer col s12 m12 margin-top">
-                                <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
+                            <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
                             <table class="responsive-table1 striped bordered">
                                 <tbody> 
                                     <tr>
@@ -260,8 +259,9 @@ margin: auto;
                                 </table>
                             </form>
                         </div>
-                    </ng-template>
-                        <ng-template #fetchtemp>
+                        
+                    </div>
+                        <div *ngIf="step==1">
                             <div class="value-transfer col s12 m12 margin-top">
                                 <form class="padd" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
                                     <div class="row">
@@ -276,321 +276,203 @@ margin: auto;
                                 </div>
                                 </form>
                             </div>
-                        </ng-template>
-                        <div class="recent-details" *ngIf="recent_transfer && recent_transfer.length > 0">
-                            <h4 class="recent-txt">Recents </h4>
-                            <div class="row">
-                                <div class="{{this.classes[i%4]}}" *ngFor="let item of recent_transfer;let i = index"> <a href="javascript:" class="white-text" (click)="select_partner(item.subscriber_id)" *ngIf="check_user(item.partner) != null">{{check_user(item.partner)}}</a> </div>
-                                <!-- <div class="circle-box2">PS </div>
-                                <div class="circle-box3">BM </div>
-                                <div class="circle-box4">LK </div> -->
+                            <div class="recent-details" *ngIf="recent_transfer && recent_transfer.length > 0">
+                                <h4 class="recent-txt">Recents </h4>
+                                <div class="row">
+                                    <div class="{{this.classes[i%4]}}" *ngFor="let item of recent_transfer;let i = index"> <a href="javascript:" class="white-text" (click)="select_partner(item.subscriber_id)" *ngIf="check_user(item.partner) != null">{{check_user(item.partner)}}</a> </div>
+                                    
+                                </div>
                             </div>
                         </div>
-                    </div>
-                   
-                
-                </div>
-                </div>
-                
-                <div class="col s12 m7">
-
- <!-- send money to wallet  -->
-
- <div class="card inline-block w-100">
-                   
-                
-    <div class="card-content cst-mwallet">
-        <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
-        <br/>
-        <span>we pay high fees when you add money to wllet , hence we charge 2% when you take this money to your bank account</span>
-        <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
-        <ng-template #transfertemp>
-     
-    </ng-template>
-        <ng-template #fetchtemp>
-            <div class="value-transfer col s12 m12 margin-top">
-                <form class="" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
-                    <div class="row">
-                        <div class="col s1"><label class="lbl-num"> <span class="fa fa-inr"></span> </label> </div>
-                        <div class="col s11">
-                        <input id="first_name" type="number" placeholder="AMOUNT" class="validate" name="amoutn" [(ngModel)]="fetch_user.phone">
+                        <div *ngIf="step == 3">
+                            <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
+                            <br/>
+                            <span>we pay high fees when you add money to wllet , hence we charge 2% when you take this money to your bank account</span>
+                            <br/>
+                            <form [formGroup]="user_tobank" class="margin-top sec-7 " #userform = "ngForm" (ngSubmit)="user_tobank_submit(userform.value)">
+                                <input id="first_name" type="number" placeholder="Enter Amount"  class="validate" formControlName="amount">
+                                <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
+                            </form>
                         </div>
-                        
-                        
-                    <div class="input-field col s12 center">
-                        <p class="cst-fix-terms">
-                            By Proceeding I agree to the additional 2% charges applicable on this transaction</p>
-                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
-                    </div>
-                </div>
-                </form>
-            </div>
-        </ng-template>
-      
-    </div>
-   
-
-</div>
-                </div>
-
-
-                <div class="col s12 m5">
-
-                    <!-- send money to wallet  -->
-                   
-                    <div class="card inline-block w-100">
-                                      
-                                   
-                       <div class="card-content" *ngIf="!order_id">
-                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
-                           <br/>
-                           <span>we pay high fees when you add money to wllet , hence we charge 2% when you take this money to your bank account</span>
-                           <div class="work" *ngIf="step==1;then fetchtemp else transfertemp"></div>
-                           <ng-template #transfertemp>
-                        
-                       </ng-template>
-                           <ng-template #fetchtemp>
-                               <div class="value-transfer col s12 m12 margin-top">
-                                   <form class="" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
-                                       <div class="row">
+                        <div *ngIf="step == 4">
+                                <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
+                                <div class="value-transfer col s12 m12 margin-top">
+                                   <div class="row">
                                            <div class="col s1"><label class="lbl-num"> <span class="fa fa-inr"></span> </label> </div>
                                            <div class="col s11">
                                                <div class="inner-rate">
-                                           <input id="first_name" type="number" placeholder="AMOUNT"  class="validate" name="amoutn" value="100">
+                                           <input id="first_name" type="number" placeholder="AMOUNT"  class="validate" name="amoutn" value="{{this.user_data.amount}}" (keyup)="change_amount($event.target.value)">
                                            <span class="fa fa-plus cst-plus-bg"> </span>
                                         </div>
                                         <div class="money-wallet">   
                                         <div class="extra-rate-1"> 
                                             <p>Charge</p>
-                                            <span class="fa fa-inr"></span>. 55   =
+                                            <span class="fa fa-inr"></span>{{this.user_data.surcharge}}   =
                                         </div>
-                                       
-                                        <div class="extra-rate-2"> 
+                                       <div class="extra-rate-2"> 
                                             <p>Net Payable</p>
-                                            <span class="fa fa-inr"></span> 11.55 
+                                            <span class="fa fa-inr"></span>{{ 1* this.user_data.amount + 1* this.user_data.surcharge}} 
                                         </div>
 
                                         </div>
                                         </div>
-                                           <span class="error-rtext">Please enter a valid amount between <span class="fa fa-inr"></span> 100 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
-                                           
-                                       <div class="input-field col s12 center">
+                                           <span class="error-rtext" *ngIf="this.user_data.amount < 100">Please enter a valid amount between <span class="fa fa-inr"></span> 100 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
+                                        <div class="input-field col s12 center">
                                            <p class="cst-fix-terms">
                                                By Proceeding I agree to the additional 2% charges applicable on this transaction</p>
-                                           <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
+                                           <button type="button" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" (click)="this.goto_step(5)"> Proceed </button>
                                        </div>
                                    </div>
-                                   </form>
                                </div>
-                           </ng-template>
-                         
-                       </div>
-                      
-                   
-                   </div>
-                                   </div>
-                                   <div class="col s12 m7">
-
-                                    <!-- send money to wallet  -->
-                                   
-                                    <div class="card inline-block wt-100">
-                                                      
-                                                   
-                                       <div class="card-content cst-mwallet">
-                                           <div class="row">
-                                               <div class="col s6 m8">
-                                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Select a Saved Bank Account  </h4>
-                                           </div>
-                                           <div class="col s6 m4">
-                                            <button class="btn border-btn">Add&nbsp;New </button>
-                                           </div>
-                                           </div>
-                                       
-                                           <div class="bank-list">
-                                              <div class="row ">
-                                                  <div class="col s2">
-                                                      <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
-                                                  </div> 
-                                                  <div class="col s10 border-bottom">
-                                                      <h4 class="user-name">Praveen Jain </h4>
-                                                      <p class="act-txt">A/C No. XX XX 1317 </p>
-                                                  </div>
-                                              </div>
-                                              <div class="row ">
-                                                <div class="col s2">
-                                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
-                                                </div> 
-                                                <div class="col s10 border-bottom">
-                                                    <h4 class="user-name">Praveen Jain </h4>
-                                                    <p class="act-txt">A/C No. XX XX 1317 </p>
-                                                </div>
-                                            </div>
-                                            <div class="row ">
-                                                <div class="col s2">
-                                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
-                                                </div> 
-                                                <div class="col s10 border-bottom">
-                                                    <h4 class="user-name">Libanz International </h4>
-                                                    <p class="act-txt">A/C No. XX XX 1984 </p>
-                                                </div>
-                                            </div>
-                                           </div>
-                                          
-                                         
-                                       </div>
-                                      
-                                   
-                                   </div>
-                                                   </div>
-                
-                                                   <div class="col s12 m5">
-
-                                                    <!-- add new bank account  -->
-                                                   
-                                                    <div class="card inline-block wt-100">
-                                                                      
-                                                                   
-                                                       <div class="card-content">
-                                                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Add New Bank Account  </h4>
-                                                           <br/>
-                                                           <div class="form-group">
-
-                                                            <input type="text" class="form-control" placeholder="Enter Account Number"/>
-                                                           </div>
-                                                           <div class="form-group">
-
-                                                            <input type="text" class="form-control" placeholder="Enter IFSC Code"/>
-
-                                                            <span class="ifsc-txt">Find IFSC</span>
-                                                           </div>
-                                                           <div class="form-group">
-
-                                                            <input type="text" class="form-control" placeholder="Account Holder's  Name"/>
-                                                           </div>
-
-                                                           <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
-                                                         
-                                                       </div>
-                                                      
-                                                   
-                                                   </div>
-                                                                   </div>
-
-
-                                                                   <div class="col s12 m7">
-
-                                                                    <!-- send money to wallet  -->
-                                                                   
-                                                                    <div class="card inline-block wt-100">
-                                                                                      
-                                                                                   
-                                                                       <div class="card-content cst-mwallet">
-                                                                           <div class="row">
-                                                                               <div class="col s12 m12">
-                                                                           <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money from Wallet to  </h4>
-                                                                           </div>
-                                                                           
-                                                                           </div>
-                                                                       
-                                                                           <div class="bank-list">
-                                                                              <div class="row ">
-                                                                                 
-                                                                                  <div class="col s10">
-                                                                                      <h4 class="user-name"><strong> PRAVEEN JAIN </strong> </h4>
-                                                                                      <p class="act-txt">PHONE PAY BANK XX XX 1317 </p>
-                                                                                  </div>
-                                                                                  <div class="col s2">
-                                                                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img img-circle1">
-                                                                                </div> 
-                                                                              </div>
-                                                                            
-                                                                           
-                                                                           </div>
-
-                                                                           <div class="row acount-box">
-
-                                                                            <div class="col s10">
-                                                                                <p>Amunt to be sent </p>
-                                                                            </div>
-                                                                            <div class="col s2">
-                                                                                <span class="fa fa-inr"></span> 100
-                                                                            </div>
-
-                                                                           </div>
-                                                                          
-                                                                           <div class="row acount-box">
-
-                                                                            <div class="col s10">
-                                                                                <p> Charge &nbsp; <span class="fa fa-info-circle"></span> </p>
-                                                                            </div>
-                                                                            <div class="col s2">
-                                                                                <span class="fa fa-inr"></span> 5
-                                                                            </div>
-
-                                                                           </div>
-                                                                           <div class="row acount-box total-block">
-                                                                           
-                                                                            <div class="col s10">
-                                                                                <p class="total-txt"> Total Payable  </p>
-                                                                            </div>
-                                                                            <div class="col s2">
-                                                                                <span class="fa fa-inr"></span> 105 
-                                                                            </div>
-
-                                                                           </div>
-
-                                                                       </div>
-                                                                      
-                                                                   
-                                                                   </div>
-                                                                                   </div>
-                                                                                   <div class="col s12 m5">
-
-                                                                                    <!-- add new bank account  -->
-                                                                                   
-                                                                                    <div class="card inline-block wt-100">
-                                                                                                      
-                                                                                                   
-                                                                                                <div class="card-content1">
-                                                                                                    <div class="row money-sent-box">
-
-                                                                                                        <h4 class="money-txt" style="color:#fff; font-size:18px; padding:10px;"> Money Sent To Bank Successfully  </h4>
-                                                                                                              <h3 class="rupee-txt"><span class="fa fa-inr"></span> 100</h3>
-                                                                                                        <p class="rupee-txt">Rupees One Hundred only </p>
-
-                                                                                                        <button class="btn cst-view-btn">View Detils </button>
-                                                                                                    </div>
-                                                                                                    <div class="pass-detail">
-                                                                                                        <p class="wallet-bal">Updated Libanz Wallet Balance <span class="fa fa-inr"></span> 140  </p>
-                                                                                                    </div>
-
-                                                                                                    <div class="inner-passbook">
-                                                                                                        <ul class="inr-txt">
-                                                                                                            <li> <a href="#"><span class="fa fa-book"></span> &nbsp; View Passbook  </a> </li>
-                                                                                                       
-                                                                                                            <li> <a href="#"><span class="fa fa-edit"></span> &nbsp; Add Money To Libanz Wallet  </a> </li>
-
-                                                                                                            <li> <a href="#"><span class="fa fa-info-circle"></span> &nbsp; 24 x 7 Help  </a> </li>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                
-                                                                                            
-                                                                                   </div>
-                                                                                                   </div>                                                                                
-
-                
+                            </div>
+                            <div *ngIf="step == 5">
+                                <div class="col s6 m8">
+                                <h4 class="money-txt" style="color:#333; font-size:18px;"> Select a Saved Bank Account  </h4>
                                 </div>
-            </div>
+                                <div class="col s6 m4">
+                                <button class="btn border-btn" (click)="this.goto_step(6)">Add&nbsp;New </button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="bank-list" *ngIf="this.user_banks">
+                                    <div class="row" *ngFor="let item of this.user_banks">
+                                        <div class="col s3">
+                                            <mat-radio-button name="select_user_bank" value="{{item.id}}"><img src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{item.icon}}" class="responsive-img img-circle1"></mat-radio-button>
+                                        </div> 
+                                        <div class="col s9 border-bottom">
+                                            <h4 class="user-name">{{item.holder_name}} </h4>
+                                            <p class="act-txt">A/C No. XX XX {{item.last_4_acc}} </p>
+                                        </div>
+                                    </div>
+                                    <button class="btn white-text orange" (click)="proceed_to_choose_bank()">Proceed</button>
+                                </div>
+                                <div class="no-found-list" *ngIf="!this.user_banks">No Bank Added</div> 
+                            </div>
+                            <div *ngIf="step == 6">
+                                    <h4 class="money-txt" style="color:#333; font-size:18px;"> Add New Bank Account  </h4>
+                                    <br/>
+                                    <form [formGroup]="bankgroup" class="margin-top sec-7 " #bankform = "ngForm" (ngSubmit)="add_bank(bankform.value)">
+                                        <div class="form-group">    
+                                            <mat-form-field>
+                                                <mat-select placeholder="Select Bank" formControlName="bank_id">
+                                                    <span *ngFor="let item of all_banks">
+                                                        <mat-option [value]="item.id">
+                                                            <span *ngIf="item.icon != ''"><img class="operator-img" src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{item.icon}}"></span><span class="operator-name">{{ item.bank_name }}</span>
+                                                        </mat-option>
+                                                    </span> 
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>    
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Enter Account Number" formControlName="account_no"/>
+                                        </div>
+                                        <div class="form-group">
+                        
+                                        <input type="text" class="form-control" placeholder="Enter IFSC Code" formControlName="ifsc"/>
+                        
+                                        <span class="ifsc-txt">Find IFSC</span>
+                                        </div>
+                                        <div class="form-group">
+                        
+                                        <input type="text" class="form-control" placeholder="Account Holder's  Name" formControlName="holder_name"/>
+                                        </div>
+                                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" [disabled]="!bankgroup.valid" id="fetch-form"> Proceed </button>
+                                        <button type="button" class="btn grey white-text" id="fetch-form" (click)="this.goto_step(5)"> Back </button>
+                                                    
+                                    </form>
+                                    
+                                </div>
+                                <div *ngIf="step == 7">
+                                        <div class="row">
+                                            <div class="col s12 m12">
+                                        <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money from Wallet to  </h4>
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                        <div class="bank-list">
+                                            <div class="row ">
+                                                <div class="col s10">
+                                                    <h4 class="user-name"><strong> {{this.selected_bank[0].holder_name}} </strong> </h4>
+                                                    <p class="act-txt">{{this.selected_bank[0].bank_name}} XX XX {{this.selected_bank[0].last_4_acc}}  </p>
+                                                </div>
+                                                <div class="col s2">
+                                                <img src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{this.selected_bank[0].icon}}" class="responsive-img img-circle1">
+                                            </div> 
+                                            </div>
+                                        </div>
+                        
+                                        <div class="row acount-box">
+                        
+                                        <div class="col s10">
+                                            <p>Amunt to be sent </p>
+                                        </div>
+                                        <div class="col s2">
+                                            <span class="fa fa-inr"></span> {{this.user_data.amount}}
+                                        </div>
+                        
+                                        </div>
+                                        
+                                        <div class="row acount-box">
+                        
+                                        <div class="col s10">
+                                            <p> Charge &nbsp; <span class="fa fa-info-circle"></span> </p>
+                                        </div>
+                                        <div class="col s2">
+                                            <span class="fa fa-inr"></span> {{this.user_data.surcharge}}
+                                        </div>
+                        
+                                        </div>
+                                        <div class="row acount-box total-block">
+                                        
+                                        <div class="col s10">
+                                            <p class="total-txt"> Total Payable  </p>
+                                        </div>
+                                        <div class="col s2">
+                                            <span class="fa fa-inr"></span> {{this.user_data.amount*1 + this.user_data.surcharge*1}} 
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <button type="button" class="btn grey white-text" id="fetch-form" (click)="this.send_money_resuest()"> Confirm </button>
+                                        </div>
+                        
+                                    </div> 
+                                    <div *ngIf="step == 8">
+                                            <div class="row money-sent-box">
+                    
+                                                <h4 class="money-txt" style="color:#fff; font-size:18px; padding:10px;">Your Request is Placed Successfully.</h4>
+                                                        <h3 class="rupee-txt"><span class="fa fa-inr"></span> 100</h3>
+                                                <p class="rupee-txt">Rupees One Hundred only </p>
+                    
+                                                <button class="btn cst-view-btn">View Detils </button>
+                                            </div>
+                                            <div class="pass-detail">
+                                                <p class="wallet-bal">Updated Libanz Wallet Balance <span class="fa fa-inr"></span> 140  </p>
+                                            </div>
+                    
+                                            <div class="inner-passbook">
+                                                <ul class="inr-txt">
+                                                    <li> <a href="#"><span class="fa fa-book"></span> &nbsp; View Passbook  </a> </li>
+                                                
+                                                    <li> <a href="#"><span class="fa fa-edit"></span> &nbsp; Add Money To Libanz Wallet  </a> </li>
+                    
+                                                    <li> <a href="#"><span class="fa fa-info-circle"></span> &nbsp; 24 x 7 Help  </a> </li>
+                                                </ul>
+                                            </div>
+                                        </div>                  
+                            <!--#################-->
+                    </div>
+                </div>
+                </div>                                                                            
+    </div>
+</div>
 
                 
 
-        </div>
-    
-        <div class="row">
-            <img src="{{this.todoservice.base_url}}web-app/assets/images/kyc-inner-banner.png" class="responsive-img hide-img1" style="width: 90%; height: 130px; margin: 17px;"/>
-        </div>
     </div>
+
+    <div class="row">
+        <img src="{{this.todoservice.base_url}}web-app/assets/images/kyc-inner-banner.png" class="responsive-img hide-img1" style="width: 90%; height: 130px; margin: 17px;"/>
+    </div>
+</div>
 
    
 </section>

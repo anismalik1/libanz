@@ -1027,4 +1027,24 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/get_circles';
     return this.send_post_request(data,url) ;
   }
+  add_user_bank(data)
+  {
+    let url = this.server_url+'accounts/apis/home/add_user_bank';
+    return this.send_post_request(data,url) ; 
+  }
+  banks(data)
+  {
+    let url = this.server_url+'accounts/apis/home/banks';
+    return this.send_post_request(data,url) ; 
+  }
+  user_banks(data)
+  {
+    let url = this.server_url+'accounts/apis/home/user_banks';
+    return this.send_post_request(data,url) ; 
+  }
+  send_money_to_bank(data)
+  {
+    let url = this.server_url+'accounts/apis/home/send_money_to_bank';
+    return this.send_post_request(data,url) ; 
+  }
 }

@@ -4,6 +4,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 
 @Component({
   selector: 'app-value-transfer',
@@ -16,8 +17,14 @@ export class ValueTransferComponent implements OnInit{
   step : number = 1;
   fetch_user : any = {phone: '',name:'',id:''}; 
   recent_transfer : any;
+  user_tobank : FormGroup;
+  bankgroup : FormGroup;
+  user_data : any;
+  user_banks : any;
+  all_banks : any;
+  selected_bank : any;
   classes : any = ['circle-box1','circle-box2','circle-box3','circle-box2']; 
-  constructor(private spinner : NgxSpinnerService, vcr: ViewContainerRef,private toastr: ToastrManager,public todoservice : TodoService,private authservice : AuthService,private router : Router) {
+  constructor(private spinner : NgxSpinnerService,private fb: FormBuilder, vcr: ViewContainerRef,private toastr: ToastrManager,public todoservice : TodoService,private authservice : AuthService,private router : Router) {
    }
   ngOnInit() {
     if(!this.get_token())
@@ -30,6 +37,16 @@ export class ValueTransferComponent implements OnInit{
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
       return false;
     }
+    this.user_tobank = this.fb.group({
+      'amount' : [null,Validators.compose([Validators.required])],
+    });
+    this.bankgroup = this.fb.group({
+      'account_no' : [null,Validators.compose([Validators.required])],
+      'ifsc' : [null,Validators.compose([Validators.required])],
+      'holder_name' : [null,Validators.compose([Validators.required])],
+      'bank_id' : [null,Validators.compose([Validators.required])]
+    });
+
     if(this.todoservice.get_param('order_id'))
 		{
 			this.order_id = this.todoservice.get_param('order_id');
@@ -37,7 +54,110 @@ export class ValueTransferComponent implements OnInit{
 		}
     this.fetch_value_transfer(); 
   }
+  user_tobank_submit(form)
+  {
+    let surcharge = (2*form.amount)/100;
+    this.user_data = { amount : form.amount,surcharge:surcharge};
+    this.goto_step(4);
+  }
+  change_amount(amount)
+  {
+    let surcharge = (2*amount)/100;
+    this.user_data.surcharge = surcharge;
+    this.user_data.amount = amount;
+  }
 
+  proceed_to_choose_bank()
+  {
+    let bank_selected_id : number = $('[name="select_user_bank"]:checked').val() * 1;
+    this.user_data['bank_selected_id'] = bank_selected_id;
+    this.selected_bank = this.user_banks.filter(banks => banks.id == bank_selected_id);
+    this.step = 7;
+  }
+
+  send_money_resuest()
+  {
+      if(!this.get_token())
+      {
+        return false;
+      }	
+      this.spinner.show();
+		  this.todoservice.send_money_to_bank({token:this.get_token(),user_data : this.user_data})
+		  .subscribe( 
+			data => 
+			{
+        this.spinner.hide();
+        if(data.status == true)
+        {
+          this.toastr.infoToastr(data.msg);
+          this.step = 5;
+        }
+        else if(data.status == false)
+        {
+          this.toastr.errorToastr(data.msg);
+        }
+			}
+		) 
+  }
+
+  add_bank(form)
+  {
+    if(!this.get_token())
+		{
+			return false;
+    }	
+    this.spinner.show();
+		  this.todoservice.add_user_bank({token:this.get_token(),form : form})
+		  .subscribe( 
+			data => 
+			{
+        this.spinner.hide();
+        if(data.status == true)
+        {
+          this.toastr.infoToastr(data.msg);
+          this.step = 5;
+        }
+        else if(data.status == false)
+        {
+          this.toastr.errorToastr(data.msg);
+        }
+			}
+		) 
+  }
+  goto_step(step)
+  {
+    this.step = step;
+    if(step == 5)
+    {
+      if(!this.get_token())
+      {
+        return false;
+      }
+      this.spinner.show();	
+      this.todoservice.user_banks({token:this.get_token()})
+		  .subscribe( 
+			data => 
+			{
+        this.spinner.hide();
+				this.user_banks = data.user_banks;
+      })
+    }
+    else if(step == 6)
+    {
+      if(!this.get_token())
+      {
+        return false;
+      }	
+      this.spinner.show();
+      this.todoservice.banks({token:this.get_token()})
+		  .subscribe( 
+			data => 
+			{
+        this.spinner.hide();
+				this.all_banks = data.banks;
+      })
+    }
+  }
   back_to_transfer()
   {
     if(1 == 1)
@@ -199,6 +319,8 @@ export class ValueTransferComponent implements OnInit{
       this.router.navigate(['/proceed/login']);
     }
   }
+
+
 
   cancel()
   {
