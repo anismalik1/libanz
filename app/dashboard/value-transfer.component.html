@@ -226,7 +226,7 @@ margin: auto;
                     </div>
                 
                     <div class="card-content" *ngIf="!order_id">
-                        <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span><a href="javascript:" (click)="goto_step(1)">From Wallet to Wallet</a><a href="javascript:" (click)="goto_step(3)">From Wallet to Bank</a>
+                        <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span><a [className]="step==1?'active':''" href="javascript:" (click)="goto_step(1)">From Wallet to Wallet</a> OR <a [className]="step==3?'active':''" href="javascript:" (click)="goto_step(3)">From Wallet to Bank</a>
                         <br/>
                         
                         <div *ngIf="step == 2">
