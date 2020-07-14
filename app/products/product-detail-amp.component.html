@@ -1,8 +1,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <style stype="text/css">
 
+@media only screen and (max-width: 767px){
+.price-cut1 {
+    padding-bottom: 0px;
+    padding-top: 0;
+}
+}
 .list-data{
-		padding-top:6px;
+		
 		padding-bottom:10px; font-size:16px; color:#333;
 		z-index:99999;
 	}
@@ -637,7 +643,7 @@ ul#dropdown1 li {
                         <div class="rating-green" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate}} &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">{{product_rating(item.id)[0].rate_count}} </span>
                         <br/>
                         <p class="price-cut1 black-text" ><strong> Rs. {{item.offer_price}} </strong> &nbsp; <span class="del-pri">  {{item.price}} </span> </p>
-                        <p class="list-data pt-fix-20"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
+                        <p class="list-data"> <a [routerLink]="['/product/compare-box/']" [queryParams]= "{urls : item.url,ref:item.url}"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
                        
                     </div>
                 </div>
