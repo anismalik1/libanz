@@ -200,7 +200,7 @@ margin: auto;
             </div>
             <div class="col s12 m10">
                 <div class="row">
-                <div class="col s12 m5">
+                <div class="col s12 m6">
                <div class="card inline-block w-100">
                     <div class="card-content cst-invoice" *ngIf="order_id">
                         <div  class="mb-1">
@@ -209,7 +209,7 @@ margin: auto;
                         <ul *ngIf="order_data" class="font-li">
                             <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/pending.gif" style="width:40px;"></span></li>
                             <li class="cst-top-signle"><strong>Order Status: </strong> {{order_data.status}}</li>
-                            <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
+                            <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
                             <li><strong>Invoice No: </strong>  #{{order_data.id}} </li>
                             <li><strong>Amount: </strong> {{order_data.grand_total}}</li>
                             <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>

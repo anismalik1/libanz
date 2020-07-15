@@ -69,7 +69,7 @@ export class ValueTransferComponent implements OnInit{
 
   proceed_to_choose_bank()
   {
-    let bank_selected_id : number = $('[name="select_user_bank"]:checked').val() * 1;
+    let bank_selected_id : Number = Number($('[name="select_user_bank"]:checked').val());
     this.user_data['bank_selected_id'] = bank_selected_id;
     this.selected_bank = this.user_banks.filter(banks => banks.id == bank_selected_id);
     this.step = 7;
@@ -90,11 +90,20 @@ export class ValueTransferComponent implements OnInit{
         if(data.status == true)
         {
           this.toastr.infoToastr(data.msg);
-          this.step = 5;
+          this.order_id = data.order_id;
+           // this.toastr.successToastr(" Transfer is Successful", 'Success! ');
+            if(1 == 1)
+            {
+              this.router.routeReuseStrategy.shouldReuseRoute = function(){
+                return false;
+              }
+            }  
+            this.router.navigated = false;
+            this.router.navigate(['/dashboard/value-transfer'],{queryParams : {order_id : this.order_id}});
         }
         else if(data.status == false)
         {
-          this.toastr.errorToastr(data.msg);
+          this.toastr.errorToastr(data.error);
         }
 			}
 		) 

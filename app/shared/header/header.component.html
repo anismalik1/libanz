@@ -541,7 +541,7 @@ li.txt-fix-mb span a {
 											<!-- <button type="submit" class="btn-flat cst-hin"><i class="material-icons grey-text">search</i></button> -->
 												<span class="search-icn"><i class="material-icons grey-text">search</i></span>
 											<mat-form-field class="example-full-width test1 fix-input-place">
-												<input type="text" placeholder="Compare Dth Products for better choice.." class="no-margin black-text fix-inner-lbl"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
+												<input type="text" placeholder="Compare Dth Products for better choice.." id="mat-input-3" class="no-margin black-text fix-inner-lbl"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
 												<mat-autocomplete #auto="matAutocomplete">
 													<span *ngIf="filterdList">
 													<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
@@ -557,17 +557,17 @@ li.txt-fix-mb span a {
 					</li>
 					<li *ngIf="href && href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
 					<li class="craft relative">
-						<a routerLink="/product/cart"><img src="../../../assets/images/cart01.png" class="crft-icon-fix"><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
+						<a routerLink="/product/cart"><img src="./assets/images/cart01.png" class="crft-icon-fix"><span class="badge cart-text">{{this.productservice.cartItemsCount()}}</span></a>
 						<!-- <a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a> -->
 					</li>
 				
 					<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
-						<a routerLink="/product/favorites"><img src="./../../../assets/images/favorite-01.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
+						<a routerLink="/product/favorites"><img src="./assets/images/favorite-01.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count">{{this.productservice.favorite_count()}}</span></a>
 					</li>	
 						
 					<li class="craft relative" >
 						<!-- <a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a> -->
-						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2" ><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="./../../../assets/images/notification-01.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
+						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2" ><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="./assets/images/notification-01.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
 						<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
 							<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
 						</ul> -->
@@ -602,7 +602,7 @@ li.txt-fix-mb span a {
 							<div class="notification-drop-image">
 							<!-- <img src="{{this.todoservice.base_url}}web-app/assets/images/notify-favicon.png"> -->
 
-							<img src="../../../assets/images/icon-logo.png" class="responsive-img" style="width: 50px;
+							<img src="./assets/images/icon-logo.png" class="responsive-img" style="width: 50px;
 							margin: 10px;" >
 							</div>
 							<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
@@ -619,7 +619,7 @@ li.txt-fix-mb span a {
 					<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Log In/Sign Up </a></li>
 					
 					<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="white-text"><span class="no-margin font-size-change1 right-align fixed-margin" *ngIf="this.todoservice.get_user_wallet()"> 
-						<img src="../../../assets/images/wallet-icon.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span><div class="clearfix"></div><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted white-text bonus-amount absolute cst-bonus-txt"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></a>
+						<img src="./assets/images/wallet-icon.png" alt="wallet" class="responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span><div class="clearfix"></div><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted white-text bonus-amount absolute cst-bonus-txt"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></a>
 					</li>
 					<!-- <li>
 						<span class="cst-name">RG</span>

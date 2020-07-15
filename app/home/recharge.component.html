@@ -307,7 +307,7 @@ left:5%;
 							</p> 
 							<p class="col m2 col s12 recharge-content-box">
 								<input [type]="(this.options.apply_minimum_recharge <= 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(this.options.apply_minimum_recharge <= 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="((this.options.apply_minimum_recharge > 0 && this.rechargeData.recharge_amount * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1) ?false:true" [disabled]="((this.options.apply_minimum_recharge > 0 && this.rechargeData.recharge_amount * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)?true:false"/>
-								<label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"></label><span class="grey-text wallet-txt">Balance Rs.{{this.todoservice.get_user_wallet_amount()}} </span>   				
+								<label for="instant-recharge" class="black-text"><img width="25px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"></label><span class="grey-text wallet-txt">Balance Rs.{{this.todoservice.get_user_wallet_amount()}} </span>   				
 							</p> 
 							<p class="col s12 col m4 recharge-content-box">
 								<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/>

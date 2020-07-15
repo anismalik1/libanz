@@ -213,6 +213,8 @@ export class ProductsComponent implements OnInit{
   
   cat_filter(category,id)
   {
+    if(!category)
+      return false;
     let matched = category.filter(x => x.id == id);
     return matched;
   }
