@@ -231,8 +231,8 @@ margin: auto;
                         
                         <div *ngIf="step == 2">
                         <div class="value-transfer col s12 m12 margin-top">
-                            <form class="padd" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
-                            <table class="responsive-table1 striped bordered">
+                            <form class="padd" [formGroup]="valuetransfer" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
+                            <table class="responsive-table1 striped bordered"> 
                                 <tbody> 
                                     <tr>
                                         <td><span class="font600 font-size-change">Name</span></td>
@@ -246,13 +246,14 @@ margin: auto;
                                         <td><span class="font600 font-size-change" style="white-space: nowrap;">Enter Amount</span></td>
                                         <td>
                                         <div class="input-field">
-                                            <input id="amount" type="text" class="validate" maxlength="6" name="amount" ngModel>
+                                            <input id="amount" type="text" class="validate" maxlength="6" name="amount" formControlName="amount">
                                             <label for="amount">Enter Amount Here </label>
+                                            <div class="red-text accent-4" *ngIf="!valuetransfer.controls['amount'].valid && valuetransfer.controls['amount'].touched">Enter Valid Amount*.</div> 
                                         </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                    <td colspan="2"><button type="Submit" class="btn orange btn-value resp-btn">Transfer Now</button>
+                                    <td colspan="2"><button type="Submit" class="btn orange btn-value resp-btn" [disabled]="!valuetransfer.valid">Transfer Now</button>
                                         <!-- <button type="button" class="btn orange btn-value clc-btn" (click)="cancel()">Cancel</button></td> -->
                                     </tr>
                                 </tbody>    
@@ -287,7 +288,7 @@ margin: auto;
                         <div *ngIf="step == 3">
                             <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money From Wallet To  Bank  </h4>
                             <br/>
-                            <span>we pay high fees when you add money to wllet , hence we charge 2% when you take this money to your bank account</span>
+                            <span>we pay high fees when you add money to wllet , hence we charge 3% when you take this money to your bank account</span>
                             <br/>
                             <form [formGroup]="user_tobank" class="margin-top sec-7 " #userform = "ngForm" (ngSubmit)="user_tobank_submit(userform.value)">
                                 <input id="first_name" type="number" placeholder="Enter Amount"  class="validate" formControlName="amount">
@@ -316,18 +317,18 @@ margin: auto;
 
                                         </div>
                                         </div>
-                                           <span class="error-rtext" *ngIf="this.user_data.amount < 100">Please enter a valid amount between <span class="fa fa-inr"></span> 100 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
+                                           <span class="error-rtext" *ngIf="this.user_data.amount < 1000">Please enter a valid amount between <span class="fa fa-inr"></span> 1000 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
                                         <div class="input-field col s12 center">
                                            <p class="cst-fix-terms">
-                                               By Proceeding I agree to the additional 2% charges applicable on this transaction</p>
-                                           <button type="button" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" (click)="this.goto_step(5)"> Proceed </button>
+                                               By Proceeding I agree to the additional 3% charges applicable on this transaction</p>
+                                           <button type="button" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" (click)="this.goto_step(5)" [disabled]="(this.user_data.amount < 100)?true:false"> Proceed </button>
                                        </div>
                                    </div>
                                </div>
                             </div>
                             <div *ngIf="step == 5">
                                 <div class="col s6 m8">
-                                <h4 class="money-txt" style="color:#333; font-size:18px;"> Select a Saved Bank Account  </h4>
+                                <h4 class="money-txt" style="color:#333; font-size:18px;" *ngIf="this.user_banks"> Select a Saved Bank Account  </h4>
                                 </div>
                                 <div class="col s6 m4">
                                 <button class="btn border-btn" (click)="this.goto_step(6)">Add&nbsp;New </button>
@@ -336,7 +337,7 @@ margin: auto;
                                 <div class="bank-list" *ngIf="this.user_banks">
                                     <div class="row" *ngFor="let item of this.user_banks">
                                         <div class="col s3">
-                                            <mat-radio-button name="select_user_bank" value="{{item.id}}"><img src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{item.icon}}" class="responsive-img img-circle1"></mat-radio-button>
+                                            <mat-radio-button name="select_user_bank" value="{{item.id}}" [checked]="(this.selected_bank && this.selected_bank == item.id)?true:false"><img src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{item.icon}}" class="responsive-img img-circle1"></mat-radio-button>
                                         </div> 
                                         <div class="col s9 border-bottom">
                                             <h4 class="user-name">{{item.holder_name}} </h4>
@@ -363,7 +364,7 @@ margin: auto;
                                             </mat-form-field>
                                         </div>    
                                         <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Enter Account Number" formControlName="account_no"/>
+                                        <input type="number" class="form-control" placeholder="Enter Account Number" formControlName="account_no"/>
                                         </div>
                                         <div class="form-group">
                         

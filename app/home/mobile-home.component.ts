@@ -532,7 +532,7 @@ export class MobileHomeComponent implements OnInit {
                         window.cordova.getAppVersion.getVersionCode(function(version){
                             if(version *1 < window.appversion *1)
                             {
-                                this.open_update_popup()
+                                window.me.open_update_popup()
                             }  
                         });  
                     }

@@ -33,6 +33,11 @@ export class ComplaintBoxComponent implements OnInit{
     } 
     this.route.params.subscribe(params => {
       this.type = params['name']; //log the value of id
+      if(this.type.length > 3)
+      {
+        $('#ticket-id').val(this.type);
+        this.seach_ticket();
+      }
       this.fetch_complaints(this.type,1);
     });
     $(document).ready(function() {

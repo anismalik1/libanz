@@ -148,6 +148,7 @@ export class HeaderComponent implements OnInit{
       this.user_notification(this.start);
       this.user_favourites();
       this.get_circles();
+      this.device_registered();
     }  
 
     region_selected()
@@ -183,13 +184,51 @@ export class HeaderComponent implements OnInit{
         }
       )
     }
+
+  device_registered()
+  {
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      window.me = this;
+      window.FirebasePlugin.getToken(function(token) {
+        window.device_registered_token = token;
+      }, function(error) {
+          console.error(error);
+      });
+
+      window.FirebasePlugin.onNotificationOpen(function(notification) {
+        //console.log(notification);
+        window.me.router.navigate([notification.go_link]);
+        // if(notification.activity == '0' || notification.activity == '5' || notification.activity == '15' || notification.activity == '16' || notification.activity == '18')
+        // {
+        //   window.me.router.navigate(['/dashboard/orders']);
+        // }
+        // else if(notification.activity == '1' || notification.activity == '15' || notification.activity == '17')
+        // {
+        //   window.me.router.navigate(['/orders/recharge-receipt/'+notification.order_id]);
+        // }
+        // else if(notification.activity == '2' || notification.activity == '3' || notification.activity == '4' || notification.activity == '6' || notification.activity == '7' || notification.activity == '8' || notification.activity == '14' || notification.activity == '19')
+        // {
+        //   window.me.router.navigate(['/dashboard/transactions']);
+        // }
+        // else if(notification.activity == '10' || notification.activity == '6' || notification.activity == '7' || notification.activity == '8')
+        // {
+        //   window.me.router.navigate(['/dashboard/complaints']);
+        // }
+
+      }, function(error) {
+          console.error(error);
+      });
+    }
+  }
     check_device()
     {
       if(document.URL.indexOf('android_asset') !== -1)
       {
+        this.device_registered();
         if(window.device)
         {
-          let data : any ={ device : window.device.uuid};
+          let data : any ={ device : window.device.uuid,device_token : window.device_registered_token};
           let storeddata = JSON.parse(localStorage.getItem('device'));
           if(storeddata != null)
           { 
@@ -219,7 +258,6 @@ export class HeaderComponent implements OnInit{
                 }
                 if(data.status == 1 || data.status == 2)
                 {
-
                   localStorage.setItem('device',JSON.stringify(storeddata));
                 }
                   
@@ -288,6 +326,8 @@ export class HeaderComponent implements OnInit{
     return input;
   }
 
+  
+
   login_submit(login,me)
   {
     if(!me)
@@ -295,6 +335,8 @@ export class HeaderComponent implements OnInit{
     if(document.URL.indexOf('android_asset') !== -1)
     {
       login.device = 'android';
+      login.device_id = window.device.uuid;
+      login.device_registered_token = window.device_registered_token ;
     }
     if(me.step == 2)
       {

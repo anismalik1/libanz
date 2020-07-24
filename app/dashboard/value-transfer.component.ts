@@ -19,10 +19,11 @@ export class ValueTransferComponent implements OnInit{
   recent_transfer : any;
   user_tobank : FormGroup;
   bankgroup : FormGroup;
+  valuetransfer : FormGroup;
   user_data : any;
   user_banks : any;
   all_banks : any;
-  selected_bank : any;
+  selected_bank : any ;
   classes : any = ['circle-box1','circle-box2','circle-box3','circle-box2']; 
   constructor(private spinner : NgxSpinnerService,private fb: FormBuilder, vcr: ViewContainerRef,private toastr: ToastrManager,public todoservice : TodoService,private authservice : AuthService,private router : Router) {
    }
@@ -46,6 +47,9 @@ export class ValueTransferComponent implements OnInit{
       'holder_name' : [null,Validators.compose([Validators.required])],
       'bank_id' : [null,Validators.compose([Validators.required])]
     });
+    this.valuetransfer = this.fb.group({
+      'amount' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]+")])],
+    });
 
     if(this.todoservice.get_param('order_id'))
 		{
@@ -56,13 +60,13 @@ export class ValueTransferComponent implements OnInit{
   }
   user_tobank_submit(form)
   {
-    let surcharge = (2*form.amount)/100;
+    let surcharge = (3*form.amount)/100;
     this.user_data = { amount : form.amount,surcharge:surcharge};
     this.goto_step(4);
   }
   change_amount(amount)
   {
-    let surcharge = (2*amount)/100;
+    let surcharge = (3*amount)/100;
     this.user_data.surcharge = surcharge;
     this.user_data.amount = amount;
   }
@@ -124,7 +128,8 @@ export class ValueTransferComponent implements OnInit{
         if(data.status == true)
         {
           this.toastr.infoToastr(data.msg);
-          this.step = 5;
+          this.selected_bank = data.insert_id;
+          this.goto_step(5);
         }
         else if(data.status == false)
         {
@@ -135,6 +140,13 @@ export class ValueTransferComponent implements OnInit{
   }
   goto_step(step)
   {
+    if(step == 5)
+    {
+      if(this.user_data.amount < 100)
+      {
+        return false;
+      }
+    }  
     this.step = step;
     if(step == 5)
     {

@@ -556,17 +556,12 @@ float: right;
                                 </div>
                                 
                               </div>
-                              
-                              
-                              
-                            <div class="col s12 m12" *ngIf="this.add_data.proceed == 2">
+                              <div class="col s12 m12" *ngIf="this.add_data.proceed == 2">
                                 <div class="row">
-                                    
                                   <div class="top-logo-block">
-                                 <img src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png"/>
+                                    <img src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png"/>
                                     <h4>Add Money to wallet <span class="amt-inr"><span class="fa fa-inr"></span> {{this.add_data.amount}} </span></h4>
                                   </div>
-                          
                                   <div class=" bottom-option">
                                     <div class="col s12 add-money-history">
                                         <div id="method-selected">
@@ -574,7 +569,6 @@ float: right;
                                             <i class="material-icons orange-text">check_circle</i>&nbsp;
                                             <label for="funddd" class="black-text nttf-txt">NEFT/IMPS/RTGS/FUND TRANSFER</label>
                                           </div>
-                                        
                                         </div>
                                         <div class="default-hide" *ngIf="this.add_data.paymethod == 'FUND TRANSFER' || this.add_data.paymethod == 'Cash Deposit'">
                                             <div class="row" >

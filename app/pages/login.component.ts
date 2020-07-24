@@ -67,6 +67,7 @@ constructor( public todoservice : TodoService,
   {
     this.todoservice.set_user_data({name:''});
   }
+  
  }
 ngOnInit() {
   this.ini_list()
@@ -78,8 +79,20 @@ ngOnInit() {
       this.router.navigate(['/']);
     }
     this.fetch_page_data();
+  this.device_registered()  
 }
 
+device_registered()
+{
+  if(document.URL.indexOf('android_asset') !== -1)
+  {
+    window.FirebasePlugin.getToken(function(token) {
+      window.device_registered_token = token;
+    }, function(error) {
+        console.error(error);
+    });
+  }
+}
 
 fetch_page_data()
  {
@@ -117,6 +130,8 @@ login_submit(login,me)
     if(document.URL.indexOf('android_asset') !== -1)
     {
       login.device = 'android';
+      login.device_id = window.device.uuid;
+      login.device_registered_token = window.device_registered_token ;
     }
     if(this.step == 2)
     {

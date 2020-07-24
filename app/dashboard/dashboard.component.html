@@ -55,9 +55,6 @@ padding-top:15px;
 .cst-table tr td {
     border: 1px solid #e2e2e2;
 }
-.cst-table{
-    white-space: nowrap;
-}
 tr.ng-star-inserted {
     border-bottom: 1px solid #bbb9b9;
 }
@@ -230,10 +227,10 @@ font-weight: bold;
 										<span class="fa fa-download download-sq-1"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Orders </span>
+										<span class="card-title inline-block font-size-change1 font-20">Orders ({{sales_obj.order_count}})</span>
 									
 										<div class="slaes-rup margin-top-cart">
-											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.cashback_sale + this.sales_obj.promo_sale}}</span>
+											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.order_sale}}</span>
 										</div>
 
 									</div>
@@ -242,16 +239,14 @@ font-weight: bold;
 						</div>
 						<div class="col s12 m3">
 							<div class="card cashback-box ">
-							
-
 									<div class="col s3 left-sq-2">
 										<span class="fa fa-edit download-sq-1"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Tickets ({{sales_obj.order_count}})</span>
+										<span class="card-title inline-block font-size-change1 font-20">Tickets</span>
 									
 										<div class="slaes-rup margin-top-cart">
-											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.order_sale }}</span>
+											<span class="font-size-change2">{{sales_obj.ticket_count}}</span>
 										</div>
 
 									</div>
@@ -267,10 +262,10 @@ font-weight: bold;
 										<span class="fa fa-diamond download-sq-2"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Cashback ({{sales_obj.recharge_count}}) </span>
+										<span class="card-title inline-block font-size-change1 font-20">Cashback ({{sales_obj.cashback_count}}) </span>
 									
 										<div class="slaes-rup margin-top-cart">
-											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.recharge_sale}}</span>
+											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.cashback_sale}}</span>
 										</div>
 
 									</div>
@@ -286,10 +281,10 @@ font-weight: bold;
 										<span class="fa fa-gift download-sq-1"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Bonus </span>
+										<span class="card-title inline-block font-size-change1 font-20">ADD MONEY({{this.sales_obj.addmoney_count}})</span>
 									
 										<div class="slaes-rup margin-top-cart">
-											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.cashback_sale + this.sales_obj.promo_sale}}</span>
+											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.addmoney}}</span>
 										</div>
 
 									</div>
@@ -405,7 +400,7 @@ font-weight: bold;
 	
 				<div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
 					<div class="row">
-						<div class="col m9 s9"><h3 class="font600 inline-block">Orders </h3></div>
+						<div class="col m9 s9"><h3 class="font600 inline-block">Recent Orders </h3></div>
 						<div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
 					</div>
 					
@@ -430,17 +425,16 @@ font-weight: bold;
 						<tfoot>
 								<tr>
 									<th>S.No </th>
-										<th >Order No</th>
-										<th> Product </th>
-										<th >Amount</th>
-										<th>Date </th>
-										<th>Subscriber ID</th>
-										<th >Remarks</th>
-										<th >C.Address</th>
-										<th>Payment Method</th>
-										<th >Order Status</th>
-										<th>Pyament Status </th>
-										<th >C.Address</th>
+									<th >Order No</th>
+									<th> Product </th>
+									<th >Amount</th>
+									<th>Date </th>
+									<th>Subscriber ID</th>
+									<th >Remarks</th>
+									<th >C.Address</th>
+									<th>Payment Method</th>
+									<th >Order Status</th>
+									<th>Pyament Status </th>
 								</tr>
 						</tfoot>
 						<tbody>
@@ -466,7 +460,39 @@ font-weight: bold;
 				</table>
 			</div>
 		</div>
-				 
+		
+		<div class="card-content">
+			<h3 class="font600 inline-block pt-top-mb"><span class="fa fa-edit"></span> &nbsp; Recent ADDMONEY AND Value Transfer</h3>
+			<!-- <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a> -->
+			<div class="overflow-scroll cst-table">
+					<table id="datatable" class="table display  datatable-example">
+							<thead>
+									<tr>
+										 	<th >S.No.</th>
+											<th >Order Id</th>
+											<th >Order Date</th>
+											<th >Amount</th>
+											<th >Commission/Surcharge</th>
+											<th >Payment Type</th>
+											<th >TXN ID</th>
+											<th >Status</th>
+									</tr>
+							</thead>
+						 	<tbody *ngIf="topups">			
+									<tr *ngFor="let topup of topups; let i = index">
+											<td nowrap="nowrap">{{i+1}}</td>
+											<td nowrap="nowrap">{{topup.id}}</td>
+											<td nowrap="nowrap">{{topup.history_time | date: date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
+											<td nowrap="nowrap"><i class="icon-inr"></i>{{topup.grand_total}}</td>
+											<td nowrap="nowrap">{{topup.commission_surcharge}}</td>
+											<td nowrap="nowrap">{{topup.payment}}</td>
+											<td nowrap="nowrap">{{topup.transaction_id}}</td>
+											<div [innerHTML]="this.todoservice.order_template(topup.status)"></div>
+									</tr>  
+							</tbody>	
+					</table>
+			</div>
+	</div>
 
 			<!-- <div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
 				<div class="row">
@@ -541,33 +567,7 @@ font-weight: bold;
 
 		
 		</div>
-		<div id="complaints" class="modal complaint-modal">
-			<div class="modal-content">
-			  <h3 class="font600">Add Complaint</h3>
-			  <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
-			  <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
-			  <form>
-				<div class="row no-margin">
-				  <div class="input-field col s12">
-					<select>
-					  <option value="" disabled selected>Choose your option</option>
-					  <option value="1">Balance did not receive by customer</option>
-					  <option value="2">Wrong Opreater but correct recharge No/ID</option>
-					  <option value="3">Wrong Recharge No/ID but correct opreater </option>
-					  <option value="4">Other</option>
-					</select>
-				  </div>
-				  <div class="input-field col s12">
-					<textarea id="textarea1" class="materialize-textarea"></textarea>
-					<label for="textarea1" class="font-size-change">Description</label>
-				  </div>
-				</div>
-			  </form>
-			</div>
-			<div class="modal-footer orange center">
-			  <a href="javascript:" class="modal-action btn-flat white-text font-size-change" (click)="add_complaint()">Register</a>
-			</div>
-		  </div>
+
 	</section>
 	
 	<app-footer-min></app-footer-min>

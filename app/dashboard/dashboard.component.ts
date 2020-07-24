@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit{
   registration_obj : any ={total_register : 0}; 
   sales_obj : any = {}; 
   orders : any;
-  recharges : any;
+  topups : any;
   ranges: any = {
     'Last 7 Days': [moment().subtract(6, 'days'), moment(),'active'],
     'Today': [moment(), moment()],
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit{
         else
         {
           this.orders         = data.ORDERS;
-         // this.recharges      = data.RECHARGES;
+          this.topups         = data.ADDMONEYVALUEORDERS;
         }
       }
     ) 
@@ -119,15 +119,15 @@ export class DashboardComponent implements OnInit{
       return 2;
     }
   }
-
+  
   fetch_transactions()
   {
     this.spinner.show();
     var date = $('[name="daterange"]').val();
-    if(date == '')
+    if( date == '' )
     {
       date = moment().subtract(6, 'days').format('DD-MM-YYYY') +' To '+ moment().format('DD-MM-YYYY')
-      $('[name="daterange"]').val(date)
+      $('[name="daterange"]').val(date);
     }
 
     this.todoservice.fetch_transactions({date : date, token : this.get_token()})
@@ -147,50 +147,67 @@ export class DashboardComponent implements OnInit{
         }
       ) 
   }
+
+  sales_object_init()
+  {
+    this.sales_obj.order_sale       = 0;
+    this.sales_obj.order_count      = 0;
+    this.sales_obj.cashback_sale    = 0;
+    this.sales_obj.cashback_count   = 0;
+    this.sales_obj.ticket_count     = 0;
+    this.sales_obj.addmoney         = 0;
+    this.sales_obj.addmoney_count   = 0;
+  }
+
   filter_sales(sales_activity)
   {
-    this.sales_obj.recharge_sale  = 0;
-    this.sales_obj.order_sale     = 0;
-    this.sales_obj.cashback_sale  = 0;
-    this.sales_obj.promo_sale     = 0;
-    this.sales_obj.recharge_count = 0;
-    this.sales_obj.order_count    = 0;
-
-    let recharge_sale = sales_activity.filter(x => x.activity_type == 1);  // recharge sale
-    if(recharge_sale.length > 0 )
+    this.sales_object_init();
+    let morder_sale = sales_activity.filter(x => x.activity_type == 1 || x.activity_type == 5);  // recharge sale
+    if(morder_sale.length > 0 )
     {
-      this.sales_obj.recharge_count = recharge_sale.length;
-      for(var i = 0;i < recharge_sale.length;i++)
+      this.sales_obj.order_count = morder_sale.length;
+      for(var i = 0;i < morder_sale.length;i++)
       {
-        this.sales_obj.recharge_sale += Number(recharge_sale[i].amount); 
+        this.sales_obj.order_sale += Number(morder_sale[i].amount); 
+      }
+    } 
+
+    let tickets = sales_activity.filter(x => x.activity_type == 10);  // order sale
+    if(tickets.length > 0 )
+    {
+      this.sales_obj.ticket_count = tickets.length;
+      for(var i = 0;i < tickets.length;i++)
+      {
+        this.sales_obj.tickets +=  Number(tickets[i].amount); 
       }
     }
 
-    let order_sale = sales_activity.filter(x => x.activity_type == 5);  // order sale
-    if(order_sale.length > 0 )
-    {
-      this.sales_obj.order_count = order_sale.length;
-      for(var i = 0;i < order_sale.length;i++)
-      {
-        this.sales_obj.order_sale +=  Number(order_sale[i].amount); 
-      }
-    }
-
-    let cashback_sale = sales_activity.filter(x => x.activity_type == 8);  // cashback sale
+    let cashback_sale = sales_activity.filter(x => x.activity_type == 8 ||  x.activity_type == 14);  // cashback sale
     if(cashback_sale.length > 0 )
     {
+      this.sales_obj.cashback_count = cashback_sale.length;
       for(var i = 0;i < cashback_sale.length;i++)
       {
         this.sales_obj.cashback_sale += Number(cashback_sale[i].amount);
       }
     }
 
-    let promo_sale = sales_activity.filter(x => x.activity_type == 14);  // Promocodes 
-    if(promo_sale.length > 0 )
+    // let promo_sale = sales_activity.filter(x => x.activity_type == 14);  // Promocodes 
+    // if(promo_sale.length > 0 )
+    // {
+    //   for(var i = 0;i < promo_sale.length;i++)
+    //   {
+    //     this.sales_obj.promo_sale += Number(promo_sale[i].amount);
+    //   }
+    // }
+
+    let addmoney = sales_activity.filter(x => x.activity_type == 4);  // Promocodes 
+    if(addmoney.length > 0 )
     {
-      for(var i = 0;i < promo_sale.length;i++)
+      this.sales_obj.addmoney_count = addmoney.length;
+      for(var i = 0;i < addmoney.length;i++)
       {
-        this.sales_obj.promo_sale += Number(promo_sale[i].amount);
+        this.sales_obj.addmoney += Number(addmoney[i].amount);
       }
     }
   }
@@ -272,51 +289,45 @@ export class DashboardComponent implements OnInit{
     
   }
 
-  dashboard_content()
-  {
-    this.spinner.show();
-    if(this.authservice.retrieveToken())
-	  {
-      let data = {token : this.get_token()};
-      this.todoservice.dashboard_content(data)
-      .subscribe(
-        data => 
-        {
-          if(data.status == 'Invalid Token')
-          {
-            this.authservice.clear_session();
-            this.router.navigate(['/home']);
-          }
-          let b = JSON.stringify(data);
-          data =  JSON.parse(b.replace(/\\/g, ''));
-          if(!jQuery.isEmptyObject(data))
-          {
-            this.sales_obj.total_sum        = data.SALES[0].sales;
-            if(data.RECHARGES[0])
-            {
-              this.recharge_obj.total_orders  = data.RECHARGESALE[0].order_count;
-              this.recharge_obj.total_sum     = data.RECHARGESALE[0].total_sum;
-            }
+  // dashboard_content()
+  // {
+  //   this.spinner.show();
+  //   if(this.authservice.retrieveToken())
+	//   {
+  //     let data = {token : this.get_token()};
+  //     this.todoservice.dashboard_content(data)
+  //     .subscribe(
+  //       data => 
+  //       {
+  //         if(data.status == 'Invalid Token')
+  //         {
+  //           this.authservice.clear_session();
+  //           this.router.navigate(['/home']);
+  //         }
+  //         let b = JSON.stringify(data);
+  //         data =  JSON.parse(b.replace(/\\/g, ''));
+  //         if(!jQuery.isEmptyObject(data))
+  //         {
+  //           this.sales_obj.total_sum        = data.SALES[0].sales;
+  //           if(data.RECHARGES[0])
+  //           {
+  //             this.recharge_obj.total_orders  = data.RECHARGESALE[0].order_count;
+  //             this.recharge_obj.total_sum     = data.RECHARGESALE[0].total_sum;
+  //           }
             
-            this.products_obj.total_orders  = data.DTHORDERS[0].order_count;
-            this.products_obj.total_sum     = data.DTHORDERS[0].total_sum;
-            this.orders                     = data.ORDERS;
-            this.recharges                  = data.RECHARGES;
-          }
-          this.spinner.hide();
-        }
-      )  
-    }
-    else
-    {
-      this.router.navigate(['/home']);
-    }
-  }
-
-  add_complaint()
-  {
-    
-  }
+  //           this.products_obj.total_orders  = data.DTHORDERS[0].order_count;
+  //           this.products_obj.total_sum     = data.DTHORDERS[0].total_sum;
+  //           this.orders                     = data.ORDERS;
+  //         }
+  //         this.spinner.hide();
+  //       }
+  //     )  
+  //   }
+  //   else
+  //   {
+  //     this.router.navigate(['/home']);
+  //   }
+  // }
 
   get_token()
   {

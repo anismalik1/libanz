@@ -449,11 +449,7 @@ nav ul a:hover{
 	border-bottom: 1px solid #ff9001cf;
 	box-shadow: 0 1px 0 0 #ff9001cf;
 }
-nav .brand-logo img{
-	max-width: 170px;
-	padding-top: 4px;
-	width:100%;
-}
+nav .brand-logo img{width: 100%;max-width: 150px}
 #modal-update {z-index: 9999999!important}
 .continue{
 	background: #ff9001cf;
@@ -593,7 +589,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 .search-input input{
   border: 2px solid #FF6A00 !important;
 	text-indent: 5rem;
-	border-radius: 20px !important;
 	color: #000 !important;
 	/* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08) !important;   */
   font-size: 1.2rem !important;
@@ -663,7 +658,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 	text-align: center;
 	border: 1px solid transparent;
 	color: #fff;
-	background: #ff6a00;
+	background: #d61f0a;
 	border-radius: 50%;
 	position: absolute;
 	right: 2%;
@@ -4781,13 +4776,13 @@ i.material-icons.black-text {
 ul.lSPager.lSpg {
     margin: 0px !important;
 }
-/* .mobile-search .mobile-search-icon {
+.mobile-search .mobile-search-icon {
     position: absolute;
     right: -20px;
     top: 3px;
     color: #333;
 
-} */
+}
 
 /* .cst-bg-color{
 
@@ -5030,7 +5025,7 @@ span.fa.fa-star.pull-right.icn-clr1:hover {
 }
 .balance{
 
-	padding-top:0px;
+	padding-top:15px;
 	padding-right:30px;
 }
 
@@ -5207,10 +5202,7 @@ a.logup.modal-trigger.black-text {
     white-space: nowrap;
 }
 .mat-form-field-wrapper {
-	padding: 0px !important;
-    position: relative;
-    top: -70px;
-    margin-left: -10px;
+    padding: 0px !important;
 }
 a.logup.modal-trigger.black-text {
     border-radius: 20px;
@@ -6516,10 +6508,10 @@ div#login-page-otps input {
 .cst-bonus-txt{
 
 	z-index: 9999;
-    top:0;
+    top: 15px;
     padding-left: 43px;
 	font-size: 13px;
-	color: #ff6a00 !important;
+	color: #fff !important;
 
 }
 
@@ -6821,10 +6813,10 @@ ul.inr-txt li a {
 
 @media only screen and (max-width: 767px){
 
-	/* .search-box .mat-form-field-infix label {
+	.search-box .mat-form-field-infix label {
 		padding-left: 35px !important;
 		margin-top: -5px !important;
-	} */
+	}
 	ul#select-item li img {
 		width: 27px;
 		padding-top: 2px;
@@ -6835,17 +6827,17 @@ ul.inr-txt li a {
 	}
 }
 
-/* .header-strip {
+.header-strip {
     display: none;
-} */
-/* header.navigation.header {
+}
+header.navigation.header {
     background: #ff6a00;
 }
 .icon-hwhite{
 
 	color:#fff;
-} */
-/* #mat-input-1 {
+}
+#mat-input-1 {
     background: #fff;
     border-radius: 25px;
 }
@@ -6868,9 +6860,4 @@ ul.inr-txt li a {
 input#mat-input-3 {
     background: #fff;
     border-radius: 20px;
-} */
-.crft-icon-fix{
-
-	width: 24px;
-    padding-top: 19px;
 }
