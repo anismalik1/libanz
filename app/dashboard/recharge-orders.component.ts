@@ -169,7 +169,6 @@ export class RechargeOrdersComponent implements OnInit {
 
   check_val(val)
   {
-    console.log(val)
     if(typeof val == 'undefined')
       this.display = 2;
   }

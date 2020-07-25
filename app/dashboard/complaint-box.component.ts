@@ -2,8 +2,10 @@ import { Component, OnInit,Renderer2,Inject } from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router,ActivatedRoute } from '@angular/router'
+import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-complaint-box',
@@ -18,8 +20,12 @@ export class ComplaintBoxComponent implements OnInit{
   complaint_info : any ;
   type : string = 'all';
   p: number = 1;
+  display : number = 1;
+  complaintgroup : FormGroup;
   complaints_counts : number ;
-  constructor( private _renderer2: Renderer2,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { }
+  complaint_id : number;
+  recent_comments : any = [];
+  constructor( private _renderer2: Renderer2,private toastr : ToastrManager,private fb: FormBuilder,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { }
   ngOnInit() {
     if(!this.get_token())
     {
@@ -33,12 +39,13 @@ export class ComplaintBoxComponent implements OnInit{
     } 
     this.route.params.subscribe(params => {
       this.type = params['name']; //log the value of id
-      if(this.type.length > 3)
+      if(this.type && this.type.length > 3)
       {
         $('#ticket-id').val(this.type);
         this.seach_ticket();
       }
-      this.fetch_complaints(this.type,1);
+      else
+        this.fetch_complaints(this.type,1);
     });
     $(document).ready(function() {
         $('.filter-show').on('click',function(){
@@ -56,6 +63,77 @@ export class ComplaintBoxComponent implements OnInit{
       });
     `;
     this._renderer2.appendChild(this._document.body, script);
+    this.complaintgroup = this.fb.group({
+      'title' : [null,Validators.compose([Validators.required])]
+     });
+  }
+  init_complaint(id)
+  {
+    this.recent_comments = [];
+    this.complaint_id = id;
+  }
+  show_all_comment(id)
+  {
+    this.complaint_id = id;
+    this.spinner.show();
+    if(this.authservice.retrieveToken())
+    {
+      let data = { token : this.get_token() ,order_id : id };
+      this.todoservice.recent_comments(data)
+      .subscribe(
+        data => 
+        {
+          if(data == 'Invalid Token')
+          {
+            this.authservice.clear_session();
+            this.router.navigate(['/proceed/login']);
+          }
+          this.recent_comments = data.RECENT_COMMENT;
+          this.spinner.hide();
+        }
+      ) 
+    }  
+  }
+  reply_complaint(data)
+  {
+    if(!this.authservice.authenticate())
+    {
+        this.router.navigate(['/proceed/login']);
+        return;
+    }
+    this.spinner.show();
+    data.token = this.get_token();
+    data.order_id = this.complaint_id;
+    this.todoservice.add_complaint(data)
+		.subscribe(
+			data => 
+			{
+				this.spinner.hide();
+			  if(data.status == 'Invalid Token')
+			  {
+          this.authservice.clear_session();
+          this.router.navigate(['/proceed/login']);
+			  }
+			  if(!jQuery.isEmptyObject(data))
+			  {			
+          this.toastr.successToastr(data.msg);
+          let url = window.location.pathname;
+            if(url == url)
+            {
+              this.router.routeReuseStrategy.shouldReuseRoute = function(){
+                return false;
+             }
+              this.router.navigated = false;
+              this.router.navigate([url]);	
+			      }
+        }
+      }  
+		  );
+  }
+  check_val(val)
+  {
+    if(typeof val == 'undefined')
+      this.display = 2;
   }
   getPage(page)
   {
@@ -85,8 +163,6 @@ export class ComplaintBoxComponent implements OnInit{
             this.complaints = data.COMPLAINTS;
             this.complaints_counts = data.COUNTS;
           }
-
-          
         }
       )  
     } 

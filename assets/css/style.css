@@ -6841,6 +6841,9 @@ header.navigation.header {
     background: #fff;
     border-radius: 25px;
 }
+.recent-comments ul{
+	height: 150px;
+	overflow-y: scroll;}
 
 .crft-icon-fix{
 	width: 24px;

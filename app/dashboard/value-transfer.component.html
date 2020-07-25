@@ -200,7 +200,7 @@ margin: auto;
             </div>
             <div class="col s12 m10">
                 <div class="row">
-                <div class="col s12 m6">
+                <div class="col s12 m8">
                <div class="card inline-block w-100">
                     <div class="card-content cst-invoice" *ngIf="order_id">
                         <div  class="mb-1">
@@ -226,15 +226,15 @@ margin: auto;
                     </div>
                 
                     <div class="card-content" *ngIf="!order_id">
-                        <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span><a [className]="step==1?'active':''" href="javascript:" (click)="goto_step(1)">From Wallet to Wallet</a> OR <a [className]="step==3?'active':''" href="javascript:" (click)="goto_step(3)">From Wallet to Bank</a>
+                         <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span><!--<a [className]="step==1?'active':''" href="javascript:" >From Wallet to Wallet</a> OR <a [className]="step==3?'active':''" href="javascript:" >From Wallet to Bank</a> -->
                         <br/>
                         <br/>
                         <div class="row">
                             <div class="col s6"><span >
-                                <mat-radio-button value="cod" name="wallet_type" id="coed" (change)="cod_apply()">To Wallet </mat-radio-button>
+                                <mat-radio-button value="cod" name="wallet_type" id="coed" checked (click)="goto_step(1)">To Libanz Wallet </mat-radio-button>
                         </span></div>
                         <div class="col s6"><span >
-                            <mat-radio-button value="cod" name="wallet_type" id="code" (change)="cod_apply()"> To Bank </mat-radio-button>
+                            <mat-radio-button value="cod" name="wallet_type" id="code" (click)="goto_step(3)"> To Bank </mat-radio-button>
                     </span></div>
                         </div>
                         <div *ngIf="step == 2">

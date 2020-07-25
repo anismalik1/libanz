@@ -135,7 +135,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="button-block">
-                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == 'all')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == 'all' || type == '')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
                             <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">In Progress</button></a>
                             <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">Resolved</button></a>
                        
@@ -162,17 +162,18 @@
                                 <tbody *ngIf="complaints_counts > 0">
                                     <tr *ngFor="let complaint of complaints | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: complaints_counts };let i=index">
                                         <td>{{i+1}}</td>
-                                        <td>{{complaint.id}}</td>
+                                        <td>{{complaint.complaint_id}}</td>
                                         <td>{{complaint.order_id}}</td>
                                         <td>{{complaint.status}}</td>
                                         <td>{{complaint.subcriber_id}}</td>
                                         <td><i class="fa fa-inr"></i> {{complaint.grand_total}}</td>
-                                        <td>{{complaint.comment}}</td>
+                                        <td><span *ngIf="complaint.recent_comment != null">{{complaint.recent_comment}} <a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+more</a></span><span *ngIf="complaint.recent_comment == null">{{complaint.comment}}</span></td>
                                         <td><span>{{complaint.history_time | date: date:'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
                                         <td><span>{{complaint.last_update | date: date:'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
                                         <td><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 1 || complaint.seen == 2"></i><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 3"></i></td>
                                         <td class="center">
                                             <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a>
+                                            <a href="#complaints" class="modal-trigger blue-text" *ngIf="complaint.v_o == 'o'" (click)="init_complaint(complaint.order_id)">reply</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -215,21 +216,7 @@
       			<span>{{complaint_info[0].status}}</span>
       		</div>
       	</div>
-      	<!-- <div class="col s12 m6">
-      		<span class="font-size-change">User Detail</span>
-      		<div class="order-date margin-top-cart">
-      			<span class="font600">Name : </span>
-      			<span>{{complaint_info[0].name}}</span>
-      		</div>
-      		<div class="order-date margin-top-cart">
-      			<span class="font600">Email : </span>
-      			<span>{{complaint_info[0].email}}</span>
-      		</div>
-      		<div class="order-date margin-top-cart">
-      			<span class="font600">Contact No : </span>
-      			<span>{{complaint_info[0].phone}}</span>
-      		</div>
-      	</div> -->
+      
       </div>
       <hr>
       <div class="row">
@@ -275,4 +262,30 @@
       </div>
     </div>
   </div>
-  <app-footer-min></app-footer-min>
+  <div id="complaints" class="modal complaint-modal">
+         
+  <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="reply_complaint(complaintform.value)">
+  <div class="modal-content">
+    <div class="recent-comments" *ngIf="recent_comments.length > 0">
+       <h4>Recent Comments</h4>
+       <ul>
+           <li *ngFor="let item of recent_comments;"><span class="date-span">[{{item.created | date: date:'dd M, Y'}}]</span> <span class="comment"> {{item.comment}}</span></li>
+       </ul> 
+    </div>
+    <h3 class="font600">Reply Comment</h3>
+    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+    <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
+    
+      <div class="row no-margin">
+        <div class="input-field col s12">
+            <input type="text" placeholder="Enter Query" formControlName="title" value="">
+        </div>
+      </div>
+    
+  </div>
+  <div class="modal-footer orange center">
+    <button type="submit" class="modal-action btn-flat white-text font-size-change">Register</button>
+  </div>
+</form>
+</div>
+<app-footer-min></app-footer-min>

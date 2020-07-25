@@ -487,7 +487,10 @@ font-weight: bold;
 											<td nowrap="nowrap">{{topup.commission_surcharge}}</td>
 											<td nowrap="nowrap">{{topup.payment}}</td>
 											<td nowrap="nowrap">{{topup.transaction_id}}</td>
-											<div [innerHTML]="this.todoservice.order_template(topup.status)"></div>
+											<td>
+												<div [innerHTML]="this.todoservice.order_template(topup.status)"></div>
+											</td>
+											
 									</tr>  
 							</tbody>	
 					</table>
