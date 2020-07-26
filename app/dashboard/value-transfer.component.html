@@ -169,6 +169,18 @@ margin: auto;
 
     display:none !important;
 }
+.cst-invoice-fix{
+
+position: relative;
+left: 25%;
+}
+}
+.border-btn:hover {
+    background-color: transparent !important;
+}
+.fix-icon-0 .mat-select-arrow {
+    position: relative !important;
+    top: 10px !important;
 }
   </style>
 <app-header class="hide-on-mobile"></app-header>
@@ -200,8 +212,8 @@ margin: auto;
             </div>
             <div class="col s12 m10">
                 <div class="row">
-                <div class="col s12 m8">
-               <div class="card inline-block w-100">
+             
+               <div class="card inline-block w-100 cst-invoice-fix">
                     <div class="card-content cst-invoice" *ngIf="order_id">
                         <div  class="mb-1">
                             <h2 class="font600 inline-block">Invoice </h2>
@@ -240,7 +252,7 @@ margin: auto;
                         <div *ngIf="step == 2">
                         <div class="value-transfer col s12 m12 margin-top">
                             <form class="padd" [formGroup]="valuetransfer" #transferform = "ngForm" (ngSubmit)="send_value(transferform.value)">
-                            <table class="responsive-table1 striped bordered"> 
+                            <table class="responsive-table1  bordered"> 
                                 <tbody> 
                                     <tr>
                                         <td><span class="font600 font-size-change">Name</span></td>
@@ -352,15 +364,15 @@ margin: auto;
                                             <p class="act-txt">A/C No. XX XX {{item.last_4_acc}} </p>
                                         </div>
                                     </div>
-                                    <button class="btn white-text orange" (click)="proceed_to_choose_bank()">Proceed</button>
+                                    <button class="btn white-text orange cst-proceed" (click)="proceed_to_choose_bank()">Proceed</button>
                                 </div>
                                 <div class="no-found-list" *ngIf="!this.user_banks">No Bank Added</div> 
                             </div>
                             <div *ngIf="step == 6">
                                     <h4 class="money-txt" style="color:#333; font-size:18px;"> Add New Bank Account  </h4>
                                     <br/>
-                                    <form [formGroup]="bankgroup" class="margin-top sec-7 " #bankform = "ngForm" (ngSubmit)="add_bank(bankform.value)">
-                                        <div class="form-group">    
+                                    <form [formGroup]="bankgroup" class="sec-7 " #bankform = "ngForm" (ngSubmit)="add_bank(bankform.value)">
+                                        <div class="form-group fix-icon-0">    
                                             <mat-form-field>
                                                 <mat-select placeholder="Select Bank" formControlName="bank_id">
                                                     <span *ngFor="let item of all_banks">
@@ -371,7 +383,7 @@ margin: auto;
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>    
-                                        <div class="form-group">
+                                        <div class="form-group" style="margin-top:20px;">
                                         <input type="number" class="form-control" placeholder="Enter Account Number" formControlName="account_no"/>
                                         </div>
                                         <div class="form-group">
@@ -412,10 +424,10 @@ margin: auto;
                         
                                         <div class="row acount-box">
                         
-                                        <div class="col s10">
+                                        <div class="col s8">
                                             <p>Amunt to be sent </p>
                                         </div>
-                                        <div class="col s2">
+                                        <div class="col s4">
                                             <span class="fa fa-inr"></span> {{this.user_data.amount}}
                                         </div>
                         
@@ -423,24 +435,24 @@ margin: auto;
                                         
                                         <div class="row acount-box">
                         
-                                        <div class="col s10">
+                                        <div class="col s8">
                                             <p> Charge &nbsp; <span class="fa fa-info-circle"></span> </p>
                                         </div>
-                                        <div class="col s2">
+                                        <div class="col s4">
                                             <span class="fa fa-inr"></span> {{this.user_data.surcharge}}
                                         </div>
                         
                                         </div>
                                         <div class="row acount-box total-block">
                                         
-                                        <div class="col s10">
+                                        <div class="col s8">
                                             <p class="total-txt"> Total Payable  </p>
                                         </div>
-                                        <div class="col s2">
+                                        <div class="col s4">
                                             <span class="fa fa-inr"></span> {{this.user_data.amount*1 + this.user_data.surcharge*1}} 
                                         </div>
                                         <div class="clearfix"></div>
-                                        <button type="button" class="btn grey white-text" id="fetch-form" (click)="this.send_money_resuest()"> Confirm </button>
+                                        <button type="button" class="btn grey white-text" id="fetch-form" (click)="this.send_money_resuest()" style="margin-top:20px;"> Confirm </button>
                                         </div>
                         
                                     </div> 
@@ -470,7 +482,7 @@ margin: auto;
                             <!--#################-->
                     </div>
                 </div>
-                </div>                                                                            
+                                                                                        
     </div>
 </div>
 

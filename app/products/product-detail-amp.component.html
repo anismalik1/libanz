@@ -172,6 +172,10 @@ ul#dropdown1 li {
 
 
 }
+.price-fxi{
+	position: relative;
+    top: 20px
+}
 
 </style>
 
@@ -489,7 +493,7 @@ ul#dropdown1 li {
                          <div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
                          <div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
                              <div class="row">
-                                 <div class="col s6 m4" *ngFor="let item of packs.child;let i = index;">
+                                 <div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
                                   <!--<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
                                  <div class="card product-new" *ngIf="item.default_selected == 2">
                                      <div class="card-content center">
@@ -549,10 +553,10 @@ ul#dropdown1 li {
                  <div>
                      <div class="subtotal">
                          <div *ngIf="product && ( kit == 2 || kit == 3) ; then kitblock else nokitblock"></div>
-                         <p class="inline-block" *ngIf="product">{{product.title}}</p>
+                         <p class="inline-block" *ngIf="product" style="width:80%;">{{product.title}}</p>
                          <ng-template #kitblock>
-                             <p class="inline-block right font-size-change green-text" *ngIf="product && kit == 2"> <i class="icon-inr"></i> {{product.offer_price}}</p>
-                             <p class="inline-block right font-size-change green-text" *ngIf="product && kit == 3"> <i class="icon-inr"></i> {{product.price - 1000}}</p>
+                             <p class="inline-block right font-size-change green-text" *ngIf="product && kit == 2" style="padding-top:5px;"> <i class="icon-inr"></i> {{product.offer_price}}</p>
+                             <p class="inline-block right font-size-change green-text" *ngIf="product && kit == 3" style="padding-top:5px;"> <i class="icon-inr"></i> {{product.price - 1000}}</p>
                          </ng-template>
                          <ng-template #nokitblock>
                              <p class="inline-block right font-size-change green-text" *ngIf="product"> <i class="icon-inr"></i> {{product.offer_price}}</p>
@@ -560,9 +564,9 @@ ul#dropdown1 li {
                          
                      </div> 
                      <div class="subtotal" *ngFor="let item of pack_selected;">
-                         <p class="inline-block font600">{{item.title}} :</p>
-                         <p class="inline-block green-text right font-size-change" *ngIf="!multienable"> <i class="icon-inr"></i> {{item.price}} </p>
-                         <p class="inline-block green-text right font-size-change" *ngIf="multienable"> <i class="icon-inr"></i> {{item.multi_price}} </p>
+                         <p class="inline-block font600" style="width:80%;">{{item.title}} :</p>
+                         <p class="inline-block green-text right font-size-change" *ngIf="!multienable" style="padding-top:5px;"> <i class="icon-inr"></i> {{item.price}} </p>
+                         <p class="inline-block green-text right font-size-change" *ngIf="multienable" style="padding-top:5px;"> <i class="icon-inr"></i> {{item.multi_price}} </p>
 						 <div class="clearfix"></div>
 						 <span class="grey-text" style="list-style-type: none;
                                  white-space: nowrap;
@@ -570,13 +574,13 @@ ul#dropdown1 li {
                                  font-size: 12px;" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</span>
                      </div>
                      <div class="subtotal" *ngIf="this.product && this.product.promos">
-                         <p class="inline-block font600">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
-                         <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0"> <i class="icon-inr"></i> -{{promos.discount}} </p>
-                         <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1"> <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
+                         <p class="inline-block font600" style="width:80%;">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
+                         <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0" > <i class="icon-inr"></i> -{{promos.discount}} </p>
+                         <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1" > <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
                      </div>
                      <div class="subtotal" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">
-                         <p class="inline-block font600">Congrates! One Product Bonus Amount Will be Applied:</p>
-                         <p class="inline-block green-text right font-size-change"><i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
+                         <p class="inline-block font600" style="width:80%;">Congrates! One Product Bonus Amount Will be Applied:</p>
+                         <p class="inline-block green-text right font-size-change" ><i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} </p>
                      </div>
                      <!-- <div class="subtotal">
                          <p class="inline-block font600">Cashback<i class="red-text"> *</i> :</p>

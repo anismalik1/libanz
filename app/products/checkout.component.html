@@ -363,7 +363,7 @@ span.icon-locate {
 									{{check_wallet_content()}}
 									<!-- <mat-checkbox ></mat-checkbox> -->
 									<span *ngIf="checkbox_text.checkbox ==  true">
-										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true">LIBANZ Wallet  <div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true">LIBANZ Wallet  <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
 									</span>
 									<span *ngIf="checkbox_text.radio == true">
 										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true">LIBANZ <div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
@@ -409,7 +409,7 @@ span.icon-locate {
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout">
-						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled">Continue Checkout({{pay_amount() - this.calculate_bonus()}})</button></span>
+						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout Rs. ({{pay_amount() - this.calculate_bonus()}})</button></span>
 						<!-- <span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a></span> -->
 					</div>
 					<!-- <div class="name margin-checkout" *ngIf="cod == true">
@@ -437,13 +437,13 @@ span.icon-locate {
 					</ng-template>
 					<br/>
 					<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
-						<p class="font600 left"> <span class="grey-text font500 pack-title">{{pack.title}} :</span></p>
+						<p class="font600 left"> <span class="grey-text font500 pack-title" style="width:80%;">{{pack.title}} :</span></p>
 						<p class="right font-size-change" *ngIf="item.product.multi != 1"> <i class="icon-inr"></i>{{pack.price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 						<p class="right font-size-change" *ngIf="item.product.multi == 1"> <i class="icon-inr"></i>{{pack.multi_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
 						<div class="clearfix"></div>
 					</div>
 					<div style="padding-top: 10px;" *ngIf="item.product.promos">
-						<p class="inline-block font600"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
+						<p class="inline-block font600" style="width:80%;"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 					</div> 

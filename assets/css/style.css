@@ -5616,10 +5616,15 @@ a.modal-trigger i {
     font-size: 20px;
 	}
 	button#fetch-form {
-		border-radius: 0;
-		width: 90%;
-		margin-bottom: 22px;
+		border-radius: 20px !important;
+		width: 100%;
+		/* margin-top: 20px; */
+		margin-bottom:12px;
+		color: #fff !important;
 		background: #ff6a00 !important;
+	
+	
+	
 	}
 
 	.buyer-blk span {
@@ -6606,6 +6611,7 @@ left: 50%;
 	border-radius: 50%;
 	padding: 7px;
 	border: 1px solid #dcd2d2;
+	width:43px;
 }
 .act-txt{
 
@@ -6634,9 +6640,9 @@ left: 50%;
 }
 .total-block{
 
-	background: #ececec;
-    padding: 8px;
-    border-bottom: 7px solid #ff6a00;
+	/* background: #ececec; */
+    /* padding: 8px; */
+    /* border-bottom: 7px solid #ff6a00; */
 }
 .acount-box p {
     font-size: 15px;
@@ -6710,8 +6716,10 @@ ul.inr-txt li a {
 	.mobile-search-icon button{border: none;
     color: #333;background: none;}	
 .mobile-bar img{padding-top: 5px;}
-.app-logo{margin-left: 10px;
-	margin-top: -12px;}
+.app-logo{
+	margin-left: 10px;
+    margin-top: -10px;
+}
 	.search-box input{height:35px!important}
 	.mobile-bar img{margin-top: -10px;}
 @media screen and (orientation:landscape) {
@@ -6860,3 +6868,20 @@ header.navigation.header {
     background: #fff;
     border-radius: 20px;
 } */
+span.grey-text.wallet-txt {
+    font-size: 14px;
+    color: #333 !IMPORTANT;
+    padding-left: 7px;
+}
+
+.cst-proceed{
+
+	margin: 0 auto;
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+.fix-icon-0 .mat-select-arrow {
+    position: relative !important;
+    top: 10px !important;
+}

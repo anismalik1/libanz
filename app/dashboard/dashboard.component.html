@@ -216,6 +216,8 @@ font-weight: bold;
 						<h4 class="font-bold cst-heading-fix">Welcome To Dashboard </h4>
 						<div class="row">
 							<!-- <div class="col m5 s12"><h3 class="font600 inline-block">Leads </h3></div> -->
+							<div class="col m1 s3 pt-15-fix"><p style="font-size: 14px;
+								padding-top: 8px;"> Select Date </p> </div>
 							<div class="col m3 s6 pt-15-fix">	<input placeholder="Choose date range" startKey="start" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd name="daterange" class="form-control"/></div>
 							<div class="col m1 s3 pt-15-fix">	<button type="Search" class="btn orange no-box-shadow" (click)="fetch_transactions()">GO</button></div>
 							<!-- <div class="col m3 s3"><a [routerLink]="['/dashboard/orders']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div> -->
