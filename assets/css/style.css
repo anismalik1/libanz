@@ -449,7 +449,7 @@ nav ul a:hover{
 	border-bottom: 1px solid #ff9001cf;
 	box-shadow: 0 1px 0 0 #ff9001cf;
 }
-nav .brand-logo img{width: 100%;max-width: 150px}
+nav .brand-logo img{width: 100%;max-width: 150px;padding-top:8px;}
 #modal-update {z-index: 9999999!important}
 .continue{
 	background: #ff9001cf;
@@ -600,8 +600,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
 .search-input .mat-form-field-label-wrapper{
 	color: #000 !important;
 	position: absolute !important;
-	top: 0;
-	left: 9%;
+	top: -1px;
+    left: 1%;
 }
 .search-input button{
   position: absolute;
@@ -5157,8 +5157,8 @@ a.btn-floating.btn-large.orange.dropdown-button.white-text i {
     background-color: #ff6a00;
 }
 a.logup.modal-trigger.black-text {
-    background: #fff;
-    color: #8c8c8c !important;
+	background: #ff6a00;
+    color: #ffffff !important;
 }
 .black-text{
 
@@ -5205,7 +5205,8 @@ a.logup.modal-trigger.black-text {
     padding: 0px !important;
 }
 a.logup.modal-trigger.black-text {
-    border-radius: 20px;
+	border-radius: 3px;
+    height: 39px;
 }
 
   .mission h1 {
@@ -6502,11 +6503,11 @@ div#login-page-otps input {
 }
 .cst-bonus-txt{
 	z-index: 9999;
-		top: 0;
-		margin-top: 15px;
+	top: 0;
+	margin-top: 15px;
     padding-left: 43px;
     font-size: 13px;
-    color: #000 !important;
+    color: #f47423!important;
 
 }
 
@@ -6822,9 +6823,9 @@ ul.inr-txt li a {
 	}
 }
 
-.header-strip {
+/* .header-strip {
     display: none;
-}
+} */
 header.navigation.header {
     background: #fff;
 }
@@ -6834,7 +6835,7 @@ header.navigation.header {
 }
 #mat-input-1 {
     background: #fff;
-    border-radius: 25px;
+    /* border-radius: 25px; */
 }
 .recent-comments ul{
 	height: 150px;
@@ -6845,11 +6846,10 @@ header.navigation.header {
     margin-top: 20px !important;
 }
 .search-icn {
-    position: absolute;
+	position: absolute;
     /* z-index: 9999; */
-    /* right: 18px; */
+    right: 22px;
     cursor: pointer;
-    left: 25px;
 }
 .fixed-margin{
 
