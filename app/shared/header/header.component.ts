@@ -184,7 +184,19 @@ export class HeaderComponent implements OnInit{
         }
       )
     }
-
+  open_notifications()
+  {
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `notification-script`;
+    script.text = `
+    $(document).ready(function(){ 
+      $('.modal').modal();
+      $('#loadmore-modal2').modal('open');
+    });  
+      `
+      this._renderer2.appendChild(this._document.body, script);
+  }
   device_registered()
   {
     if(document.URL.indexOf('android_asset') !== -1)
@@ -695,6 +707,10 @@ export class HeaderComponent implements OnInit{
 
             this.notification_count =  data.notification_count[0];
             this.notifications = this.filter_notification(this.notifications);
+            if(this.todoservice.get_param('refer') && this.todoservice.get_param('refer') == 'app-notify' && start == 0)
+            {
+              this.open_notifications();
+            }
           }
         }
       )

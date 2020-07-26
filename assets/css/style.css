@@ -6444,10 +6444,6 @@ div#login-page-otps input {
 	margin-left: 5px;
 
 }
-
-
-	
-
 	.cst-list-view li {
 		height: auto;
 	}
@@ -6461,7 +6457,6 @@ div#login-page-otps input {
 
 		padding: 10px 20px;
     /* background: #ff6b01 !important; */
-    color: #fff !important;
     border-radius: 20px;
     font-size: 15px;
 	}
@@ -6506,9 +6501,9 @@ div#login-page-otps input {
     padding-top: 14px !important;
 }
 .cst-bonus-txt{
-
 	z-index: 9999;
-    top: 0;
+		top: 0;
+		margin-top: 15px;
     padding-left: 43px;
     font-size: 13px;
     color: #000 !important;
