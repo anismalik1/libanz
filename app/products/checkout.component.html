@@ -366,10 +366,10 @@ span.icon-locate {
 										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true">LIBANZ Wallet  <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
 									</span>
 									<span *ngIf="checkbox_text.radio == true">
-										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true">LIBANZ <div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true">LIBANZ <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
 									</span>
 									<span *ngIf="checkbox_text.no_input == true">
-										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> LIBANZ Wallet <div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> LIBANZ Wallet <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
 									</span>
 								</div>	
 								<!-- <label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>  -->

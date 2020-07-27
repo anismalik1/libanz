@@ -6052,6 +6052,9 @@ width: 100%;
 	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
 	padding: 10px 20px!important;vertical-align: middle;
 }
+.add-fix {
+    margin-top: 35px !important;
+}
 #monthly-packages a {
     font-size: 14px;
     font-weight: bold;
@@ -6884,4 +6887,11 @@ span.grey-text.wallet-txt {
 .fix-icon-0 .mat-select-arrow {
     position: relative !important;
     top: 10px !important;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #ff6a00 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #ff6a00 !important;
 }

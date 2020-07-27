@@ -308,7 +308,12 @@ li.txt-fix-mb span a {
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
 					<div class="notification-drop-image">
-					<img src="{{this.todoservice.base_url}}web-app/assets/images/notify-favicon.png" class="responsive-img">
+					<img src="https://www.libanz.com/assets/images/icon-logo.png" class="responsive-img" style="width: 28px;
+					height: 28px;
+					border: 1px solid #ff6a00;
+					border-radius: 50%;
+					padding: 7px;
+					margin-top: 10px;">
 					</div>
 					<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 					<p [innerHTML]="item.visitor_comment"></p>
