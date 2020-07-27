@@ -122,7 +122,7 @@
                     <div class="card-content">
                         <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-edit"></span> &nbsp; Add Money Request</h3>
                         <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a>
-                        <div class="overflow-scroll cst-table">
+                        <div class="overflow-scroll">
                             <table id="datatable" class="table display  datatable-example">
                                 <thead>
                                     <tr>
@@ -130,13 +130,14 @@
                                         <th >S.No.</th>
                                         <th >Order Id</th>
                                         <th >Order Date</th>
-                                        <!-- <th width="100px" nowrap="nowrap">Name</th>
-                                        <th width="100px" nowrap="nowrap">Contact No.</th> -->
                                         <th >Amount</th>
-                                        <th >Commission/Surcharge</th>
-                                        <th >Payment Type</th>
+                                        <th >Commission/ Surcharge</th>
                                         <th >TXN ID</th>
-                                        <th >Status</th>
+                                        <th >Order Type</th>
+                                        <th >Payment Type</th>
+                                        <th >Order Status</th>
+                                        <th >Payment Status</th>
+                                        <th >Comment</th>
                                     </tr>
                                 </thead>
                                
@@ -150,9 +151,12 @@
                                         <td nowrap="nowrap">{{topup.phone}}</td> -->
                                         <td nowrap="nowrap"><i class="icon-inr"></i>{{topup.amount}}</td>
                                         <td nowrap="nowrap">{{topup.commission_surcharge}}</td>
-                                        <td nowrap="nowrap">{{topup.payment}}</td>
                                         <td nowrap="nowrap">{{topup.transaction_id}}</td>
-                                        <td nowrap="nowrap">{{topup.status}}</td>
+                                        <td nowrap="nowrap"><span *ngIf="topup.activity_type == 4">ADDMONEY To Wallet</span><span *ngIf="topup.activity_type == 19">Wallet To Bank</span></td>
+                                        <td nowrap="nowrap">{{topup.payment}}</td>
+                                        <td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
+                                        <td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
+                                        <td nowrap="nowrap">{{topup.comment}}</td>
                                     </tr>  
                                 </tbody>
                                 <tbody *ngIf="topup_counts == 0">

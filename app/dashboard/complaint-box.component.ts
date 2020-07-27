@@ -94,6 +94,10 @@ export class ComplaintBoxComponent implements OnInit{
       ) 
     }  
   }
+  decode_json(data)
+  {
+    return $.parseJSON(data);
+  }
   reply_complaint(data)
   {
     if(!this.authservice.authenticate())

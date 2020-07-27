@@ -4,14 +4,10 @@
 }
 .theader-cst{
     background: #ececec;
-    white-space: nowrap;
    
 }
 .cst-table tr td {
     border: 1px solid #e2e2e2;
-}
-.cst-table{
-    white-space: nowrap;
 }
 .fix-welcome{
     padding: 10px;
@@ -160,16 +156,9 @@ padding:0;
                                     <td *ngIf="(row.transaction_type == 1 && row.payment_status == 2) ||(row.transaction_type == 1 && row.payment_status == 3)"> <i class="icon-inr"></i>{{row.balance_before }}</td>
                                     <td *ngIf="row.transaction_type == 2"> <i class="icon-inr"></i>{{row.balance_before*1-row.amount*1+row.commission_surcharge*1 }}</td>
                                     <td *ngIf="row.transaction_type == 3"> <i class="icon-inr"></i>{{row.balance_before+row.commission_surcharge*1 }}</td>
-                                    <td *ngIf="row.paymethod == 1">Wallet</td>
-                                    <td *ngIf="row.paymethod == 3">Libanz</td>
-                                    <td *ngIf="row.paymethod == 4">PAYTM</td>
-                                    <td *ngIf="row.paymethod == 5">COD</td>
-                                    <td *ngIf="row.paymethod == 2">Gateway</td>
-                                    <td *ngIf="row.payment_status == 1"><span class="green white-text padd1">Success</span></td>
-                                    <td *ngIf="row.payment_status == 2"><span class="red white-text padd1">Fail</span></td>
-                                    <td *ngIf="row.payment_status == 0"><span class="orange white-text padd1">Pending</span></td>
-                                    <td *ngIf="row.payment_status == 3"><span class="orange white-text padd1">Pending</span></td>
-                                    <td><span class="padd1">{{row.status}}</span></td> 
+                                    <td><div [innerHTML]="this.todoservice.paymethod_template(row.paymethod)"></div></td>
+                                    <td><div [innerHTML]="this.todoservice.payment_template(row.payment_status)"></div></td>
+                                    <td><div [innerHTML]="this.todoservice.order_template(row.status)"></div></td>
                                 </tr>
 
 

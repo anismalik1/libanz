@@ -329,77 +329,6 @@ font-weight: bold;
 						</div>
 					</div>
 
-
-					
-					<!-- <div class="responsive-table table-box-design" style="width: 100%; overflow:auto;"> -->
-						
-						
-						<hr/>
-						<!-- <div class="responsive-table">
-						<table id="datatable" class="table display  datatable-example cst-table">
-							<thead class="thead-bg">
-									<tr>
-											<th>S.No </th>
-											<th >Order No</th>
-											<th >Customer Name</th>
-											<th >C. Phone</th>
-											<th >C.Address</th>
-											<th> Product </th>
-											<th >Amount</th>
-											<th>Date </th>
-											<th>Subscriber ID</th>
-											
-											<th >Remarks</th>
-											
-											<th>Payment Method</th>
-											<th >Order Status</th>
-											<th>Pyament Status </th>
-									</tr>
-							</thead>
-							<tfoot>
-									<tr>
-										<th>S.No </th>
-											<th >Order No</th>
-											<th >Customer Name</th>
-											<th >C. Phone</th>
-											<th >C.Address</th>
-											<th> Product </th>
-											<th >Amount</th>
-											<th>Date </th>
-											<th>Subscriber ID</th>
-											
-											<th >Remarks</th>
-											
-											<th>Payment Method</th>
-											<th >Order Status</th>
-											<th>Pyament Status </th>
-									</tr>
-							</tfoot>
-							<tbody>
-									<tr *ngFor="let recharge of orders; let i = index">
-											<td>{{i+1}}</td>
-											<td>{{recharge.id}}</td>
-											<td>{{recharge.subcriber_id}}</td>
-											<td>{{recharge.transaction_id}}</td>
-											<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
-											<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
-											<td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
-											<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
-										
-												<td>{{recharge.deliver_to}}</td>
-												<td>{{recharge.remark}}</td>
-												<td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">Libanz</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
-												<td>
-													<span class="green white-text padd1" *ngIf="recharge.status.toLowerCase() == 'successful'">Success</span><span class="red white-text padd1" *ngIf="recharge.status.toLowerCase() == 'failed'">Fail</span><span class="orange white-text padd1" *ngIf="recharge.status.toLowerCase() == 'pending'">Pending</span>
-													<span class="grey white-text padd1" *ngIf="recharge.status.toLowerCase() != 'successful' && recharge.status.toLowerCase() != 'failed' && recharge.status.toLowerCase() != 'pending'">{{recharge.status}}</span>
-												</td>
-												<td> 	<span class="green white-text padd1">Success </span></td>
-									</tr>
-							</tbody>	
-					</table>
-				</div>
-			</div> -->
-	
 				<div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
 					<div class="row">
 						<div class="col m9 s9"><h3 class="font600 inline-block">Recent Orders </h3></div>
@@ -413,11 +342,12 @@ font-weight: bold;
 								<tr>
 										<th>S.No </th>
 										<th >Order No</th>
-										<th> Product </th>
-										<th >Amount</th>
+										<th >Subscriber Id</th>
+										<th>TXNID/REFID</th>
+										<th>Provider/Brand</th>
+										<th>Amount</th>
+										<th>Balance After </th>
 										<th>Date </th>
-										<th>Subscriber ID</th>
-										<th >Remarks</th>
 										<th >C.Address</th>
 										<th>Payment Method</th>
 										<th >Order Status</th>
@@ -428,11 +358,12 @@ font-weight: bold;
 								<tr>
 									<th>S.No </th>
 									<th >Order No</th>
-									<th> Product </th>
-									<th >Amount</th>
+									<th >Subscriber Id</th>
+									<th>TXNID/REFID</th>
+									<th>Provider/Brand</th>
+									<th>Amount</th>
+									<th>Balance After</th>
 									<th>Date </th>
-									<th>Subscriber ID</th>
-									<th >Remarks</th>
 									<th >C.Address</th>
 									<th>Payment Method</th>
 									<th >Order Status</th>
@@ -443,20 +374,20 @@ font-weight: bold;
 								<tr *ngFor="let recharge of orders; let i = index">
 										<td>{{i+1}}</td>
 										<td>{{recharge.id}}</td>
+										<td>{{recharge.subcriber_id}}</td>
+										<td>{{recharge.transaction_id}}</td>
 										<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
 										<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
+										<td><i class="icon-inr"></i>{{balance_after(recharge) | number : '.2-2'}}</td>
 										<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
-										<td>{{recharge.subcriber_id}}</td>
-										<!-- <td>{{recharge.transaction_id}}</td> -->
-										<td>{{recharge.remark}}</td>
 										<td>{{recharge.deliver_to}}</td>
-											<td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">Libanz</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
-											<td>
-												<div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
-											</td>
-											<td>
-												<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
-											</td>
+										<td><div [innerHTML]="this.todoservice.paymethod_template(recharge.paymethod)"></div></td>
+										<td>
+											<div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
+										</td>
+										<td>
+											<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
+										</td>
 								</tr>
 						</tbody>	
 				</table>
@@ -464,36 +395,40 @@ font-weight: bold;
 		</div>
 		
 		<div class="card-content">
-			<h3 class="font600 inline-block pt-top-mb"><span class="fa fa-edit"></span> &nbsp; Recent ADDMONEY AND Value Transfer</h3>
-			<!-- <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a> -->
+			<div class="col m9 s9"><h3 class="font600 inline-block pt-top-mb"><span class="fa fa-edit"></span> &nbsp; Recent ADDMONEY AND Value Transfer</h3></div>
+			<div class="col m3 s3"><a [routerLink]="['/dashboard/topup-request']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
 			<div class="overflow-scroll cst-table">
 					<table id="datatable" class="table display  datatable-example">
 							<thead>
-									<tr>
-										 	<th >S.No.</th>
-											<th >Order Id</th>
-											<th >Order Date</th>
-											<th >Amount</th>
-											<th >Commission/Surcharge</th>
-											<th >Payment Type</th>
-											<th >TXN ID</th>
-											<th >Status</th>
-									</tr>
+								<tr>
+									<th >S.No.</th>
+									<th >Order Id</th>
+									<th >Order Date</th>
+									<th >Amount</th>
+									<th >Commission/ Surcharge</th>
+									<th >TXN ID</th>
+									<th >Order Type</th>
+									<th >Payment Type</th>
+									<th >Order Status</th>
+									<th >Payment Status</th>
+									<th >Comment</th>
+								</tr>
 							</thead>
 						 	<tbody *ngIf="topups">			
-									<tr *ngFor="let topup of topups; let i = index">
-											<td nowrap="nowrap">{{i+1}}</td>
-											<td nowrap="nowrap">{{topup.id}}</td>
-											<td nowrap="nowrap">{{topup.history_time | date: date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
-											<td nowrap="nowrap"><i class="icon-inr"></i>{{topup.grand_total}}</td>
-											<td nowrap="nowrap">{{topup.commission_surcharge}}</td>
-											<td nowrap="nowrap">{{topup.payment}}</td>
-											<td nowrap="nowrap">{{topup.transaction_id}}</td>
-											<td>
-												<div [innerHTML]="this.todoservice.order_template(topup.status)"></div>
-											</td>
-											
-									</tr>  
+								<tr *ngFor="let topup of topups; let i = index">
+									<td nowrap="nowrap">{{i+1}}</td>
+									<td nowrap="nowrap">{{topup.id}}</td>
+									<td nowrap="nowrap">{{topup.history_time | date: date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
+									<td nowrap="nowrap"><i class="icon-inr"></i>{{topup.grand_total}}</td>
+									<td nowrap="nowrap">{{topup.commission_surcharge}}</td>
+									<td nowrap="nowrap">{{topup.transaction_id}}</td>
+									<td nowrap="nowrap"><span *ngIf="topup.activity_type == 4">ADDMONEY To Wallet</span><span *ngIf="topup.activity_type == 19">Wallet To Bank</span></td>
+									<td nowrap="nowrap">{{topup.payment}}</td>
+									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
+									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
+									<td nowrap="nowrap">{{topup.remark}}</td>
+					
+								</tr>  
 							</tbody>	
 					</table>
 			</div>

@@ -54,6 +54,20 @@ export class TodoService {
     else
       return '<span class="orange darken-1 white-text padd1"> Pending </span>';	
   }
+
+  paymethod_template($method)
+  {
+      if($method == 1)
+      return '<span class="orange darken-1 order-status white-text padd1"> Wallet </span>';
+    else if($method == 2)
+      return '<span class="pink darken-1 white-text order-status padd1"> Gateway </span>';
+    else if($method == 3)
+      return '<span class="orange darken-1 white-text order-status padd1"> Mydth </span>';
+    else if($method == 4)
+      return '<span class="blue darken-1 white-text order-status padd1"> Paytm </span>';
+    else if($method == 5)
+      return '<span class="lime darken-1 white-text order-status padd1"> COD </span>';	
+  }
   order_template($status)
   {
     if($status == 'Booked')
@@ -70,16 +84,14 @@ export class TodoService {
 		return '<span class="padd1 blue-grey darken-1 white-text"> '+$status+' </span>';
 	else if($status.toLowerCase() == 'cancel')
 		return '<span class="padd1 pink darken-1 white-text"> '+$status+' </span>';
-	else if($status == 'Cancelled')
+	else if($status == 'Cancelled' || $status.toLowerCase() == 'failed')
 		return '<span class="padd1 red darken-1 white-text"> '+$status+' </span>';
 	else if($status == 'Success' || $status == 'Successful')  // for recharge  
 		return '<span class="padd1 green darken-1 white-text"> '+$status+' </span>';
 	else if($status.toLowerCase() == 'pending')  // for recharge  
 		return '<span class="padd1 orange darken-1 white-text"> '+$status+' </span>';	
-	else if(status.toLowerCase() == 'failed')  // for recharge  
-		return '<span class="padd1 red darken-1 white-text"> '+$status+' </span>';
-	else if(status.toLowerCase() == 'Refund')  // for recharge  
-		return '<span class="padd1 lime darken-1 white-text"> '+$status+' </span>';
+	else if(status.toLowerCase() == 'refund')  // for recharge  
+    return '<span class="padd1 lime darken-1 white-text"> '+$status+' </span>';
 	else // for recharge  
 		return '<span class="padd1 lime darken-1 white-text"> '+$status+' </span>';	
   }

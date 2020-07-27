@@ -77,23 +77,13 @@ font-size: 19px !important;
   <div class="container-fluid">
       <div class="row no-margin">
           <div class="col s12 m2">
-              <!-- <div class="card">
-            <div class="card-content user-content">
-                    <div class="user-image">
-                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                                  <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-                        </div>
-                        <div class="user-name">
-                            <span class="fix-welcome">Welcome,</span><br>
-                            <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
-                        </div>
-            </div>        
-          </div> -->
               <app-side-nav></app-side-nav>			    
           </div>
         <div class="col s12 m10"> 
-               
+            <div class="chip m12 s12" *ngIf="ticket_generated">
+                <span >Your Ticket has been generated. To check your ticket status click <a routerLink="/dashboard/topup-request">here</a></span>
+                <i class="close material-icons">close</i>
+            </div>   
           <div id="recharge" style="margin-top:-12px;">
             <div class="card export-and-import">
                 <div class="card-content">
@@ -155,7 +145,7 @@ font-size: 19px !important;
                                 <td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
                                 <td> <i class="icon-inr"></i>{{recharge.balance_before}}</td>
                                 <td>{{recharge.order_date * 1000 | date }}<br><time>{{recharge.order_date *1000 |date : 'h:mm a' }}</time></td>
-                                <td><span *ngIf="recharge.paymethod == 1">Wallet</span><span *ngIf="recharge.paymethod == 2">Gateway</span><span *ngIf="recharge.paymethod == 3">Libanz</span><span *ngIf="recharge.paymethod == 4">Paytm</span><span *ngIf="recharge.paymethod == 5">COD</span></td>
+                                <td><div [innerHTML]="this.todoservice.paymethod_template(recharge.paymethod)"></div></td>
                                 <td>
                                     <div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
                                 </td>

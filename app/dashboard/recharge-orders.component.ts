@@ -24,6 +24,7 @@ export class RechargeOrdersComponent implements OnInit {
   recharge_counts : number;
   complaint_id : number;
   go_to_complaint : number = 0;
+  ticket_generated : boolean = false;
   display : number = 1;
   order_id : number ;
   ranges: any = {
@@ -152,6 +153,10 @@ export class RechargeOrdersComponent implements OnInit {
 			  }
 			  if(!jQuery.isEmptyObject(data))
 			  {			
+          if(data.ticket_generated)
+          {
+            this.ticket_generated = true;
+          }
           this.toastr.successToastr(data.msg);
           let url = window.location.pathname;
             if(url == url)

@@ -148,13 +148,14 @@
                                         <th >S.No.</th>
                                         <th >Ticket ID</th>
                                         <th >Order ID</th>
-                                        <th >Status</th>
+                                        <th >Order Type</th>
                                         <th >Subcriber ID/Recharge No</th>
                                         <th >Amount</th>
                                         <th >Comment</th>
                                         <th >Created</th>
                                         <th >Last Update</th>
-                                        <th></th>
+                                        <th>Complaint Status</th>
+                                        <th >Order Status</th>
                                         <th >Option</th>
                                     </tr>
                                 </thead>
@@ -164,13 +165,16 @@
                                         <td>{{i+1}}</td>
                                         <td>{{complaint.complaint_id}}</td>
                                         <td>{{complaint.order_id}}</td>
-                                        <td>{{complaint.status}}</td>
+                                        <td><span *ngIf="complaint.activity_type == 5">{{decode_json(complaint.order_data).product_title}}</span><span *ngIf="complaint.activity_type == 1">{{decode_json(complaint.order_data).operator_title}}</span></td>
+                                        
                                         <td>{{complaint.subcriber_id}}</td>
                                         <td><i class="fa fa-inr"></i> {{complaint.grand_total}}</td>
                                         <td><span *ngIf="complaint.recent_comment != null">{{complaint.recent_comment}} <a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+more</a></span><span *ngIf="complaint.recent_comment == null">{{complaint.comment}}</span></td>
                                         <td><span>{{complaint.history_time | date: date:'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
                                         <td><span>{{complaint.last_update | date: date:'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
+                                        
                                         <td><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 1 || complaint.seen == 2"></i><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 3"></i></td>
+                                        <td><span [innerHTML]="this.todoservice.order_template(complaint.status)"></span></td>
                                         <td class="center">
                                             <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a>
                                             <a href="#complaints" class="modal-trigger blue-text" *ngIf="complaint.v_o == 'o'" (click)="init_complaint(complaint.order_id)">reply</a>
@@ -204,17 +208,20 @@
       		<div class="order-date margin-top-cart">
       			<span class="font600">Order Date : </span>
       			<span>{{complaint_info[0].created | date: date:'dd M, Y h:i a'}}</span>
+              </div>
+            <div class="order-date margin-top-cart">
+                <span class="font600">Payment Mode : </span>
+                <div [innerHTML]="this.todoservice.paymethod_template(complaint_info[0].paymethod)"></div>
+            </div>
+      		<div class="order-date margin-top-cart">
+                <span class="font600">Payment Status : </span>
+                <div [innerHTML]="this.todoservice.payment_template(complaint_info[0].payment_status)"></div>
       		</div>
       		<div class="order-date margin-top-cart">
-      			<span class="font600">Payment Status : </span>
-      			<span *ngIf="complaint_info[0].payment_status == 1">Successful</span>
-      			<span *ngIf="complaint_info[0].payment_status == 2">Failed</span>
-      			<span *ngIf="complaint_info[0].payment_status == 3">Pending</span>
-      		</div>
-      		<div class="order-date margin-top-cart">
-      			<span class="font600">Recharge Status : </span>
-      			<span>{{complaint_info[0].status}}</span>
-      		</div>
+                  <span class="font600">Order Status : </span>
+                  <div [innerHTML]="this.todoservice.order_template(complaint_info[0].status)"></div>
+            </div>
+            
       	</div>
       
       </div>

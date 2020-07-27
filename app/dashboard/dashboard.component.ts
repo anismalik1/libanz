@@ -57,6 +57,30 @@ export class DashboardComponent implements OnInit{
     this.recent_orders();  
   }
 
+  balance_after(order)
+  {
+    if(order.transaction_type == 1 && order.payment_status == 1)
+    {
+      return order.balance_before*1+order.grand_total*1+order.commission_surcharge*1;
+    }
+    else if(order.transaction_type == 1 && (order.payment_status == 2 || order.payment_status == 3))
+    {
+      return order.balance_before*1;
+    }
+    else if(order.transaction_type == 2)
+    {
+      return order.balance_before*1-order.grand_total*1+order.commission_surcharge*1
+    }
+    else if(order.transaction_type == 3)
+    {
+      return order.balance_before*1 +order.commission_surcharge*1;
+    }
+    else
+    {
+      return order.balance_before*1 + order.commission_surcharge*1;
+    }  
+  }
+
   recent_orders()
   {
     this.spinner.show();
