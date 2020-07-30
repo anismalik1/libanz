@@ -346,7 +346,7 @@ font-weight: bold;
 										<th>TXNID/REFID</th>
 										<th>Provider/Brand</th>
 										<th>Amount</th>
-										<th>Balance After </th>
+										<!-- <th>Balance After </th> -->
 										<th>Date </th>
 										<th >C.Address</th>
 										<th>Payment Method</th>
@@ -363,7 +363,7 @@ font-weight: bold;
 									<th>TXNID/REFID</th>
 									<th>Provider/Brand</th>
 									<th>Amount</th>
-									<th>Balance After</th>
+									<!-- <th>Balance After</th> -->
 									<th>Date </th>
 									<th >C.Address</th>
 									<th>Payment Method</th>
@@ -380,7 +380,7 @@ font-weight: bold;
 										<td>{{recharge.transaction_id}}</td>
 										<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
 										<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
-										<td><i class="icon-inr"></i>{{balance_after(recharge) | number : '.2-2'}}</td>
+										<!-- <td><i class="icon-inr"></i>{{balance_after(recharge) | number : '.2-2'}}</td> -->
 										<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
 										<td>{{recharge.deliver_to}}</td>
 										<td><div [innerHTML]="this.todoservice.paymethod_template(recharge.paymethod)"></div></td>
@@ -409,7 +409,7 @@ font-weight: bold;
 									<th >Order Date</th>
 									<th >Amount</th>
 									<th >Commission/ Surcharge</th>
-									<th >TXN ID</th>
+									<th >REF ID</th>
 									<th >Order Type</th>
 									<th >Payment Type</th>
 									<th >Order Status</th>

@@ -307,7 +307,7 @@ li.txt-fix-mb span a {
 					</div>
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
-					<div class="notification-drop-image">
+					<div class="notification-drop-image" [ngClass]="{'recharge-icon-bg' : (item.activity_type == '1') ,'transfer-from-icon-bg': (item.activity_type == '2') ,'transfer-to-icon-bg' : (item.activity_type == '3'),'addmoney-icon-bg' : (item.activity_type == '4'),'product-purchase-icon-bg': (item.activity_type == '5'),'recharge-refund-icon-bg': (item.activity_type == '6'),'product-refund-icon-bg': (item.activity_type == '7'),'product-cashback-icon-bg': (item.activity_type == '8'),'register-user-icon-bg': (item.activity_type == '9'),'form-query-icon-bg': (item.activity_type == '10'),'promo-cashback-icon-bg': (item.activity_type == '14'),'recharge-addmoney-icon-bg': (item.activity_type == '15'),'product-addmoney-icon-bg': (item.activity_type == '16'),'recharge-bonus-icon-bg': (item.activity_type == '17'),'product-bonus-icon-bg': (item.activity_type == '18'),'money-to-bank-icon-bg': (item.activity_type == '19')}">
 					<img src="https://www.libanz.com/assets/images/icon-logo.png" class="responsive-img" style="width: 28px;
 					height: 28px;
 					border: 1px solid #ff6a00;
@@ -633,7 +633,7 @@ li.txt-fix-mb span a {
 		</div>
 		<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 			<li *ngFor="let item of notifications;" >
-				<div class="notification-drop-image"[ngClass]="{'recharge-icon-bg' : (item.activity_type == '1') ,'transfer-from-icon-bg': (item.activity_type == '2') ,'transfer-to-icon-bg' : (item.activity_type == '3'),'addmoney-icon-bg' : (item.activity_type == '4'),'product-purchase-icon-bg': (item.activity_type == '5'),'recharge-refund-icon-bg': (item.activity_type == '6'),'product-refund-icon-bg': (item.activity_type == '7'),'product-cashback-icon-bg': (item.activity_type == '8'),'register-user-icon-bg': (item.activity_type == '9'),'form-query-icon-bg': (item.activity_type == '10'),'promo-cashback-icon-bg': (item.activity_type == '14'),'recharge-addmoney-icon-bg': (item.activity_type == '15'),'product-addmoney-icon-bg': (item.activity_type == '16'),'recharge-bonus-icon-bg': (item.activity_type == '17'),'product-bonus-icon-bg': (item.activity_type == '18'),'money-to-bank-icon-bg': (item.activity_type == '19')}">
+				<div class="notification-drop-image" [ngClass]="{'recharge-icon-bg' : (item.activity_type == '1') ,'transfer-from-icon-bg': (item.activity_type == '2') ,'transfer-to-icon-bg' : (item.activity_type == '3'),'addmoney-icon-bg' : (item.activity_type == '4'),'product-purchase-icon-bg': (item.activity_type == '5'),'recharge-refund-icon-bg': (item.activity_type == '6'),'product-refund-icon-bg': (item.activity_type == '7'),'product-cashback-icon-bg': (item.activity_type == '8'),'register-user-icon-bg': (item.activity_type == '9'),'form-query-icon-bg': (item.activity_type == '10'),'promo-cashback-icon-bg': (item.activity_type == '14'),'recharge-addmoney-icon-bg': (item.activity_type == '15'),'product-addmoney-icon-bg': (item.activity_type == '16'),'recharge-bonus-icon-bg': (item.activity_type == '17'),'product-bonus-icon-bg': (item.activity_type == '18'),'money-to-bank-icon-bg': (item.activity_type == '19')}">
 					<img src="./assets/images/icon-logo.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
 				</div>
 				<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
