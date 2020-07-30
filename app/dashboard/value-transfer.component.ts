@@ -20,7 +20,8 @@ export class ValueTransferComponent implements OnInit{
   user_tobank : FormGroup;
   bankgroup : FormGroup;
   valuetransfer : FormGroup;
-  user_data : any;
+  phonefetchform : FormGroup;
+  user_data : any = {amount : 0,surcharge :0};
   user_banks : any;
   all_banks : any;
   selected_bank : any ;
@@ -49,6 +50,10 @@ export class ValueTransferComponent implements OnInit{
     });
     this.valuetransfer = this.fb.group({
       'amount' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]+")])],
+    });
+
+    this.phonefetchform = this.fb.group({
+      'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
     });
 
     if(this.todoservice.get_param('order_id'))
@@ -213,7 +218,7 @@ export class ValueTransferComponent implements OnInit{
   {
     if(formdata.phone == '' || formdata.phone == null)
     {
-      this.toastr.errorToastr(" Please Enter the registered number to whom Transfer", 'Failed! ');
+      this.toastr.errorToastr(" Please Enter a Valid Number", 'Failed! ');
       return false;
     }
     this.spinner.show();

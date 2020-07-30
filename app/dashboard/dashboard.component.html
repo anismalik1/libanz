@@ -229,7 +229,7 @@ font-weight: bold;
 										<span class="fa fa-download download-sq-1"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Orders ({{sales_obj.order_count}})</span>
+										<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/orders">Orders ({{sales_obj.order_count}})</a></span>
 									
 										<div class="slaes-rup margin-top-cart">
 											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.order_sale}}</span>
@@ -245,7 +245,7 @@ font-weight: bold;
 										<span class="fa fa-edit download-sq-1"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Tickets</span>
+										<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/complaints">Tickets</a></span>
 									
 										<div class="slaes-rup margin-top-cart">
 											<span class="font-size-change2">{{sales_obj.ticket_count}}</span>
@@ -264,7 +264,7 @@ font-weight: bold;
 										<span class="fa fa-diamond download-sq-2"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">Cashback ({{sales_obj.cashback_count}}) </span>
+										<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/transactions">Cashback ({{sales_obj.cashback_count}})</a> </span>
 									
 										<div class="slaes-rup margin-top-cart">
 											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.cashback_sale}}</span>
@@ -283,7 +283,7 @@ font-weight: bold;
 										<span class="fa fa-gift download-sq-1"></span>
 									</div>
 									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20">ADD MONEY({{this.sales_obj.addmoney_count}})</span>
+										<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/transactions">ADD MONEY({{this.sales_obj.addmoney_count}})</a></span>
 									
 										<div class="slaes-rup margin-top-cart">
 											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.addmoney}}</span>
@@ -352,6 +352,7 @@ font-weight: bold;
 										<th>Payment Method</th>
 										<th >Order Status</th>
 										<th>Pyament Status </th>
+										<th>View</th>
 								</tr>
 						</thead>
 						<tfoot>
@@ -368,6 +369,7 @@ font-weight: bold;
 									<th>Payment Method</th>
 									<th >Order Status</th>
 									<th>Pyament Status </th>
+									<th>View</th>
 								</tr>
 						</tfoot>
 						<tbody>
@@ -388,6 +390,7 @@ font-weight: bold;
 										<td>
 											<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
 										</td>
+										<td><a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1">view</a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5">view</a></td>
 								</tr>
 						</tbody>	
 				</table>
@@ -412,6 +415,7 @@ font-weight: bold;
 									<th >Order Status</th>
 									<th >Payment Status</th>
 									<th >Comment</th>
+									<th >View</th>
 								</tr>
 							</thead>
 						 	<tbody *ngIf="topups">			
@@ -427,7 +431,7 @@ font-weight: bold;
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
 									<td nowrap="nowrap">{{topup.remark}}</td>
-					
+									<td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.id}">View</a></td>	
 								</tr>  
 							</tbody>	
 					</table>

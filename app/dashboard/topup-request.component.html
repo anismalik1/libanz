@@ -138,6 +138,7 @@
                                         <th >Order Status</th>
                                         <th >Payment Status</th>
                                         <th >Comment</th>
+                                        <td>View</td>
                                     </tr>
                                 </thead>
                                
@@ -157,6 +158,7 @@
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
                                         <td nowrap="nowrap">{{topup.comment}}</td>
+                                        <td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.order_id}">View</a></td>	
                                     </tr>  
                                 </tbody>
                                 <tbody *ngIf="topup_counts == 0">

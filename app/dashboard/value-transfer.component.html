@@ -238,7 +238,7 @@ left: 25%;
                     </div>
                 
                     <div class="card-content" *ngIf="!order_id">
-                         <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span><!--<a [className]="step==1?'active':''" href="javascript:" >From Wallet to Wallet</a> OR <a [className]="step==3?'active':''" href="javascript:" >From Wallet to Bank</a> -->
+                         <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span> <span class="wallet-balance"><span class="libanz-wallet"> Libanz Wallet</span><i class="fa fa-inr"></i>{{this.todoservice.get_user_wallet()}}</span>
                         <br/>
                         <br/>
                         <div class="row">
@@ -284,15 +284,16 @@ left: 25%;
                     </div>
                         <div *ngIf="step==1">
                             <div class="value-transfer col s12 m12 margin-top">
-                                <form class="padd" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
+                                <form [formGroup]="phonefetchform" class="padd" #fetchform = "ngForm" (ngSubmit)="fetch_user_data(fetchform.value)">
                                     <div class="row">
                                         <div class="col s2"><label class="lbl-num">  +91- </label> </div>
                                         <div class="col s9">
-                                        <input id="first_name" type="number" placeholder="Enter Mobile Number" class="validate" name="phone" [(ngModel)]="fetch_user.phone">
+                                        <input id="first_name" type="number" placeholder="Enter Mobile Number" class="validate" formControlName="phone" [(ngModel)]="fetch_user.phone">
+                                        <div class="red-text accent-4" *ngIf="!phonefetchform.controls['phone'].valid && phonefetchform.controls['phone'].touched">Enter Valid Phone*.</div> 
                                         </div>
                                         <div class="col s1"> <span class="fa fa-address-book"></span> </div>
                                     <div class="input-field col s12 center">
-                                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form">Submit</button>
+                                        <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" [disabled]="!phonefetchform.valid">Submit</button>
                                     </div>
                                 </div>
                                 </form>
@@ -310,9 +311,11 @@ left: 25%;
                             <br/>
                             <span>we pay high fees when you add money to wllet , hence we charge 3% when you take this money to your bank account</span>
                             <br/>
+                            <i class="fa fa-info"></i> You can send 5000 to 25000 with in a month.
                             <form [formGroup]="user_tobank" class="margin-top sec-7 " #userform = "ngForm" (ngSubmit)="user_tobank_submit(userform.value)">
-                                <input id="first_name" type="number" placeholder="Enter Amount"  class="validate" formControlName="amount">
-                                <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form"> Proceed </button>
+                                <input id="first_name" type="number" id="user-amount" placeholder="Enter Amount"  class="validate" formControlName="amount" (keyup)="change_amount($event.target.value)">
+                                <span class="error-rtext" *ngIf="this.user_data.amount < 5000">Please enter a valid amount between <span class="fa fa-inr"></span> 5000 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
+                                <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" [disabled]="(!this.user_data || this.user_data.amount < 5000)?true:false"> Proceed </button>
                             </form>
                         </div>
                         <div *ngIf="step == 4">
@@ -337,11 +340,11 @@ left: 25%;
 
                                         </div>
                                         </div>
-                                           <span class="error-rtext" *ngIf="this.user_data.amount < 1000">Please enter a valid amount between <span class="fa fa-inr"></span> 1000 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
+                                           <span class="error-rtext" *ngIf="this.user_data.amount < 5000">Please enter a valid amount between <span class="fa fa-inr"></span> 5000 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
                                         <div class="input-field col s12 center">
                                            <p class="cst-fix-terms">
                                                By Proceeding I agree to the additional 3% charges applicable on this transaction</p>
-                                           <button type="button" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" (click)="this.goto_step(5)" [disabled]="(this.user_data.amount < 100)?true:false"> Proceed </button>
+                                           <button type="button" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" (click)="this.goto_step(5)" [disabled]="(this.user_data.amount < 5000)?true:false"> Proceed </button>
                                        </div>
                                    </div>
                                </div>
@@ -355,9 +358,9 @@ left: 25%;
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bank-list" *ngIf="this.user_banks">
-                                    <div class="row" *ngFor="let item of this.user_banks">
+                                    <div class="row" *ngFor="let item of this.user_banks;let i = index;">
                                         <div class="col s3">
-                                            <mat-radio-button name="select_user_bank" value="{{item.id}}" [checked]="(this.selected_bank && this.selected_bank == item.id)?true:false"><img src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{item.icon}}" class="responsive-img img-circle1"></mat-radio-button>
+                                            <mat-radio-button name="select_user_bank" value="{{item.id}}" [checked]="(this.selected_bank && this.selected_bank == item.id || i == 0)?true:false"><img src="{{this.todoservice.base_url}}accounts/assets/uploads/banks/{{item.icon}}" class="responsive-img img-circle1"></mat-radio-button>
                                         </div> 
                                         <div class="col s9 border-bottom">
                                             <h4 class="user-name">{{item.holder_name}} </h4>
@@ -405,9 +408,8 @@ left: 25%;
                                 <div *ngIf="step == 7">
                                         <div class="row">
                                             <div class="col s12 m12">
-                                        <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money from Wallet to  </h4>
-                                        </div>
-                                        
+                                            <h4 class="money-txt" style="color:#333; font-size:18px;"> Send Money from Wallet to  </h4>
+                                            </div>
                                         </div>
                                     
                                         <div class="bank-list">
@@ -425,9 +427,9 @@ left: 25%;
                                         <div class="row acount-box">
                         
                                         <div class="col s8">
-                                            <p>Amunt to be sent </p>
+                                            <p>Amount to be sent </p>
                                         </div>
-                                        <div class="col s4">
+                                        <div class="col s4 right-align">
                                             <span class="fa fa-inr"></span> {{this.user_data.amount}}
                                         </div>
                         
@@ -438,7 +440,7 @@ left: 25%;
                                         <div class="col s8">
                                             <p> Charge &nbsp; <span class="fa fa-info-circle"></span> </p>
                                         </div>
-                                        <div class="col s4">
+                                        <div class="col s4 right-align">
                                             <span class="fa fa-inr"></span> {{this.user_data.surcharge}}
                                         </div>
                         
@@ -448,7 +450,7 @@ left: 25%;
                                         <div class="col s8">
                                             <p class="total-txt"> Total Payable  </p>
                                         </div>
-                                        <div class="col s4">
+                                        <div class="col s4 right-align">
                                             <span class="fa fa-inr"></span> {{this.user_data.amount*1 + this.user_data.surcharge*1}} 
                                         </div>
                                         <div class="clearfix"></div>

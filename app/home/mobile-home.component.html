@@ -167,14 +167,6 @@ margin: 2px;
     margin-bottom: 20px;
 }
 
-.footer-slide{
-
-	width: 95% !important;
-    margin-right: 6px;
-    margin-top: -27px !important;
-}
-
-
 @media only screen and (max-width: 767px){
 
 	.mobile-top-menu {
@@ -292,13 +284,6 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 	display: none !important;
 }
 
-
-.bottom-slider-dot{
-
-	position: relative;
-    margin-top: -10px;
-}
-
  .sky-relative{
 
 	 position: relative;
@@ -351,6 +336,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 }
 
 }
+.bottom-slider .shadow-box{margin-right:-6px;}
 </style>
 <app-header></app-header>
 <div class="spinner-wrapper">
@@ -432,7 +418,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 				<li *ngFor="let item of this.mainbanners;let i = index;">
 					<div class="col m12 s12" style="padding-right: 1.1%;">
 						<div class="shadow-box">
-							<a href="{{item.imageurl}}">
+							<a routerLink="item.imageurl">
 								<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{item.image}}" class="responsive-img"/>
 							</a>	
 						</div>
@@ -670,8 +656,10 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<div class="bottom-slider-dot footer-slide">
 		<ul class="bottom-slider " id="bottom-slider">
 			<li *ngFor="let banner of this.bottombanners">
-				<div class="shadow-box">
-					<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}"/>
+				<div class="shadow-box row">
+					<div class="col m12">
+						<a routerLink="banner.imageurl"><img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}"/></a>
+					</div>
 				</div>
 			</li>
 		</ul>

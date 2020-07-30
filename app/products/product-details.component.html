@@ -662,11 +662,12 @@ font-size: 10px;
 					
 				</div>
 
-				<div class="subtotal inline-block">
+				<div class="subtotal inline-block right">
 					<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
 					<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
 					<a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
-				</div>				
+				</div>
+				<div class="clearfix"></div>				
 			</div>
 		</div>
 	</div>
