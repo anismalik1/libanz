@@ -3815,10 +3815,10 @@ canvas {
 .new-page-tab .tab .active img{opacity: 1 !important;}
 .notification-drop-ul li{padding: 5px 10px;}
 .notification-drop-ul .notification-drop-image{width: 15%; float: left;}
-#loadmore-modal .notification-drop-image,#loadmore-modal2 .notification-drop-image{width: 15%; float: left;}
+#loadmore-modal .notification-drop-image,#loadmore-modal2 .notification-drop-image{width: 8%; float: left;}
 /* .notification-drop-ul .notification-drop-image img{ margin: 0; width: 50px; border-radius: 50px; height: 50px;} */
 .notification-drop-ul .notification-drop-text{ width: 85%;  float: right; margin-top: 10px;}
-#loadmore-modal .notification-drop-text,#loadmore-modal2 .notification-drop-text{ width: 85%; border-bottom: 1px solid #ececec !important; float: right; margin-top: 10px;     padding: 0px 15px 3px 0px;}
+#loadmore-modal .notification-drop-text,#loadmore-modal2 .notification-drop-text{ width: 92%; border-bottom: 1px solid #ececec !important; float: right; margin-top: 10px;     padding: 0px 15px 3px 0px;}
 .notification-drop-ul .notification-drop-text p, #loadmore-modal .notification-drop-text p{ white-space: normal; word-break: break-word; margin: 0; margin-bottom: 2px; font-size: 12px;}
 .notification-drop-ul .notification-drop-text time, #loadmore-modal .notification-drop-text time{font-size: 12px; font-weight: 600; margin-top: 5px;}
 #loadmore-modal ul,#loadmore-modal2 ul{margin-top: 1rem; float: left; width: 100%; padding: 0 2rem;}
@@ -6621,7 +6621,7 @@ left: 50%;
 .img-circle1{
 
 	border-radius: 50%;
-	padding: 7px;
+	padding: 3px;
 	border: 1px solid #dcd2d2;
 	width:43px;
 }
@@ -6906,3 +6906,11 @@ span.grey-text.wallet-txt {
 }
 #loadmore-modal2.modal{width:100%;height:100%;top:0!important;bottom: 0;max-height: 100%;}
 #loadmore-modal.modal{width:100%;height:100%;top:0!important;padding-bottom: 80px;max-height: 100%;}
+
+
+span.libanz-wallet {
+    padding-right: 10px;
+}
+.ifsc-txt{
+	display:none;
+}

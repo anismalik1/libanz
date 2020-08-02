@@ -11,7 +11,12 @@
     padding-left: 35px !important;
     margin-top: -5px !important;
 } */
-
+.close-fx {
+    padding: 0px 0px 0px 5px !important;
+    font-size: 16px !important;
+    height: 28px;
+    width: 26px;
+}
 #name-characters {
     background: #d0cbcb;
     padding: 11px 8px;
@@ -287,7 +292,7 @@ li.txt-fix-mb span a {
 			<div class="clearfix"></div>
 			<div class="search-box">
 				<mat-form-field class="example-full-width">
-					<input class="black-text" type="text" id="mobile-search" placeholder="Search Product to Compare" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
+					<input class="black-text" type="text" id="mobile-search" placeholder="Search for Product , brands & more.." matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
 					<span class="mobile-search-icon"><button><i  class="fa fa-search grey-text"></i></button></span>
 					 <mat-autocomplete #auto="matAutocomplete">
 						<span *ngIf="filterdList">
@@ -650,7 +655,7 @@ li.txt-fix-mb span a {
 	<!-- Login Modal -->
 	<div id="login-modal" class="modal">
 		<div class="modal-content no-padding">
-			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text">close</i></a>
+			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text close-fx">close</i></a>
 			<div class="row no-margin">
 				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login-banner.jpg);background-size: cover;">
 					<div class="login-modal">
