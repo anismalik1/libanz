@@ -21,6 +21,9 @@
 		page-break-after: left;
 		left: 78%;
 	}
+	.ifsc-txt{
+		display:none;
+	}
   }
 
 html{font-size: 12px;font-family: Arial,sans-serif !important;width: 100%;overflow-x: hidden;}
