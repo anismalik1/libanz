@@ -15,6 +15,12 @@
 		background-color:#f3f3f3 !important;
 		-webkit-backface-visibility: hidden;
 	  }
+	  .extra-rate-2 {
+		position: relative;
+		top: -91px !important;
+		page-break-after: left;
+		left: 78%;
+	}
   }
 
 html{font-size: 12px;font-family: Arial,sans-serif !important;width: 100%;overflow-x: hidden;}
@@ -5469,6 +5475,7 @@ a.modal-trigger i {
 		.left-icn-mb1 {
 			position: absolute;
 			left:23px;
+			top: 19px;
 		}
 		span.fa.fa-search.search-mb-btn {
 			position: absolute;
