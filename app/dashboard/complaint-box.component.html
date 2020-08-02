@@ -42,7 +42,6 @@
 .complaint-modal {
     width: 45%;
     border-radius: 5px;
-    overflow: hidden;
 }
 .order-date.margin-top-cart {
     margin-bottom: -3px;
@@ -106,39 +105,19 @@
                 <app-side-nav></app-side-nav>		    
             </div>
             <div class="col s12 m10">
-                <!-- <div class="card export-and-import">
-                    <div class="card-content">
-                        <form class="date-export">
-                            <div class="row no-margin">
-                                <div class="col s12 m3">
-                                    <input type="text" class="datepicker no-margin" placeholder="Start Date">
-                                </div>
-                                <div class="col s12 m1 center no-padding to">
-                                    <span class="font600">TO</span>
-                                </div>
-                                <div class="col s12 m3">
-                                    <input type="text" class="datepicker no-margin" placeholder="End Date">
-                                </div>
-                                <div class="col s6 m2">
-                                    <button type="Search" class="btn orange no-box-shadow">Export</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div> -->
-              
-                <div class="card" style="margin-top:-8px;">
+               
+              <div class="card" style="margin-top:-8px;">
                     <div class="card-content complain">
                         <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-envelope"></span> &nbsp; Tickets</h3>
                         <div class="right">
                             <span>Search Ticket: </span><input type="text" placeholder="Enter Order Id/Subscriber Id" id="ticket-id"><a href="javascript:" class="search-link" (click)="seach_ticket()"><i class="material-icons">search</i></a>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="button-block">
-                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == 'all' || type == '')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
-                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">In Progress</button></a>
-                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class="right inline-block margin-top-cart "><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">Resolved</button></a>
-                       
+                        <div class="left inline-block" id="search-record"></div>
+                        <div class=" right inline-block">
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class=" margin-top-cart "><button type="button" [className]="(type == 'all' || type == '')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class=" margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">In Progress</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class=" margin-top-cart "><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">Resolved</button></a>
                         </div>
                         
                         <div class="overflow-scroll cst-table responsive-table">							 
@@ -151,7 +130,8 @@
                                         <th >Order Type</th>
                                         <th >Subcriber ID/Recharge No</th>
                                         <th >Amount</th>
-                                        <th >Comment</th>
+                                        <th >Complaint</th>
+                                        <th >Recent Comment/Remark</th>
                                         <th >Created</th>
                                         <th >Last Update</th>
                                         <th>Complaint Status</th>
@@ -169,15 +149,16 @@
                                         
                                         <td>{{complaint.subcriber_id}}</td>
                                         <td><i class="fa fa-inr"></i> {{complaint.grand_total}}</td>
-                                        <td><span *ngIf="complaint.recent_comment != null">{{complaint.recent_comment}} <a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+more</a></span><span *ngIf="complaint.recent_comment == null">{{complaint.comment}}</span></td>
+                                        <td>{{complaint.comment}}</td>
+                                        <td>{{complaint.remark}} <span *ngIf="complaint.comment_count > 1"><a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+{{complaint.comment_count*1 - 1}} more</a></span></td>
                                         <td><span>{{complaint.history_time | date: date:'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
                                         <td><span>{{complaint.last_update | date: date:'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
                                         
-                                        <td><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 1 || complaint.seen == 2"></i><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 3"></i></td>
+                                        <td><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 1"></i><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 2 || complaint.seen == 3"></i></td>
                                         <td><span [innerHTML]="this.todoservice.order_template(complaint.status)"></span></td>
                                         <td class="center">
                                             <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a>
-                                            <a href="#complaints" class="modal-trigger blue-text" *ngIf="complaint.v_o == 'o'" (click)="init_complaint(complaint.order_id)">reply</a>
+                                            <a href="#complaints" class="modal-trigger blue-text" *ngIf="(searched_ticket ==true && i == 0 && complaint.v_o == 'o') || (searched_ticket == false && complaint.v_o == 'o')" (click)="init_complaint(complaint.order_id)">reply</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -273,26 +254,30 @@
          
   <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="reply_complaint(complaintform.value)">
   <div class="modal-content">
+    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>  
     <div class="recent-comments" *ngIf="recent_comments.length > 0">
        <h4>Recent Comments</h4>
        <ul>
-           <li *ngFor="let item of recent_comments;"><span class="date-span">[{{item.created | date: date:'dd M, Y'}}]</span> <span class="comment"> {{item.comment}}</span></li>
+           <li *ngFor="let item of recent_comments;"><span class="date-span">[{{item.created | date: date:'dd M, Y h:i A'}}] </span><span class="user font600" *ngIf="item.v_o == 'v'">You:</span> <span class="user font600" *ngIf="item.v_o == 'o'">Libanz:</span> <span class="comment"> {{item.comment}}</span></li>
        </ul> 
     </div>
-    <h3 class="font600">Reply Comment</h3>
-    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
-    <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
-    
-      <div class="row no-margin">
-        <div class="input-field col s12">
-            <input type="text" placeholder="Enter Query" formControlName="title" value="">
+    <a href="javascript:" *ngIf="this.recent_comments.length > 0 && this.recent_comments[this.recent_comments.length-1].v_o =='o' && this.comment == false" (click)="open_comment()">ADD COMMENT</a>
+    <div *ngIf="this.comment == true">
+        <h3 class="font600">Reply Comment</h3>
+        <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
+        <div class="row no-margin">
+            <div class="input-field col s12">
+                <input type="text" placeholder="Enter Query" formControlName="title" value="">
+                <div class="red-text accent-4" *ngIf="!complaintgroup.controls['title'].valid && complaintgroup.controls['title'].touched">Enter Comment.</div> 
+            </div>
         </div>
-      </div>
-    
+        <div class="modal-footer orange center">
+            <button type="submit" class="modal-action btn-flat white-text font-size-change" [disabled]="!complaintgroup.valid">Comment</button>
+        </div>
+    </div>
+   
   </div>
-  <div class="modal-footer orange center">
-    <button type="submit" class="modal-action btn-flat white-text font-size-change">Register</button>
-  </div>
+  
 </form>
 </div>
 <app-footer-min></app-footer-min>

@@ -2044,7 +2044,7 @@ input[type=number]::-webkit-outer-spin-button {
 	border-right: none !important;
 	border-top: none !important;
 	margin: 0 4px;
-	background-image: url(https://mydthshop.com/web-app/assets/images/arrow-down.png);
+	background-image: url(https://www.libanz.com/web-app/assets/images/arrow-down.png);
 	background-position: right;
 	background-repeat: no-repeat;
 	transform: rotate(90deg);
@@ -3814,11 +3814,11 @@ canvas {
 .new-page-tab .tab a img{opacity: 0.6;}
 .new-page-tab .tab .active img{opacity: 1 !important;}
 .notification-drop-ul li{padding: 5px 10px;}
-.notification-drop-ul .notification-drop-image{width: 15%; float: left;}
-#loadmore-modal .notification-drop-image,#loadmore-modal2 .notification-drop-image{width: 8%; float: left;}
+.notification-drop-ul .notification-drop-image{float: left;}
+#loadmore-modal .notification-drop-image,#loadmore-modal2 .notification-drop-image{float: left;width:50px;height: 50px}
 /* .notification-drop-ul .notification-drop-image img{ margin: 0; width: 50px; border-radius: 50px; height: 50px;} */
 .notification-drop-ul .notification-drop-text{ width: 85%;  float: right; margin-top: 10px;}
-#loadmore-modal .notification-drop-text,#loadmore-modal2 .notification-drop-text{ width: 92%; border-bottom: 1px solid #ececec !important; float: right; margin-top: 10px;     padding: 0px 15px 3px 0px;}
+#loadmore-modal .notification-drop-text,#loadmore-modal2 .notification-drop-text{ width: calc(100% - 50px); border-bottom: 1px solid #ececec !important; float: right; margin-top: 10px;     padding: 0px 15px 3px 10px;}
 .notification-drop-ul .notification-drop-text p, #loadmore-modal .notification-drop-text p{ white-space: normal; word-break: break-word; margin: 0; margin-bottom: 2px; font-size: 12px;}
 .notification-drop-ul .notification-drop-text time, #loadmore-modal .notification-drop-text time{font-size: 12px; font-weight: 600; margin-top: 5px;}
 #loadmore-modal ul,#loadmore-modal2 ul{margin-top: 1rem; float: left; width: 100%; padding: 0 2rem;}
@@ -4183,7 +4183,7 @@ canvas {
 		font-size:30px;
 	}
 .test-earn{padding: 3rem 0; background-repeat: no-repeat; background-size: cover; background-position: center; position: relative; z-index:9999;}
-.test-earn::after{background-image: url('https://www.mydthshop.com/web-app/assets/images/testimonial-bg.jpg'); position: absolute; content: ''; width: 125%; top: 0; height: 100%; left: -6%; z-index: -1;}  
+.test-earn::after{background-image: url('https://www.libanz.com/web-app/assets/images/testimonial-bg.jpg'); position: absolute; content: ''; width: 125%; top: 0; height: 100%; left: -6%; z-index: -1;}  
 .test-earn .card{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15) !important; z-index: 999;}
 .test-earn:hover .card{box-shadow: 0px 0px 55px 0px rgba(0,0,0,0.31) !important; transition: .3s all linear;}
 .test-earn .card .card-content{padding: 3rem 24px !important;}
@@ -4454,7 +4454,7 @@ background: #ff6a00;
 .mobile-header-left{float:left;}
 #mobile-bar{ cursor:pointer;}
 .mobile-search {width: 180px;margin-left:10px; }
-.mobile-search  input[type="text"]{width: 100%;height: 30px;border-radius: 5px;border: 0;outline: 0;padding: 0 12px;background:#fff url('https://www.mydthshop.com/web-app/assets/images/search-logo-tm.png') no-repeat 15px 9px; }
+.mobile-search  input[type="text"]{width: 100%;height: 30px;border-radius: 5px;border: 0;outline: 0;padding: 0 12px;background:#fff url('https://www.libanz.com/web-app/assets/images/search-logo-tm.png') no-repeat 15px 9px; }
 .mobile-search .no-bg{background-image:none!important;}
 
 .mobile-search button{background:none;outline:0;border:0;cursor:pointer;padding: 6px 30px;}
@@ -4477,18 +4477,18 @@ background: #ff6a00;
 .mobile-footer-menu ul li img{ margin-bottom:4px}
 .mobile-footer-menu ul li a{color:#000;} 
 .mobile-footer-menu ul li a span{display:block;}
-.mobile-footer-menu ul li a span.icon-home{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/home.png') no-repeat; width:18px; height:18px}
-.mobile-footer-menu ul li a span.icon-products{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/product.png') no-repeat;width:18px; height:18px}
-.mobile-footer-menu ul li a span.icon-packages{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/package.png') no-repeat;width:18px; height:18px}
-.mobile-footer-menu ul li a span.icon-faqs{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/faq.png') no-repeat;width:18px; height:18px}	
+.mobile-footer-menu ul li a span.icon-home{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/home.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li a span.icon-products{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/product.png') no-repeat;width:18px; height:18px}
+.mobile-footer-menu ul li a span.icon-packages{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/package.png') no-repeat;width:18px; height:18px}
+.mobile-footer-menu ul li a span.icon-faqs{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/faq.png') no-repeat;width:18px; height:18px}	
 
 
 
 
-.mobile-footer-menu ul li.active a span.icon-home{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/home-active.png') no-repeat; width:18px; height:18px}
-.mobile-footer-menu ul li.active a span.icon-products{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/product-active.png')  no-repeat; width:18px; height:18px}
-.mobile-footer-menu ul li.active a span.icon-packages{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/package-active.png') no-repeat; width:18px; height:18px}
-.mobile-footer-menu ul li.active a span.icon-faqs{background:url('https://www.mydthshop.com/web-app/assets/images/mobile-icons/faq-active.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-home{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/home-active.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-products{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/product-active.png')  no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-packages{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/package-active.png') no-repeat; width:18px; height:18px}
+.mobile-footer-menu ul li.active a span.icon-faqs{background:url('https://www.libanz.com/web-app/assets/images/mobile-icons/faq-active.png') no-repeat; width:18px; height:18px}
 
 .mobile-footer-menu ul li.active a span{color:#ff6a00}
 
@@ -4498,11 +4498,11 @@ background: #ff6a00;
 .side-menu h3{ padding:0 0 5px 0;}
 .side-menu ul{padding-bottom: 15px;}
 .logout{ padding-bottom: 0!important; border-bottom: none!important;}
-/* .side-menu li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;} */
-.information li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
-.category-txt li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
-.product-txt li{background: url('https://www.mydthshop.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
-.side-menu .logout li{background: url('https://www.mydthshop.com/web-app/assets/images/logout.png') no-repeat 0px 2px;margin: 10px 0;}
+/* .side-menu li{background: url('https://www.libanz.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;} */
+.information li{background: url('https://www.libanz.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+.category-txt li{background: url('https://www.libanz.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+.product-txt li{background: url('https://www.libanz.com/web-app/assets/images/bullet.png') no-repeat 0px 2px;margin: 10px 0;}
+.side-menu .logout li{background: url('https://www.libanz.com/web-app/assets/images/logout.png') no-repeat 0px 2px;margin: 10px 0;}
 .side-menu ul li a{padding: 0px 0 0 25px;display: block; color:#333;} 
 .side-menu .side-menu-header{background-color: #ffffff;padding: 8px 18px;}
 .side-menu .side-menu-header h3{    padding: 18px 0 2px 0; margin:0;     text-transform: capitalize;}
@@ -4527,7 +4527,7 @@ background: #ff6a00;
 }
 .mobile-footer li.active{font-weight: 600}
 .back-icon li {
-	/* background: url(https://www.mydthshop.com/web-app/assets/images/back-arrow.png) no-repeat 0px 2px; */
+	/* background: url(https://www.libanz.com/web-app/assets/images/back-arrow.png) no-repeat 0px 2px; */
 	/* margin: 10px 0; */
 	padding:5px 2px;
 }
@@ -5325,7 +5325,7 @@ a.modal-trigger i {
 			border-right: none !important;
 			border-top: none !important;
 			margin: 0 4px;
-			background-image: url(https://mydthshop.com/web-app/assets/images/arrow-down.png);
+			background-image: url(https://www.libanz.com/web-app/assets/images/arrow-down.png);
 			background-position: right;
 			background-repeat: no-repeat;
 			transform: rotate(90deg);
@@ -5421,7 +5421,7 @@ a.modal-trigger i {
 			border-right: none !important;
 			border-top: none !important;
 			margin: 0 -8px;
-			background-image: url(https://mydthshop.com/web-app/assets/images/arrow-down.png);
+			background-image: url(https://www.libanz.com/web-app/assets/images/arrow-down.png);
 			background-position: right;
 			background-repeat: no-repeat;
 			transform: rotate(90deg);

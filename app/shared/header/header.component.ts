@@ -875,14 +875,15 @@ export class HeaderComponent implements OnInit{
       $('.logup.modal-trigger').click(function(){
         $('#login-modal').modal('open');
       })
+      $('.button-collapse').sideNav({
+        menuWidth: 300, // Default is 300
+        edge: 'right', // Choose the horizontal origin
+        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: true, // Choose whether you can drag to open on touch screens,
+      }); 
     })
     
-    $('.button-collapse').sideNav({
-      menuWidth: 300, // Default is 300
-      edge: 'right', // Choose the horizontal origin
-      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-      draggable: true, // Choose whether you can drag to open on touch screens,
-    }); 
+    
   $('.tabs').tabs();
   function googleTranslateElementInit() {
     var width = $(window).width(); 
@@ -893,7 +894,7 @@ export class HeaderComponent implements OnInit{
     if(google != 'undefined')
       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     else
-      setTimeout("googleTranslateElementInit()", 1000);
+      setTimeout("googleTranslateElementInit()", 2000);
       setTimeout("set_lang()", 5000);
   }
   function set_lang()

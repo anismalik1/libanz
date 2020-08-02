@@ -156,17 +156,18 @@ export class RechargeOrdersComponent implements OnInit {
           if(data.ticket_generated)
           {
             this.ticket_generated = true;
+            $('.modal-close').click();
           }
           this.toastr.successToastr(data.msg);
-          let url = window.location.pathname;
-            if(url == url)
-            {
-              this.router.routeReuseStrategy.shouldReuseRoute = function(){
-                return false;
-             }
-              this.router.navigated = false;
-              this.router.navigate([url]);	
-			      }
+          // let url = window.location.pathname;
+          //   if(url == url)
+          //   {
+          //     this.router.routeReuseStrategy.shouldReuseRoute = function(){
+          //       return false;
+          //    }
+          //     this.router.navigated = false;
+          //     this.router.navigate([url]);	
+			    //   }
         }
       }  
 		  );

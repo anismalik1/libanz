@@ -25,6 +25,8 @@ export class ComplaintBoxComponent implements OnInit{
   complaints_counts : number ;
   complaint_id : number;
   recent_comments : any = [];
+  searched_ticket : boolean = false;
+  comment : boolean = false;
   constructor( private _renderer2: Renderer2,private toastr : ToastrManager,private fb: FormBuilder,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { }
   ngOnInit() {
     if(!this.get_token())
@@ -39,6 +41,10 @@ export class ComplaintBoxComponent implements OnInit{
     } 
     this.route.params.subscribe(params => {
       this.type = params['name']; //log the value of id
+      if(typeof this.type == 'undefined' || this.type == '' )
+      {
+        this.type = 'all';
+      }
       if(this.type && this.type.length > 3)
       {
         $('#ticket-id').val(this.type);
@@ -72,9 +78,14 @@ export class ComplaintBoxComponent implements OnInit{
     this.recent_comments = [];
     this.complaint_id = id;
   }
+  open_comment()
+  {
+    this.comment = true;
+  }
   show_all_comment(id)
   {
     this.complaint_id = id;
+    this.comment = false;
     this.spinner.show();
     if(this.authservice.retrieveToken())
     {
@@ -89,6 +100,7 @@ export class ComplaintBoxComponent implements OnInit{
             this.router.navigate(['/proceed/login']);
           }
           this.recent_comments = data.RECENT_COMMENT;
+          //console.log(this.recent_comments[this.recent_comments.length-1])
           this.spinner.hide();
         }
       ) 
@@ -108,7 +120,7 @@ export class ComplaintBoxComponent implements OnInit{
     this.spinner.show();
     data.token = this.get_token();
     data.order_id = this.complaint_id;
-    this.todoservice.add_complaint(data)
+    this.todoservice.add_comment(data)
 		.subscribe(
 			data => 
 			{
@@ -179,6 +191,7 @@ export class ComplaintBoxComponent implements OnInit{
     {
       return false;
     }
+    $('#search-record').html('<h4><i class="material-icons orange-text">search</i> Recent Comments For Searched Order '+key+'</h4>');
     this.spinner.show();
     if(this.authservice.retrieveToken())
     {
@@ -192,15 +205,13 @@ export class ComplaintBoxComponent implements OnInit{
             this.authservice.clear_session();
             this.router.navigate(['/proceed/login']);
           }
-
           this.spinner.hide();
           if(!jQuery.isEmptyObject(data))
           {
+            this.searched_ticket = true;
             this.complaints = data.COMPLAINTS;
             this.complaints_counts = data.COMPLAINTS.length;
           }
-
-          
         }
       )  
     } 

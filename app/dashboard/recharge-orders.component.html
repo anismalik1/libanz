@@ -80,8 +80,8 @@ font-size: 19px !important;
               <app-side-nav></app-side-nav>			    
           </div>
         <div class="col s12 m10"> 
-            <div class="chip m12 s12" *ngIf="ticket_generated">
-                <span >Your Ticket has been generated. To check your ticket status click <a routerLink="/dashboard/topup-request">here</a></span>
+            <div class="chip m12 s12" *ngIf="ticket_generated == true">
+                <span >Your Ticket has been generated. To check your ticket status click <a routerLink="/dashboard/complaints">here</a></span>
                 <i class="close material-icons">close</i>
             </div>   
           <div id="recharge" style="margin-top:-12px;">
@@ -176,11 +176,6 @@ font-size: 19px !important;
                         </div>
                         </div>
                         </div>
-
-        
-
-            <!-- end -->
-
            
       </div>
     </div>
@@ -188,34 +183,34 @@ font-size: 19px !important;
 </div>
 <!-- <a href="#complaints" class="modal-trigger com" (click)="do_complaint(1)">Complaint</a> -->
 <div id="complaints" class="modal complaint-modal">
+    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
     <div class="modal-content" *ngIf="go_to_complaint == 0">
-        <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
         <h3>Please Wait...</h3>
     </div>
     <div class="modal-content" *ngIf="go_to_complaint == 2">
-        <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
-        <h3>Complaint In this Order is Already been Registered.</h3>
+        <!-- <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span> -->
+        <p>Ticket for this Order is Already been Registered. For more detail goto <a routerLink="/dashboard/complaints/{{this.complaint_id}}" class="blue-text">ticket</a></p>
     </div>      
   <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="add_complaint(complaintform.value)" *ngIf="go_to_complaint == 1">
   <div class="modal-content">
-    <h3 class="font600">Add Complaint</h3>
-    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+    <h3 class="font600">Create Ticket</h3>
+    <!-- <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span> -->
     <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
     
       <div class="row no-margin">
         <div class="input-field col s12">
             <mat-form-field *ngIf="display == 1">
                 <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
-                    <mat-option [value]="1">
+                    <mat-option value="Balance did not receive by customer">
                         Balance did not receive by customer
                     </mat-option>
-                    <mat-option [value]="2">
+                    <mat-option value="Wrong Opreater but correct recharge No/ID">
                         Wrong Opreater but correct recharge No/ID
                     </mat-option>
-                    <mat-option [value]="3">
+                    <mat-option value="Wrong Recharge No/ID but correct opreater">
                         Wrong Recharge No/ID but correct opreater
                     </mat-option>
-                    <mat-option [value]=""> 
+                    <mat-option value=""> 
                         Other
                     </mat-option>
                 </mat-select>

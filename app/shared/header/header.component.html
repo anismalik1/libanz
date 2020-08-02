@@ -274,8 +274,26 @@ li.txt-fix-mb span a {
 							<li class="notificatoins-dropdown-container">
 								<ul  *ngIf="notifications  && notifications.length > 0">
 									<li *ngFor="let item of notifications;" >
-										<div class="notification-drop-image">
-											<img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" class="responsive-img">
+										<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+										</div>
+										<div class="notification-drop-image" *ngIf="item.activity_type == '2' || item.activity_type == '3' || item.activity_type == '4'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-3.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+										</div>
+										<div class="notification-drop-image" *ngIf="item.activity_type == '5' || item.activity_type == '16' || item.activity_type == '18'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-10.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+										</div>
+										<div class="notification-drop-image" *ngIf="item.activity_type == '6' || item.activity_type == '7' || item.activity_type == '8' || item.activity_type == '14'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+										</div>
+										<div class="notification-drop-image" *ngIf="item.activity_type == '9'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+										</div>
+										<div class="notification-drop-image" *ngIf="item.activity_type == '10'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-1.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+										</div>
+										<div class="notification-drop-image" *ngIf="item.activity_type == '19'">
+											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-6.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
 										</div>
 										<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 											<p [innerHTML]="item.visitor_comment"></p>
@@ -312,14 +330,28 @@ li.txt-fix-mb span a {
 					</div>
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
-					<div class="notification-drop-image" [ngClass]="{'recharge-icon-bg' : (item.activity_type == '1') ,'transfer-from-icon-bg': (item.activity_type == '2') ,'transfer-to-icon-bg' : (item.activity_type == '3'),'addmoney-icon-bg' : (item.activity_type == '4'),'product-purchase-icon-bg': (item.activity_type == '5'),'recharge-refund-icon-bg': (item.activity_type == '6'),'product-refund-icon-bg': (item.activity_type == '7'),'product-cashback-icon-bg': (item.activity_type == '8'),'register-user-icon-bg': (item.activity_type == '9'),'form-query-icon-bg': (item.activity_type == '10'),'promo-cashback-icon-bg': (item.activity_type == '14'),'recharge-addmoney-icon-bg': (item.activity_type == '15'),'product-addmoney-icon-bg': (item.activity_type == '16'),'recharge-bonus-icon-bg': (item.activity_type == '17'),'product-bonus-icon-bg': (item.activity_type == '18'),'money-to-bank-icon-bg': (item.activity_type == '19')}">
-					<img src="https://www.libanz.com/assets/images/icon-logo.png" class="responsive-img" style="width: 28px;
-					height: 28px;
-					border: 1px solid #ff6a00;
-					border-radius: 50%;
-					padding: 7px;
-					margin-top: 10px;">
-					</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '2' || item.activity_type == '3' || item.activity_type == '4'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-3.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '5' || item.activity_type == '16' || item.activity_type == '18'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-10.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '6' || item.activity_type == '7' || item.activity_type == '8' || item.activity_type == '14'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '9'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '10'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-1.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						<div class="notification-drop-image" *ngIf="item.activity_type == '19'">
+							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-6.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+						</div>
+						
 					<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 					<p [innerHTML]="item.visitor_comment"></p>
 					<time class="grey-text">{{time_ago(item.history_time)}}</time>
@@ -359,12 +391,12 @@ li.txt-fix-mb span a {
 		<div class="side-menu" id="mobile-side-menu">
 			<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
 				<div class="side-profile-details">
-				<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-				
-				<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-				
-				<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-						<div class="user-name-mb">
+				<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
+					<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar().includes('data:image/png')"/>
+					<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar().includes('data:image/png')"/>
+				</span>
+				<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() || this.todoservice.get_user_avatar() == 'null'">{{this.todoservice.get_user_characters()}}</span>
+				<div class="user-name-mb">
 				<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
 				<p>{{this.todoservice.get_user_phone()}}</p>
 
@@ -614,12 +646,14 @@ li.txt-fix-mb span a {
 					<!-- <li>
 						<span class="cst-name">RG</span>
 					</li> -->
-					<li id="user-nav">
+					<li id="user-nav" *ngIf="this.todoservice.get_user_name() != ''">
 						<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
-							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-							<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+							<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
+								<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar().includes('data:image/png')"/>
+								<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar().includes('data:image/png')"/>
+							</span>
 							<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
-							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() && this.todoservice.get_user_name() != ''"><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
+							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() || this.todoservice.get_user_avatar() == 'null'"><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
 							<span *ngIf="this.todoservice.get_user_name() == ''"><img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png"></span>
 						</a>
 					</li>
@@ -638,9 +672,28 @@ li.txt-fix-mb span a {
 		</div>
 		<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 			<li *ngFor="let item of notifications;" >
-				<div class="notification-drop-image" [ngClass]="{'recharge-icon-bg' : (item.activity_type == '1') ,'transfer-from-icon-bg': (item.activity_type == '2') ,'transfer-to-icon-bg' : (item.activity_type == '3'),'addmoney-icon-bg' : (item.activity_type == '4'),'product-purchase-icon-bg': (item.activity_type == '5'),'recharge-refund-icon-bg': (item.activity_type == '6'),'product-refund-icon-bg': (item.activity_type == '7'),'product-cashback-icon-bg': (item.activity_type == '8'),'register-user-icon-bg': (item.activity_type == '9'),'form-query-icon-bg': (item.activity_type == '10'),'promo-cashback-icon-bg': (item.activity_type == '14'),'recharge-addmoney-icon-bg': (item.activity_type == '15'),'product-addmoney-icon-bg': (item.activity_type == '16'),'recharge-bonus-icon-bg': (item.activity_type == '17'),'product-bonus-icon-bg': (item.activity_type == '18'),'money-to-bank-icon-bg': (item.activity_type == '19')}">
-					<img src="./assets/images/icon-logo.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
 				</div>
+				<div class="notification-drop-image" *ngIf="item.activity_type == '2' || item.activity_type == '3' || item.activity_type == '4'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-3.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				</div>
+				<div class="notification-drop-image" *ngIf="item.activity_type == '5' || item.activity_type == '16' || item.activity_type == '18'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-10.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				</div>
+				<div class="notification-drop-image" *ngIf="item.activity_type == '6' || item.activity_type == '7' || item.activity_type == '8' || item.activity_type == '14'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				</div>
+				<div class="notification-drop-image" *ngIf="item.activity_type == '9'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				</div>
+				<div class="notification-drop-image" *ngIf="item.activity_type == '10'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-1.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				</div>
+				<div class="notification-drop-image" *ngIf="item.activity_type == '19'">
+					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-6.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 10px;" >
+				</div>
+				
 				<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 				<p [innerHTML]="item.visitor_comment"></p>
 				<time class="grey-text">{{time_ago(item.history_time)}}</time>
@@ -882,9 +935,12 @@ li.txt-fix-mb span a {
 		<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
 			<ul class="unique-item">
 				<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
-					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-					<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/></a>
-					<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+					<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
+						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf=" !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf=" this.todoservice.get_user_avatar().includes('data:image/png')"/>
+					</span>
+					<span alt="user-icon" id="name-characters" *ngIf="this.todoservice.get_user_avatar() == 'null' || !this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+					</a>
 					<a class="modal-trigger" href="#modal1"><i class="material-icons">photo_camera</i></a>
 				</li>
 					<li class="inline-block user-after-login-text only-txt-name">

@@ -863,6 +863,11 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/add_complaint';
     return this.send_post_request(data,url) ;
   }
+  add_comment(data)
+  {
+    let url = this.server_url+'accounts/apis/orders/add_comment';
+    return this.send_post_request(data,url) ;
+  }
   fetch_complaints(data)
   {
     
