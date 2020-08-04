@@ -439,7 +439,7 @@ li.txt-fix-mb span a {
 						<mat-select class="select-lbl">
 							<mat-option (click)="go_to_nav('/p/about-us')"><a [routerLink]="['/p/about-us']" > About Us</a></mat-option>
 							<mat-option (click)="go_to_nav('/p/dth-connection-refund-policy')"><a [routerLink]="['/p/dth-connection-refund-policy']" > Refund Policy</a></mat-option>
-							<mat-option (click)="go_to_nav('/p/24-7')"><a [routerLink]="['/p/24-7']">Help & Support </a></mat-option>
+							<mat-option (click)="go_to_nav('/p/24-x-7-support')"><a [routerLink]="['/p/24-x-7-support']">Help & Support </a></mat-option>
 							<mat-option (click)="go_to_nav('/p/know-about-my-dth-shop')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Who We Are</a></mat-option>
 							<mat-option (click)="go_to_nav('/p/libanz-terms-and-conditions')"><a [routerLink]="['/p/know-about-my-dth-shop']" >Terms &amp; Conditions</a></mat-option>
 							<mat-option (click)="go_to_nav('/p/privacy-policy')"><a [routerLink]="['/p/privacy-policy']" >Privacy policy</a></mat-option>
@@ -485,7 +485,7 @@ li.txt-fix-mb span a {
 				<ul class="information hide-left-menu-mb">	
 					<li><a [routerLink]="['/p/about-us']" (click)="go_to_nav('/p/about-us')"> About Us</a></li>
 					<li><a [routerLink]="['/p/dth-connection-refund-policy']" (click)="go_to_nav('/p/dth-connection-refund-policy')"> Refund Policy</a></li>
-					<li><a [routerLink]="['/p/24-7']">Help & Support </a></li>
+					<li><a [routerLink]="['/p/24-x-7-support']">Help & Support </a></li>
 					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/know-about-my-dth-shop')">Who We Are</a></li>
 					<li><a [routerLink]="['/p/know-about-my-dth-shop']" (click)="go_to_nav('/p/libanz-terms-and-conditions')">Terms &amp; Conditions</a></li>
 					<li><a [routerLink]="['/p/privacy-policy']" (click)="go_to_nav('/p/privacy-policy')">Privacy policy</a></li>
@@ -562,7 +562,7 @@ li.txt-fix-mb span a {
 					<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank">FAQ </a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank">Blog</a> |</span>
 					<span><a href="/merchant/kyc" class="grey-text"> KYC</a> |</span>
-					<span><a class="grey-text" [routerLink]="['/p/24-7']" target="_blank">24x7 support</a> </span>
+					<span><a class="grey-text" [routerLink]="['/p/24-x-7-support']" target="_blank">24x7 support</a> </span>
 					<span id="renew-section" *ngIf="this.todoservice.get_user_type() == 3 && this.todoservice.get_days_left() <= 14"> | {{this.todoservice.get_days_left()}} days left 
 						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() == '10000')" [routerLink] = "['/merchant/pricing']">Upgrade</a>
 						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() != '10000')" [routerLink] = "['/merchant/checkout']" [queryParams]="{plan : this.todoservice.get_active_pack()}">Renew</a>
@@ -960,7 +960,7 @@ li.txt-fix-mb span a {
 		<li><div class="divider"></div></li>
 		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
 		<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
-		<li><a routerLink="/p/24-7" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
+		<li><a routerLink="/p/24-x-7-support" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
 		
 		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
 	</ul>

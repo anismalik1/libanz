@@ -36,7 +36,7 @@ li.clogin.ng-star-inserted {
 
 .shadow-box img{
     border-radius: 10px;
-    height: 155px;
+    height: 172px;
     /* border-radius: 20px; */
 	/* padding: 5px 10px 5px 4px !important;
 	margin-left: 13px; */
@@ -419,7 +419,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 			<div class="top-slider-dot">
 			<ul class="mobile-slider" id="mobile-slider">
 				<li *ngFor="let item of this.mainbanners;let i = index;">
-					<div class="col m12 s12" style="padding-right: 1.1%;">
+					<div class="col m12 s12">
 						<div class="shadow-box">
 							<a routerLink="item.imageurl">
 								<img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{item.image}}" class="responsive-img"/>
@@ -660,7 +660,7 @@ ul.mob-retailer-slider.lightSlider.lSSlide {
 		<ul class="bottom-slider " id="bottom-slider">
 			<li *ngFor="let banner of this.bottombanners">
 				<div class="shadow-box row">
-					<div class="col m12">
+					<div class="col m12 s12">
 						<a routerLink="banner.imageurl"><img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}"/></a>
 					</div>
 				</div>

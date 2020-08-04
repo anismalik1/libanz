@@ -4612,6 +4612,11 @@ body{padding-bottom: 80px;}
 	.login-side-image{display:none}
 	#sntch_webchat{display:none}
 	.slider-flash-deal{display: none;}
+	#login-modal{top: 0!important;
+    bottom: 66px;
+    width: 100%!important;
+    max-height: 100%;
+    z-index: 999999!important;}
 }
 #dropdown-notice2 li{margin-right:0!important;}
 
@@ -5354,16 +5359,11 @@ a.modal-trigger i {
 		.chip a.black-text.btn-contu {
 			font-size: 13px;
 		}
+	.mobile-slider,#bottom-slider{height: 175px!important;}	
 
 	@media only screen and (max-width: 767px){
-/* 
-		.bottom-slider-dot ul.lSPager.lSpg {
-			position: absolute;
-			bottom: -20px;
-			left: 35%;
-		} */
 		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li.active a, .lSSlideOuter .lSPager.lSpg>li:hover a {
-			background-color: #000000 !important;
+			background-color: #ff6a00 !important;
 		}
 		.add-new-address {
 			padding: 16px !important;

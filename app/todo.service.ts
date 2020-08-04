@@ -60,13 +60,13 @@ export class TodoService {
       if($method == 1)
       return '<span class="orange darken-1 order-status white-text padd1"> Wallet </span>';
     else if($method == 2)
-      return '<span class="pink darken-1 white-text order-status padd1"> Gateway </span>';
+      return '<span class="blue-grey lighten-3 white-text order-status padd1"> Gateway </span>';
     else if($method == 3)
-      return '<span class="orange darken-1 white-text order-status padd1"> Mydth </span>';
+      return '<span class="orange lighten-3 white-text order-status padd1"> Mydth </span>';
     else if($method == 4)
-      return '<span class="blue darken-1 white-text order-status padd1"> Paytm </span>';
+      return '<span class="blue lighten-3 white-text order-status padd1"> Paytm </span>';
     else if($method == 5)
-      return '<span class="lime darken-1 white-text order-status padd1"> COD </span>';	
+      return '<span class="teal lighten-3 white-text order-status padd1"> COD </span>';	
   }
   order_template($status)
   {

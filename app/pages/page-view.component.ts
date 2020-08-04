@@ -84,9 +84,8 @@ ngOnInit() {
   if(this.todoservice.get_param('ref'))
   {
     this.ref = this.todoservice.get_param('ref')
-    console.log(this.ref);
   }
-  if(this.router.url == '/p/24-7' || this.router.url == '/p/jio-fiber' || this.router.url == '/p/airtel-xstream' || this.router.url == '/p/dishsmrt-hub')
+  if(this.router.url == '/p/24-x-7-support' || this.router.url == '/p/jio-fiber' || this.router.url == '/p/airtel-xstream' || this.router.url == '/p/dishsmrt-hub')
   {
     this.form_enable = true;
   }
