@@ -82,7 +82,7 @@ export class RechargeComponent implements OnInit {
   alloperators : any;
   selected_operator : number = 0;
   pagetitle : string;
-  options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
+  options: any = [{ how_much_apply_to_recharge: 0}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
   tab_1 : boolean = false;
@@ -131,13 +131,12 @@ export class RechargeComponent implements OnInit {
      spinner.show()
     this.ini_script() ;
     if(this.get_token())
-      this.get_last_recharges()  
+      this.get_last_recharges();
     if(this.get_token())
     {
-      //console.log(this.todoservice.get_user_recharge_amount())
       if(this.todoservice.get_user_recharge_amount() > 0)
       {
-        this.fetch_options()
+        this.fetch_options();
       }
     }  
   } 
@@ -152,6 +151,7 @@ export class RechargeComponent implements OnInit {
       }
     )
   }
+  
   check_list(type)
   {
     if(this.url_name.includes(type))

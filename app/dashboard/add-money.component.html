@@ -497,7 +497,7 @@ float: right;
                             <h2 class="font600 inline-block">Invoice </h2>
                         </div>
                         <ul *ngIf="order_data" class="font-li">
-                          <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="{{this.todoservice.base_url}}/web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/pending.gif" style="width:40px;"></span></li>
+                          <li><span *ngIf="order_data.payment_status == 2" class="red-text"><img src="{{this.todoservice.base_url}}/web-app/assets/images/close.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 1" class="green-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" style="width:40px;"></span><span *ngIf="order_data.payment_status == 3" class="orange-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" style="width:40px;"></span></li>
                           <li class="cst-top-signle"><strong>Order Status: </strong> {{order_data.status}}</li>
                           <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
                           <li><strong>Invoice No: </strong>  #{{order_data.order_id}} </li>
@@ -506,7 +506,7 @@ float: right;
                           
                           <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Libanz</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
                           <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li>
-                          <!-- <li><strong>Comment: </strong>{{order_data.comment}}</li> -->
+                          <li><strong class="green-text">{{order_data.remark}}</strong></li>
                         </ul>
 
                         <div class="clearfix"></div> <br/>
@@ -552,7 +552,7 @@ float: right;
                                   <label for="enter-amount" class="enter-amt"><span class="fa fa-inr"></span> &nbsp; Amount*</label>
                                 </div>
                                 <div class="input-field col s12 m12">
-                                    <button type="button" class="btn orange btn-large btn-full wid-100" (click)="proceed_to_add()">Proceed To Add Money </button>
+                                    <button type="button" class="btn orange btn-large btn-full wid-100" (click)="proceed_to_add()" [disabled]="(this.add_data.send && this.add_data.send == 1)?true:false">Proceed To Add Money </button>
                                 </div>
                                 
                               </div>

@@ -318,9 +318,11 @@ left:5%;
 								<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
 									float: left;"></label>
 							</p>
-							<p class="col s12  col m3 recharge-content-box promo-txt-mb" *ngIf="promo_selected == 0 && (this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge && this.url_name == 'mobile')">
+							<span *ngIf="this.todoservice.get_user_recharge_amount() == 0">
+								<p class="col s12  col m3 recharge-content-box promo-txt-mb" *ngIf="promo_selected == 0 && this.url_name == 'mobile'">
 									<a href="#promo-code-apply" class="modal-trigger">Have A Promocode</a>
-							</p>
+								</p>
+							</span>
 							<div class="payment-method" *ngIf="pay_step==1">
 								<p class="col s12 m3 recharge-content-box" *ngIf="promo_selected == 1">
 									<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
