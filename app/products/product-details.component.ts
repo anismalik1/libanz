@@ -1109,6 +1109,11 @@ export class ProductDetailsComponent implements OnInit{
         alert("There Must be atleast two packs(FTA + Other) in this Package.");
         return false;
       }
+      if(pack.title.includes('Gold Combo') || pack.title.includes('Gold HD Combo'))
+      {
+        alert("There Must be atleast two packs(FTA + Other) in this Package.");
+        return false;
+      }
       $('#check-pack-'+pack.id).addClass('grey-text');
       if(!this.fta_pack)
         this.pack_selected = [];
