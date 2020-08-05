@@ -116,8 +116,9 @@ font-size: 19px !important;
                     </div>
                     <div class="overflow-scroll responsive-table cst-table">	
 
-                        <table class="table ">
-                            <tr>
+                        <table class="table table-bordered">
+                            <thead class="thead-bg">
+                            <tr >
                                 <th >S.No.</th>
                           <th >Order No.</th>
                           <th >SubscriberID</th>
@@ -133,6 +134,7 @@ font-size: 19px !important;
                           <!-- <th >Remark</th> -->
                           <th >Action</th>
                             </tr>
+                            </thead>
 
 
                             <tr *ngFor="let recharge of recharges| paginate: { id: 'recharge-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: r_p, totalItems: recharge_counts };let i = index">

@@ -114,15 +114,15 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="left inline-block" id="search-record"></div>
-                        <div class=" right inline-block">
+                        <div class=" right inline-block" style="margin-bottom:15px;">
                             <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class=" margin-top-cart "><button type="button" [className]="(type == 'all' || type == '')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
-                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class=" margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">In Progress</button></a>
-                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class=" margin-top-cart "><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow item'">Resolved</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class=" margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item light-btn'">In Progress</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class=" margin-top-cart "><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow item light-btn'">Resolved</button></a>
                         </div>
-                        
-                        <div class="overflow-scroll cst-table responsive-table">							 
+                       
+                        <div class="overflow-scroll cst-table responsive-table" >							 
                             <table id="datatable" class="display  datatable-example">
-                                <thead>
+                                <thead class="thead-bg">
                                     <tr>
                                         <th >S.No.</th>
                                         <th >Ticket ID</th>
@@ -210,7 +210,7 @@
       <div class="row">
       	<div class="col s12">
       		<table class="responsive-table bordered striped highlight">
-		        <thead>
+                <thead class="thead-bg">
 		          <tr>
 	              <th>Subscriber/Customer No.</th>
 	              <th>Operator</th>

@@ -6398,7 +6398,7 @@ margin: 2px;
     border: 1px solid #ececec;
 }
 .thead-bg tr th {
-    background: #ececec;
+    background: #ececec !important;
     border: 1px solid #dcdcdc !important;
 }
 
@@ -6913,4 +6913,21 @@ span.libanz-wallet {
 }
 .ifsc-txt{
 	display:none;
+}
+.thead-bg tr th {
+    border: 1px solid #dcd5d5;
+}
+
+thead.thead-bg {
+    background: #ececec;
+}
+
+.light-btn {
+    background: #ececec !important;
+    color: #333;
+    margin: 0px 10px;
+}
+
+.edit-acc span {
+    padding-top: 4px !important;
 }

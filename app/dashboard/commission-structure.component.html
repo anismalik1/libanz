@@ -32,7 +32,7 @@
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<div class="fix-mb-top"></div>
+
 <section class="flash-deal">
     <div class="container-fluid">
         <div class="row no-margin">
@@ -73,7 +73,7 @@
                   </ul>
                     <div id="test1" class="margin-top responsive-table">
                         <table id="datatable" class="display datatable-example cst-table">
-                                <thead>
+                                <thead class="thead-bg">
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>
                                         <th nowrap="nowrap">Operator</th>
@@ -82,7 +82,7 @@
                                         <th nowrap="nowrap">Amount Type</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
+                                <!-- <tfoot>
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>
                                         <th nowrap="nowrap">Operator</th>
@@ -90,7 +90,7 @@
                                         <th nowrap="nowrap">Commission Type</th>
                                         <th nowrap="nowrap">Amount Type</th>
                                     </tr>
-                                </tfoot>
+                                </tfoot> -->
                                 <tbody *ngIf="dthcommissions">
                                     <tr *ngFor="let commission of dthcommissions;let i = index">
                                         <td>{{i+1}}</td>
@@ -116,7 +116,7 @@
                                         <th nowrap="nowrap">Amount Type</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
+                                <!-- <tfoot>
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>
                                         <th nowrap="nowrap">Operator</th>
@@ -124,7 +124,7 @@
                                         <th nowrap="nowrap">Commission Type</th>
                                         <th nowrap="nowrap">Amount Type</th>
                                     </tr>
-                                </tfoot>
+                                </tfoot> -->
                                 <tbody *ngIf="billcommissions">
                                     <tr *ngFor="let commission of billcommissions;let i = index">
                                         <td>{{i+1}}</td>
@@ -151,7 +151,7 @@
                                         <th nowrap="nowrap">Amount Type</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
+                                <!-- <tfoot>
                                     <tr>
                                         <th nowrap="nowrap">S.No.</th>
                                         <th nowrap="nowrap">Operator Code</th>
@@ -160,7 +160,7 @@
                                         <th nowrap="nowrap">Commission Type</th>
                                         <th nowrap="nowrap">Amount Type</th>
                                     </tr>
-                                </tfoot>
+                                </tfoot> -->
                                 <tbody>
                                     <tr>
                                         <td>1</td>

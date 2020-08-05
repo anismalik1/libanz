@@ -120,6 +120,7 @@ padding:0;
                             </div>
                             <div class="responsive-table" style="width:100%; overflow:auto;">
                              <table class="table striped  cst-table">
+                                 <thead class="thead-bg">
                                 <tr class="theader-cst">
                                     <th >S.No.</th>
                                     <th >Order No.</th>
@@ -136,6 +137,7 @@ padding:0;
                                     <th>Payment Status</th>
                                     <th >Order Status</th>
                                 </tr>
+                                </thead>
 
                                 <tr *ngFor="let row of transactions | paginate: { id: 'wallet-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: w_p, totalItems: wallet_counts }; let i=index">
                                     <td>{{i+1}}</td>
