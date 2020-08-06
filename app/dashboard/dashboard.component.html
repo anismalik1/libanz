@@ -411,10 +411,10 @@ font-weight: bold;
 									<th >Commission/ Surcharge</th>
 									<th >Payment Ref ID</th>
 									<!-- <th >Order Type</th> -->
+									<th >Comment</th>
 									<th >Payment Method</th>
 									<th >Order Status</th>
 									<th >Payment Status</th>
-									<th >Comment</th>
 									<th >View</th>
 								</tr>
 							</thead>
@@ -426,12 +426,13 @@ font-weight: bold;
 									<td nowrap="nowrap"><i class="icon-inr"></i>{{topup.grand_total}}</td>
 									<td nowrap="nowrap">{{topup.commission_surcharge}}</td>
 									<td nowrap="nowrap">{{topup.transaction_id}}</td>
+									<td nowrap="nowrap">{{topup.comment}}</td>
 									<!-- <td nowrap="nowrap"><span *ngIf="topup.activity_type == 2 || topup.activity_type == 3">Wallet To Wallet</span><span *ngIf="topup.activity_type == 4">Add Money to Wallet</span><span *ngIf="topup.activity_type == 19">Wallet To Bank</span></td> -->
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.addmoney_paymethod_template(topup.paymethod)"></div></td>
 									<!-- <td nowrap="nowrap"><div [innerHTML]="this.todoservice.paymethod_template(topup.paymethod)"></div></td> -->
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
-									<td nowrap="nowrap">{{topup.comment}}</td>
+									
 									<td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.id}">View</a></td>	
 								</tr>  
 							</tbody>	

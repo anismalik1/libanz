@@ -132,12 +132,11 @@
                                         <th >Amount</th>
                                         <th >Surcharge</th>
                                         <th >TXN/REF ID</th>
-                                        <!-- <th >Order Type</th> -->
-                                        <!-- <th >Payment Type</th> -->
+                                        <th >Comment</th>
                                         <th >Payment Method</th>
                                         <th >Order Status</th>
                                         <th >Payment Status</th>
-                                        <th >Comment</th>
+                                        
                                         <td>View</td>
                                     </tr>
                                 </thead>
@@ -148,18 +147,13 @@
                                         <td nowrap="nowrap">{{i+1}}</td>
                                         <td nowrap="nowrap">{{topup.order_id}}</td>
                                         <td nowrap="nowrap">{{topup.history_time | date: date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
-                                        <!-- <td nowrap="nowrap">{{topup.name}}</td>
-                                        <td nowrap="nowrap">{{topup.phone}}</td> -->
                                         <td nowrap="nowrap"><i class="icon-inr"></i>{{topup.amount}}</td>
                                         <td nowrap="nowrap">{{topup.commission_surcharge}}</td>
                                         <td nowrap="nowrap">{{topup.transaction_id}}</td>
-                                        <!-- <td nowrap="nowrap"><span *ngIf="topup.activity_type == 2 || topup.activity_type == 3">Wallet To Wallet</span><span *ngIf="topup.activity_type == 4">Add Money To Wallet</span><span *ngIf="topup.activity_type == 19">Wallet To Bank</span></td> -->
-                                        <!-- <td nowrap="nowrap">{{topup.payment}}</td> -->
+                                        <td nowrap="nowrap">{{topup.comment}}</td>
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.addmoney_paymethod_template(topup.paymethod)"></div></td>
-                                        <!-- <td nowrap="nowrap"><div [innerHTML]="this.todoservice.paymethod_template(topup.paymethod)"></div></td> -->
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
-                                        <td nowrap="nowrap">{{topup.comment}}</td>
                                         <td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.order_id}">View</a></td>	
                                     </tr>  
                                 </tbody>
