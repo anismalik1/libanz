@@ -41,6 +41,10 @@ z-index: 99999;
     margin-top: -5px;
 }
 }
+.pk-list {
+    position: relative;
+    top: -5px;
+}
 </style>
 
 <app-header class="hide-on-mobile"></app-header>
@@ -50,7 +54,7 @@ z-index: 99999;
 </div>
 <div class="col s12 cst-back">
     <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Package List</a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
+      <li>  <a class="black-text" routerLink="{{this.todoservice.get_urls().previousUrl}}"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; <span class="pk-list"> Package List </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
     </ul>
 </div>	
 <div class="fix-mb-top" style="padding-top:65px !important;"></div>
