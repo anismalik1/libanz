@@ -1,5 +1,7 @@
 import { Component, OnInit ,ViewContainerRef} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { Meta ,Title} from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
@@ -19,6 +21,7 @@ export class ForgotPasswordComponent implements OnInit{
   public step : number = 1;
   public tick : number;
   private pin : Number;
+  private page : string = 'forgot-password';
   back_to_login : boolean = false;
   public resetgroup : FormGroup;
   private watch : Number = 0; 
@@ -28,6 +31,9 @@ export class ForgotPasswordComponent implements OnInit{
               private toast : ToastrManager,
               private vcr: ViewContainerRef,
               private fb: FormBuilder,
+              private title : Title,
+              private meta : Meta,
+              private spinner : NgxSpinnerService
   ) {
     this.resetgroup = fb.group({
       'password' : [null,Validators.compose([Validators.required])],
@@ -40,7 +46,7 @@ export class ForgotPasswordComponent implements OnInit{
    }
   
   ngOnInit() {
-    
+    this.fetch_page_data();
   }
   
   process_to_reset(data,me)
@@ -78,7 +84,34 @@ export class ForgotPasswordComponent implements OnInit{
         }
       )  
   }
-
+  fetch_page_data()
+  {
+    if(this.page == null || this.page == '')
+    {
+        return false;
+    }
+    this.spinner.show(); 
+    this.todoservice.fetch_page_data({page : this.page})
+      .subscribe(
+        data => 
+        {
+          if(data.PAGEDATA)
+          {
+            this.todoservice.set_page_data(data.PAGEDATA[0]);
+            if(data.PAGEDATA[0].image != '')
+            {
+              //$('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);
+            }
+            $('#page-content').html(this.todoservice.get_page().description);
+            this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+            this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+            this.title.setTitle(this.todoservice.get_page().metaTitle);
+            window.scroll(0,0); 
+          }
+          this.spinner.hide();  
+        }
+      ) 
+   }
   watch_sms()
   {
     if(window.SMSRetriever )

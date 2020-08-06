@@ -2184,6 +2184,7 @@ tbody img{
 	height: 70vh;
 	background-image: url(https://www.libanz.com/web-app/assets/images/login.jpg);
 }
+.login-side-image{background-image: url(https://www.libanz.com/web-app/assets/images/forgot.jpg);}
 .login-modal-close {
     position: absolute;
     right: 3%;
