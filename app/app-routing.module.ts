@@ -14,7 +14,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password.component';
 
 const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
-  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  //{ path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
  // { path: 'splash-screen', component: SplashScreenComponent },
   { path: 'error', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'package-list',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'reviews',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: '',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
-  {path: '**', redirectTo: '/error/404'},
+  {path: '**', redirectTo: '/error/404'}, 
 ];
 
 @NgModule({
