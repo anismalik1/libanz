@@ -439,10 +439,10 @@ p.ask-login {
 											</div>
 											</div>
 											<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 2 : 1"/>
-											<div class="col s12  margin-top">
+											<div class="col s12  margin-top fix-center">
 												<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
-												<button type="submit" class="btn  orange  regis-btn-fix" [disabled]="!signupgroup.valid">Create Account</button>
-												<p class="ask-login"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
+												<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!signupgroup.valid">Create Account</button>
+												<p class="ask-login fix-center"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
 												<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
 											</div>
 										</div>

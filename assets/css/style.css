@@ -6933,3 +6933,40 @@ thead.thead-bg {
     padding-top: 4px !important;
 }
 /*---------home style--------------*/
+
+
+.upper-text {
+    text-align: center;
+}
+.fix-center{
+
+	text-align:center;
+}
+.login-modal {
+    height: 67vh !important;
+	background-image: url(https://www.libanz.com/web-app/assets/images/login.jpg) !important;
+	background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 767px){
+
+	.promo-txt-mb {
+		position: absolute;
+		top: 12px;
+		right: -118px !important;
+	}
+}
+.cst-select-fix span{
+
+	padding-left:7px !important;
+	font-size:13px !important;
+}
+.blog-content P{
+
+	color:#6c6c6c;
+}
+/* .operation-txt{
+
+	padding-left:7px !important;
+	font-size:13px !important;
+} */
