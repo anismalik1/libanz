@@ -190,7 +190,7 @@ ul#dropdown1 li {
     <div class="container">
         <div class="col s12">
             <ul class="back-icon">
-                <li>  <a class="black-text" routerLink="/mhome"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
+                <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
             </ul>
         </div>	
     </div>
@@ -202,11 +202,11 @@ ul#dropdown1 li {
 				<nav>
 					<div class="nav-wrapper">
 						<div class="col s12" *ngIf="product">
-							<a routerLink="/home" class="breadcrumb black-text">Home</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:1}" class="breadcrumb black-text"*ngIf="product.category_id == 1">Tata Sky</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:2}" class="breadcrumb black-text"*ngIf="product.category_id == 2">Videocon</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:3}" class="breadcrumb black-text"*ngIf="product.category_id == 3">Airtel</a>
-							<a routerLink="/product/listing" [queryParams]="{cat_id:4}" class="breadcrumb black-text"*ngIf="product.category_id == 4">DishTv</a>
+							<a routerLink="/" class="breadcrumb black-text">Home</a>
+							<a routerLink="/product/listing/tata-sky" class="breadcrumb black-text"*ngIf="product.category_id == 1">Tata Sky</a>
+							<a routerLink="/product/listing/videocon" class="breadcrumb black-text"*ngIf="product.category_id == 2">Videocon</a>
+							<a routerLink="/product/listing/airtel" class="breadcrumb black-text"*ngIf="product.category_id == 3">Airtel</a>
+							<a routerLink="/product/listing/dish-tv" class="breadcrumb black-text"*ngIf="product.category_id == 4">DishTv</a>
 							<a class="breadcrumb black-text">Details</a>
 						</div>
 					</div>

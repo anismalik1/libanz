@@ -139,6 +139,31 @@ export class ProductService {
     }
     return true;
   }
+
+  selectCartItemById(id)
+  {
+    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let index : number = -1;
+    if(cart != null)
+    {
+      for(var i =0;i< Object.keys(cart).length;i++)
+      {
+        let item :Item = JSON.parse(cart[i]);
+        if(item.product.id == id)
+        {
+          index = i;
+          break;
+        } 
+      }
+    }
+    
+    if(index == -1)
+    {
+     return false;
+    }
+    return JSON.parse(cart[index]);
+  }
+
   addto_cart(id : number,product_item)
   {
     let push_cart_id = id;

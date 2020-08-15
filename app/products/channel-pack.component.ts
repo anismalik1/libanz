@@ -19,6 +19,8 @@ export class ChannelPackComponent implements OnInit {
   product_pack_info : any = [];
   channel_count : Number = 0;
   month : number;
+  channels_packs : any;
+  region : number;
   pack_box : any;
   category : number;
   pack_id : number;
@@ -127,6 +129,7 @@ export class ChannelPackComponent implements OnInit {
       }
       );
   }
+  
   choose_box_for_this_pack(parent,id)
    {
      this.pack_id = id;

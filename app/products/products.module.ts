@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatStepperModule} from '@angular/material/stepper';
 import { ProductDetailsComponent } from './product-details.component';
 import { ProductsComponent } from './products.component';
 import { CheckoutComponent } from './checkout.component';
@@ -21,13 +22,15 @@ import { CompareDthComponent } from './compare-dth.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom'; 
 import { User } from '../user';
 import { FavoritesComponent } from './favorites.component';
-import { ProductDetailAmpComponent } from './product-detail-amp.component'; 
+import { ProductDetailAmpComponent } from './product-detail-amp.component';
+import { StepCheckoutComponent } from './step-checkout.component'; 
 const routes: Routes = [
   { path: 'compare-box', component: CompareDthComponent },
   { path: 'listing', component: ProductsComponent },
   { path: 'listing/:name', component: ProductsComponent },
   { path: 'channel-pack/:id', component: ChannelPackComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'step-checkout', component: StepCheckoutComponent },
   { path: 'cart', component: CartComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
@@ -50,9 +53,10 @@ const routes: Routes = [
     MatCheckboxModule,
     MatRadioModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatStepperModule
   ],
-  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent, FavoritesComponent, ProductDetailAmpComponent],
+  declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent, FavoritesComponent, ProductDetailAmpComponent, StepCheckoutComponent],
   providers : [ProductService,TodoService,User,AuthService]
 })
 

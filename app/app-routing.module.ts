@@ -13,21 +13,17 @@ import { SignupComponent } from './pages/signup.component';
 import { ForgotPasswordComponent } from './pages/forgot-password.component';
 
 const routes: Routes = [
-  
   { path: 'logout', component: LogoutComponent },
-  { path: '', component: SplashScreenComponent },
-  { path: 'splash-screen', component: SplashScreenComponent },
+  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+ // { path: 'splash-screen', component: SplashScreenComponent },
   { path: 'error', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
   { path: 'product', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
   { path: 'proceed',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
   { path: 'merchant',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
- 
   { path: 'help',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'p/:name',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'home#login',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)}, 
-  { path: 'home',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
-  { path: 'home/',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   { path: 'recharge',loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   { path: 'p/accounts',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'lead',loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},

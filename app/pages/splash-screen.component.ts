@@ -4,7 +4,7 @@ import { DOCUMENT} from "@angular/common";
 import { Headers,Http } from '@angular/http';
 import { TodoService } from '../todo.service';
 import {Router} from '@angular/router';
-import {  stepper } from './splash-animation';
+
 
 declare var window: any;
 
@@ -28,7 +28,6 @@ declare var window: any;
             </div>-->
         </div>
     `,
-    animations: [stepper],
     styles: [`
         .splash-box{position: absolute;
             top: 40%;width:100%} 
@@ -67,22 +66,18 @@ export class SplashScreenComponent implements OnInit {
     animationDone(ele)
     {
         $('.splash-box').css({top:'40%'});
-        this.router.navigate(['/mhome']);
+        this.router.navigate(['/']);
     }
 
     ngOnInit() {
         
         var width = $(window).width() + 17; 
-        if(width > 767)
+        if(width > 767 || document.URL.indexOf('https://') !== -1)
         {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
             return false;
         }
-        else if( document.URL.indexOf('https://') !== -1)
-        {
-            this.router.navigate(['/mhome']);
-            return false;
-        }
+       
         if(document.URL.indexOf('android_asset') !== -1)
         {
             if(!window.cordova)

@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit{
     private verify : number;
     public signupverify : number = 0;
     public notifications : any = {};
-    public notification_count : Number;
+    public notification_count : any = {count :0};
     public favourites : any;
     public favourite_count : number;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
@@ -74,7 +74,6 @@ export class HeaderComponent implements OnInit{
     private http : Http
   ) 
     {
-      this.check_device();
       this.router.events
         .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
         .subscribe((events: RoutesRecognized[]) => {
@@ -109,7 +108,6 @@ export class HeaderComponent implements OnInit{
     }
     ngOnInit()
     { 
-      
       this.todoservice.createOnline$().subscribe(isOnline => 
         {
           if(isOnline == false)
@@ -119,19 +117,18 @@ export class HeaderComponent implements OnInit{
           }
         } 
         );  
-      if(document.URL.indexOf('android_asset') !== -1)
-      {
-        if(!window.cordova)
+        if(document.URL.indexOf('android_asset') !== -1)
         {
-          let script1 = this._renderer2.createElement('script');
-          script1.type = `text/javascript`;
-          script1.id = `cordova-js`;
-          script1.src = `cordova.js`;
-          this._renderer2.appendChild(this._document.body, script1);
+          if(!window.cordova)
+          {
+            let script1 = this._renderer2.createElement('script');
+            script1.type = `text/javascript`;
+            script1.id = `cordova-js`;
+            script1.src = `cordova.js`;
+            this._renderer2.appendChild(this._document.body, script1);
+          }
         }
         
-      }
-      
 
       this.href = this.router.url;                                  
       this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -148,7 +145,7 @@ export class HeaderComponent implements OnInit{
       this.user_notification(this.start);
       this.user_favourites();
       this.get_circles();
-      this.device_registered();
+      this.check_device();
     }  
 
     region_selected()
@@ -201,36 +198,22 @@ export class HeaderComponent implements OnInit{
   {
     if(document.URL.indexOf('android_asset') !== -1)
     {
-      window.me = this;
-      window.FirebasePlugin.getToken(function(token) {
-        window.device_registered_token = token;
-      }, function(error) {
-          console.error(error);
-      });
-
-      window.FirebasePlugin.onNotificationOpen(function(notification) {
-        //console.log(notification);
-        window.me.router.navigate([notification.go_link]);
-        // if(notification.activity == '0' || notification.activity == '5' || notification.activity == '15' || notification.activity == '16' || notification.activity == '18')
-        // {
-        //   window.me.router.navigate(['/dashboard/orders']);
-        // }
-        // else if(notification.activity == '1' || notification.activity == '15' || notification.activity == '17')
-        // {
-        //   window.me.router.navigate(['/orders/recharge-receipt/'+notification.order_id]);
-        // }
-        // else if(notification.activity == '2' || notification.activity == '3' || notification.activity == '4' || notification.activity == '6' || notification.activity == '7' || notification.activity == '8' || notification.activity == '14' || notification.activity == '19')
-        // {
-        //   window.me.router.navigate(['/dashboard/transactions']);
-        // }
-        // else if(notification.activity == '10' || notification.activity == '6' || notification.activity == '7' || notification.activity == '8')
-        // {
-        //   window.me.router.navigate(['/dashboard/complaints']);
-        // }
-
-      }, function(error) {
-          console.error(error);
-      });
+      if(window.FirebasePlugin)
+      {
+        window.me = this;
+        window.FirebasePlugin.getToken(function(token) {
+          window.device_registered_token = token;
+        }, function(error) {
+            console.error(error);
+        });
+  
+        window.FirebasePlugin.onNotificationOpen(function(notification) {
+          window.me.router.navigate([notification.go_link]);
+        }, function(error) {
+            console.error(error);
+        });
+      }
+      
     }
   }
     check_device()
@@ -296,7 +279,7 @@ export class HeaderComponent implements OnInit{
   
   check_to_replace()
   {
-    if(this.router.url.includes('mhome') || this.router.url.includes('home'))
+    if(this.router.url === '/')
       return '';
     else
       return 'hide-on-mobile';
@@ -729,6 +712,24 @@ export class HeaderComponent implements OnInit{
     return notifications.filter(option => option.visitor_comment != null);
   }
 
+  notification_read()
+  {
+    if(this.notification_count.count > 0)
+    {
+      this.todoservice.notification_read({token: this.get_token()})
+      .subscribe(
+        data => 
+        {
+          if(data.status == 0)
+          {
+            this.notification_count.count = 0
+          }
+        }
+      )
+    }
+    
+  }
+
   user_favourites()
   {
     let favourite :string = localStorage.getItem("favourite");
@@ -828,13 +829,13 @@ export class HeaderComponent implements OnInit{
       }
       $('.side-menu').removeClass('open-menu');
 	  $('.mobile-mask').hide();
-    });
+    }); 
     //====================mobile js end ===================
       $('.chat-box').on('click', function(){
         $('.chat-box-msg').css('transform','translate(0,0)');
         $('.chat-box').addClass('hide');
       });
-      var width = $(window).width(); 
+      var width = $(window).width();  
       if(width > 767)
       {
         $(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}

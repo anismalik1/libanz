@@ -55,7 +55,7 @@ span.icon-locate {
             			<span>1</span>
             		</div>
             		<div class="col s8 my-cart">
-            			<span class="font-size-change1 inline-block margin-checkout left grey-text white-rec">LOGIN <i class="material-icons grey-text white-rec">check</i></span><br><br>
+            			<span class="font-size-change1 inline-block margin-checkout left grey-text white-rec">LOGIN</span><br><br>
             			<span class="font600 naam1">{{this.todoservice.get_user_name()}}</span>&nbsp;
             			<span class="grey-text email1">{{this.todoservice.get_user_email()}}</span>
             		</div>
@@ -179,8 +179,6 @@ span.icon-locate {
             		<div class="col s8 my-cart" >
             			<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons grey-text">check</i></span><br><br>
             			<span class="font600 naam2" *ngIf="address"><span >{{address.name}}-</span>{{address.contact}}&nbsp;(<span *ngIf="address">{{address.address}},</span> {{ address.pin}})</span>
-            			<!-- <span class="grey-text email2" *ngIf="only_address == 1">{{addresses[0].address}}, {{addresses[0].city}}, {{addresses[0].state}}, {{addresses[0].pin}}</span>
-            			<span class="grey-text email2" *ngIf="only_address != 1">{{default_address.address}}, {{default_address.city}}, {{default_address.state}}, {{default_address.pin}}</span> -->
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
             			<a href="javascript:" class="btn btn-flat right chngs2 hide" (click)="call_change_section('to_address')">Change</a>
@@ -363,58 +361,46 @@ span.icon-locate {
 									{{check_wallet_content()}}
 									<!-- <mat-checkbox ></mat-checkbox> -->
 									<span *ngIf="checkbox_text.checkbox ==  true">
-										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true">LIBANZ Wallet  <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><span class="black-text">LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
 									</span>
 									<span *ngIf="checkbox_text.radio == true">
-										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true">LIBANZ <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><span class="black-text">LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
 									</span>
 									<span *ngIf="checkbox_text.no_input == true">
-										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> LIBANZ Wallet <div class="clearfix"></div><span class="grey-text" style="margin-left: 25px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="black-text">LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
 									</span>
 								</div>	
-								<!-- <label for="instant-recharge" class="black-text"><img width="60px" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Mydth Wallet"></label><div class="clearfix"></div><span class="grey-text" style="margin-left: 35px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>  -->
 										<div class="clearfix"></div>
 										<div class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</div> 
-										<!-- <input name="wallet_type" value="wallet" class="with-gap" type="radio" id="wallet" (change)="cod_apply()" checked/>
-                  <label for="wallet" class="font-size-change black-text mydth-wallet"> <img src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Mydth Wallet"> </label> -->
-                </div>
+								</div>
               </div>
               <div class="row">
           			<div class="col s12 m10 offset-m1">
 									<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
-          				<!-- <input name="wallet_type" class="with-gap" value="paytm" type="radio" id="paytm" (change)="cod_apply()" [checked]="(this.todoservice.get_user_wallet_amount() <= 1 || (this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) || (this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.productservice.cartItemsCount() == 1))?true:false"/> -->
-    							<!-- <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"> </label> -->
-				        </div>
+          			</div>
           		</div>
           		<!-- Credit Card -->
           		<div class="row">
           			<div class="col s12 m10 offset-m1">
-										<mat-radio-button value="card" name="wallet_type" id="card" (change)="cod_apply()">Cards & Netbanking</mat-radio-button>
-          				<!-- <input name="wallet_type" class="with-gap" value="card" type="radio" id="card" (change)="cod_apply()"/>
-    							<label for="card" class="font-size-change black-text cod-text">Cards & Netbanking</label> -->
-				        </div>
+									<mat-radio-button value="card" name="wallet_type" id="card" (change)="cod_apply()">Cards & Netbanking</mat-radio-button>
+          			</div>
 							</div>
 							<div class="row" *ngIf="this.productservice.cod_invalid == false">
-									<div class="col s12 m10 offset-m1">
-										<span *ngIf="!this.productservice.check_cashon_delivery()">
-												<mat-radio-button value="cod" name="wallet_type" id="cod" (change)="cod_apply()"> Cash on Delivery / ( COD )</mat-radio-button>
-										</span>
-										<span *ngIf="this.productservice.check_cashon_delivery()"><i class="material-icons red-text" style="font-size: 22px;">error_outline</i><label> Cash on Delivery / ( COD )</label></span>
-										<!-- <input name="wallet_type" class="with-gap" value="cod" type="radio" id="cod" (change)="cod_apply()" [disabled]="this.productservice.check_cashon_delivery()"/> -->
-										<!-- <label for="cod" class="font-size-change black-text cod-text">Cash on Delivery / ( COD )</label> -->
-										<div class="clearfix"></div>
-										<span class="red-text pt-left-35" *ngIf="this.productservice.check_cashon_delivery()"> Not Available On Selected item(s).</span>
-									</div>
+								<div class="col s12 m10 offset-m1">
+									<span *ngIf="!this.productservice.check_cashon_delivery()">
+											<mat-radio-button value="cod" name="wallet_type" id="cod" (change)="cod_apply()"> Cash on Delivery / ( COD )</mat-radio-button>
+									</span>
+									<span *ngIf="this.productservice.check_cashon_delivery()"><i class="material-icons red-text" style="font-size: 22px;">error_outline</i><label> Cash on Delivery / ( COD )</label></span>
+									<div class="clearfix"></div>
+									<span class="red-text pt-left-35" *ngIf="this.productservice.check_cashon_delivery()"> Not Available On Selected item(s).</span>
 								</div>
+							</div>
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout">
 						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout Rs. ({{pay_amount() - this.calculate_bonus()}})</button></span>
-						<!-- <span *ngIf="this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()"><a href="javascript:" class="btn orange btn-large ctn-che1" disabled>Continue Checkout</a></span> -->
 					</div>
-					<!-- <div class="name margin-checkout" *ngIf="cod == true">
-						<span><a href="javascript:" class="btn orange btn-large cod-check" (click)="checkout_items(2)">Continue Checkout</a></span>
-					</div> -->
+					
 				</div>
         	</div>
         	<!-- End Here -->
@@ -447,22 +433,11 @@ span.icon-locate {
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
 						<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
 					</div> 
-					<!-- <div style="padding-top: 10px;">
-							<p class="inline-block grey-text">Extra Cashback<i class="red-text"> *</i> :</p>
-							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2 && item.product"><i class="icon-inr"></i>{{item.product.partnerwalletamount }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>								
-							<p class="font-size-change right green-text" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2 && item.product"> <i class="icon-inr"></i>{{item.product.user_cashback_wallet}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-						</div> -->
 						<div style="padding-top: 10px;" *ngIf="this.bonus_quantity(i) > 0">
 								<p class="inline-block grey-text"> Product Bonus Applied :</p>
 								<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} x {{bonus_quantity(i)}} </p>
 							</div>	
 				</div>				
-				
-            	<!-- <div class="subtotal">
-            		<p class="inline-block font600">Subtotal :</p>
-            		<p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}}</p>
-							</div>							
-					<hr class="horizontal"> -->
             	<div class="subtotal">
             		<p class="inline-block">Delivery Charges :</p>
             		<p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p>
@@ -505,76 +480,6 @@ span.icon-locate {
           <li><a href="javascript:" routerLink="/home">Best Selling</a></li>
           <li><a href="javascript:" routerLink="/contact-us">Contact Us</a></li>
         </ul>
-        <!-- End Here -->
-        <!-- Modal Structure --> 
-        <!-- <div id="add-new-address" class="modal">
-					<form  [formGroup]="addressformgroup" class="margin-top location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
-			<div class="modal-content no-padding">
-					<div class="add-add border-bottom">
-						<h4 class="inline-block">Add Delivery Address</h4>
-						
-					</div>
-							<div class="row no-margin">
-							<div class="input-field col s12 m6">
-								<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
-								<label for="name">Name*</label>
-								<div class="center" *ngIf="!addressformgroup.controls['name'].valid && addressformgroup.controls['name'].touched">
-									<span class="red-text ">*Name is Required.</span>
-								</div>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
-								<label for="phn-no">Phone Number*</label>
-								<div class="center" *ngIf="!addressformgroup.controls['contact'].valid && addressformgroup.controls['contact'].touched">
-									<span class="red-text ">*Enter a Valid Phone Number.</span>
-								</div>
-							</div>
-						</div>
-						<div class="row no-margin">
-							<div class="input-field col s12 m6">
-								<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off">
-								<label for="pincode">Pincode*</label>
-								<div class="center" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
-									<span class="red-text ">*Enter a Valid Pincode.</span>
-								</div>
-							</div>
-							<div class="input-field col s12 m6">
-								<input id="locality" name="locality" type="text" class="validate" formControlName="locality" autocomplete="off">
-								<label for="locality">Locality</label>
-							</div>
-						</div>
-						<div class="row no-margin">
-							<div class="input-field col s12 m6">
-								<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
-								<label for="city">City/District/Town*</label>
-								<div class="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
-									<span class="red-text ">*City is Required.</span>
-								</div>
-							</div>
-							<div class="input-field col s12 m6">
-								<mat-form-field>
-									<mat-select placeholder="Choose your Circle*" (change)="changeState($event.value)" name="state" formControlName="state">
-										<mat-option [value]="item.name" *ngFor="let item of circles;">{{item.name}}</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</div>
-						</div>
-						<div class="row no-margin">
-							<div class="input-field col s12">
-								<input name="address" id="land" type="text" class="validate" formControlName="address">
-								<label for="land">Address*</label>
-								<div class="center" *ngIf="!addressformgroup.controls['address'].valid && addressformgroup.controls['address'].touched">
-									<span class="red-text ">*Enter Delivery Address.</span>
-								</div>
-							</div>
-						</div>
-			</div>
-			<div class="modal-footer">
-				<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!addressformgroup.valid">Save and Deliver Here</button>
-				<a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
-			</div>
-	</form>
-	</div> -->
 	<div class="religon-overlay"> 
 			<div class="religon-modal center" >
 				<p>

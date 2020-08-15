@@ -416,6 +416,11 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/home/notifications';
     return this.send_post_request(data,url) ; 
   }
+  notification_read(data)
+  {
+    let url = this.server_url+'accounts/apis/home/notification_read';
+    return this.send_post_request(data,url) ; 
+  }
   user_favourites(data)
   {
     let url = this.server_url+'accounts/apis/product/user_favourites';
@@ -1082,6 +1087,12 @@ export class TodoService {
   recent_comments(data)
   {
     let url = this.server_url+'accounts/apis/orders/recent_comments';
+    return this.send_post_request(data,url) ; 
+  }
+
+  fetch_packs_and_month(data)
+  {
+    let url = this.server_url+'accounts/apis/product/fetch_packs_and_month';
     return this.send_post_request(data,url) ; 
   }
 }
