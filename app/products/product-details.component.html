@@ -323,17 +323,7 @@ font-size: 10px;
 						</div>
 						<div class="clearfix"></div><br/>
 						<br/>
-							<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
-								<li>
-									<span class="font-size-change1 font600 grey-text">Select Month</span>
-								</li>
-								<br/>
-								<li *ngFor="let item of package_month;let i = index">
-									<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
-								</li>
-							</ul>
-						<br/>
-						<ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable && fta_pack.price != 0">
+						<!-- <ul class="monthly-packages" id="monthly-packages" *ngIf="!multienable && fta_pack.price != 0">
 							<li>
 								<span class="font-size-change1 font600 grey-text px-10">Add Multi</span>
 							</li>
@@ -341,7 +331,7 @@ font-size: 10px;
 								<a href="javascript:" class="grey lighten-2 white btn black-text" (click)="go_to_channel_section(2)">Select</a>
 							</li>
 						</ul>
-						<br/>
+						<br/> -->
 						
 						<div class="clearfix"></div>
 						<div class="location monthly-packages" *ngIf="circles">
@@ -537,10 +527,16 @@ font-size: 10px;
 		 <div class="container">
 			<div class="row no-margin">
 				<div class="col s12 m8">
-						<div class="center">	
-								<h2 class="center font600 text-orange">Select Package </h2>
-								<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
-							</div>
+					<div class="center">	
+						<h2 class="center font600 text-orange">Select Package </h2>
+						<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+						<div class="clearfix"></div>
+						<ul class="monthly-packages" id="monthly-packages" *ngIf="package_month">
+							<li *ngFor="let item of package_month;let i = index">
+								<a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.id)">{{item.month_label}}</a>
+							</li>
+						</ul>
+					</div>
 				</div>			
 			 <div class="col s12 m8 channel-list-box">				
 				<div class="channels-accoriadn">
@@ -664,8 +660,8 @@ font-size: 10px;
 
 				<div class="subtotal inline-block right">
 					<a href="#multi-add-modal" class="modal-trigger checkout-with-multi"></a>
-					<a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i>  BUY NOW</a>
-					<a href="javascript:" class="btn orange round-btmobile" *ngIf="multienable || fta_pack.price == 0" (click)="buyNow(product.id)" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
+					<!-- <a href="javascript:" *ngIf="!multienable && fta_pack.price != 0" class="btn orange rounded-btn multi-text round-btmobile" (click)="fetch_all_multi(product.category_id,product.id)"><i class="material-icons white-text">flash_on</i>  BUY NOW</a> -->
+					<a href="javascript:" class="btn orange round-btmobile" (click)="buyNow(product.id)" ><i class="material-icons white-text">flash_on</i>  BUY NOW </a>
 				</div>
 				<div class="clearfix"></div>				
 			</div>

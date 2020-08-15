@@ -2,8 +2,8 @@
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-  <mat-horizontal-stepper #stepper>
-    <mat-step [editable]="true">
+  <mat-horizontal-stepper #stepper labelPosition="bottom">
+    <!-- <mat-step [editable]="true">
         <ng-template matStepLabel>Login</ng-template>
             <div class="row">
                 <div class="col s12 m5 offset-m1">
@@ -18,7 +18,7 @@
                     <div class="name margin-top-cart">
                         <a href="javascript:" routerLink="/logout" class="font600">Logout &amp; Sign in to another account</a>
                     </div>
-                    <!-- <button class="btn waves-effect waves-light orange margin-top" type="Submit" (click)="call_change_section('to_order_summary')">PROCEED</button> -->
+                    
                 </div>
                 <div class="col s12 m6">
                     <div class="name margin-top-cart">
@@ -41,14 +41,9 @@
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
-    </mat-step>
-    <mat-step [stepControl]="addressFormGroup" errorMessage="Address is required.">
-        <ng-template matStepLabel>
-            <div class="col s8 my-cart" >
-                <span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <!--<i class="material-icons grey-text">check</i>--></span><br><br>
-                <span class="font600 naam2" *ngIf="address"><span >{{address.name}}-</span>{{address.contact}}&nbsp;(<span *ngIf="address">{{address.address}},</span> {{ address.pin}})</span>
-            </div>
-        </ng-template>
+    </mat-step> -->
+    <mat-step [stepControl]="ControlFormGroup" errorMessage="Address is required." >
+            <ng-template matStepLabel>Address</ng-template>
         <div class="name margin-top-cart user-address">
             <input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
             <label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label>
@@ -151,7 +146,7 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                            <button type="Submit" class="modal-action btn orange btn-large" [disabled]="!rowaddressformgroup.valid">Save and Deliver Here</button>
+                            <button type="Submit" class="modal-action btn orange btn-large" [disabled]="!rowaddressformgroup.valid">Save and Continue</button>
                     </div>
             </form>
         </div>
@@ -177,7 +172,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="Submit" class="modal-action btn orange btn-large" [disabled]="!regaddressformgroup.valid">Save and Deliver Here</button>
+                    <button type="Submit" class="modal-action btn orange btn-large" [disabled]="!regaddressformgroup.valid">Save and Continue</button>
                 </div>
             </form>
         </div>
@@ -187,12 +182,12 @@
                 </div>
             </div>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <!-- <button mat-button matStepperPrevious>Back</button> -->
+          <!-- <button mat-button matStepperNext>Next</button> -->
         </div>
     </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Order Details(Rs.{{this.productservice.calculateCartAmount()}})</ng-template>
+    <mat-step [editable]="false">
+        <ng-template matStepLabel>Details</ng-template>
         <div class="order-details">
             <div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
                 <div class="col s3 m3 center">
@@ -210,86 +205,78 @@
                 <div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
                     <a href="javascript:" class="black-text">
                         <h4 class="font600"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
-                        <span class="font-size-change grey-text">Seller : Libanz</span>
-                        <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/>
-                        <span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
+                        <!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
+                        <!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
+                        
                     </a>
                     <div class="green-text">
                         <span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
-                        <span class="font-size-change1 black-text inline-block margin-top-cart">Selected Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span></span>
-                        <a class="blue-text modal-trigger" (click)="select_package(item.product.id)" href="#select-pack">Add Package</a>
+                        <span class="font-size-change1 black-text inline-block">Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span><span class="font-size-change orange-text" *ngIf="item.product.month_pack">({{item.product.month_pack}} Month)</span></span>
+                        <a class="blue-text modal-trigger" routerLink="/product/{{item.product.url}}" href="#select-pack" *ngIf="!item.product.pack_selected[1]">Add Another Pack</a>
                     </div>
                         <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
                 </div>
-                <div class="col s12 m4 margin-top padd">
+                <!-- <div class="col s12 m4 margin-top padd">
                     <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
-                </div>
+                </div> -->
             </div>
-            <div class="divider"></div>
-        </div>    
-        <div>
-            <button mat-button matStepperNext >Next</button>
-        </div>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Order Summary and Payment</ng-template>
-        <div class="row">
-        <div class="col s12 m7 order-summary">
-            <div class="card">
-            <div class="card-content black-text no-padding fix-inne-pad">
-                <span class="card-title inline-block">Order Summary</span>
-                <hr>
-                <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
-                    <div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
-                    <p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
-                    <ng-template #kitblock>
-                        <p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-                        <p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{(item.product.price - 1000) }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-                    </ng-template>
-                    <ng-template #nokitblock>
-                        <p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-                    </ng-template>
-                    <br/>
-                    <div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
-                        <p class="font600 left"> <span class="grey-text font500 pack-title" style="width:80%;">{{pack.title}} :</span></p>
-                        <p class="right font-size-change" *ngIf="item.product.multi != 1"> <i class="icon-inr"></i>{{pack.price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-                        <p class="right font-size-change" *ngIf="item.product.multi == 1"> <i class="icon-inr"></i>{{pack.multi_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div style="padding-top: 10px;" *ngIf="item.product.promos">
-                        <p class="inline-block font600" style="width:80%;"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
-                        <p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
-                        <p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
-                    </div> 
+            <button type="Submit" class="modal-action btn orange btn-large" matStepperNext>Continue</button>
+        </div> 
+        <div class="order-summary">
+        <div class="card">
+        <div class="card-content black-text no-padding fix-inne-pad">
+            <span class="card-title inline-block">Order Summary</span>
+            <hr>
+            <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
+                <div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
+                <p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
+                <ng-template #kitblock>
+                    <p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+                    <p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{(item.product.price - 1000) }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+                </ng-template>
+                <ng-template #nokitblock>
+                    <p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+                </ng-template>
+                <br/>
+                <div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
+                    <p class="font600 left"> <span class="grey-text font500 pack-title" style="width:80%;">{{pack.title}} :</span></p>
+                    <p class="right font-size-change" *ngIf="item.product.multi != 1"> <i class="icon-inr"></i>{{pack.price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+                    <p class="right font-size-change" *ngIf="item.product.multi == 1"> <i class="icon-inr"></i>{{pack.multi_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+                    <div class="clearfix"></div>
+                </div>
+                <div style="padding-top: 10px;" *ngIf="item.product.promos">
+                    <p class="inline-block font600" style="width:80%;"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
+                    <p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
+                    <p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
+                </div> 
                     <div style="padding-top: 10px;" *ngIf="this.bonus_quantity(i) > 0">
                         <p class="inline-block grey-text"> Product Bonus Applied :</p>
                         <p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} x {{bonus_quantity(i)}} </p>
                     </div>	
-                </div>				
-                <div class="subtotal">
-                    <p class="inline-block">Delivery Charges :</p>
-                    <p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p>
-                </div>
-                <hr class="horizontal">
-                <div class="subtotal payable margin-top">
-                    <p class="inline-block font600">Amount Payable :</p>
-                    <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
-                </div>
-                <hr>
-                <div class="subtotal">
-                    <p class="inline-block green-text" *ngIf="this.productservice.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount()}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
-                    <p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
-                </div>
-                
+            </div>				
+            <div class="subtotal">
+                <p class="inline-block">Delivery Charges :</p>
+                <p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p>
+                        </div>
+                        <hr class="horizontal">
+            <div class="subtotal payable margin-top">
+                <p class="inline-block font600">Amount Payable :</p>
+                <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
             </div>
+            <hr>
+            <div class="subtotal">
+                <p class="inline-block green-text" *ngIf="this.productservice.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount()}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+                <p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
+            </div>
+            
         </div>
-        <div class="security1" style="padding-top:10px;">
-            <ul>
-                <li class="shield-img inline-block center"><img src="{{this.todoservice.base_url}}web-app/assets/images/shield.png" class="responsive-img" alt="shield" width="40px"></li>
-                <li class="shield-text inline-block"><span class="no-padding grey-text">Safe and Secure Payments. Easy returns payment on your wallet before activation set top box. 100% Authentic products.</span></li>
-            </ul>
-        </div>
-        </div>
+      </div>
+      
+    </div>   
+    </mat-step>
+    <mat-step [editable]="false">
+        <ng-template matStepLabel>Payment</ng-template>
+        <div class="row">
         <div class="col m5 payments-method">
             <div class="row">
                 <div class="col s12 m10 offset-m1">
@@ -297,17 +284,17 @@
                         {{check_wallet_content()}}
                         <!-- <mat-checkbox ></mat-checkbox> -->
                         <span *ngIf="checkbox_text.checkbox ==  true">
-                            <mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><span class="black-text">LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+                            <mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><span class="black-text"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
                         </span>
                         <span *ngIf="checkbox_text.radio == true">
-                            <mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><span class="black-text">LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+                            <mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><span class="black-text"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
                         </span>
                         <span *ngIf="checkbox_text.no_input == true">
-                            <i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="black-text">LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+                            <i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text"> LIBANZ Wallet<span class="red-text">*</span></span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
                         </span>
                     </div>	
                     <div class="clearfix"></div>
-                    <div class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</div> 
+                    <!-- <div class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</div>  -->
                     </div>
                 </div>
             <div class="row">
@@ -333,6 +320,7 @@
             <div class="col name margin-checkout offset-m1">
                 <span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout Rs. ({{pay_amount() - this.calculate_bonus()}})</button></span>
             </div> 
+            <div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
         </div>
         </div>
     </mat-step>

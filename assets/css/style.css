@@ -4216,6 +4216,9 @@ canvas {
     top: 0;
     right: 1%;
 }
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
+	pointer-events: none !important;
+}
 #loadmore-modal,#loadmore-modal2{padding: 0; z-index: 9999 !important;}
 #loadmore-modal .modal-content,#loadmore-modal2 .modal-content{padding: 0 !important;}
 #loadmore-modal .modal-header,#loadmore-modal2 .modal-header{background: #FF6A00; padding: 1.2rem;}  

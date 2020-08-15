@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject,ViewContainerRef } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject,ViewContainerRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { MatStepper } from '@angular/material';
+import { stepper } from '../home/splash-animation';
 declare var window: any; 
 
 @Component({
@@ -17,9 +19,10 @@ declare var window: any;
   styles: [],
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
-  }]
+  },MatStepper]
 })
 export class StepCheckoutComponent implements OnInit {
+  @ViewChild('stepper',{static: false}) private myStepper: MatStepper;
   myControl = new FormControl();
   addressformgroup : FormGroup;
   regaddressformgroup : FormGroup;
@@ -49,7 +52,7 @@ export class StepCheckoutComponent implements OnInit {
   region : any;
   reg_address : number = 0; 
   tab_address : any;
-  addressFormGroup : any ;
+  ControlFormGroup : FormGroup ;
   address : any;
   months : any;
   pack_selected : any;
@@ -57,7 +60,9 @@ export class StepCheckoutComponent implements OnInit {
   checkbox_text : any = {checkbox : false,radio : false,no_input : false};
   gosection_data : any = {to_login: false,to_order_summary : true,to_address : false,to_payment:false}
   topaybutton : boolean = false;
+ 
   constructor(
+    public stepper : MatStepper,
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
     private http: Http, 
@@ -126,7 +131,7 @@ export class StepCheckoutComponent implements OnInit {
         this.fetch_options()
       }
     }
-    this.addressFormGroup = this.addressformgroup;
+    this.ControlFormGroup = this.addressformgroup;
   }
 
   ini_list()
@@ -185,15 +190,15 @@ change_addr_form(section)
   $('#'+section).show();
   if(section == 'add-new-address')
   {
-    this.addressFormGroup = this.addressformgroup;
+    this.ControlFormGroup = this.addressformgroup;
   }
   else if(section == 'add-row-address')
   {
-    this.addressFormGroup = this.rowaddressformgroup
+    this.ControlFormGroup = this.rowaddressformgroup
   }
   else if(section == 'reg-address')
   {
-    this.addressFormGroup = this.regaddressformgroup
+    this.ControlFormGroup = this.regaddressformgroup
   }
 }
 check_wallet_content()
@@ -578,7 +583,7 @@ reg_addr(formdata)
         {
           this.address = data.address;
           this.tab_address = data.address.address_id; 
-          this.call_change_section('to_payment')
+          this.myStepper.next();
         }
         this.spinner.hide();
       }
@@ -603,12 +608,13 @@ add_new_addr(form)
         {
            this.address = data.added_address; 
            this.tab_address = this.address.address_id;
-          this.call_change_section('to_payment')
+           this.myStepper.next();
         }
         this.spinner.hide();
       }
     )  
 }
+
 set_on_tab(addr)
 {
   this.tab_address = addr;

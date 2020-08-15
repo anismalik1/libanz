@@ -44,7 +44,7 @@ export class CheckoutComponent implements OnInit{
   address : any;
   options : any = {how_much_apply_to_product : 0};
   checkbox_text : any = {checkbox : false,radio : false,no_input : false};
-  gosection_data : any = {to_login: false,to_order_summary : true,to_address : false,to_payment:false}
+  gosection_data : any = {to_login: false,to_order_summary : false,to_address : true,to_payment:false}
   topaybutton : boolean = false;
 constructor( public todoservice : TodoService,
   private _renderer2: Renderer2, 
@@ -238,6 +238,7 @@ call_change_section(activesection)
   else if(activesection == 'to_order_summary')
   {
     this.gosection_data.to_order_summary = true;
+    $('.chngs2').removeClass('hide');
   }
   else if(activesection == 'to_address')
   {
@@ -412,10 +413,7 @@ get_checkout_data()
           if(this.productservice.cart_items[0].product.multi == 1 && this.todoservice.get_user_type() == 2)
           {
             $('.second-line').hide();
-            //$('.checkout_3').hide();
             $('.payment-number span').text('3');
-            $('.second-line').hide();
-            this.topaybutton = true;
           }
         }
       }
@@ -533,7 +531,7 @@ reg_addr(formdata)
         {
           this.address = data.address;
           this.tab_address = data.address.address_id; 
-          this.call_change_section('to_payment')
+          this.call_change_section('to_order_summary')
         }
         this.spinner.hide();
       }
@@ -558,7 +556,7 @@ add_new_addr(form)
         {
            this.address = data.added_address; 
            this.tab_address = this.address.address_id;
-          this.call_change_section('to_payment')
+          this.call_change_section('to_order_summary')
         }
         this.spinner.hide();
       }
