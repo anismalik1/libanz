@@ -752,18 +752,18 @@ export class ProductDetailsComponent implements OnInit{
 
   buyNow(p_id)
   {
-    if(!this.get_token())
-    {
-      var width = $(window).width(); 
-      if(width < 767)
-      {
-        this.open_model();
-        return false;
-      }
-      $('.logup.modal-trigger')[0].click();
-      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
-    }
+    // if(!this.get_token())
+    // {
+    //   var width = $(window).width(); 
+    //   if(width < 767)
+    //   {
+    //     this.open_model();
+    //     return false;
+    //   }
+    //   $('.logup.modal-trigger')[0].click();
+    //   this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
+    //   return false;
+    // }
     if($('[name="pincode"]').length > 0)
     {
       var pincode =  $('[name="pincode"]').val();

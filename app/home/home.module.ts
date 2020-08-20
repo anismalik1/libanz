@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'mhome', redirectTo: '/' },
   { path: 'home', redirectTo: '/' },
+  { path: 'blog/:name', component: BlogComponent },
+  { path: 'blog-detail/:name', component: BlogDetailComponent },
   { path: 'for/:name', component: RechargeComponent },
   { path: ':name/proceed', component: RechargeComponent },
   {path: '**', redirectTo: '/error/404'},

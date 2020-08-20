@@ -76,6 +76,12 @@ constructor( public todoservice : TodoService,
     });
    }
 ngOnInit() {
+  var width = $(window).width() + 17; 
+  if(width < 767)
+  {
+      this.router.navigate(['/product/step-checkout']);
+      return false;
+  }
   if(!this.get_token())
   {
     let full_url = this.router.url.split('/');
@@ -107,14 +113,6 @@ ngOnInit() {
   script.type = `text/javascript`;
   script.text = `
   $('.tooltipped').tooltip({delay: 50});
-  $('body').delegate('.add-new-address','click',function(){
-    $('.modal').modal();
-    $('#add-new-address').modal('open');
-  });
-  $('body').delegate('.edit-address','click',function(){
-    $('.modal').modal();
-    $('#add-address').modal('open');
-  });
   $(document).ready(function(){
     $('.modal').modal();
     $('[name="wallet_type"]').change(function(){
@@ -134,86 +132,39 @@ ngOnInit() {
         $('#popular-banks').removeClass('hide');
       }
     });
-    $('.tabs').tabs();
-//     $('.modal-close').on('click', function(){
-//       $('.modal').modal('close');
-//      });
-//      $('.modal').modal();
-//      $('body').delegate('.chngs1','click',function() {
-//       $('.checkout_1').removeClass('hide');	
-//       $('.checkout_2').addClass('hide');				
-//       $('.checkout_3').addClass('hide');				
-//       $('.checkout_4').addClass('hide');				
-//       $('.first-line').addClass('white');		
-//       $('.second-line').removeClass('white');		
-//       $('.third-line').removeClass('white');		
-//       $('.fourth-line').removeClass('white');	
-//       $('.chngs2').addClass('hide');				
-//       $('.chngs3').addClass('hide');				
-//       $('.chngs1').removeClass('hide');				
-//       $('.chngs4').addClass('hide');	
-//   });
-//   $('body').delegate('.ctn-che1','click', function(){
-//     $('.modal').modal();
-//       $('.checkout_1').addClass('hide');
-//       $('.checkout_2').removeClass('hide');			
-//       $('.naam1').removeClass('hide');
-//       $('.first-line').css('background','white');
-//       $('.second-line').css('background','white');
-//       $('.second-line').css('box-shadow','none');					
-//   });	
-//   $('body').delegate('.chngs2','click', function() {
-//     $('.modal').modal();
-//       $('.checkout_2').removeClass('hide');	
-//       $('.checkout_3').addClass('hide');				
-//       $('.checkout_4').addClass('hide');								
-//       $('.second-line').addClass('white');
-//       $('.third-line').removeClass('white');
-//       $('.fourth-line').removeClass('white');
-//       //$('.chngs3').addClass('hide');				
-//       $('.chngs4').addClass('hide');
-//  });
-//   $('body').delegate('.ctn-che2','click',function() {
-//     $('.modal').modal();
-//       $('.email2').removeClass('hide');	
-//       $('.chngs2').removeClass('hide');	
-//       $('.naam2').removeClass('hide');					
-//       $('.second-line').css('background','white');
-//       $('.second-line').css('box-shadow','0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)');				
-//       $('.third-line').css('background','white');
-//       $('.third-line').css('box-shadow','none');									
-//   });
-//   $('body').delegate('.chngs3','click', function() {
-//       $('.modal').modal();
-//       $('.checkout_3').removeClass('hide');	
-//       $('.checkout_3').show();	
 
-//       $('.chngs2').addClass('hide');								
-//       $('.chng3').addClass('hide');								
-//       $('.checkout_4').addClass('hide');									
-//       $('.checkout_2').addClass('hide');									
-//       //$('.naam3').addClass('hide');									
-//       $('.third-line').addClass('white');									
-//       $('.fourth-line').removeClass('white');									
-//   });
-//   $('body').delegate('.chngs4','click', function() {
-//     $('.modal').modal();
-//       $('.checkout_4').removeClass('hide');									
-//       $('.chngs4').addClass('hide');				
-//       $('.naam4').addClass('hide');				
-//       $('.fourth-line').css('background','white');
-//       $('.fourth-line').css('box-shadow','none');									
-//   });
-//   $('body').delegate('.last-btn','click', function() {
-//     $('.modal').modal();
-//       $('.checkout_4').removeClass('hide');
-//       $('.cod-avial').removeClass('hide');
-//       $('.fourth-line').css('background','white');
-//       $('.fourth-line').css('box-shadow','none');
-//       $('.third-line').css('background','white');
-//       $('.third-line').css('box-shadow','0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)');
-//   });
-  });
+$.fn.isInViewport = function() {
+  if($(this).length == 0 )
+  {
+    return false;
+  }
+  var elementTop = $(this).offset().top;
+  var elementBottom = elementTop + $(this).outerHeight();
+  var viewportTop = $(window).scrollTop();
+  var viewportBottom = viewportTop + $(window).height();
+  return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+$(window).scroll(function (event) {
+  if( !$.fn.isInViewport )
+  {
+    return false;
+  }
+  if($(window).width() >767){
+  var scroll = $(window).scrollTop();
+  if(scroll >= 1)
+  {
+    if((scroll - $('#footer-content').offset().top) < -449 && $('.order-summary').isInViewport())
+    {
+      $('.order-summary').css({'position':'fixed','top':$('.navigation.header').height(),'right':'20px'});
+    }
+    else
+    {
+      $('.order-summary').css({'position':'relative'});
+    }
+  }
+  }
+});
+});
   
   `;
   this._renderer2.appendChild(this._document.body, script);

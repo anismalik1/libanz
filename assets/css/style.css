@@ -1189,13 +1189,7 @@ font-size: 13px;
 	padding: 16px !important;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
   margin: 2rem 0 0 5.3rem !important;
-  width: 80% !important;
-}
-@media (max-width:375px) {
-	.add-new-address{
-		width:123% !important;
-		margin: 1.5rem 0 0 0 !important;
-	}
+  width: 80% ;
 }
 .add-add{
 	padding: 24px;
@@ -2178,10 +2172,6 @@ tbody img{
 	padding: 2.5rem 1rem 0;
     display: inline-block;
     width: 100%;
-    
-	
-
-
 }
 .login-modal{
 	height: 70vh;
@@ -2229,11 +2219,9 @@ tbody img{
 	margin-right:3px; 
 	vertical-align: middle;
 }
-@media (max-width:500px){
-	.monthly-packages li{
-		width:30%;
-	}
-}
+#modal-packages{top: 60px;
+	bottom: 66px;width: 100%;}
+	#modal-packages.modal{max-height:100%!important}
 .monthly-packages li a {
     border: transparent !important;
     display: inline-block;
@@ -5366,7 +5354,9 @@ a.modal-trigger i {
 			font-size: 13px;
 		}
 	.mobile-slider,#bottom-slider{height: 175px!important;}	
-
+.address-location {position: absolute;
+	left: 0;
+	margin-top: 15px;}
 	@media only screen and (max-width: 767px){
 		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li.active a, .lSSlideOuter .lSPager.lSpg>li:hover a {
 			background-color: #ff6a00 !important;
@@ -5375,7 +5365,7 @@ a.modal-trigger i {
 			padding: 16px !important;
 			box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 			margin: 1rem 0 0 2rem!important;
-			width: 104% !important;
+			width: 85% !important;
 		}
 
 		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li a {
@@ -6954,7 +6944,6 @@ thead.thead-bg {
 }
 
 @media only screen and (min-width: 767px){
-
 	.promo-txt-mb {
 		position: absolute;
 		top: 12px;
@@ -6962,16 +6951,14 @@ thead.thead-bg {
 	}
 }
 .cst-select-fix span{
-
 	padding-left:7px !important;
 	font-size:13px !important;
 }
 .blog-content P{
-
 	color:#6c6c6c;
 }
-/* .operation-txt{
-
-	padding-left:7px !important;
-	font-size:13px !important;
-} */
+.mat-horizontal-stepper-content .mat-form-field-label {padding-left: 15px;}
+.address-location{position: absolute;
+	left: 0;
+	margin-top: 15px;}
+	

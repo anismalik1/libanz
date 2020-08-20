@@ -48,6 +48,7 @@ export class StepCheckoutComponent implements OnInit {
   fta_pack : any;
   product : any;
   pincode : any;
+  package_month : any;
   channels_packs : any;
   region : any;
   reg_address : number = 0; 
@@ -77,6 +78,7 @@ export class StepCheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  $('.mobile-footer').remove();  
   if(!this.get_token())
   {
     let full_url = this.router.url.split('/');
@@ -364,6 +366,7 @@ fetch_package(id)
         this.channels_packs = data.package;
         this.filter_channel_subpack();
         this.spinner.hide();
+        this.initialize_collapse();
       }
     ) 
 }
@@ -438,6 +441,17 @@ filter_channel_subpack()
     this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product);
   }
   
+}
+
+filter_circle(circle_id)
+{
+  if(circle_id == '')
+    return;
+  let circle_record = this.circles.filter(x => x.circle_id == circle_id);
+  if(circle_record.length > 0)
+    return circle_record[0].name;
+  else
+    return circle_id
 }
 
 bonus_quantity(index)

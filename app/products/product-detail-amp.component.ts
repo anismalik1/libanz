@@ -669,18 +669,19 @@ export class ProductDetailAmpComponent implements OnInit {
 
   buyNow(p_id)
   {
-    if(!this.get_token())
-    {
-      var width = $(window).width(); 
-      if(width < 767)
-      {
-        this.open_model();
-        return false;
-      }
-      $('.logup.modal-trigger')[0].click();
-      this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
-    }
+    // if(!this.get_token())
+    // {
+    //   var width = $(window).width(); 
+    //   if(width < 767)
+    //   {
+    //     this.open_model();
+    //     return false;
+    //   }
+    //   $('.logup.modal-trigger')[0].click();
+    //   this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
+    //   return false;
+    // }
+    $('.modal-close').click();
     if($('[name="pincode"]').length > 0)
     {
       var pincode =  $('[name="pincode"]').val();
@@ -699,7 +700,6 @@ export class ProductDetailAmpComponent implements OnInit {
 
     if(this.multienable)
     {
-      
       var sub_id =  $('[name="subscriber_id"]').val();
       if(sub_id == null || sub_id == '')
       {
@@ -745,10 +745,10 @@ export class ProductDetailAmpComponent implements OnInit {
     }
     if(this.pincode != '')
     {
-      this.route.navigate(['/product/checkout'],{queryParams: {pincode: this.pincode}});
+      this.route.navigate(['/product/step-checkout'],{queryParams: {pincode: this.pincode}});
       return;
     } 
-    this.route.navigate(['product/checkout']);
+    this.route.navigate(['product/step-checkout']);
   }
 
   open_model()
@@ -928,7 +928,9 @@ export class ProductDetailAmpComponent implements OnInit {
         this.pack_selected = [this.fta_pack];
       }  
     }
-    this.calculate_amount();
+    let $amount = this.calculate_amount();
+    $('#book-now').text('CONTINUE');  
+    $('#cart-add').html('<h3 class="center"><i class="icon-inr"></i>'+$amount+'</h3>'); 
   }
 
   calculate_amount()
@@ -960,7 +962,7 @@ export class ProductDetailAmpComponent implements OnInit {
       }
     } 
     if(this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product) 
-      amount = amount - this.options.how_much_apply_to_product;
+      amount = amount - this.options.how_much_apply_to_product; 
     return amount;
   }
 
@@ -1029,11 +1031,11 @@ export class ProductDetailAmpComponent implements OnInit {
       .subscribe(
         data => 
         {
-          if(type == 'product')
-          {
-            this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
-            this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
-          }
+          // if(type == 'product')
+          // {
+          //   this.route.navigate(['/product/'+this.p_id], { queryParams: { month:  this.monthdata[0].total_month} });
+          //   this.title.setTitle(this.product.meta_title + " With "+this.monthdata[0].total_month+ ' Month Pack');
+          // }
           this.channels_packs = data.package;
           this.filter_channel_subpack();
           this.spinner.hide();
