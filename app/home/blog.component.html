@@ -122,7 +122,7 @@
 						<div class="blog-content"> 
 						<span class="blog-title" title="{{item.title}}"><a [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
 						<div class="clearfix"></div>
-						<span class="blog-description-{{item.id}}" [innerHTML]="decode_html(item.shortDescription) | truncate : 225 : '...'"> </span>
+						<p class="blog-description-{{item.id}} cst-blog-fix" [innerHTML]="decode_html(item.shortDescription) | truncate : 225 : '...'"> </p>
 						</div>
 					</div>
 					<div class="card-action center">

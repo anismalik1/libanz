@@ -3774,7 +3774,7 @@ canvas {
 	padding-bottom: 10px;
 }
 .channels-accoriadn .card-content a{
-	background: #ff6a00;
+	 color: #ff6a00 !important;
     color: #fff;
     padding: 10px;
     display: inline-block;
@@ -3782,6 +3782,7 @@ canvas {
     border-radius: 20px;
     width: 110px;
     margin-top: 10px;
+    font-size: 15px !important;
 }
 #page-content br{display:none;} 
 #page-content {font-size: 15px;} 
@@ -4303,7 +4304,7 @@ a.btn-floating.btn-large.orange.dropdown-button.white-text {
 .testimonial-text{max-height: 180px;overflow-y:auto;min-height:180px;}
 .share-us-on{float: right; width: auto; margin-top: 6px; justify-content: center !important;}
 .share-us-on li{margin: 0 12px !important;} 
-.margin-high .logo img{max-width: 250px; margin-bottom: 1.3rem;}
+.margin-high .logo img{    max-width: 175px; margin-bottom: 1.3rem;}
 .share-us-on{display: flex;}
 .new-packages h2{display: inline-block;font-size: 2rem;}
 .packages-channels-download .card .packages-channels li{width: 30% !important;min-height: 231px;vertical-align: middle;}
@@ -5087,7 +5088,7 @@ input:not([type]), input[type=date]:not(.browser-default), input[type=datetime-l
 }
 
 .login-page-form .input-field input {
-    padding: 2px 0px 0px 30px;
+	padding: 3px 0px 0px 0px;
 }
 
 .login-step input#icon_prefix {
@@ -6962,3 +6963,16 @@ thead.thead-bg {
 	left: 0;
 	margin-top: 15px;}
 	
+	.cst-blog-fix {
+    font-size: 13px !important;
+    color: #848282 !important;
+    font-family: sans-serif;
+    line-height: 22px;
+}
+.blog-page .card-content .blog-content p {
+    
+    font-size: 13px !important;
+    color: #716f6f !important;
+    font-family: sans-serif;
+    line-height: 24px;
+}

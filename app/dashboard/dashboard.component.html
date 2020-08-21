@@ -1,4 +1,9 @@
 <style>
+	.cst-eye{
+		font-size: 16px;
+    color: #333;
+    padding-left: 7px;
+	}
 	.cst-table tr:nth-child(odd) {
     background-color: rgba(242,242,242,0.5);
 }
@@ -374,7 +379,7 @@ font-weight: bold;
 										<td>
 											<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
 										</td>
-										<td><a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1">view</a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5">view</a></td>
+										<td><a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1"><span class="fa fa-eye cst-eye"></span></a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5"><span class="fa fa-eye cst-eye"></span> </a></td>
 								</tr>
 						</tbody>	
 				</table>
@@ -417,7 +422,7 @@ font-weight: bold;
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
 									<td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
 									
-									<td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.id}">View</a></td>	
+									<td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.id}"><span class="fa fa-eye cst-eye"></span></a></td>	
 								</tr>  
 							</tbody>	
 					</table>
