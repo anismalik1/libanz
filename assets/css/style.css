@@ -6941,6 +6941,7 @@ thead.thead-bg {
 .login-modal {
     height: 67vh !important;
 	background-image: url(https://www.libanz.com/web-app/assets/images/login.jpg) !important;
+	background-size: cover;
 	background-repeat: no-repeat;
 }
 
