@@ -212,7 +212,7 @@ left: 25%;
             </div>
             <div class="col s12 m10">
                 <div class="row">
-             
+                    <div class="fix-top">
                <div class="card inline-block col m6 s12 l6">
                     <div class="card-content cst-invoice" *ngIf="order_id">
                         <div  class="mb-1">
@@ -236,7 +236,7 @@ left: 25%;
                             <li><a class="btn btn-orange black-text cst-ibtn" href="javascript:" (click)="back_to_transfer()">Back </a></li>
                         </ul> -->
                     </div>
-                
+                   
                     <div class="card-content" *ngIf="!order_id">
                          <span class="money-txt" style="color:#333; font-size:18px;"> Send Money </span> <span class="wallet-balance"><span class="libanz-wallet"> Libanz Wallet</span><i class="fa fa-inr"></i>{{this.todoservice.get_user_wallet()}}</span>
                         <br/>
@@ -484,6 +484,7 @@ left: 25%;
                                         </div>                  
                             <!--#################-->
                     </div>
+                </div>
                 </div>
                                                                                         
     </div>

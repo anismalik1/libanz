@@ -121,7 +121,8 @@
                 <div class="card" style="margin-top:-8px;">
                     <div class="card-content">
                         <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-edit"></span> &nbsp; All Money Request</h3>
-                        <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow">Export All Data</button></a>
+                        <a href="#" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" style="margin-bottom:7px;">Export All Data</button></a>
+                        
                         <div class="overflow-scroll">
                             <table id="datatable" class="table display  datatable-example cst-table">
                                 <thead class="thead-bg">
@@ -154,7 +155,7 @@
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.addmoney_paymethod_template(topup.paymethod)"></div></td>
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.order_template(topup.status)"></div></td>
                                         <td nowrap="nowrap"><div [innerHTML]="this.todoservice.payment_template(topup.payment_status)"></div></td>
-                                        <td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.order_id}">View</a></td>	
+                                        <td><a routerLink="/dashboard/value-transfer" [queryParams]="{order_id : topup.order_id}"><span class="fa fa-eye cst-eye"></span></a></td>	
                                     </tr>  
                                 </tbody>
                                 <tbody *ngIf="topup_counts == 0">

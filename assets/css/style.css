@@ -5034,7 +5034,7 @@ span.fa.fa-star.pull-right.icn-clr1:hover {
 .balance{
 
 	padding-top:15px;
-	padding-right:30px;
+	padding-right:19px;
 }
 
 
@@ -6477,11 +6477,12 @@ div#login-page-otps input {
 	}
 
 	.remove-btn {
-		background: #ff6a00;
-		border-radius: 20px;
-		color: #fff !important;
-		padding:5px 23px;
-	}
+		background: #F44336!important;
+    border-radius: 20px;
+    color: #fff !important;
+    padding: 5px 15px;
+}
+	
 	.active-item{
 
 		color: #ff6a00 !important;
@@ -6976,4 +6977,31 @@ thead.thead-bg {
     color: #716f6f !important;
     font-family: sans-serif;
     line-height: 24px;
+}
+.cst-eye{
+	font-size: 16px;
+color: #333;
+padding-left: 7px;
+}
+@media only screen and (min-width: 1200px){
+
+	.fix-top{
+
+		margin-top:-14px;
+	}
+	.fix-top-2{
+
+		margin-top:-38px;
+	}
+	.fix-top-bg {
+		background: #fff;
+		padding: 10px;
+		margin-top: -8px;
+	}
+	.link-border {
+		border: 1px solid;
+		padding: 1px 6px;
+		border-radius: 10px;
+		display: flex;
+	}
 }
