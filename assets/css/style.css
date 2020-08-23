@@ -7006,8 +7006,11 @@ padding-left: 7px;
 		display: flex;
 	}
 }
+.navigation.header,.images-product,#checkout-order-summary{position: sticky;top:0;}
+.order-summary,#sticky-product-img{position: sticky;top:100px;}
+.location-wrapper .mat-form-field-label{left: 10px!important;
+	margin-top: -10px;}
 .login-page-form .red-text {
 	position: relative;
 		top: -11px;
-	
 	}

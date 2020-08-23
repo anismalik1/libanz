@@ -47,7 +47,7 @@
 </section>  
 <section class="beard">
     <mat-horizontal-stepper #stepper labelPosition="bottom">
-       <mat-step [stepControl]="ControlFormGroup" errorMessage="Address is required." >
+       <mat-step>
             <ng-template matStepLabel>Address</ng-template>
             <div class="name margin-top-cart user-address">
                 <input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
@@ -190,8 +190,6 @@
                     {{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	
                 </div>
             </div>
-           
-            
         </mat-step>
         <mat-step [editable]="false">
             <ng-template matStepLabel>Details</ng-template>

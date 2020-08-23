@@ -373,6 +373,7 @@ export class ProductService {
     {
       return amount;
     }
+    
     for(var i =0;i< Object.keys(cart).length;i++)
     {
       let item :Item = JSON.parse(cart[i]);
@@ -469,6 +470,7 @@ export class ProductService {
     this.loadCart();
   }
 
+
   removeItem(id : number)
   {
     var item : Item = {
@@ -497,7 +499,10 @@ export class ProductService {
         return false;
       }
     this.router.navigated = false;
-    this.router.navigate(['/product/checkout']);
+    if(this.get_param('addr'))
+      this.router.navigate(['/product/checkout/'],{queryParams :{addr : this.get_param('addr')}});
+    else
+      this.router.navigate(['/product/checkout/']); 
     }
     this.loadCart();
     this.cartItemsCount();

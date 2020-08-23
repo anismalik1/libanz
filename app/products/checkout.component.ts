@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject,ViewContainerRef } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject,ViewContainerRef, HostListener } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
@@ -21,27 +21,34 @@ export class CheckoutComponent implements OnInit{
   rowaddressformgroup : FormGroup;
   addresses : any ;
   only_address :number = 0 ;
-  state : string ; 
+  state : string ;
+  month : number = 1; 
+  multienable : boolean = false;
   default_address : any = {address : ''};
   edit_id : number;
   editaddress : any;
+  selectedCartItem : any;
   edit : boolean = false;
   disabled : boolean = false;
   order_placed : boolean  = false;
   msg : string ;
   order_status : boolean;
   cod : boolean = false;
-  coupon_enable : boolean = false;
-  tsk_pay : string ; 
-  otf_margin : any ;
-  otfquantity : number = 0;
   cart_items : any;
   circles : any;
+  pack_id : Number;
+  fta_pack : any;
+  product : any;
   pincode : any;
+  package_month : any;
+  channels_packs : any;
   region : any;
   reg_address : number = 0; 
   tab_address : any;
+  ControlFormGroup : FormGroup ;
   address : any;
+  months : any;
+  pack_selected : any;
   options : any = {how_much_apply_to_product : 0};
   checkbox_text : any = {checkbox : false,radio : false,no_input : false};
   gosection_data : any = {to_login: false,to_order_summary : false,to_address : true,to_payment:false}
@@ -109,6 +116,11 @@ ngOnInit() {
   {
     this.pincode = this.todoservice.get_param('pincode');
   }
+  if(this.todoservice.get_param('addr'))
+  {
+    this.tab_address = this.todoservice.get_param('addr');
+    this.edit_address(this.tab_address);
+  }
   let script = this._renderer2.createElement('script');
   script.type = `text/javascript`;
   script.text = `
@@ -132,40 +144,8 @@ ngOnInit() {
         $('#popular-banks').removeClass('hide');
       }
     });
+});
 
-$.fn.isInViewport = function() {
-  if($(this).length == 0 )
-  {
-    return false;
-  }
-  var elementTop = $(this).offset().top;
-  var elementBottom = elementTop + $(this).outerHeight();
-  var viewportTop = $(window).scrollTop();
-  var viewportBottom = viewportTop + $(window).height();
-  return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-$(window).scroll(function (event) {
-  if( !$.fn.isInViewport )
-  {
-    return false;
-  }
-  if($(window).width() >767){
-  var scroll = $(window).scrollTop();
-  if(scroll >= 1)
-  {
-    if((scroll - $('#footer-content').offset().top) < -449 && $('.order-summary').isInViewport())
-    {
-      $('.order-summary').css({'position':'fixed','top':$('.navigation.header').height(),'right':'20px'});
-    }
-    else
-    {
-      $('.order-summary').css({'position':'relative'});
-    }
-  }
-  }
-});
-});
-  
   `;
   this._renderer2.appendChild(this._document.body, script);
   this.get_checkout_data();
@@ -177,8 +157,10 @@ $(window).scroll(function (event) {
         this.fetch_options()
       }
     }
+  //this.fixed_summary();  
 }
 
+    
 call_change_section(activesection)
 {
   this.gosection_data = {to_login: false,to_order_summary : false,to_address : false,to_payment:false}
@@ -372,29 +354,29 @@ get_checkout_data()
   }
 }
 
-remove_address(id)
-{
-  this.edit_id = id;
-  this.spinner.show();
-  this
-  let data : any = {token : this.get_token(), edit_id : id};
-  this.todoservice.fetch_remove_address(data)
-    .subscribe(
-      data => 
-      {
-        if(data.status == 'Invalid Token')
-        {                                                     
-          this.authservice.clear_session();
-          this.router.navigate(['/proceed/login']);
-        }
-        if(!jQuery.isEmptyObject(data))
-        {
-          this.addresses = data.ADDRESSES;
-        }
-        this.spinner.hide();
-      }
-    )  
-}
+// remove_address(id)
+// {
+//   this.edit_id = id;
+//   this.spinner.show();
+//   this
+//   let data : any = {token : this.get_token(), edit_id : id};
+//   this.todoservice.fetch_remove_address(data)
+//     .subscribe(
+//       data => 
+//       {
+//         if(data.status == 'Invalid Token')
+//         {                                                     
+//           this.authservice.clear_session();
+//           this.router.navigate(['/proceed/login']);
+//         }
+//         if(!jQuery.isEmptyObject(data))
+//         {
+//           this.addresses = data.ADDRESSES;
+//         }
+//         this.spinner.hide();
+//       }
+//     )  
+// }
 
 edit_address(id)
 {
@@ -406,7 +388,7 @@ edit_address(id)
     return;
   }
   let data : any = {token : this.get_token(), edit_id : id};
-  this.todoservice.fetch_edit_address(data)
+  this.todoservice.fetch_address_(data)
     .subscribe(
       data => 
       {
@@ -417,44 +399,239 @@ edit_address(id)
         }
         if(!jQuery.isEmptyObject(data))
         {
-          this.edit = true;
-          this.editaddress = data.ADDRESS;
+          if(data.address.length > 0)
+          {
+            this.address = data.address[0];
+            this.call_change_section('to_order_summary');
+          }
         }
         this.spinner.hide();
       }
     )  
 }
 
-edit_addr(form)
-{
-  let data = form;
-  this.spinner.show();
-  data.token  = this.get_token();
-  data.state  = this.state;
-  data.edit_id  = this.edit_id;
- 
-  this.todoservice.edit_address(data)
-    .subscribe(
-      data => 
+select_pack(pack)
+  { 
+    if(this.fta_pack.length > 0)
+      this.pack_selected = [this.fta_pack];  
+    if($('#check-pack-'+pack.id).hasClass('grey-text'))
+    {
+      $('.when-check').addClass('grey-text');
+      $('#check-pack-'+pack.id).removeClass('grey-text');
+      $('#check-pack-'+this.fta_pack.id).removeClass('grey-text');
+      
+      this.pack_selected = [];
+      //console.log(this.fta_pack);
+      if(this.fta_pack.id)
+        this.pack_selected = [this.fta_pack];
+      this.pack_selected.push(pack);
+    }
+    else
+    {
+      if(pack.title.includes('Super Family') || this.fta_pack.price == 0)
       {
-        if(data.status == 'Invalid Token')
-        {                                                     
-          this.authservice.clear_session();
-          this.router.navigate(['/proceed/login']);
-        }
-        if(!jQuery.isEmptyObject(data))
-        {
-          this.addresses = data.ADDRESSES;
-          if(Object.keys(this.addresses).length == 1)
-          {
-              this.only_address = 1;
-          }
-        }
-        $('.modal-close').click();
-        this.spinner.hide();
+        alert("There Must be atleast two packs(FTA + Other) in this Package.");
+        return false;
       }
-    )  
+      if(pack.title.includes('Gold Combo') || pack.title.includes('Gold HD Combo'))
+      {
+        alert("There Must be atleast two packs(FTA + Other) in this Package.");
+        return false;
+      }
+      $('#check-pack-'+pack.id).addClass('grey-text');
+      if(!this.fta_pack)
+        this.pack_selected = [];
+      else
+      {
+        this.pack_selected = [];
+        this.pack_selected = [this.fta_pack];
+      }  
+    }
+    this.selectedCartItem.product.pack_selected = this.pack_selected;
+    this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
+    this.calculate_amount();
+  }
+  calculate_amount()
+  {
+    let amount : number = 0;
+    if(!this.product)
+      return 0;
+    //console.log(this.pack_selected)
+    for(var i = 0;i < this.pack_selected.length;i++)
+    {
+      if(this.multienable)
+      {
+        amount = amount + Number(this.pack_selected[i].multi_price);
+      }
+      else
+      {
+        amount = amount + Number(this.pack_selected[i].price);
+      }
+    }
+    amount = amount + Number(this.product.offer_price);  
+    // if(this.product.promos)
+    // {
+    //   if(this.promos.discount <= this.promos.max_discount)
+    //   {
+    //     amount = amount - Number(this.promos.discount);
+    //   }
+    // } 
+    if(this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product) 
+      amount = amount - this.options.how_much_apply_to_product;
+    return amount;
+  }  
+select_package(id)
+{
+  this.product = id;
+  this.todoservice.fetch_packs_and_month({circle: this.region,product: id})
+  .subscribe(
+    data => 
+    {
+      this.months = data.PACKAGEMONTH;
+      this.channels_packs = data.package;
+      this.product = data.product;
+      this.initialize_collapse();
+      this.filter_channel_subpack();
+      this.selectedCartItem = this.productservice.selectCartItemById(id);
+    }
+  )
 }
+
+filter_channel_subpack()
+{ 
+  this.pack_selected = [];
+  if(!this.channels_packs)
+   return false;
+  //console.log(this.channels_packs); 
+  
+  for(var i=0;i<this.channels_packs.length ;i++)
+    {
+      //console.log(this.channels_packs[i])
+      if( this.channels_packs[i].default_selected == 1 || this.pack_id)
+      {
+        if(this.channels_packs[i].child[0])
+        {
+          for(var j=0;j<this.channels_packs[i].child.length ;j++)
+          {
+            //console.log("child"+this.channels_packs[i].child[j]);
+            if(this.channels_packs[i].child[j].default_selected == 2)
+            {
+              this.fta_pack = this.channels_packs[i].child[j];
+            }
+            else if(this.channels_packs[i].child[j].default_selected == 1 || this.pack_id == this.channels_packs[i].child[j].id)
+            {
+              this.pack_selected.push(this.channels_packs[i].child[j]); 
+            }
+          }
+          
+          let fta_exist = this.pack_selected.filter(x => x.id == this.fta_pack.id);
+          if(fta_exist.length == 0)
+          {
+            this.pack_selected.push(this.fta_pack); 
+          }
+          
+        }
+         
+      }
+      if(this.channels_packs[i].title.includes('North-India Super Family') || (this.fta_pack.price == 0  && this.pack_selected.length < 2))
+      {
+        let fta_exist = this.pack_selected.filter(x => x.id == this.channels_packs[i].child[0].id);
+        if(fta_exist.length == 0)
+        {
+          this.pack_selected.push(this.channels_packs[i].child[0]); 
+        }
+      }
+  } 
+  //console.log(this.fta_pack);
+  if(this.fta_pack.price == 0 )
+  {
+    for(var i=0;i < this.channels_packs.length ;i++)
+    {
+      //console.log(this.channels_packs[i]);
+      if(this.channels_packs[1])
+      {
+        this.channels_packs[1].child[0].default_selected = 1;
+        this.channels_packs[1].default_selected = 1;
+      }
+      
+      if(this.product.url.includes('standard'))
+      {
+        this.channels_packs[i].child =  this.channels_packs[i].child.filter(x => x.title.includes('HD') == false);
+      }
+      
+    }
+  }
+  if(this.selectedCartItem)
+  {
+    this.selectedCartItem.product.pack_selected = this.pack_selected;
+    this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product);
+  }
+  
+}
+
+initialize_collapse()
+{
+  this.init_accordian();
+}
+
+init_accordian() 
+{
+  if($('#accordian-script'))
+  {
+    $('#accordian-script').remove();
+  }
+  let script = this._renderer2.createElement('script');
+  script.type = `text/javascript`;
+  script.id = `accordian-script`;
+  script.text = `
+  $(document).ready(function(){
+  $('.collapsible').collapsible(); 
+  });
+  `;
+  this._renderer2.appendChild(this._document.body, script);
+}
+
+filter_circle(circle_id)
+{
+  if(circle_id == '')
+    return;
+  let circle_record = this.circles.filter(x => x.circle_id == circle_id);
+  if(circle_record.length > 0)
+    return circle_record[0].name;
+  else
+    return circle_id
+}
+
+// edit_addr(form)
+// {
+//   let data = form;
+//   this.spinner.show();
+//   data.token  = this.get_token();
+//   data.state  = this.state;
+//   data.edit_id  = this.edit_id;
+ 
+//   this.todoservice.edit_address(data)
+//     .subscribe(
+//       data => 
+//       {
+//         if(data.status == 'Invalid Token')
+//         {                                                     
+//           this.authservice.clear_session();
+//           this.router.navigate(['/proceed/login']);
+//         }
+//         if(!jQuery.isEmptyObject(data))
+//         {
+//           this.addresses = data.ADDRESSES;
+//           if(Object.keys(this.addresses).length == 1)
+//           {
+//               this.only_address = 1;
+//           }
+//         }
+//         $('.modal-close').click();
+//         this.spinner.hide();
+//       }
+//     )  
+// }
 change_addr_form(section)
 {
   if(section == 'reg-address')
@@ -482,7 +659,8 @@ reg_addr(formdata)
         {
           this.address = data.address;
           this.tab_address = data.address.address_id; 
-          this.call_change_section('to_order_summary')
+          this.call_change_section('to_order_summary');
+          this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
         }
         this.spinner.hide();
       }
@@ -505,9 +683,10 @@ add_new_addr(form)
         }
         if(!jQuery.isEmptyObject(data))
         {
-           this.address = data.added_address; 
-           this.tab_address = this.address.address_id;
-          this.call_change_section('to_order_summary')
+          this.address = data.added_address; 
+          this.tab_address = this.address.address_id;
+          this.call_change_section('to_order_summary');
+          this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
         }
         this.spinner.hide();
       }
@@ -677,12 +856,49 @@ update_application()
     window.cordova.plugins.market.open("mydth.app");
 }
 
-check_for_tsk()
+remove_new_line(str)
 {
-  var pay_type : any = $('[name="payment_type"]:checked').val();
-  this.tsk_pay = pay_type;
-  this.checkout_items(1)
+  return str.replace(/(\r\n|\n|\r|↵|rn)/g,"");
 }
+
+check_child_exist(id,childs)
+{
+  for(var i = 0;i<childs.length;i++)
+  {
+    if(childs[i].id == id)
+      return true;
+  }
+  return false;
+}
+
+select_month(month,id)
+{
+  this.month = month;
+  this.fetch_package(id);
+}
+
+fetch_package(id)
+{
+  this.spinner.show();
+  let data = {circle: this.region,product: id,month:this.month};
+    this.todoservice.fetch_pack_by_month(data)
+    .subscribe(
+      data => 
+      {
+        this.channels_packs = data.package;
+        this.filter_channel_subpack();
+        this.spinner.hide();
+        this.initialize_collapse();
+      }
+    ) 
+}
+
+// check_for_tsk()
+// {
+//   var pay_type : any = $('[name="payment_type"]:checked').val();
+//   this.tsk_pay = pay_type;
+//   this.checkout_items(1)
+// }
 
 show_coupon(i)
 {

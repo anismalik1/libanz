@@ -51,7 +51,7 @@ span.icon-locate {
 
 
 	<!-- Flash Deal section -->
-	<div class="work" *ngIf="order_placed==false;then checkout else thankssection"></div>
+	<div class="work" *ngIf="order_placed==false;then checkout"></div>
 	<ng-template #checkout>
 	<section class="flash-deal checkout-page">
 		<div class="container">
@@ -270,7 +270,7 @@ span.icon-locate {
 										</div>
 									<div class="card" *ngIf="address">
 										<div class="card-content">
-												{{address.address}}, {{address.city}}, {{address.state}}, {{address.pin}}	
+												{{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	
 												<button type="button" class="btn orange btn-large check-btn" (click)="call_change_section('to_order_summary')">Continue</button>
 										</div>
 									</div>						
@@ -331,7 +331,7 @@ span.icon-locate {
 										<span class="font-size-change1 black-text inline-block" style="white-space: nowrap;
 										overflow: hidden;
 										text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span>
-										<!-- <span style="    display: block;"> </span>  -->
+										<div class=""><a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.product.id)" >Add Another Pack</a></div>
 										<!-- <div class="subscriber-area" *ngIf="item.product.multi == 1">
 											<input id="subscriber-id-{{item.product.id}}" placeholder="Enter Sbuscriber Id" value="{{item.product.subscriber_id}}" type="text" class="validate">
 										</div> -->
@@ -427,7 +427,7 @@ span.icon-locate {
         	</div>
         	<!-- End Here -->
 				</div>
-				<div class="col s12 m4 order-summary">
+				<div class="col s12 m4 order-summary" id="checkout-order-summary">
 					<div class="card">
             <div class="card-content black-text no-padding fix-inne-pad">
             	<span class="card-title inline-block">Order Summary</span>
@@ -573,42 +573,86 @@ span.icon-locate {
     </form>
 		</div>
 </ng-template>	
-<div id="kit-modal" class="modal">
+<div id="modal-packages" class="modal modal-fixed-footer">
 	<div class="modal-content">
-		<h3 class="font600">Pay for OTF Margin <span class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Advance Payment for TSK 999."><i class="material-icons">error_outline</i></span></h3>
-		<span class="modal-close close-modal-span"><i class="material-icons font-size-change1">close</i></span>
-			<div class="kit-images margin-top-order">
-				<div class=" inline-block">
-					<span class="multiply">{{otfquantity}}</span>
-					<span class="multiply-sign"><i class="material-icons">close</i></span>
-					<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/999kit.png">
-				</div>
-				<div class="otf-margin inline-block">
-					<span *ngIf="otf_margin">{{otf_margin.option_value}}</span>
-					<span><i class="material-icons">close</i></span>
-					<span *ngIf="otfquantity">{{otfquantity}}</span>
-					<span><i class="material-icons">drag_handle</i></span>
-					<span *ngIf="otf_margin">{{otfquantity * otf_margin.option_value}}</span>
-				</div>
-			</div>
-				<div class="margin-top">
-					<div *ngIf="otf_margin">
-						<div class="cod1" *ngIf="this.todoservice.get_user_wallet_amount() >= otfquantity * otf_margin.option_value">
-							<input type="radio" id="cod-2" name="payment_type" class="with-gap" value="wallet" checked/>
-							<label for="cod-2" class="black-text">Use Wallet</label>
+					<span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
+			<div class="row">
+					<!-- <h3>Selected</h3> -->
+					<div class="col s12 m12">
+							<div class="center">	
+									<h2 class="center font600 text-orange">Select Package </h2>
+									<div class="clearfix"></div>
+									<ul class="monthly-packages" id="monthly-packages" *ngIf="months">
+											<li *ngFor="let item of months;let i = index">
+													<a id="month-{{item.id}}" [className]="(1*item.total_month == 1*this.month) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.total_month,this.selectedCartItem.product.id)">{{item.month_label}}</a>
+											</li>
+									</ul>
+									<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+							</div>
+					</div>
+					<div class="col s12 m12 l12 channel-list-box">				
+							<div class="channels-accoriadn">
+									<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
+											<li *ngFor="let packs of channels_packs;let j = index" class="active">
+													<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
+													<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
+															<div class="row">
+																	<div class="col s6 m3 l2" *ngFor="let item of packs.child;let i = index;">
+																	<!--<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
+																	<div class="card product-new" *ngIf="item.default_selected == 2">
+																			<div class="card-content center">
+																					<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
+																					<h4 class="grey-text">{{item.title}}</h4>
+																					<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
+																					<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+																					<br/>
+																					<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
+																			
+																			</div>
+																			
+																	</div>
+																	<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
+																	<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
+																			<div class="card-content center" >
+																					<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+																					<h4 class="grey-text">{{item.title}}</h4>
+																					<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+																					<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+																					<br/>
+																					<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+																					<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
+																			</div>
+																	</div>
+																	<div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
+																			<div class="card-content center" >
+																					<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+																					<h4 class="grey-text">{{item.title}}</h4>
+																					<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+																					<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+																					<br/>
+																					<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
+																					<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+																			</div>
+																	</div>
+																	</div>
+															</div>
+													</div>
+											</li>
+									</ul>
+									<h3 class="center" *ngIf="!channels_packs">Loading...</h3>
+									<ul class="pt-all-10">
+											<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. Libanz is in no way responsible for that and shall not be liable in any way for the same.</li>
+											<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same LibanzSHOP is in no way responsible for that and shall not be liable in any way.</li>
+											<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+									</ul>
+									<hr class="horizontal">
+										
+								</div>
 						</div>
-					</div>
-					<div class="uwa margin-top">
-						<input type="radio" id="uwa" name="payment_type" class="with-gap" value="paytm"/>
-						<label for="uwa" class="black-text">Paytm</label>
-					</div>
-				</div>
 			</div>
-		<div class="modal-footer right-align">
-			<button type="submit" class="btn orange" (click)="check_for_tsk()">Proceed</button>
-			<!-- <h4 class="left red-text" *ngIf="this.todoservice.get_user_wallet() < selected_item.display_price && selected_item.cod_available != 1">Sorry! You do not have sufficient balance in your wallet.</h4> -->
-		</div>
-</div>
-	<span id="kit-modal-a" data-target="kit-modal" class="modal-trigger"></span>
-	<ng-template #thankssection></ng-template>
+	</div>
+	<div class="modal-footer">
+			<a href="javascript:" class="modal-close btn orange white-text">DONE</a>
+	</div>
+</div>	
 	<app-footer></app-footer>	

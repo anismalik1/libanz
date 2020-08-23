@@ -102,6 +102,11 @@ export class StepCheckoutComponent implements OnInit {
     // this.addressformgroup.controls['state'].setValue(this.region);
     // this.rowaddressformgroup.controls['state'].setValue(this.region);
   }
+  if(this.todoservice.get_param('addr'))
+  {
+    this.tab_address = this.todoservice.get_param('addr');
+    this.edit_address(this.tab_address);
+  }
   if(this.todoservice.get_param('pincode'))
   {
     this.pincode = this.todoservice.get_param('pincode');
@@ -228,6 +233,39 @@ check_wallet_content()
   {
     this.checkbox_text.no_input = true;
   }
+}
+
+edit_address(id)
+{
+  this.edit_id = id;
+  this.spinner.show();
+  if(!this.get_token())
+  {
+    this.router.navigate(['/']);
+    return;
+  }
+  let data : any = {token : this.get_token(), edit_id : id};
+  this.todoservice.fetch_address_(data)
+    .subscribe(
+      data => 
+      {
+        if(data.status == 'Invalid Token')
+        {                                                     
+          this.authservice.clear_session();
+          this.router.navigate(['/proceed/login']);
+        }
+        if(!jQuery.isEmptyObject(data))
+        {
+          if(data.address.length > 0)
+          {
+            this.address = data.address[0];
+            this.tab_address = this.address.id;
+            this.myStepper.next();
+          }
+        }
+        this.spinner.hide();
+      }
+    )  
 }
 
 fetch_options()
@@ -597,6 +635,7 @@ reg_addr(formdata)
         {
           this.address = data.address;
           this.tab_address = data.address.address_id; 
+          this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
           this.myStepper.next();
         }
         this.spinner.hide();
@@ -622,6 +661,7 @@ add_new_addr(form)
         {
            this.address = data.added_address; 
            this.tab_address = this.address.address_id;
+           this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
            this.myStepper.next();
         }
         this.spinner.hide();

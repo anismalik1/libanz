@@ -943,69 +943,69 @@ export class ProductDetailsComponent implements OnInit{
           });
           $('.cdk-overlay-container').css('z-index','99999999!important');
         });
-        $.fn.isInViewport = function() {
-          if($(this).length == 0 )
-          {
-            return false;
-          }
-          var elementTop = $(this).offset().top;
-          var elementBottom = elementTop + $(this).outerHeight();
-          var viewportTop = $(window).scrollTop();
-          var viewportBottom = viewportTop + $(window).height();
-          return elementBottom > viewportTop && elementTop < viewportBottom;
-      };
-      $(window).scroll(function (event) {
-        if(!$.fn.isInViewport )
-        {
-          return false;
-        }
-        if($(window).width() >767){
-        var scroll = $(window).scrollTop();
-        //console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
-        if(scroll >= 1)
-        {
-          if($('#footer-content').isInViewport())
-          {
-            if(scroll - $('#footer-content').offset().top > -300)
-            {
-              $('.images-product').css({'position':'relative','top':'0'});
-              $('.order-summary').css('position','relative');
-              return;
-            }
+    //     $.fn.isInViewport = function() {
+    //       if($(this).length == 0 )
+    //       {
+    //         return false;
+    //       }
+    //       var elementTop = $(this).offset().top;
+    //       var elementBottom = elementTop + $(this).outerHeight();
+    //       var viewportTop = $(window).scrollTop();
+    //       var viewportBottom = viewportTop + $(window).height();
+    //       return elementBottom > viewportTop && elementTop < viewportBottom;
+    //   };
+    //   $(window).scroll(function (event) {
+    //     if(!$.fn.isInViewport )
+    //     {
+    //       return false;
+    //     }
+    //     if($(window).width() >767){
+    //     var scroll = $(window).scrollTop();
+    //     //console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
+    //     if(scroll >= 1)
+    //     {
+    //       if($('#footer-content').isInViewport())
+    //       {
+    //         if(scroll - $('#footer-content').offset().top > -300)
+    //         {
+    //           $('.images-product').css({'position':'relative','top':'0'});
+    //           $('.order-summary').css('position','relative');
+    //           return;
+    //         }
             
-          }
-          if($('.order-summary').isInViewport() && ($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height() >= 0 || $('.order-summary').offset().top - $('#channel-list').offset().top < 0))
-            {
-              $('.order-summary').css({'position':'relative','top':0,'right':0});
-              return;
-            }
-          if ($('.product-img').isInViewport() && (scroll - $('#channel-list').offset().top < -500)) {
-            $('.images-product').css({"position":"fixed","top":"106px"});
-            $('.order-summary').css('position','relative');
-          }
-          else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -500) && (scroll - $('#channel-list').offset().top < 0))
-          {
-            //console.log(scroll - $('#channel-list').offset().top);
-            $('.images-product').css({'position':'relative','top':'0'});
-            //console.log(2)
-          }
-          else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -98))
-          {
-            $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
-          }
-          else 
-          {
-            //console.log(1);
-            $('.images-product').css({'position':'relative','top':'0'});
-            $('.order-summary').css('position','relative');
-          }
-        }
-        else
-        {
-          $('.images-product').css({'position':'relative','top':'0'});
-        }
-      }
-    });
+    //       }
+    //       if($('.order-summary').isInViewport() && ($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height() >= 0 || $('.order-summary').offset().top - $('#channel-list').offset().top < 0))
+    //         {
+    //           $('.order-summary').css({'position':'relative','top':0,'right':0});
+    //           return;
+    //         }
+    //       if ($('.product-img').isInViewport() && (scroll - $('#channel-list').offset().top < -500)) {
+    //         $('.images-product').css({"position":"fixed","top":"106px"});
+    //         $('.order-summary').css('position','relative');
+    //       }
+    //       else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -500) && (scroll - $('#channel-list').offset().top < 0))
+    //       {
+    //         //console.log(scroll - $('#channel-list').offset().top);
+    //         $('.images-product').css({'position':'relative','top':'0'});
+    //         //console.log(2)
+    //       }
+    //       else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -98))
+    //       {
+    //         $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
+    //       }
+    //       else 
+    //       {
+    //         //console.log(1);
+    //         $('.images-product').css({'position':'relative','top':'0'});
+    //         $('.order-summary').css('position','relative');
+    //       }
+    //     }
+    //     else
+    //     {
+    //       $('.images-product').css({'position':'relative','top':'0'});
+    //     }
+    //   }
+    // });
     // $(window).on('load', function(){ 
 		// 	$('.religon-overlay').css('display', 'block');
 		// });

@@ -136,7 +136,7 @@ export class HeaderComponent implements OnInit{
         map(value => this._filter(value))
       ); 
       this.init_page(); 
-      
+      this.get_circles();
       if(!this.get_token())
       {
         return false;
@@ -144,7 +144,7 @@ export class HeaderComponent implements OnInit{
       this.todoservice.get_user_data();
       this.user_notification(this.start);
       this.user_favourites();
-      this.get_circles();
+     
       this.check_device();
     }  
 
@@ -779,14 +779,26 @@ export class HeaderComponent implements OnInit{
   } 
   init_page()
   {
-    if($('#snatchbot-script') && $(window).width() > 767)
+    if( $(window).width() > 767)
     {
-      $('#snatchbot-script').remove();
+      if($('#snatchbot-script').length > 0)
+        $('#snatchbot-script').remove();
       let script1 = this._renderer2.createElement('script');
       script1.type = `text/javascript`;
       script1.id = `snatchbot-script`;
       script1.src = `https://account.snatchbot.me/script.js`;
       this._renderer2.appendChild(this._document.body, script1);
+    }
+    if($(window).width() > 767)
+    {
+      if($('#google-translate-script').length > 0)
+        $('#google-translate-script').remove();
+      let script1 = this._renderer2.createElement('script');
+      script1.type = `text/javascript`;
+      script1.id = `google-translate-script`;
+      script1.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
+      this._renderer2.appendChild(this._document.body, script1);
+      
     }
     if($('#side-nav-script'))
     {
@@ -838,8 +850,8 @@ export class HeaderComponent implements OnInit{
       var width = $(window).width();  
       if(width > 767)
       {
-        $(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}
-        else{$('.header').removeClass('fixed-header')}});
+        //$(window).scroll(function(){if($(window).scrollTop()>=1){$('.header').addClass('fixed-header')}
+        //else{$('.header').removeClass('fixed-header')}});
       }
       
       $('.close-chat').on('click', function(){
@@ -888,15 +900,19 @@ export class HeaderComponent implements OnInit{
   $('.tabs').tabs();
   function googleTranslateElementInit() {
     var width = $(window).width(); 
-    if(width <= 767)
+    if(width > 767)
     {
-      return false;
+      if(google && google.translate)
+      {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        setTimeout("set_lang()", 5000);
+      }
+      else
+      {
+        setTimeout("googleTranslateElementInit()", 2000);
+        setTimeout("set_lang()", 5000);
+      }  
     }
-    if(google != 'undefined')
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    else
-      setTimeout("googleTranslateElementInit()", 2000);
-      setTimeout("set_lang()", 5000);
   }
   function set_lang()
   {
@@ -1003,12 +1019,13 @@ export class HeaderComponent implements OnInit{
     else
     {
       window.sntchChat.Init(70574);
-      if($('#sntch_iframe').length > 0)
-        setTimeout("$('#sntch_webchat').css('width','350px');$('#sntch_iframe')[0].setAttribute('style', 'width:350px; height:425px; border:0');$('#sntch_webchat').css('height','400')", 5000);
+      setTimeout("$('#sntch_webchat').css('width','350px');$('#sntch_iframe')[0].setAttribute('style', 'width:350px; height:425px; border:0');$('#sntch_webchat').css('height','400')", 5000); 
     }
     i++;
   }
-  openchat();
+  var width = $(window).width(); 
+  if(width > 767)
+    openchat();
   //setTimeout("$('#sntch_webchat').attr('style','background-color: rgb(255, 255, 255); width: 450x; height: 500px; position: fixed; bottom: 10px; right: 10px; max-height: 100%; max-width: 100%; z-index: 2147483647; transform: translateY(0px); transition: transform 0.5s ease 0s; border-radius: 20px 20px 0px 0px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;');$('#sntch_iframe')[0].setAttribute('style', 'width:450px; height:500px; border:0');", 4500);
   // (function () {
   // $.getScript("https://connect.facebook.net/en_US/all.js#xfbml=1", function () {

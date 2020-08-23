@@ -534,21 +534,21 @@ export class TodoService {
     return this.send_post_request(data,url) ;
   }
   
-  edit_address(data)
-  {
-    let url = this.server_url+'index.php?/app_services/edit_address';
-    return this.send_post_request(data,url) ;
-  }
-  fetch_edit_address(data)
-  {
-    let url = this.server_url+'index.php?/app_services/fetch_edit_address';
-    return this.send_post_request(data,url) ;
-  }
-  fetch_remove_address(data)
-  {
-    let url = this.server_url+'index.php?/app_services/fetch_remove_address';
-    return this.send_post_request(data,url) ;
-  }
+  // edit_address(data)
+  // {
+  //   let url = this.server_url+'index.php?/app_services/edit_address';
+  //   return this.send_post_request(data,url) ;
+  // }
+  // fetch_edit_address(data)
+  // {
+  //   let url = this.server_url+'index.php?/app_services/fetch_edit_address';
+  //   return this.send_post_request(data,url) ;
+  // }
+  // fetch_remove_address(data)
+  // {
+  //   let url = this.server_url+'index.php?/app_services/fetch_remove_address';
+  //   return this.send_post_request(data,url) ;
+  // }
   checkout_items(data)
   {
     let url = this.server_url+'accounts/apis/orders/checkout_items';
@@ -922,6 +922,11 @@ export class TodoService {
   add_new_address(data)
   {
     let url = this.server_url+'accounts/apis/product/add_new_address';
+    return this.send_post_request(data,url) ;
+  }
+  fetch_address_(data)
+  {
+    let url = this.server_url+'accounts/apis/product/fetch_address';
     return this.send_post_request(data,url) ;
   }
   reg_address(data)

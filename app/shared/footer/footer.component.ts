@@ -46,7 +46,6 @@ export class FooterComponent implements OnInit{
       this.router.routeReuseStrategy.shouldReuseRoute = function(){
         return false;
       }
-    //console.log(url) 
     this.router.navigated = false;
     this.router.navigate([url]);
     } 
