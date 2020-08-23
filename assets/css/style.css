@@ -5088,7 +5088,7 @@ input:not([type]), input[type=date]:not(.browser-default), input[type=datetime-l
 }
 
 .login-page-form .input-field input {
-	padding: 3px 0px 0px 0px;
+	padding: 3px 0px 0px 32px;
 }
 
 .login-step input#icon_prefix {
@@ -6977,6 +6977,7 @@ thead.thead-bg {
     color: #716f6f !important;
     font-family: sans-serif;
     line-height: 24px;
+	height:110px;
 }
 .cst-eye{
 	font-size: 16px;
@@ -7005,3 +7006,8 @@ padding-left: 7px;
 		display: flex;
 	}
 }
+.login-page-form .red-text {
+	position: relative;
+		top: -11px;
+	
+	}

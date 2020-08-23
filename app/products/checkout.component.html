@@ -303,7 +303,7 @@ span.icon-locate {
         		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
           			<div class="col s2 m2 center">
           				<div class="cart-product-image"> 
-          					<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width: 90px;
+          					<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width:120px;
 							  padding-top: 12px;"><br>
           					<div class="product-quantity less-add-btn">
 											<div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
@@ -322,7 +322,7 @@ span.icon-locate {
           					<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
 							  <span class="fa fa-calendar" style="font-size: 13px;
 							  padding-right: 7px;
-							  color: #868686;"></span>	<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span>
+							  color: #868686;"></span>	<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span> <a routerLink="/product/{{item.product.url}}"> &nbsp; Add Another Packs & Offers  </a>
           					<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
 									</a>
 									<div class="green-text">
@@ -331,7 +331,7 @@ span.icon-locate {
 										<span class="font-size-change1 black-text inline-block" style="white-space: nowrap;
 										overflow: hidden;
 										text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span>
-										<span style="    display: block;"> <a routerLink="/product/{{item.product.url}}">Add Another Package </a></span> 
+										<!-- <span style="    display: block;"> </span>  -->
 										<!-- <div class="subscriber-area" *ngIf="item.product.multi == 1">
 											<input id="subscriber-id-{{item.product.id}}" placeholder="Enter Sbuscriber Id" value="{{item.product.subscriber_id}}" type="text" class="validate">
 										</div> -->
