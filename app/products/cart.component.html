@@ -42,7 +42,11 @@
 									padding-top: 12px;"><br>
 									<div class="product-quantity less-add-btn">
 												  <div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
-													  <button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
+													  <button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')" style="padding: 0px 12px;
+													  position: relative;
+													  top: -14px;
+													  height: 26px;
+													  line-height: 26px !important;"><i class="material-icons">remove</i></button>
 													  <span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
 													  <button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
 												  </div>
@@ -53,24 +57,16 @@
 								<a href="javascript:" class="black-text">
 									<h4 class="font600" style="font-size: 13px;
 									height: 10px;"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
-									<!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
-									<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
-									<span class="fa fa-calendar" style="font-size: 13px;
-									padding-right: 7px;
-									color: #868686;"></span>	<span class="font-size-change orange-text" *ngIf="item.product.month_pack">{{item.product.month_pack}} Month Pack</span> <a routerLink="/product/{{item.product.url}}"> &nbsp; Add Another Packs & Offers  </a>
-									<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
-										  </a>
-										  <div class="green-text">
-											  <!-- <span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span> -->
-											  <!-- <a href="javascript:" (click)="show_coupon(i)">Change</a> -->
-											  <span class="font-size-change1 black-text inline-block" style="white-space: nowrap;
-											  overflow: hidden;
-											  text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span>
-											  <!-- <span style="    display: block;"> </span>  -->
-											  <!-- <div class="subscriber-area" *ngIf="item.product.multi == 1">
-												  <input id="subscriber-id-{{item.product.id}}" placeholder="Enter Sbuscriber Id" value="{{item.product.subscriber_id}}" type="text" class="validate">
-											  </div> -->
-										  </div>
+          					<!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
+          					<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
+							  <span class="font-size-change1 black-text inline-block" style="white-space: nowrap;
+							  overflow: hidden;
+							  text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span> &nbsp; <span class="font-size-change orange-text" *ngIf="item.product.month_pack" style="position: absolute;">{{item.product.month_pack}} Month Pack</span> 
+							  <a routerLink="/product/{{item.product.url}}" style="display:block;     position: relative;
+							  top: -14px;"> &nbsp; Add Another Packs & Offers  </a>
+          					<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
+									</a>
+										
 								  <!-- <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.quantity*(item.product.price -1000)}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span> -->
 								  <!-- <br> -->
 									<a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove &nbsp; <span class="fa fa-times"></span></a>

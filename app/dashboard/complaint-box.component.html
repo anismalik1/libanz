@@ -157,7 +157,8 @@
                                         <td><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 1"></i><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 2 || complaint.seen == 3"></i></td>
                                         <td><span [innerHTML]="this.todoservice.order_template(complaint.status)"></span></td>
                                         <td class="center">
-                                            <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a>
+                                            <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" ><span class="fa fa-eye cst-eye"></span> </a>
+                                            <!-- <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a> -->
                                             <a href="#complaints" class="modal-trigger blue-text" *ngIf="(searched_ticket ==true && i == 0 && complaint.v_o == 'o') || (searched_ticket == false && complaint.v_o == 'o')" (click)="init_complaint(complaint.order_id)">reply</a>
                                         </td>
                                     </tr>

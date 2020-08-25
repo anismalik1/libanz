@@ -169,7 +169,7 @@ font-size: 19px !important;
                                   <span *ngIf="recharge.status == 'Received'"><a href="#cancel-popup" class="modal-trigger com blue-text link-border" (click)="open_cancel_modal(recharge.id)">cancel</a></span>
                                  
                                 </td>
-                                <td>  <a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1">view</a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5"><span class="fa fa-eye cst-eye"></span></a></td>
+                                <td>  <a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1"><span class="fa fa-eye cst-eye"></span></a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5"><span class="fa fa-eye cst-eye"></span></a></td>
                             </tr>
                         </table>
 
