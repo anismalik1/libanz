@@ -531,10 +531,11 @@ export class HomeComponent implements OnInit {
     $(document).ready(function(){
       $('.mobile-slider').lightSlider({
         item: 1,
-        auto: false,
+        auto: true,
         autoWidth:true,
         slideMove: 1,
         loop: true,
+        slideMargin : 0,
         pause: 5000,
         speed : 1200,
         controls: false,
