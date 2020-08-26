@@ -75,42 +75,7 @@ export class StepCheckoutComponent implements OnInit {
     public productservice : ProductService,
     private _formBuilder: FormBuilder,
     private router : Router
-  ) { }
-
-  ngOnInit() {
-  $('.mobile-footer').remove();  
-  if(!this.get_token())
-  {
-    let full_url = this.router.url.split('/');
-    if(!full_url[2])
-    full_url[2] = '';
-    else
-      full_url[2] = '#'+full_url[2];
-    this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-    return false;
-  } 
-  
-  if(this.productservice.get_pincode())
-  {
-    this.pincode = this.productservice.get_pincode()
-    this.addressformgroup.controls['pincode'].setValue(this.pincode);
-    this.regaddressformgroup.controls['pincode'].setValue(this.pincode);
-  }
-  if(this.productservice.get_region())
-  {
-    this.region = this.productservice.get_region();
-    // this.addressformgroup.controls['state'].setValue(this.region);
-    // this.rowaddressformgroup.controls['state'].setValue(this.region);
-  }
-  if(this.todoservice.get_param('addr'))
-  {
-    this.tab_address = this.todoservice.get_param('addr');
-    this.edit_address(this.tab_address);
-  }
-  if(this.todoservice.get_param('pincode'))
-  {
-    this.pincode = this.todoservice.get_param('pincode');
-  }
+  ) {
     this.addressformgroup = this._formBuilder.group({
       'name' : [null,Validators.compose([Validators.required])],
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -128,6 +93,44 @@ export class StepCheckoutComponent implements OnInit {
       'row_address' : [null,Validators.compose([Validators.required])],
       'state' : [null,Validators.compose([Validators.required])]
     });
+  }
+
+  ngOnInit() {
+  $('.mobile-footer').remove();  
+  if(!this.get_token())
+  {
+    let full_url = this.router.url.split('/');
+    if(!full_url[2])
+    full_url[2] = '';
+    else
+      full_url[2] = '#'+full_url[2];
+    this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
+    return false;
+  } 
+  
+  
+  if(this.productservice.get_region())
+  {
+    this.region = this.productservice.get_region();
+    // this.addressformgroup.controls['state'].setValue(this.region);
+    // this.rowaddressformgroup.controls['state'].setValue(this.region);
+  }
+  if(this.todoservice.get_param('addr'))
+  {
+    this.tab_address = this.todoservice.get_param('addr');
+    this.edit_address(this.tab_address);
+  }
+  if(this.todoservice.get_param('pincode'))
+  {
+    this.pincode = this.todoservice.get_param('pincode');
+  }
+    
+    if(this.productservice.get_pincode())
+    {
+      this.pincode = this.productservice.get_pincode()
+      this.addressformgroup.controls['pincode'].setValue(this.pincode);
+      this.regaddressformgroup.controls['pincode'].setValue(this.pincode);
+    }
     this.spinner.hide();
     this.get_checkout_data();
     this.todoservice.get_user_data();
@@ -635,7 +638,7 @@ reg_addr(formdata)
         {
           this.address = data.address;
           this.tab_address = data.address.address_id; 
-          this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
+          this.router.navigate(['/product/step-checkout/'],{queryParams: {addr: this.tab_address}});
           this.myStepper.next();
         }
         this.spinner.hide();
@@ -661,7 +664,7 @@ add_new_addr(form)
         {
            this.address = data.added_address; 
            this.tab_address = this.address.address_id;
-           this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
+           this.router.navigate(['/product/step-checkout/'],{queryParams: {addr: this.tab_address}});
            this.myStepper.next();
         }
         this.spinner.hide();

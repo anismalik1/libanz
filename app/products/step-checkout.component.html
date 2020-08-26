@@ -226,7 +226,7 @@
                             <div class="clearfix"></div>
                             <a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.product.id)" >Add Another Pack</a>
                         </div>
-                            <!-- <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a> -->
+                            <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
                     </div>
                     <!-- <div class="col s12 m4 margin-top padd">
                         <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
@@ -406,6 +406,7 @@
                     <div class="center">	
                         <h2 class="center font600 text-orange">Select Package </h2>
                         <div class="clearfix"></div>
+                        <h3 class="text-center" *ngIf="!channels_packs">Loading...</h3>
                         <ul class="monthly-packages" id="monthly-packages" *ngIf="months">
                             <li *ngFor="let item of months;let i = index">
                                 <a id="month-{{item.id}}" [className]="(1*item.total_month == 1*this.month) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.total_month,this.selectedCartItem.product.id)">{{item.month_label}}</a>
