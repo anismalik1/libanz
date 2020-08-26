@@ -297,6 +297,7 @@ export class HomeComponent implements OnInit {
         var product = $('.product-slider').lightSlider({
           item: 1,
           auto: false,
+          autoWidth:true,
           pauseOnHover: true,
           loop: true,
           pause: 5000,
@@ -532,7 +533,6 @@ export class HomeComponent implements OnInit {
       $('.mobile-slider').lightSlider({
         item: 1,
         auto: true,
-        autoWidth:true,
         slideMove: 1,
         loop: true,
         slideMargin : 0,

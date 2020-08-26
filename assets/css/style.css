@@ -7046,8 +7046,8 @@ padding-left: 7px;
 		top: -11px;
 	}
 
-.mobile-slider{padding-left: 55px;}
-.mobile-slider li{max-width: 300px;}	
+.product-slider{padding-left: 55px;}
+.product-slider li{max-width: 330px;}	
 /* .mobile-slider li:nth-child(n+2).active{position: relative;
 	left: 20px;} */
 
