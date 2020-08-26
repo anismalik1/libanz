@@ -4759,14 +4759,15 @@ i.material-icons.black-text {
 
 		.lSSlideOuter .lSPager.lSpg>li a {
 			/* background-color: #ff6a00; */
-				background-color: transparent;
-				border: 2px solid #ececec;
+			background-color: #cec6c6;
+			border: 2px solid #cec6c6;
 			border-radius: 50% !important;
 			display: inline-block;
-			height: 9px;
+			height: 8px;
+		
 			overflow: hidden;
 			text-indent: -999em;
-			width: 9px;
+			width: 8px;
 			position: relative;
 			/* z-index: 99; */
 			transition: all .5s linear 0s;
@@ -6308,11 +6309,11 @@ h2#compare-title {
 	color: #a9a4a1 !important;
     float: right;
     /* background: #ececec; */
-    padding: 6px 6px 0px 7px;
+    /* padding: 6px 6px 0px 7px; */
     font-size: 15px;
     border-radius: 50%;
     margin-right: 11px;
-    height: 27px;
+    height: 28px;
 	box-shadow: 1px 1px 4px #ececec !important;
 	margin-top:4px;
 }
@@ -6838,6 +6839,20 @@ ul.inr-txt li a {
 
 @media only screen and (max-width: 767px){
 
+	.inner-lbl-fix1 input[type=text] {
+		padding-left: 20px;
+		width:91%;
+	}
+	
+	.mobile-search-icon {
+		position: absolute;
+		top: 10px;
+		left: 3px;
+		font-size: 15px;
+		padding-top: 0;
+		color: #8c8c8c !important;
+	}
+
 	.search-box .mat-form-field-infix label {
 		padding-left: 35px !important;
 		margin-top: -5px !important;
@@ -6982,13 +6997,17 @@ thead.thead-bg {
     font-family: sans-serif;
     line-height: 22px;
 }
+.cstm-height{
+
+	height:120px !important;
+}
 .blog-page .card-content .blog-content p {
     
     font-size: 13px !important;
     color: #716f6f !important;
     font-family: sans-serif;
     line-height: 24px;
-	height:110px;
+	height:auto;
 }
 .cst-eye{
 	font-size: 16px;

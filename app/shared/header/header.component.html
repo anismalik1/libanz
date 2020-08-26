@@ -309,8 +309,8 @@ li.txt-fix-mb span a {
 			</div>
 			<div class="clearfix"></div>
 			<div class="search-box">
-				<mat-form-field class="example-full-width">
-					<input class="black-text" type="text" id="mobile-search" placeholder="Search for Product , brands & more.." matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
+				<mat-form-field class="example-full-width inner-lbl-fix1">
+					<input class="black-text inner-lbl-fix" type="text" id="mobile-search" placeholder="Search for Product , brands & more.." matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
 					<span class="mobile-search-icon"><button><i  class="fa fa-search grey-text"></i></button></span>
 					 <mat-autocomplete #auto="matAutocomplete">
 						<span *ngIf="filterdList">
