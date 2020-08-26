@@ -6997,6 +6997,7 @@ thead.thead-bg {
     font-family: sans-serif;
     line-height: 22px;
 }
+
 .cstm-height{
 
 	height:120px !important;
@@ -7044,6 +7045,11 @@ padding-left: 7px;
 	position: relative;
 		top: -11px;
 	}
+
+.mobile-slider{padding-left: 55px;}
+.mobile-slider li{max-width: 300px;}	
+/* .mobile-slider li:nth-child(n+2).active{position: relative;
+	left: 20px;} */
 
 .circle-dotss {
     margin-top: 32px;

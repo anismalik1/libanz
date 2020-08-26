@@ -531,7 +531,8 @@ export class HomeComponent implements OnInit {
     $(document).ready(function(){
       $('.mobile-slider').lightSlider({
         item: 1,
-        auto: true,
+        auto: false,
+        autoWidth:true,
         slideMove: 1,
         loop: true,
         pause: 5000,
@@ -541,8 +542,6 @@ export class HomeComponent implements OnInit {
         enableDrag: true,
         pager: true,
         gallery: false,
-        galleryMargin: 5,
-        thumbMargin: 5,
         currentPagerPosition: 'middle',
         responsive: [
           {

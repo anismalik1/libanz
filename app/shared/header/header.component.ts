@@ -119,14 +119,13 @@ export class HeaderComponent implements OnInit{
         );  
         if(document.URL.indexOf('android_asset') !== -1)
         {
-          if(!window.cordova)
-          {
-            let script1 = this._renderer2.createElement('script');
-            script1.type = `text/javascript`;
-            script1.id = `cordova-js`;
-            script1.src = `cordova.js`;
-            this._renderer2.appendChild(this._document.body, script1);
-          }
+          if($('#cordova-js').length > 0)
+            $('#cordova-js').remove();
+          let script1 = this._renderer2.createElement('script');
+          script1.type = `text/javascript`;
+          script1.id = `cordova-js`;
+          script1.src = `cordova.js`;
+          this._renderer2.appendChild(this._document.body, script1);
         }
         
 
