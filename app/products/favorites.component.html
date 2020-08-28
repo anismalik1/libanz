@@ -1,4 +1,21 @@
 <style>
+    .black-text-1 {
+    /* font-size: 16px; */
+    color: #333 !important;
+    /* line-height: 30px; */
+}
+.margin-top-cart-1 {
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 1024px){
+.fix-ht-size{
+
+    height:20px;
+}
+}
+
     @media only screen and (max-width: 767px){
 
         .w-100-btn{
@@ -33,7 +50,7 @@
 				          <div class="content-wrapper" *ngIf="favourites.length > 0">        
                     <div class="card-content black-text padd-only no-margin" *ngFor="let item of favourites;">
                         <div class="row">
-                                <div class="col s12 m3 center">
+                                <div class="col s12 m2 center">
                                     <div class="cart-product-image">
 										<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270
 										{{convert_to_object(item.save_json).image}}" class="responsive-img" alt="hd-tata-sky"><br>
@@ -41,21 +58,21 @@
                                     </div>
                                 </div>
                                 <div class="col s12 m5 margin-top">
-                                    <a href="javascript:" class="black-text">
-                                        <h4 class="font600"><a [routerLink]="['/product/'+convert_to_object(item.save_json).url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack}" class="black-text">{{convert_to_object(item.save_json).title}}</a></h4>
+                                    <a href="javascript:" class="black-text-1">
+                                        <h4 class="font600 fix-ht-size" style="font-size:15px;"><a [routerLink]="['/product/'+convert_to_object(item.save_json).url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack}" class="black-text">{{convert_to_object(item.save_json).title}}</a></h4>
                                         <span class="font-size-change grey-text">Seller : Libanz</span><br>
-                                        <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available == 1">Cash On Delivery Available</span><br/>
-                                        <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available != 1">Free Home Delivery</span><br/>
+                                        <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available == 1">Cash On Delivery Available</span>
+                                        <span class="font-size-change grey-text" *ngIf="convert_to_object(item.save_json).cod_available != 1">Free Home Delivery</span>
                                         <!-- <span class="font-size-change orange-text" *ngIf="convert_to_object(item.save_json).month_pack">{{convert_to_object(item.save_json).month_pack}} Month Pack</span> -->
           							    <!-- <span class="font-size-change orange-text" *ngIf="convert_to_object(item.save_json).tsk_kit"><span *ngIf="convert_to_object(item.save_json).tsk_kit == 2">, TSK 559</span><span *ngIf="convert_to_object(item.save_json).tsk_kit == 3">, TSK 999</span></span> -->
                                     </a>
-                                    <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="convert_to_object(item.save_json).tsk_kit && convert_to_object(item.save_json).tsk_kit == 3">{{convert_to_object(item.save_json).price -1000}}</span><span *ngIf="!convert_to_object(item.save_json).tsk_kit || convert_to_object(item.save_json).tsk_kit == 2">{{convert_to_object(item.save_json).offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{convert_to_object(item.save_json).price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(convert_to_object(item.save_json).price-convert_to_object(item.save_json).offer_price)*100/convert_to_object(item.save_json).price | number : '1.2-2'}}% Off</p></span>
+                                    <span class="font-size-change1  inline-block margin-top-cart-1"><i class="icon-inr"></i><span *ngIf="convert_to_object(item.save_json).tsk_kit && convert_to_object(item.save_json).tsk_kit == 3">{{convert_to_object(item.save_json).price -1000}}</span><span *ngIf="!convert_to_object(item.save_json).tsk_kit || convert_to_object(item.save_json).tsk_kit == 2">{{convert_to_object(item.save_json).offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{convert_to_object(item.save_json).price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(convert_to_object(item.save_json).price-convert_to_object(item.save_json).offer_price)*100/convert_to_object(item.save_json).price | number : '1.2-2'}}% Off</p></span>
                                     <!-- <span id="tsk-applied" class="green-text" *ngIf="convert_to_object(item.save_json).promos">Congratulations! Promo {{convert_to_object(item.save_json).promos.unique_code}} is Applied to your purchase.</span> -->
                                     <!-- <span class="font-size-change1 black-text inline-block margin-top-cart">Selected Pack: <span class="font-size-change1 orange-text" *ngIf="convert_to_object(item.save_json).pack_selected[0]">{{convert_to_object(item.save_json).pack_selected[0].title}} <span *ngIf="convert_to_object(item.save_json).pack_selected[1]">, {{convert_to_object(item.save_json).pack_selected[1].title}}</span></span></span> -->
 									
 									                  <br>
                                     <!-- <a href="javascript:" class="font-size-change margin-top inline-block black-text"  onclick="Materialize.toast('Product add to whishlist', 4000)">Add to Whislist</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
-                                        <a href="javascript:" class="font-size-change margin-top inline-block black-text remove-btn" (click)="this.removeItem(convert_to_object(item.save_json).id);" >Remove</a><br>
+                                        <a href="javascript:" class="font-size-change margin-top inline-block black-text remove-btn" (click)="this.removeItem(convert_to_object(item.save_json).id);" >Remove &nbsp; <span class="fa fa-times"></span> </a><br>
                                         <!-- <a href="#promocode-modal" class="font-size-change margin-top modal-trigger inline-block blue-text">Apply Any Promocode</a> -->
                                 </div>
                                 <div class="col s12 m4 margin-top padd">

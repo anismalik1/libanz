@@ -12,6 +12,9 @@
 
 		width:100%;
 	}
+	.mb-height{
+		height:25px !important;
+	}
 }
 </style>
 <app-header></app-header>
@@ -55,13 +58,13 @@
 							</div>
 							<div class="col s10 m5 margin-top" id="item-detail-section-{{i}}">
 								<a href="javascript:" class="black-text">
-									<h4 class="font600" style="font-size: 13px;
+									<h4 class="font600 mb-height" style="font-size: 13px;
 									height: 10px;"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
           					<!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
           					<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
 							  <span class="font-size-change1 black-text inline-block" style="white-space: nowrap;
 							  overflow: hidden;
-							  text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span> &nbsp; <span class="font-size-change orange-text" *ngIf="item.product.month_pack" style="position: absolute;">{{item.product.month_pack}} Month Pack</span> 
+							  text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span> &nbsp; <span class="font-size-change orange-text" *ngIf="item.product.month_pack" style="position: relative; top:-10px;">{{item.product.month_pack}} Month Pack</span> 
 							  <a routerLink="/product/{{item.product.url}}" style="display:block;     position: relative;
 							  top: -14px;"> &nbsp; Add Another Packs & Offers  </a>
           					<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->

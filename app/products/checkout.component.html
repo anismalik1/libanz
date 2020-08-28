@@ -1,6 +1,13 @@
 <style>
+	.desktop-footer {
+    display: none !important;
+}
+
 @media only screen and (max-width: 767px){
 
+	.mb-height{
+		height:25px !important;
+	}
 	.check-btn{
 
 		width: 100%;
@@ -35,6 +42,11 @@ span.icon-locate {
 }
 .header-strip {
     padding: 1px 0;
+    display: none !important;
+}
+.details1 {
+    background-color: #172337;
+    padding: 2rem 0 1rem;
     display: none !important;
 }
 </style>
@@ -316,7 +328,7 @@ span.icon-locate {
           			</div>
           			<div class="col s10 m5 margin-top" id="item-detail-section-{{i}}">
           				<a href="javascript:" class="black-text">
-          					<h4 class="font600" style="font-size: 13px;
+          					<h4 class="font600 mb-height" style="font-size: 13px;
 							  height: 10px;"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
           					<!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
           					<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
@@ -653,4 +665,33 @@ span.icon-locate {
 			<a href="javascript:" class="modal-close btn orange white-text">DONE</a>
 	</div>
 </div>	
-	<app-footer></app-footer>	
+	<app-footer style="display:none;"></app-footer>	
+	<section class="last-footer grey lighten-3">
+		<div class="container">
+			<div class="row no-margin">
+				<!-- <div class="col s12 m2">
+					<span class="grey-text font600">PAYMENT METHODS</span>
+				</div> -->
+				<div class="col s12 m12 l4 center">
+					<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/bg-payment.png" class="responsive-img" alt="bg-payment">
+					<img src="{{this.todoservice.base_url}}web-app/assets/images/banner/paytm-logo.png" class="responsive-img paytm-img-footer" alt="bg-Paytm">
+					<!-- <img src="{{this.todoservice.base_url}}web-app/assets/images/banner/phone-pe.png" class="responsive-img paytm-img-footer" alt="bg-Phone Pe	"> -->
+				</div>
+				<div class="col s12 m12 l5 center">
+					<span class="font-size-change1">© 2015 - {{year}} All Rights Reserved by Libanz <br/> Under Libanz International</span>
+				</div>
+				<div class="col s12 m12 l3">
+					<ul class="social-icons-footer no-margin center">
+						<li class="inline-block"><a href="https://www.facebook.com/mydthshop/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Facebook"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" class="responsive-img" alt="facebook"></a></li>
+						<li class="inline-block"><a href="https://www.linkedin.com/company/14611847/admin/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Linkedin"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" class="responsive-img" alt="linkedin"></a></li>
+						<li class="inline-block"><a href="https://twitter.com/mydthshop" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Twitter"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" class="responsive-img" alt="twitter"></a></li>
+						<!-- <li class="inline-block"><a href="https://plus.google.com/+Mydthshopmydthshop/about" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Google Plus"><img src="https://mydthshop.com/web-app/assets/images/google-plus.png" class="responsive-img" alt="google-plus"></a></li> -->
+						<li class="inline-block"><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Youtube"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" class="responsive-img" alt="youtube"></a></li>
+						<li class="inline-block"><a href="https://in.pinterest.com/jain2221/pins/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Pinerest"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" class="responsive-img" alt="pinterest"></a></li>
+						<li class="inline-block"><a href="https://www.instagram.com/mydthshopindia/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Instagram"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" class="responsive-img" alt="instagram"></a></li>
+						<li class="inline-block"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Blogger"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" class="responsive-img" alt="blogger"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
