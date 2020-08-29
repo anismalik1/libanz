@@ -327,18 +327,18 @@ export class ProductService {
     return amount; 
   }
   
-  cashback_amount()
+  cashback_amount(items)
   {
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart : any = items;
     let index : number = -1;
     let amount : number = 0;
     if(cart == null)
     {
       return amount;
     }
-    for(var i =0;i< Object.keys(cart).length;i++)
+    for(var i =0;i< cart.length;i++)
     {
-      let item :Item = JSON.parse(cart[i]);
+      let item :Item = cart[i];
       if(item.product.partnerwalletamount && item.product.partnerwalletamount > 0)
         amount += item.product.partnerwalletamount * item.quantity*1;
     }
@@ -362,10 +362,9 @@ export class ProductService {
     return amount;
   }
 
-  total_savings()
+  total_savings(items)
   {
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
-    let index : number = -1;
+    let cart :any = items;
     let amount : number = 0;
     let mrp_amount : number = 0;
     let offer_amount : number = 0;
@@ -376,7 +375,7 @@ export class ProductService {
     
     for(var i =0;i< Object.keys(cart).length;i++)
     {
-      let item :Item = JSON.parse(cart[i]);
+      let item :Item = cart[i];
       mrp_amount += item.product.price * item.quantity;
       if(item.product.tsk_kit && item.product.tsk_kit == 3)
       {

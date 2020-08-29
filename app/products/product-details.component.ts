@@ -827,10 +827,10 @@ export class ProductDetailsComponent implements OnInit{
     }
     if(this.pincode != '')
     {
-      this.route.navigate(['/product/checkout'],{queryParams: {pincode: this.pincode}});
+      this.route.navigate(['/product/checkout'],{queryParams: {tracker : 'product', id : p_id ,pincode: this.pincode}});
       return;
     } 
-    this.route.navigate(['product/checkout']);
+    this.route.navigate(['product/checkout'],{queryParams: {tracker : 'product', id : p_id }});
   }
 
   recommended_slider()

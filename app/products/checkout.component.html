@@ -299,7 +299,7 @@ span.icon-locate {
             		<div class="col s8 my-cart">
 									<span class="font-size-change1 inline-block margin-checkout left grey-text">ORDER SUMMARY <i class="material-icons blue-text">check</i></span>
 									<div class="clearfix"></div>
-            			<span class="font600 naam3">{{this.productservice.cartItemsCount()}} Items</span>&nbsp;
+            			<span class="font600 naam3">{{this.itemCount()}} Items</span>&nbsp;
             		</div>
             		<div class="col s3 right-align margin-top-cart chng">
             			<a href="javascript:" class="btn btn-flat right chngs3 hide" (click)="call_change_section('to_order_summary')">Change</a> 
@@ -312,7 +312,7 @@ span.icon-locate {
           <!-- End Here -->          
           <!-- Login Checkout -->
         	<div class="row no-margin white login-checkout checkout_3" *ngIf="gosection_data.to_order_summary == true">
-        		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
+        		<div class="row" *ngFor="let item of this.product_items;let i = index;">
           			<div class="col s3 m2 center">
           				<div class="cart-product-image"> 
           					<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width:120px;
@@ -433,7 +433,7 @@ span.icon-locate {
 					</div>
 					
 				</div>
-				<div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
+				<div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.itemCount() > 1 && this.calculateAmount() >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
         	</div>
         	<!-- End Here -->
 				</div>
@@ -443,7 +443,7 @@ span.icon-locate {
             	<span class="card-title inline-block">Order Summary</span>
 				<hr>
 				
-				<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
+				<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
 					<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
 					<p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
 					<ng-template #kitblock>
@@ -477,12 +477,12 @@ span.icon-locate {
 							<hr class="horizontal">
             	<div class="subtotal payable margin-top">
             		<p class="inline-block font600">Amount Payable :</p>
-            		<p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
+            		<p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}} </p>
             	</div>
             	<hr>
             	<div class="subtotal">
-									<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount()}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
-            		<p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
+									<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount(this.product_items) > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+            		<p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.product_items)}}</p><div class="clearfix"></div>
             		<!-- <p class="inline-block red-text">*You will get cashback After Product Activation.</p> -->
               </div>
                 

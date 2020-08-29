@@ -8,6 +8,7 @@ import { Headers,Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { Item } from '../item.entities';
 declare var window: any;
 @Component({
   selector: 'app-checkout',
@@ -20,6 +21,7 @@ export class CheckoutComponent implements OnInit{
   regaddressformgroup : FormGroup;
   rowaddressformgroup : FormGroup;
   addresses : any ;
+  params : any = {};
   only_address :number = 0 ;
   state : string ;
   month : number = 1; 
@@ -34,7 +36,7 @@ export class CheckoutComponent implements OnInit{
   msg : string ;
   order_status : boolean;
   cod : boolean = false;
-  cart_items : any;
+  product_items : any = this.productservice.cart_items;
   circles : any;
   pack_id : Number;
   fta_pack : any;
@@ -100,6 +102,12 @@ ngOnInit() {
     return false;
   } 
   
+  if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'product')
+  {
+    this.params.tracker = 'product';
+    this.params.id      = this.todoservice.get_param('id');
+    this.product_items = this.productservice.cart_items.filter(item => item.product.id == this.todoservice.get_param('id'));
+  }
   if(this.productservice.get_pincode())
   {
     this.pincode = this.productservice.get_pincode()
@@ -151,15 +159,19 @@ ngOnInit() {
   this.get_checkout_data();
   this.todoservice.get_user_data();
   if(this.get_token())
+  {
+    if(this.todoservice.get_user_product_amount() > 0)
     {
-      if(this.todoservice.get_user_product_amount() > 0)
-      {
-        this.fetch_options()
-      }
+      this.fetch_options()
     }
-  //this.fixed_summary();  
+  }
+  this.check_wallet_content(); 
 }
 
+itemCount()
+{
+  return this.product_items.length;
+}
     
 call_change_section(activesection)
 {
@@ -193,24 +205,64 @@ call_change_section(activesection)
   }
 }
 
+calculateAmount() : number
+{
+let cart : any = this.product_items;
+let amount : number = 0;
+if(cart == null)
+{
+  return amount;
+}
+for(var i =0;i< cart.length;i++)
+{
+  var product_amount : number = 0; 
+  let item :Item = cart[i];
+  product_amount = item.product.offer_price* 1;
+  if(item.product.multi == 1)
+  {
+    if(item.product.pack_selected[0])
+    product_amount += Number(item.product.pack_selected[0].multi_price);
+    if(item.product.pack_selected[1])
+    product_amount += Number(item.product.pack_selected[1].multi_price);
+  }
+  else
+  {
+    if(item.product.pack_selected[0])
+    product_amount += Number(item.product.pack_selected[0].price);
+    if(item.product.pack_selected[1])
+    product_amount += Number(item.product.pack_selected[1].price);
+  }
+  if(item.product.promos)
+  {
+    if(item.product.promos.discount <= item.product.promos.max_discount)
+    {
+      product_amount = product_amount - Number(item.product.promos.discount);
+    }
+  } 
+  product_amount = product_amount * item.quantity;
+  amount += product_amount;
+}
+return amount; 
+}
+
 check_wallet_content()
 {
   this.checkbox_text = {checkbox : false,radio : false,no_input : false}
-  if(this.productservice.cartItemsCount() == 1 && this.todoservice.get_user_product_amount() < this.options.how_much_apply_to_product)
+  if(this.itemCount() == 1 && this.todoservice.get_user_product_amount() < this.options.how_much_apply_to_product)
   {
-    if(this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount() && this.todoservice.get_user_wallet_amount() > 0)
+    if(this.calculateAmount() > this.todoservice.get_user_wallet_amount() && this.todoservice.get_user_wallet_amount() > 0)
     {
       this.checkbox_text.checkbox = true;
       return;
     }
-    else if(this.productservice.calculateCartAmount() <= this.todoservice.get_user_wallet_amount())
+    else if(this.calculateAmount() <= this.todoservice.get_user_wallet_amount())
     {
       this.checkbox_text.radio =  true;
       return;
     }
     this.checkbox_text.no_input =  true;
   }
-  else if(this.productservice.calculateCartAmount() <= this.todoservice.get_user_wallet_amount())
+  else if(this.calculateAmount() <= this.todoservice.get_user_wallet_amount())
   {
     this.checkbox_text.radio =  true;
   }
@@ -235,12 +287,12 @@ bonus_quantity(index)
 {
   index = index;
   var $userwallet = this.todoservice.get_user_product_amount();
-  for(var i = 0; i < this.productservice.cart_items.length;i++)
+  for(var i = 0; i < this.product_items.length;i++)
   {
     var bonus_amount : number = 0;
-    if(this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product)
+    if(this.product_items[i].product.offer_price >= this.options.apply_minimum_product)
     {
-      for(var j=0;j<this.productservice.cart_items[i].quantity;j++)
+      for(var j=0;j<this.product_items[i].quantity;j++)
       {
         if( $userwallet * 1 >= this.options.how_much_apply_to_product)
         {
@@ -261,14 +313,14 @@ bonus_quantity(index)
 calculate_bonus()
 {
   var amount : number = 0;
-  if(this.options && this.productservice.cart_items.length > 0)
+  if(this.options && this.product_items.length > 0)
   {
     var $userwallet = this.todoservice.get_user_product_amount();
-    for(var i = 0; i < this.productservice.cart_items.length;i++)
+    for(var i = 0; i < this.product_items.length;i++)
     {
-      if(this.productservice.cart_items[i].product.offer_price >= this.options.apply_minimum_product)
+      if(this.product_items[i].product.offer_price >= this.options.apply_minimum_product)
       {
-        for(var j=0;j<this.productservice.cart_items[i].quantity;j++)
+        for(var j=0;j<this.product_items[i].quantity;j++)
         {
           if( $userwallet * 1 >= this.options.how_much_apply_to_product)
           {
@@ -287,11 +339,11 @@ pay_amount()
   var wallet_used = '';
     if($('[name="include_wallet"]:checked').length > 0)
       wallet_used = 'wallet';
-    if((this.productservice.calculateCartAmount() > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
+    if((this.calculateAmount() > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
     {
-      return Math.ceil(this.productservice.calculateCartAmount() - this.todoservice.get_user_wallet_amount());
+      return Math.ceil(this.calculateAmount() - this.todoservice.get_user_wallet_amount());
     }
-    return Math.ceil(this.productservice.calculateCartAmount());
+    return Math.ceil(this.calculateAmount());
 }
 
 cod_apply()
@@ -341,9 +393,9 @@ get_checkout_data()
           this.addresses = data.ADDRESSES;
         }
         this.spinner.hide();
-        if(this.productservice.cart_items.length == 1)
+        if(this.product_items.length == 1)
         {
-          if(this.productservice.cart_items[0].product.multi == 1 && this.todoservice.get_user_type() == 2)
+          if(this.product_items[0].product.multi == 1 && this.todoservice.get_user_type() == 2)
           {
             $('.second-line').hide();
             $('.payment-number span').text('3');
@@ -451,6 +503,7 @@ select_pack(pack)
     this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
     this.calculate_amount();
   }
+
   calculate_amount()
   {
     let amount : number = 0;
@@ -593,7 +646,7 @@ init_accordian()
 
 filter_circle(circle_id)
 {
-  if(circle_id == '')
+  if(circle_id == '' || !this.circles)
     return;
   let circle_record = this.circles.filter(x => x.circle_id == circle_id);
   if(circle_record.length > 0)
@@ -660,7 +713,8 @@ reg_addr(formdata)
           this.address = data.address;
           this.tab_address = data.address.address_id; 
           this.call_change_section('to_order_summary');
-          this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
+          this.params.addr = this.tab_address;
+          this.router.navigate(['/product/checkout/'],{queryParams: this.params});
         }
         this.spinner.hide();
       }
@@ -686,7 +740,8 @@ add_new_addr(form)
           this.address = data.added_address; 
           this.tab_address = this.address.address_id;
           this.call_change_section('to_order_summary');
-          this.router.navigate(['/product/checkout/'],{queryParams: {addr: this.tab_address}});
+          this.params.addr = this.tab_address;
+          this.router.navigate(['/product/checkout/'],{queryParams: this.params});
         }
         this.spinner.hide();
       }
@@ -704,25 +759,25 @@ checkout_items(type)
     var address_id = this.tab_address;
   let wallet_type = $('#wallet-type input[type="radio"]:checked').val();
   let p_data : any = [];
-  for(var i = 0;i < this.productservice.cart_items.length;i++)
+  for(var i = 0;i < this.product_items.length;i++)
   {
     let pkarr = [];
-    for(var j = 0;j < this.productservice.cart_items[i].product.pack_selected.length;j++)
+    for(var j = 0;j < this.product_items[i].product.pack_selected.length;j++)
     {
-      pkarr.push(this.productservice.cart_items[i].product.pack_selected[j].p_id);
+      pkarr.push(this.product_items[i].product.pack_selected[j].p_id);
     }
-    let arr = {p_id : this.productservice.cart_items[i].product.id,pk : pkarr,qty: this.productservice.cart_items[i].quantity }
-    if(this.productservice.cart_items[i].product.promos)
-      arr['pr_id'] = this.productservice.cart_items[i].product.promos.id;
-    if(this.productservice.cart_items[i].product.month_pack)
-      arr['month_pack'] = this.productservice.cart_items[i].product.month_pack;
-    if(this.productservice.cart_items[i].product.pincode)
-      arr['pincode'] = this.productservice.cart_items[i].product.pincode;
-    if(this.productservice.cart_items[i].product.subscriber_id)
-      arr['subscriber_id'] = this.productservice.cart_items[i].product.subscriber_id;      
+    let arr = {p_id : this.product_items[i].product.id,pk : pkarr,qty: this.product_items[i].quantity }
+    if(this.product_items[i].product.promos)
+      arr['pr_id'] = this.product_items[i].product.promos.id;
+    if(this.product_items[i].product.month_pack)
+      arr['month_pack'] = this.product_items[i].product.month_pack;
+    if(this.product_items[i].product.pincode)
+      arr['pincode'] = this.product_items[i].product.pincode;
+    if(this.product_items[i].product.subscriber_id)
+      arr['subscriber_id'] = this.product_items[i].product.subscriber_id;      
     p_data.push(arr);  
   }
-  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, p_data : p_data,wallet_type : wallet_type ,cart_amount: this.productservice.calculateCartAmount()};
+  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, p_data : p_data,wallet_type : wallet_type ,cart_amount: this.calculateAmount()};
   if($('#wallet-type [name="include_wallet"]:checked').length > 0)
     data.include_wallet = 1;
   if(this.region)
@@ -804,7 +859,7 @@ checkout_items(type)
               this.router.navigate(['/product/order-receipt/'+data.order_id]);
             }
            
-            this.productservice.cartItemsCount();
+            this.itemCount();
           }
         }
         

@@ -79,7 +79,7 @@ ngOnInit() {
       this.router.navigate(['/']);
     }
     this.fetch_page_data();
-  this.device_registered()  
+  this.device_registered()  ;
 }
 
 device_registered()
@@ -172,8 +172,10 @@ login_submit(login,me)
           me.user_favourites();
           if(me.ref)
           {
-            //me.router.navigate([me.ref],{ queryParams: { month:  this.monthdata[0].total_month});
-            me.router.navigate(['/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
+            let navigate = me.ref.substr(0, me.ref.indexOf('?')).replace('#','/');
+            let parsedUrl : any = this.router.parseUrl('/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?'));
+            me.router.navigate([navigate],{queryParams : parsedUrl.queryParams});
+            //me.router.navigate(['/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
           }
           else
           {

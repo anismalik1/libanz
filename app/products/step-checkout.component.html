@@ -200,7 +200,7 @@
                 </div>
             </div>
             <div class="order-details">
-                <div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
+                <div class="row" *ngFor="let item of this.product_items;let i = index;">
                     <div class="col s3 m3 center">
                         <div class="cart-product-image"> 
                             <img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
@@ -224,9 +224,9 @@
                             <span id="tsk-applied" class="green-text" *ngIf="item.product.promos">Congratulations! Promo {{item.product.promos.unique_code}} is Applied to your purchase.</span>
                             <span class="font-size-change1 black-text inline-block">Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]">, {{item.product.pack_selected[1].title}}</span></span><span class="font-size-change orange-text" *ngIf="item.product.month_pack">({{item.product.month_pack}} Month)</span></span>
                             <div class="clearfix"></div>
-                            <a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.product.id)" >Add Another Pack</a>
+                            <!-- <a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.product.id)" >Add Another Pack</a> -->
                         </div>
-                            <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a>
+                            <!-- <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a> -->
                     </div>
                     <!-- <div class="col s12 m4 margin-top padd">
                         <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
@@ -239,7 +239,7 @@
             <div class="card-content black-text no-padding fix-inne-pad">
                 <span class="card-title inline-block">Order Summary</span>
                 <hr>
-                <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
+                <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
                     <div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
                     <p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
                     <ng-template #kitblock>
@@ -273,19 +273,19 @@
                             <hr class="horizontal">
                 <div class="subtotal payable margin-top">
                     <p class="inline-block font600">Amount Payable :</p>
-                    <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
+                    <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}} </p>
                 </div>
                 <hr>
                 <div class="subtotal">
-                    <p class="inline-block green-text" *ngIf="this.productservice.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount()}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
-                    <p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
+                    <p class="inline-block green-text" *ngIf="this.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+                    <p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.product_items)}}</p><div class="clearfix"></div>
                 </div>
                 
             </div>
           </div>
         </div> 
         <div class="footer-button-buy">
-            <div class="left-half"><h3><i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}}</h3></div>
+            <div class="left-half"><h3><i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}}</h3></div>
             <div class="right-half">
                 <button type="button" class="btn" matStepperNext>Continue</button>
             </div>
@@ -341,14 +341,14 @@
                     <!-- <a href="javascript:" (click)="add_to_cart(product.id)" id="cart-add" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a> -->
                     <button href="javascript:" class="btn full" type="Submit" id="book-now" (click)="checkout_items(1)">Checkout (<i class="icon-inr"></i>{{pay_amount() - this.calculate_bonus()}})</button>
                 </div>
-                <div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
+                <div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.itemCount() > 1 && this.calculateAmount() >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
             </div>
             <div class="order-summary">
                     <div class="card">
                     <div class="card-content black-text no-padding fix-inne-pad">
                         <span class="card-title inline-block">Order Summary</span>
                         <hr>
-                        <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
+                        <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
                             <div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
                             <p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
                             <ng-template #kitblock>
@@ -382,12 +382,12 @@
                         <hr class="horizontal">
                         <div class="subtotal payable margin-top">
                             <p class="inline-block font600">Amount Payable :</p>
-                            <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}} </p>
+                            <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}} </p>
                         </div>
                         <hr>
                         <div class="subtotal">
-                            <p class="inline-block green-text" *ngIf="this.productservice.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount()}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
-                            <p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}}</p><div class="clearfix"></div>
+                            <p class="inline-block green-text" *ngIf="this.productservice.cashback_amount(this.product_items) > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+                            <p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.product_items)}}</p><div class="clearfix"></div>
                         </div>
                         
                     </div>

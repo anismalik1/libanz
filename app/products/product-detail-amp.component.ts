@@ -176,6 +176,7 @@ export class ProductDetailAmpComponent implements OnInit {
     }
     return false;
   }
+  
   tick_multi()
   {
     if($("#multi-enable").is(':checked'))
@@ -228,7 +229,6 @@ export class ProductDetailAmpComponent implements OnInit {
         var prate = rating.toFixed(1);
       this.product_ratings.push({id : this.recommended[i].id,rate : prate, rate_count : j});
     }  
-    //console.log(this.product_ratings);
   }
 
   continue_to_change(url)
@@ -745,10 +745,10 @@ export class ProductDetailAmpComponent implements OnInit {
     }
     if(this.pincode != '')
     {
-      this.route.navigate(['/product/step-checkout'],{queryParams: {pincode: this.pincode}});
+      this.route.navigate(['/product/step-checkout'],{queryParams: {tracker : 'product', id : p_id,pincode: this.pincode}});
       return;
     } 
-    this.route.navigate(['product/step-checkout']);
+    this.route.navigate(['product/step-checkout'],{queryParams : {tracker : 'product', id : p_id}});
   }
 
   open_model()
