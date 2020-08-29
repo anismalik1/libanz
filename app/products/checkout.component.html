@@ -313,7 +313,7 @@ span.icon-locate {
           <!-- Login Checkout -->
         	<div class="row no-margin white login-checkout checkout_3" *ngIf="gosection_data.to_order_summary == true">
         		<div class="row" *ngFor="let item of this.productservice.cart_items;let i = index;">
-          			<div class="col s2 m2 center">
+          			<div class="col s3 m2 center">
           				<div class="cart-product-image"> 
           					<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width:120px;
 							  padding-top: 12px;"><br>
@@ -326,7 +326,7 @@ span.icon-locate {
 					          </div>
           				</div>
           			</div>
-          			<div class="col s10 m5 margin-top" id="item-detail-section-{{i}}">
+          			<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
           				<a href="javascript:" class="black-text">
           					<h4 class="font600 mb-height" style="font-size: 13px;
 							  height: 10px;"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
@@ -349,7 +349,7 @@ span.icon-locate {
 									</div>
         					<!-- <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.quantity*(item.product.price -1000)}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span> -->
         					<!-- <br> -->
-      						<a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)" style="padding: 4px 10px !important;">Remove &nbsp; <span class="fa fa-times"></span></a>
+      						<!-- <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)" style="padding: 4px 10px !important;">Remove &nbsp; <span class="fa fa-times"></span></a> -->
           			</div>
           			<div class="col s12 m4 margin-top padd">
           				<strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>

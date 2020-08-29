@@ -15,6 +15,18 @@
 	.mb-height{
 		height:25px !important;
 	}
+
+	.remove-btn {
+    background: #F44336!important;
+    border-radius: 20px;
+    color: #fff !important;
+    padding: 0px 12px !important;
+    position: relative;
+    height: 26px;
+    top: -20px;
+    line-height: 26px;
+}
+
 }
 </style>
 <app-header></app-header>
@@ -39,7 +51,7 @@
 				<div class="content-wrapper" *ngIf="this.productservice.cart_items">        
                     <div class="card-content black-text padd-only no-margin" *ngFor="let item of this.productservice.cart_items;">
                         <div class="row">
-							<div class="col s2 m2 center">
+							<div class="col s3 m2 center">
 								<div class="cart-product-image"> 
 									<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width:120px;
 									padding-top: 12px;"><br>
@@ -56,7 +68,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col s10 m5 margin-top" id="item-detail-section-{{i}}">
+							<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
 								<a href="javascript:" class="black-text">
 									<h4 class="font600 mb-height" style="font-size: 13px;
 									height: 10px;"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
