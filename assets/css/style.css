@@ -7061,3 +7061,6 @@ padding-left: 7px;
 	right: 30px;
 	
 }
+.mat-step-header:hover {
+    background-color: transparent !important;
+}

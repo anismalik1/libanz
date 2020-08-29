@@ -3,9 +3,76 @@
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
 <style>
+   
+    
+  
 @media (max-width: 767px){
+    .forder-txt{
+
+position: relative;
+top: -15px;
+font-size: 11px;
+left: 4px;
+}
+.bt-border{
+    margin-top: -12px;
+    border-bottom:1px solid #ececec;
+}
+.bx-shad{
+    padding: 5px;
+    background: #fff;
+    box-shadow:1px 1px 6px #ececec;
+}
+    .text-add{
+
+padding: 10px 0px 0px 12px;
+height: 25px;
+}
+.fix-ht{
+    padding-top: 15px;
+}
+.mat-step-header .mat-step-header-ripple {
+    top: 0;
+    background: transparent !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:first-child)::before, .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:last-child)::after, [dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:first-child)::after, [dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:last-child)::before {
+    border-top-width: 1px;
+    border-top-style: solid;
+    content: '';
+    display: inline-block;
+    height: 0;
+    position: absolute;
+    top: 36px;
+    width: calc(50% - 20px);
+    background: #3f51b5 !important;
+}
+.mat-horizontal-stepper-header::after, .mat-horizontal-stepper-header::before, .mat-stepper-horizontal-line {
+    border-top-color: rgb(63 81 181) !important;
+}
+
+.mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {
+    background-color: transparent!important;
+}
+
+    .add-new-address {
+    padding: 0px !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+
     .mobile-footer {
     display: none!important;
+}
+.pt-top-10{
+
+    padding-top:10px;
 }
 }
 
@@ -194,15 +261,15 @@
         <mat-step [editable]="false">
             <ng-template matStepLabel>Details</ng-template>
             <div class="card" *ngIf="address">
-                <h3>Address</h3>
+                <h3 class="text-add">Address</h3>
                 <div class="card-content">
                     {{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	
                 </div>
             </div>
-            <div class="order-details">
-                <div class="row" *ngFor="let item of this.product_items;let i = index;">
+            <div class="order-details bx-shad">
+                <div class="row bt-border" *ngFor="let item of this.productservice.cart_items;let i = index;">
                     <div class="col s3 m3 center">
-                        <div class="cart-product-image"> 
+                        <div class="cart-product-image fix-ht"> 
                             <img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
                             <div class="product-quantity less-add-btn">
                                 <!-- <div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
@@ -236,7 +303,7 @@
             </div> 
             <div class="order-summary">
             <div class="card">
-            <div class="card-content black-text no-padding fix-inne-pad">
+            <div class="card-content black-text no-padding fix-inne-pad pt-top-10">
                 <span class="card-title inline-block">Order Summary</span>
                 <hr>
                 <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
@@ -285,7 +352,9 @@
           </div>
         </div> 
         <div class="footer-button-buy">
-            <div class="left-half"><h3><i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}}</h3></div>
+            <div class="left-half"><h3><i class="icon-inr"></i>{{this.productservice.calculateCartAmount() - this.calculate_bonus()}}</h3>
+                <p><a href="#" class="forder-txt">Order Details </a></p>
+            </div>
             <div class="right-half">
                 <button type="button" class="btn" matStepperNext>Continue</button>
             </div>
