@@ -2,10 +2,50 @@
 <style stype="text/css">
 
 @media only screen and (max-width: 767px){
+	/* .channels-accoriadn.card-content{
+
+		background-color:transparent !important;
+} */
+.collapsible-body {
+    display: none;
+    background: #fff !important;
+}
+
+.channels-accoriadn .card-content {
+    height: auto !important;
+    padding: 10px !important;
+    overflow: auto;
+    border: 1px solid #e3e3e3;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    min-height: auto;
+}
+.rating-center {
+    line-height: 16px !important;
+}
+.space-fix-bottom {
+    overflow-y: scroll;
+    position: relative;
+    top: 10px;
+}
+
+.descripetion-detail.margin-top1 {
+    background: #fff;
+    box-shadow: 1px 1px 6px #ececec;
+    padding: 10px;
+}
+.review-ratings .card {
+    padding: 1px 10px !important;
+}
+
+}
+@media only screen and (max-width: 767px){
 .price-cut1 {
     padding-bottom: 0px;
     padding-top: 0;
 }
+
 .icn-clr1 {
     color: #746d67!important;
     float: right!important;
@@ -108,8 +148,23 @@
 
 @media only screen and (max-width: 767px){
 
+	.subtotal-fix {
+    
+    padding: 10px 15px;
+
+}
+	.pk-item-2 {
+    position: relative;
+    top: -7px !important;
+	font-size:13px;
+}
+
+.pk-item {
+    position: relative;
+    top: 7px !important;
+}
 	.channels-accoriadn .card-content a {
-    background: #ff6a00;
+    /* background: #ff6a00; */
     color: #fff;
     padding: 5px;
     display: inline-block;
@@ -281,15 +336,15 @@ ul#dropdown1 li {
 					</div>
 					<div class="clearfix"></div><br/>
 					<div class="margin-top1 card" *ngIf="pack_selected">
-						<span class="font-size-change1 font600 grey-text subtotal">Pack</span> 
-						<div class="subtotal" *ngFor="let item of pack_selected;">
+						<span class="font-size-change1 font600 grey-text subtotal pk-item">Pack</span> 
+						<div class="subtotal subtotal-fix" *ngFor="let item of pack_selected;">
 							<p class="inline-block font600" style="width:80%;">{{item.title}} :</p>
 							<p class="inline-block green-text right font-size-change" *ngIf="!multienable" style="padding-top:5px;"> <i class="icon-inr"></i> {{item.price}} </p>
 							<p class="inline-block green-text right font-size-change" *ngIf="multienable" style="padding-top:5px;"> <i class="icon-inr"></i> {{item.multi_price}} </p>
 							<div class="clearfix"></div>
 							<span class="grey-text" *ngIf="item.title && item.default_selected == 2">This Pack is mandatory, You cannot remove it.</span>
 						</div>
-						<a class="modal-trigger subtotal" href="#modal-packages">Add other Pack & Offer</a>
+						<a class="modal-trigger subtotal pk-item-2" href="#modal-packages">Add other Pack & Offer</a>
 					</div>
 					
                   	<div class="clearfix"></div>
@@ -332,7 +387,7 @@ ul#dropdown1 li {
 					<!-- <button class="btn" (click)="load_specification()">Specification</button> -->
 					<div class="review-ratings">
                   		<div class="card">
-							<h2>Specifications <a href="javascript:" onclick="$('#specification-list').removeClass('hide');$('#see-specification').remove();" id="see-specification" class="right font-size-change">+See List</a></h2>
+							<h2>Specifications <a href="javascript:" onclick="$('#specification-list').removeClass('hide');$('#see-specification').remove();" id="see-specification" class="right font-size-change">+ View More </a></h2>
                   			<ul id="specification-list" class="hide">
                   				<li [className]="hide && i > 10 ? 'hide specification-hide':''" *ngFor="let feature of product_features;let i = index">
 									<div class="row">
@@ -706,9 +761,9 @@ ul#dropdown1 li {
 		  	</div>
 		</div>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
       <a href="javascript:" class="modal-close waves-effect waves-green btn-flat">Done</a>
-    </div>
+    </div> -->
 </div>
 
 <div id="write-review" class="modal">
