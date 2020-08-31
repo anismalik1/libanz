@@ -155,10 +155,7 @@ export class StepCheckoutComponent implements OnInit {
     this.ControlFormGroup = this.addressformgroup;
      
   }
-  ngAfterViewInit()
-  {
-    this.check_wallet_content();
-  }
+
   ini_list()
   {
     if($('#init-list-script'))

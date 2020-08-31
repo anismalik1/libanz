@@ -400,15 +400,15 @@ export class ProductService {
     return (mrp_amount - offer_amount); 
   }
 
-  check_cashon_delivery()
+  check_cashon_delivery(items)
   {
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart :any = items;
     if(cart == null)
       return false
     var index = false;
-    for(var i =0;i< Object.keys(cart).length;i++)
+    for(var i =0;i< cart.length;i++)
     {
-      let item :Item = JSON.parse(cart[i]);
+      let item :Item = cart[i];
       if(item.product.cod_available != 1)
       {
         index = true;
