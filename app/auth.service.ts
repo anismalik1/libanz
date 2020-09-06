@@ -13,7 +13,7 @@ export class AuthService {
   public tokenKey:string = 'app_token';
   public ttl  = 12;
   constructor(private http : Http) { }
-  public base_url = "http://www.libanz.com/app/";
+  public base_url = "https://www.libanz.com/app/";
   private token_api = 'https://www.libanz.com/accounts/apis/home/dologin';
 
 

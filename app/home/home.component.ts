@@ -188,6 +188,8 @@ export class HomeComponent implements OnInit {
 
   navigate_to(recharge_data)
    {
+     if(!recharge_data || !recharge_data.title)
+      return false;
       var url ='';
       if(recharge_data.title.toLowerCase() == 'mobile')
       {

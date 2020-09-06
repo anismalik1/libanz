@@ -492,17 +492,17 @@ export class ProductService {
       }
     }
     localStorage.setItem('cart',JSON.stringify(cart));
-    if(1==1)
-    {
-      this.router.routeReuseStrategy.shouldReuseRoute = function(){
-        return false;
-      }
-    this.router.navigated = false;
-    if(this.get_param('addr'))
-      this.router.navigate(['/product/checkout/'],{queryParams :{addr : this.get_param('addr')}});
-    else
-      this.router.navigate(['/product/checkout/']); 
-    }
+    // if(1==1)
+    // {
+    //   this.router.routeReuseStrategy.shouldReuseRoute = function(){
+    //     return false;
+    //   }
+    // this.router.navigated = false;
+    // if(this.get_param('addr'))
+    //   this.router.navigate(['/product/checkout/'],{queryParams :{addr : this.get_param('addr')}});
+    // else
+    //   this.router.navigate(['/product/checkout/']); 
+    // }
     this.loadCart();
     this.cartItemsCount();
   }

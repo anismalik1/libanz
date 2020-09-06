@@ -56,36 +56,36 @@
 									<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width:120px;
 									padding-top: 12px;"><br>
 									<div class="product-quantity less-add-btn">
-												  <div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
-													  <button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')" style="padding: 0px 12px;
-													  position: relative;
-													  top: -14px;
-													  height: 26px;
-													  line-height: 26px !important;"><i class="material-icons">remove</i></button>
-													  <span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
-													  <button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
-												  </div>
+									<div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
+										<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')" style="padding: 0px 12px;
+										position: relative;
+										top: -14px;
+										height: 26px;
+										line-height: 26px !important;"><i class="material-icons">remove</i></button>
+										<span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
+										<button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
+									</div>
 									</div>
 								</div>
 							</div>
 							<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
-								<a href="javascript:" class="black-text" style="display:block;">
-									<h4 class="font600 mb-height" style="font-size: 13px;
-									height: 10px;"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
-          					<!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
-          					<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
-							  <span class="font-size-change1 black-text inline-block" style="white-space: nowrap;
-							  overflow: hidden;
-							  text-overflow: ellipsis; font-size: 12px !important;">Packs: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> </span></span> &nbsp; <span class="font-size-change orange-text" *ngIf="item.product.month_pack" style="position: relative; top:-10px;">({{item.product.month_pack}} Month)</span> 
-							  <!-- <a routerLink="/product/{{item.product.url}}" style="display:block;     position: relative;
-							  top: -14px;"> &nbsp; Add Another Packs & Offers  </a> -->
-          					<!-- <span class="font-size-change orange-text" *ngIf="item.product.tsk_kit"><span *ngIf="item.product.tsk_kit == 2">, TSK 559</span><span *ngIf="item.product.tsk_kit == 3">, TSK 999</span></span> -->
-									</a>
-										
-								  <!-- <span class="font-size-change1 black-text inline-block margin-top-cart"><i class="icon-inr"></i><span *ngIf="item.product.tsk_kit && item.product.tsk_kit == 3">{{item.quantity*(item.product.price -1000)}}</span><span *ngIf="!item.product.tsk_kit || item.product.tsk_kit == 2">{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></span> -->
-								  <!-- <br> -->
+								<div class="black-text" style="display:block;">
+									<h4 class="font600 mb-height" style="font-size: 13px;height: 10px;">
+									<a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
+									<div class="font-size-change1 black-text inline-block"><i class="icon-inr"></i><span>{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></div>
+									<div class="clearfix"></div>
+									<div class="font-size-change1 black-text inline-block" style="font-size: 12px !important;">Packs: 
+										<span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} 
+											<span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> 
+										</span> 
+										<span class="font-size-change orange-text" *ngIf="item.product.month_pack">({{item.product.month_pack}} Month)</span>
+									</div> 
+									<div class="clearfix"></div>
+									<a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.product.id)" >Add Pack & Offers</a>
+								</div>
+									
 								  <div class="clearfix"></div>
-									<a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove &nbsp; <span class="fa fa-times"></span></a>
+									<a href="javascript:" class="font-size-change inline-block red-text"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove &nbsp; <span class="fa fa-times"></span></a>
 							</div>
                                 <div class="col s12 m4 margin-top padd">
                                     <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
@@ -268,6 +268,89 @@
 		  	</div>
 		  </div>
 	  </div>
+	</div>
+	<div id="modal-packages" class="modal modal-fixed-footer">
+		<div class="modal-content">
+				<span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
+			<div class="row">
+				<!-- <h3>Selected</h3> -->
+				<div class="col s12 m12 l12">
+					<div class="center">	
+						<h2 class="center font600 text-orange">Select Package </h2>
+						<div class="clearfix"></div>
+						<h3 class="text-center" *ngIf="!channels_packs || channels_packs.length == 0">Loading...</h3>
+						<ul class="monthly-packages" id="monthly-packages" *ngIf="months">
+							<li *ngFor="let item of months;let i = index">
+								<a id="month-{{item.id}}" [className]="(1*item.total_month == 1*this.month) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.total_month,this.product.id)">{{item.month_label}}</a>
+							</li>
+						</ul>
+						<!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+					</div>
+				</div>
+				<div class="col s12 m12 l12 channel-list-box">				
+					<div class="channels-accoriadn">
+						<ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
+							<li *ngFor="let packs of channels_packs;let j = index" class="active">
+								<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
+								<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
+									<div class="row">
+										<div class="col s12 m3 l2" *ngFor="let item of packs.child;let i = index;">
+										<!--<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
+										<div class="card product-new" *ngIf="item.default_selected == 2">
+											<div class="card-content center">
+												<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
+												<h4 class="grey-text">{{item.title}}</h4>
+												<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
+												<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+												<br/>
+												<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a>
+											
+											</div>
+											
+										</div>
+										<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
+										<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
+											<div class="card-content center" >
+												<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+												<h4 class="grey-text">{{item.title}}</h4>
+												<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+												<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+												<br/>
+												<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+												<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
+											</div>
+										</div>
+										<div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
+											<div class="card-content center" >
+												<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+												<h4 class="grey-text">{{item.title}}</h4>
+												<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+												<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+												<br/>
+												<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
+												<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+			
+						<ul class="pt-all-10">
+							<li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. Libanz is in no way responsible for that and shall not be liable in any way for the same.</li>
+							<li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same LibanzSHOP is in no way responsible for that and shall not be liable in any way.</li>
+							<li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+						</ul>
+						<hr class="horizontal">
+							
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button href="javascript:" class="modal-close white-text btn orange"[disabled]="!enable_add_pack" (click)="add_to_product()">ADD PACK</button>
+		</div>
 	</div>
 	<app-footer></app-footer>	
 	

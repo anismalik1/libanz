@@ -542,70 +542,81 @@ export class RechargeComponent implements OnInit {
             this.operators = data.ALLOPERATORS;
             this.circles  = data.CIRCLES;
             this.spinner.hide();
-            let recharge_data  = this.todoservice.get_recharge();
-            if(recharge_data == null)
-              return false;
-            if(recharge_data && !recharge_data.operator_id )
+            
+            // if(recharge_data && !recharge_data.operator_id )
+            // {
+            //   localStorage.removeItem('recharge_cart');
+            //   return false;
+            // }
+            if(this.todoservice.get_param('next_action') && this.todoservice.get_param('next_action') == 'recharge_init')
             {
-              localStorage.removeItem('recharge_cart');
-              return false;
+              var recharge_data  = this.todoservice.get_recharge();
+              //var formdata : any = JSON.parse(localStorage.getItem('recharge_cart'));
+              // if()
+              // {
+              //   this.recharge_init( this.url_name,formdata);
+              // }
             }
-            this.recharge_cart = recharge_data;
-            if(recharge_data.circle_id != null)
-              this.region        = recharge_data.circle_id;
-            if(this.recharge_cart != null)
+
+            if(recharge_data.circle_area != null)
+              this.region        = recharge_data.circle_area;
+            if(this.get_token() && recharge_data != null && recharge_data.url_name == this.url_name)
             {
+              recharge_data.operator_id = recharge_data.operator;
+              recharge_data.recharge_amount = recharge_data.amount;
               //console.log(this.recharge_cart);
-              if(this.recharge_cart.recharge_type == 'mobile')
+              if(recharge_data.url_name == 'mobile')
               {
                 this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.mobilegroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.mobilegroup.controls['circle_area'].setValue(this.region);
                 this.mobilegroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'dth')
+              else if(recharge_data.url_name == 'dth')
               {
                 this.dthgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.dthgroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.dthgroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'datacard')
+              else if(recharge_data.url_name == 'datacard')
               {
                 this.datacardgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.datacardgroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.datacardgroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'landline')
+              else if(recharge_data.url_name == 'landline')
               {
                 this.landlinegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.landlinegroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.landlinegroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'broadband')
+              else if(recharge_data.url_name == 'broadband')
               {
                 this.broadbandgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.broadbandgroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.broadbandgroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'electricity')
+              else if(recharge_data.url_name == 'electricity')
               {
                 this.electricitygroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.electricitygroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.electricitygroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'gas')
+              else if(recharge_data.url_name == 'gas')
               {
                 this.gasgroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.gasgroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.gasgroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              else if(this.recharge_cart.recharge_type == 'water')
+              else if(recharge_data.url_name == 'water')
               {
                 this.watergroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
                 this.watergroup.controls['operator'].setValue(recharge_data.operator_id);
                 this.watergroup.controls['amount'].setValue(recharge_data.recharge_amount);
               }
-              
+              var time = new Date();
+              if(time.getTime() - recharge_data.time <= 60*60*1000)
+                this.recharge_init(recharge_data.url_name,recharge_data);
             }
            
             this.selectedOperator = Number(recharge_data.operator_id);
@@ -624,6 +635,7 @@ export class RechargeComponent implements OnInit {
 
         }
       )
+      
   }
 
   filter_operators(filter_id)
@@ -726,7 +738,7 @@ export class RechargeComponent implements OnInit {
       return;
     }
    // console.log(formdata)
-    if(formdata.amount <= 0 || formdata.recharge_id.id <= 0 || formdata.operator <= 0 )
+    if(formdata.amount <= 0 || formdata.recharge_id <= 0 || formdata.operator <= 0 )
 		{
       return false;
     }
@@ -735,15 +747,26 @@ export class RechargeComponent implements OnInit {
 		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
     if(!this.authservice.authenticate())
     {
-      $('.logup.modal-trigger')[0].click();
+      var width = $(window).width();
+      if(width < 767)
+      {
+        this.open_model();
+        $('#mobile-form').append('<input type="hidden" name="next_action" value="recharge_init">');
+      }
+      else
+      {
+        $('.logup.modal-trigger')[0].click();
+        $('#login-input-form').append('<input type="hidden" name="next_action" value="recharge_init">');
+      } 
       var time = new Date();
       this.rechargeData.recharge_type = s;
       this.rechargeData.time = time.getTime();
-      this.addto_recharge_cart(this.rechargeData);
+      formdata.url_name = s;
+      formdata.time = time.getTime();
+      this.addto_recharge_cart(formdata);
       this.spinner.hide();
       return false;
     }
-    
     this.todoservice.recharge_init(this.rechargeData)
 		.subscribe(
 			data => 
@@ -757,7 +780,12 @@ export class RechargeComponent implements OnInit {
         this.rechargeData.operator_api_id = data.recharge_id;
         this.rechargeData.recharge_type = s;
        
-			  if(data.status == 'Invalid Token')
+        if(data.status == 'false')
+        {
+          this.toastr.errorToastr(data.msg);
+          return false;
+        }
+        if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
           return false;
@@ -799,15 +827,19 @@ export class RechargeComponent implements OnInit {
     this._renderer2.appendChild(this._document.body, script);
   }
 recharge_handle()
- {
+{
   if(!this.authservice.authenticate())
   {
-      var width = $(window).width(); 
-      if(width < 767)
-      {
-        this.open_model()
-      }
-      return false;
+    var width = $(window).width();
+    if(width < 767)
+    {
+      this.open_model();
+     }
+    else
+    {
+      $('.logup.modal-trigger')[0].click();
+    } 
+    return false;
   }
   if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
   {

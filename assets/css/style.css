@@ -5361,13 +5361,13 @@ a.modal-trigger i {
 	margin-top: 15px;}
 	@media only screen and (max-width: 767px){
 		.circle-dotss {
-    margin-top: 51px !important;
+    margin-top: -46px !important;
     height: 13px !important;
     width: 13px !important;
     background: #ff6a00;
     border-radius: 50%;
     position: absolute;
-    right: 18px !important;
+    right: -2px !important;
 }
 		.bottom-slider-dot .lSSlideOuter .lSPager.lSpg>li.active a, .lSSlideOuter .lSPager.lSpg>li:hover a {
 			background-color: #545353 !important;
@@ -7052,7 +7052,7 @@ padding-left: 7px;
 	left: 20px;} */
 
 .circle-dotss {
-    margin-top: 32px;
+    margin-top: -42px;
     height: 15px;
     width: 15px;
     background: #ff6a00;

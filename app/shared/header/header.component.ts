@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit{
     public notification_count : any = {count :0};
     public favourites : any;
     public favourite_count : number;
+    public offline_alert : boolean = false;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
   filteredOptions: Observable<object>;
   filterdList : boolean = false;
@@ -112,6 +113,9 @@ export class HeaderComponent implements OnInit{
         {
           if(isOnline == false)
           {
+            if(this.offline_alert == true)
+              return false;
+            this.offline_alert = true;  
             alert("You Are Offine.");
             return false;
           }
@@ -367,6 +371,7 @@ export class HeaderComponent implements OnInit{
           me.token_params = data;
           if(typeof data.status != 'undefined' && data.status == true)
           {
+            
             $('.modal-close').click();
             $('.modal-overlay').css('display','none');
             let user : any = data.user;
@@ -374,15 +379,31 @@ export class HeaderComponent implements OnInit{
             me.authService.AccessToken = me.token_params.accessToken;
             me.authService.storage(data,me);
             me.todoservice.set_user_data(user);
-            let url = window.location.pathname;
-            if(url == url)
+            if($('[name="next_action"]').length > 0)
             {
-              me.router.routeReuseStrategy.shouldReuseRoute = function(){
-                return false;
-             }
-            me.router.navigated = false;
-            me.router.navigate([this.href]);
+              let url = window.location.pathname;
+              if(url == url)
+              {
+                me.router.routeReuseStrategy.shouldReuseRoute = function(){
+                  return false;
+               }
+              me.router.navigated = false;
+              me.router.navigate([this.href],{queryParams : {next_action : $('[name="next_action"]').val()}});
+              }
             }
+            else
+            {
+              let url = window.location.pathname;
+              if(url == url)
+              {
+                me.router.routeReuseStrategy.shouldReuseRoute = function(){
+                  return false;
+              }
+              me.router.navigated = false;
+              me.router.navigate([this.href]);
+              }
+            }
+
           }
           else  
           {

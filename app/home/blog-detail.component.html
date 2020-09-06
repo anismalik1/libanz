@@ -15,7 +15,7 @@
 
 <div class="col s12 cst-back">
   <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+      <li>  <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; Blogs Details </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
   </ul>
 </div>	
 <!-- Blog Page New Design -->

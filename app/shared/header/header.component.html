@@ -329,7 +329,7 @@ li.txt-fix-mb span a {
 				
 					<div class="modal-close right-align"><i class="material-icons">close</i></div>
 					</div>
-					<div class="circle-dotss"></div>
+					
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
 						<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
@@ -355,10 +355,9 @@ li.txt-fix-mb span a {
 						</div>
 					
 					<div [className]="(item.visitor_read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text font600'">
-					
-					
 						<p [innerHTML]="item.visitor_comment"></p>
-					<time class="grey-text">{{time_ago(item.history_time)}}</time>
+						<time class="grey-text">{{time_ago(item.history_time)}}</time>
+						<div class="circle-dotss" *ngIf="item.visitor_read != 1"></div>
 					</div>
 					</li>
 					</ul>										
@@ -677,7 +676,7 @@ li.txt-fix-mb span a {
 		<h4>Notification's</h4>
 		<div class="modal-close right-align"><i class="material-icons">close</i></div>
 		</div>
-		<div class="circle-dotss"></div>
+		
 		<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 			<li *ngFor="let item of notifications;" >
 				<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
@@ -701,11 +700,12 @@ li.txt-fix-mb span a {
 				<div class="notification-drop-image" *ngIf="item.activity_type == '19'">
 					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-6.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; " >
 				</div>
-				
 				<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
-				<p [innerHTML]="item.visitor_comment"></p>
-				<time class="grey-text">{{time_ago(item.history_time)}}</time>
+					<p [innerHTML]="item.visitor_comment"></p>
+					<time class="grey-text">{{time_ago(item.history_time)}}</time>
+					<div class="circle-dotss" *ngIf="item.read != 1"></div>
 				</div>
+
 			</li>
 		
 		</ul>										

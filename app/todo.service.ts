@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, RoutesRecognized} from '@angular/router';
 import { Observable, } from 'rxjs/Observable';
 import { fromEvent, merge ,Observer} from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter, pairwise } from 'rxjs/operators';
 import { Headers,Http } from '@angular/http';
 import { AuthService } from './auth.service';
 import {Pages} from './pages';
@@ -43,6 +43,14 @@ export class TodoService {
       }
     } 
     );
+    // router.events
+    //     .pipe(
+    //       filter(event => event instanceof RoutesRecognized),
+    //       pairwise()
+    //     )            
+    //     .subscribe((e: any) => {
+    //         this.previousUrl = e[0].urlAfterRedirects;
+    //     });
   }
 
   payment_template($status)
@@ -312,6 +320,11 @@ export class TodoService {
         return data.user.avatar;   
     } 
     return ''; 
+  }
+
+  back()
+  {
+    window.history.go(-1);
   }
 
   get_user_characters()
