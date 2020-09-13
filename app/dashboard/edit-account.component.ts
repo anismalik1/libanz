@@ -69,6 +69,7 @@ loadImageFailed() {
     });
   }
   ngOnInit() {
+    this.todoservice.back_icon_template('Edit Profile',this.todoservice.back())
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.text = `$('.modal').modal();`;

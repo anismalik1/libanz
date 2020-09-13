@@ -57,17 +57,8 @@ padding:0;
 <div class="spinner-wrapper">
     <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
     </div>
-    <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-        <div class="container">
-            <div class="col s12">
-            <ul class="back-icon">
-                <li> <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">History  </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
-            </ul>
-            </div>	
-            <div class="clearfix"></div>
-        </div>
-        </div>
-        <div class="fix-mb-top"></div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
 <section class="flash-deal">
     <div class="container-fluid">
         <div class="row no-margin">

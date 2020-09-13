@@ -41,6 +41,7 @@ export class FavoritesComponent implements OnInit {
       this.user_favourites();
   }
   ngOnInit() {
+    this.todoservice.back_icon_template('Favorite(s)',this.todoservice.back())
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -208,7 +209,6 @@ init_accordian()
              
               localStorage.setItem('favourite', JSON.stringify(data.favourites));
               this.favourites = data.favourites.items;
-              console.log(this.favourites)
               this.favourite_count =  data.count;
             }
           }

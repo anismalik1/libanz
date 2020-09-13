@@ -70,6 +70,7 @@ constructor( public todoservice : TodoService,
   
  }
 ngOnInit() {
+  this.todoservice.back_icon_template('Login',this.todoservice.back())
   this.ini_list()
   if(this.todoservice.get_param('reset') && this.todoservice.get_param('reset') == 'true')
     this.notification = "Your Password Reset Successful. Login here.";

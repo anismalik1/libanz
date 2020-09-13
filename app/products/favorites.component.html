@@ -41,8 +41,10 @@
 <div class="spinner-wrapper">
     <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
   </div>
+  <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
 <section class="flash-deal border-bottom">
-    <div class="container">
+    <div class="">
         <div class="row no-margin">
             <div class="col s12 m12 l8">
                 <div>
@@ -67,8 +69,8 @@
 										<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270
 										{{convert_to_object(item.save_json).image}}" class="responsive-img" alt="hd-tata-sky"><br>
                                     </div>
-                                    <div class="cart-card-padd" *ngIf="this.productservice.cartItemsCount() > 0">
-                                        <a [routerLink]="['/product/'+item.url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack,tracker : 'favorite',id : item.id}" class="btn sign orange btn-large font-size-change waves-effect waves-light w-100-btn"> Book Now</a>
+                                    <div class="cart-card-padd">
+                                        <a [routerLink]="['/product/'+item.url]" [queryParams]= "{month : convert_to_object(item.save_json).month_pack,tracker : 'favorite',id : item.id}" class="btn sign orange waves-effect waves-light"> Book Now</a>
                                     </div>
                                 </div>
                                 <div class="col s9 m5 margin-top">
@@ -192,7 +194,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button href="javascript:" class="modal-close white-text btn orange"[disabled]="!enable_add_pack" (click)="add_to_product()">ADD PACK</button>
+        <button href="javascript:" class="modal-close white-text btn orange mobile-popup-button"[disabled]="!enable_add_pack" (click)="add_to_product()">ADD PACK</button>
     </div>
 </div>
 <app-footer></app-footer>	

@@ -3,7 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 
 @Component({
@@ -26,9 +26,13 @@ export class ValueTransferComponent implements OnInit{
   all_banks : any;
   selected_bank : any ;
   classes : any = ['circle-box1','circle-box2','circle-box3','circle-box2']; 
-  constructor(private spinner : NgxSpinnerService,private fb: FormBuilder, vcr: ViewContainerRef,private toastr: ToastrManager,public todoservice : TodoService,private authservice : AuthService,private router : Router) {
+  constructor(private spinner : NgxSpinnerService,private fb: FormBuilder, 
+    vcr: ViewContainerRef,private toastr: ToastrManager,
+    public todoservice : TodoService,private authservice : AuthService,
+    private router : Router,private route : ActivatedRoute) {
    }
   ngOnInit() {
+    this.todoservice.back_icon_template('Pay',this.todoservice.back())
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -56,11 +60,12 @@ export class ValueTransferComponent implements OnInit{
       'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
     });
 
-    if(this.todoservice.get_param('order_id'))
-		{
-			this.order_id = this.todoservice.get_param('order_id');
-			this.fetch_order();
-		}
+    this.route.params.subscribe(params => {
+      this.order_id = params['name'];
+      if(this.order_id > 0)
+        this.fetch_order();
+   });
+
     this.fetch_value_transfer(); 
   }
   user_tobank_submit(form)
@@ -108,7 +113,7 @@ export class ValueTransferComponent implements OnInit{
               }
             }  
             this.router.navigated = false;
-            this.router.navigate(['/dashboard/value-transfer'],{queryParams : {order_id : this.order_id}});
+            this.router.navigate(['/dashboard/value-transfer/'+this.order_id]);
         }
         else if(data.status == false)
         {
@@ -329,7 +334,7 @@ export class ValueTransferComponent implements OnInit{
               }
             }  
             this.router.navigated = false;
-            this.router.navigate(['/dashboard/value-transfer'],{queryParams : {order_id : this.order_id}});
+            this.router.navigate(['/dashboard/value-transfer/'+this.order_id]);
           }
           else
           {

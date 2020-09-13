@@ -25,6 +25,7 @@ export class TransactionHistoryComponent implements OnInit{
   selected: {startDate: moment.Moment, endDate: moment.Moment};
   constructor( private spinner: NgxSpinnerService ,  public todoservice : TodoService,private authservice : AuthService,private router : Router) { }
   ngOnInit() {
+    this.todoservice.back_icon_template('History',this.todoservice.back())
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');

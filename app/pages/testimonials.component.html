@@ -49,7 +49,10 @@ width: 35% !important;
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+
+<!-- <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
   <div class="container">
     <div class="col s12">
       <ul class="back-icon">
@@ -58,7 +61,7 @@ width: 35% !important;
     </div>	
     <div class="clearfix"></div>
   </div>
-</div>
+</div> -->
 <section class="hero beard">
     <img src="" class="responsive-img">
     <div class="container"> 

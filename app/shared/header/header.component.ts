@@ -742,14 +742,29 @@ export class HeaderComponent implements OnInit{
         {
           if(data.status == 0)
           {
-            this.notification_count.count = 0
+            this.user_notification(0)
           }
         }
       )
     }
     
   }
-
+  route_link(notification)
+  {
+    if(notification.activity_type == 1 || notification.activity_type == 15 || notification.activity_type == 17)
+      return '/orders/recharge-receipt/'+notification.order_id;
+    else if((notification.activity_type == 5 || notification.activity_type == 16 || notification.activity_type == 18) && notification.seen == null )
+      return '/product/order-receipt/'+notification.activity_id;
+    else if(notification.activity_type == 5 && notification.seen == 1)
+      return '/dashboard/complaints/'+notification.order_id;  
+    else if(notification.activity_type == 6 || notification.activity_type == 7 || notification.activity_type == 8 || notification.activity_type == 14)
+      return "/dashboard/transactions"; 
+    else if( notification.activity_type == 2 || notification.activity_type == 3 || notification.activity_type == 19)
+      return "/dashboard/value-transfer/"+notification.order_id;
+    else if( notification.activity_type == 4)
+      return "/dashboard/add-money/"+notification.activity_id;  
+    return '#';
+  }
   user_favourites()
   {
     let favourite :string = localStorage.getItem("favourite");
@@ -818,6 +833,14 @@ export class HeaderComponent implements OnInit{
       script1.id = `google-translate-script`;
       script1.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
       this._renderer2.appendChild(this._document.body, script1);
+
+      if($('#google-gtag-script').length > 0)
+        $('#google-gtag-script').remove();
+      let script2 = this._renderer2.createElement('script');
+      script2.type = `text/javascript`;
+      script2.id = `google-gtag-script`;
+      script2.src = `https://www.googletagmanager.com/gtag/js?id=UA-176715754-1`;
+      this._renderer2.appendChild(this._document.body, script2);
       
     }
     if($('#side-nav-script'))
@@ -829,6 +852,7 @@ export class HeaderComponent implements OnInit{
     script.id = `side-nav-script`;
     script.text = ` 
     $(document).ready(function(){
+      
       $('select').material_select();
       $('.modal').modal();
       //$(".side-menu").swipe( {fingers:1} );
@@ -1071,6 +1095,13 @@ export class HeaderComponent implements OnInit{
     //     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
     //     a.appendChild(r);
     // })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-176715754-1');
+  
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

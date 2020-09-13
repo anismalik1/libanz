@@ -29,6 +29,7 @@ export class ComplaintBoxComponent implements OnInit{
   comment : boolean = false;
   constructor( private _renderer2: Renderer2,private toastr : ToastrManager,private fb: FormBuilder,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { }
   ngOnInit() {
+    this.todoservice.back_icon_template('Tickets',this.todoservice.back())
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');

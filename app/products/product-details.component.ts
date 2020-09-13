@@ -65,6 +65,7 @@ export class ProductDetailsComponent implements OnInit{
   recommended : any;
   myControl = new FormControl();
   options: any ;
+  params : any = {};
   filteredOptions: Observable<object>;
   constructor(
     private _renderer2: Renderer2, 
@@ -84,28 +85,30 @@ export class ProductDetailsComponent implements OnInit{
 
   ngOnInit() {
     var width = $(window).width(); 
-    if(width < 767)
-    {
-      let uri = this.route.url.replace('product','product/amp');
+    
+      //let uri = this.route.url.replace('product','product/amp');
       if(this.todoservice.get_param('month'))
       {
         this.month = Number(this.todoservice.get_param('month'));
-        this.route.navigate([uri.split("?")[0]],{queryParams: {month: this.month}});
-        return false;
-      }   
-      this.route.navigate([uri]);
-      return false;
-    }
-    this.cat_id = this.todoservice.get_param('cat_id');
-    this.pack_id = Number(this.todoservice.get_param('id'));
-    if(this.todoservice.get_param('month'))
-      this.month = Number(this.todoservice.get_param('month'));
+        this.params.month = this.month
+        //this.route.navigate([uri.split("?")[0]],{queryParams: {month: this.month}});
+        //return false;
+      } 
+    if(this.todoservice.get_param('id'))
+    {
+      this.pack_id = Number(this.todoservice.get_param('id'));
+      this.params.id = this.pack_id;
+    }    
     
     this.router.params.subscribe(params => { 
       this.p_id = params['name']; //log the value of id
-      this.fetch_product_data(this.p_id,this.cat_id);
     });
-    
+    if(width < 767)
+    {
+      this.route.navigate(['/product/amp/'+this.p_id],{queryParams: this.params});
+      return false;
+    }
+    this.fetch_product_data(this.p_id);
     $('body').delegate('#stars li','mouseover', function(){
       var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
      
@@ -210,7 +213,14 @@ export class ProductDetailsComponent implements OnInit{
   {
     this.kit = 0;
     this.multienable = false;
-    this.route.navigateByUrl('/product/'+url);
+    if(1 == 1)
+      {
+        this.route.routeReuseStrategy.shouldReuseRoute = function(){
+          return false;
+        }
+      this.route.navigated = false;
+      this.route.navigate(['/product/'+url]);
+      } 
   }  
 
   filter_channel_subpack()
@@ -401,11 +411,11 @@ export class ProductDetailsComponent implements OnInit{
   }
 
 
-  fetch_product_data(p_id,cat_id) 
+  fetch_product_data(p_id) 
 	{
     this.channel_display = 0; 
       this.spinner.show();
-		  let data : any = {token : this.get_token(),product_id: p_id,cat_id:cat_id,month:this.month};
+		  let data : any = {token : this.get_token(),product_id: p_id,month:this.month};
       if( this.region_selected())
       {
         data.region = this.region_selected();
@@ -454,17 +464,15 @@ export class ProductDetailsComponent implements OnInit{
           this.promos = data.PROMOS[0];
           this.product.promos = this.promos;
         }
-        if(this.circles)
+        if(this.circles && this.todoservice.get_param('tracker') != 'circle_selected')
         {
-          if(!this.productservice.get_region())
+          setTimeout(()=>{    //<<<---    using ()=> syntax
+            $('.religon-overlay').show();
+          }, 2000);
+
+          if(this.productservice.get_region())
           {
-            setTimeout(()=>{    //<<<---    using ()=> syntax
-              $('.religon-overlay').show();
-            }, 2000);
-          }
-          else
-          {
-            this.region = this.productservice.get_region(); 
+            this.region = this.productservice.get_region();
           }
         }
 
@@ -681,16 +689,8 @@ export class ProductDetailsComponent implements OnInit{
           return false;
         }
       this.route.navigated = false;
-      this.route.navigate([url],{queryParams: {month: this.month}});
+      this.route.navigate([url],{queryParams: {month: this.month,tracker:'circle_selected'}});
       }  
-    // this.todoservice.channel_category_by_circle({circle:circle,packages: this.product.channel_packages,month: this.month})
-    // .subscribe(
-    // data => 
-    // {
-    //   this.channels_packs = data.package;
-    //   this.filter_channel_subpack();
-    // }
-    // ) 
   }
   
   region_selected()
@@ -912,7 +912,7 @@ export class ProductDetailsComponent implements OnInit{
   view_product(cat_id,purl)
   {
     this.route.navigate(['/product/'+purl],{ queryParams: {cat_id:cat_id ,p_id: purl}});
-    this.fetch_product_data(purl,cat_id)
+    this.fetch_product_data(purl)
   }
   init_page() 
   {
@@ -943,72 +943,7 @@ export class ProductDetailsComponent implements OnInit{
           });
           $('.cdk-overlay-container').css('z-index','99999999!important');
         });
-    //     $.fn.isInViewport = function() {
-    //       if($(this).length == 0 )
-    //       {
-    //         return false;
-    //       }
-    //       var elementTop = $(this).offset().top;
-    //       var elementBottom = elementTop + $(this).outerHeight();
-    //       var viewportTop = $(window).scrollTop();
-    //       var viewportBottom = viewportTop + $(window).height();
-    //       return elementBottom > viewportTop && elementTop < viewportBottom;
-    //   };
-    //   $(window).scroll(function (event) {
-    //     if(!$.fn.isInViewport )
-    //     {
-    //       return false;
-    //     }
-    //     if($(window).width() >767){
-    //     var scroll = $(window).scrollTop();
-    //     //console.log($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height());
-    //     if(scroll >= 1)
-    //     {
-    //       if($('#footer-content').isInViewport())
-    //       {
-    //         if(scroll - $('#footer-content').offset().top > -300)
-    //         {
-    //           $('.images-product').css({'position':'relative','top':'0'});
-    //           $('.order-summary').css('position','relative');
-    //           return;
-    //         }
-            
-    //       }
-    //       if($('.order-summary').isInViewport() && ($('.order-summary').offset().top - $('.recomended-wrapper').offset().top + $('.order-summary').height() >= 0 || $('.order-summary').offset().top - $('#channel-list').offset().top < 0))
-    //         {
-    //           $('.order-summary').css({'position':'relative','top':0,'right':0});
-    //           return;
-    //         }
-    //       if ($('.product-img').isInViewport() && (scroll - $('#channel-list').offset().top < -500)) {
-    //         $('.images-product').css({"position":"fixed","top":"106px"});
-    //         $('.order-summary').css('position','relative');
-    //       }
-    //       else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -500) && (scroll - $('#channel-list').offset().top < 0))
-    //       {
-    //         //console.log(scroll - $('#channel-list').offset().top);
-    //         $('.images-product').css({'position':'relative','top':'0'});
-    //         //console.log(2)
-    //       }
-    //       else if($('.order-summary').isInViewport() && (scroll - $('#channel-list').offset().top >= -98))
-    //       {
-    //         $('.order-summary').css({'position':'fixed','top':'107px','right':'25px'});
-    //       }
-    //       else 
-    //       {
-    //         //console.log(1);
-    //         $('.images-product').css({'position':'relative','top':'0'});
-    //         $('.order-summary').css('position','relative');
-    //       }
-    //     }
-    //     else
-    //     {
-    //       $('.images-product').css({'position':'relative','top':'0'});
-    //     }
-    //   }
-    // });
-    // $(window).on('load', function(){ 
-		// 	$('.religon-overlay').css('display', 'block');
-		// });
+
 		$(document).ready(function(){
 			$('.more').on('click', function(){
 				$('.chip').removeClass('hide');

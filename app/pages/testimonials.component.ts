@@ -35,6 +35,7 @@ export class TestimonialsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.todoservice.back_icon_template('Testimonials',this.todoservice.back())
     this.fetch_testimonials();
     this.fetch_page_data();
   }

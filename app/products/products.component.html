@@ -94,27 +94,9 @@
 <div class="spinner-wrapper">
     <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<div class="col s12 cst-back">
-    <ul class="back-icon">
-        <li>  <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left bk-icon"></span>&nbsp; Products </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
-    </ul>
-</div>	
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>	
 
-<!-- <header class="navigation navior1">
-<div class="container center">
-<nav>
-<div class="nav-wrapper">
-<ul id="nav-mobile" class="mar center no-margin inline-block">
-<li><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:1}" target="_blank">Tata Sky</a></li>
-<li><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:2}" target="_blank">Videocon</a></li>
-<li><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:3}" target="_blank">Airtel</a></li>
-<li><a [routerLink]="['/product/listing']" [queryParams]="{cat_id:4}" target="_blank">Dish Tv</a></li>
-<li><a [routerLink]="['/p/contact-us/jio-query']" target="_blank">Jio Dth</a></li>   
-</ul>
-</div>
-</nav>            
-</div>
-</header> -->
 <div class="page-wrapper grey lighten-3">
 <section class="no-padding grey lighten-2 beard cstm-height">
 <div class="container">

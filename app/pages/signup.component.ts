@@ -64,6 +64,7 @@ export class SignupComponent implements OnInit{
 
     }
   ngOnInit() {
+    this.todoservice.back_icon_template('Register',this.todoservice.back())
     if(this.get_token())
     {
       this.router.navigate(['/']);

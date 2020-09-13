@@ -7,11 +7,9 @@
     /* opacity: 0.8; */
 }
 .ct-btn{
-        width: 100%;
-        width: 100%;
-    background: #F44336 !important;
+  background: #ff6a00;
     color: #fff !IMPORTANT;
-
+    padding: 5px;
     }
     .list-data{
 	padding-top:6px;
@@ -52,12 +50,9 @@ z-index: 99999;
 <div class="spinner-wrapper">
   <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<div class="col s12 cst-back">
-    <ul class="back-icon">
-      <li>  <a class="black-text" routerLink="/home"><span class="fa fa-arrow-left bk-icon left-icn-mb"></span>&nbsp; <span class="pk-list"> Package List </span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
-    </ul>
-</div>	
-<div class="fix-mb-top" style="padding-top:65px !important;"></div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+<!-- <div class="fix-mb-top" style="padding-top:65px !important;"></div> -->
 <div id="fb-root"></div>
 <section class="channels-basic new-packages on-mobile">
   <div class="row">
@@ -76,110 +71,6 @@ z-index: 99999;
       </div>
   </div>
 </section>  
-
-
-<!-- <section class="mobile-view-itm">
-	<div class="row no-margin 1">
-		<div class="col s12 m4" >
-		<div class="product-image">
-			<div class="row">
-				<div class="col s10">
-					<div class="rating-green-content" >Trending </div>
-				</div>
-				<div class="col s2">
-					<span class="fa fa-star pull-right icn-clr1"></span>
-				</div>
-			</div>
-			<div class="row">
-			
-			<div class="col s2">
-				<div class="product-img1">
-					<a><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-				</div>
-			</div>
-			<div class="col s10">
-				<div class="rechare-section-list">
-					<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
-	
-					<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
-					<br/>
-					<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-					<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-				   
-				</div>
-			</div>
-			</div>
-			</div>
-		</div>
-
-		<div class="col s12 m4" >
-			<div class="product-image">
-				<div class="row">
-					<div class="col s10">
-						<div class="rating-green-content" >Trending </div>
-					</div>
-					<div class="col s2">
-						<span class="fa fa-star pull-right icn-clr1"></span>
-					</div>
-				</div>
-				<div class="row">
-				
-				<div class="col s2">
-					<div class="product-img1">
-						<a><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-					</div>
-				</div>
-				<div class="col s10">
-					<div class="rechare-section-list">
-						<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
-		
-						<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
-						<br/>
-						<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-						<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-					   
-					</div>
-				</div>
-				</div>
-				</div>
-			</div>
-
-			<div class="col s12 m4" >
-				<div class="product-image">
-					<div class="row">
-						<div class="col s10">
-							<div class="rating-green-content" >Trending </div>
-						</div>
-						<div class="col s2">
-							<span class="fa fa-star pull-right icn-clr1"></span>
-						</div>
-					</div>
-					<div class="row">
-					
-					<div class="col s2">
-						<div class="product-img1">
-							<a><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x2703311552984190.png" class="responsive-image"></a>
-						</div>
-					</div>
-					<div class="col s10">
-						<div class="rechare-section-list">
-							<p class="heading-txt1"><a class="black-text">Apna Price</a> </p>
-			
-							<div class="rating-green"  >4.7 &nbsp;<span class="fa fa-star"></span> </div>&nbsp;<span class="line-ht black-text" id="rating-count" *ngIf="product_rating(item.id)[0]">15 </span>
-							<br/>
-							<p class="price-cut1 black-text" ><strong> Rs. 1600 </strong> &nbsp; <span class="del-pri">  1000 </span> </p>
-							<p class="list-data"> <a [routerLink]="['/product/compare-box/']"> <span class="fa fa-plus-circle"></span> COMPARE  </a> </p>
-						   
-						</div>
-					</div>
-					</div>
-					</div>
-				</div>
-
-				
-		</div>
-
-</section>  -->
 <section class="channels-basic">
     <div class="container center">
       <h1 *ngIf="details == false">{{this.package.category}} Packages 
@@ -245,10 +136,12 @@ z-index: 99999;
 				<div class="col l4 s12 m6 smart-packs" *ngFor="let channel_pack of item.child">
 				<div class="smart-inner ">
 					<!-- <span class="when-check" id="check-pack-{{channel_pack.id}}"><i class="material-icons">check_circle</i></span> -->
-          <h4 class="grey-text">{{channel_pack.title}}</h4>
+          <div class="title-wrapper">
+              <h4 class="grey-text">{{channel_pack.title}}</h4>
+          </div>
           <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{channel_pack.price}}</span><span *ngIf="multienable">{{channel_pack.multi_price}}</span>  <small>@ {{channel_pack.month}} Month</small></span>
           <span class="font-size-change1" [innerHTML] = "remove_new_line(channel_pack.short_description)"></span>
-          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="font-size-change1 chng-set"><i class="material-icons white-text">shop_two </i> Channels</a>
+          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="font-size-change1 chng-set">Channels</a>
           <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="font-size-change1  ct-btn"><i class="material-icons white-text">flash_on</i> Buy Now</a>
           <!-- <a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set grey lighten-3 black-text modal-trigger cst-btn" (click)="choose_box_for_this_pack(item.id,channel_pack.id)"><i class="material-icons white-text">flash_on</i> Buy Now</a> -->
 				  

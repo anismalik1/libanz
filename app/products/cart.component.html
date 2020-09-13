@@ -26,12 +26,32 @@
     top: -20px;
     line-height: 26px;
 }
-
+.footer-button-buy{
+	position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    left: 0;
+    text-align: center;
+    box-shadow: 1px 1px 5px #8c8c8c;
+    right: 0;
+    /* background: #ff6a00; */
 }
+.footer-button-buy .left-half{background: #fff;height: 65px;}
+.footer-button-buy .right-half,.footer-button-buy .full{background: #ff6a00 !important;height: 65px;}
+.footer-button-buy .left-half{width: 50%;
+    float: left;}
+.footer-button-buy .full{width: 100%;}
+.footer-button-buy .right-half{width: 50%;
+    float: right;}
+}
+
 </style>
 <app-header></app-header>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+
 <section class="flash-deal border-bottom">
-    <div class="container">
+    <div class="">
         <div class="row no-margin">
             <div class="col s12 m12 l8">
                 <div class="card">
@@ -104,10 +124,20 @@
 						<a [routerLink]="['/']" class="font-size-change"><i class="material-icons">add</i> Add Some Items</a>
 					</div>
 				</div>
-				<div class="card-action right-align cart-card-padd" *ngIf="this.productservice.cartItemsCount() > 0">
+					<div class="card-action right-align cart-card-padd hide-on-mobile" *ngIf="this.productservice.cartItemsCount() > 0">
 						<a href="javascript:" [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change cst-addbtn" style="line-height:43px;"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
 						<a href="javasctipt:" routerLink="/product/checkout" class="btn sign orange btn-large font-size-change waves-effect waves-light w-100-btn"> Place Order</a>
 					</div>
+					<div class="footer-button-buy hide-on-desktop" *ngIf="this.productservice.cartItemsCount() > 0">
+							<div class="left-half">
+								<h3 style="margin:0"><a href="javascript:" [routerLink]="['/']" class=" waves-effect waves-light white black-text" style="line-height:43px;">Continue Shopping</a></h3>
+								<a href="javascript:" class="forder-txt center" (click)="to_order_summary()">Order Details </a>
+							</div>
+							<div class="right-half">
+								<h3><a href="javasctipt:" routerLink="/product/checkout" class="sign orange white-text waves-effect waves-light"> Place Order</a></h3>
+							</div>
+							<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
+						</div>
                 </div>
             </div>
             <div class="col s12 m12 l4 order-summary" *ngIf="this.productservice.cartItemsCount() > 0">
@@ -349,7 +379,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button href="javascript:" class="modal-close white-text btn orange"[disabled]="!enable_add_pack" (click)="add_to_product()">ADD PACK</button>
+			<button href="javascript:" class="modal-close white-text btn orange mobile-popup-button"[disabled]="!enable_add_pack" (click)="add_to_product()">ADD PACK</button>
 		</div>
 	</div>
 	<app-footer></app-footer>	

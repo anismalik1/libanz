@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit{
     @Inject(DOCUMENT) private _document, 
     private authservice : AuthService,private router : Router) { }
   ngOnInit() {
+    this.todoservice.back_icon_template('Dashboard',this.todoservice.back())
     $('#search').focus(function(){
         $('.search-result').removeClass('hide');
       });

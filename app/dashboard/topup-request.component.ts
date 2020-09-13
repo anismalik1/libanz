@@ -18,6 +18,7 @@ export class TopupRequestComponent implements OnInit{
 	loading: boolean;
   constructor( public todoservice : TodoService,private authservice : AuthService,private router : Router,private spinner : NgxSpinnerService) { }
   ngOnInit() {
+    this.todoservice.back_icon_template('Add Money Request',this.todoservice.back())
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');

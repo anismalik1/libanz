@@ -41,6 +41,7 @@ export class BlogDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.todoservice.back_icon_template('Blogs Details',this.todoservice.back())
     this.router.params.subscribe(params => {
       this.url = params['name']; //log the value of id
      this.fetch_single_blog(this.url);

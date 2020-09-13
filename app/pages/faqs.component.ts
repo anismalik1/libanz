@@ -63,6 +63,7 @@ export class FaqsComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.todoservice.back_icon_template('Frequent Ask Questions',this.todoservice.back())
     if(this.todoservice.get_param('q'))
     {
       this.query_string = this.todoservice.get_param('q');

@@ -35,6 +35,7 @@ export class ProductsComponent implements OnInit{
     private meta : Meta
     ) { }
   ngOnInit() {
+    this.todoservice.back_icon_template('Products',this.todoservice.back())
     this.data = {cat_id : '',page_index:0};
     this.route.params.subscribe(params => {
       this.data.cat_id = params['name'];

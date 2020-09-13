@@ -274,6 +274,7 @@ li.txt-fix-mb span a {
 							<li class="notificatoins-dropdown-container">
 								<ul  *ngIf="notifications  && notifications.length > 0">
 									<li *ngFor="let item of notifications;" >
+										<a [routerLink]="route_link(item)" onclick="$('.modal-close').click();">
 										<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
 											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; " >
 										</div>
@@ -298,7 +299,10 @@ li.txt-fix-mb span a {
 										<div [className]="(item.visitor_read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text font600'">
 											<p [innerHTML]="item.visitor_comment"></p>
 											<time class="grey-text">{{time_ago(item.history_time)}}</time>
+											<div class="circle-dotss" *ngIf="item.visitor_read != 1"></div>
 										</div>
+										<div class="clearfix"></div>
+									</a>
 									</li>							
 									<li><a class="modal-trigger font600" href="#loadmore-modal">Load More</a></li>
 								</ul>
@@ -315,7 +319,7 @@ li.txt-fix-mb span a {
 					 <mat-autocomplete #auto="matAutocomplete">
 						<span *ngIf="filterdList">
 						<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-							<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text">{{option.title}}</a>
+							<a [routerLink] ="['/product/'+option.url]" class="black-text">{{option.title}}</a>
 						</mat-option>
 					</span>
 					</mat-autocomplete>
@@ -332,6 +336,7 @@ li.txt-fix-mb span a {
 					
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
+						<a [routerLink]="route_link(item)" onclick="$('.modal-close').click();">
 						<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
 							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 2px;" >
 						</div>
@@ -359,6 +364,7 @@ li.txt-fix-mb span a {
 						<time class="grey-text">{{time_ago(item.history_time)}}</time>
 						<div class="circle-dotss" *ngIf="item.visitor_read != 1"></div>
 					</div>
+					</a>
 					</li>
 					</ul>										
 					<div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div>
@@ -515,7 +521,7 @@ li.txt-fix-mb span a {
 				<li><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></li>
 			</ul>	
 			
-			<h3 class="hide-left-menu-mb">Follow Us</h3>
+			<!-- <h3 class="hide-left-menu-mb">Follow Us</h3>
 			<ul class="side-social hide-left-menu-mb">	
 				<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" /></a></li>
 				<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" /></a></li>
@@ -524,7 +530,7 @@ li.txt-fix-mb span a {
 				<li><a href="https://in.pinterest.com/jain2221/pins/"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" /></a></li>
 				<li><a href="https://www.instagram.com/mydthshopindia/"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" /></a></li>
 				<li><a href="https://mydthshopp.blogspot.com/"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" /></a></li>
-			</ul>	
+			</ul>	 -->
 							
 			</div>
 		</div>
@@ -598,7 +604,7 @@ li.txt-fix-mb span a {
 												<mat-autocomplete #auto="matAutocomplete">
 													<span *ngIf="filterdList">
 													<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
-														<a [routerLink] ="['/product/compare-box']"  [queryParams]= "{ urls: option.url.trim() } " class="black-text" target="_blank">{{option.title}}</a>
+														<a [routerLink] ="['/product/'+option.url]" class="black-text" target="_blank">{{option.title}}</a>
 													</mat-option>
 												</span>
 												</mat-autocomplete>
@@ -630,7 +636,7 @@ li.txt-fix-mb span a {
 										<div class="notification-drop-image">
 											<img src="{{this.todoservice.base_url}}web-app/assets/images/noti-black.png">
 										</div>
-										<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
+										<div [className]="(item.visitor_read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 											<p [innerHTML]="item.visitor_comment"></p>
 											<time class="grey-text">{{time_ago(item.history_time)}}</time>
 										</div>
@@ -679,6 +685,7 @@ li.txt-fix-mb span a {
 		
 		<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 			<li *ngFor="let item of notifications;" >
+				<a [routerLink]="route_link(item)" onclick="$('.modal-close').click();">
 				<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
 					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; " >
 				</div>
@@ -700,12 +707,13 @@ li.txt-fix-mb span a {
 				<div class="notification-drop-image" *ngIf="item.activity_type == '19'">
 					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-6.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; " >
 				</div>
-				<div [className]="(item.read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
+				<div [className]="(item.visitor_read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text'">
 					<p [innerHTML]="item.visitor_comment"></p>
 					<time class="grey-text">{{time_ago(item.history_time)}}</time>
-					<div class="circle-dotss" *ngIf="item.read != 1"></div>
+					<div class="circle-dotss" *ngIf="item.visitor_read != 1"></div>
 				</div>
-
+				<div class="clearfix"></div>
+				</a>
 			</li>
 		
 		</ul>										

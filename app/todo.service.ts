@@ -26,6 +26,7 @@ export class TodoService {
   public previousUrl: string;
   public currnetURL : string;
   public cartItems : any;
+  public back_link : any = '';
   public dropdown_add_money = {paymethod: '',paybankaccount:'',yourbankname : '' };
   public login_urls : any = ['/book-order','/booked-order-list','/recharge-status','/order-status',
   '/manage-account','/transaction-history','/commission-structure','/topup-request','/add-money',
@@ -75,6 +76,57 @@ export class TodoService {
       return '<span class="blue darken-3 white-text order-status padd1"> Paytm </span>';
     else if($method == 5)
       return '<span class="teal darken-3 white-text order-status padd1"> COD </span>';	
+  }
+
+  back_icon_template($title, $url)
+  {
+    let a = document.createElement('div');
+    a.setAttribute("class", "bredcum-inner");
+
+    let b = document.createElement('div');
+    b.setAttribute("class", "left bredcum-top");
+    
+    let c = document.createElement('a');
+    c.setAttribute("class", "bredcum-title");
+    c.id = "previous-event";
+    c.text =  $title;
+    b.append(c);
+    
+    let b2 = document.createElement('div');
+    b2.setAttribute("class", "right");
+
+    let c2 = document.createElement('a');
+    c2.setAttribute("class", "cart-strip");
+    c2.setAttribute("href", "/product/cart");
+    
+    let d2 = document.createElement('img');
+    d2.setAttribute("src", "https://www.libanz.com/web-app/assets/images/cart.png");
+
+    let e2 = document.createElement('span');
+    e2.setAttribute("class", "strip-circle");
+    e2.innerText = this.cartItemsCount();
+    
+    b2.append(c2);
+    c2.append(d2,e2);
+    a.append(b,b2);
+    
+    this.back_link = a.outerHTML
+    setTimeout(function(){
+      $('.cst-back').delegate('.bredcum-title','click',function(){
+        if(window.location.href.indexOf('/amp/') != -1)
+          window.history.go(-2);
+        else
+          window.history.go(-1);  
+      });
+    }, 2000);
+
+    return this.back_link;
+  }
+
+  back() 
+  {
+    return 'previous';
+    return window.history.go(-1);
   }
 
   addmoney_paymethod_template($method)
@@ -322,10 +374,7 @@ export class TodoService {
     return ''; 
   }
 
-  back()
-  {
-    window.history.go(-1);
-  }
+  
 
   get_user_characters()
   {

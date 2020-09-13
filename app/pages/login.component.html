@@ -70,11 +70,9 @@ padding-top:50px;
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<div class="col s12 cst-back">
-	<ul class="back-icon">
-		<li>  <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left bk-icon"></span>&nbsp; Login Now </a> </li>
-	</ul>
-  </div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+
 <div class="work" *ngIf="step==1;then loginform else otpverify"></div>
 <ng-template #loginform>
 	<section class="login-form no-padding white">

@@ -218,15 +218,6 @@ font-size: 10px;
 	<div class="spinner-wrapper">
 		<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 	</div>
-	<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-		<div class="container">
-			<div class="col s12">
-				<ul class="back-icon">
-					<li>  <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
-				</ul>
-			</div>	
-		</div>
-	</section>
 	<section class="no-padding grey lighten-2 beard">
 		<div class="container">
 			<div class="row no-margin">
@@ -282,7 +273,7 @@ font-size: 10px;
 				<div class="col s12 m12 l7 product-detail" *ngIf="product">
 					<h3 class="margin-fix-bt" *ngIf="product">{{product.title}}</h3>
 					
-					<a href="#" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
+					<a href="javascript:" class="font-size-change1 dropdown-button display-block" data-activates='dropdown1'>Change Product</a>
 					
 					<div> <span class="font-size-change2 black-text margin-top inline-block">  <i class="icon-inr"></i><span id="offer-price">{{product.offer_price}}</span> &nbsp;  <small class="grey-text price-cut font-size-change1"> <i class="icon-inr"></i><span id="mrp-price">{{product.price}}</span></small>&nbsp; <p class="no-margin green-text1 inline-block font-size-change">{{(product.price-product.offer_price)*100/product.price | number : '1.2-2'}}% Off</p></span> </div>
 											
@@ -921,9 +912,9 @@ font-size: 10px;
 			<a href="javascript:" class="modal-action red btn modal-close" (click)="buyNow(product.id)">No</a>
 		</div>
 	</div>
-	<!-- <div class="religon-overlay" *ngIf="1==2"> 
-		<div class="religon-modal" >
-			<div *ngIf="product.title.includes('Xstream'); else elseBlock">
+	<div class="religon-overlay" > 
+		<div class="religon-modal" *ngIf="product">
+			<div *ngIf="product.title.includes('1234'); else elseBlock">
 				<h3 class="center">Check Pincode</h3>
 				<mat-form-field class="example-full-width">
 					<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
@@ -937,19 +928,24 @@ font-size: 10px;
 				<button class="orange btn check-pincode-btn" (click)="check_pincode()">Check</button>	
 			</div>
 			<ng-template #elseBlock>
-			<h3 class="center">Select Region</h3>
-		<div *ngFor="let item of circles;let i = index">
-			<div class="chip" *ngIf="i < 5">
-				<a href="javascript:" class="black-text btn-contu" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+				<h3 class="center" *ngIf="!this.region">Select Region</h3>
+				<h3 class="center" *ngIf="this.region">Confirm Region</h3>
+				<div *ngFor="let item of circles;let i = index">
+					<div [className]="(this.region == item.circle_id)?'chip black':'chip'">
+						<a href="javascript:" [className]="(this.region == item.circle_id)?'white-text':'black-text'" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+					</div>
+					<!-- <div class="chip more" *ngIf="i == 5">
+						<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
+					</div>
+					<div class="chip hide" *ngIf="i >= 5">
+					<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
+					</div> -->
 				</div>
-			<div class="chip more" *ngIf="i == 5">
-				<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
-			</div>
-			<div class="chip hide" *ngIf="i >= 5">
-			<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
-			</div>
-		</div>	
-		</ng-template>
+				<div class="overlay-footer right" *ngIf="this.region">
+					<a href="javascript:" class="orange btn" onclick="$('.religon-overlay').hide();">Confirm</a> 
+				</div>
+				<div class="clearfix"></div>	
+			</ng-template>
 		</div>
-	</div> -->
+	</div>
 	<app-footer></app-footer>

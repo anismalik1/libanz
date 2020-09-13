@@ -47,6 +47,7 @@ export class ForgotPasswordComponent implements OnInit{
   
   ngOnInit() {
     this.fetch_page_data();
+    this.todoservice.back_icon_template('Forget Password',this.todoservice.back())
   }
   
   process_to_reset(data,me)

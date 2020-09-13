@@ -53,6 +53,7 @@ export class CartComponent implements OnInit{
     $('.copy-click').on('click',function(){			
 			$('.copy-click').attr('disabled');
     });
+    this.todoservice.back_icon_template('My Cart',this.todoservice.back())
   }
   change_count(p_id,op)
   {
@@ -185,6 +186,12 @@ init_accordian()
   this._renderer2.appendChild(this._document.body, script);
 }
 
+to_order_summary()
+  {
+    $('html, body').animate({
+      scrollTop: $(".order-summary").offset().top - 60
+    }, 1000);
+  }
 filter_channel_subpack()
 { 
   this.pack_selected = [];

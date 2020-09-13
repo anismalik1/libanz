@@ -12,6 +12,7 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material';
 import { stepper } from '../home/splash-animation';
 import { Item } from '../item.entities';
+//import '../../assets/css/mixin-style.sass';
 declare var window: any; 
 
 @Component({
@@ -99,6 +100,7 @@ export class StepCheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+  this.todoservice.back_icon_template('Checkout',this.todoservice.back())
   $('.mobile-footer').remove();  
   if(!this.get_token())
   {
@@ -351,6 +353,13 @@ select_pack(pack)
     this.selectedCartItem.product.pack_selected = this.pack_selected;
     this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
     this.calculate_amount();
+  }
+
+  to_order_summary()
+  {
+    $('html, body').animate({
+      scrollTop: $(".order-summary").offset().top -100
+    }, 1000);
   }
 
   cashback_amount()

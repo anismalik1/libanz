@@ -236,7 +236,7 @@ ul#dropdown1 li {
 @media only screen and (max-width: 767px){
 .beard .breadcrumb:before {
     color: #000;
-    padding: 10px 0 0 0 !important;
+    padding: 0 !important;
 }
 .cart-strip {
     margin-right: 20px;
@@ -245,21 +245,47 @@ ul#dropdown1 li {
     top:35px;
 }
 }
+.footer-button-buy{
+	position: fixed;
+    bottom: 0;
+    z-index: 999999;
+    left: 0;
+    text-align: center;
+    box-shadow: 1px 1px 5px #8c8c8c;
+    right: 0;
+    /* background: #ff6a00; */
+}
+.footer-button-buy .left-half{background: #fff;height: 65px;}
+.footer-button-buy .right-half,.footer-button-buy .full{background: #ff6a00 !important;height: 65px;}
+.footer-button-buy .left-half{width: 50%;
+    float: left;}
+.footer-button-buy .full{width: 100%;}
+.footer-button-buy .right-half{width: 50%;
+	float: right;}
+	.footer-button-buy button{
+    height: 65px;
+    background: #ff6a00 !important;
+    border: none;
+    border-radius: 0;
+    font-size: 18px;
+    color: #fff;
+    box-shadow: none;
+	}
+	.forder-txt{
+    position: relative;
+    top: -15px;
+    font-size: 11px;
+    left: 4px}
 </style>
 
 <app-header></app-header>
 <div class="spinner-wrapper">
 	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
-<section class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-    <div class="container">
-        <div class="col s12">
-            <ul class="back-icon">
-                <li>  <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title" *ngIf="product">{{product.title}}</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a> </li>
-            </ul>
-        </div>	
-    </div>
-</section>
+<!-- {{this.todoservice.back_icon_template(product.title,this.todoservice.back())}} -->
+<div *ngIf="product"><div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div></div>
+<div class="fix-mb-top"></div>
+
 <section class="no-padding grey lighten-2 beard">
 	<div class="container">
 		<div class="row no-margin">
@@ -336,7 +362,7 @@ ul#dropdown1 li {
 					</div>
 					<div class="clearfix"></div><br/>
 					<div class="margin-top1 card" *ngIf="pack_selected">
-						<span class="font-size-change1 font600 grey-text subtotal pk-item">Pack</span> 
+						<span class="font-size-change1 font600 grey-text subtotal pk-item">Pack ({{this.month}} Month)</span> 
 						<div class="subtotal subtotal-fix" *ngFor="let item of pack_selected;">
 							<p class="inline-block font600" style="width:80%;">{{item.title}} :</p>
 							<p class="inline-block green-text right font-size-change" *ngIf="!multienable" style="padding-top:5px;"> <i class="icon-inr"></i> {{item.price}} </p>
@@ -355,9 +381,9 @@ ul#dropdown1 li {
 							<li>
 								<div class="no-padding" *ngIf="circles"> 
 									<mat-form-field>
-										<mat-select placeholder="Circle Area" [(value)]="this.region" (selectionChange)="circle_selected($event.value)" style="padding-left:5px;">
+										<mat-select placeholder="Circle Area" [value]="this.region_selected()" (selectionChange)="circle_selected($event.value)" style="padding-left:5px;">
 											<span *ngFor="let item of circles;">
-												<mat-option [value]="item.circle_id" >
+												<mat-option [value]="item.circle_id">
 													<span class="operator-name">{{ item.name }}</span>
 												</mat-option>
 											</span> 
@@ -620,9 +646,10 @@ ul#dropdown1 li {
      
      </div>
      </section>
-     <section>
+     <section id="recommended-product">
         <div class="col s12 m4" >
             <div class="product-image" *ngFor="let item of recommended">
+				<a class="blue-text" routerLink="/product/amp/{{item.url}}">
 				<div class="row" style="margin-bottom:0px;">
                     <div class="col s10">
                         <div class="rating-green-content" *ngIf="item.new_product == 1">Trending </div>
@@ -650,14 +677,21 @@ ul#dropdown1 li {
                        
                     </div>
                 </div>
-                </div>
+				</div>
+				</a>
                 </div>
             </div>
 </section>
 <div class="footer-button-buy">
-	<a href="javascript:" (click)="add_to_cart(product.id)" id="cart-add" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-	<a href="javascript:" id="book-now" (click)="buyNow(product.id)" class="btn margin-left red btn-large font-size-change1 end-btn fix-btnd modal-close"> BUY NOW </a>
+	<div class="left-half"><h3><a href="javascript:" (click)="add_to_cart(product.id)"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a></h3>
+		<a href="javascript:" class="forder-txt" (click)="to_order_summary()">Order Details </a>
+	</div>
+	<div class="right-half">
+			<button href="javascript:" id="book-now" (click)="buyNow(product.id)" class="btn modal-close"> BUY NOW </button>
+	</div>
+	<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 </div>
+
 <div id="review" class="modal">
     <div class="modal-content no-padding" *ngIf="display == 1">
      <div class="border-bottom padd-right-left1 center">
@@ -929,9 +963,9 @@ ul#dropdown1 li {
 		<a href="javascript:" class="modal-action red btn modal-close" (click)="buyNow(product.id)">No</a>
 	</div>
 </div>
-<!-- <div class="religon-overlay" *ngIf="1==2"> 
-	<div class="religon-modal" >
-		<div *ngIf="product.title.includes('Xstream'); else elseBlock">
+<div class="religon-overlay" > 
+	<div class="religon-modal" *ngIf="product">
+		<div *ngIf="product.title.includes('1234'); else elseBlock">
 			<h3 class="center">Check Pincode</h3>
 			<mat-form-field class="example-full-width">
 				<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
@@ -945,19 +979,24 @@ ul#dropdown1 li {
 			<button class="orange btn check-pincode-btn" (click)="check_pincode()">Check</button>	
 		</div>
 		<ng-template #elseBlock>
-		<h3 class="center">Select Region</h3>
-	<div *ngFor="let item of circles;let i = index">
-		<div class="chip" *ngIf="i < 5">
-			<a href="javascript:" class="black-text btn-contu" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+			<h3 class="center" *ngIf="!this.region">Select Region</h3>
+			<h3 class="center" *ngIf="this.region">Confirm Region</h3>
+			<div *ngFor="let item of circles;let i = index">
+				<div [className]="(this.region == item.circle_id)?'chip black':'chip'">
+					<a href="javascript:" [className]="(this.region == item.circle_id)?'white-text':'black-text'" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+				</div>
+				<!-- <div class="chip more" *ngIf="i == 5">
+					<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
+				</div>
+				<div class="chip hide" *ngIf="i >= 5">
+				<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
+				</div> -->
 			</div>
-		<div class="chip more" *ngIf="i == 5">
-			<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
-		</div>
-		<div class="chip hide" *ngIf="i >= 5">
-		<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
-		</div>
-	</div>	
-	</ng-template>
+			<div class="overlay-footer right" *ngIf="this.region">
+				<a href="javascript:" class="orange btn" onclick="$('.religon-overlay').hide();">Confirm</a> 
+			</div>
+			<div class="clearfix"></div>	
+		</ng-template>
 	</div>
-</div> -->
+</div>
 <app-footer></app-footer>

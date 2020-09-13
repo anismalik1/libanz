@@ -309,7 +309,7 @@ export class RechargeComponent implements OnInit {
       this.fetch_promocode(tab);
       this.fetch_navigate_data(tab);
       this.get_last_recharges();
-      
+      this.todoservice.back_icon_template(this.pagetitle,this.todoservice.back())
       this.mobilegroup = this.fb.group({
         'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
         // 'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
@@ -533,6 +533,7 @@ export class RechargeComponent implements OnInit {
 
   }
   ngOnInit() {
+    
     let data = {token : ''};
       this.todoservice.fetch_operators(data)
       .subscribe(

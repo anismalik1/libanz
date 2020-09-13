@@ -10,7 +10,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-package-view',
   templateUrl: './package-view.component.html',
-  styles: []
+  styles: [`.title-wrapper{height: 53px;}`]
 })
 export class PackageViewComponent implements OnInit {
   package : any ; 
@@ -83,7 +83,7 @@ export class PackageViewComponent implements OnInit {
     setTimeout (() => {
       this.init_script();
     }, 2000);
-
+    this.todoservice.back_icon_template(this.package.category+' Packages',this.todoservice.back())
   }
   goto_package()
   {

@@ -49,6 +49,7 @@ export class ChannelPackComponent implements OnInit {
       this.fetch_channels(this.channel_id);
     });
     this.init_script();
+    this.todoservice.back_icon_template('Channel',this.todoservice.back())
   }
 
   init_script()

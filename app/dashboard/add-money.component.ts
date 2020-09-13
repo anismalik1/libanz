@@ -2,7 +2,7 @@ import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/co
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { CssSelector } from '@angular/compiler';
 
@@ -21,10 +21,14 @@ export class AddMoneyComponent implements OnInit{
 	previousUrl: string;
 	add_data : any = {proceed : 1,paymethod : 'FUND TRANSFER',send : 0};
 	add_amount : number;
-  constructor( private toastr : ToastrManager,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,public todoservice : TodoService,private authservice : AuthService,private router : Router) { 
+	constructor( private toastr : ToastrManager,private _renderer2: Renderer2, 
+		@Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,
+		public todoservice : TodoService,private authservice : AuthService,
+		private router : Router,private route : ActivatedRoute) { 
     
   }
   ngOnInit() {
+		this.todoservice.back_icon_template('Add Money',this.todoservice.back())
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -35,12 +39,11 @@ export class AddMoneyComponent implements OnInit{
 			this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
 			return false;
 		}
-		if(this.todoservice.get_param('order_id'))
-		{
-			this.order_id = this.todoservice.get_param('order_id');
-			this.fetch_addmoney_order();
-		}
-			
+		this.route.params.subscribe(params => {
+      this.order_id = params['name'];
+			if(this.order_id > 0)
+				this.fetch_addmoney_order();
+	 });
 		
 		$(document).ready(function() {	
         $('.filter-show').on('click',function(){
@@ -187,7 +190,7 @@ export class AddMoneyComponent implements OnInit{
 						}
 					}	
 					this.router.navigated = false;
-					this.router.navigate(['/dashboard/add-money/'],{ queryParams: { order_id: data.order_id } });
+					this.router.navigate(['/dashboard/add-money/'+data.order_id]);
 				}
 				else if(data.status == 'error')
 				{

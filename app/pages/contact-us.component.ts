@@ -39,6 +39,7 @@ export class ContactUsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.todoservice.back_icon_template('Contact Us',this.todoservice.back())
     if(this.page == null)
     {
       this.page = 'contact-us'

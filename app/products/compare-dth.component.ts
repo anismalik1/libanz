@@ -36,6 +36,7 @@ export class CompareDthComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.todoservice.back_icon_template('Compare Products',this.todoservice.back())
     if(this.todoservice.get_param('ref') != '')
       this.referer = this.todoservice.get_param('ref')
     if(this.todoservice.get_param('urls') != '')

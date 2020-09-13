@@ -34,7 +34,7 @@ export class BlogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.todoservice.back_icon_template('Blogs Details',this.todoservice.back())
     this.page = '/blog/all';
     this.start = 0;
     this.fetch_page_data();
