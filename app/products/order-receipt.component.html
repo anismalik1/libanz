@@ -59,19 +59,21 @@ overflow:hidden !important;
 								font-size: 30px;">
 								<span class="fa fa-check" ></span>
 							</span>
-							<h4 class="font600">Thank you for shopping with us.</h4>
-							<span class="font-size-change1" style="text-align: center;">We will send you a SMS conformation within 30 mintues.</span>
-							<div class="border padd-rem margin-top-order">
-								<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{orders[0].deliver_to}}</span> from Libanz</p>
-								<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{orders[0].delivery_date}}</span></p>
+							<div *ngIf="orders[0].payment_status != 2 && orders[0].status == 'Received'">
+								<h4 class="font600">Thank you for shopping with us.</h4>
+								<span class="font-size-change1" style="text-align: center;">We will send you a SMS conformation within 30 mintues.</span>
+								<div class="border padd-rem margin-top-order">
+									<p class="font-size-change1"><span class="font600">Item(s) will be delivered to {{orders[0].deliver_to}}</span> from Libanz</p>
+									<p class="font-size-change1"><span class="font-size-change1 font600 black-text">Estimated delivery:</span> <span class="font-size-change1 font600 green-text">{{orders[0].delivery_date}}</span></p>
+								</div>
 							</div>
-							<div *ngIf="orders[0].payment_status == 2" class="icon" style="
+							<div *ngIf="orders[0].payment_status == 2;" class="icon" style="
 							color: #f1592a;
 							padding: 5px 0px 0px 12px;
 							border-radius: 50%;
 							font-size: 30px;">
 								<span class="fa fa-exclamation-triangle" ></span>
-								<h4 class="font600">Your Payment is failed. Please Try again.</h4>
+								<h4 class="font600">Your Payment is failed.</h4>
 							</div>							
 							
 						</div>
@@ -95,16 +97,15 @@ overflow:hidden !important;
 								<div class="col s9 m10 no-padding">
 									<div class="col m9 s6 left-box">
 										<a href="javascript:" class="black-text"><span class="font600 font-size-change-order">{{order.title}}</span></a><br>
-										<span class="font-size-change-order font600">Setup Box</span>
 										<!-- <div class="clearfix"></div> --> 
 										<div class="tsk-item">
-											<span class="font-size-change">Package : </span> <span class="font-size-change " *ngIf="order.package_type">{{order.package_type}} Month</span>
+											<span class="font-size-change grey-text">Package : </span> <span class="font-size-change " *ngIf="order.package_type">{{order.package_type}} Month</span>
 											<div class="clearfix"></div>
-											<span class="font-size-change">Quantity : </span> <span class="font-size-change">{{order.qty}} Item(s)</span>
+											<span class="font-size-change grey-text">Quantity : </span> <span class="font-size-change">{{order.qty}} Item(s)</span>
 										</div>
 										<div class="month-item"></div>
 									</div>
-									<div class="col m3 s12 no-padding" style="padding:0px 10px;">
+									<div class="col m3 s6 right-align">
 											<span class="font-size-change1">Order Number</span><br>
 											<span class="font-size-change-order font600">{{order.id}}</span><br>
 											<span class="font-size-change1 grey-text">{{order.formated_date}}</span>
@@ -138,7 +139,7 @@ overflow:hidden !important;
 										<p class="inline-block grey-text">Amount Payable :</p>
 										<p class="font-size-change right green-text" id="cashback-item"><i class="icon-inr"></i>{{order.grand_total}}</p>		
 									</div>	
-								</div>
+								</div>								
 								<div class="center"><span class="card-title margin-top orange-text">Your Order Status is {{order.status}}</span></div>								
 								<div class="center"><span class="font-size-change1 margin-top green-text">*Congratulations You Will receive Rs.{{order.cashback * order.qty}} Cashback on your Libanz Wallet After Activation.</span></div>								
 								<!-- <div class="center" *ngIf="order.cashback > 0 && order.payment == 'wallet'"><span class="font-size-change1 margin-top green-text">*Congratulations You Have recieved {{order.cashback}} Cashback on your Libanz Wallet.</span></div>								 -->

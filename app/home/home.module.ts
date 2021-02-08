@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
+import { MatSelectModule} from '@angular/material/select';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule ,ReactiveFormsModule,} from '@angular/forms';
 import { SharedCommonModule } from '../shared/common.module';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
@@ -36,16 +39,18 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    HttpModule,
+    HttpClientModule,
     MatSelectModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
     SharedCommonModule,
     ImageCropperModule
   ],
+  exports: [ MatFormFieldModule, MatInputModule ],
   declarations: [HomeComponent, RechargeStatusComponent, RechargeComponent,Nl2pbrPipe,TruncatePipe, BlogComponent, BlogDetailComponent],
   providers : [TodoService,AuthService,User,Params,RechargeType]
 

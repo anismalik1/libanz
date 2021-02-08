@@ -12,16 +12,6 @@
     letter-spacing: 1px;
     font-weight: bold;
 	}
-	.fix-pt-15{
-		padding-top:15px;
-	
-	}
-
-	.fix-pt-12{
-		padding-top:12px;
-	
-	}
-
 	.cst-border1{
 		border: none !important;
     height: 480px;
@@ -285,49 +275,52 @@ left:5%;
 			<div class="col s12 m12">
 			<div class="card">
 					<div class="card-content" id="recharge-container">
-					<div class="col s12  l3 border-bottom">
+					<div class="col s12 l3">
 						<img src="{{this.todoservice.base_url}}accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img margin-right icon-images" alt="airtel" width="50px" style="margin-bottom: -10px;">
-						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{this.rechargeData.recharge_amount * 1 + this.rechargeData.commission*1}}<a content="any text here" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
+						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{this.rechargeData.recharge_amount * 1 + this.rechargeData.commission*1}}<a content="any text here" *ngIf="rechargeData.commission > 0" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
 					</div>
 				
 					
-					<div class="col s12  l7 margin-top fix-pt-15">
+					<div class="col s12 l9 margin-top">
 						<div class="">
-							<p class="col s12 col m3 recharge-content-box" *ngIf="this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
+							<div class="col s12 m3 recharge-content-box" *ngIf="this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
 								<label for="credit-card" class="black-text"> <span class="fa fa-gift cst-gift"></span> <span class="txt-bonus"> Bonus  Rs. </span> <span class="orange-text">{{this.options.how_much_apply_to_recharge}}</span> is Applied.</label>
-							</p> 
-							<p class="col m4 col s12 recharge-content-box">
+							</div> 
+							<div class="col m3 s12 recharge-content-box">
 								<input [type]="(this.options.apply_minimum_recharge <= 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(this.options.apply_minimum_recharge <= 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="((this.options.apply_minimum_recharge > 0 && this.rechargeData.recharge_amount * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1) ?false:true" [disabled]="((this.options.apply_minimum_recharge > 0 && this.rechargeData.recharge_amount * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)?true:false"/>
-								<label for="instant-recharge" class="black-text">LIBANZ  </label><span class="grey-text wallet-txt">Wallet Rs.{{this.todoservice.get_user_wallet_amount()}} </span>   				
-							</p> 
-							<p class="col s12 col m4 recharge-content-box">
+								<label for="instant-recharge" class="black-text font600">LIBANZ Wallet </label><span class="grey-text font-size-change">&nbsp; <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}} </span>   				
+							</div> 
+							<div class="col s12 m3 recharge-content-box">
 								<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/> 
 								<label for="credit-card" class="black-text">Cards & Netbanking</label>
-							</p> 
-							<p class="col s12 col m3 recharge-content-box">
+							</div> 
+							<div class="col s12 m3 recharge-content-box">
 									<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
 								<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
 									float: left;"></label>
-							</p>
-							<span *ngIf="this.todoservice.get_user_recharge_amount() == 0">
-								<p class="col s12  col m3 recharge-content-box promo-txt-mb" *ngIf="promo_selected == 0 && this.url_name == 'mobile'">
-									<a href="#promo-code-apply" class="modal-trigger">Have A Promocode</a>
-								</p>
-							</span>
-							<div class="payment-method" *ngIf="pay_step==1">
-								<p class="col s12 m3 recharge-content-box" *ngIf="promo_selected == 1">
-									<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
-								</p>	
 							</div>
+							
+							<div class="col s12 m12 l3 no-proceed red-text center" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
+								You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
+							</div>
+							
+							<div class="col s12 m12 l3 center" *ngIf="!rechargeData.record_exist">
+								<span *ngIf="this.todoservice.get_user_recharge_amount() == 0">
+									<p class="recharge-content-box" *ngIf="promo_selected == 0 && this.url_name == 'mobile'">
+										<a href="#promo-code-apply" class="modal-trigger">Have A Promocode</a>
+									</p>
+								</span>
+								<span class="payment-method" *ngIf="pay_step==1">
+									<p class="recharge-content-box" *ngIf="promo_selected == 1">
+										<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
+									</p>	
+								</span>
+								<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()" id="recharge-proceed">Proceed to pay {{pay_amount()}}</button>
+							</div>
+							
 						</div>
-					</div>
-					<div class="no-proceed red-text" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
-						You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
-					</div>
-					
-					<div class="col s12 m12 l2 fix-pt-12" *ngIf="!rechargeData.record_exist">
-						<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()">Proceed to pay {{pay_amount()}}</button>
+						<div class="clearfix"></div>	
 					</div>
 					<div class="clearfix"></div>
 				</div>	
@@ -560,7 +553,7 @@ left:5%;
 
 						<span class="hide electric-cls3">
 							<div class="input-field col s12 m12">
-								<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+								<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!landlinegroup.controls['amount'].valid && landlinegroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
@@ -676,7 +669,7 @@ left:5%;
 							</div>
 							<span class="hide electric-cls3">
 								<div class="input-field col s12 m12">
-									<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin"  value="">
+									<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin"  value="">
 									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['amount'].valid && electricitygroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 								</div>
@@ -739,7 +732,7 @@ left:5%;
 
 						<span class="hide electric-cls3">
 							<div class="input-field col s12 m12">
-								<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+								<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!gasgroup.controls['amount'].valid && gasgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
@@ -799,7 +792,7 @@ left:5%;
 
 						<span class="hide electric-cls3">
 							<div class="input-field col s12 m12">
-								<input placeholder="Enter Amount" formControlName="amount" type="text" disabled class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+								<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!watergroup.controls['amount'].valid && watergroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
@@ -876,7 +869,7 @@ left:5%;
 							<div class="rechare-section">
 								<p class="heading-txt1">{{decode_data(item.order_data,'operator')}} </p>
 								<p>{{item.subcriber_id}}</p>
-								<span class="list-data">Recharge of Rs.{{item.grand_total}} done on {{item.history_time | date: date: 'dd M, Y'}} .</span>
+								<span class="list-data">Recharge of Rs.{{item.grand_total}} done on {{item.history_time | date: 'dd M, Y'}} .</span>
 							</div>
 						</div>
 						</div>

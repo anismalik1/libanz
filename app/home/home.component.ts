@@ -1,8 +1,8 @@
-import { Component, OnInit ,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit ,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import {Location} from '@angular/common';
 import { FormBuilder } from '@angular/forms'; 
 import { ToastrManager } from 'ng6-toastr-notifications';
-import {Meta,Title } from "@angular/platform-browser";
+import { Title, Meta, makeStateKey } from '@angular/platform-browser';
 import { DOCUMENT} from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -11,8 +11,13 @@ import { Observable} from 'rxjs';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
-import { Headers,Http } from '@angular/http';
+import { HttpHeaders,HttpClient } from '@angular/common/http';
 import { stepper } from './splash-animation';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+declare var $: any;
+// import * as $ from 'jquery';
+
 declare var window : any;
 @Component({
   selector: 'app-home',
@@ -36,6 +41,7 @@ declare var window : any;
     `],
 })
 export class HomeComponent implements OnInit {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   public userinfo = {wallet:'',phone:'',name:''};
   public operators : any = {};
   public loop : boolean = false;
@@ -95,6 +101,7 @@ export class HomeComponent implements OnInit {
   }
   ratings : any;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any ,
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
      public todoservice : TodoService,
@@ -106,8 +113,9 @@ export class HomeComponent implements OnInit {
      private fb: FormBuilder,
      private spinner: NgxSpinnerService,
      public params : Params,
-      private http: Http
+      private http: HttpClient
   ) {
+    HomeComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.spinner.hide();
    }
 
@@ -116,7 +124,7 @@ export class HomeComponent implements OnInit {
     {
       let ref : any = this.todoservice.get_param('ref');
       this.router.navigate([ref.replace('#', "/").replace('%3D','=').replace('%3F','?').replace('%2F','/').replace('%252F','/').replace('%252F','/')]);
-      return false;
+      return;
     }
     if(this.router.url == '/home#login' || this.router.url == '/home%23login')
     {
@@ -129,30 +137,35 @@ export class HomeComponent implements OnInit {
   {
     this.todoservice.set_user_data({name:''});
   } 
-   
-    $('#search').focus(function(){
-      $('.search-result').removeClass('hide');
-    });
-    $('#search').focusout(function(){
-      $('.search-result').addClass('hide');
-    });
-    var width = $(window).width() + 17; 
-    
-    if(width < 767)
-    {
-      this.webTemplate = false;
-      return false;
+  
+    if(isPlatformBrowser(this.platformId)) {
+      $('#search').focus(function(){
+        $('.search-result').removeClass('hide');
+      });
+      $('#search').focusout(function(){
+        $('.search-result').addClass('hide');
+      });
+      
+      var width = $(window).width() + 17; 
+      if(width < 767)
+      {
+        this.webTemplate = false;
+      }
     }
+
+    
+    
     if(document.URL.indexOf('android_asset') !== -1)
     {
       if(window.history.state.navigationId == 1)
-        this.show = true;
+        this.show = true; 
     }
 
     if(document.URL.indexOf('android_asset') === -1)
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
-        this.open_model()
+        if(isPlatformBrowser(this.platformId))
+          this.open_model()
       }, 4000);
     }
     this.check_local();
@@ -189,7 +202,7 @@ export class HomeComponent implements OnInit {
   navigate_to(recharge_data)
    {
      if(!recharge_data || !recharge_data.title)
-      return false;
+      return;
       var url ='';
       if(recharge_data.title.toLowerCase() == 'mobile')
       {
@@ -242,10 +255,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => 
         {
-          if(!$.isEmptyObject(data))
-          {
-            let page_data = data.PAGEDATA[0];
-            
+          let page_data = data.PAGEDATA[0];
             if(page_data)
             {
               this.meta.addTag({ name: 'description', content: page_data.metaDesc });
@@ -258,6 +268,9 @@ export class HomeComponent implements OnInit {
             this.bottombanners = this.filter_banners('mobile_bottom_banner',0, 0);
             let banner_data : any = { main : this.mainbanners,bottom : this.bottombanners} 
             this.todoservice.set_data('b_d',banner_data);
+            if(!isPlatformBrowser(this.platformId)) {
+              return;
+            }
             if(!this.webTemplate)
             {
               setTimeout(()=>{   
@@ -268,18 +281,17 @@ export class HomeComponent implements OnInit {
               }, 1000);
               this.init_page();
             }
-            else
-            {
-
-            }
             
             this.fetch_home_products(); 
-            $('#mobile').css('display','');  
-            $('#select-item').css('display',''); 
+            if(isPlatformBrowser(this.platformId)) {
+              $('#mobile').css('display','');  
+              $('#select-item').css('display',''); 
+            }
             //this.filter_banners('Big Tv');
             this.spinner.hide();
-            window.scroll(0,0);
-          }
+            if(isPlatformBrowser(this.platformId)) {
+              window.scroll(0,0);
+            }
         }
       )  
   }
@@ -337,20 +349,22 @@ export class HomeComponent implements OnInit {
 
   open_model()
   {
-    if($('#init-open_model-script'))
-    {
-      $('#init-open_model-script').remove();
-    }
-    let script = this._renderer2.createElement('script');
-    script.type = `text/javascript`;
-    script.id = `init-open_model-script`;
-    script.text = `
-      $(document).ready(function(){
-        $('.modal').modal();
-        $('#modal-app').modal('open');
-      }); 
-    `;
-    this._renderer2.appendChild(this._document.body, script);
+    if(isPlatformBrowser(this.platformId)) {
+      if($('#init-open_model-script'))
+      {
+        $('#init-open_model-script').remove();
+      }
+      let script = this._renderer2.createElement('script');
+      script.type = `text/javascript`;
+      script.id = `init-open_model-script`;
+      script.text = `
+        $(document).ready(function(){
+          $('.modal').modal();
+          $('#modal-app').modal('open');
+        }); 
+      `;
+      this._renderer2.appendChild(this._document.body, script);
+    }  
   }
 
   fetch_home_products()
@@ -397,7 +411,7 @@ export class HomeComponent implements OnInit {
     {
       $('.logup.modal-trigger')[0].click();
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
+      return;
     }
     $('.favorite-'+product.id).addClass('active');
     this.spinner.show() 
@@ -973,38 +987,82 @@ export class HomeComponent implements OnInit {
   }
 
   app_version()
+  {
+    if(window.cordova && isPlatformBrowser(this.platformId))
     {
-      if(document.URL.indexOf('android_asset') !== -1)
-      {  
-      var Headers_of_api = new Headers({
-            'Content-Type' : 'application/x-www-form-urlencoded'
-          });
-        this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
-            data => {
-                let response = $.parseJSON(data['_body'])
-                if(response.version)
-                {
-                    window.me = this;
-                    window.appversion = response.version;
-                    if(window.cordova.getAppVersion)
-                    {
-                        window.cordova.getAppVersion.getVersionCode(function(version){
-                            if(version *1 < window.appversion *1)
-                            {
-                                window.me.open_update_popup()
-                            }  
-                        });  
-                    }
-                }
-                
-            }    
-        ) 
-     }       
-    }
+      if($('#appversion-script'))
+      {
+        $('#appversion-script').remove();
+      }
+      let script = this._renderer2.createElement('script');
+      script.type = `text/javascript`;
+      script.id = `appversion-script`; 
+      script.text = `
+      $(document).ready(function(){
+        if(window.cordova)
+        {
+          window.cordova.plugins.inappupdate.isUpdateAvailable(success,fail);
+          function success(result)
+          {
+            if(JSON.parse(result))
+              {
+                window.cordova.plugins.inappupdate.update("immediate",function(){},function(){});
+              }
+              else
+              {
+                  console.log("No app update available");
+              }
+          }
+          function fail(result)
+          {
+          console.log(result);
+          }
+        }
+        
+      })
+    `;
+      this._renderer2.appendChild(this._document.body, script);
+    }   
+
+    if(document.URL.indexOf('android_asset') !== -1)
+    { 
+      if(!window.cordova)
+      {
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+          this.app_version()
+      }, 2000);
+      }
+
+      // cordova.plugins.inappupdate.isUpdateAvailable(function(suc){console.log(suc)},function(err){console.log(err)}); 
+      //   var Headers_of_api = new Headers({
+      //     'Content-Type' : 'application/x-www-form-urlencoded'
+      //   });
+      // this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
+      //     data => {
+      //         let response = $.parseJSON(data['_body'])
+      //         if(response.version)
+      //         {
+      //             window.me = this;
+      //             window.appversion = response.version;
+      //             if(window.cordova.getAppVersion)
+      //             {
+      //               window.cordova.getAppVersion.getVersionCode(function(version){
+      //                   if(version *1 < window.appversion *1)
+      //                   {
+      //                       window.me.open_update_popup()
+      //                   }  
+      //               });  
+      //             }
+      //         }
+              
+      //     }    
+      // ) 
+    }       
+  }
   
   goto_market()
   {
-      window.cordova.plugins.market.open("mydth.app");
+    //window.cordova.plugins.market.open("mydth.app");
   }
 
   open_update_popup()

@@ -1,43 +1,45 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Injectable,Inject } from '@angular/core';
 import * as $ from 'jquery';
 import 'rxjs/add/observable/of';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';
-import { Headers,Http,HttpModule } from '@angular/http';
-import { HttpHeaders } from '@angular/common/http';
-import { Authparams } from './authparams';
+import { HttpHeaders,HttpClient } from '@angular/common/http';
+
 @Injectable()
 export class AuthService {
   public AccessToken : string = '';
   public tokenKey:string = 'app_token';
   public ttl  = 12;
-  constructor(private http : Http) { }
+  constructor(private http: HttpClient) {
+    
+   }
   public base_url = "https://www.libanz.com/app/";
   private token_api = 'https://www.libanz.com/accounts/apis/home/dologin';
 
+  length! : number;
 
-  dologin(data) : Observable<Authparams> 
+  dologin(data : any)
   {
-    var Headers_of_api = new Headers({
+    var Headers_of_api = new HttpHeaders({
       'Content-Type' : 'application/x-www-form-urlencoded'
     });
     return this.http.post(this.token_api,data,{headers: Headers_of_api})
-    .map(res => res.json());
+    .map(res => res)
   }
   
 
-  private store(storage_name,content:Object) {
-    localStorage.setItem(storage_name, JSON.stringify(content));
+  private store(storage_name : string,content:Object) {
+    var $content = JSON.stringify(content); 
+    localStorage.setItem(storage_name, $content);
   }
 
 private retrieve() {
-    let storedToken:string = localStorage.getItem(this.tokenKey);
+    let storedToken : string = localStorage.getItem(this.tokenKey)!;
     if(!storedToken)
     {
       throw 'no token found';
     } 
-    return storedToken;
+    return storedToken ;
 }
 
 call_login_popup()
@@ -74,7 +76,7 @@ auth_usertype()
 {
   if(this.authenticate())
   {
-    let storedToken = JSON.parse(this.retrieve());
+    let storedToken = JSON.parse(this.retrieve() || '{}');
     return storedToken.token_key.user_type;
   }
 }
@@ -95,7 +97,7 @@ auth_token()
   }
 }
 
-public storage(data : any,me)
+public storage(data : any, me : any)
 {
   if(!me)
     me = this;

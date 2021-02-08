@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { FormBuilder, Validators, FormGroup ,FormControl} from '@angular/forms';
 import { DOCUMENT } from "@angular/common";
 import { Router,ActivatedRoute } from '@angular/router';
@@ -9,6 +9,8 @@ import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PaginationService } from 'ngx-pagination';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-faqs',
@@ -32,10 +34,11 @@ export class FaqsComponent implements OnInit {
   suggested_product : any;
   myControl = new FormControl();
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
-  filteredOptions: Observable<object>;
+  filteredOptions: any;
   filterdList : boolean = false;
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any ,
     private fb: FormBuilder,
     public todoservice: TodoService,
     private spinner : NgxSpinnerService,
@@ -45,9 +48,9 @@ export class FaqsComponent implements OnInit {
     private _renderer2: Renderer2, 
     private router : ActivatedRoute, 
     private route : Router,
-
     @Inject(DOCUMENT) private _document, 
   ) {
+    FaqsComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.faqsgroup = fb.group({
         'name' : [null,Validators.compose([Validators.required])],
         'email' : [null,Validators.email],
@@ -84,10 +87,12 @@ export class FaqsComponent implements OnInit {
     });
     
     //this.faqs_list();
-    this.init_script();
-    this.defaut_query();
+    if(isPlatformBrowser(this.platformId))
+    {
+      this.init_script();
+      this.defaut_query();
+    } 
   }
-
   unsatisfied(form)
   {
     form.faq_url = this.faq_url;
@@ -292,7 +297,7 @@ export class FaqsComponent implements OnInit {
         }
       ) 
   }
-  getPage(page,id)
+  getPage(page)
   {
     this.spinner.show();
       this.search_faqs(page);
@@ -306,7 +311,7 @@ export class FaqsComponent implements OnInit {
       key = this.query_string;
     //console.log(key)   
     if(key == '')
-      return false;  
+      return;  
     if(1 == 1)
     {
       this.route.routeReuseStrategy.shouldReuseRoute = function(){
@@ -373,6 +378,11 @@ export class FaqsComponent implements OnInit {
         this.spinner.hide();
         if(data.status == true)
         {
+          this.faqsgroup.controls['name'].setValue(null);
+          this.faqsgroup.controls['email'].setValue(null);
+          this.faqsgroup.controls['message'].setValue(null);
+          this.faqsgroup.controls['phone'].setValue(null);
+          this.faqsgroup.markAsUntouched()
           this.toastr.successToastr("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }

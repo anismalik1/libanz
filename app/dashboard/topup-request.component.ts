@@ -27,7 +27,7 @@ export class TopupRequestComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
 	  this.fetch_topup_request(1);
 	  $('table').delegate('.select-all','change',function(){

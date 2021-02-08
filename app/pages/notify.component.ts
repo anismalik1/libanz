@@ -48,7 +48,7 @@ export class NotifyComponent implements OnInit {
   let page = {page : this.page}; 
   if(page.page == '')
   {
-      return false;
+      return;
   }
   this.todoservice.fetch_page_data(page)
     .subscribe(

@@ -73,7 +73,7 @@ width:100%;
                                   <th nowrap="nowrap" width="57px">S.No.</th> 
                                   <th nowrap="nowrap">Order No.</th>
                                   <th nowrap="nowrap" width="125px">Product</th>
-                                  <th nowrap="nowrap" width="102px">Order Date</th>
+                                  <!--##change <th nowrap="nowrap" width="102px">Order Date</th> -->
                                   <th nowrap="nowrap" width="140px">Amount</th>
                                   <th nowrap="nowrap" width="130px">Subscriber ID</th>
                                   <th nowrap="nowrap" width="135px">Paymnet Method</th>
@@ -87,7 +87,7 @@ width:100%;
                                   <td>{{i+1}}</td>
                                   <td>{{item.id}}</td>
                                   <td>{{item.title}}</td>
-                                  <td>{{item.order_date | date: date:'dd M, Y'}}<br><time>{{item.order_date | date:'hh:mm a' }}</time></td>
+                                  <!--##change <td>{{item.order_date | date: date:'dd M, Y'}}<br><time>{{item.order_date | date:'hh:mm a' }}</time></td> -->
                                   <td> <i class="icon-inr"></i>{{item.final_price}}</td>
                                   <td>{{item.subcriber_id}}</td>
                                   <td>{{item.payment}}</td>

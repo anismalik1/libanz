@@ -1,6 +1,8 @@
-import {Component,OnInit} from "@angular/core";
+import {Component,OnInit, Inject, PLATFORM_ID} from "@angular/core";
 import {Router, NavigationEnd,RouteConfigLoadStart, RouteConfigLoadEnd} from "@angular/router";
 import { NgxSpinnerService } from 'ngx-spinner';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 //import { SwUpdate } from '@angular/service-worker'; 
 
 declare var ga: Function;
@@ -11,12 +13,16 @@ declare var ga: Function;
 })
 export class AppComponent implements OnInit{
   title = '';
-  loadingRouteConfig: boolean;
-  constructor(public router: Router,private spinner : NgxSpinnerService ) {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
+  loadingRouteConfig! : boolean;
+  constructor(public router: Router,private spinner : NgxSpinnerService,@Inject(PLATFORM_ID) private platformId: any ) {
+    AppComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) { 
-        ga('set', 'page', event.urlAfterRedirects);
-        ga('send', 'pageview'); 
+      if (isPlatformBrowser(this.platformId)) {
+        if (event instanceof NavigationEnd) { 
+          ga('set', 'page', event.urlAfterRedirects);
+          ga('send', 'pageview'); 
+        }
       }
     });
   }
@@ -41,7 +47,9 @@ export class AppComponent implements OnInit{
     // }
 }
 
-onActivate(event) {
-  window.scroll(0,0);
+onActivate(event : any ) {
+  if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0,0);
+  }
 }
 }

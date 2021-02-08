@@ -29,24 +29,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col s12 m2">
-                <!-- <div class="card">
-              <div class="card-content user-content">
-                  <div class="user-image">
-                      <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                      <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-			                <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-                  </div>
-                  <div class="user-name">
-                      <span>Welcome,</span><br>
-                      <span class="font-size-change font600">{{this.todoservice.get_user_name()}}</span>
-                  </div>
-              </div>
-            </div> -->
+               
             <app-side-nav></app-side-nav>
             </div>
             <div class="col s12 m10">
-               
-                <div class="card" style="margin-top:-8px;">
+               <div class="card fix-top-bg">
                     <div class="card-content">
                         <h3 class="font600 inline-block">Account Dashboard </h3>
                         <!-- <a href="javascript:" class="font-size-change inline-block margin-left1 edit-click" (click)="edituser()">Edit</a> -->

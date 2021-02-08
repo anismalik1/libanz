@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart.component';
@@ -8,7 +8,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductService } from '../product.service';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
-import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
+import { MatSelectModule} from '@angular/material/select';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -35,7 +38,7 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'order-receipt/:name', component: OrderReceiptComponent },
   { path: 'amp/:name', component: ProductDetailAmpComponent },
-  { path: ':name', component: ProductDetailsComponent },
+  { path: ':name', component: ProductDetailsComponent ,pathMatch: 'full'},
  // {path: '**', redirectTo: '/error/404'},
 ];
 
@@ -45,7 +48,7 @@ const routes: Routes = [
     SharedCommonModule,
     NgxSpinnerModule,
     RouterModule.forChild(routes),
-    NgxImageZoomModule.forRoot(),
+    NgxImageZoomModule,
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
@@ -54,10 +57,12 @@ const routes: Routes = [
     MatRadioModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatFormFieldModule,
     MatStepperModule
   ],
   declarations: [ProductsComponent, CartComponent, ProductDetailsComponent,CheckoutComponent, OrderReceiptComponent, ChannelPackComponent, CompareDthComponent, FavoritesComponent, ProductDetailAmpComponent, StepCheckoutComponent],
-  providers : [ProductService,TodoService,User,AuthService]
+  providers : [ProductService,TodoService,User,AuthService],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 
 export class ProductsModule { }

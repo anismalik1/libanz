@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewContainerRef ,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit,ViewContainerRef ,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { Meta,Title } from "@angular/platform-browser";
 import { DOCUMENT} from "@angular/common";
 import {  FormControl } from '@angular/forms'
@@ -11,6 +11,8 @@ import { Observable} from 'rxjs';
 import { Product } from '../product.entities';
 import { ProductService } from '../product.service';
 import { Package } from '../packages.entities.service';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 import * as $ from 'jquery'; 
 
 @Component({
@@ -19,6 +21,7 @@ import * as $ from 'jquery';
   styles: []
 })
 export class ProductDetailsComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   fta_price : number;
   hide : boolean = true;
   region : any;
@@ -50,7 +53,7 @@ export class ProductDetailsComponent implements OnInit{
   package_month : any;
   review_start = 0;
   more_display : boolean = true;
-  avg_rating : DoubleRange;
+  avg_rating : any;
   all_rating : number;
   grouped_rating : any;
   month : number = 1;
@@ -66,9 +69,10 @@ export class ProductDetailsComponent implements OnInit{
   myControl = new FormControl();
   options: any ;
   params : any = {};
-  filteredOptions: Observable<object>;
+  filteredOptions: any;
   constructor(
-    private _renderer2: Renderer2, 
+    private _renderer2: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any, 
     @Inject(DOCUMENT) private _document, 
     private spinner : NgxSpinnerService,
     private title: Title,
@@ -79,13 +83,12 @@ export class ProductDetailsComponent implements OnInit{
     private authservice : AuthService,
     public productservice : ProductService,
     private router : ActivatedRoute, private route : Router ) {
+      ProductDetailsComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.product_categories();
     //this.init_overlay();
    }
 
   ngOnInit() {
-    var width = $(window).width(); 
-    
       //let uri = this.route.url.replace('product','product/amp');
       if(this.todoservice.get_param('month'))
       {
@@ -103,57 +106,67 @@ export class ProductDetailsComponent implements OnInit{
     this.router.params.subscribe(params => { 
       this.p_id = params['name']; //log the value of id
     });
-    if(width < 767)
+
+    if(isPlatformBrowser(this.platformId)) 
     {
-      this.route.navigate(['/product/amp/'+this.p_id],{queryParams: this.params});
-      return false;
+      var width = $(window).width(); 
+      if(width < 767)
+      {
+        this.route.navigate(['/product/amp/'+this.p_id],{queryParams: this.params});
+        return;
+      }
     }
+    
     this.fetch_product_data(this.p_id);
-    $('body').delegate('#stars li','mouseover', function(){
-      var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-     
-      // Now highlight all the stars that's not after the current hovered star
-      $(this).parent().children('li.star').each(function(e){
-        if (e < onStar) {
-          $(this).addClass('hover');
+    if(isPlatformBrowser(this.platformId)) 
+    {
+      $('body').delegate('#stars li','mouseover', function(){
+        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+       
+        // Now highlight all the stars that's not after the current hovered star
+        $(this).parent().children('li.star').each(function(e){
+          if (e < onStar) {
+            $(this).addClass('hover');
+          }
+          else {
+            $(this).removeClass('hover');
+          }
+        });
+        
+      }).on('mouseout', function(){
+        $(this).parent().children('li.star').each(function(e){
+          $(this).removeClass('hover');
+        });
+      });
+      $('body').delegate('#stars li','click', function(){
+        var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+        var stars = $(this).parent().children('li.star');
+        
+        for (var i = 0; i < stars.length; i++) {
+          $(stars[i]).removeClass('selected');
+        }
+        
+        for (i = 0; i < onStar; i++) {
+          $(stars[i]).addClass('selected');
+        }
+        
+        // JUST RESPONSE (Not needed)
+        var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+        var msg = "";
+        if (ratingValue > 1) {
+            msg = "Thanks! You rated this " + ratingValue + " stars.";
         }
         else {
-          $(this).removeClass('hover');
+            msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
         }
+        $('.text-message').text(msg);
       });
-      
-    }).on('mouseout', function(){
-      $(this).parent().children('li.star').each(function(e){
-        $(this).removeClass('hover');
-      });
-    });
-    $('body').delegate('#stars li','click', function(){
-      var onStar = parseInt($(this).data('value'), 10); // The star currently selected
-      var stars = $(this).parent().children('li.star');
-      
-      for (var i = 0; i < stars.length; i++) {
-        $(stars[i]).removeClass('selected');
-      }
-      
-      for (i = 0; i < onStar; i++) {
-        $(stars[i]).addClass('selected');
-      }
-      
-      // JUST RESPONSE (Not needed)
-      var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-      var msg = "";
-      if (ratingValue > 1) {
-          msg = "Thanks! You rated this " + ratingValue + " stars.";
-      }
-      else {
-          msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
-      }
-      $('.text-message').text(msg);
-    });
-    setTimeout(()=>{    
-      if(this.pack_selected[0])
-        $('#collapse-header-'+this.pack_selected[0].parent_id).click();
-     }, 2000);
+      setTimeout(()=>{    
+        if(this.pack_selected[0])
+          $('#collapse-header-'+this.pack_selected[0].parent_id).click();
+       }, 2000);
+    }
+    
     if(this.get_token())
     {
       if(this.todoservice.get_user_product_amount() > 0)
@@ -161,6 +174,13 @@ export class ProductDetailsComponent implements OnInit{
         this.fetch_options()
       }
     }
+  }
+  fetch_channels(item)
+  {
+
+  }
+  onKeyUp(event: { target: HTMLInputElement }) {
+    this.search_me(event.target.value);
   }
 
   fetch_options()
@@ -227,7 +247,7 @@ export class ProductDetailsComponent implements OnInit{
   { 
     this.pack_selected = [];
     if(!this.channels_packs)
-     return false;
+     return;
     //console.log(this.channels_packs); 
     
     for(var i=0;i<this.channels_packs.length ;i++)
@@ -348,7 +368,7 @@ export class ProductDetailsComponent implements OnInit{
       this.rating = 0;
       this.toastr.errorToastr("Please Login to rate this product", 'Failed! ');
       this.spinner.hide();
-      return false;
+      return;
     }
     let data : any = {token : this.get_token(),product_id : this.product_id};
     this.todoservice.fetch_review_data(data)
@@ -377,7 +397,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       this.toastr.errorToastr("Please Select Rating.", 'Failed! ');
       this.spinner.hide();
-      return false;
+      return;
     }
     this.spinner.show();
     form.token = this.get_token();
@@ -385,7 +405,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       this.toastr.errorToastr("Please Login to rate this product.", 'Failed! ');
       this.spinner.hide();
-      return false;
+      return;
     }
     form.rating = ratingValue;
     form.product_id = this.product_id;
@@ -436,7 +456,8 @@ export class ProductDetailsComponent implements OnInit{
             this.multienable = true;
         }
         this.recommended = data.RECOMMENDED;
-        this.recommended_slider();
+        if(isPlatformBrowser(this.platformId))
+          this.recommended_slider();
         this.filter_channel_subpack();
         let cashback_data : any;
         if(data.cashback && data.cashback.length > 0 )
@@ -467,7 +488,8 @@ export class ProductDetailsComponent implements OnInit{
         if(this.circles && this.todoservice.get_param('tracker') != 'circle_selected')
         {
           setTimeout(()=>{    //<<<---    using ()=> syntax
-            $('.religon-overlay').show();
+            if(isPlatformBrowser(this.platformId)) 
+              $('.religon-overlay').show();
           }, 2000);
 
           if(this.productservice.get_region())
@@ -475,8 +497,7 @@ export class ProductDetailsComponent implements OnInit{
             this.region = this.productservice.get_region();
           }
         }
-
-          
+  
         this.thumbs = data.THUMBS;
         this.fta_title = data.fta_title;
         this.fta_price = data.fta_price;
@@ -490,7 +511,7 @@ export class ProductDetailsComponent implements OnInit{
         this.meta.addTag({ name: 'description', content: this.product.meta_description });
         this.meta.addTag({ name: 'keywords', content: this.product.meta_keyword });
         this.title.setTitle(this.product.meta_title + " With "+this.month+ ' Month Pack');
-        this.productservice.setItem(this.product);
+        this.productservice.setProductItem(this.product);
         //this.recommended  = this.filter_products(data.RECOMMENDED);
         this.reviews      = data.REVIEW;
         this.more_display = data.more_enable;
@@ -500,9 +521,12 @@ export class ProductDetailsComponent implements OnInit{
         this.grouped_rating = data.GROUPED_RATING;
         this.packages     = data.product_packages; 
         this.display      = 1;
-        setTimeout(()=>{    
-          $('#product-description').html(this.product.description);
-          $('#offer-price').text(this.product.offer_price);
+        setTimeout(()=>{
+          if(isPlatformBrowser(this.platformId))
+          {
+            $('#product-description').html(this.product.description);
+            $('#offer-price').text(this.product.offer_price);
+          }    
          }, 1000);
          
         if(typeof data.PACKAGEMONTH != 'undefined' )
@@ -515,29 +539,26 @@ export class ProductDetailsComponent implements OnInit{
             //this.month = this.monthdata[0].total_month;
           }
         }
-        this.init_page();
-        window.scroll(0,0);
+
+        if(isPlatformBrowser(this.platformId))
+        {
+          this.init_page();
+          window.scroll(0,0);
+        }
         //this.share_fb_links();
       }
     ) 
   }
-  add_to_favorite(id)
+  add_to_favorite(id,type = 'fav')
   {
-    $('.wishlist-'+id).addClass('active');
+    if(type == 'fav')
+    {
+      $('.wishlist-'+id).addClass('active');
+    }
+    
     if(this.pack_selected)
       this.product.pack_selected = this.pack_selected;
-    if($('#kit-packages').length > 0 )
-    {
-      if( typeof this.kit == 'undefined' )
-      {
-        this.toastr.errorToastr("Please Select Kit first");
-        return false;
-      }
-    }
-    else
-    {
       this.kit = 2;
-    }
     if(typeof this.month == 'undefined')
     {
       this.month = 1;
@@ -552,7 +573,7 @@ export class ProductDetailsComponent implements OnInit{
     {
       $('.logup.modal-trigger')[0].click();
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
+      return;
     }
     if(id != this.product.id)
     {
@@ -565,16 +586,23 @@ export class ProductDetailsComponent implements OnInit{
     }
       
     this.spinner.show() 
-    this.productservice.add_to_favorite({product : product_data,token : this.get_token()})
+    this.productservice.add_to_favorite({ product : product_data,type : type,token : this.get_token() })
     .subscribe(
     data => 
     {
       this.spinner.hide();
       if(data.status == true)
       {
-        localStorage.setItem('favourite', JSON.stringify(data.favourites));
+        if(data.favourites.items.length > 0)
+        {
+          let carts = data.favourites.items.filter(x => x.type == 1);
+          let fav = data.favourites.items.filter(x => x.type == 2);
+          localStorage.setItem('favourite', JSON.stringify(data.favourites));
+          $('#cart-web').text(carts.length);
+          $('#favourite-count').text(fav.length);
+        }
         this.toastr.successToastr(data.msg);
-        return false;
+        return;
       }
       this.toastr.errorToastr(data.msg); 
     }
@@ -598,14 +626,14 @@ export class ProductDetailsComponent implements OnInit{
           scrollTop: $("#monthly-packages").offset().top
         }, 1000);
         $('[name="pincode"]').css("border-bottom", "1px solid #ff6a00");
-        return false;
+        return;
       }
     }
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return false;
+      return;
     }
     else
     {
@@ -660,7 +688,7 @@ export class ProductDetailsComponent implements OnInit{
       }
       //console.log(multi.pack_selected);
       multi.month_pack = this.product.month_pack;
-      this.productservice.addto_cart(multi.id,multi);
+      this.productservice.addto_direct_purchase(multi);
     } 
     this.productservice.loadCart();
     if(this.pincode != '')
@@ -752,18 +780,6 @@ export class ProductDetailsComponent implements OnInit{
 
   buyNow(p_id)
   {
-    // if(!this.get_token())
-    // {
-    //   var width = $(window).width(); 
-    //   if(width < 767)
-    //   {
-    //     this.open_model();
-    //     return false;
-    //   }
-    //   $('.logup.modal-trigger')[0].click();
-    //   this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-    //   return false;
-    // }
     if($('[name="pincode"]').length > 0)
     {
       var pincode =  $('[name="pincode"]').val();
@@ -774,7 +790,7 @@ export class ProductDetailsComponent implements OnInit{
           scrollTop: $("#monthly-packages").offset().top
         }, 1000);
         $('[name="pincode"]').css("border-bottom", "1px solid #ff6a00");
-        return false;
+        return;
       }
       this.product.pincode = pincode;
       this.productservice.set_pincode(pincode);
@@ -791,7 +807,7 @@ export class ProductDetailsComponent implements OnInit{
           scrollTop: $("#monthly-packages").offset().top
         }, 1000);
         $('[name="subscriber_id"]').css("border-bottom", "1px solid #ff6a00");
-        return false;
+        return;
       }
       this.product.subscriber_id =sub_id;
     }
@@ -803,7 +819,7 @@ export class ProductDetailsComponent implements OnInit{
       if( typeof this.kit == 'undefined' )
       {
         this.toastr.errorToastr("Please Select Kit first");
-        return false;
+        return;
       }
     }
     else
@@ -813,18 +829,13 @@ export class ProductDetailsComponent implements OnInit{
     if(typeof this.month == 'undefined')
     {
       this.toastr.errorToastr("Please Select Month Package first");
-        return false;
+        return;
     }
     else
     {
       this.product.month_pack = this.month;
     } 
-    
-    if(!this.productservice.if_exist_in_cart(p_id))
-    {
-      this.productservice.addto_cart(p_id,this.product);
-      this.productservice.loadCart();
-    }
+    this.productservice.addto_direct_purchase(this.product);
     if(this.pincode != '')
     {
       this.route.navigate(['/product/checkout'],{queryParams: {tracker : 'product', id : p_id ,pincode: this.pincode}});
@@ -966,10 +977,10 @@ export class ProductDetailsComponent implements OnInit{
     $('.unhide-link').remove()
     this.hide = false;
   }
-  search_me(val)
+  search_me(val : any)
   {
     let data : any = {};
-    data.search = val;
+    data.search = val.target.value;
     data.product_id = this.product.id;
     this.todoservice.search_pincode(data)
     .subscribe(
@@ -1004,7 +1015,7 @@ export class ProductDetailsComponent implements OnInit{
             $('.religon-overlay').hide();
             this.pincode = pincode;
             this.toastr.successToastr('Great! '+data.msg);
-            //console.log(this.circles);
+
             let circle_exist = this.circles.filter(circles => circles.name.includes(data.circle));
             if(circle_exist.length > 0)
             {
@@ -1041,12 +1052,12 @@ export class ProductDetailsComponent implements OnInit{
       if(pack.title.includes('Super Family') || this.fta_pack.price == 0)
       {
         alert("There Must be atleast two packs(FTA + Other) in this Package.");
-        return false;
+        return;
       }
       if(pack.title.includes('Gold Combo') || pack.title.includes('Gold HD Combo'))
       {
         alert("There Must be atleast two packs(FTA + Other) in this Package.");
-        return false;
+        return;
       }
       $('#check-pack-'+pack.id).addClass('grey-text');
       if(!this.fta_pack)
@@ -1135,7 +1146,7 @@ export class ProductDetailsComponent implements OnInit{
       if( typeof this.kit == 'undefined' )
       {
         this.toastr.errorToastr("Please Select TSK Kit");
-        return false;
+        return;
       }
     }
     else
@@ -1208,8 +1219,9 @@ export class ProductDetailsComponent implements OnInit{
     this.product.pack_selected = this.pack_selected;
     this.product.offer_price = Number($('#offer-price').text());
     this.product.price = Number($('#mrp-price').text());
-    this.productservice.addto_cart(id,this.product);
-    this.toastr.infoToastr("Your Item is Added to the Cart");
+    //this.productservice.addto_cart(id,this.product);
+    //this.toastr.infoToastr("Your Item is Added to the Cart");
+    this.add_to_favorite(this.product.id,'cart');
   }
 
   multi_tsk(id)
@@ -1249,7 +1261,7 @@ export class ProductDetailsComponent implements OnInit{
       if( typeof this.kit == 'undefined' )
       {
         this.toastr.errorToastr("Please Select TSK Kit");
-        return false;
+        return;
       }
     }
     else
@@ -1289,7 +1301,7 @@ export class ProductDetailsComponent implements OnInit{
       if($('#paytm-ref').val() == '')
       {
         this.toastr.errorToastr("Please Enter the Paytm Transaction ID");
-        return false;
+        return;
       }
       var otf_type = 2;
     }

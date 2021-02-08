@@ -462,6 +462,7 @@ p.ask-login {
 									</form>
 						</div>	
 					</div>
+					<div class="clearfix"></div>
 				</div>			
 			</div>
 		</div>
@@ -470,7 +471,7 @@ p.ask-login {
 </ng-template>
 <ng-template #otpverify>
 	<section class="login-page">
-		<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)" id="header-signup">
+		<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value,this)" id="header-signup">
 
 			<div class="container">	
 				<div class="row">

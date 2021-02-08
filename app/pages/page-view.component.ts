@@ -1,4 +1,4 @@
-import { Component, OnInit,Pipe } from '@angular/core';
+import { Component, OnInit,PLATFORM_ID,Inject } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { Meta ,Title} from '@angular/platform-browser';
@@ -6,6 +6,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-page-view',
@@ -13,21 +15,25 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styles: []
 })
 export class PageViewComponent implements OnInit {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   page : string;
   page_data : any;
   contactgroup : FormGroup;
   form_enable : boolean = false;
   public ref : any;
 constructor(private title: Title, public todoservice : TodoService,
+  @Inject(PLATFORM_ID) private platformId: any ,
   private spinner: NgxSpinnerService,private router : Router,
   private fb: FormBuilder,
   private toastr: ToastrManager,
   private authservice : AuthService,
    private meta : Meta, private route : ActivatedRoute) {
+    PageViewComponent.isBrowser.next(isPlatformBrowser(platformId));
   this.page = route.snapshot.params['name'];
   this.spinner.show();
   this.fetch_page_data();
-  window.scroll(0,0);
+  if(isPlatformBrowser(this.platformId)) 
+    window.scroll(0,0);
   this.contactgroup = fb.group({
     'name' : [null,Validators.compose([Validators.required])],
     'email' : [null,Validators.compose([Validators.email])],
@@ -44,7 +50,7 @@ constructor(private title: Title, public todoservice : TodoService,
   let page = {page : this.page}; 
   if(page.page == '')
   {
-      return false;
+      return;
   }
   this.todoservice.fetch_page_data(page)
     .subscribe(
@@ -53,20 +59,27 @@ constructor(private title: Title, public todoservice : TodoService,
         if(data.PAGEDATA)
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-          if(data.PAGEDATA[0].image != '' && data.PAGEDATA[0].image != undefined)
-          {
-            $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
-          }
-          else
-          {
-            $('.hero').remove(); 
-          }
-          $('#page-title').text(this.todoservice.get_page().title);
-          $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
-          window.scroll(0,0);
+          
+          if(data.PAGEDATA[0].image != '' && data.PAGEDATA[0].image != undefined)
+          {
+            if(isPlatformBrowser(this.platformId)) 
+              $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
+          }
+          else
+          {
+            if(isPlatformBrowser(this.platformId)) 
+              $('.hero').remove(); 
+          }
+          this.todoservice.back_icon_template(this.todoservice.get_page().title,this.todoservice.back())
+          //$('#page-title').text(this.todoservice.get_page().title);
+          if(isPlatformBrowser(this.platformId)) 
+            $('#page-content').html(this.todoservice.get_page().description);
+          
+          if(isPlatformBrowser(this.platformId))  
+            window.scroll(0,0);
           
           // $( "#page-content .testimonial-text blockquote" ).each(function( index ) {
           //   if(  $( this ).html().length > 300)

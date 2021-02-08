@@ -1,9 +1,13 @@
-import { Component, OnInit,Renderer2,Inject, } from '@angular/core';
+import { Component, OnInit,Renderer2,PLATFORM_ID,Inject } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { DOCUMENT } from "@angular/common";
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providers : [ProductService]
 })
 export class CartComponent implements OnInit{
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   public user = {phone:'loading',name:'loading'};
   public items : any = [];
   push_cart_id : number;
@@ -22,44 +26,50 @@ export class CartComponent implements OnInit{
   public channels_packs : any;
   public region : any;
   pack_selected : any;
-  month : number;
+  month : number = 1;
   pack_id : number;
   fta_pack : any;
+  carts : any;
+  cart_count : number = 0;
   selectedCartItem : any;
-  
-  constructor( 
+  multienable : boolean = false;
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any ,
+    private route : Router, 
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
     public todoservice : TodoService,
     private authservice : AuthService,
     private spinner : NgxSpinnerService,
+    private toast : ToastrManager,
     public productservice : ProductService
   ) {
-      this.productservice.loadCart();
-      this.refreshCart(); 
-   }
-   add_to_product()
-   {
-     this.product.pack_selected = this.pack_selected;
-     //console.log(this.product);
-     this.productservice.addto_cart(this.product.id,this.product);
+    CartComponent.isBrowser.next(isPlatformBrowser(platformId));
    }
 
-   refreshCart() : void
-   {
-     this.productservice.loadCart();
-   }
   ngOnInit() {
-    $('.copy-click').on('click',function(){			
-			$('.copy-click').attr('disabled');
-    });
+    if(!this.get_token())
+    {
+      let full_url = this.route.url.split('/');
+      if(!full_url[2])
+      full_url[2] = '';
+      else
+        full_url[2] = '#'+full_url[2];
+      this.route.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
+      return false;
+    }
+    if(isPlatformBrowser(this.platformId)) 
+    {
+      $('.copy-click').on('click',function(){			
+        $('.copy-click').attr('disabled');
+      });
+    }
+   
     this.todoservice.back_icon_template('My Cart',this.todoservice.back())
+    this.user_favourites();
+    return true;
   }
-  change_count(p_id,op)
-  {
-    this.productservice.changeItemCount(p_id,op);
-    this.refreshCart();
-  }
+
   get_token()
   {
     return this.authservice.auth_token();
@@ -106,15 +116,17 @@ export class CartComponent implements OnInit{
         this.pack_selected = [this.fta_pack];
       }  
     }
-    //this.selectedCartItem.pack_selected = this.pack_selected;
     this.enable_add_pack = true;  
+    return true;
     //this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
   }
 
   select_package(id)
   {
     this.product = id;
-    this.channels_packs = [];
+    // this.selectedCartItem = this.convert_to_object(json);
+    this.selectedCartItem = this.carts.filter(x => x.prod_id == id)[0];
+    console.log(this.selectedCartItem);
     this.todoservice.fetch_packs_and_month({circle: this.region,product: id})
     .subscribe(
       data => 
@@ -128,6 +140,83 @@ export class CartComponent implements OnInit{
       }
     )
   }
+
+add_to_product()
+{
+  this.selectedCartItem.product.pack_selected = this.pack_selected;
+  this.add_to_favorite(this.selectedCartItem);
+}
+
+add_to_favorite(product : any)
+{
+  if(!this.get_token())
+  {
+    $('.logup.modal-trigger')[0].click();
+    return;
+  }
+  $('.favorite-'+product.id).addClass('active');
+  this.spinner.show() 
+  this.todoservice.add_to_favorite({product : product,type : 'cart',token : this.get_token()})
+  .subscribe(
+  data => 
+  {
+    this.spinner.hide();
+    if(data.status == true)
+    {
+      this.toast.successToastr(data.msg);
+      localStorage.setItem('favourite', JSON.stringify(data.favourites));
+      this.carts = data.favourites.items.filter(items => items.type == 1);
+      this.cart_count =  this.carts.length;
+    }
+    return true;  
+  }
+  ) 
+}
+  user_favourites()
+  {
+    this.spinner.show();
+    this.todoservice.user_favourites({token: this.get_token()})
+        .subscribe(
+          data => 
+          {
+            if(!jQuery.isEmptyObject(data))
+            {
+              this.spinner.hide();
+              if(data.status && data.status == 'Invalid Token')
+              {
+                return false;
+              }
+             
+              localStorage.setItem('favourite', JSON.stringify(data.favourites));
+              this.carts = data.favourites.items.filter(items => items.type == 1);
+              this.cart_count =  this.carts.length;
+            }
+            return true;
+          }
+        )  
+  }
+  removeItem(id)
+  {
+    this.spinner.show();
+    this.todoservice.remove_favourites({product_id : id,type : 'cart',token: this.get_token()})
+    .subscribe(
+      data => 
+      {
+        if(!jQuery.isEmptyObject(data))
+        {
+          this.spinner.hide();
+          if(data.status && data.status == 'Invalid Token')
+          {
+            return;
+          }
+          localStorage.setItem('favourite', JSON.stringify(data.favourites));
+          this.carts = data.favourites.items.filter(items => items.type == 1);
+          this.cart_count =  this.carts.length;
+        }
+      }
+    )
+  }
+
 remove_new_line(str)
 {
   return str.replace(/(\r\n|\n|\r|↵|rn)/g,"");
@@ -136,6 +225,8 @@ initialize_collapse()
 {
   this.init_accordian();
 }
+
+fetch_channels(item){}
 
 check_child_exist(id,childs)
 {
@@ -196,7 +287,7 @@ filter_channel_subpack()
 { 
   this.pack_selected = [];
   if(!this.channels_packs)
-   return false;
+   return;
   //console.log(this.channels_packs); 
   
   for(var i=0;i<this.channels_packs.length ;i++)

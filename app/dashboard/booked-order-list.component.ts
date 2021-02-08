@@ -23,7 +23,7 @@ export class BookedOrderListComponent implements OnInit {
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
    }
    
@@ -32,7 +32,7 @@ export class BookedOrderListComponent implements OnInit {
     if(!this.get_token() )
     {
       this.router.navigate(['/']);
-      return false;
+      return;
     }
      this.spinner.show();
      let data : any = {token : this.get_token()};

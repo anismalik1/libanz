@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject, } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { DOCUMENT } from "@angular/common";
 import { AuthService } from '../auth.service';
@@ -26,7 +26,7 @@ export class FavoritesComponent implements OnInit {
   public pack_id  : any;
   public month : number = 1;
   public enable_add_pack : boolean = false;
-
+  public multienable : boolean = false;
   constructor(
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
@@ -60,10 +60,12 @@ export class FavoritesComponent implements OnInit {
   {
     return this.authservice.auth_token();
   }
-select_package(id,json)
+select_package(id)
 {
   this.product = id;
-  this.selectedCartItem = this.convert_to_object(json);
+  // this.selectedCartItem = this.convert_to_object(json);
+  this.selectedCartItem = this.favourites.filter(x => x.prod_id == id)[0];
+  // console.log(this.selectedCartItem.product);
   this.todoservice.fetch_packs_and_month({circle: this.region,product: id})
   .subscribe(
     data => 
@@ -80,17 +82,13 @@ select_package(id,json)
 
 add_to_product()
 {
-  this.selectedCartItem.pack_selected = this.pack_selected;
+  this.selectedCartItem.product.pack_selected = this.pack_selected;
   this.add_to_favorite(this.selectedCartItem);
-  let url = window.location.pathname;
-  if(url == url)
-  {
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
-      return false;
-    }
-  }  
-  this.router.navigated = false;
-  this.router.navigate([url]);
+}
+
+fetch_channels(item)
+{
+
 }
 
 filter_channel_subpack()
@@ -162,7 +160,7 @@ filter_channel_subpack()
     this.selectedCartItem.pack_selected = this.pack_selected;
     //this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product);
   }
-  
+  return true;
 }
 
 initialize_collapse()
@@ -206,11 +204,21 @@ init_accordian()
               {
                 return false;
               }
+              else
+              {
+                localStorage.setItem('favourite', JSON.stringify(data.favourites));
+                this.favourites = data.favourites.items.filter(items => items.type == 2);;
+                this.favourite_count =  data.count;
+                return true;
+              }
              
-              localStorage.setItem('favourite', JSON.stringify(data.favourites));
-              this.favourites = data.favourites.items;
-              this.favourite_count =  data.count;
+              
             }
+            else
+            {
+              return false;
+            }
+             
           }
         )  
   }
@@ -254,10 +262,12 @@ select_pack(pack)
       {
         this.pack_selected = [];
         this.pack_selected = [this.fta_pack];
-      }  
+      } 
+      
     }
     this.selectedCartItem.pack_selected = this.pack_selected;
-    this.enable_add_pack = true;  
+    this.enable_add_pack = true;
+    return true;   
     //this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
   }
   add_to_favorite(product)
@@ -265,7 +275,7 @@ select_pack(pack)
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
-      return false;
+      return;
     }
     $('.favorite-'+product.id).addClass('active');
     this.spinner.show() 
@@ -278,8 +288,10 @@ select_pack(pack)
       {
         this.toast.successToastr(data.msg);
         localStorage.setItem('favourite', JSON.stringify(data.favourites));
+        this.favourites = data.favourites.items.filter(items => items.type == 2);
+        this.favourite_count =  this.favourites.length;
       }
-        
+      return true;  
     }
     ) 
   }
@@ -332,6 +344,7 @@ fetch_package(id)
           this.favourite_count =  data.count;
           $('#favourite-count').text(this.favourite_count);
         }
+        return true;
       }
     )
   }

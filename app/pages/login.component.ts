@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewContainerRef,Renderer2,Inject } from '@angular/core';
+import { Component, OnInit,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { DOCUMENT} from "@angular/common";
 import { Router ,ActivatedRoute} from '@angular/router';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
@@ -10,6 +10,8 @@ import { AuthService } from '../auth.service';
 import {  CordovaService } from '../cordova.service';
 import { Authparams } from '../authparams';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 import * as $ from 'jquery';
 declare var window : any;
 @Component({
@@ -19,6 +21,7 @@ declare var window : any;
   providers: [TodoService,User,AuthService,CordovaService]
 })
 export class LoginComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   private token_params : Authparams;
   public phone : number;
   public phone1 : string;
@@ -36,6 +39,7 @@ export class LoginComponent implements OnInit{
   private watch  : Number = 0;
   remember : any = {rm:false,ph:'',pw : ''};  
 constructor( public todoservice : TodoService,
+  @Inject(PLATFORM_ID) private platformId: any ,
   private _renderer2: Renderer2,
   private cordovaserve : CordovaService, 
    @Inject(DOCUMENT) private _document, 
@@ -48,7 +52,8 @@ constructor( public todoservice : TodoService,
   private title : Title,
   private route : ActivatedRoute,
   private fb: FormBuilder
-) {  
+) { 
+  LoginComponent.isBrowser.next(isPlatformBrowser(platformId)); 
   if(this.route.snapshot.params['name'])
   {
     this.ref = this.route.snapshot.params['name'];
@@ -71,7 +76,8 @@ constructor( public todoservice : TodoService,
  }
 ngOnInit() {
   this.todoservice.back_icon_template('Login',this.todoservice.back())
-  this.ini_list()
+  if(isPlatformBrowser(this.platformId))
+    this.ini_list()
   if(this.todoservice.get_param('reset') && this.todoservice.get_param('reset') == 'true')
     this.notification = "Your Password Reset Successful. Login here.";
      
@@ -87,8 +93,8 @@ device_registered()
 {
   if(document.URL.indexOf('android_asset') !== -1)
   {
-    window.FirebasePlugin.getToken(function(token) {
-      window.device_registered_token = token;
+    window.FirebasePlugin.getToken(function(fcmToken) {
+      window.device_registered_token = fcmToken;
     }, function(error) {
         console.error(error);
     });
@@ -100,7 +106,7 @@ fetch_page_data()
   let page = {page : this.page}; 
   if(page.page == '')
   {
-      return false;
+      return;
   }
   this.todoservice.fetch_page_data(page)
     .subscribe(
@@ -109,12 +115,13 @@ fetch_page_data()
         if(data.PAGEDATA)
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-          
-          $('#page-content').html(this.todoservice.get_page().description);
+          if(isPlatformBrowser(this.platformId))
+            $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
-          window.scroll(0,0);
+          if(isPlatformBrowser(this.platformId))
+            window.scroll(0,0);
         }
         this.spinner.hide();  
       }
@@ -155,7 +162,7 @@ login_submit(login,me)
     if(typeof me.phone == "undefined" || typeof me.password == "undefined")
     {
       me.toastr.errorToastr("Please Enter Valid Details", 'Failed');
-      return false;
+      return;
     }
     me.spinner.show();
     me.authService.dologin(login)
@@ -173,10 +180,16 @@ login_submit(login,me)
           me.user_favourites();
           if(me.ref)
           {
-            let navigate = me.ref.substr(0, me.ref.indexOf('?')).replace('#','/');
-            let parsedUrl : any = this.router.parseUrl('/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?'));
-            me.router.navigate([navigate],{queryParams : parsedUrl.queryParams});
-            //me.router.navigate(['/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
+            if(me.ref.indexOf('?') > 0)
+            {
+              let navigate = me.ref.substr(0, me.ref.indexOf('?')).replace('#','/');
+              let parsedUrl : any = this.router.parseUrl('/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?'));
+              me.router.navigate([navigate],{queryParams : parsedUrl.queryParams});
+            }
+            else
+            {
+              me.router.navigate(['/'+me.ref.replace('#', "/").replace('%3D','=').replace('%3F','?')]);
+            }
           }
           else
           {
@@ -206,39 +219,63 @@ login_submit(login,me)
 
 watch_sms()
 {
-    if(window.SMSRetriever)
+    if(window.cordova)
     {
-      window.me = this;  
-      // window.SMSReceive.stopWatch(function() {
-      //     console.log('stopped');
-      // }, function() {
-      // });
-      window.SMSRetriever.startWatch(function() {
-          console.log('started');
-        }, function() {
-        });
-        this.watch = 1;
-      document.addEventListener('onSMSArrive', function(args : any) {
-        //console.log(args);
-        var otp1 = substring(args.message,13, 14);
-        var otp2 = substring(args.message,14, 15);
-        var otp3 = substring(args.message,15, 16);
-        var otp4 = substring(args.message,16, 17);
-        //var otp4 = substring(args.data.body,16, 17);
-        $('#login-page-otps #otp1').val(otp1);
-        $('#login-page-otps #otp2').val(otp2);
-        $('#login-page-otps #otp3').val(otp3);
-        $('#login-page-otps #otp4').val(otp4);
-        window.me.login_submit(window.me.logingroup.value,window.me);
-        function substring(string, start, end) {
-          var result = '',
-              length = Math.min(string.length, end),
-              i = start;
+      window.me = this;
+      window.cordova.plugins.AndroidSmsRetriever
+        .onSmsReceived(function successCallback(message) {
+                console.log(message);
+                if(message === 'SMS_RETRIEVER_SETUP') {
+                    // Here you request server to send the SMS
+                    return;
+                }
+                console.log(message);
+                var otp1 = substring(message,13, 14);
+                  var otp2 = substring(message,14, 15);
+                  var otp3 = substring(message,15, 16);
+                  var otp4 = substring(message,16, 17);
+                  $('#login-page-otps #otp1').val(otp1);
+                  $('#login-page-otps #otp2').val(otp2);
+                  $('#login-page-otps #otp3').val(otp3);
+                  $('#login-page-otps #otp4').val(otp4);
+                  window.me.login_submit(window.me.logingroup.value,window.me);
+                  function substring(string, start, end) {
+                    var result = '',
+                        length = Math.min(string.length, end),
+                        i = start;
+                  
+                    while (i < length) result += string[i++];
+                    return result;
+                  }  
+            },
+
+            function errorCallback(e) {
+                console.error(e);
+            },
+
+            true //notifyWhenStarted
+        );
+      // document.addEventListener('onSMSArrive', function(args : any) {
+      //   //console.log(args);
+      //   var otp1 = substring(args.message,13, 14);
+      //   var otp2 = substring(args.message,14, 15);
+      //   var otp3 = substring(args.message,15, 16);
+      //   var otp4 = substring(args.message,16, 17);
+      //   //var otp4 = substring(args.data.body,16, 17);
+      //   $('#login-page-otps #otp1').val(otp1);
+      //   $('#login-page-otps #otp2').val(otp2);
+      //   $('#login-page-otps #otp3').val(otp3);
+      //   $('#login-page-otps #otp4').val(otp4);
+      //   window.me.login_submit(window.me.logingroup.value,window.me);
+      //   function substring(string, start, end) {
+      //     var result = '',
+      //         length = Math.min(string.length, end),
+      //         i = start;
         
-          while (i < length) result += string[i++];
-          return result;
-        }  
-      }); 
+      //     while (i < length) result += string[i++];
+      //     return result;
+      //   }  
+      // }); 
     }
 }
 
@@ -254,7 +291,7 @@ user_favourites()
             this.spinner.hide();
             if(data.status && data.status == 'Invalid Token')
             {
-              return false;
+              return;
             }
             localStorage.setItem('favourite', JSON.stringify(data.favourites));
           }
@@ -334,7 +371,7 @@ ini_list()
 keytab(event){
   if(event.keyCode == 8 || event.keyCode == 46)
   {
-    return false;
+    return;
   }
   let element = event.srcElement.nextElementSibling; // get the sibling element
 

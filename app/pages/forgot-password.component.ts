@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewContainerRef} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,Inject,PLATFORM_ID} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +7,8 @@ import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 declare var window : any;
 @Component({
   selector: 'app-forgot-password',
@@ -15,6 +17,7 @@ declare var window : any;
   providers: [TodoService,User,AuthService]
 })
 export class ForgotPasswordComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   public proceedresetgroup : FormGroup;
   public phone : string;
   public password : string;
@@ -26,6 +29,7 @@ export class ForgotPasswordComponent implements OnInit{
   public resetgroup : FormGroup;
   private watch : Number = 0; 
   constructor( public todoservice : TodoService,
+    @Inject(PLATFORM_ID) private platformId: any ,
               private authservice : AuthService,
               private router : Router,
               private toast : ToastrManager,
@@ -35,6 +39,7 @@ export class ForgotPasswordComponent implements OnInit{
               private meta : Meta,
               private spinner : NgxSpinnerService
   ) {
+    ForgotPasswordComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.resetgroup = fb.group({
       'password' : [null,Validators.compose([Validators.required])],
        'cpassword' : [null,Validators.compose([Validators.required])]
@@ -57,7 +62,7 @@ export class ForgotPasswordComponent implements OnInit{
     if(data.phone == '')
     {
       this.toast.errorToastr("Enter Registered Phone");
-      return false;
+      return;
     }
     this.phone = data.phone;
     data.step =  this.step;
@@ -89,7 +94,7 @@ export class ForgotPasswordComponent implements OnInit{
   {
     if(this.page == null || this.page == '')
     {
-        return false;
+        return;
     }
     this.spinner.show(); 
     this.todoservice.fetch_page_data({page : this.page})
@@ -103,11 +108,13 @@ export class ForgotPasswordComponent implements OnInit{
             {
               //$('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);
             }
-            $('#page-content').html(this.todoservice.get_page().description);
+            if(isPlatformBrowser(this.platformId))
+              $('#page-content').html(this.todoservice.get_page().description);
             this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
             this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
             this.title.setTitle(this.todoservice.get_page().metaTitle);
-            window.scroll(0,0); 
+            if(isPlatformBrowser(this.platformId))
+              window.scroll(0,0); 
           }
           this.spinner.hide();  
         }
@@ -147,7 +154,7 @@ export class ForgotPasswordComponent implements OnInit{
   tick_clock(tick)
   {
     if(tick == 0)
-      return false;
+      return;
     this.tick = tick - 1;
     setTimeout(() => {
           this.tick_clock(this.tick); 
@@ -166,7 +173,7 @@ export class ForgotPasswordComponent implements OnInit{
     if(form.password != form.cpassword)
     {
       this.toast.errorToastr('Confirm password must be same.');
-      return false;
+      return;
     }
     this.todoservice.reset_password(form)
       .subscribe(

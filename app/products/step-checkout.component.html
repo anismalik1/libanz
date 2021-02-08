@@ -17,13 +17,6 @@
     padding: 10px;
 }
 
-
-.mat-step-header:hover {
-    background-color: #fff!important;
-}
-.location-add1 label.active {
-    margin-top: 0px !important;
-}
     .forder-txt{
 
 position: relative;
@@ -124,7 +117,7 @@ height: 25px;
 <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 <div class="fix-mb-top"></div>	
  
-<section class="beard">
+<section class="beard" id="checkout-section">
     <mat-horizontal-stepper #stepper labelPosition="bottom">
        <mat-step>
             <ng-template matStepLabel>Address</ng-template>
@@ -377,13 +370,13 @@ height: 25px;
                             {{check_wallet_content()}}
                             <!-- <mat-checkbox ></mat-checkbox> -->
                             <span *ngIf="checkbox_text.checkbox ==  true">
-                                <mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><span class="black-text"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+                                <mat-checkbox name="include_wallet" value="wallet" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
                             </span>
                             <span *ngIf="checkbox_text.radio == true">
-                                <mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><span class="black-text"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+                               <mat-radio-button value="wallet" name="wallet_type" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
                             </span>
                             <span *ngIf="checkbox_text.no_input == true">
-                                <i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text"> LIBANZ Wallet<span class="red-text">*</span></span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+                                <i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text font600"> LIBANZ Wallet<span class="red-text">*</span></span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span>
                             </span>
                         </div>	
                         <div class="clearfix"></div>

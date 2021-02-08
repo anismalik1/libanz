@@ -98,7 +98,7 @@
             </div>
             <div class="col s12 m10">
                
-              <div class="card" style="margin-top:-8px;">
+              <div class="card fix-top-bg">
                     <div class="card-content complain">
                         <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-envelope"></span> &nbsp; Tickets</h3>
                         <div class="right">
@@ -132,7 +132,7 @@
                                     </tr>
                                 </thead>
                                 
-                                <tbody *ngIf="complaints_counts > 0">
+                                <tbody *ngIf="complaints && complaints_counts > 0">
                                     <tr *ngFor="let complaint of complaints | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: complaints_counts };let i=index">
                                         <td>{{i+1}}</td>
                                         <td>{{complaint.complaint_id}}</td>
@@ -142,16 +142,16 @@
                                         <td>{{complaint.subcriber_id}}</td>
                                         <td><i class="fa fa-inr"></i> {{complaint.grand_total}}</td>
                                         <td>{{complaint.comment}}</td>
-                                        <td>{{complaint.remark}} <span *ngIf="complaint.comment_count > 1"><a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+{{complaint.comment_count*1 - 1}} more</a></span></td>
-                                        <td><span>{{complaint.history_time | date: date:'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
-                                        <td><span>{{complaint.last_update | date: date:'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
+                                        <td>{{complaint.remark}} <span *ngIf="complaint.comment_count > 1"><a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+{{complaint.comment_count*1 - 1}} more</a></span><div class="clearfix"></div><a href="#complaints" class="modal-trigger blue-text" *ngIf="(searched_ticket ==true && i == 0 && complaint.v_o == 'o') || (searched_ticket == false && complaint.v_o == 'o')" (click)="init_complaint(complaint.order_id)">reply</a></td>
+                                        <td><span>{{complaint.history_time | date: 'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
+                                        <td><span>{{complaint.last_update | date: 'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
                                         
                                         <td><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 1"></i><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 2 || complaint.seen == 3"></i></td>
                                         <td><span [innerHTML]="this.todoservice.order_template(complaint.status)"></span></td>
                                         <td class="center">
                                             <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" ><span class="fa fa-eye cst-eye"></span> </a>
                                             <!-- <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a> -->
-                                            <a href="#complaints" class="modal-trigger blue-text" *ngIf="(searched_ticket ==true && i == 0 && complaint.v_o == 'o') || (searched_ticket == false && complaint.v_o == 'o')" (click)="init_complaint(complaint.order_id)">reply</a>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>
@@ -181,7 +181,7 @@
       		
       		<div class="order-date margin-top-cart">
       			<span class="font600">Order Date : </span>
-      			<span>{{complaint_info[0].created | date: date:'dd M, Y h:i a'}}</span>
+      			<span>{{complaint_info[0].created | date: 'dd M, Y h:i a'}}</span>
               </div>
             <div class="order-date margin-top-cart">
                 <span class="font600">Payment Mode : </span>
@@ -251,7 +251,7 @@
     <div class="recent-comments" *ngIf="recent_comments.length > 0">
        <h4>Recent Comments</h4>
        <ul>
-           <li *ngFor="let item of recent_comments;"><span class="date-span">[{{item.created | date: date:'dd M, Y h:i A'}}] </span><span class="user font600" *ngIf="item.v_o == 'v'">You:</span> <span class="user font600" *ngIf="item.v_o == 'o'">Libanz:</span> <span class="comment"> {{item.comment}}</span></li>
+           <li *ngFor="let item of recent_comments;"><span class="date-span">[{{item.created | date: 'dd M, Y h:i A'}}] </span><span class="user font600" *ngIf="item.v_o == 'v'">You:</span> <span class="user font600" *ngIf="item.v_o == 'o'">Libanz:</span> <span class="comment"> {{item.comment}}</span></li>
        </ul> 
     </div>
     <a href="javascript:" *ngIf="this.recent_comments.length > 0 && this.recent_comments[this.recent_comments.length-1].v_o =='o' && this.comment == false" (click)="open_comment()">ADD COMMENT</a>

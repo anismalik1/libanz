@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject } from '@angular/core';
+import { Component, OnInit,Renderer2 ,PLATFORM_ID,Inject} from '@angular/core';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -6,7 +6,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DOCUMENT } from "@angular/common";
 import {Meta,Title } from "@angular/platform-browser";
 import { ToastrManager } from 'ng6-toastr-notifications';
-
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-testimonials',
@@ -14,17 +15,19 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styles: []
 })
 export class TestimonialsComponent implements OnInit {
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   testimonials : any;
   contactgroup : FormGroup;
   page : string = 'testimonial';
   constructor(private title: Title, public todoservice : TodoService,
     private spinner: NgxSpinnerService,private meta : Meta,
+    @Inject(PLATFORM_ID) private platformId: any ,
     private _renderer2: Renderer2,private fb: FormBuilder,
     private authservice : AuthService,
     private toastr: ToastrManager,
      @Inject(DOCUMENT) private _document,
     ) { 
+      TestimonialsComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.contactgroup = fb.group({
         'name' : [null,Validators.compose([Validators.required])],
         'email' : [null,Validators.compose([Validators.email])],
@@ -52,7 +55,8 @@ export class TestimonialsComponent implements OnInit {
           // this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           // this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           // this.title.setTitle(this.todoservice.get_page().metaTitle);
-          this.init_script();
+          if(isPlatformBrowser(this.platformId)) 
+            this.init_script();
         }
         this.spinner.hide();  
       }
@@ -80,18 +84,21 @@ export class TestimonialsComponent implements OnInit {
       this._renderer2.appendChild(this._document.body, script); 
   }
   
-decode_html(html)
- {
-  var textArea = document.createElement('textarea');
-  textArea.innerHTML = html;
-  return textArea.value;
- }
+  decode_html(html)
+  {
+   var textArea = document.createElement('textarea');
+   textArea.innerHTML = html;
+   var text = textArea.value.replace(/<[^>]*>/g, '')
+   if(textArea.value.replace(/<[^>]*>/g, '').length > 225)
+     text = textArea.value.replace(/<[^>]*>/g, '').substring(0,225)+'...';
+   return text;
+  }
  fetch_page_data()
  {
   let page = {page : this.page}; 
   if(page.page == '')
   {
-      return false;
+      return;
   }
   this.todoservice.fetch_page_data(page)
     .subscribe(
@@ -102,13 +109,16 @@ decode_html(html)
           this.todoservice.set_page_data(data.PAGEDATA[0]);
           if(data.PAGEDATA[0].image != '')
           {
-            $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
-          } 
-          $('#page-content').html(this.todoservice.get_page().description);
+            if(isPlatformBrowser(this.platformId)) 
+              $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
+          }
+          if(isPlatformBrowser(this.platformId))  
+            $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
-          window.scroll(0,0);
+          if(isPlatformBrowser(this.platformId)) 
+            window.scroll(0,0);
           
           // $( "#page-content .testimonial-text blockquote" ).each(function( index ) {
           //   if(  $( this ).html().length > 300)

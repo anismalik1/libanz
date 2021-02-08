@@ -1,8 +1,8 @@
-import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject} from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
+import { Component, OnInit,Input,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DOCUMENT } from "@angular/common";
 import { map, startWith} from 'rxjs/operators';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
 import { TodoService } from '../../todo.service';
 import { ProductService } from '../../product.service';
@@ -13,6 +13,9 @@ import { Authparams } from '../../authparams';
 import { User } from '../../user';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { filter, pairwise } from 'rxjs/operators';
+import * as $ from 'jquery';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 declare var window: any;
 
 @Component({
@@ -21,6 +24,7 @@ declare var window: any;
   providers : [ProductService,TodoService,User]
 })
 export class HeaderComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   myControl = new FormControl();
   logingroup : FormGroup;
   signupgroup : FormGroup;
@@ -57,7 +61,7 @@ export class HeaderComponent implements OnInit{
     public favourite_count : number;
     public offline_alert : boolean = false;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
-  filteredOptions: Observable<object>;
+  filteredOptions: any;
   filterdList : boolean = false;
   valid_for_bonus : boolean= false;
   _bonus_text : any ;
@@ -72,9 +76,11 @@ export class HeaderComponent implements OnInit{
     private vcr: ViewContainerRef,
     public router : Router,
     private fb: FormBuilder,
-    private http : Http
+    private http : HttpClient,
+    @Inject(PLATFORM_ID) private platformId: any
   ) 
     {
+      HeaderComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.router.events
         .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
         .subscribe((events: RoutesRecognized[]) => {
@@ -88,7 +94,7 @@ export class HeaderComponent implements OnInit{
       {
         this.authService.clear_session();
       }
-      this.productservice.cartItemsCount();
+      // this.productservice.cartItemsCount();
       this.logingroup = fb.group({
         'phone' : [null,Validators.compose([Validators.required])],
         'password' : [null,Validators.compose([Validators.required])],
@@ -107,6 +113,11 @@ export class HeaderComponent implements OnInit{
       this.get_remember();
       this.createForm();
     }
+
+    onKeyUp(event: any) {
+      this.search_me(event.target.value);
+    }
+
     ngOnInit()
     { 
       this.todoservice.createOnline$().subscribe(isOnline => 
@@ -114,22 +125,23 @@ export class HeaderComponent implements OnInit{
           if(isOnline == false)
           {
             if(this.offline_alert == true)
-              return false;
+              return;
             this.offline_alert = true;  
             alert("You Are Offine.");
-            return false;
+            return ;
           }
         } 
         );  
-        if(document.URL.indexOf('android_asset') !== -1)
+        if(document.URL.indexOf('android_asset') !== -1 && isPlatformBrowser(this.platformId))
         {
-          if($('#cordova-js').length > 0)
-            $('#cordova-js').remove();
-          let script1 = this._renderer2.createElement('script');
-          script1.type = `text/javascript`;
-          script1.id = `cordova-js`;
-          script1.src = `cordova.js`;
-          this._renderer2.appendChild(this._document.body, script1);
+          if($('#cordova-js').length == 0)
+          {
+            let script1 = this._renderer2.createElement('script');
+            script1.type = `text/javascript`;
+            script1.id = `cordova-js`;
+            script1.src = `cordova.js`;
+            this._renderer2.appendChild(this._document.body, script1);
+          }
         }
         
 
@@ -138,11 +150,12 @@ export class HeaderComponent implements OnInit{
         startWith(''),
         map(value => this._filter(value))
       ); 
-      this.init_page(); 
+      if(isPlatformBrowser(this.platformId))
+        this.init_page(); 
       this.get_circles();
       if(!this.get_token())
       {
-        return false;
+        return;
       }
       this.todoservice.get_user_data();
       this.user_notification(this.start);
@@ -199,25 +212,19 @@ export class HeaderComponent implements OnInit{
   }
   device_registered()
   {
-    if(document.URL.indexOf('android_asset') !== -1)
+    window.me = this;
+    if(window.FirebasePlugin)
     {
-      if(window.FirebasePlugin)
-      {
-        window.me = this;
-        window.FirebasePlugin.getToken(function(token) {
-          window.device_registered_token = token;
-        }, function(error) {
-            console.error(error);
-        });
-  
-        window.FirebasePlugin.onNotificationOpen(function(notification) {
-          window.me.router.navigate([notification.go_link]);
-        }, function(error) {
-            console.error(error);
-        });
-      }
-      
+      window.FirebasePlugin.getToken(function(fcmToken) {
+        window.device_registered_token = fcmToken;
+      }, function(error) {
+          console.error(error);
+      });
     }
+  }
+
+  read_notification(item){
+    
   }
     check_device()
     {
@@ -232,7 +239,7 @@ export class HeaderComponent implements OnInit{
           { 
             if(storeddata.user)
             {
-              return false
+              return
             }
             else if(this.get_token())
             {
@@ -359,7 +366,7 @@ export class HeaderComponent implements OnInit{
       if(typeof me.phone == "undefined" || typeof me.password == "undefined")
       {
         me.toastr.errorToastr("Please Enter Valid Details", 'Failed');
-        return false;
+        return;
       }
       //me.spinner.show();
       $('#login-controller').text('Please Wait...');
@@ -409,6 +416,12 @@ export class HeaderComponent implements OnInit{
           {
             if(typeof data.step != 'undefined' &&  data.step == 'verify')
             {
+              if($('[name="next_action"]').length > 0)
+              {
+                setTimeout(()=>{    //<<<---    using ()=> syntax
+                  $('.otp-step #header-login').append('<input type="hidden" name="next_action" value="recharge_init">');
+                }, 2000);
+              }
               me.step = 2;
               me.tick_clock(60);
               me.watch_sms('login');
@@ -425,38 +438,65 @@ export class HeaderComponent implements OnInit{
 
   watch_sms(section)
   {
-      if(window.SMSRetriever)
+      if(window.cordova)
       {
         window.me = this;  
-        // window.SMSRetriever.stopWatch(function() {
-        //   console.log('stopped');
-        // }, function() {
-        // });
-        window.SMSRetriever.startWatch(function() {
-            console.log('started');
-          }, function() {
-          });
-          this.watch = 1;
-        document.addEventListener('onSMSArrive', function(args : any) {
-          var otp1 = substring(args.message,13, 14);
-          var otp2 = substring(args.message,14, 15);
-          var otp3 = substring(args.message,15, 16);
-          var otp4 = substring(args.message,16, 17);
-          $('#header-'+section+' #otp1').val(otp1);
-          $('#header-'+section+' #otp2').val(otp2);
-          $('#header-'+section+' #otp3').val(otp3);
-          $('#header-'+section+' #otp4').val(otp4);
-          //if()
-            window.me.login_submit(window.me.logingroup.value,window.me);
-          function substring(string, start, end) {
-            var result = '',
-                length = Math.min(string.length, end),
-                i = start;
+        window.cordova.plugins.AndroidSmsRetriever
+        .onSmsReceived(
+            
+            function successCallback(message) {
+
+                if(message === 'SMS_RETRIEVER_SETUP') {
+                    // Here you request server to send the SMS
+                    return;
+                }
+                var otp1 = substring(message,13, 14);
+                var otp2 = substring(message,14, 15);
+                var otp3 = substring(message,15, 16);
+                var otp4 = substring(message,16, 17);
+                $('#header-'+section+' #otp1').val(otp1);
+                $('#header-'+section+' #otp2').val(otp2);
+                $('#header-'+section+' #otp3').val(otp3);
+                $('#header-'+section+' #otp4').val(otp4);
+                //if()
+                  window.me.login_submit(window.me.logingroup.value,window.me);
+                function substring(string, start, end) {
+                  var result = '',
+                      length = Math.min(string.length, end),
+                      i = start;
+                
+                  while (i < length) result += string[i++];
+                  return result;
+                }   
+            },
+
+            function errorCallback(e) {
+                console.error(e);
+            },
+
+            true //notifyWhenStarted
+        );
+
+        // document.addEventListener('onSMSArrive', function(args : any) {
+        //   var otp1 = substring(args.message,13, 14);
+        //   var otp2 = substring(args.message,14, 15);
+        //   var otp3 = substring(args.message,15, 16);
+        //   var otp4 = substring(args.message,16, 17);
+        //   $('#header-'+section+' #otp1').val(otp1);
+        //   $('#header-'+section+' #otp2').val(otp2);
+        //   $('#header-'+section+' #otp3').val(otp3);
+        //   $('#header-'+section+' #otp4').val(otp4);
+        //   //if()
+        //     window.me.login_submit(window.me.logingroup.value,window.me);
+        //   function substring(string, start, end) {
+        //     var result = '',
+        //         length = Math.min(string.length, end),
+        //         i = start;
           
-            while (i < length) result += string[i++];
-            return result;
-          }  
-        });
+        //     while (i < length) result += string[i++];
+        //     return result;
+        //   }  
+        // });
       }
   }
 
@@ -549,13 +589,13 @@ export class HeaderComponent implements OnInit{
   get_remember()
   {
     let data : any = this.authService.get_remember();
-    data = $.parseJSON(data);
-    if(data != null)
-    {
-      this.remember.rm = true; 
-      this.remember.ph = data.ph; 
-      this.remember.pw = data.pd; 
-    }
+    // data = $.parseJSON(data);
+    // if(data != null)
+    // {
+    //   this.remember.rm = true; 
+    //   this.remember.ph = data.ph; 
+    //   this.remember.pw = data.pd; 
+    // }
   }
 
   signup_form()
@@ -580,7 +620,7 @@ export class HeaderComponent implements OnInit{
     if(formdata.password != formdata.cpassword)
     {
       this.toastr.errorToastr("Password does not match with Confirm Password", 'Failed');
-        return false;
+        return;
     }
     if(document.URL.indexOf('android_asset') !== -1)
     {
@@ -644,7 +684,7 @@ export class HeaderComponent implements OnInit{
           else
           {
             this.toastr.errorToastr(data.msg, 'Failed');
-            return false;
+            return;
           }
         }
       ) 
@@ -653,7 +693,7 @@ export class HeaderComponent implements OnInit{
   keytab(event){
     if(event.keyCode == 8 || event.keyCode == 46)
     {
-      return false;
+      return;
     }
     let element = event.srcElement.nextElementSibling; // get the sibling element
 
@@ -691,7 +731,7 @@ export class HeaderComponent implements OnInit{
           {
             if(data.status && data.status == 'Invalid Token')
             {
-              return false;
+              return;
             }
             
             if(this.notifications.length > 0)
@@ -705,8 +745,9 @@ export class HeaderComponent implements OnInit{
             if(data.more_enable)
               this.more_display = true;
             else
-              this.more_display = false; 
-            $('#loading-more').remove();
+              this.more_display = false;
+            if(isPlatformBrowser(this.platformId))    
+              $('#loading-more').remove();
 
             this.notification_count =  data.notification_count[0];
             this.notifications = this.filter_notification(this.notifications);
@@ -732,11 +773,9 @@ export class HeaderComponent implements OnInit{
     return notifications.filter(option => option.visitor_comment != null);
   }
 
-  notification_read()
+  notification_read(item)
   {
-    if(this.notification_count.count > 0)
-    {
-      this.todoservice.notification_read({token: this.get_token()})
+    this.todoservice.notification_read({token: this.get_token(),id:item.order_id})
       .subscribe(
         data => 
         {
@@ -746,27 +785,25 @@ export class HeaderComponent implements OnInit{
           }
         }
       )
-    }
-    
   }
   route_link(notification)
   {
-    if(notification.activity_type == 1 || notification.activity_type == 15 || notification.activity_type == 17)
+    if((notification.activity_type == 5 || notification.activity_type == 1) && (notification.seen == 1 || notification.seen == 0))
+      return '/dashboard/complaints/'+notification.order_id; 
+    else if(notification.activity_type == 1 || notification.activity_type == 15 || notification.activity_type == 17)
       return '/orders/recharge-receipt/'+notification.order_id;
     else if((notification.activity_type == 5 || notification.activity_type == 16 || notification.activity_type == 18) && notification.seen == null )
-      return '/product/order-receipt/'+notification.activity_id;
-    else if(notification.activity_type == 5 && notification.seen == 1)
-      return '/dashboard/complaints/'+notification.order_id;  
+      return '/product/order-receipt/'+notification.activity_id; 
     else if(notification.activity_type == 6 || notification.activity_type == 7 || notification.activity_type == 8 || notification.activity_type == 14)
       return "/dashboard/transactions"; 
     else if( notification.activity_type == 2 || notification.activity_type == 3 || notification.activity_type == 19)
       return "/dashboard/value-transfer/"+notification.order_id;
     else if( notification.activity_type == 4)
       return "/dashboard/add-money/"+notification.activity_id;  
-    return '#';
+    return '';
   }
   user_favourites()
-  {
+  { 
     let favourite :string = localStorage.getItem("favourite");
     if(!favourite)
     {
@@ -778,7 +815,7 @@ export class HeaderComponent implements OnInit{
             {
               if(data.status && data.status == 'Invalid Token')
               {
-                return false;
+                return;
               }
               localStorage.setItem('favourite', JSON.stringify(data.favourites));
             }
@@ -814,39 +851,42 @@ export class HeaderComponent implements OnInit{
   } 
   init_page()
   {
-    if( $(window).width() > 767)
-    {
-      if($('#snatchbot-script').length > 0)
-        $('#snatchbot-script').remove();
-      let script1 = this._renderer2.createElement('script');
-      script1.type = `text/javascript`;
-      script1.id = `snatchbot-script`;
-      script1.src = `https://account.snatchbot.me/script.js`;
-      this._renderer2.appendChild(this._document.body, script1);
-    }
-    if($(window).width() > 767)
-    {
-      if($('#google-translate-script').length > 0)
-        $('#google-translate-script').remove();
-      let script1 = this._renderer2.createElement('script');
-      script1.type = `text/javascript`;
-      script1.id = `google-translate-script`;
-      script1.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
-      this._renderer2.appendChild(this._document.body, script1);
-
-      if($('#google-gtag-script').length > 0)
-        $('#google-gtag-script').remove();
-      let script2 = this._renderer2.createElement('script');
-      script2.type = `text/javascript`;
-      script2.id = `google-gtag-script`;
-      script2.src = `https://www.googletagmanager.com/gtag/js?id=UA-176715754-1`;
-      this._renderer2.appendChild(this._document.body, script2);
-      
-    }
-    if($('#side-nav-script'))
-    {
-      $('#side-nav-script').remove();
-    }
+    if (isPlatformBrowser(this.platformId)) {
+      if( $(window).width() > 767)
+      {
+        if($('#snatchbot-script').length > 0)
+          $('#snatchbot-script').remove();
+        let script1 = this._renderer2.createElement('script');
+        script1.type = `text/javascript`;
+        script1.id = `snatchbot-script`;
+        script1.src = `https://account.snatchbot.me/script.js`;
+        this._renderer2.appendChild(this._document.body, script1);
+      }
+      if($(window).width() > 767)
+      {
+        if($('#google-translate-script').length > 0)
+          $('#google-translate-script').remove();
+        let script1 = this._renderer2.createElement('script');
+        script1.type = `text/javascript`;
+        script1.id = `google-translate-script`;
+        script1.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
+        this._renderer2.appendChild(this._document.body, script1);
+  
+        if($('#google-gtag-script').length > 0)
+          $('#google-gtag-script').remove();
+        let script2 = this._renderer2.createElement('script');
+        script2.type = `text/javascript`;
+        script2.id = `google-gtag-script`;
+        script2.src = `https://www.googletagmanager.com/gtag/js?id=UA-176715754-1`;
+        this._renderer2.appendChild(this._document.body, script2);
+        
+      }
+      if($('#side-nav-script'))
+      {
+        $('#side-nav-script').remove();
+      }
+     } 
+    
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.id = `side-nav-script`;
@@ -958,6 +998,26 @@ export class HeaderComponent implements OnInit{
       }  
     }
   }
+
+  function read_notification(item)
+  {
+    console.log(item);
+  }
+  // $('#loadmore-modal, #loadmore-modal2').delegate('.unread-notification','click',function(){
+  //   var id = $(this).attr('id');
+  //   event.stopPropagation();
+  //   $.ajax({
+	// 		url: '`+this.todoservice.server_url+`accounts/apis/home/notification_read',
+	// 		type: 'post',
+	// 		data: {
+	// 			id: id
+	// 		},
+	// 		success: function(data){
+	// 			 // console.log(data);
+	// 			$('select[name="'+loadName+'"]').html(data).material_select();
+	// 		}
+	// 	});
+  // })
   function set_lang()
   {
     $(".goog-te-combo option[value='my']").remove();
@@ -1109,7 +1169,7 @@ export class HeaderComponent implements OnInit{
   tick_clock(tick)
   {
     if(tick == 0)
-      return false;
+      return;
     this.tick = tick - 1;
     setTimeout(() => {
           this.tick_clock(this.tick); 

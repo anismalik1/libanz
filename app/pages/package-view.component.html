@@ -45,7 +45,7 @@ z-index: 99999;
 }
 </style>
 
-<app-header class="hide-on-mobile"></app-header>
+<app-header></app-header>
 <title></title>
 <div class="spinner-wrapper">
   <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
@@ -56,10 +56,10 @@ z-index: 99999;
 <div id="fb-root"></div>
 <section class="channels-basic new-packages on-mobile">
   <div class="row">
-    <div class="container center">
+    <div class="center">
         <div class="card">
           <div class="card-content no-padding">
-              <ul class="package-list all-packages no-padding" style="position:relative; left:25%;">
+              <ul class="package-list all-packages no-padding">
                   <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/tata-sky']" (click)="go_to_nav('/package-list/tata-sky')"><span class="icon-home"></span><span class="mobile-footer-text">Tata Sky Packages</span></a></li>
                   <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/airtel']" (click)="go_to_nav('/package-list/airtel')"><span class="icon-products"></span><span class="mobile-footer-text">Airtel Packages</span></a></li>
                   <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/videocon']" (click)="go_to_nav('/package-list/videocon')"><span class="icon-packages"></span><span class="mobile-footer-text">Videocon Packages</span></a></li>
@@ -73,7 +73,7 @@ z-index: 99999;
 </section>  
 <section class="channels-basic">
     <div class="container center">
-      <h1 *ngIf="details == false">{{this.package.category}} Packages 
+      <h1 class="no-margin" *ngIf="details == false">{{this.package.category}} Packages 
          
         <span >
         <a href="javascript:void(0);" class="btn-floating btn-large orange dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>

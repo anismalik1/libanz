@@ -15,10 +15,11 @@ export class OrderReceiptComponent implements OnInit {
   orders : any;
   display = 0;
   pack_amount : number = 0;
+  checkbox_text : any = {checkbox : false,radio : false,no_input : false};
   constructor( public todoservice : TodoService,
     private spinner : NgxSpinnerService,  
     private authservice : AuthService,
-    private productservice : ProductService,
+    public productservice : ProductService,
     private router : ActivatedRoute,private route : Router) {
       
      }
@@ -32,7 +33,14 @@ export class OrderReceiptComponent implements OnInit {
       this.order_id = params['name']; //log the value of id
     this.fetch_order_status(this.order_id);
     });
+    if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'cart')
+    {
+      // this.productservice.clear_cart();
+      this.todoservice.clear_cart({token : this.get_token()});
+    }
   }
+
+
   fetch_order_status(id)
   {
       this.spinner.show();
@@ -45,14 +53,27 @@ export class OrderReceiptComponent implements OnInit {
         let b = JSON.stringify(data);
         data =  JSON.parse(b.replace(/&nbsp;/g, ''));
         this.orders = data.order;
-        //console.log(this.orders)
         this.display = 1;
         this.spinner.hide();
-        this.todoservice.set_user_data(data.user)
-        this.productservice.clear_cart();
+        this.todoservice.set_user_data(data.user);
+        if(data.order[0].referer == 'cart' && (data.order[0].now - data.order[0].order_date *1)/60 < 5)
+        {
+          this.clearcart();
+        }
       }
 		  ) 
   }
+
+  clearcart()
+  {
+    this.todoservice.clear_cart({token : this.get_token()})
+    .subscribe(
+			data => 
+			{
+        
+      });
+  }
+
   get_token()
   {
     return this.authservice.auth_token();
@@ -125,7 +146,7 @@ export class OrderReceiptComponent implements OnInit {
     if(width > 767)
     {
         this.route.navigate(['/home']);
-        return false;
+        return;
     }
     this.route.navigate(['/mhome'])    
   }

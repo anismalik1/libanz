@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { LogoutComponent } from './shared/logout.component';
-// import { SplashScreenComponent } from './pages/splash-screen.component';
-import { ContactUsComponent } from './pages/contact-us.component';
-import { FaqsComponent } from './pages/faqs.component';
+import { LogoutComponent } from '../shared/logout.component';
+import { SplashScreenComponent } from '../pages/splash-screen.component';
+import { ContactUsComponent } from '../pages/contact-us.component';
+import { FaqsComponent } from '../pages/faqs.component';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ng6-toastr-notifications';
-import { LoginComponent } from './pages/login.component';
-import { SignupComponent } from './pages/signup.component';
-import { ForgotPasswordComponent } from './pages/forgot-password.component';
+import { LoginComponent } from '../pages/login.component';
+import { SignupComponent } from '../pages/signup.component';
+import { ForgotPasswordComponent } from '../pages/forgot-password.component';
 
 const routes: Routes = [
   { path: 'logout', component: LogoutComponent },

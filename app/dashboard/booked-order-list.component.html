@@ -77,7 +77,7 @@
                                         <th nowrap="nowrap" width="81px">Reg. Mobile</th>
                                         <th nowrap="nowrap" width="145px">Alternate</th>
                                         <th nowrap="nowrap" width="137px">Remark</th>
-                                        <th nowrap="nowrap" width="123px">Order Date</th>
+                                        <!--##change <th nowrap="nowrap" width="123px">Order Date</th> -->
                                         <th nowrap="nowrap" width="125px">Amount</th>
                                         <th nowrap="nowrap" width="35px">Subscriber ID</th>
                                         <th nowrap="nowrap" width="70px;">Payment Method</th>
@@ -95,7 +95,7 @@
                                         <td>{{item.regmobile}}</td>
                                         <td>{{item.altmobile}}</td>
                                         <td>{{item.remark}}</td>
-                                        <td><span>{{item.order_date | date: date:'dd M, Y'}}</span></td>
+                                        <!--##change <td><span>{{item.order_date | date: date:'dd M, Y'}}</span></td> -->
                                         <td><span>{{item.amount}}</span></td>
                                         <td><span>{{item.subid}}</span></td>
                                         <td *ngIf="item.is_cod == 1"><span>COD</span></td>

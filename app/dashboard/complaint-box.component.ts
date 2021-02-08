@@ -16,7 +16,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 export class ComplaintBoxComponent implements OnInit{
 
   loop_info : boolean = false;
-  complaints : object = {};
+  complaints : any;
   complaint_info : any ;
   type : string = 'all';
   p: number = 1;
@@ -38,7 +38,7 @@ export class ComplaintBoxComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
     this.route.params.subscribe(params => {
       this.type = params['name']; //log the value of id
@@ -190,7 +190,7 @@ export class ComplaintBoxComponent implements OnInit{
     var key = $("#ticket-id").val();
     if(key == "")
     {
-      return false;
+      return;
     }
     $('#search-record').html('<h4><i class="material-icons orange-text">search</i> Recent Comments For Searched Order '+key+'</h4>');
     this.spinner.show();

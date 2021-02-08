@@ -41,7 +41,7 @@ export class ValueTransferComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     }
     this.user_tobank = this.fb.group({
       'amount' : [null,Validators.compose([Validators.required])],
@@ -74,9 +74,10 @@ export class ValueTransferComponent implements OnInit{
     this.user_data = { amount : form.amount,surcharge:surcharge};
     this.goto_step(4);
   }
-  change_amount(amount)
+  change_amount(amount : any)
   {
-    let surcharge = (3*amount)/100;
+
+    let surcharge = (3*amount.target.value)/100;
     this.user_data.surcharge = surcharge;
     this.user_data.amount = amount;
   }
@@ -93,7 +94,7 @@ export class ValueTransferComponent implements OnInit{
   {
       if(!this.get_token())
       {
-        return false;
+        return;
       }	
       this.spinner.show();
 		  this.todoservice.send_money_to_bank({token:this.get_token(),user_data : this.user_data})
@@ -127,7 +128,7 @@ export class ValueTransferComponent implements OnInit{
   {
     if(!this.get_token())
 		{
-			return false;
+			return;
     }	
     this.spinner.show();
 		  this.todoservice.add_user_bank({token:this.get_token(),form : form})
@@ -154,7 +155,7 @@ export class ValueTransferComponent implements OnInit{
     {
       if(this.user_data.amount < 100)
       {
-        return false;
+        return;
       }
     }  
     this.step = step;
@@ -162,7 +163,7 @@ export class ValueTransferComponent implements OnInit{
     {
       if(!this.get_token())
       {
-        return false;
+        return;
       }
       this.spinner.show();	
       this.todoservice.user_banks({token:this.get_token()})
@@ -177,7 +178,7 @@ export class ValueTransferComponent implements OnInit{
     {
       if(!this.get_token())
       {
-        return false;
+        return ;
       }	
       this.spinner.show();
       this.todoservice.banks({token:this.get_token()})
@@ -204,7 +205,7 @@ export class ValueTransferComponent implements OnInit{
 	{
 		if(!this.get_token())
 		{
-			return false;
+			return;
 		}	
 		  this.todoservice.fetch_order({token:this.get_token(),order_id: this.order_id})
 		  .subscribe( 
@@ -224,7 +225,7 @@ export class ValueTransferComponent implements OnInit{
     if(formdata.phone == '' || formdata.phone == null)
     {
       this.toastr.errorToastr(" Please Enter a Valid Number", 'Failed! ');
-      return false;
+      return;
     }
     this.spinner.show();
     if(this.authservice.retrieveToken())
@@ -307,7 +308,7 @@ export class ValueTransferComponent implements OnInit{
     if(formdata.amount == '')
     {
       this.toastr.errorToastr(" Please Enter Amount", 'Failed! ');
-      return false;
+      return;
     }
     this.spinner.show();
     if(this.authservice.retrieveToken())
@@ -339,7 +340,7 @@ export class ValueTransferComponent implements OnInit{
           else
           {
             this.toastr.errorToastr(' '+data.error, 'Failed! ');
-            return false;
+            return;
           }
         }
       )  

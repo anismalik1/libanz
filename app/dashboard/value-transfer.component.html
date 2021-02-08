@@ -8,9 +8,7 @@
     text-transform: capitalize;
   }
 
- 
- 
-  .btn-value{  
+.btn-value{  
   width: 100%;
     margin-right: 0;
     border-radius: 20px;
@@ -34,7 +32,7 @@ table.striped>tbody>tr:nth-child(4) {
     border-bottom: 1px solid #ececec;
     margin-bottom: 10px;
 }
-  .fix-welcome{
+.fix-welcome{
     padding: 10px;
     font-size: 16px;
     color: #7b7a7a;
@@ -43,10 +41,10 @@ table.striped>tbody>tr:nth-child(4) {
       padding:9px;
   }
   .w-100{
-
     width:100%;
   }
-  label.lbl-num {
+
+label.lbl-num {
     line-height: 33px;
     font-size: 16px !important;
     }
@@ -215,10 +213,11 @@ left: 25%;
                             <li class="cst-top-signle"><strong>Payment Status: </strong> <span *ngIf="order_data.payment_status == 1">Succcessful</span><span *ngIf="order_data.payment_status == 2">Failed</span><span *ngIf="order_data.payment_status == 3">Pending</span></li>
                             <li><strong>Invoice No: </strong>  #{{order_data.id}} </li>
                             <li><strong>Amount: </strong> {{order_data.grand_total}}</li>
-                            <li><strong>Date issued: </strong> {{order_data.history_time | date: date:'dd M, Y'}}</li>
+                            <li><strong>Date issued: </strong> {{order_data.history_time | date: 'dd M, Y'}}</li>
                             
                             <li><strong>Payment Method: </strong><span *ngIf="order_data.paymethod == 1">Wallet</span><span *ngIf="order_data.paymethod == 2">Gateway</span><span *ngIf="order_data.paymethod == 3">Libanz</span><span *ngIf="order_data.paymethod == 4">Paytm</span></li>
-                            <!-- <li><strong>Commission/Surcharge: </strong>Rs.{{order_data.commission_surcharge}}</li> -->
+                            <!-- <li><span *ngIf=" !=''"></span></li> -->
+                            <li><strong>Detail: </strong><span *ngIf="order_data.comment !=''">{{order_data.comment}}</span></li>
                             <li><b class="green-text">{{order_data.remark}}</b></li>
                         </ul>
 
@@ -304,7 +303,7 @@ left: 25%;
                             <br/>
                             <i class="fa fa-info"></i> You can send upto 25000 with in a month.
                             <form [formGroup]="user_tobank" class="margin-top sec-7 " #userform = "ngForm" (ngSubmit)="user_tobank_submit(userform.value)">
-                                <input id="first_name" type="number" id="user-amount" placeholder="Enter Amount"  class="validate" formControlName="amount" (keyup)="change_amount($event.target.value)">
+                                <input id="first_name" type="number" id="user-amount" placeholder="Enter Amount"  class="validate" formControlName="amount" (keyup)="change_amount($event)">
                                 <span class="error-rtext" *ngIf="this.user_data.amount < 500">Please enter a valid amount between <span class="fa fa-inr"></span> 500 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
                                 <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" [disabled]="(!this.user_data || this.user_data.amount < 500)?true:false"> Proceed </button>
                             </form>
@@ -316,9 +315,9 @@ left: 25%;
                                            <div class="col s1"><label class="lbl-num"> <span class="fa fa-inr"></span> </label> </div>
                                            <div class="col s11">
                                                <div class="inner-rate">
-                                           <input id="first_name" type="number" placeholder="AMOUNT"  class="validate" name="amoutn" value="{{this.user_data.amount}}" (keyup)="change_amount($event.target.value)">
-                                           <span class="fa fa-plus cst-plus-bg"> </span>
-                                        </div>
+                                                    <input id="first_name" type="number" placeholder="AMOUNT"  class="validate" name="amoutn" value="{{this.user_data.amount}}" (keyup)="change_amount($event)">
+                                                    <span class="fa fa-plus cst-plus-bg"> </span>
+                                                </div>
                                         <div class="money-wallet">   
                                         <div class="extra-rate-1"> 
                                             <p>Charge</p>

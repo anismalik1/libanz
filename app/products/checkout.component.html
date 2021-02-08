@@ -53,7 +53,7 @@ span.icon-locate {
 <app-header style="display:none;"></app-header>
 <div class="row">
 	<div class="header-size" style="width:100%;height:80px;background-color:#fff;">
-		<a href="#"> <img src="https://www.libanz.com/assets/images/logo.png" style="    width: 170px;
+		<a routerLink="/"> <img src="https://www.libanz.com/assets/images/logo.png" style="    width: 170px;
 		padding: 13px;"> </a>
 	</div>
 </div>
@@ -170,10 +170,13 @@ span.icon-locate {
 																		</div>
 																	</div>
 																	<div class="input-field col s12 m6">
-																		<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+																		<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off" (keyup)="verify_phone($event);">
 																		<label for="phn-no">Phone Number*</label>
 																		<div class="center" *ngIf="!addressformgroup.controls['contact'].valid && addressformgroup.controls['contact'].touched">
 																			<span class="red-text ">*Enter a Valid Phone Number.</span>
+																		</div>
+																		<div class="center" *ngIf="phone_exist">
+																			<span class="red-text ">Phone Number is already exist.</span>
 																		</div>
 																	</div>
 																</div>
@@ -219,7 +222,7 @@ span.icon-locate {
 																</div>
 													</div>
 													<div class="modal-footer">
-														<button type="Submit" class="modal-action btn orange btn-large check-btn" [disabled]="!addressformgroup.valid">Save and Continue</button>
+														<button type="Submit" class="modal-action btn orange btn-large check-btn" [disabled]="!addressformgroup.valid || phone_exist">Save and Continue</button>
 														<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 													</div>
 											</form>
@@ -359,7 +362,7 @@ span.icon-locate {
           		<div class="divider"></div>
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-								<span><button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span>
+								<span><button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button></span>
 								<!-- <span *ngIf="topaybutton"><button class="btn waves-effect waves-light orange right button-two" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span> -->
 							</div>
           	<div class="divider"></div>
@@ -393,13 +396,13 @@ span.icon-locate {
 									{{check_wallet_content()}}
 									<!-- <mat-checkbox ></mat-checkbox> -->
 									<span *ngIf="checkbox_text.checkbox ==  true">
-										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" checked="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
 									</span>
 									<span *ngIf="checkbox_text.radio == true">
-										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" checked="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
 									</span>
 									<span *ngIf="checkbox_text.no_input == true">
-										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text font600"> LIBANZ Wallet <i class="red-text">*</i></span> <span class="grey-text" style="margin-left: 5px;">Balance Rs{{this.todoservice.get_user_wallet_amount()}}</span>
+										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text font600"> LIBANZ Wallet <i class="red-text">*</i></span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span>
 									</span>
 								</div>	
 										<div class="clearfix"></div> 
@@ -429,7 +432,7 @@ span.icon-locate {
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout">
-						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout Rs. ({{pay_amount() - this.calculate_bonus()}})</button></span>
+						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout <i class="icon-inr"></i> ({{pay_amount() - this.calculate_bonus()}})</button></span>
 					</div>
 					
 				</div>
@@ -437,7 +440,7 @@ span.icon-locate {
         	</div>
         	<!-- End Here -->
 				</div>
-				<div class="col s12 m4 order-summary" id="checkout-order-summary">
+				<div class="col s12 m4 order-summary" id="checkout-order-summary" *ngIf="this.product_items.length > 0">
 					<div class="card">
             <div class="card-content black-text no-padding fix-inne-pad">
             	<span class="card-title inline-block">Order Summary</span>
@@ -481,7 +484,7 @@ span.icon-locate {
             	</div>
             	<hr>
             	<div class="subtotal">
-									<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount(this.product_items) > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+								<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount(this.product_items) > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
             		<p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.product_items)}}</p><div class="clearfix"></div>
             		<!-- <p class="inline-block red-text">*You will get cashback After Product Activation.</p> -->
               </div>
@@ -521,13 +524,12 @@ span.icon-locate {
 			</div>
 		</div>
 
-      <div id="add-address" class="modal">
+      <!-- <div id="add-address" class="modal">
             <form class="margin-top location-add1" #addnewaddress = "ngForm" (ngSubmit)="edit_addr(addnewaddress.value)">
         <div class="modal-content no-padding" *ngIf="edit == true">
             <div class="add-add border-bottom">
               <h4 class="inline-block">Edit Address</h4>
-              <!-- <a href="javascript:" class="btn orange white-text inline-block right"><i class="material-icons">my_location</i> Use my current location</a> -->
-            </div>
+             </div>
                 <div class="row no-margin">
                 <div class="input-field col s12 m6">
                   <input name="name" id="name" type="text" class="validate" value="{{editaddress.name}}" [(ngModel)]="editaddress.name">
@@ -535,7 +537,7 @@ span.icon-locate {
                   <label for="name" *ngIf="editaddress.name == ''">Name</label>
                 </div>
                 <div class="input-field col s12 m6">
-                  <input id="phn-no" name="contact" type="text" class="validate" ngModel value="{{editaddress.contact}}" [(ngModel)]="editaddress.contact">
+                  <input id="phn-no" name="contact" type="text" class="validate" ngModel value="{{editaddress.contact}}" [(ngModel)]="editaddress.contact" (keyup)="verify_phone($event);">
                   <label for="phn-no" class="active" *ngIf="editaddress.contact != ''">Phone Number</label>
                   <label for="phn-no" *ngIf="editaddress.contact == ''">Phone Number</label>
                 </div>
@@ -581,7 +583,7 @@ span.icon-locate {
           <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a>
         </div>
     </form>
-		</div>
+		</div> -->
 </ng-template>	
 <div id="modal-packages" class="modal modal-fixed-footer">
 	<div class="modal-content">
@@ -665,7 +667,6 @@ span.icon-locate {
 			<a href="javascript:" class="modal-close btn orange white-text">DONE</a>
 	</div>
 </div>	
-	<app-footer style="display:none;"></app-footer>	
 	<section class="last-footer grey lighten-3">
 		<div class="container">
 			<div class="row no-margin">
@@ -681,16 +682,15 @@ span.icon-locate {
 					<span class="font-size-change1">© 2015 - 2020 All Rights Reserved by Libanz <br/> Under Libanz International</span>
 				</div>
 				<div class="col s12 m12 l3">
-					<ul class="social-icons-footer no-margin center">
-						<li class="inline-block"><a href="https://www.facebook.com/mydthshop/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Facebook"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" class="responsive-img" alt="facebook"></a></li>
-						<li class="inline-block"><a href="https://www.linkedin.com/company/14611847/admin/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Linkedin"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" class="responsive-img" alt="linkedin"></a></li>
-						<li class="inline-block"><a href="https://twitter.com/mydthshop" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Twitter"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" class="responsive-img" alt="twitter"></a></li>
-						<!-- <li class="inline-block"><a href="https://plus.google.com/+Mydthshopmydthshop/about" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Google Plus"><img src="https://mydthshop.com/web-app/assets/images/google-plus.png" class="responsive-img" alt="google-plus"></a></li> -->
-						<li class="inline-block"><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Youtube"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" class="responsive-img" alt="youtube"></a></li>
-						<li class="inline-block"><a href="https://in.pinterest.com/jain2221/pins/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Pinerest"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" class="responsive-img" alt="pinterest"></a></li>
-						<li class="inline-block"><a href="https://www.instagram.com/mydthshopindia/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Instagram"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" class="responsive-img" alt="instagram"></a></li>
-						<li class="inline-block"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Blogger"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" class="responsive-img" alt="blogger"></a></li>
-					</ul>
+						<ul class="social-icons-footer no-margin center">
+								<li class="inline-block"><a href="https://www.facebook.com/libanzb2b/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Facebook"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" class="responsive-img" alt="facebook"></a></li>
+								<li class="inline-block"><a href="https://www.linkedin.com/company/libanzb2b" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Linkedin"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" class="responsive-img" alt="linkedin"></a></li>
+								<li class="inline-block"><a href=" https://twitter.com/libanzb2b" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Twitter"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" class="responsive-img" alt="twitter"></a></li>
+								<li class="inline-block"><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Youtube"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" class="responsive-img" alt="youtube"></a></li>
+								<li class="inline-block"><a href="https://in.pinterest.com/jain2221/_created/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Pinerest"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" class="responsive-img" alt="pinterest"></a></li>
+								<li class="inline-block"><a href="https://www.instagram.com/libanzb2b/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Instagram"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" class="responsive-img" alt="instagram"></a></li>
+								<li class="inline-block"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Blogger"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" class="responsive-img" alt="blogger"></a></li>
+							</ul>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild ,ViewContainerRef,Renderer2,Inject,} from '@angular/core';
+import { Component, OnInit,ViewChild ,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -13,8 +13,13 @@ import { RechargeType } from '../recharge.type';
 import { Meta ,Title} from '@angular/platform-browser';
 import { DOCUMENT} from '@angular/common';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+// var jsdom = require("jsdom"); 
+// const $ = require("jquery")(jsdom.jsdom().createWindow()); 
+//declare var $: any;
+
 import * as $ from 'jquery';
-import { element } from 'protractor';
 declare var window: any;
 
 @Component({
@@ -23,6 +28,7 @@ declare var window: any;
   styles: []
 })
 export class RechargeComponent implements OnInit {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   myControl = new FormControl();
   @ViewChild('operator', {static: false}) moperator;                                                        
   @ViewChild('postoperator', {static: false}) postoperator;                                                        
@@ -83,7 +89,7 @@ export class RechargeComponent implements OnInit {
   selected_operator : number = 0;
   pagetitle : string;
   options: any = [{ how_much_apply_to_recharge: 0}];
-  filteredOptions: Observable<object>;
+  filteredOptions: any;
   filterdList : boolean = false;
   tab_1 : boolean = false;
   tab_2 : boolean = false;
@@ -120,8 +126,9 @@ export class RechargeComponent implements OnInit {
     private meta : Meta,
     private toastr : ToastrManager,
     private vcr: ViewContainerRef,
+    @Inject(PLATFORM_ID) private platformId: any
   ) {
-    
+    RechargeComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.url_name = this.activatedroute.snapshot.params['name'];
       this.ini_recharge_tabs(this.url_name);
    
@@ -219,24 +226,27 @@ export class RechargeComponent implements OnInit {
 
   ini_script()
   {
-    if($('#init-script'))
-    {
-      $('#init-script').remove();
+    if (isPlatformBrowser(this.platformId)) {
+      if($('#init-script'))
+      {
+        $('#init-script').remove();
+      }
+      let script = this._renderer2.createElement('script');
+      script.type = `text/javascript`;
+      script.id = `init-list-script`;
+      script.text = `
+     $(document).ready(function(){
+      $('.modal').modal();
+      $('.tooltipped').tooltip();
+      });
+      function pack_price(price)
+      {
+        $('[ng-reflect-name="amount"]').val(price);
+      }
+      `;
+      this._renderer2.appendChild(this._document.body, script);
     }
-	  let script = this._renderer2.createElement('script');
-    script.type = `text/javascript`;
-    script.id = `init-list-script`;
-    script.text = `
-   $(document).ready(function(){
-    $('.modal').modal();
-    $('.tooltipped').tooltip();
-    });
-    function pack_price(price)
-    {
-      $('[ng-reflect-name="amount"]').val(price);
-    }
-    `;
-    this._renderer2.appendChild(this._document.body, script);
+    
   }
 
   
@@ -375,26 +385,26 @@ export class RechargeComponent implements OnInit {
   
   show_tab(action)
   {
-    if(action == 1)
-    {
-      $('#circles-content').addClass('hide');
-      $('#promo-content').removeClass('hide');
-      $('#promo-content').addClass('active');
-      $("#tab-1").addClass('active');
-      $("#tab-2").removeClass('active');
-      this.tab_1 = true; 
-      this.tab_2 = false; 
-    }
-    else
-    {
-      $('#circles-content').removeClass('hide');
-      $('#promo-content').addClass('hide');
-      $('#circles-content').addClass('active');
-      $("#tab-1").removeClass('active');
-      $("#tab-2").addClass('active');
-      this.tab_1 = false; 
-      this.tab_2 = true; 
-    }
+    // if(action == 1)
+    // {
+    //   $('#circles-content').addClass('hide');
+    //   $('#promo-content').removeClass('hide');
+    //   $('#promo-content').addClass('active');
+    //   $("#tab-1").addClass('active');
+    //   $("#tab-2").removeClass('active');
+    //   this.tab_1 = true; 
+    //   this.tab_2 = false; 
+    // }
+    // else
+    // {
+    //   $('#circles-content').removeClass('hide');
+    //   $('#promo-content').addClass('hide');
+    //   $('#circles-content').addClass('active');
+    //   $("#tab-1").removeClass('active');
+    //   $("#tab-2").addClass('active');
+    //   this.tab_1 = false; 
+    //   this.tab_2 = true; 
+    // }
   }
   fetch_navigate_data(page)
   {
@@ -486,7 +496,7 @@ export class RechargeComponent implements OnInit {
         this.validationtext = "Subscriber ID starts with 1 and 10 digits long. To locate it, press the home button on remote.";
       }else if(data == 72)
       {
-        this.dthpattern = "[0-9]{10}$";
+        this.dthpattern = "[0-9]{6,11}$";
         this.validationtext = "Know your Customer ID SMS 'ID' to 566777 from your registered mobile number.";
       }else if(data == 74)
       {
@@ -558,14 +568,13 @@ export class RechargeComponent implements OnInit {
               //   this.recharge_init( this.url_name,formdata);
               // }
             }
-
-            if(recharge_data.circle_area != null)
+            if(recharge_data && recharge_data.circle_area != null)
               this.region        = recharge_data.circle_area;
-            if(this.get_token() && recharge_data != null && recharge_data.url_name == this.url_name)
+            if( recharge_data != null && recharge_data.url_name == this.url_name)
             {
               recharge_data.operator_id = recharge_data.operator;
               recharge_data.recharge_amount = recharge_data.amount;
-              //console.log(this.recharge_cart);
+
               if(recharge_data.url_name == 'mobile')
               {
                 this.mobilegroup.controls['recharge_id'].setValue(recharge_data.recharge_id);
@@ -617,13 +626,16 @@ export class RechargeComponent implements OnInit {
               }
               var time = new Date();
               if(time.getTime() - recharge_data.time <= 60*60*1000)
-                this.recharge_init(recharge_data.url_name,recharge_data);
+                this.recharge_init(recharge_data.url_name,recharge_data); 
             }
-           
+           if(recharge_data)
+           {
             this.selectedOperator = Number(recharge_data.operator_id);
             this.filter_operator_name(recharge_data.operator_id);
             this.filter_circle_name(Number(recharge_data.circle_id));
-            if(this.region > 0 && recharge_data.operator_id > 0)
+           }
+            
+            if(recharge_data && this.region > 0 && recharge_data.operator_id > 0)
             {
               var operators = this.alloperators.filter(x => x.id == recharge_data.operator_id);
               //console.log(operators)  
@@ -631,8 +643,8 @@ export class RechargeComponent implements OnInit {
                 this.get_plans(this.region,operators[0].recharge_id);   
               this.operator_id = operators[0].recharge_id;  
             } 
-            
-            this.activity = recharge_data.activity_id;
+            if(recharge_data)
+              this.activity = recharge_data.activity_id;
 
         }
       )
@@ -738,10 +750,9 @@ export class RechargeComponent implements OnInit {
       });
       return;
     }
-   // console.log(formdata)
     if(formdata.amount <= 0 || formdata.recharge_id <= 0 || formdata.operator <= 0 )
 		{
-      return false;
+      return ;
     }
     this.spinner.show();
     //console.log(formdata)	
@@ -762,11 +773,13 @@ export class RechargeComponent implements OnInit {
       var time = new Date();
       this.rechargeData.recharge_type = s;
       this.rechargeData.time = time.getTime();
+      if(s == 'dth')
+        s = 'dth-recharge';
       formdata.url_name = s;
       formdata.time = time.getTime();
       this.addto_recharge_cart(formdata);
       this.spinner.hide();
-      return false;
+      return;
     }
     this.todoservice.recharge_init(this.rechargeData)
 		.subscribe(
@@ -784,12 +797,12 @@ export class RechargeComponent implements OnInit {
         if(data.status == 'false')
         {
           this.toastr.errorToastr(data.msg);
-          return false;
+          return;
         }
         if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
-          return false;
+          return;
 			  //	this.router.navigate(['/login']);
         }
         this.ini_script();
@@ -840,7 +853,7 @@ recharge_handle()
     {
       $('.logup.modal-trigger')[0].click();
     } 
-    return false;
+    return;
   }
   if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
   {
@@ -850,7 +863,7 @@ recharge_handle()
   this.rechargeData.payment_type = $('[name="payment_type"]:checked').val();
   if($('[name="include_wallet"]:checked').length > 0)
     this.rechargeData.include_wallet = 1;
-
+  $('#recharge-proceed').prop("disabled",true);
 	this.todoservice.recharge_handler(this.rechargeData)
 	.subscribe(
         data => 
@@ -859,13 +872,13 @@ recharge_handle()
           if(data.status == 'Invalid Token')
           {
             this.authservice.clear_session();
-            return false;
+            return ;
           }
           if(data.status == "false")
           {
             this.toastr.errorToastr(data.msg);
 
-            return false;
+            return;
           }
           if(!$.isEmptyObject(data))
           {
@@ -873,7 +886,7 @@ recharge_handle()
             {
               if(document.URL.indexOf('android_asset') !== -1)
               {
-                var ref = window.cordova.InAppBrowser.open("https://www.libanz.com/web-app/do-paytm/recharge-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount, '_blank', 'location=yes');
+                var ref = window.cordova.InAppBrowser.open("https://www.libanz.com/accounts/apis/response/paytm_form_recharge?ORDERID="+data.activity+'&token='+this.get_token(), '_blank', 'location=yes');
                 window.me = this;
                 ref.addEventListener('loadstart', function(event) { 
                   var urlSuccessPage = "recharge-receipt";
@@ -887,14 +900,14 @@ recharge_handle()
               }
               else
               {
-                window.location.href = "https://www.libanz.com/web-app/do-paytm/recharge-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount;
+                window.location.href = "https://www.libanz.com/accounts/apis/response/paytm_form_recharge?ORDERID="+data.activity+'&token='+this.get_token();
               }
             }
             else if(typeof data.red_auth != 'undefined' && data.red_auth == 'card')
             {
               if(document.URL.indexOf('android_asset') !== -1)
               {
-                var ref = window.cordova.InAppBrowser.open("https://www.libanz.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id, '_blank', 'location=yes');
+                var ref = window.cordova.InAppBrowser.open("https://www.libanz.com/accounts/apis/response/recharge_pay/?order_id="+data.activity, '_blank', 'location=yes');
                 window.me = this;
                 ref.addEventListener('loadstart', function(event) { 
                   var urlSuccessPage = "recharge-receipt";
@@ -906,7 +919,7 @@ recharge_handle()
               });
               }
               else
-                window.location.href = "https://www.libanz.com/accounts/apis/response/recharge_pay/?order_id="+data.order_id;
+                window.location.href = "https://www.libanz.com/accounts/apis/response/recharge_pay/?order_id="+data.activity;
             }
           else
           {
@@ -937,7 +950,7 @@ recharge_handle()
     if(Number(this.selected_promo.min_pay) > Number(this.rechargeData.recharge_amount))
     {
       $('#response-code').text('This Promocode is applicable for Minimum Amount of Rs. '+this.selected_promo.min_pay);
-      return false;
+      return;
     }
   }
   apply_promo()
@@ -946,7 +959,7 @@ recharge_handle()
     if(name == '' || name == null )
     {
       $('#response-code').text('Please Enter Promo code');
-      return false;
+      return;
     }
     $('#apply-promo').text('WAIT..');
     this.todoservice.apply_promo_code({token:this.get_token(),promo: name,recharge_data : this.rechargeData})
@@ -958,7 +971,7 @@ recharge_handle()
 			  if(data.status == 'Invalid Token')
 			  {
           this.authservice.clear_session();
-          return false;
+          return;
 			  //	this.router.navigate(['/login']);
         }
         
@@ -1063,7 +1076,7 @@ check_amount(s)
    }
    let recharge_id = e.target.value;
    if(recharge_id.length <= 2)
-     return false;
+     return;
    this.todoservice.check_if_recharge_exist({recharge_id: recharge_id})
    .subscribe(
      data => 
@@ -1151,7 +1164,7 @@ check_amount(s)
  {
    //console.log(operator);
   if(this.url_name != 'mobile')
-    return true; 
+    return; 
   if(operator == 'get')
    {
     // console.log(this.operator_id)
@@ -1200,7 +1213,7 @@ check_amount(s)
   {
   let operator = this.alloperators.filter(x => x.id == id);
   if(operator.length == 0)
-    return false;
+    return;
   this.operators.selected = operator;
   this.operator_id = operator[0].recharge_id;
   }

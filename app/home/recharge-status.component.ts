@@ -47,7 +47,7 @@ export class RechargeStatusComponent implements OnInit {
           }
           this.order = data.ORDER[0];
           this.todoservice.set_user_data(data.USER);
-          if(this.order.status == 'Pending' && this.order.payment_status == 1 && this.iterate < 10)
+          if((this.order.status == 'Pending' || this.order.status == 'Progress') && this.order.payment_status == 1 && this.iterate < 10)
           {
             this.iterate++;
             setTimeout(()=>{   
@@ -113,7 +113,7 @@ export class RechargeStatusComponent implements OnInit {
     if(width > 767)
     {
         this.router.navigate(['/home']);
-        return false;
+        return;
     }
     this.router.navigate(['/mhome'])    
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy,Renderer2,Inject} from '@angular/core';
 //import {trigger,transition,keyframes,state,query,animate,group,animateChild,style} from '@angular/animations';
 import { DOCUMENT} from "@angular/common";
-import { Headers,Http } from '@angular/http';
+import { HttpHeaders,HttpClient } from '@angular/common/http';
 import { TodoService } from '../todo.service';
 import {Router} from '@angular/router';
 
@@ -59,7 +59,7 @@ export class SplashScreenComponent implements OnInit {
         private _renderer2: Renderer2,
          @Inject(DOCUMENT) private _document,
         private router : Router,
-        private http : Http
+        private http : HttpClient
     ) 
     { }
 
@@ -75,7 +75,7 @@ export class SplashScreenComponent implements OnInit {
         if(width > 767 || document.URL.indexOf('https://') !== -1)
         {
             this.router.navigate(['/']);
-            return false;
+            return;
         }
        
         if(document.URL.indexOf('android_asset') !== -1)
@@ -101,7 +101,7 @@ export class SplashScreenComponent implements OnInit {
 
     app_version()
     {
-        var Headers_of_api = new Headers({
+        var Headers_of_api = new HttpHeaders({
             'Content-Type' : 'application/x-www-form-urlencoded'
           });
         this.http.post('https://www.libanz.com/accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
@@ -119,7 +119,7 @@ export class SplashScreenComponent implements OnInit {
                                 if(version *1 < window.appversion *1)
                                 {
                                     //$('.mid-btns').removeClass('hide');
-                                    return false;
+                                    return;
                                 } 
                                 else
                                 {
@@ -140,7 +140,7 @@ export class SplashScreenComponent implements OnInit {
                         if(2000 < 2001)
                         {
                             //$('.mid-btns').removeClass('hide');
-                            return false;
+                            return;
                         }
                         else
                         {

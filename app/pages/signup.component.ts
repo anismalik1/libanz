@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewContainerRef} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,PLATFORM_ID,Inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Meta ,Title} from '@angular/platform-browser';
@@ -6,7 +6,10 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from '../user';
-import { Router ,ActivatedRoute} from '@angular/router'
+import { Router ,ActivatedRoute} from '@angular/router';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+
 import * as $ from 'jquery';
 declare var window: any;
 @Component({
@@ -16,7 +19,7 @@ declare var window: any;
   providers: [TodoService,User,AuthService]
 })
 export class SignupComponent implements OnInit{
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   user_type : number = 1;
   user_type_enabled : boolean = true;
   verify : number = 0;
@@ -38,6 +41,7 @@ export class SignupComponent implements OnInit{
   device : string;
   private watch : Number = 0;
   constructor(private toast: ToastrManager, 
+    @Inject(PLATFORM_ID) private platformId: any ,
     private fb : FormBuilder,
     public todoservice : TodoService,
     private meta : Meta,
@@ -47,6 +51,7 @@ export class SignupComponent implements OnInit{
     private authservice : AuthService,
     vcr: ViewContainerRef,
     private router : Router) {
+      SignupComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.referer = String(this.todoservice.get_param('ref'));
     if(this.referer && this.referer == 'merchant')
       this.page = "merchant-signup";
@@ -89,7 +94,7 @@ export class SignupComponent implements OnInit{
           { 
             if(storeddata.user)
             {
-              return false
+              return
             }
             else if(this.get_token())
             {
@@ -121,7 +126,7 @@ export class SignupComponent implements OnInit{
   let page = {page : this.page}; 
   if(page.page == '')
   {
-      return false;
+      return;
   }
   this.todoservice.fetch_page_data(page)
     .subscribe(
@@ -130,11 +135,13 @@ export class SignupComponent implements OnInit{
         if(data.PAGEDATA)
         { 
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-          $('#page-content').html(this.todoservice.get_page().description);
+          if(isPlatformBrowser(this.platformId)) 
+            $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
-          window.scroll(0,0);
+          if(isPlatformBrowser(this.platformId)) 
+            window.scroll(0,0);
         }
         this.spinner.hide();  
       }
@@ -146,7 +153,7 @@ export class SignupComponent implements OnInit{
     this.days = days;
     this.selected_plans = this.plans_data.filter(x => x.days == days);
     if(this.selected_plans.length == 0)
-      return false;
+      return;
        
     setTimeout(()=>{    //<<<---    using ()=> syntax
       for(var i = 0;i < this.selected_plans.length;i++)
@@ -208,7 +215,7 @@ export class SignupComponent implements OnInit{
     if(formdata.password != formdata.cpassword)
     {
       this.toast.errorToastr("Password does not match with Confirm Password", 'Failed');
-        return false;
+        return;
     }
     this.phone = formdata.phone;
     this.password = formdata.password;
@@ -278,7 +285,7 @@ export class SignupComponent implements OnInit{
           else
           {
             me.toast.errorToastr(data.msg, 'Failed');
-            return false;
+            return;
           }
         }
       ) 
@@ -324,7 +331,7 @@ export class SignupComponent implements OnInit{
   keytab(event){
     if(event.keyCode == 8 || event.keyCode == 46)
     {
-      return false;
+      return;
     }
     let element = event.srcElement.nextElementSibling; // get the sibling element
 

@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewContainerRef} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,Inject,PLATFORM_ID} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Meta ,Title} from '@angular/platform-browser';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -7,6 +7,9 @@ import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+
 import * as $ from 'jquery';
 @Component({ 
   selector: 'app-contact-us',
@@ -16,8 +19,10 @@ import * as $ from 'jquery';
 })
 export class ContactUsComponent implements OnInit {
   contactgroup : FormGroup;
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   page : any;
   constructor(private fb: FormBuilder, 
+    @Inject(PLATFORM_ID) private platformId: any,
     public todoservice: TodoService,
     private spinner : NgxSpinnerService,
     private toastr: ToastrManager,
@@ -27,6 +32,7 @@ export class ContactUsComponent implements OnInit {
     private router : ActivatedRoute,
     private route : Router,
     private authservice : AuthService) { 
+      ContactUsComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.contactgroup = fb.group({
         'name' : [null,Validators.compose([Validators.required])],
         'email' : [null,Validators.compose([Validators.required])],
@@ -51,7 +57,7 @@ fetch_page_data()
 {
   if(this.page == null || this.page == '')
   {
-      return false;
+      return;
   }
   this.spinner.show(); 
   this.todoservice.fetch_page_data({page : this.page})
@@ -63,7 +69,8 @@ fetch_page_data()
           this.todoservice.set_page_data(data.PAGEDATA[0]);
           if(data.PAGEDATA[0].image != '')
           {
-            $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);
+            if(isPlatformBrowser(this.platformId))
+              $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);
           }
           $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
@@ -82,17 +89,26 @@ fetch_page_data()
       data.token  = this.get_token();
     }
     data.which_form = 1;
+    
     this.spinner.show();
     this.todoservice.save_contact_form(data)
     .subscribe(
       data => 
       {
-        let b = JSON.stringify(data);
-        data =  JSON.parse(b.replace(/\\/g, ''));
         this.spinner.hide();
         if(data.status == true)
         {
-          $('[href="#modal1"]')[0].click();
+          this.contactgroup.controls['name'].setValue(null);
+          this.contactgroup.controls['email'].setValue(null);
+          this.contactgroup.controls['subject'].setValue(null);
+          this.contactgroup.controls['message'].setValue(null);
+          this.contactgroup.markAsUntouched()
+          $('[href="#modal-success"]')[0].click();
+          //this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
+        }
+        else
+        {
+          this.toastr.errorToastr("Sorry! Your query is not recorded. Please try later.");
           //this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
         }
       }

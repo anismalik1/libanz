@@ -1,12 +1,12 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,Inject,PLATFORM_ID} from '@angular/core';
 import { Meta,Title } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
-
 import { Router,ActivatedRoute } from '@angular/router';
-
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-blog',
@@ -15,7 +15,7 @@ import { Router,ActivatedRoute } from '@angular/router';
   providers: [TodoService,User,AuthService]
 })
 export class BlogComponent implements OnInit {
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   blogs : any = [];
   categories : any;
   page : string;
@@ -24,6 +24,7 @@ export class BlogComponent implements OnInit {
   more_display : boolean = false;
   loaded_blogs : any = [];
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any, 
     public todoservice : TodoService,
     private authservice : AuthService,
     private route : Router,
@@ -31,7 +32,9 @@ export class BlogComponent implements OnInit {
     private  meta : Meta,
     private title : Title, 
     private spinner : NgxSpinnerService
-  ) { }
+  ) { 
+    BlogComponent.isBrowser.next(isPlatformBrowser(platformId));
+  }
 
   ngOnInit() {
     this.todoservice.back_icon_template('Blogs Details',this.todoservice.back())
@@ -39,9 +42,12 @@ export class BlogComponent implements OnInit {
     this.start = 0;
     this.fetch_page_data();
     this.router.params.subscribe(params => {
-       this.category = params['name']; //log the value of id
-       $('.blog-tabs li a').removeClass('active'); 
-       $('.blog-tabs ').find('#list-item-'+this.category).find('a').addClass('active');
+    this.category = params['name']; //log the value of id
+    if(isPlatformBrowser(this.platformId)) 
+    {
+      $('.blog-tabs li a').removeClass('active'); 
+      $('.blog-tabs ').find('#list-item-'+this.category).find('a').addClass('active');
+    }
       this.fetch_blogs(this.category);
     });
   }
@@ -85,7 +91,7 @@ export class BlogComponent implements OnInit {
   let page = {page : this.page}; 
   if(page.page == '')
   {
-      return false;
+      return;
   }
   this.todoservice.fetch_page_data(page)
     .subscribe(
@@ -95,12 +101,16 @@ export class BlogComponent implements OnInit {
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
           // $('#page-content').html(this.todoservice.get_page().description);
-          $('.hero').css('background','url('+this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
-          $('.hero').css('background-repeat','no-repeat');
+          if(isPlatformBrowser(this.platformId)) 
+          {
+            $('.hero').css('background','url('+this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
+            $('.hero').css('background-repeat','no-repeat');
+            window.scroll(0,0);
+          }
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
-          this.title.setTitle(this.todoservice.get_page().metaTitle);
-          window.scroll(0,0); 
+          this.title.setTitle(this.todoservice.get_page().metaTitle);   
+           
         }
         this.spinner.hide();  
       }
@@ -122,6 +132,9 @@ export class BlogComponent implements OnInit {
  {
   var textArea = document.createElement('textarea');
   textArea.innerHTML = html;
-  return textArea.value.replace(/<[^>]*>/g, '');
+  var text = textArea.value.replace(/<[^>]*>/g, '')
+  if(textArea.value.replace(/<[^>]*>/g, '').length > 225)
+    text = textArea.value.replace(/<[^>]*>/g, '').substring(0,225)+'...';
+  return text;
  }
 }

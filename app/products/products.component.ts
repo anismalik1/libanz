@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,PLATFORM_ID,Inject} from '@angular/core';
 import { ProductService } from '../product.service';
 import { Meta,Title } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router,ActivatedRoute } from '@angular/router';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+
 import * as $ from 'jquery';
 
 @Component({
@@ -13,6 +16,7 @@ import * as $ from 'jquery';
   styles: []
 })
 export class ProductsComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   data : any;
   products : any ;
   p: number = 1;
@@ -27,13 +31,16 @@ export class ProductsComponent implements OnInit{
   checked_package : any = {monthly:false,yearly:false};
   private categories : any;
   constructor( private cartStore: ProductService,
+    @Inject(PLATFORM_ID) private platformId: any ,
     private spinner : NgxSpinnerService,
     public todoservice : TodoService,
     private authservice : AuthService,private router : Router,
     private route : ActivatedRoute,
     private title: Title,
     private meta : Meta
-    ) { }
+    ) { 
+      ProductsComponent.isBrowser.next(isPlatformBrowser(platformId));
+    }
   ngOnInit() {
     this.todoservice.back_icon_template('Products',this.todoservice.back())
     this.data = {cat_id : '',page_index:0};
@@ -185,7 +192,8 @@ export class ProductsComponent implements OnInit{
      this.meta.addTag({ name: 'description', content: metadescription });
      this.meta.addTag({ name: 'keywords', content: metakeyword });
      this.title.setTitle(metatitle);
-     window.scroll(0,0); 
+     if(isPlatformBrowser(this.platformId)) 
+      window.scroll(0,0); 
   }
 
   fetch_page_data()
@@ -194,7 +202,7 @@ export class ProductsComponent implements OnInit{
    let page = {page : key}; 
    if(page.page == '')
    {
-       return false;
+       return;
    }
    this.todoservice.fetch_page_categories(page)
      .subscribe(

@@ -22,6 +22,7 @@ export class FooterComponent implements OnInit{
   filterOptions : any;
   @Input() baseUrl;
   filterdList : boolean = false;
+  $mini_footer : boolean = false;
   myControl = new FormControl();
   filteredOptions: Observable<object>;
   constructor( public todoservice : TodoService,
@@ -30,7 +31,7 @@ export class FooterComponent implements OnInit{
   private vcr :ViewContainerRef,
     private authservice : AuthService,private router : Router, private title: Title, private meta : Meta) {
   ///this.fetch_page_data();
-    window.scroll(0,0);
+    // window.scroll(0,0);
      if(!this.todoservice.footer_data)
      {
        this.page = 'footer';
@@ -56,7 +57,7 @@ export class FooterComponent implements OnInit{
     let page = { page : this.page };
     if(page.page == '')
     {
-        return false;
+        return;
     } 
     this.spinner.show();
     this.todoservice.fetch_page_data(page) 
@@ -87,7 +88,11 @@ export class FooterComponent implements OnInit{
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
-    ); 
+    );
+    if(this.router.url == '/' || this.router.url.includes('signup'))
+    {
+      this.$mini_footer = true;
+    } 
   }
   fetch_list(e)
   {
@@ -116,6 +121,7 @@ export class FooterComponent implements OnInit{
       const filterValue = value.toLowerCase();
       return this.options.filter(option => option.search_words.toLowerCase().includes(value));
     }
+    return {};
   }
   
   get_token()
@@ -135,7 +141,10 @@ export class FooterComponent implements OnInit{
       .subscribe(
         data => 
         {
-          this.toast.errorToastr(data.msg);
+          if(data.status == true)
+            this.toast.successToastr(data.msg);
+          else  
+            this.toast.errorToastr(data.msg);
           this.spinner.hide();
         }
       ) 

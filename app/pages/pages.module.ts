@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedCommonModule } from '../shared/common.module';
 import { PageViewComponent } from './page-view.component';
 import { ContactUsComponent } from './contact-us.component';
 import { ForgotPasswordComponent } from './forgot-password.component';
-import { MatSelectModule,MatAutocompleteModule,MatInputModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule} from '@angular/material/select';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_MOMENT_DATE_FORMATS,MatMomentDateModule } from "@angular/material-moment-adapter";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductService } from '../product.service';
 import { FormsModule ,ReactiveFormsModule,} from '@angular/forms';
@@ -73,9 +80,15 @@ const routes: Routes = [
     NgxPaginationModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatCheckboxModule,
     SharedCommonModule, 
   ],
   declarations: [page404Component,LoginComponent,SignupComponent,FaqsComponent,ForgotPasswordComponent,ContactUsComponent,PageViewComponent, NotifyComponent, MerchantComponent, PackageViewComponent, UserDetailComponent, TestimonialsComponent,TruncatePipe, MerchantRegistrationComponent, PricingComponent, KycComponent, ProductListingComponent, PlanCheckoutComponent, FiledirDirective],
-  providers : [ProductService,TodoService,User,AuthService] 
+  providers : [
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    ProductService,TodoService,User,AuthService] 
 })
 export class PagesModule { } 

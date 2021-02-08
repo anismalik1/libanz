@@ -80,7 +80,7 @@ ngOnInit() {
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
 }
 book_order(form)
@@ -91,7 +91,7 @@ book_order(form)
     if(form.tsk_kit == null)
     {
       $('.tsk_margin').addClass('red-text').html('Please select TSK Kit');
-      return false;
+      return;
     }
       
   }

@@ -80,7 +80,7 @@ padding:0;
             </div>
             <div class="col s12 m10">
                 
-                <div id="wallet" style="margin-top:-12px;">
+                <div id="wallet" class="fix-top-bg">
                     <div class="card export-and-import">
                         <div class="card-content">
                             <form class="date-export">
@@ -135,7 +135,7 @@ padding:0;
                                     <td>{{row.order_id}}</td>
                                     <td>{{row.transaction_id}}</td>
                                     <td>{{row.subscriber_id}}</td>
-                                   <td>{{row.history_time | date: date:'dd M, Y'}}<br><time>{{row.history_time | date:'hh:mm a'}}</time></td>
+                                   <td>{{row.history_time | date: 'dd M, Y'}}<br><time>{{row.history_time | date:'hh:mm a'}}</time></td>
                                     <td>{{row.comment}}</td>
                                     <td *ngIf="row.transaction_type == 1">Credit</td>
                                     <td *ngIf="row.transaction_type == 2">Debit</td>

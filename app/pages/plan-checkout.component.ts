@@ -52,7 +52,7 @@ export class PlanCheckoutComponent implements OnInit {
     let data = {plan_id : id}; 
     if(data.plan_id == '')
     {
-        return false;
+        return;
     }
     this.todoservice.fetch_plan_data(data)
       .subscribe(
@@ -130,9 +130,8 @@ export class PlanCheckoutComponent implements OnInit {
 
   check_if_user_exist()
   {
-    console.log(this.checkoutgroup.controls['phone'].value)
     if(!this.checkoutgroup.controls['phone'].valid && !this.get_token())
-      return false;
+      return;
     let data : any = { phone : this.checkoutgroup.controls['phone'].value } 
     this.todoservice.check_if_user_exist(data)
       .subscribe(

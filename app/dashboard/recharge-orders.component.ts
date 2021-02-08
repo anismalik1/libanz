@@ -37,6 +37,7 @@ export class RechargeOrdersComponent implements OnInit {
   }
   selected: {startDate: moment.Moment, endDate: moment.Moment};
   selected_val : Number;
+  recharge_order : boolean = false;
   constructor(private spinner: NgxSpinnerService ,  
     public todoservice : TodoService,
     private authservice : AuthService,
@@ -64,7 +65,7 @@ export class RechargeOrdersComponent implements OnInit {
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     }
     this.fetch_recharge_history(this.r_p); 
     this.init_script()
@@ -106,9 +107,13 @@ export class RechargeOrdersComponent implements OnInit {
       }  
 		  );
   }
-  do_complaint(order_id)
+  do_complaint(_order)
   {
-    this.complaint_id = order_id;
+    if(_order.activity_type == 1)
+    {
+      this.recharge_order = true; 
+    }
+    this.complaint_id = _order.id;
     this.go_to_complaint = 0;
     let data = {order : this.complaint_id , token : this.get_token()};
     this.todoservice.check_complaint(data)
@@ -176,7 +181,7 @@ export class RechargeOrdersComponent implements OnInit {
 
   check_val(val)
   {
-    if(typeof val == 'undefined')
+    if(val == '')
       this.display = 2;
   }
   decode_data(data)
@@ -209,7 +214,7 @@ export class RechargeOrdersComponent implements OnInit {
     var date = $('[name="daterange"]').val();
     if(date == '')
     {
-      return false;
+      return;
     }
     window.location.href = this.todoservice.server_url+'accounts/apis/export/export_orders/?token='+this.get_token()+'&date='+date;
   }

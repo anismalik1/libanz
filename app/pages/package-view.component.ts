@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject,PLATFORM_ID } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
@@ -6,6 +6,8 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { Meta ,Title} from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-package-view',
@@ -13,6 +15,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styles: [`.title-wrapper{height: 53px;}`]
 })
 export class PackageViewComponent implements OnInit {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   package : any ; 
   path : string;
   package_list : any;
@@ -23,8 +26,10 @@ export class PackageViewComponent implements OnInit {
   sharemailgroup : FormGroup;
   sharwhatsappgroup : FormGroup;
   category : any;
-
+  month : number;
+  multienable : boolean = false;
   constructor(private title: Title, public todoservice : TodoService,
+    @Inject(PLATFORM_ID) private platformId: any ,
     private spinner: NgxSpinnerService,private router : Router,
     private _renderer2: Renderer2,  
     @Inject(DOCUMENT) private _document, 
@@ -32,6 +37,7 @@ export class PackageViewComponent implements OnInit {
      private meta : Meta, 
      private fb: FormBuilder,
      private route : ActivatedRoute) { 
+      PackageViewComponent.isBrowser.next(isPlatformBrowser(platformId)); 
       this.sharemailgroup = fb.group({
         'email' : [null,Validators.compose([Validators.required]),Validators.email],
       });
@@ -78,10 +84,11 @@ export class PackageViewComponent implements OnInit {
       this.category = 2;
     }
     this.package_data();
-    $('.fb-share-button').attr('data-href',"https://www.mydthshop.com"+this.path);
+    // $('.fb-share-button').attr('data-href',"https://www.mydthshop.com"+this.path);
    
     setTimeout (() => {
-      this.init_script();
+      if(isPlatformBrowser(this.platformId))
+        this.init_script();
     }, 2000);
     this.todoservice.back_icon_template(this.package.category+' Packages',this.todoservice.back())
   }
@@ -105,7 +112,7 @@ export class PackageViewComponent implements OnInit {
    let page = {page : page_url}; 
    if(page.page == '')
    {
-       return false;
+       return;
    }
    this.todoservice.fetch_page_data(page)
      .subscribe(
@@ -114,7 +121,7 @@ export class PackageViewComponent implements OnInit {
          if(data.PAGEDATA)
          {
            this.todoservice.set_page_data(data.PAGEDATA[0]);
-           $('#page-content').html(this.todoservice.get_page().description);
+          //  $('#page-content').html(this.todoservice.get_page().description);
            this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
            this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
            this.title.setTitle(this.todoservice.get_page().metaTitle);
@@ -146,7 +153,7 @@ export class PackageViewComponent implements OnInit {
     this.spinner.show(); 
     if(this.package.category == '')
     {
-        return false;
+        return;
     }
     this.todoservice.fetch_package_data(this.package)
       .subscribe(

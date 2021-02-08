@@ -226,29 +226,17 @@ li.txt-fix-mb span a {
     font-size: 12px;
     padding-top: 7px;
 }
-
-
-	/* .dashboard-menu-mobile{
-
-		position: relative;
 	}
-	.icon-text{
 
-		position: absolute;
-    top: 34px;
-    left: 27px;
-    font-size: 10px;
-    color: #8c8c8c;
-    text-transform: capitalize;
-	} */
-	}
-	
-	/* .side-nav li>a:hover {
-    background-color: transparent !important;
-} */
-
-
-	
+	.modal-header {
+    padding: 14px;
+    text-align: center;
+    position: sticky;
+}
+.modal.modal-fixed-footer.with-header .modal-content {
+    height: calc(88% - 56px) !important;
+    padding: 23px !important;
+}
 		</style>
 	<!-- Header Start Here -->
 	<div class="mobile-wrapper">
@@ -257,24 +245,23 @@ li.txt-fix-mb span a {
 		<header id="mobile-header" class="clearfix {{this.check_to_replace()}}">
 			<div class="mobile-header-left">
 				<ul>
-				<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}web-app/assets/images/mobilr-nav.png" /> </li>
-				<li><img class="app-logo" width="95" src="./assets/images/white-logo.png" /></li>	
-			</ul>
+					<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}web-app/assets/images/mobilr-nav.png" /> </li>
+					<li><img class="app-logo" width="95" src="./assets/images/white-logo.png" /></li>	
+				</ul>
 			</div>
-			
 			<div class="mobile-header-right">
 				<ul>
-				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png" ><span class="noti-circle" *ngIf="this.productservice.cartItemsCount() > 0">{{this.productservice.cartItemsCount()}}</span></a> </li>
+				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png" ><span class="noti-circle" *ngIf="this.productservice.favorite_count(1) > 0">{{this.productservice.favorite_count(1)}}</span></a> </li>
 				<li *ngIf="this.todoservice.get_user_name() == '' && valid_for_bonus" class="txt-fix-mb no-wrap"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">{{_bonus_text}}</a> </span>	</li>
 				<!-- <li class="txt-fix-mb"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">Get Rs 300</a> </span>	</li> -->
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" style="width:23px;"><span class="noti-circle" *ngIf="this.productservice.favorite_count() > 0">{{this.productservice.favorite_count()}}</span></a></li>
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal" (click)="notification_read()"><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count && notification_count.count > 0">{{notification_count.count}}</span> </a>
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" style="width:23px;"><span class="noti-circle" *ngIf="this.productservice.favorite_count(2) > 0">{{this.productservice.favorite_count(2)}}</span></a></li>
+				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count && notification_count.count > 0">{{notification_count.count}}</span> </a>
 					<!-- <li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a> -->
 					<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
 							<li class="notificatoins-dropdown-container">
 								<ul  *ngIf="notifications  && notifications.length > 0">
 									<li *ngFor="let item of notifications;" >
-										<a [routerLink]="route_link(item)" onclick="$('.modal-close').click();">
+										<a id="{{item.order_id}}" [routerLink]="route_link(item)" onclick="$('.modal-close').click();" (click)="notification_read(item)">
 										<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
 											<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; " >
 										</div>
@@ -314,7 +301,7 @@ li.txt-fix-mb span a {
 			<div class="clearfix"></div>
 			<div class="search-box">
 				<mat-form-field class="example-full-width inner-lbl-fix1">
-					<input class="black-text inner-lbl-fix" type="text" id="mobile-search" placeholder="Search for Product , brands & more.." matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" style="border-radius:8px; background-position:33px 5px !important;">
+					 <input class="black-text inner-lbl-fix" type="text" id="mobile-search" placeholder="Search for Product , brands & more.." matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="onKeyUp($event)" style="border-radius:8px; background-position:33px 5px !important;"> 
 					<span class="mobile-search-icon"><button><i  class="fa fa-search grey-text"></i></button></span>
 					 <mat-autocomplete #auto="matAutocomplete">
 						<span *ngIf="filterdList">
@@ -325,18 +312,15 @@ li.txt-fix-mb span a {
 					</mat-autocomplete>
 				</mat-form-field>
 			</div>
-			<div id="loadmore-modal" class="modal white" style="width:100%;height:100%">
+			<div id="loadmore-modal" class="modal white modal-fixed-footer" style="width:100%;height:100%">
 					<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
+				<div class="modal-header">
+					<div class="bredcum-inner"><div class="left bredcum-top"><a class="bredcum-title modal-close">Notifications</a></div><div class="clearfix"></div></div>
+				</div>		
 				<div class="modal-content">
-					<div class="modal-header">
-					<h4>1Notification's</h4>
-				
-					<div class="modal-close right-align"><i class="material-icons">close</i></div>
-					</div>
-					
 					<ul *ngIf="notifications  && notifications.length > 0">
 					<li *ngFor="let item of notifications;" >
-						<a [routerLink]="route_link(item)" onclick="$('.modal-close').click();">
+						<a [className]="(item.visitor_read == 1)?'read-notification':'unread-notification'" [routerLink]="route_link(item)" onclick="$('.modal-close').click();" (click)="notification_read(item)">
 						<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
 							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 2px;" >
 						</div>
@@ -346,10 +330,7 @@ li.txt-fix-mb span a {
 						<div class="notification-drop-image" *ngIf="item.activity_type == '5' || item.activity_type == '16' || item.activity_type == '18'">
 							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-10.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 2px;" >
 						</div>
-						<div class="notification-drop-image" *ngIf="item.activity_type == '6' || item.activity_type == '7' || item.activity_type == '8' || item.activity_type == '14'">
-							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 2px;" >
-						</div>
-						<div class="notification-drop-image" *ngIf="item.activity_type == '9'">
+						<div class="notification-drop-image" *ngIf="item.activity_type == '6' || item.activity_type == '7' || item.activity_type == '8' || item.activity_type == '9' || item.activity_type == '14'">
 							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-9.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 2px;" >
 						</div>
 						<div class="notification-drop-image" *ngIf="item.activity_type == '10'">
@@ -359,7 +340,7 @@ li.txt-fix-mb span a {
 							<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-6.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; padding: 2px; " >
 						</div>
 					
-					<div [className]="(item.visitor_read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text font600'">
+					<div [className]="(item.visitor_read == 1)?'grey-text notification-drop-text':'black-text notification-drop-text font600 unread-notification'">
 						<p [innerHTML]="item.visitor_comment"></p>
 						<time class="grey-text">{{time_ago(item.history_time)}}</time>
 						<div class="circle-dotss" *ngIf="item.visitor_read != 1"></div>
@@ -392,7 +373,7 @@ li.txt-fix-mb span a {
 				<li routerLinkActive="active"><a [routerLink]="['/product/listing/tata-sky']"><span class="fa fa-stack-overflow" style="font-size:18px;"></span><span class="mobile-footer-text">Products</span></a></li>
 				<li routerLinkActive="active"><a [routerLink]="['/package-list/tata-sky']"><span class="fa fa-gift" style="font-size:18px;"></span><span class="mobile-footer-text">Packages</span></a></li>
 				<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-question-circle" style="font-size:18px;"></span><span class="mobile-footer-text">FAQS</span></a></li>
-				<li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger  </span></a></li>
+				<!-- <li routerLinkActive="active"><a [routerLink]="['/help/faqs']"><span class="fa fa-envelope" style="font-size:18px;"></span><span class="mobile-footer-text">Messenger  </span></a></li> -->
 			</ul>
 		</div>
 		
@@ -521,17 +502,16 @@ li.txt-fix-mb span a {
 				<li><a [routerLink]="['/package-list/dish-tv']">DishTv Packages</a></li>
 			</ul>	
 			
-			<!-- <h3 class="hide-left-menu-mb">Follow Us</h3>
-			<ul class="side-social hide-left-menu-mb">	
-				<li><a href="https://www.facebook.com/mydthshop/"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" /></a></li>
-				<li><a href="https://www.linkedin.com/company/mydthshop/"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" /></a></li>
-				<li><a href="https://twitter.com/mydthshop"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" /></a></li>
-				<li><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" /></a></li>
-				<li><a href="https://in.pinterest.com/jain2221/pins/"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" /></a></li>
-				<li><a href="https://www.instagram.com/mydthshopindia/"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" /></a></li>
-				<li><a href="https://mydthshopp.blogspot.com/"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" /></a></li>
-			</ul>	 -->
-							
+			<h3 class="hide-left-menu-mb">Follow Us</h3>
+			<ul class="side-social hide-left-menu-mb">
+					<li class="inline-block"><a href="https://www.facebook.com/libanzb2b/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Facebook"><img src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png" class="responsive-img" alt="facebook"></a></li>
+					<li class="inline-block"><a href="https://www.linkedin.com/company/libanzb2b" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Linkedin"><img src="{{this.todoservice.base_url}}web-app/assets/images/linkedin.png" class="responsive-img" alt="linkedin"></a></li>
+					<li class="inline-block"><a href=" https://twitter.com/libanzb2b" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Twitter"><img src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png" class="responsive-img" alt="twitter"></a></li>
+					<li class="inline-block"><a href="https://www.youtube.com/channel/UCsi2AhbMaiVVZ-hVfXdfQcA" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Youtube"><img src="{{this.todoservice.base_url}}web-app/assets/images/youtube.png" class="responsive-img" alt="youtube"></a></li>
+					<li class="inline-block"><a href="https://in.pinterest.com/jain2221/_created/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Pinerest"><img src="{{this.todoservice.base_url}}web-app/assets/images/pinterest.png" class="responsive-img" alt="pinterest"></a></li>
+					<li class="inline-block"><a href="https://www.instagram.com/libanzb2b/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Instagram"><img src="{{this.todoservice.base_url}}web-app/assets/images/instagram.png" class="responsive-img" alt="instagram"></a></li>
+					<li class="inline-block"><a href="https://mydthshopp.blogspot.com/" target="_blank" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Blogger"><img src="{{this.todoservice.base_url}}web-app/assets/images/blogger.png" class="responsive-img" alt="blogger"></a></li>
+				</ul>			
 			</div>
 		</div>
 			
@@ -576,6 +556,7 @@ li.txt-fix-mb span a {
 					<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank"> Blog</a> |</span>
 					<span><a href="/merchant/kyc" class="grey-text"> KYC</a> |</span>
 					<span><a class="grey-text" [routerLink]="['/help/contact-us']" target="_blank"> Help</a> </span>
+					<!-- <span><a class="grey-text" [routerLink]="['/merchant/pricing']"> Pricing</a> </span> -->
 					<span id="renew-section" *ngIf="this.todoservice.get_user_type() == 3 && this.todoservice.get_days_left() <= 14"> | {{this.todoservice.get_days_left()}} days left 
 						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() == '10000')" [routerLink] = "['/merchant/pricing']">Upgrade</a>
 						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() != '10000')" [routerLink] = "['/merchant/checkout']" [queryParams]="{plan : this.todoservice.get_active_pack()}">Renew</a>
@@ -600,7 +581,7 @@ li.txt-fix-mb span a {
 											<!-- <button type="submit" class="btn-flat cst-hin"><i class="material-icons grey-text">search</i></button> -->
 												<span class="search-icn"><i class="material-icons grey-text">search</i></span>
 											<mat-form-field class="example-full-width test1 fix-input-place">
-												<input type="text" placeholder="Search for Product , brands & more.." id="mat-input-3" class="no-margin black-text fix-inner-lbl"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
+												<input type="text" placeholder="Search for Product , brands & more.." id="mat-input-3" class="no-margin black-text fix-inner-lbl"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="onKeyUp($event)"> 
 												<mat-autocomplete #auto="matAutocomplete">
 													<span *ngIf="filterdList">
 													<mat-option *ngFor="let option of filteredOptions" [value]="option.title">
@@ -616,16 +597,16 @@ li.txt-fix-mb span a {
 					</li>
 					<li *ngIf="href && href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
 					<li class="craft relative">
-						<a routerLink="/product/cart"><img src="./assets/images/shopping-cart.png" class="crft-icon-fix"><span class="badge cart-text" *ngIf="this.productservice.cartItemsCount() > 0">{{this.productservice.cartItemsCount()}}</span></a>
+						<a routerLink="/product/cart"><img src="./assets/images/shopping-cart.png" class="crft-icon-fix"><span class="badge cart-text" id="cart-web" *ngIf="this.productservice.favorite_count(1) > 0">{{this.productservice.favorite_count(1)}}</span></a>
 						<!-- <a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a> -->
 					</li>
 					<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
-						<a routerLink="/product/favorites"><img src="./assets/images/star.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count" *ngIf="this.productservice.favorite_count() > 0">{{this.productservice.favorite_count()}}</span></a>
+						<a routerLink="/product/favorites"><img src="./assets/images/star.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count" *ngIf="this.productservice.favorite_count(2) > 0">{{this.productservice.favorite_count(2)}}</span></a>
 					</li>	
 						
 					<li class="craft relative" >
 						<!-- <a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a> -->
-						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2" (click)="notification_read()"><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="./assets/images/noti-black.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
+						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2"><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="./assets/images/noti-black.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
 						<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
 							<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
 						</ul> -->
@@ -679,13 +660,13 @@ li.txt-fix-mb span a {
 		<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
 		<div class="modal-content">
 		<div class="modal-header">
-		<h4>Notification's</h4>
+		<h4>Notifications</h4>
 		<div class="modal-close right-align"><i class="material-icons">close</i></div>
 		</div>
 		
 		<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">
 			<li *ngFor="let item of notifications;" >
-				<a [routerLink]="route_link(item)" onclick="$('.modal-close').click();">
+				<a id="{{item.order_id}}" [className]="(item.visitor_read == 1)?'read-notification':'unread-notification'" [routerLink]="route_link(item)" onclick="$('.modal-close').click();" (click)="notification_read(item)">
 				<div class="notification-drop-image" *ngIf="item.activity_type == '1' || item.activity_type == '15' || item.activity_type == '17'">
 					<img src="https://www.libanz.com/web-app/assets/images/mobile-icons/icon-2.png" class="responsive-img" style="width: 50px; border: 1px solid #ff6a00; border-radius: 50%; " >
 				</div>
@@ -743,7 +724,7 @@ li.txt-fix-mb span a {
 						</ul>
 						<div id="login" class="col s12">
 							<div class="login" *ngIf="step == 1">
-							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value)" id="login-input-form">
+							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value,this)" id="login-input-form">
 								<div class="row">
 									<div class="input-field col s12">
 										<i class="material-icons prefix margin-top-cart2">phone</i>
@@ -777,7 +758,7 @@ li.txt-fix-mb span a {
 							</form>
 							</div>
 							<div class="otp-step margin-top1" *ngIf="step == 2">
-								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value)" id="header-login">
+								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value,this)" id="header-login">
 								<div class="upper-text center">
 									<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
 									<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
@@ -804,139 +785,6 @@ li.txt-fix-mb span a {
 							</form>
 							</div>
 						</div>
-						<!-- <div id="signup" class="col s12">
-							<div class="user-retailer margin-top center" id="stepep1" *ngIf="signup == 0">
-								<div class="col s12 border-every">
-									<a href="javascript:" class="black-text become-user" (click)="signup_form(1)">
-										<img src="{{this.todoservice.base_url}}web-app/assets/images/user.jpg" class="responsive-img" alt="1" width="100"><br>
-										<span class="font-size-change1 font600">Become a User</span>
-									</a>
-								</div>
-								<div class="col s12  center or-for-span">
-									<span class="font-size-change relative">OR</span>
-								</div>
-								<div class="col s12  border-every">
-									<a href="javascript:" class="black-text become-user" (click)="signup_form(2)">
-										<img src="{{this.todoservice.base_url}}web-app/assets/images/distributor.jpg" class="responsive-img" alt="1" width="100"><br>
-										<span class="font-size-change1 font600">Become a Retailer</span>
-									</a>
-								</div>
-							</div>
-							<div id="stepep2" *ngIf="signup == 1">
-								<div *ngIf="signupverify == 0">
-								<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
-									<div class="row">
-										<div class="input-field col s12">
-											<i class="material-icons prefix margin-top-cart2">person</i>
-											<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
-											<label for="name">Enter Name*</label>
-											<div class="center" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
-												<span class="red-text ">*Name is Required.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="pop-phone-number" type="text" class="validate" formControlName="phone" autocomplete="off">
-											<label for="pop-phone-number">Phone Number*</label>
-											<div class="center" *ngIf="!signupgroup.controls['phone'].valid && signupgroup.controls['phone'].touched">
-												<span class="red-text"> Phone Number is not valid.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">mail</i>
-											<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
-											<label for="enter_email">Enter Email</label>
-											<div class="center" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
-												<span class="red-text"> Email is not valid.</span>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">lock</i>
-											<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
-											<label for="enter_passcode">Enter Password</label>
-											<div class="center" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
-												<span class="red-text">Password is Required.</span> 
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<i class="material-icons prefix margin-top-cart2">lock</i>
-											<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
-											<label for="confirm_passcode">Confirm Password</label>
-											<div class="center" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
-												<span class="red-text">Check Confirm Password.</span>
-											</div>
-										</div>
-										<div class="col s12 m6">
-											<p>
-												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="1" id="test1" [checked]="true"/>
-												<label for="test1">Become User</label>
-											</p>
-										</div>
-										<div class="col s12 m6">
-											<p>
-												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="2" id="test2"/>
-												<label for="test2">Become Merchant</label>
-											</p>
-										</div>
-										<!-- <div class="col s12 m6">
-											<p>
-												<input name="user_type" class="with-gap" formControlName="user_type" type="radio" value="3" id="test3"/>
-												<label for="test3">Become Partner</label>
-											</p>
-										</div> 
-										
-										<div class="col s12 center margin-top">
-											 <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> 
-											<button type="submit" class="btn orange waves-effect" [disabled]="!signupgroup.valid || signupdisabled">Submit</button>
-										</div>
-									</div>
-								</form>
-								</div>	
-								<div class="otp-step margin-top1" *ngIf="signupverify == 1">
-										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value)" id="header-signup">
-										<div class="upper-text center">
-											<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
-											<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-										</div>
-										<div class="row">
-											<div class="input-field col s12 center otp-inputa" id="inputs">
-													<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
-													<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
-													<input id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-													<input id="otp4" maxlength="1" ngModel name="otp4" ngModel>
-											</div>
-											<div class="col s12 center margin-top">
-												<span class="font-size-change1">Don't recieve OTP 
-												<a href="javascript:" (click)="resend_otp('signup')" class="orange-text">Resend OTP?</a></span>
-											</div>			
-										</div>
-										<div class="row">
-											<div class="col s12 center">
-												<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="hide_otp_form()"><< Back</a>
-												<button type="Submit" id="signup-submit" class="btn waves-effect waves-light orange" [disabled]="verifydisabled">Submit</button>
-											</div>
-										</div>
-									</form>
-								</div>
-						</div>
-					</div> -->
-					<!-- <div id="forget-password" class="col s12 hide">
-						<div class="login">
-							<form class="login-step">
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix margin-top-cart2">email</i>
-											<input id="icon_prefix" type="number" class="validate">
-											<label for="icon_prefix" class="font-size-change">Enter Email Id.</label>
-											
-										</div>
-									<div class="col s12 center margin-top">
-										<button type="submit" class="btn orange waves-effect full-width otp-btn">Submit</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -982,30 +830,30 @@ li.txt-fix-mb span a {
 	</ul>
 	<div id="modal1" class="modal">
     <div class="modal-content">
-      <h4>Change Icon</h4>
-					<form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()"> 
-						<div class="file-field input-field">
-							<div class="btn orange">
-								<span>File</span>
-								<input type="file" (change)="fileChangeEvent($event)" />
-							</div>
-							<div class="file-path-wrapper">
-								<input class="file-path validate " type="text">
-							</div>
-							<image-cropper
-								[imageChangedEvent]="imageChangedEvent"
-								[maintainAspectRatio]="true"
-								[aspectRatio]="1/1"
-								[resizeToWidth]="100"
-								format="png"
-								(imageCropped)="imageCropped($event)"
-						></image-cropper>
-						<img [src]="croppedImage" />
-						</div>
+      	<h4>Change Icon</h4>
+		<form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()"> 
+			<div class="file-field input-field">
+				<div class="btn orange">
+					<span>File</span>
+					<input type="file" (change)="fileChangeEvent($event)" />
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate " type="text">
+				</div>
+				<!-- <image-cropper
+					[imageChangedEvent]="imageChangedEvent"
+					[maintainAspectRatio]="true"
+					[aspectRatio]="1/1"
+					[resizeToWidth]="100"
+					format="png"
+					(imageCropped)="imageCropped($event)"
+			></image-cropper> -->
+			<img [src]="croppedImage" />
+			</div>
 
-						<div class="clearfix"></div>
-						<input type="submit" value="Set" class="btn orange" [disabled] = "disabled">
-					</form>
+			<div class="clearfix"></div>
+			<input type="submit" value="Set" class="btn orange" [disabled] = "disabled">
+		</form>
     </div>
   </div>
 	<!-- End Here -->

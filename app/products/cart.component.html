@@ -47,6 +47,9 @@
 
 </style>
 <app-header></app-header>
+<div class="spinner-wrapper">
+    <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+  </div>
 <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 <div class="fix-mb-top"></div>
 
@@ -58,7 +61,7 @@
                     <div class="card-content black-text padd-only no-margin">  
                             <div class="row no-margin">
                                 <div class="col s12 border-bottom my-cart">
-                                    <span class="font-size-change1 margin-top-cart inline-block">My Cart ({{this.productservice.cartItemsCount()}})</span>
+                                    <span class="font-size-change1 margin-top-cart inline-block">My Cart ({{this.cart_count}})</span>
                                     <!-- <form class="right inline-block coupon">
                                         <div class="input-field no-margin">
                                         <input placeholder="Enter Refferal Code" maxlength="6" id="code" type="text" class="validate" name="Code">
@@ -68,54 +71,39 @@
                                 </div>
                             </div>
                         </div>
-				<div class="content-wrapper" *ngIf="this.productservice.cart_items">        
-                    <div class="card-content black-text padd-only no-margin" *ngFor="let item of this.productservice.cart_items;">
-                        <div class="row">
+				<div class="content-wrapper" *ngIf="this.cart_count > 0">        
+					<div class="card black-text padd-only no-margin" *ngFor="let item of carts;">
+						<div class="row">
 							<div class="col s3 m2 center">
-								<div class="cart-product-image"> 
-									<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky" style="width:120px;
-									padding-top: 12px;"><br>
-									<div class="product-quantity less-add-btn">
-									<div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
-										<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')" style="padding: 0px 12px;
-										position: relative;
-										top: -14px;
-										height: 26px;
-										line-height: 26px !important;"><i class="material-icons">remove</i></button>
-										<span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
-										<button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
-									</div>
-									</div>
+								<div class="cart-product-image">
+									<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270
+									{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
 								</div>
 							</div>
-							<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
-								<div class="black-text" style="display:block;">
-									<h4 class="font600 mb-height" style="font-size: 13px;height: 10px;">
-									<a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
-									<div class="font-size-change1 black-text inline-block"><i class="icon-inr"></i><span>{{item.quantity*item.product.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.quantity*item.product.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.product.price-item.product.offer_price)*100/item.product.price | number : '1.2-2'}}% Off</p></div>
+							<div class="col s9 m5 margin-top">
+								<a href="javascript:" class="black-text-1">
+									<h4 class="font600" style="font-size: 13px;"><a [routerLink]="['/product/'+item.product.url]" [queryParams]= "{month : item.product.month_pack}" class="black-text">{{item.title}}</a></h4>
+									<div class="font-size-change1 black-text inline-block"><i class="icon-inr"></i><span>{{item.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.price-item.offer_price)*100/item.price | number : '1.2-2'}}% Off</p></div>
 									<div class="clearfix"></div>
-									<div class="font-size-change1 black-text inline-block" style="font-size: 12px !important;">Packs: 
-										<span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected[0]" style="font-size: 12px !important;">{{item.product.pack_selected[0].title}} 
-											<span *ngIf="item.product.pack_selected[1]" style="font-size: 12px !important;">, {{item.product.pack_selected[1].title}}</span> 
-										</span> 
-										<span class="font-size-change orange-text" *ngIf="item.product.month_pack">({{item.product.month_pack}} Month)</span>
-									</div> 
-									<div class="clearfix"></div>
-									<a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.product.id)" >Add Pack & Offers</a>
+
+								</a>
+								<div class="font-size-change1 black-text inline-block" *ngIf="item.product.pack_selected">Pack: <span class="font-size-change1 orange-text" *ngIf="item.product.pack_selected && item.product.pack_selected[0]">{{item.product.pack_selected[0].title}} <span *ngIf="item.product.pack_selected && item.product.pack_selected[1]">,{{item.product.pack_selected[1].title}}</span></span>
 								</div>
-									
-								  <div class="clearfix"></div>
-									<a href="javascript:" class="font-size-change inline-block red-text"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove &nbsp; <span class="fa fa-times"></span></a>
+								<div class="clearfix"></div>
+								<a class="blue-text modal-trigger" href="#modal-packages" (click)="select_package(item.prod_id)" >Add Pack & Offers</a>
+								<div class="clearfix"></div>
+								<a href="javascript:" class="font-size-change red-text font600" (click)="this.removeItem(item.product.id);" >Remove &nbsp; <span class="fa fa-times"></span> </a>
+								<div class="clearfix"></div>
 							</div>
-                                <div class="col s12 m4 margin-top padd">
-                                    <strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
-                                </div>
-                            </div>
-                            <div class="divider"></div> 
-					</div>
+							<div class="col s12 m4 margin-top padd">
+								<strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
+							</div>
+						</div>
+						<div class="divider"></div>
+				</div>
 				</div>										
 				
-                <div class="card-content black-text padd-only no-margin" *ngIf="this.productservice.cartItemsCount() == 0">
+                <div class="card-content black-text padd-only no-margin" *ngIf="this.cart_count == 0">
 					<div class="center">
 						<img src="{{this.todoservice.base_url}}web-app/assets/images/empty-cart.png" class="responsive-img" width="200px">
 						<br>
@@ -124,28 +112,28 @@
 						<a [routerLink]="['/']" class="font-size-change"><i class="material-icons">add</i> Add Some Items</a>
 					</div>
 				</div>
-					<div class="card-action right-align cart-card-padd hide-on-mobile" *ngIf="this.productservice.cartItemsCount() > 0">
-						<a href="javascript:" [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change cst-addbtn" style="line-height:43px;"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
-						<a href="javasctipt:" routerLink="/product/checkout" class="btn sign orange btn-large font-size-change waves-effect waves-light w-100-btn"> Place Order</a>
+					<div class="card-action right-align cart-card-padd hide-on-mobile" *ngIf="this.cart_count > 0">
+						<a [routerLink]="['/']" class="btn waves-effect waves-light btn-large white black-text font-size-change cst-addbtn" style="line-height:43px;"><i class="material-icons font-size-change1">keyboard_arrow_left</i>Continue Shopping</a>
+						<a routerLink="/product/checkout" [queryParams] = "{'tracker':'cart'}" class="btn sign orange btn-large font-size-change waves-effect waves-light w-100-btn"> Place Order</a>
 					</div>
-					<div class="footer-button-buy hide-on-desktop" *ngIf="this.productservice.cartItemsCount() > 0">
+					<div class="footer-button-buy hide-on-desktop" *ngIf="this.cart_count > 0">
 							<div class="left-half">
-								<h3 style="margin:0"><a href="javascript:" [routerLink]="['/']" class=" waves-effect waves-light white black-text" style="line-height:43px;">Continue Shopping</a></h3>
+								<h3 style="margin:0"><a [routerLink]="['/']" class=" waves-effect waves-light white black-text" style="line-height:43px;">Continue Shopping</a></h3>
 								<a href="javascript:" class="forder-txt center" (click)="to_order_summary()">Order Details </a>
 							</div>
 							<div class="right-half">
-								<h3><a href="javasctipt:" routerLink="/product/checkout" class="sign orange white-text waves-effect waves-light"> Place Order</a></h3>
+								<h3><a routerLink="/product/checkout" [queryParams] = "{'tracker':'cart'}" class="sign orange white-text waves-effect waves-light"> Place Order</a></h3>
 							</div>
 							<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
 						</div>
                 </div>
             </div>
-            <div class="col s12 m12 l4 order-summary" *ngIf="this.productservice.cartItemsCount() > 0">
+            <div class="col s12 m12 l4 order-summary" *ngIf="this.cart_count > 0">
                 <div class="card">
                     <div class="card-content black-text no-padding fix-inne-pad">
                         <span class="card-title inline-block">Order Summary</span> 
                         <hr>
-                        <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.productservice.cart_items;let i = index;">
+                        <div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of carts;let i = index;">
 							<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
 							<p class="inline-block font600"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
 							<ng-template #kitblock>
@@ -175,11 +163,12 @@
                         <hr class="horizontal">
                         <div class="subtotal payable margin-top">
                             <p class="inline-block font600">Amount Payable :</p>
-                            <p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount()}} </p>
+                            <p class="inline-block right font-size-change"> <i class="icon-inr"></i>{{this.productservice.calculateCartAmount(this.carts)}}</p>
                         </div>
                         <hr>
                         <div class="subtotal">
-                            <p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings()}} </p>
+							<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount(this.productservice.cart_items) > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.carts)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+                            <p class="inline-block green-text font600">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.carts)}} </p>
                         </div>
                         <hr class="horizontal"> 
                         <div class="clearfix"></div>
@@ -324,8 +313,7 @@
 								<div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
 								<div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
 									<div class="row">
-										<div class="col s12 m3 l2" *ngFor="let item of packs.child;let i = index;">
-										<!--<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
+										<div class="col s12 m4 l4" *ngFor="let item of packs.child;let i = index;">
 										<div class="card product-new" *ngIf="item.default_selected == 2">
 											<div class="card-content center">
 												<span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
@@ -334,14 +322,11 @@
 												<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 												<br/>
 												<a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a>
-											
 											</div>
-											
 										</div>
-										<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
 										<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
 											<div class="card-content center" >
-												<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+												<span [className]="(this.selectedCartItem && this.selectedCartItem.product.pack_selected.length > 1 && this.selectedCartItem.product.pack_selected[1].id == item.id)?'when-check' : 'when-check grey-text'" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 												<h4 class="grey-text">{{item.title}}</h4>
 												<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
 												<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>

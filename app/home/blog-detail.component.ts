@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { Meta,Title } from "@angular/platform-browser";
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
@@ -6,7 +6,8 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
-
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-blog-detail',
@@ -14,14 +15,15 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class BlogDetailComponent implements OnInit {
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   private url : string;
   public recent_posts : any;
   public post : any;
   public commentgroup : FormGroup;
   public comments : any;
   constructor(
-    private _renderer2: Renderer2,  
+    private _renderer2: Renderer2, 
+    @Inject(PLATFORM_ID) private platformId: any, 
     @Inject(DOCUMENT) private _document, 
     public todoservice : TodoService,
     private authservice : AuthService,
@@ -33,6 +35,7 @@ export class BlogDetailComponent implements OnInit {
     private spinner : NgxSpinnerService,
     private fb: FormBuilder
   ) { 
+    BlogDetailComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.commentgroup = fb.group({
       'name' : [null,Validators.compose([Validators.required])],
       'email' : [null,Validators.compose([Validators.required])],
@@ -45,7 +48,8 @@ export class BlogDetailComponent implements OnInit {
     this.router.params.subscribe(params => {
       this.url = params['name']; //log the value of id
      this.fetch_single_blog(this.url);
-     this.init_script();
+    if(isPlatformBrowser(this.platformId)) 
+      this.init_script();
    });
    
   }

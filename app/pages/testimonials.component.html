@@ -51,18 +51,7 @@ width: 35% !important;
 </div>
 <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 <div class="fix-mb-top"></div>
-
-<!-- <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
-  <div class="container">
-    <div class="col s12">
-      <ul class="back-icon">
-        <li> <a class="black-text" href="javascript:" (click)="this.todoservice.back()"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Testimonials </span> </a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
-      </ul>
-    </div>	
-    <div class="clearfix"></div>
-  </div>
-</div> -->
-<section class="hero beard">
+<section class="hero">
     <img src="" class="responsive-img">
     <div class="container"> 
         <h2 class="center font600 white-text margin-top"></h2>
@@ -74,9 +63,9 @@ width: 35% !important;
     <div class="col s12 m6" *ngFor="let item of testimonials;let i = index;">
     <div [className]="(i >= 6)? 'card testimonial-card hide': 'card testimonial-card'">
     <div class="card-content testimonial-text cst-icon">
-    <blockquote [innerHTML]="decode_html(item.description) | truncate : 230 : '...'" class="cst-icon1">
+    <blockquote [innerHTML]="decode_html(item.description).toString()" class="cst-icon1">
       <span>"</span>
-    </blockquote>
+    </blockquote> 
     </div>
     
     <div class="card-image testimonial-card-image"><img class="responsive-img" src="{{this.todoservice.base_url}}web-app/assets/images/recharge-icon/user.svg" />&nbsp;<i>{{item.title}}</i>

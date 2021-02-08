@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit{
   products_obj : any ={total_orders : 0,total_sum : 0}; 
   registration_obj : any ={total_register : 0}; 
   sales_obj : any = {}; 
+  leads : any;
   orders : any;
   topups : any;
   ranges: any = {
@@ -51,7 +52,7 @@ export class DashboardComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     }
     this.spinner.show();
     this.fetch_transactions(); 
@@ -97,8 +98,10 @@ export class DashboardComponent implements OnInit{
         }
         else
         {
-          this.orders         = data.ORDERS;
-          this.topups         = data.ADDMONEYVALUEORDERS;
+          this.orders     = data.ORDERS;
+          this.topups     = data.ADDMONEYVALUEORDERS;
+          if(data.LEADS)
+            this.leads      = data.LEADS;
         }
       }
     ) 

@@ -21,6 +21,7 @@ export class BookDthOrdersComponent implements OnInit{
   categories_quality : any;
   category_products : any;
   product_plans : any;
+  product_selected : boolean = false;
   plandisabled :boolean= true;
   disabled_products : boolean = true;
   quallitydisabled : boolean = true;
@@ -94,7 +95,7 @@ ngOnInit() {
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
 }
 category_selected(category_id)
@@ -123,7 +124,7 @@ book_order(form)
     if(form.tsk_kit == null)
     {
       $('.tsk_margin').addClass('red-text').html('Please select TSK Kit');
-      return false;
+      return;
     }
       
   }

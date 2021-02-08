@@ -4,7 +4,6 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { CssSelector } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-money',
@@ -15,12 +14,12 @@ export class AddMoneyComponent implements OnInit{
 	public user = {phone:'loading',name:'loading'};
 	paybankaccount : string = '';
 	yourbankname : string = '';
-	paymethod : string;
+	paymethod! : string;
 	order_id : any;
 	order_data : any;
-	previousUrl: string;
+	previousUrl!: string;
 	add_data : any = {proceed : 1,paymethod : 'FUND TRANSFER',send : 0};
-	add_amount : number;
+	add_amount! : number;
 	constructor( private toastr : ToastrManager,private _renderer2: Renderer2, 
 		@Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,
 		public todoservice : TodoService,private authservice : AuthService,
@@ -37,7 +36,7 @@ export class AddMoneyComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
 			this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-			return false;
+			return ;
 		}
 		this.route.params.subscribe(params => {
       this.order_id = params['name'];
@@ -79,14 +78,14 @@ export class AddMoneyComponent implements OnInit{
 		if(amount == "")
 		{
 			this.toastr.errorToastr("Enter Amount ",'Failed');
-			return false;
+			return;
 		}
 			
 		this.add_data.amount = amount;
 		this.add_data.proceed = 2;
 	}
 
-	select_method(method,ele,margin)
+	select_method(method : string ,ele : any ,margin: number)
 	{
 		this.add_data.paymethod = method;
 		var checked = ele.target.parentNode.parentNode.innerHTML;
@@ -166,7 +165,7 @@ export class AddMoneyComponent implements OnInit{
 			if(formdata.ref_id == '')
 			{
 				this.toastr.errorToastr("Enter Reference ID", 'Failed!');
-				return false;
+				return;
 			}
 		}
 
@@ -202,7 +201,7 @@ export class AddMoneyComponent implements OnInit{
 				}
 				else if(data.status == 'red' && data.red_auth == 'paytm')
 				{
-					window.location.href = this.todoservice.base_url+"web-app/do-paytm/addmoney-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.pt_amount;
+					window.location.href = this.todoservice.base_url+"accounts/apis/response/paytm_form_addmoney?ORDERID="+data.order_id+'&token='+this.get_token();
 				}
 			}
 		  )  
@@ -212,7 +211,7 @@ export class AddMoneyComponent implements OnInit{
 	{
 		if(!this.get_token())
 		{
-			return false;
+			return;
 		}	
 		  this.todoservice.fetch_addmoney_order({token:this.get_token(),order_id: this.order_id})
 		  .subscribe( 

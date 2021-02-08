@@ -205,12 +205,23 @@ font-weight: bold;
 				</div> -->
 				<app-side-nav></app-side-nav>
 				</div>
+
 				<div class="col s12 m10 ">
 					<div class="fix-top-bg">
-
-
 					<div class="row">
-						
+						<div class="chip green white-text" *ngIf="(this.todoservice.get_user_id() == 173 || this.todoservice.get_user_id() == 1321) && this.todoservice.is_subscribed_lead() && this.todoservice.get_days_left() >= 10">
+							<span class="white-text">{{this.todoservice.get_days_left()}} days left for your lead Subscription.</span>
+							<i class="close material-icons">close</i>
+						</div>
+						<div class="chip orange white-text" *ngIf="(this.todoservice.get_user_id() == 173 || this.todoservice.get_user_id() == 1321) && this.todoservice.is_subscribed_lead() && this.todoservice.get_days_left() < 10 && this.todoservice.get_days_left() > 0">
+							<span class="white-text">{{this.todoservice.get_days_left()}} days left for your lead Subscription.</span>
+							<i class="close material-icons">close</i>
+						</div>
+						<div class="chip red white-text" *ngIf="(this.todoservice.get_user_id() == 173 || this.todoservice.get_user_id() == 1321) && this.todoservice.is_subscribed_lead() && this.todoservice.get_days_left() <= 0">
+							<span class="white-text">Your Lead Subscription is Expired. Renew <a routerLink="/">here</a></span>
+							<i class="close material-icons">close</i>
+						</div>	
+						<div class="clearfix"></div>
 						<h4 class="font-bold cst-heading-fix font600 inline-block">Welcome To Dashboard </h4>
 						<div class="row">
 							<!-- <div class="col m5 s12"><h3 class="font600 inline-block">Leads </h3></div> -->
@@ -222,7 +233,7 @@ font-weight: bold;
 						</div>
 						<div class="clearfix"></div>
 						<div class="col s12 m3">
-							<div class="card cashback-box ">
+							<div class="card cashback-box">
 									<div class="col s3 left-sq-1">
 										<span class="fa fa-download download-sq-1"></span>
 									</div>
@@ -232,10 +243,8 @@ font-weight: bold;
 										<div class="slaes-rup margin-top-cart">
 											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.order_sale}}</span>
 										</div>
-
 									</div>
 							</div>
-							
 						</div>
 						<div class="col s12 m3">
 							<div class="card cashback-box ">
@@ -256,41 +265,33 @@ font-weight: bold;
 
 						<div class="col s12 m3">
 							<div class="card cashback-box ">
-							
-
-									<div class="col s3 left-sq-3">
-										<span class="fa fa-diamond download-sq-2"></span>
+								<div class="col s3 left-sq-3">
+									<span class="fa fa-diamond download-sq-2"></span>
+								</div>
+								<div class="col s9 right-sq-1">
+									<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/transactions">Cashback ({{sales_obj.cashback_count}})</a> </span>
+								
+									<div class="slaes-rup margin-top-cart">
+										<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.cashback_sale}}</span>
 									</div>
-									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/transactions">Cashback ({{sales_obj.cashback_count}})</a> </span>
-									
-										<div class="slaes-rup margin-top-cart">
-											<i class="icon-inr"></i>	<span class="font-size-change2">{{sales_obj.cashback_sale}}</span>
-										</div>
 
-									</div>
+								</div>
 							</div>
-							
 						</div>
 
 						<div class="col s12 m3">
 							<div class="card cashback-box ">
-							
-
-									<div class="col s3 left-sq-4">
-										<span class="fa fa-gift download-sq-1"></span>
-									</div>
-									<div class="col s9 right-sq-1">
-										<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/transactions">ADD MONEY({{this.sales_obj.addmoney_count}})</a></span>
-									
-										<div class="slaes-rup margin-top-cart">
-											<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.addmoney}}</span>
-										</div>
-
-									</div>
+								<div class="col s3 left-sq-4">
+									<span class="fa fa-gift download-sq-1"></span>
+								</div>
+								<div class="col s9 right-sq-1">
+									<span class="card-title inline-block font-size-change1 font-20"><a routerLink="/dashboard/transactions">ADD MONEY({{this.sales_obj.addmoney_count}})</a></span>
 								
-							</div>
-							
+									<div class="slaes-rup margin-top-cart">
+										<i class="icon-inr"></i>	<span class="font-size-change2">{{this.sales_obj.addmoney}}</span>
+									</div>
+								</div>								
+							</div>							
 						</div>
 
 						
@@ -326,7 +327,24 @@ font-weight: bold;
 						
 						</div>
 					</div>
-
+				<div class="lead-box" *ngIf="(this.todoservice.get_user_id() == 173 || this.todoservice.get_user_id() == 1321) && this.todoservice.is_subscribed_lead() == 1 && leads">
+					<div class="row">
+						<div class="col m9 s9"><h3 class="font600 inline-block">Recent Leads </h3></div>
+						<div class="col m3 s3"><a [routerLink]="['/dashboard/leads']" class="right inline-block margin-top-cart"><button type="submit" class="btn orange no-box-shadow" id="export-order-txt">View All</button></a></div>
+					</div>
+					<div class="row">
+						<div class="col m3 s12" *ngFor="let item of leads;let i = index;">
+							<div class="card">
+								<div class="card-content lead-item-inner-box">
+									<h4 class=" grey-text">{{item.name}}</h4>
+									<span class="black-text">{{item.city}}({{item.branchpin}})</span>
+									<div class="clearfix"></div>
+									<span class="right grey-text">{{item.created}}</span>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>	
 				<div class="responsive-table table-box-design" style="width: 100%; overflow:auto; margin-top:35px;">
 					<div class="row">
 						<div class="col m9 s9"><h3 class="font600 inline-block">Recent Orders </h3></div>
@@ -337,43 +355,43 @@ font-weight: bold;
 					<div class="responsive-table">
 					<table id="datatable" class="table display  datatable-example cst-table">
 						<thead class="thead-bg">
-								<tr>
-										<th>S.No </th>
-										<th >Order No</th>
-										<th >Subscriber Id</th>
-										<th>TXNID/REFID</th>
-										<th>Provider/Brand</th>
-										<th>Amount</th>
-										<!-- <th>Balance After </th> -->
-										<th>Date </th>
-										<th >C.Address</th>
-										<th>Payment Method</th>
-										<th >Order Status</th>
-										<th>Pyament Status </th>
-										<th>View</th>
-								</tr>
+							<tr>
+								<th>S.No </th>
+								<th >Order No</th>
+								<th >Subscriber Id</th>
+								<th>TXNID/REFID</th>
+								<th>Provider/Brand</th>
+								<th>Amount</th>
+								<!-- <th>Balance After </th> -->
+								<th>Date </th>
+								<th >C.Address</th>
+								<th>Payment Method</th>
+								<th >Order Status</th>
+								<th>Pyament Status </th>
+								<th>View</th>
+							</tr>
 						</thead>
 						
 						<tbody>
-								<tr *ngFor="let recharge of orders; let i = index">
-										<td>{{i+1}}</td>
-										<td>{{recharge.id}}</td>
-										<td>{{recharge.subcriber_id}}</td>
-										<td>{{recharge.transaction_id}}</td>
-										<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
-										<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
-										<!-- <td><i class="icon-inr"></i>{{balance_after(recharge) | number : '.2-2'}}</td> -->
-										<td>{{recharge.history_time | date: date:'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
-										<td>{{recharge.deliver_to}}</td>
-										<td><div [innerHTML]="this.todoservice.paymethod_template(recharge.paymethod)"></div></td>
-										<td>
-											<div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
-										</td>
-										<td>
-											<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
-										</td>
-										<td><a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1"><span class="fa fa-eye cst-eye"></span></a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5"><span class="fa fa-eye cst-eye"></span> </a></td>
-								</tr>
+							<tr *ngFor="let recharge of orders; let i = index">
+								<td>{{i+1}}</td>
+								<td>{{recharge.id}}</td>
+								<td>{{recharge.subcriber_id}}</td>
+								<td>{{recharge.transaction_id}}</td>
+								<td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
+								<td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
+								<!-- <td><i class="icon-inr"></i>{{balance_after(recharge) | number : '.2-2'}}</td> -->
+								<td>{{recharge.history_time | date: 'dd M, Y' }}<br><time>{{recharge.history_time | date:'h:mm a' }}</time></td>
+								<td>{{recharge.deliver_to}}</td>
+								<td><div [innerHTML]="this.todoservice.paymethod_template(recharge.paymethod)"></div></td>
+								<td>
+									<div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
+								</td>
+								<td>
+									<div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
+								</td>
+								<td><a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1"><span class="fa fa-eye cst-eye"></span></a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5"><span class="fa fa-eye cst-eye"></span> </a></td>
+							</tr>
 						</tbody>	
 				</table>
 			</div>
@@ -404,7 +422,7 @@ font-weight: bold;
 								<tr *ngFor="let topup of topups; let i = index">
 									<td nowrap="nowrap">{{i+1}}</td>
 									<td nowrap="nowrap">{{topup.id}}</td>
-									<td nowrap="nowrap">{{topup.history_time | date: date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
+									<td nowrap="nowrap">{{topup.history_time | date: 'dd M, Y'}}<br><time>{{topup.history_time | date:'HH:mm a'}}</time></td>
 									<td nowrap="nowrap"><i class="icon-inr"></i>{{topup.grand_total}}</td>
 									<td nowrap="nowrap">{{topup.commission_surcharge}}</td>
 									<td nowrap="nowrap">{{topup.transaction_id}}</td>

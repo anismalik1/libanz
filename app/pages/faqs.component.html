@@ -12,7 +12,7 @@ button.btn-flat.search-btn {
     position: absolute;
     left: 16px;
     padding-right: 20px;
-    top: 22px !important;
+    top: 24px !important;
 }
 #faq_key {
   padding-left:30px;
@@ -88,7 +88,7 @@ top:-5px;
 
 </style>
 <h2 class="dis-none">Help Centre</h2> 
-<app-header class="hide-on-mobile"></app-header>
+<app-header></app-header>
 <title></title>
 
 <div class="spinner-wrapper">
@@ -135,7 +135,7 @@ top:-5px;
 
                 <mat-form-field class="example-full-width">
                   <button type="Submit" class="btn-flat search-btn" (click)="go_to_search();" ><i class="material-icons search">search</i></button>
-										<input type="text" id="faq_key"  class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" (keyup.enter)="go_to_search()" > 
+										<input type="text" id="faq_key"  class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event)" (keyup.enter)="go_to_search()" > 
 										<mat-autocomplete #auto="matAutocomplete">
 											<span *ngIf="filterdList">
 											<mat-option *ngFor="let option of filteredOptions" [value]="option">
@@ -192,7 +192,7 @@ top:-5px;
               <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
                 <div class="link-faqs">
                   <a routerLink="'/help/faqs/'+{{item.url}}" (click)="print_faq(item.url)">{{item.question}}</a>
-                  <span class="orange-clr">{{this.todoservice.base_url}}help/faqs/{{item.url}}</span>
+                  <span>{{this.todoservice.base_url}}help/faqs/{{item.url}}</span>
                   <p [innerHTML]="item.meta_description"></p>
                 </div>
                 

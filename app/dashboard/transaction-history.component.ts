@@ -34,7 +34,7 @@ export class TransactionHistoryComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
     $(document).ready(function() {
         $('.filter-show').on('click',function(){
@@ -107,7 +107,7 @@ export class TransactionHistoryComponent implements OnInit{
     var date = $('[name="daterange"]').val();
     if(date == '')
     {
-      return false;
+      return;
     }
     window.location.href = this.todoservice.server_url+'accounts/apis/export/export_transactions/?token='+this.get_token()+'&date='+date;
   }

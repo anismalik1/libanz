@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule} from '@angular/material';
+import { MatSelectModule} from '@angular/material/select';
 import { SharedCommonModule } from '../shared/common.module';
 import { DashboardComponent } from './dashboard.component';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ExcelService } from '../export.service';
 import { MatRadioModule } from '@angular/material/radio';
@@ -30,10 +32,12 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { LeadsComponent } from './leads.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'orders', component: RechargeOrdersComponent },
+  { path: 'leads', component: LeadsComponent },
   { path: 'complaints', component: ComplaintBoxComponent },
   { path: 'complaints/:name', component: ComplaintBoxComponent },
   { path: 'value-transfer', component: ValueTransferComponent },
@@ -57,6 +61,8 @@ const routes: Routes = [
     SharedCommonModule,
     NgxSpinnerModule,
     FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     MatRadioModule,
     MatSelectModule,
@@ -64,7 +70,7 @@ const routes: Routes = [
     NgxDaterangepickerMd.forRoot(),
     ImageCropperModule 
   ],
-  declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent, RechargeOrdersComponent, DthOrdersComponent],
+  declarations: [DashboardComponent, ValueTransferComponent, ComplaintBoxComponent, AddMoneyComponent, TopupRequestComponent, CommissionStructureComponent, TransactionHistoryComponent, EditAccountComponent, BookDthOrderComponent, BookedOrderListComponent,FooterMinComponent, BookDthOrdersComponent, RechargeOrdersComponent, DthOrdersComponent, LeadsComponent],
   providers : [ExcelService,AuthService,TodoService,User,ProductService]
 })
 export class DashboardModule { }

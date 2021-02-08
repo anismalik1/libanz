@@ -1,17 +1,20 @@
-import { Component, OnInit,Renderer2,Inject,ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit,Renderer2,ViewContainerRef,ViewChild,Inject,PLATFORM_ID} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
-import { Headers,Http } from '@angular/http';
+import { HttpHeaders,HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { MatStepper } from '@angular/material';
+import { MatStepper } from '@angular/material/stepper';
 import { stepper } from '../home/splash-animation';
 import { Item } from '../item.entities';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+
 //import '../../assets/css/mixin-style.sass';
 declare var window: any; 
 
@@ -24,6 +27,7 @@ declare var window: any;
   },MatStepper]
 })
 export class StepCheckoutComponent implements OnInit {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   @ViewChild('stepper',{static: false}) private myStepper: MatStepper;
   myControl = new FormControl();
   addressformgroup : FormGroup;
@@ -31,7 +35,7 @@ export class StepCheckoutComponent implements OnInit {
   rowaddressformgroup : FormGroup;
   addresses : any ;
   params : any = {};
-  product_items : any = this.productservice.cart_items;
+  product_items : any = [];
   only_address :number = 0 ;
   state : string ;
   month : number = 1; 
@@ -67,10 +71,11 @@ export class StepCheckoutComponent implements OnInit {
   topaybutton : boolean = false;
  
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     public stepper : MatStepper,
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
-    private http: Http, 
+    private http: HttpClient, 
     private spinner : NgxSpinnerService,
     private vcr: ViewContainerRef,
     private toastr: ToastrManager,
@@ -80,6 +85,7 @@ export class StepCheckoutComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private router : Router
   ) {
+    StepCheckoutComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.addressformgroup = this._formBuilder.group({
       'name' : [null,Validators.compose([Validators.required])],
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -101,7 +107,8 @@ export class StepCheckoutComponent implements OnInit {
 
   ngOnInit() {
   this.todoservice.back_icon_template('Checkout',this.todoservice.back())
-  $('.mobile-footer').remove();  
+  if(isPlatformBrowser(this.platformId)) 
+    $('.mobile-footer').remove();  
   if(!this.get_token())
   {
     let full_url = this.router.url.split('/');
@@ -110,7 +117,7 @@ export class StepCheckoutComponent implements OnInit {
     else
       full_url[2] = '#'+full_url[2];
     this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-    return false;
+    return;
   } 
   
   
@@ -131,11 +138,19 @@ export class StepCheckoutComponent implements OnInit {
     this.pincode = this.todoservice.get_param('pincode');
   }
 
-  if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'product')
+  if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'favorite')
+  {
+    this.params.tracker = 'favorite';
+    this.params.id      = this.todoservice.get_param('id'); 
+  }
+  else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'cart')
+  {
+    this.params.tracker = 'cart'; 
+  }
+  else
   {
     this.params.tracker = 'product';
     this.params.id      = this.todoservice.get_param('id');
-    this.product_items = this.productservice.cart_items.filter(item => item.product.id == this.todoservice.get_param('id'));
   }
     
     if(this.productservice.get_pincode())
@@ -146,6 +161,7 @@ export class StepCheckoutComponent implements OnInit {
     }
     this.spinner.hide();
     this.get_checkout_data();
+    this.update_user_favourites();
     this.todoservice.get_user_data();
     if(this.get_token())
     {
@@ -157,6 +173,49 @@ export class StepCheckoutComponent implements OnInit {
     this.ControlFormGroup = this.addressformgroup;
      
   }
+
+update_user_favourites()
+{
+  if(this.get_token())
+  {
+    this.todoservice.user_favourites({token: this.get_token()})
+    .subscribe(
+      data => 
+      {
+        localStorage.setItem('favourite', JSON.stringify(data.favourites));
+        
+        if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'favorite')
+        {
+          this.params.tracker = 'favorite';
+          this.params.id      = this.todoservice.get_param('id');
+          if(data.favourites.items.length > 0)
+          {
+            var myitems : any =  data.favourites.items.filter(item => item.id == this.todoservice.get_param('id')); 
+            myitems[0].product.price = myitems[0].price;
+            myitems[0].product.offer_price = myitems[0].offer_price;
+            this.product_items.push({product: myitems[0].product,quantity : 1});
+          } 
+        }
+        else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'cart')
+        {
+          this.params.tracker = 'cart';
+          if(data.favourites.items.length > 0)
+          {
+            var myitems : any = data.favourites.items.filter(item => item.type == 1); 
+            //this.product_items.push({product : [],quantity : 1});
+            for(var i = 0;i < myitems.length ; i++)
+            {
+              this.product_items.push({product : myitems[i].product,quantity : 1});
+            }
+          }
+        }
+        else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'product')
+        {
+          this.product_items  =  this.productservice.PurchaseItems(); 
+        }
+      })
+  }     
+}
 
   ini_list()
   {
@@ -334,12 +393,12 @@ select_pack(pack)
       if(pack.title.includes('Super Family') || this.fta_pack.price == 0)
       {
         alert("There Must be atleast two packs(FTA + Other) in this Package.");
-        return false;
+        return;
       }
       if(pack.title.includes('Gold Combo') || pack.title.includes('Gold HD Combo'))
       {
         alert("There Must be atleast two packs(FTA + Other) in this Package.");
-        return false;
+        return;
       }
       $('#check-pack-'+pack.id).addClass('grey-text');
       if(!this.fta_pack)
@@ -351,7 +410,7 @@ select_pack(pack)
       }  
     }
     this.selectedCartItem.product.pack_selected = this.pack_selected;
-    this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
+   // this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product)
     this.calculate_amount();
   }
 
@@ -454,7 +513,7 @@ filter_channel_subpack()
 { 
   this.pack_selected = [];
   if(!this.channels_packs)
-   return false;
+   return;
   //console.log(this.channels_packs); 
   
   for(var i=0;i<this.channels_packs.length ;i++)
@@ -517,7 +576,7 @@ filter_channel_subpack()
   if(this.selectedCartItem)
   {
     this.selectedCartItem.product.pack_selected = this.pack_selected;
-    this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product);
+    //this.productservice.addto_cart(this.selectedCartItem.product.id,this.selectedCartItem.product);
   }
   
 }
@@ -647,10 +706,14 @@ get_checkout_data()
         {
           if(this.product_items[0].product.multi == 1 && this.todoservice.get_user_type() == 2)
           {
-            $('.second-line').hide();
-            //$('.checkout_3').hide();
-            $('.payment-number span').text('3');
-            $('.second-line').hide();
+            if(isPlatformBrowser(this.platformId)) 
+            {
+              $('.second-line').hide();
+              //$('.checkout_3').hide();
+              $('.payment-number span').text('3');
+              $('.second-line').hide();
+            }
+            
             this.topaybutton = true;
           }
         }
@@ -757,6 +820,11 @@ for(var i =0;i< cart.length;i++)
 return amount; 
 }
 
+fetch_channels(item : any)
+{
+
+}
+
 itemCount()
 {
   return this.product_items.length;
@@ -794,7 +862,8 @@ checkout_items(type)
     data.region = this.region;  
   if(this.calculate_bonus() > 0)
     data.bonus = 1;
-  this.disabled = true;     
+  this.disabled = true;  
+  data.referer = this.params.tracker;   
   this.todoservice.checkout_items(data)
     .subscribe(
       data => 
@@ -804,27 +873,27 @@ checkout_items(type)
         {                                                     
           this.authservice.clear_session();
           this.router.navigate(['/proceed/login']);
+          return;
         }
         if(!jQuery.isEmptyObject(data))
         {
           if(data.error && data.error == 'balance_error')
           {
             this.toastr.errorToastr("InSufficient Balance.");
-            return false;
+            return;
           }
           if(data.status == true)
           {
+            if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'cart')
+            {
+              this.productservice.clear_cart();
+              // this.todoservice.clear_cart({token : this.get_token()});
+            }
             if(typeof data.red_auth != 'undefined' && data.red_auth == 'ptm')
             {
-              if(typeof data.for_tsk != 'undefined' && data.for_tsk == 1)
-              {
-                window.location.href = this.todoservice.base_url+"web-app/do-paytm/tsk-index.php?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.tsk_amount;
-              }
-              else
-              {
-                if(document.URL.indexOf('android_asset') !== -1)
+              if(document.URL.indexOf('android_asset') !== -1)
                 {
-                  var ref = window.cordova.InAppBrowser.open(this.todoservice.base_url+"web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount, '_blank', 'location=yes');
+                  var ref = window.cordova.InAppBrowser.open(this.todoservice.base_url+"accounts/apis/response/paytm_form_product?ORDERID="+data.order_id+'&token='+this.get_token(), '_blank', 'location=yes');
                   window.me = this;
                   ref.addEventListener('loadstart', function(event) { 
                     var urlSuccessPage = "order-receipt";
@@ -837,8 +906,7 @@ checkout_items(type)
                   
                 }
                 else
-                  window.location.href = this.todoservice.base_url+"web-app/do-paytm/?pt_t="+data.pt_t+"&order_id="+data.order_id+'&token='+this.get_token()+'&amount='+data.amount;
-              }
+                  window.location.href = this.todoservice.base_url+"accounts/apis/response/paytm_form_product?ORDERID="+data.order_id+'&token='+this.get_token();
       
             }
             else if(typeof data.red_auth != 'undefined' && data.red_auth == 'card')
@@ -869,7 +937,7 @@ checkout_items(type)
               this.router.navigate(['/product/order-receipt/'+data.order_id]);
             }
            
-            this.productservice.cartItemsCount();
+            // this.productservice.cartItemsCount();
           }
         }
         
@@ -901,7 +969,7 @@ init_accordian()
 
 app_version()
 {
-    var Headers_of_api = new Headers({
+    var Headers_of_api = new HttpHeaders({
         'Content-Type' : 'application/x-www-form-urlencoded'
       });
     this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(

@@ -2,32 +2,72 @@ import { Injectable } from '@angular/core';
 import { Product } from './product.entities';
 import { Item } from './item.entities';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Headers,Http,HttpModule } from '@angular/http';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/observable/of';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';
+import {AppComponent} from './app.component';
 import * as $ from 'jquery';
 
+class LocalStorage implements Storage {
+  length!: number | 0;
+  [name : string] : any;
+
+  clear(): void { }
+  getItem( key : string ): string | null { return null; }
+  key(index: number): string | null { return null; }
+  removeItem(key: string): void {}
+  setItem(key: string, value: string): void {}
+}
+
 @Injectable()
-export class ProductService {
+export class ProductService implements Storage  {
 
   public server_url : string = "https://www.libanz.com/";
   public base_url : string = 'https://localhost:4200/';
   public service_url : string = 'https://www.mydthshop.com/index.php?/app_services/';
-  public request_action : string ;
+  public request_action!: string;
   public dropdown_add_money = {paymethod: '',paybankaccount:'',yourbankname : '' };
-  private product : Product;
-  private products : Product[];
-  private item : Item;
+  private product : Product | any;
+  private products : Product[] | any;
+  // private item : Item;
   public cartItems: number = 0;
   public cart_items : Item[] = [];
   cod_invalid = false; 
   options : any;
-  constructor(private http : Http, private router : Router )
+  private storage: Storage;
+  constructor(private http : HttpClient, private router : Router )
   {
+    this.storage = new LocalStorage();
+    // AppComponent.isBrowser.subscribe(isBrowser => {
+    //   if (isBrowser) {
+    //     this.storage = localStorage;
+    //   }
+    // });
     this.loadCart();
   } 
+  length!: number;
+
+  clear(): void {
+    this.storage.clear();
+  }
+
+  getItem(key: string): string | null {
+    return this.storage.getItem(key);
+  }
+
+  key(index: number): string | null {
+    return this.storage.key(index);
+  }
+
+  removeItem(key: string): void {
+    return this.storage.removeItem(key);
+  }
+
+  setItem(key: string, value: string): void {
+    return this.storage.setItem(key, value);
+  }
   get_user_product_amount()
   {
     if(this.get_user() != null)
@@ -38,7 +78,7 @@ export class ProductService {
   get_user()
   {
     //return this.user.storage;
-    let data = JSON.parse(localStorage.getItem('app_token'));
+    let data = JSON.parse(this.storage.getItem('app_token') || '{}');
     if(data != null)
     {
       //console.log(this.user)
@@ -49,7 +89,7 @@ export class ProductService {
   is_mboss_enable()
   {
     let airtel_all : number = 0; 
-    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cart = JSON.parse(this.storage.getItem('cart') || '{}');
     if(cart != null)
     {
       for(var i =0;i<Object.keys(cart).length; i++)
@@ -64,15 +104,19 @@ export class ProductService {
       {
         return true;
       }
-      return false;
     } 
+    return false;
   }
 
   loadCart() : void
    {
     this.cart_items = [];
     let cod_count :number  = 0;
-    let cart = JSON.parse(localStorage.getItem('cart'));
+    if(this.storage.getItem('cart') == null)
+    {
+      return;
+    }
+    let cart = JSON.parse(this.storage.getItem('cart') || '{}');
     if(cart != null)
     {
       for(var i =0;i<Object.keys(cart).length; i++)
@@ -94,7 +138,7 @@ export class ProductService {
     } 
    }
 
-  setItem(products : Product)
+  setProductItem(products : Product)
   {
       this.product = products;
   }
@@ -116,9 +160,9 @@ export class ProductService {
     return -1;
   }
 
-  if_exist_in_cart(push_cart_id)
+  if_exist_in_cart(push_cart_id : number)
   {
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
     let index : number = -1;
     if(cart != null)
     {
@@ -140,9 +184,9 @@ export class ProductService {
     return true;
   }
 
-  selectCartItemById(id)
+  selectCartItemById(id : number)
   {
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
     let index : number = -1;
     if(cart != null)
     {
@@ -164,112 +208,114 @@ export class ProductService {
     return JSON.parse(cart[index]);
   }
 
-  addto_cart(id : number,product_item)
+  addto_direct_purchase(product_item : any)
   {
-    let push_cart_id = id;
-      if(push_cart_id)
-      {
-        var item : Item = {
-          product   : product_item,
-          quantity  : 1
-        };
-        if( localStorage.getItem('cart') == null )
-        {
-          let cart :any = [];
-          cart.push(JSON.stringify(item));
-          localStorage.setItem('cart',JSON.stringify(cart));
-        }
-        else
-        {
-          let cart :any = JSON.parse(localStorage.getItem('cart'));
-          let index : number = -1;
-          cart = cart.filter(data => data.id != push_cart_id);
-
-          for(var i =0;i< Object.keys(cart).length;i++)
-          {
-            let temp :Item = JSON.parse(cart[i]);
-            if(temp.product.id == push_cart_id)
-            {
-              cart.splice(i, 1);
-            } 
-          }
+    var item : any = [{
+      product   : product_item,
+      quantity  : 1
+    }];
+    this.storage.setItem('purchase',JSON.stringify(item));
+      // if(push_cart_id)
+      // {
+       
+        // if( localStorage.getItem('cart') == null )
+        // {
           
-          if(index == -1)
-          {
-            cart.push(JSON.stringify(item));
-            localStorage.setItem('cart',JSON.stringify(cart));
-          }else
-          {
-            var item_2 = JSON.parse(cart[index]);
-            item_2.quantity += 1;
-            cart[index] = JSON.stringify(item_2);
-            localStorage.setItem('cart',JSON.stringify(cart));
-          }
-        }
-        this.loadCart();
-      }
-      else
-      {
+        // }
+        // else
+        // {
+        //   let cart :any = JSON.parse(localStorage.getItem('cart'));
+        //   let index : number = -1;
+        //   cart = cart.filter(data => data.id != push_cart_id);
 
-      }
-    this.cartItemsCount();   
+        //   for(var i =0;i< Object.keys(cart).length;i++)
+        //   {
+        //     let temp :Item = JSON.parse(cart[i]);
+        //     if(temp.product.id == push_cart_id)
+        //     {
+        //       cart.splice(i, 1);
+        //     } 
+        //   }
+          
+        //   if(index == -1)
+        //   {
+        //     cart.push(JSON.stringify(item));
+        //     localStorage.setItem('cart',JSON.stringify(cart));
+        //   }else
+        //   {
+        //     var item_2 = JSON.parse(cart[index]);
+        //     item_2.quantity += 1;
+        //     cart[index] = JSON.stringify(item_2);
+        //     localStorage.setItem('cart',JSON.stringify(cart));
+        //   }
+        // }
+      // } 
   }
 
-  set_pincode(pincode)
+  get_favorites()
   {
-    localStorage.setItem('pincode',JSON.stringify(pincode));
+    if( this.storage.getItem('favourite') != null )
+    {
+      return JSON.parse(this.storage.getItem('favourite') || '{}');
+    }
+    return null;
+  }
+
+  set_pincode(pincode : any)
+  {
+    this.storage.setItem('pincode',JSON.stringify(pincode));
   }
 
   get_pincode()
   {
-    if( localStorage.getItem('pincode') != null )
+    if( this.storage.getItem('pincode') != null )
     {
-      return JSON.parse(localStorage.getItem('pincode'));
+      return JSON.parse(this.storage.getItem('pincode') || '{}');
     }
     return false;
   }
-  set_region(region)
+  set_region(region : number)
   {
-    localStorage.setItem('region',JSON.stringify(region));
+    this.storage.setItem('region',JSON.stringify(region));
   }
 
   get_region()
   {
-    if( localStorage.getItem('region') != null )
+    if( this.storage.getItem('region') != null )
     {
-      return JSON.parse(localStorage.getItem('region'));
+      return JSON.parse(this.storage.getItem('region') || '{}');
     }
     return 0;
   }
-  cartItemsCount() 
+  PurchaseItems() 
   {
-    if(localStorage.getItem('cart') != null)
+    if(this.storage.getItem('purchase') != null)
     {
-      let cart :any = JSON.parse(localStorage.getItem('cart'));
-      this.cartItems =  Object.keys(cart).length;
+      let cart : any = JSON.parse(this.storage.getItem('purchase') || '{}');
+      return cart;
+    }
+    return null;
+  }
+
+  favorite_count(type : any)
+  {
+    if(this.storage.getItem('favourite') != null)
+    {
+      let cart :any = JSON.parse(this.storage.getItem('favourite') || '{}');
+      this.cartItems = cart.items.filter((item: { type: any; }) => item.type == type);;
+      this.cartItems =  Object.keys(this.cartItems).length;
       return this.cartItems;
     }
     return 0;
   }
 
-  favorite_count()
-  {
-    if(localStorage.getItem('favourite') != null)
-    {
-      let cart :any = JSON.parse(localStorage.getItem('favourite'));
-      this.cartItems =  Object.keys(cart.items).length;
-      return this.cartItems;
-    }
-    return 0;
-  }
-
-  exist_in_favourite(id) : boolean
+  exist_in_favourite(id : number) : boolean
   {
     //console.log(id);
-    if(localStorage.getItem('favourite') != null)
+    if(this.storage.getItem('favourite') != null)
     {
       let index = -1;
-      let cart :any = JSON.parse(localStorage.getItem('favourite'));
+      let cart :any = JSON.parse(this.storage.getItem('favourite') || '{}');
       for(var i =0;i< Object.keys(cart.items).length;i++)
       {
         let item = cart.items[i];
@@ -287,18 +333,17 @@ export class ProductService {
     return false;
   }
 
-  calculateCartAmount() : number{
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+  calculateCartAmount(items : any) : number{
     let index : number = -1;
     let amount : number = 0;
-    if(cart == null)
+    if(items == null)
     {
       return amount;
     }
-    for(var i =0;i< Object.keys(cart).length;i++)
+    for(var i =0;i< Object.keys(items).length;i++)
     {
       var product_amount : number = 0; 
-      let item :Item = JSON.parse(cart[i]);
+      let item :Item = items[i];
       product_amount = item.product.offer_price* 1;
       if(item.product.multi == 1)
       {
@@ -327,7 +372,7 @@ export class ProductService {
     return amount; 
   }
   
-  cashback_amount(items)
+  cashback_amount(items : any)
   {
     let cart : any = items;
     let index : number = -1;
@@ -346,7 +391,7 @@ export class ProductService {
   }
 
   calculateCartAmountWithoutOffer() : number{
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
     let index : number = -1;
     let amount : number = 0;
     if(cart == null)
@@ -362,7 +407,7 @@ export class ProductService {
     return amount;
   }
 
-  total_savings(items)
+  total_savings(items : any)
   {
     let cart :any = items;
     let amount : number = 0;
@@ -400,7 +445,7 @@ export class ProductService {
     return (mrp_amount - offer_amount); 
   }
 
-  check_cashon_delivery(items)
+  check_cashon_delivery(items :any)
   {
     let cart :any = items;
     if(cart == null)
@@ -419,16 +464,20 @@ export class ProductService {
   }
   clear_cart()
   {
-    localStorage.removeItem('cart');
+    let $all : any = this.get_favorites();
+    var favitems = $all.items.filter((item: { type: number; }) => item.type == 2);
+    var array : any = {items : favitems,count : favitems.length};
+    this.storage.setItem('favourite', JSON.stringify(array));
+
   }
 
-  changeItemCount(id :number, op)
+  changeItemCount(id :number, op : string )
   {
     var item : Item = {
       product   : this.product,
       quantity  : 1
     };
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
     let index : number = -1;
     
     for(var i =0;i< Object.keys(cart).length;i++)
@@ -444,7 +493,7 @@ export class ProductService {
     if(index == -1)
     {
       cart.push(JSON.stringify(item));
-      localStorage.setItem('cart',JSON.stringify(cart));
+      this.storage.setItem('cart',JSON.stringify(cart));
     }
     else
     {
@@ -458,19 +507,19 @@ export class ProductService {
         if(item_2.quantity == 3)
         {
           //alert("You can not buy more that 3 Multi Box on same Contact Number.");
-          return false;
+          return ;
         }  
         item_2.quantity += 1;
       }
       $('#update_count'+id).text(item_2.quantity);
       cart[index] = JSON.stringify(item_2);
-      localStorage.setItem('cart',JSON.stringify(cart));
+      this.storage.setItem('cart',JSON.stringify(cart));
     }
     this.loadCart();
   }
 
 
-  removeItem(id : number)
+  removeProductItem(id : number)
   {
     var item : Item = {
       product   : this.product,
@@ -478,9 +527,9 @@ export class ProductService {
     };
     if(!id)
     {
-      return false;
+      return;
     }
-    let cart :any = JSON.parse(localStorage.getItem('cart'));
+    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
     let index : number = -1;
     for(var i =0;i< Object.keys(cart).length;i++)
     {
@@ -491,23 +540,10 @@ export class ProductService {
         cart.splice(index, 1);
       }
     }
-    localStorage.setItem('cart',JSON.stringify(cart));
-    // if(1==1)
-    // {
-    //   this.router.routeReuseStrategy.shouldReuseRoute = function(){
-    //     return false;
-    //   }
-    // this.router.navigated = false;
-    // if(this.get_param('addr'))
-    //   this.router.navigate(['/product/checkout/'],{queryParams :{addr : this.get_param('addr')}});
-    // else
-    //   this.router.navigate(['/product/checkout/']); 
-    // }
-    this.loadCart();
-    this.cartItemsCount();
+    this.storage.setItem('cart',JSON.stringify(cart));
   }
 
-  get_param(name)
+  get_param(name : string)
   {
     const results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if(!results){
@@ -521,59 +557,59 @@ export class ProductService {
     return this.products[this.select_by_id(id)];
   }
 
-  send_post_request(data,url) : Observable<any>
+  send_post_request(data : any,url : string) : Observable<any>
   {
-    var Headers_of_api = new Headers({ 
+    var Headers_of_api = new HttpHeaders({ 
       'Content-Type' : 'application/x-www-form-urlencoded'
     });
     return this.http.post(url,data,{headers: Headers_of_api})
-    .map(res => res.json());
+    .map(res => res)
   }
 
-  fetch_product_data(data)
+  fetch_product_data(data : any)
   {
     this.request_action = '';
     let url = this.server_url+'accounts/apis/product/fetch_product';
     return this.send_post_request(data,url) ;
   }
-  fetch_channels(data)
+  fetch_channels(data : any)
   {
     this.request_action = '';
     let url = this.server_url+'accounts/apis/product/fetch_channels';
     return this.send_post_request(data,url) ;
   }
-  fetch_products_by_category(data)
+  fetch_products_by_category(data : any)
   {
     this.request_action = '';
     let url = this.server_url+'accounts/apis/product/fetch_products_by_category';
     return this.send_post_request(data,url) ;
   }
-  fetch_all_multi(data)
+  fetch_all_multi(data : any)
   {
     this.request_action = '';
     let url = this.server_url+'accounts/apis/product/fetch_all_multi';
     return this.send_post_request(data,url) ;
   }
 
-  compare_urls(data)
+  compare_urls(data : any)
   {
     this.request_action = '';
     let url = this.server_url+'accounts/apis/product/compare_urls';
     return this.send_post_request(data,url) ;
   } 
-  change_compare_list(data)
+  change_compare_list(data : any)
   {
     this.request_action = '';
     let url = this.server_url+'accounts/apis/product/change_compare_list';
     return this.send_post_request(data,url) ;
   } 
-  share_pack_to_mail(data)
+  share_pack_to_mail(data : any)
   {
     let url = this.server_url+'index.php?/app_services/share_pack_to_mail';
     return this.send_post_request(data,url) ;
   }
 
-  add_to_favorite(data)
+  add_to_favorite(data : any)
   {
     let url = this.server_url+'accounts/apis/product/add_to_favorite';
     return this.send_post_request(data,url) ; 

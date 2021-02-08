@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewContainerRef,Renderer2,Inject,ElementRef, ViewChild } from '@angular/core';
-import { Headers,Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -29,7 +29,7 @@ export class EditAccountComponent implements OnInit{
     private toastr : ToastrManager ,
     public todoservice : TodoService,
     private authservice : AuthService,
-    private http : Http,
+    private http : HttpClient,
     private router : Router,
     private fb: FormBuilder,
     private spinner : NgxSpinnerService,
@@ -82,7 +82,7 @@ loadImageFailed() {
       else
         full_url[2] = '#'+full_url[2];
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     } 
   }
   edituser()
@@ -180,24 +180,24 @@ loadImageFailed() {
     if(formdata.cpassword == "")
     {
       this.toastr.errorToastr("Enter Password", 'Failed!');
-      return false;
+      return ;
     }
     if(formdata.newpassword == "")
     {
       this.toastr.errorToastr("Enter New Password", 'Failed!');
-      return false;
+      return ;
     }
 
     if(formdata.cnewpassword == "")
     {
       this.toastr.errorToastr("Enter Confirm Password", 'Failed!');
-      return false;
+      return ;
     }
       
     if(formdata.newpassword != formdata.cnewpassword)
     {
       this.toastr.errorToastr('Your Password Does Not Match ', 'failed!');
-      return false;
+      return;
     }
     if(this.authservice.retrieveToken())
     {

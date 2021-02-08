@@ -1,7 +1,7 @@
 import { Injectable,NgZone } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 function _window(): any {
@@ -11,23 +11,23 @@ function _window(): any {
 @Injectable()
 export class CordovaService {
    
-   private resume: BehaviorSubject<boolean>;
-   constructor(private zone: NgZone) {
-      this.resume = new BehaviorSubject<boolean>(null);
-      Observable.fromEvent(document, 'resume').subscribe(event => {
-         this.zone.run(() => {
-            this.onResume();
-         });
-      });
-    }
+   // private resume: BehaviorSubject<boolean>;
+   // constructor(private zone: NgZone) {
+   //    this.resume = new BehaviorSubject<boolean>(null);
+   //    Observable.fromEvent(document, 'resume').subscribe(event => {
+   //       this.zone.run(() => {
+   //          this.onResume();
+   //       });
+   //    });
+   //  }
    
-   get cordova(): any {
-      return _window().cordova;
-   }
-   get onCordova(): Boolean {
-    return !!_window().cordova;
-    }
-   public onResume(): void {
-      this.resume.next(true);
-   }
+   // get cordova(): any {
+   //    return _window().cordova;
+   // }
+   // get onCordova(): Boolean {
+   //  return !!_window().cordova;
+   //  }
+   // public onResume(): void {
+   //    this.resume.next(true);
+   // }
 }

@@ -1,10 +1,13 @@
-import { Component, OnInit ,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit ,Renderer2,Inject,PLATFORM_ID } from '@angular/core';
 import { Meta,Title } from "@angular/platform-browser";
 import { DOCUMENT} from "@angular/common";
 import { TodoService } from '../todo.service';
 import { ProductService } from '../product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+
 import * as $ from 'jquery'; 
 @Component({
   selector: 'app-compare-dth',
@@ -12,7 +15,7 @@ import * as $ from 'jquery';
   styles: []
 })
 export class CompareDthComponent implements OnInit {
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   private urls : any = '';
   public disable_compare = false;
   public compare_products : any ;
@@ -23,7 +26,8 @@ export class CompareDthComponent implements OnInit {
   private change : boolean = false;
   public all_specifications :any;
   constructor(
-    private _renderer2: Renderer2, 
+    private _renderer2: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any, 
     @Inject(DOCUMENT) private _document, 
     public todoservice  : TodoService,
     private productservice: ProductService, 
@@ -32,7 +36,9 @@ export class CompareDthComponent implements OnInit {
     private title: Title,
     private meta : Meta
   ) { 
-    this.init_script();
+    CompareDthComponent.isBrowser.next(isPlatformBrowser(platformId));
+    if(isPlatformBrowser(this.platformId)) 
+      this.init_script();
   }
 
   ngOnInit() {
@@ -45,7 +51,7 @@ export class CompareDthComponent implements OnInit {
     if(arr.length >= 4)
     {
       this.disable_compare = true;
-      return true;
+      return;
     }
     this.apply_filter(arr); 
     this.product_categories();
@@ -58,7 +64,7 @@ export class CompareDthComponent implements OnInit {
    let page = {page : this.page}; 
    if(page.page == '')
    {
-       return false;
+       return;
    }
    this.todoservice.fetch_page_data(page)
      .subscribe(
@@ -143,7 +149,6 @@ export class CompareDthComponent implements OnInit {
 
   apply_filter(vsurls)
   {
-    console.log(this.change)
     this.spinner.show();
     this.productservice.compare_urls(vsurls)
     .subscribe(
@@ -162,7 +167,8 @@ export class CompareDthComponent implements OnInit {
         }
         if(data.compare_content)
         {
-          $('#compare-title').text(data.compare_content.title);
+          if(isPlatformBrowser(this.platformId))
+            $('#compare-title').text(data.compare_content.title);
           this.meta.addTag({ name: 'description', content: data.compare_content.meta_description });
           this.meta.addTag({ name: 'keywords', content: data.compare_content.meta_keyword });
           this.title.setTitle(data.compare_content.meta_title);

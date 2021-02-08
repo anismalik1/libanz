@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewContainerRef ,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit,ViewContainerRef ,Renderer2,PLATFORM_ID,Inject} from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { Meta,Title } from "@angular/platform-browser";
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,13 +7,16 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import { TodoService } from '../todo.service';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+
 @Component({
   selector: 'app-channel-pack',
   templateUrl: './channel-pack.component.html',
   styles: []
 })
 export class ChannelPackComponent implements OnInit {
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   channel_id : Number;
   product_pack_rows : any = [];
   product_pack_info : any = [];
@@ -25,6 +28,7 @@ export class ChannelPackComponent implements OnInit {
   category : number;
   pack_id : number;
   constructor( 
+    @Inject(PLATFORM_ID) private platformId: any ,
     private _renderer2: Renderer2, 
     @Inject(DOCUMENT) private _document, 
     private spinner : NgxSpinnerService,
@@ -37,7 +41,7 @@ export class ChannelPackComponent implements OnInit {
     public todoservice : TodoService,
     private router : ActivatedRoute, private route : Router
   ) { 
-
+    ChannelPackComponent.isBrowser.next(isPlatformBrowser(platformId));
   }
 
   ngOnInit() {
@@ -48,7 +52,8 @@ export class ChannelPackComponent implements OnInit {
       this.spinner.show();
       this.fetch_channels(this.channel_id);
     });
-    this.init_script();
+    if(isPlatformBrowser(this.platformId)) 
+      this.init_script();
     this.todoservice.back_icon_template('Channel',this.todoservice.back())
   }
 
@@ -119,10 +124,14 @@ export class ChannelPackComponent implements OnInit {
           }
           
         }
-        if(channel_list != '')
-          $('#product-pack').html(channel_list);
-        else
-         $('#product-pack').html("<li>Channel list is not updated.</li>");
+        if(isPlatformBrowser(this.platformId)) 
+        {
+          if(channel_list != '')
+            $('#product-pack').html(channel_list);
+          else
+            $('#product-pack').html("<li>Channel list is not updated.</li>");
+        }
+        
         this.meta.addTag({ name: 'description', content: data.pack_info.meta_description });
         this.meta.addTag({ name: 'keywords', content: data.pack_info.meta_keywords });
         this.title.setTitle(data.pack_info.meta_title); 
@@ -135,7 +144,7 @@ export class ChannelPackComponent implements OnInit {
    {
      this.pack_id = id;
     if(this.category == undefined)
-      return false;
+      return;
     this.spinner.show();
     this.todoservice.choose_box_for_this_pack({id: id,product_category: this.category})
     .subscribe(
@@ -170,7 +179,8 @@ export class ChannelPackComponent implements OnInit {
     var email = $("#sendmail-modal #pack-email").val();
     if(email == '' )
     {
-      return false;
+      this.toastr.infoToastr("Enter a Valid Email.")
+      return;
     }  
       this.productservice.share_pack_to_mail({channel:this.channel_id,email:email,pack:this.product_pack_info.title})
      .subscribe(

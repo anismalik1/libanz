@@ -272,10 +272,10 @@ ul#dropdown1 li {
     box-shadow: none;
 	}
 	.forder-txt{
-    position: relative;
-    top: -15px;
-    font-size: 11px;
-    left: 4px}
+	position: relative;
+    top: -17px;
+    font-size: 13px;
+    left: 4px;}
 </style>
 
 <app-header></app-header>
@@ -309,7 +309,7 @@ ul#dropdown1 li {
 <section class="flash-deal border-bottom white">
 	<div class="container" id="product-detailed-section">
 		<div class="row no-margin">
-			<div class="col s12 m12 l5">
+			<div class="col s12 m12 l5" *ngIf="product">
 				<div class="images-product relative">
 					<div class="product-img center">
 							<div class="xzoom-thumbs left" *ngIf="thumbs">
@@ -432,7 +432,7 @@ ul#dropdown1 li {
 							</ul>
 						</div>
 						<div class="card">
-							<h2 *ngIf="product.short_description != ''">Terms & Conditions</h2>
+							<h2 *ngIf="product && product.short_description != ''">Terms & Conditions</h2>
 							<span class="font-size-change terms-conds" [innerHTML] ="product.short_description"></span>
 						</div>
 						
@@ -452,7 +452,7 @@ ul#dropdown1 li {
               			No Ratings given. 
               		</div>	
               		<div class="col s6 m3 l2 res-cen" *ngIf="all_rating > 0">
-              			<span class="font-size-change3 font500" *ngIf="avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}}<i class="material-icons">star</i></span><br/>
+              			<span class="font-size-change3 font500" *ngIf="avg_rating && avg_rating.reting">{{(avg_rating.reting | number: '1.2-2').slice(0, -1)}}<i class="material-icons">star</i></span><br/>
               			<span class="font-size-change1 grey-text">{{all_rating}} Ratings &</span><br/>
               			<span class="font-size-change1 grey-text">{{rev_count}} Reviews</span>
               		</div>
@@ -601,7 +601,7 @@ ul#dropdown1 li {
                      <div class="subtotal" *ngIf="this.product && this.product.promos">
                          <p class="inline-block font600" style="width:80%;">Congrates! Promocode {{promos.unique_code}} is applied  :</p>
                          <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 0" > <i class="icon-inr"></i> -{{promos.discount}} </p>
-                         <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1" > <i class="icon-inr"></i> -{{item.discount * product.offer_price}} </p>
+                         <p class="inline-block green-text right font-size-change" *ngIf="promos.amount_calc_type == 1" > <i class="icon-inr"></i> -{{promos.discount * product.offer_price}} </p>
                      </div>
                      <div class="subtotal" *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product">
                          <p class="inline-block font600" style="width:80%;">Congrates! One Product Bonus Amount Will be Applied:</p>
@@ -649,7 +649,7 @@ ul#dropdown1 li {
      <section id="recommended-product">
         <div class="col s12 m4" >
             <div class="product-image" *ngFor="let item of recommended">
-				<a class="blue-text" routerLink="/product/amp/{{item.url}}">
+				<a class="blue-text" routerLink="/product/amp/{{item.url}}" (click)="continue_to_change(item.url)">
 				<div class="row" style="margin-bottom:0px;">
                     <div class="col s10">
                         <div class="rating-green-content" *ngIf="item.new_product == 1">Trending </div>
@@ -683,7 +683,7 @@ ul#dropdown1 li {
             </div>
 </section>
 <div class="footer-button-buy">
-	<div class="left-half"><h3><a href="javascript:" (click)="add_to_cart(product.id)"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a></h3>
+	<div class="left-half"><h3><a class="black-text font600" href="javascript:" (click)="add_to_cart(product.id)"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a></h3>
 		<a href="javascript:" class="forder-txt" (click)="to_order_summary()">Order Details </a>
 	</div>
 	<div class="right-half">
@@ -968,7 +968,7 @@ ul#dropdown1 li {
 		<div *ngIf="product.title.includes('1234'); else elseBlock">
 			<h3 class="center">Check Pincode</h3>
 			<mat-form-field class="example-full-width">
-				<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)"> 
+				<input type="text" placeholder="Enter Pincode" id="pincode-text" class="no-margin black-text" autocomplete="off" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event)"> 
 				<mat-autocomplete #auto="matAutocomplete">
 					<span *ngIf="filterdList">
 					<mat-option *ngFor="let option of filteredOptions" [value]="option">{{option}}

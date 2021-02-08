@@ -109,7 +109,7 @@ font-size: 19px !important;
                         <table class="table table-bordered">
                             <thead class="thead-bg">
                             <tr >
-                                <th >S.No.</th>
+                            <th >S.No.</th>
                           <th >Order No.</th>
                           <th >SubscriberID</th>
                           <th  >TXNID/REFID</th>
@@ -152,7 +152,7 @@ font-size: 19px !important;
                                 <td>
                                   <div *ngIf="recharge.complaint_id == null">
                                       <span class="orange white-text" *ngIf="check_delay(recharge.order_date) == 2">Please Wait...</span>
-                                      <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com link-border" (click)="do_complaint(recharge.id)" *ngIf="recharge.complaint_id == null; else falsyTemplate">Ticket</a></span>
+                                      <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com link-border" (click)="do_complaint(recharge)" *ngIf="recharge.complaint_id == null;">Ticket</a></span>
                                   </div>
                                   <div *ngIf="recharge.complaint_id != null">
                                       <span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
@@ -195,7 +195,7 @@ font-size: 19px !important;
     <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
     
       <div class="row no-margin">
-        <div class="input-field col s12">
+        <div class="input-field col s12" *ngIf="recharge_order">
             <mat-form-field *ngIf="display == 1">
                 <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
                     <mat-option value="Balance did not receive by customer">
@@ -213,6 +213,22 @@ font-size: 19px !important;
                 </mat-select>
               </mat-form-field>
               <input type="text" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
+        </div>
+        <div class="input-field col s12" *ngIf="!recharge_order">
+            <mat-form-field *ngIf="display == 1">
+                <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
+                    <mat-option value="Payment is deducted but my Order is Failed.">
+                        Payment is deducted but my Order is Failed.
+                    </mat-option>
+                    <mat-option value="I am not interested.">
+                        I am not interested. 
+                    </mat-option>
+                    <mat-option value=""> 
+                        Other
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+                <input type="text" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
         </div>
       </div>
     

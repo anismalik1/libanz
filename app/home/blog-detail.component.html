@@ -69,16 +69,16 @@
             data-href="{{this.todoservice.base_url}}blog-detail/blog" 
             data-layout="button_count">
           </div> -->
-            <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/facebook1.png" class="responsive-img"></a> -->
-            <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/linkedin.png" class="responsive-img"></a> -->
+            <!-- <a href="#"><img src="https://libanz.com/web-app/assets/images/facebook1.png" class="responsive-img"></a> -->
+            <!-- <a href="#"><img src="https://libanz.com/web-app/assets/images/linkedin.png" class="responsive-img"></a> -->
             <a class="twitter-share-button"
               href="https://twitter.com/intent/tweet?text={{this.todoservice.base_url}}blog-detail/{{post[0].url}}">
-             &nbsp; <img src="https://mydthshop.com/web-app/assets/images/twitter.png" class="responsive-img"></a>
-              <a class="twitter-share-button" href="#"><img src="https://mydthshop.com/web-app/assets/images/instagram.png" class="responsive-img"></a>
-              <a class="twitter-share-button" href="#"><img src="https://mydthshop.com/web-app/assets/images/whatsapp.png" class="responsive-img"></a>
-              <a class="twitter-share-button" href="#"><img src="https://mydthshop.com/web-app/assets/images/gmail.png" class="responsive-img"></a>
-            <!-- <a href="#"><img src="https://mydthshop.com/web-app/assets/images/google-plus.png" class="responsive-img"></a> -->
-            <!-- <a href="#" class="dropdown-button" data-activates='dropdown1'><img src="https://mydthshop.com/web-app/assets/images/file.png" class="responsive-img"></a>
+             &nbsp; <img src="https://www.libanz.com/web-app/assets/images/twitter.png" class="responsive-img"></a>
+              <a class="twitter-share-button" href="#"><img src="https://www.libanz.com/web-app/assets/images/instagram.png" class="responsive-img"></a>
+              <a class="twitter-share-button" href="#"><img src="https://www.libanz.com/web-app/assets/images/whatsapp.png" class="responsive-img"></a>
+              <a class="twitter-share-button" href="#"><img src="https://www.libanz.com/web-app/assets/images/gmail.png" class="responsive-img"></a>
+            <!-- <a href="#"><img src="https://libanz.com/web-app/assets/images/google-plus.png" class="responsive-img"></a> -->
+            <!-- <a href="#" class="dropdown-button" data-activates='dropdown1'><img src="https://libanz.com/web-app/assets/images/file.png" class="responsive-img"></a>
             <ul id='dropdown1' class='dropdown-content'>
               <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
               <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
@@ -89,11 +89,11 @@
           <h2>Comment Reviews</h2>
           <li *ngFor="let item of comments;"> 
             <div class="commnt-image col s2 center">
-              <img src="https://mydthshop.com//web-app/assets/images/user.jpg" class="responsive-img">
+              <img src="https://www.libanz.com//web-app/assets/images/user.jpg" class="responsive-img">
             </div>
             <div class="commnt-text col s10 no-padding">
               <h5>{{item.name}}</h5>
-              <p>{{item.comment}}<span class="grey-text">{{item.comment_date | date: data: 'dd M,Y'}}</span> </p>
+              <p>{{item.comment}}<span class="grey-text">{{item.comment_date | date: 'dd M,Y'}}</span> </p>
             </div>
           </li>
           

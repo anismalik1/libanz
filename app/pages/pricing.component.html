@@ -77,16 +77,6 @@ background-color: #02b7a4;
 color:#fff;
 }
 
-/* .heading-ux{
-
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #ececec;
-    padding: 7px 0px 25px 0px;
-    margin: 0;
-
-} */
 .trial{
     font-size: 24px;
     font-weight: bold;
@@ -293,6 +283,80 @@ button.btn.cst-btn.w-100 {
   </div>
 
 
+  </div>
+
+  <div class="container">
+    <div class="row">
+            <h4 class="cst-headline-price">Start Your Trial</h4>
+            <div class="card">
+                <div class="card-container">
+                    <div class="duration-box">
+                        <form [formGroup]="pricingformgroup" #pricingform = "ngForm" (ngSubmit)="onSubmit(pricingform.value)"> 
+                        <!-- <h3> Duration </h3>
+                        <div class="col m6 s12">
+                            <span>Days</span>
+                            <input type="number" name="duration" placeholder="Days" value="15" (keyup)="check_input($event.target.value)">
+                        </div> -->
+                        <!-- <div  class="col m6 s12">
+                            <span>End Date</span>
+                            <mat-form-field appearance="fill">
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="dp1" [min]="minDate" [(ngModel)]="mydate" formControlName="date">
+                                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                <mat-datepicker #dp1></mat-datepicker>
+                            </mat-form-field>
+                        </div> -->
+                        <div  class="input-field col m12 s12">
+                            <div class="region-box">
+                                <!-- <mat-checkbox class="example-margin" id="check-all" value="1">All</mat-checkbox> -->
+                                <mat-form-field>
+                                    <mat-select placeholder="Select Area" formControlName="circle" (selectionChange)="circle_selected($event.value)">
+                                        <mat-option [value]="'all'">
+                                            <span class="operator-name">All</span>
+                                        </mat-option>
+                                        <span *ngFor="let item of circle_list;">
+                                            <mat-option [value]="item.circle">
+                                                <span class="operator-name">{{ item.circle }}</span>
+                                            </mat-option>
+                                        </span> 
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="pincode-box">
+                                <ul class="pincode-list">
+                                    <li class="list left" *ngFor="let item of pincodes;">
+                                        <mat-checkbox class="example-margin" id="item-{{item.pincode}}" value="{{item.pincode}}" formControlName="pincode" (change)="change_me($event)">{{item.pincode}}</mat-checkbox>
+                                    </li>
+                                </ul>
+                            </div> -->
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- <h3 class="center">OR</h3>
+                        <div class="col m12 s12 center">
+                            <a href="javascript:" (click)="show_to_search()" class="show-search-box-link btn grey">Search Pincode</a>
+                            <div id="search-box" class="hide">
+                                <span class="search-icn"><i class="material-icons grey-text">search</i></span>
+                                <mat-form-field class="example-full-width test1 fix-input-place">
+                                    <input type="text" placeholder="Search Pincode" id="mat-input-3" class="no-margin black-text fix-inner-lbl"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event.target.value)" > 
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <span *ngIf="filteredOptions">
+                                            <mat-option *ngFor="let option of filteredOptions" [value]="option.pincode" (click)="click_me(option.id,option.pincode)" >
+                                                <a href="javascript:" class="black-text">{{option.pincode}}</a>
+                                            </mat-option>
+                                        </span>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                        </div>  -->
+                        <div  class="col m12 s12">
+                            <button type="submit" class="btn orange">Start Your 15 days trial</button>
+                        </div>
+                        </form>
+                    </div>
+                <div class="clearfix"></div>    
+                </div>
+            </div>
+    </div>
   </div>
 
   <div class="container">
