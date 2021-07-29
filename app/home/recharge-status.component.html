@@ -101,7 +101,7 @@ padding-bottom: 10px;
 					</div>
 					<div class="card-content" *ngIf="order">
 						<div class="row no-margin border-on-bottom padd-bottom">
-							<h3 class="mb-style">Recharge Status </h3>
+							<h3 class="mb-style">Invoice </h3>
 							<div class="col s8 no-padding">
 							
 								<span class="font-size-change-order font600" >{{order.status}}</span><br/>
@@ -120,7 +120,7 @@ padding-bottom: 10px;
 						<div class="row border-on-bottom padd-bottom margin-top">						
 							<div class="col s8 m10 no-padding">
 								<span class="font-size-change grey-text">PAID AT</span><br>
-								<span class="font600 font-size-change-order margin-top-cart1">{{operator(order.order_data,'title')}} Mobile No. {{order.subcriber_id}}</span><br>
+								<span class="font600 font-size-change-order margin-top-cart1">{{operator(order.order_data,'title')}} ON {{order.subcriber_id}}</span><br>
 								<p class="font-size-change grey-text margin-top-cart1">Order ID: {{order.id}}</p>
 							</div>
 							<div class="col s4 m2 right-align">

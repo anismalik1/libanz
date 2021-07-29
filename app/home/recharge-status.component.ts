@@ -26,7 +26,7 @@ export class RechargeStatusComponent implements OnInit {
       this.fetch_recharge_order_status(this.order_id); 
    }
   ngOnInit() {
-    this.todoservice.back_icon_template('Order Invoice',this.todoservice.back())
+    this.todoservice.back_icon_template('Order Invoice',this.todoservice.back(1))
   }
 
   fetch_recharge_order_status(id)

@@ -1,4 +1,4 @@
-import { Component, OnInit , Renderer2,Inject,ViewContainerRef} from '@angular/core';
+import { Component, OnInit , Renderer2,Inject,ViewContainerRef,PLATFORM_ID} from '@angular/core';
 import { FormBuilder,Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { DOCUMENT } from "@angular/common";
@@ -7,6 +7,8 @@ import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-book-dth-orders',
@@ -14,7 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styles: []
 })
 export class BookDthOrdersComponent implements OnInit{
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   bookformgroup : FormGroup;
   product_list : any;
   categories : any;
@@ -35,11 +37,13 @@ export class BookDthOrdersComponent implements OnInit{
   constructor( public todoservice : TodoService,
     private _renderer2: Renderer2, 
    @Inject(DOCUMENT) private _document,
+   @Inject(PLATFORM_ID) private platformId: any ,
   vcr: ViewContainerRef,
   public fb : FormBuilder,
   private productservice :ProductService,
   private spinner : NgxSpinnerService,
   private authservice : AuthService,private router : Router) { 
+    BookDthOrdersComponent.isBrowser.next(isPlatformBrowser(platformId));
   this.bookformgroup = fb.group({
       'fname' : [null,Validators.compose([Validators.required])],
       'lname' : [null,Validators.compose([Validators.required])],
@@ -61,32 +65,36 @@ export class BookDthOrdersComponent implements OnInit{
       this.Math = Math;
   }
 ngOnInit() {
-  if($('#book-order-modal'))
+  if(isPlatformBrowser(this.platformId)) 
   {
-    $('#book-order-modal').remove();
+    if($('#book-order-modal'))
+    {
+      $('#book-order-modal').remove();
+    }
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.id = `book-order-modal`;
+    script.text = `
+    $(document).ready(function(){
+      $('.modal').modal();
+      $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: true, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: false, // Displays dropdown below the button
+        alignment: 'left'
+      });
+    })
+    $('body').delegate('[href="#confirm-modal"]','click',function(){
+      $('.modal').modal();
+      $('#confirm-modal').modal('open');
+    })
+    `;
+    this._renderer2.appendChild(this._document.body, script);
   }
-  let script = this._renderer2.createElement('script');
-  script.type = `text/javascript`;
-  script.id = `book-order-modal`;
-  script.text = `
-  $(document).ready(function(){
-    $('.modal').modal();
-    $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrainWidth: true, // Does not change width of dropdown to that of the activator
-      hover: false, // Activate on hover
-      gutter: 0, // Spacing from edge
-      belowOrigin: false, // Displays dropdown below the button
-      alignment: 'left'
-    });
-  })
-  $('body').delegate('[href="#confirm-modal"]','click',function(){
-    $('.modal').modal();
-    $('#confirm-modal').modal('open');
-  })
-  `;
-  this._renderer2.appendChild(this._document.body, script);
+  
   if(!this.get_token())
     {
       let full_url = this.router.url.split('/');

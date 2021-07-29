@@ -205,10 +205,10 @@ top:-5px;
           <div class="faqs-new-format left-align" *ngIf="!searched">
             <h2 class="font600 center no-margin">Popular Ask Queries</h2>
             
-            <p class="grey-text center most-top" *ngIf="default_queries">Top {{default_queries.length}} Question</p>
+            <p class="grey-text center most-top" *ngIf="this.pageservice.default_queries">Top {{this.pageservice.default_queries.length}} Question</p>
             <hr>
             <ul>
-              <li *ngFor="let item of default_queries;">
+              <li *ngFor="let item of this.pageservice.default_queries;">
                 <div class="link-faqs">
                   <a [routerLink]="'/help/faqs/'+item.url">
                     <h5 class="font600">{{item.meta_title}}</h5>

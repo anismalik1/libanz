@@ -5,8 +5,8 @@
 </div>
 	<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 	<div class="fix-mb-top"></div>	
-	<section class="hero beard">
-		<img src="" class="responsive-img">
+	<section class="hero beard" *ngIf="this.pageservice.page_data && this.pageservice.page_data.image != ''">
+		<img src="{{this.todoservice.base_url}}/accounts/assets/img/cms/{{this.pageservice.page_data.image}}" class="responsive-img">
 		<div class="container"> 
 			<h2 class="center font600 white-text margin-top"></h2>
 		</div>
@@ -14,7 +14,7 @@
 	<section class="about-us-pages cs-page1">
 	<div class="container" >
 		<div class="row">  
-			<div class="col s12" id="page-content">
+			<div class="col s12" id="page-content" [innerHTML]="this.page_content()">
 			</div>
 		</div>
   </div>

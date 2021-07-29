@@ -1,24 +1,29 @@
-import { Component, OnInit ,ViewContainerRef,PLATFORM_ID,Inject} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,ViewChild,PLATFORM_ID,Inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Meta ,Title} from '@angular/platform-browser';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { MatStepper } from '@angular/material/stepper';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from '../user';
 import { Router ,ActivatedRoute} from '@angular/router';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 declare var window: any;
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styles: [],
-  providers: [TodoService,User,AuthService]
+  providers: [TodoService,User,AuthService,{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+  },MatStepper]
 })
 export class SignupComponent implements OnInit{
+  @ViewChild('stepper',{static: false}) private myStepper: MatStepper;
   static isBrowser = new BehaviorSubject<boolean>(null!);
   user_type : number = 1;
   user_type_enabled : boolean = true;
@@ -27,6 +32,7 @@ export class SignupComponent implements OnInit{
   password : string;
   name : string;
   signupgroup : FormGroup;
+  checkphonegroup : FormGroup
   post :any;
   referer :string = '';
   signupverify : number = 0
@@ -42,8 +48,9 @@ export class SignupComponent implements OnInit{
   private watch : Number = 0;
   constructor(private toast: ToastrManager, 
     @Inject(PLATFORM_ID) private platformId: any ,
+    public stepper : MatStepper,
     private fb : FormBuilder,
-    public todoservice : TodoService,
+    public todoservice : TodoService, 
     private meta : Meta,
     private title : Title,
     private route : ActivatedRoute,
@@ -58,7 +65,6 @@ export class SignupComponent implements OnInit{
     this.user_type = route.snapshot.params['id'];
     this.signupgroup = fb.group({
       'name':[null,Validators.required],
-      'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
       'email' : [null,Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
@@ -66,10 +72,12 @@ export class SignupComponent implements OnInit{
       'password' : [null,Validators.compose([Validators.required])],
       'cpassword' : [null,Validators.compose([Validators.required])],
     });
-
+    this.checkphonegroup = fb.group({
+      'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+    });
     }
   ngOnInit() {
-    this.todoservice.back_icon_template('Register',this.todoservice.back())
+    this.todoservice.back_icon_template('Register',this.todoservice.back(1))
     if(this.get_token())
     {
       this.router.navigate(['/']);
@@ -121,6 +129,30 @@ export class SignupComponent implements OnInit{
        }
     }
 
+    hide_signup_form()
+    {
+      this.verify = 0;
+    }
+    check_phone(form)
+    {
+      this.phone = form.phone;
+      this.spinner.show();
+      this.todoservice.check_phone(form)
+      .subscribe(
+        data => 
+        {
+          if(data.status == "success")
+          { 
+           this.verify = 1;
+          }
+          else
+          {
+            this.toast.errorToastr("Failed",data.msg);
+          }
+          this.spinner.hide();  
+        }
+      )
+    }  
   fetch_page_data()
  {
   let page = {page : this.page}; 
@@ -194,7 +226,7 @@ export class SignupComponent implements OnInit{
             if(data.status == true)
             {
               this.toast.successToastr(data.message);
-              this.watch_sms('signup');
+              // this.watch_sms('signup');
             }
             else
             {
@@ -217,16 +249,9 @@ export class SignupComponent implements OnInit{
       this.toast.errorToastr("Password does not match with Confirm Password", 'Failed');
         return;
     }
-    this.phone = formdata.phone;
+    formdata.phone = this.phone;
     this.password = formdata.password;
     this.signupdisabled = true; 
-    formdata.device = 'android';
-    formdata.device_id = this.device;
-    if(document.URL.indexOf('android_asset') !== -1)
-    {
-      formdata.device = 'android';
-      formdata.device_id = this.device;
-    }
     
     if(this._bonus_offer && this._bonus_offer.valid)
         formdata.bonus = '_bonus';
@@ -239,11 +264,13 @@ export class SignupComponent implements OnInit{
           if(data.status == 'success')
           {
             this.verify = 1;
-            this.watch_sms('signup');
+            let store = data.store;
+            this.authservice.storage(store,this);
+            this.router.navigate(['/']);
           }
           else
           {
-            this.toast.successToastr(data.msg, 'Failed');
+            this.toast.errorToastr(data.msg, 'Failed');
           }
           this.signupdisabled = false; 
         }
@@ -268,19 +295,11 @@ export class SignupComponent implements OnInit{
           me.verifydisabled = false;
           if(data.status == 'true')
           {
-            let store = data.store;
-            me.authservice.storage(store,me);
+            me.toast.successToastr(data.msg, 'Success');
+            
             localStorage.removeItem('favourite');
             localStorage.removeItem('cart');
-            var width = $(window).width(); 
-            if(width > 767)
-            {
-              me.router.navigate(['/home']);
-            }
-            else
-            {
-              me.router.navigate(['/mhome']);
-            }
+            this.myStepper.next();
           }
           else
           {

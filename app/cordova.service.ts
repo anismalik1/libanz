@@ -11,23 +11,23 @@ function _window(): any {
 @Injectable()
 export class CordovaService {
    
-   // private resume: BehaviorSubject<boolean>;
-   // constructor(private zone: NgZone) {
-   //    this.resume = new BehaviorSubject<boolean>(null);
-   //    Observable.fromEvent(document, 'resume').subscribe(event => {
-   //       this.zone.run(() => {
-   //          this.onResume();
-   //       });
-   //    });
-   //  }
+   private resume: BehaviorSubject<boolean>;
+   constructor(private zone: NgZone) {
+      this.resume = new BehaviorSubject<boolean>(null);
+      Observable.fromEvent(document, 'resume').subscribe(event => {
+         this.zone.run(() => {
+            this.onResume();
+         });
+      });
+    }
    
-   // get cordova(): any {
-   //    return _window().cordova;
-   // }
-   // get onCordova(): Boolean {
-   //  return !!_window().cordova;
-   //  }
-   // public onResume(): void {
-   //    this.resume.next(true);
-   // }
+   get cordova(): any {
+      return _window().cordova;
+   }
+   get onCordova(): Boolean {
+    return !!_window().cordova;
+    }
+   public onResume(): void {
+      this.resume.next(true);
+   }
 }

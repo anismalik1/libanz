@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input,ViewContainerRef} from '@angular/core';
+import { Component, OnInit ,Input,ViewContainerRef,PLATFORM_ID,Inject} from '@angular/core';
 import { TodoService } from '../../todo.service';
 import { AuthService } from '../../auth.service';
 import { FormControl } from '@angular/forms'; 
@@ -8,6 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map, startWith} from 'rxjs/operators';
 import { Observable} from 'rxjs';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -15,6 +17,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   page : string;
   navigate : boolean = false;
   year :  number = new Date().getFullYear();
@@ -26,18 +29,21 @@ export class FooterComponent implements OnInit{
   myControl = new FormControl();
   filteredOptions: Observable<object>;
   constructor( public todoservice : TodoService,
+  @Inject(PLATFORM_ID) private platformId: any ,
   private toast : ToastrManager,  
   private spinner: NgxSpinnerService,
   private vcr :ViewContainerRef,
-    private authservice : AuthService,private router : Router, private title: Title, private meta : Meta) {
-  ///this.fetch_page_data();
+    private authservice : AuthService,
+    private router : Router, private title: Title, private meta : Meta) {
+      FooterComponent.isBrowser.next(isPlatformBrowser(platformId));  
+      ///this.fetch_page_data();
     // window.scroll(0,0);
      if(!this.todoservice.footer_data)
      {
        this.page = 'footer';
-       this.fetch_page_data();
+       if(isPlatformBrowser(this.platformId)) 
+        this.fetch_page_data();
      } 
-
    }
 
   navigate_to(url)
@@ -64,21 +70,13 @@ export class FooterComponent implements OnInit{
       .subscribe(
         data => 
         {
+          this.spinner.hide();
           if(this.navigate == true)
           {
             this.todoservice.set_page_data(data.PAGEDATA[0]);
             if(this.todoservice.page)
-               $('#page-content').html(this.todoservice.get_page().description);
-            this.navigate = false; 
-            this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
-            this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
-            this.title.setTitle(this.todoservice.get_page().metaTitle);  
-          }
-          else
-          {
-            this.todoservice.set_footer_data(data.PAGEDATA[0]);
-            if(this.todoservice.footer_data)
-               $('#footer-content').html(this.todoservice.get_footer_page().description);
+              $('#page-content').html(this.todoservice.get_page().description);
+              this.navigate = false; 
           }
           //this.spinner.hide();
         }
@@ -113,8 +111,8 @@ export class FooterComponent implements OnInit{
     {
       this.filterOptions = this._filter(e.target.value);
     }
-    
   }
+  
   private _filter(value: string): object {
     if(this.options)
     {

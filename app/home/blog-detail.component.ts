@@ -4,6 +4,7 @@ import { Meta,Title } from "@angular/platform-browser";
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { PagesService } from '../pages.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {isPlatformBrowser} from '@angular/common';
@@ -23,6 +24,7 @@ export class BlogDetailComponent implements OnInit {
   public comments : any;
   constructor(
     private _renderer2: Renderer2, 
+    public pageservice : PagesService,
     @Inject(PLATFORM_ID) private platformId: any, 
     @Inject(DOCUMENT) private _document, 
     public todoservice : TodoService,
@@ -44,14 +46,14 @@ export class BlogDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todoservice.back_icon_template('Blogs Details',this.todoservice.back())
+    this.todoservice.back_icon_template('Blogs Details',this.todoservice.back(1))
     this.router.params.subscribe(params => {
       this.url = params['name']; //log the value of id
-     this.fetch_single_blog(this.url);
+     this.pageservice.fetch_single_blog(this.url);
     if(isPlatformBrowser(this.platformId)) 
       this.init_script();
    });
-   
+   this.spinner.hide();
   }
 
   init_script()
@@ -81,12 +83,9 @@ export class BlogDetailComponent implements OnInit {
       .subscribe(
         data => 
         {
-          this.post = data.post;
-          this.recent_posts = data.recent_posts;
+          this.pageservice.blog_post = data.post;
+          this.pageservice.recent_posts = data.recent_posts;
           this.spinner.hide();
-          this.meta.addTag({ name: 'description', content: this.post[0].metaDesc });
-          this.meta.addTag({ name: 'keywords', content: this.post[0].metaKeyword });
-          this.title.setTitle(this.post[0].metaTitle);
           this.fetch_post_comments();
         }
       )

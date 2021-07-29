@@ -65,36 +65,36 @@ export class SplashScreenComponent implements OnInit {
 
     animationDone(ele)
     {
-        $('.splash-box').css({top:'40%'});
-        this.router.navigate(['/']);
+        // $('.splash-box').css({top:'40%'});
+        // this.router.navigate(['/']);
     }
 
     ngOnInit() {
         
-        var width = $(window).width() + 17; 
-        if(width > 767 || document.URL.indexOf('https://') !== -1)
-        {
-            this.router.navigate(['/']);
-            return;
-        }
+        // var width = $(window).width() + 17; 
+        // if(width > 767 || document.URL.indexOf('https://') !== -1)
+        // {
+        //     this.router.navigate(['/']);
+        //     return;
+        // }
        
-        if(document.URL.indexOf('android_asset') !== -1)
-        {
-            if(!window.cordova)
-            {
-                let script1 = this._renderer2.createElement('script');
-                script1.type = `text/javascript`;
-                script1.id = `cordova-js`;
-                script1.src = `cordova.js`;
-                this._renderer2.appendChild(this._document.body, script1);
-            }
-            let device = JSON.parse(localStorage.getItem('device'));
-            if(device != null)
-            {
+        // if(document.URL.indexOf('android_asset') !== -1)
+        // {
+        //     if(!window.cordova)
+        //     {
+        //         let script1 = this._renderer2.createElement('script');
+        //         script1.type = `text/javascript`;
+        //         script1.id = `cordova-js`;
+        //         script1.src = `cordova.js`;
+        //         this._renderer2.appendChild(this._document.body, script1);
+        //     }
+        //     let device = JSON.parse(localStorage.getItem('device'));
+        //     if(device != null)
+        //     {
                 
-            }
-        }
-        this.show  = true;  
+        //     }
+        // }
+        // this.show  = true;  
         //this.app_version();
         //this.to_home();
     }

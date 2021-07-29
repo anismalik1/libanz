@@ -2,10 +2,9 @@ import { Component, OnInit,ViewChild ,ViewContainerRef,Renderer2,Inject,PLATFORM
 import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import {PagesService} from '../pages.service'
 import {Location} from '@angular/common';
 import { Params } from '../shared/config/params.service';
-import { Observable} from 'rxjs';
-import { map, startWith} from 'rxjs/operators';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
@@ -18,8 +17,6 @@ import {BehaviorSubject} from 'rxjs';
 // var jsdom = require("jsdom"); 
 // const $ = require("jquery")(jsdom.jsdom().createWindow()); 
 //declare var $: any;
-
-import * as $ from 'jquery';
 declare var window: any;
 
 @Component({
@@ -35,7 +32,8 @@ export class RechargeComponent implements OnInit {
   @ViewChild('mcircle', {static: false}) mcircle;                                                        
   @ViewChild('dcircle', {static: false}) dcircle;                                                        
   @ViewChild('predataoperator', {static: false}) predataoperator;                                                        
-  @ViewChild('postdataoperator', {static: false}) postdataoperator;                                                        
+  @ViewChild('postdataoperator', {static: false}) postdataoperator; 
+  private init_dth_recharge : boolean = false;                                                       
   public userinfo = {wallet:'',phone:'',name:''};
   public operators : any = {};
   public loop : boolean = false;
@@ -45,10 +43,12 @@ export class RechargeComponent implements OnInit {
   public recharge_ini : number = 1;
   public recharge_cart : any;
   promo_selected : number = 0;
+  page_data : any;
   no_dues = 0;
   bill_amt : number;
   due_msg : string = 'No pending dues.';
   rechargeData : any ;
+  bill_data : any;
   flash_deals : any;
   tata_slides : any;
   dishtv_slides : any;
@@ -111,6 +111,7 @@ export class RechargeComponent implements OnInit {
     landline : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkBQwONjKIYi4DAAADXklEQVRo3u2ZTUhUURTHf44jWvgZKIgg+LFKKiyyjwkSQtsmQepCF0WBZa0Ma2FE4a6WLQwkwk1mNLsoXUwtrKRMRCQXmUHZx1gqlmU8mNdizkzzns9hvO+OIvh/i3ff/973zv/d8+49Z86ACrLox8Bc9WHwhEwlizacUzAeOc5aH+VREpDvQnyB9dLraiaGmUt4bB57nGh3Atp4mvDYagJOtJoLNGLdBXhX5EsplvYPJvizlgKyuUyrZb2G6KWDyWQIWO6CXAa4ZNsuPDTyir1rI+AWVY4j8+glXb+AiAsKqKUI2EIDACb3+SB92TSRCZTQxVsAfNLTyL6ELZXK2Uc7ME0/wUhXKp0s2TbMTsvNR11svSsdS1wnFSCFHofuI7Z50i/AxOQuwHHHrmrbBCZHgEmdlxYx4aebvzTTFMePo7Rp+fLSOUUdAC0wh4nJR9IAuBp3BgKrsxMHaXzCxGTWQy4AkxjaHp4IDN4BkBfZB8w1NR9jUS0YaUzJ1AQ0U6OUSXippVmHgM2ULILNlEwD3LlAJRxrFXDG/QyoueC3C4uLOgT0MaNoPkiflVBzwRTlVEr8XA0MRljQIQAWeKZ4pw3rvgw3qIDYcBykPsrfZFHYRW5E2QZm4lVIrMlWYimZtULyTdgKW/TfLnzQsUISCF+rzcCM49W8Ja0zmJfW9zj3Kq6CPsqoFvfNck3Yaeo5SQYAS3TzWfgTdLANgBABHuhwgQ64coFGrLsA1Z3Qh48UABbo4ZewpRyTDdrAz5SwWTSRBYDJIIP2R6l8A4cIxSysx8LmWBZckGzh+2PYEAeFdfUNVMnbh3FAzmWWbDmfcmntj2FT7CmMmgC/ZTV3yXmMFzHsc8akdTuGDeK3Psp9OP7CuLAGh9kt3v7Jm+i21MYdCmVEksOxwZDj6PGoyGVY92W4QQVshuPNcKwDUReEXMyEG4QthjxSsd3hquqxehSwE4CvXgI0AjkM0ct8tAztjGLatZjPpUFiZQAqHetd1bZbklOoNdjlYYTz8h3EYmucK10I0cpouFnDsE3bQ8tPz4tJePvX4Yr8/8SiiBIySOeebJbTTEg1s5AKGXNB/rBwiyXeR3eJZbiyouaBpDhiGTx0OZp/KWXtNUEtj5iOmp5jkNMK5YiE8A9nxtEG5fEt9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wNS0xMlQxNDo1NDo1MCswMDowMF/6jNQAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDUtMTJUMTQ6NTQ6NTArMDA6MDAupzRoAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAABJRU5ErkJggg=='
   }
   constructor(
+    public pageservice : PagesService,
     private _renderer2: Renderer2, 
      @Inject(DOCUMENT) private _document, 
     public todoservice : TodoService,
@@ -130,6 +131,7 @@ export class RechargeComponent implements OnInit {
   ) {
     RechargeComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.url_name = this.activatedroute.snapshot.params['name'];
+      
       this.ini_recharge_tabs(this.url_name);
    
       this.testgroup = this.fb.group({
@@ -141,12 +143,47 @@ export class RechargeComponent implements OnInit {
       this.get_last_recharges();
     if(this.get_token())
     {
-      if(this.todoservice.get_user_recharge_amount() > 0)
-      {
-        this.fetch_options();
-      }
-    }  
+      this.fetch_options();
+      // if(this.todoservice.get_user_recharge_amount() > 0)
+      // {
+        
+      // }
+    }
   } 
+
+  fetch_dthorder_id(id)
+  {
+    this.todoservice.fetch_dthorder_id({ id: id })
+    .subscribe(
+      data => 
+      {
+        if(data.data.length > 0)
+        {
+          // var r = this.alloperators.filter(x => x.parent_id == data.data[0].category_id);
+          // console.log(this.filter_operators(59))
+          var c = this.return_operator(data.data[0].category_id);
+          // console.log(c.toString);
+          this.rechargeId = data.data[0].subcriber_id;
+          this.dthgroup.controls['operator'].setValue(c.toString());
+          this.dthgroup.controls['recharge_id'].setValue(data.data[0].subcriber_id);
+        }
+      }
+    )
+  }
+
+  return_operator(id)
+  {
+    if(id == 1)
+      return 71;
+    else if(id == 2)
+      return 72;
+    else if(id == 3)
+      return 74
+    else if(id == 4)
+      return 68;
+    else
+      return 69;      
+  }
 
   fetch_options()
   {
@@ -182,17 +219,30 @@ export class RechargeComponent implements OnInit {
     var wallet_used = '';
     if($('[name="include_wallet"]:checked').length > 0)
       wallet_used = 'wallet';
+    var amount = 0; 
     if((this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 > Math.floor(this.todoservice.get_user_wallet_amount())) && wallet_used == 'wallet')
     {
+      amount = Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount()));
       if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
-        return Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount())) - 1*this.options.how_much_apply_to_recharge;
-      return Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount()));
+      {
+        amount = Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount())) - 1*this.options.how_much_apply_to_recharge;
+      }  
     }
-    if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
-      return Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1) - 1*this.options.how_much_apply_to_recharge;
-    return Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
+    else
+    {
+      amount = Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
+      if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+        amount  = Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1) - 1*this.options.how_much_apply_to_recharge;
+    }
+    
+    if($('[name="include_wallet"]:checked').length > 0)
+      $("#recharge-proceed").text("Add "+amount+" Rs to pay");
+    else
+      $("#recharge-proceed").text("Proceed to pay "+amount);
+    return amount;
   }
 
+  
   get_last_recharges()
   {
     this.todoservice.get_last_recharges({token : this.get_token(),category: this.url_name})
@@ -246,10 +296,8 @@ export class RechargeComponent implements OnInit {
       `;
       this._renderer2.appendChild(this._document.body, script);
     }
-    
   }
 
-  
   ini_recharge_tabs(tab)
   {
     this.url_name = tab;
@@ -316,10 +364,11 @@ export class RechargeComponent implements OnInit {
         this.pagetitle = "Pay Landline OR Broadband Bill";
         this.recharge_type.landline = true;
       }
+
       this.fetch_promocode(tab);
-      this.fetch_navigate_data(tab);
+      this.pageservice.set_page_content(tab);
       this.get_last_recharges();
-      this.todoservice.back_icon_template(this.pagetitle,this.todoservice.back())
+      this.todoservice.back_icon_template(this.pagetitle,'');
       this.mobilegroup = this.fb.group({
         'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
         // 'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
@@ -329,14 +378,14 @@ export class RechargeComponent implements OnInit {
          'circle_area' : [null,Validators.compose([Validators.required])]
        });
        this.dthgroup = this.fb.group({
-         'amount' : [null,[Validators.required,Validators.min(50),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
-          'operator' : [null,Validators.compose([Validators.required])],
+         'amount'       : [null,[Validators.required,Validators.min(50),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator'    : [null,Validators.compose([Validators.required])],
           'recharge_id' : [null,Validators.compose([Validators.required,Validators.pattern(this.dthpattern)])],
         });
         this.datacardgroup = this.fb.group({
-          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
-          'operator' : [null,Validators.compose([Validators.required])],
-          recharge_id: new FormControl('', [Validators.required,Validators.minLength(10)]),
+          'amount'    : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'operator'  : [null,Validators.compose([Validators.required])],
+          recharge_id : new FormControl('', [Validators.required,Validators.minLength(10)]),
         });
         this.landlinegroup = this.fb.group({
           'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
@@ -352,10 +401,10 @@ export class RechargeComponent implements OnInit {
          'circle' : [null],
          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
           'operator' : [null,Validators.compose([Validators.required])],
-          'recharge_id' : [null,Validators.compose([Validators.required])]
+          'recharge_id' : [null,Validators.compose([Validators.required])] 
         });
         this.gasgroup = this.fb.group({
-          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+          'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}|.[0-9]{2}]$")]],
           'operator' : [null,Validators.compose([Validators.required])],
           'recharge_id' : [null,Validators.compose([Validators.required])]
         });
@@ -376,6 +425,7 @@ export class RechargeComponent implements OnInit {
     .subscribe(
       data => 
       {
+
         this.promo_codes = data.OPERATOR_PROMOS;
         //console.log(this.promo_codes)
         this.spinner.hide();  
@@ -414,13 +464,19 @@ export class RechargeComponent implements OnInit {
       {
         if(data.PAGEDATA) 
         {
-          $('#short-content').html(data.PAGEDATA[0].shortDescription);
-          $('#long-content').html(data.PAGEDATA[0].description);
+          // console.log(data.PAGEDATA)
+          this.pageservice.page_data = data.PAGEDATA[0];
+          // document.getElementById("short-content").innerHTML = data.PAGEDATA[0].shortDescription
+          // document.getElementById("long-content").innerHTML = data.PAGEDATA[0].description
+          // this.todoservice.set_page_data(data.PAGEDATA[0]);
+          // this.page_data = {description : data.PAGEDATA[0].description ,short_description : data.PAGEDATA[0].shortDescription};
+          // $('#short-content').html();
+          // $('#long-content').html(data.PAGEDATA[0].description);
           //$('#page-title').html(data.PAGEDATA[0].title);
-          this.meta.addTag({ name: 'description', content: data.PAGEDATA[0].metaDesc });
-          this.meta.addTag({ name: 'keywords', content: data.PAGEDATA[0].metaKeyword });
-          this.title.setTitle(data.PAGEDATA[0].metaTitle);
-          window.scroll(0,0); 
+          // this.meta.addTag({ name: 'description', content: data.PAGEDATA[0].metaDesc });
+          // this.meta.addTag({ name: 'keywords', content: data.PAGEDATA[0].metaKeyword });
+          // this.title.setTitle(data.PAGEDATA[0].metaTitle);
+          // window.scroll(0,0); 
         }
         this.spinner.hide();  
       }
@@ -436,7 +492,6 @@ export class RechargeComponent implements OnInit {
 
   changeOperator(data,s)
   {
-    //console.log(data);
     $('.additional-text').remove()
     this.viewrange = 1;
     var operatordata = this.alloperators.filter(x => x.id == data);
@@ -508,11 +563,33 @@ export class RechargeComponent implements OnInit {
     {
       this.dcircle.open();
       this.filter_operator_name(this.selectedOperator);
+      // this.check_operator(this.selectedOperator,s);
     }
     else if(s == 'landline')
     {
       this.showstd = 1;
+      this.check_operator(this.selectedOperator,s);
     }
+    else if(s == 'broadband' || s == 'electricity' || s == 'water' || s == 'gas')
+    {
+      this.check_operator(this.selectedOperator,s);
+    }
+
+  }
+
+  check_operator(operator,s)
+  {
+    this.todoservice.check_operator({operator: operator})
+		.subscribe(
+			data => 
+			{
+        if(data.params)
+        {
+          // console.log(data);
+          this.bill_data = data;
+        }
+			}
+		  );
   }
     change_list(val)
   {
@@ -540,7 +617,6 @@ export class RechargeComponent implements OnInit {
       $('#pre-datacard-list').addClass('hide');
       this.postdataoperator.open();
     }
-
   }
   ngOnInit() {
     
@@ -646,6 +722,12 @@ export class RechargeComponent implements OnInit {
             if(recharge_data)
               this.activity = recharge_data.activity_id;
 
+            if(this.activatedroute.snapshot.params['id'] && this.activatedroute.snapshot.params['id'] != null)
+            {
+              var id = this.activatedroute.snapshot.params['id'];
+              this.fetch_dthorder_id(id);
+            }
+
         }
       )
       
@@ -678,6 +760,7 @@ export class RechargeComponent implements OnInit {
   }
   recharge_init(s,formdata)
   {
+    // console.log(formdata)
     if(s == 'mobile' && !this.mobilegroup.valid)
     {
       Object.keys(this.mobilegroup.controls).forEach(field => { // {1}
@@ -755,8 +838,10 @@ export class RechargeComponent implements OnInit {
       return ;
     }
     this.spinner.show();
-    //console.log(formdata)	
+    if(this.rechargeData && this.rechargeData.bill_data)
+      var a = this.rechargeData.bill_data;
 		this.rechargeData = {token : this.get_token(),recharge_amount: formdata.amount,recharge_id:formdata.recharge_id,operator_id:formdata.operator,circle_id: formdata.circle_area};
+    this.rechargeData.bill_data = a;
     if(!this.authservice.authenticate())
     {
       var width = $(window).width();
@@ -768,7 +853,8 @@ export class RechargeComponent implements OnInit {
       else
       {
         $('.logup.modal-trigger')[0].click();
-        $('#login-input-form').append('<input type="hidden" name="next_action" value="recharge_init">');
+        $('#login-modal').prepend('<input type="hidden" name="next_action" value="recharge_init">')
+        // $('#login-input-form').append('<input type="hidden" name="next_action" value="recharge_init">');
       } 
       var time = new Date();
       this.rechargeData.recharge_type = s;
@@ -790,7 +876,7 @@ export class RechargeComponent implements OnInit {
         if(data.comm_p)
           this.rechargeData.commission = data.comm_p;
         else
-          this.rechargeData.commission = 0; 
+          this.rechargeData.commission = 0;  
         this.rechargeData.operator_api_id = data.recharge_id;
         this.rechargeData.recharge_type = s;
        
@@ -848,10 +934,12 @@ recharge_handle()
     if(width < 767)
     {
       this.open_model();
+      $('#mobile-form').append('<input type="hidden" name="next_action" value="recharge_init">');
      }
     else
     {
       $('.logup.modal-trigger')[0].click();
+      $('#login-input-form').append('<input type="hidden" name="next_action" value="recharge_init">');
     } 
     return;
   }
@@ -943,6 +1031,9 @@ recharge_handle()
   }
   promoselected(promo)
   {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     $('#response-code').text('');
     this.selected_promo = promo;
     this.copy_promo(this.selected_promo.unique_code);
@@ -1001,11 +1092,17 @@ recharge_handle()
   }
 check_amount(s)
  {
+   if(!this.get_token())
+   {
+    $('.logup.modal-trigger')[0].click();
+    $('#login-input-form').append('<input type="hidden" name="next_action" value="recharge_init">');
+     return;
+   }
   let v = $('#'+s+'-form [formcontrolname="recharge_id"]').val();
   if( typeof this.selectedOperator != 'undefined' || v != '')
   {
     $('#'+s+' .calc-amount-btn').text('Please Wait...');
-    let data : any = {phone: v,operator: this.selectedOperator};
+    let data : any = {bill_id: v,operator: this.selectedOperator,token : this.get_token()};
     this.spinner.show();
     this.todoservice.check_amount(data)
 	  .subscribe(
@@ -1017,6 +1114,8 @@ check_amount(s)
           {
             if(data.status == 1)
             {
+              this.bill_data.details = data;
+              this.rechargeData = {bill_data : data};
               if(data.amount > 0)
               {
                 this.bill_amt = data.amount;
@@ -1047,6 +1146,7 @@ check_amount(s)
             }  
             else if(data.status == 2)
             {
+              this.no_dues = 1;
               alert(data.message);
               this.due_msg = data.message;
             }
@@ -1193,7 +1293,9 @@ check_amount(s)
 
  print_plan(data,id)
   {
-    
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     $("#circles-content li").removeClass('active');
     $("#list-"+id).addClass('active');
     var plan_list = '';

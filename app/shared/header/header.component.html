@@ -12,7 +12,7 @@
     margin-top: -5px !important;
 } */
 .close-fx {
-    padding: 0px 0px 0px 5px !important;
+    padding: 5px 0px 0px 5px !important;
     font-size: 16px !important;
     height: 28px;
     width: 26px;
@@ -238,6 +238,9 @@ li.txt-fix-mb span a {
     padding: 23px !important;
 }
 		</style>
+	<div class="spinner-wrapper">
+		<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+	</div>	
 	<!-- Header Start Here -->
 	<div class="mobile-wrapper">
 		<!-- mobile header start-->
@@ -252,10 +255,10 @@ li.txt-fix-mb span a {
 			<div class="mobile-header-right">
 				<ul>
 				<li><a routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png" ><span class="noti-circle" *ngIf="this.productservice.favorite_count(1) > 0">{{this.productservice.favorite_count(1)}}</span></a> </li>
-				<li *ngIf="this.todoservice.get_user_name() == '' && valid_for_bonus" class="txt-fix-mb no-wrap"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">{{_bonus_text}}</a> </span>	</li>
+				<li *ngIf="this.todoservice.get_user_phone() == '' && valid_for_bonus" class="txt-fix-mb no-wrap"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">{{_bonus_text}}</a> </span>	</li>
 				<!-- <li class="txt-fix-mb"><span class="absolute"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}">Get Rs 300</a> </span>	</li> -->
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/product/favorites"><img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" style="width:23px;"><span class="noti-circle" *ngIf="this.productservice.favorite_count(2) > 0">{{this.productservice.favorite_count(2)}}</span></a></li>
-				<li *ngIf="this.todoservice.get_user_name() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count && notification_count.count > 0">{{notification_count.count}}</span> </a>
+				<li *ngIf="this.todoservice.get_user_phone() != ''"><a routerLink="/product/favorites"><img src="{{this.todoservice.base_url}}web-app/assets/images/favorite-white.png" style="width:23px;"><span class="noti-circle" *ngIf="this.productservice.favorite_count(2) > 0">{{this.productservice.favorite_count(2)}}</span></a></li>
+				<li *ngIf="this.todoservice.get_user_phone() != ''"><a class="modal-trigger" href="#loadmore-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count && notification_count.count > 0">{{notification_count.count}}</span> </a>
 					<!-- <li *ngIf="this.todoservice.get_user_name() != ''"><a href="javascript:" class="mobile-dropdown-button" data-beloworigin="true" data-activates='dropdown-notice2'><img src="{{this.todoservice.base_url}}web-app/assets/images/notification.png"><span class="noti-circle" *ngIf="notification_count">{{notification_count.count}}</span> </a> -->
 					<ul id="dropdown-notice2" class="dropdown-content notifications-dropdown custom-noti">
 							<li class="notificatoins-dropdown-container">
@@ -379,7 +382,7 @@ li.txt-fix-mb span a {
 		
 	</div>
 		<div class="side-menu" id="mobile-side-menu">
-			<div class="side-menu-header" *ngIf="this.todoservice.get_user_name() != ''">
+			<div class="side-menu-header" *ngIf="this.todoservice.get_user_phone() != ''">
 				<div class="side-profile-details">
 				<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
 					<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar().includes('data:image/png')"/>
@@ -416,7 +419,7 @@ li.txt-fix-mb span a {
 			</div>
 			<div class="side-menu-body">
 				<div class="login-section" >
-				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_name() == ''">
+				<ul class="dashboard-menu-mobile"  *ngIf="this.todoservice.get_user_phone() == ''">
 						<li *ngIf="valid_for_bonus"><a routerLink="/proceed/signup/" [queryParams]="{bonus : 1}"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up</a>	</li>	
 						<li *ngIf="!valid_for_bonus"><a routerLink="/proceed/signup"><span class="fa fa-sign-out pt-right-fix"></span>Sign Up <span class="fa fa-chevron-right cs-right"></span> </a></li>
 						<li><a routerLink="/proceed/login"><span class="fa fa-lock pt-right-fix"></span>Login <span class="fa fa-chevron-right cs-right"></span> </a></li>
@@ -464,7 +467,7 @@ li.txt-fix-mb span a {
 				</mat-form-field>	
 				<hr class="line1" />	
 				</div>
-					<ul class="dashboard-menu-mobile btm-menu"  *ngIf="this.todoservice.get_user_name() != ''">	
+					<ul class="dashboard-menu-mobile btm-menu"  *ngIf="this.todoservice.get_user_phone() != ''">	
 						<li><a class="font-size-change" [routerLink]="['/dashboard/edit-profile']"><span class="fa fa-user"></span> &nbsp; Edit Profile <span class="fa fa-chevron-right cs-right"></span></a></li>
 						<li><a [routerLink]="['/logout']"><span class="fa fa-sign-out"></span> &nbsp;Logout <span class="fa fa-chevron-right cs-right"></span></a></li>
 					</ul>	
@@ -593,20 +596,20 @@ li.txt-fix-mb span a {
 									</div>
 								</div>
 							  </div>
-							</form>
+							</form> 
 					</li>
 					<li *ngIf="href && href.includes('/help/faqs')"><div class="faqs-section orange-text"><h2>Stop Worring!We will Solve All Your Queries </h2></div></li>
 					<li class="craft relative">
 						<a routerLink="/product/cart"><img src="./assets/images/shopping-cart.png" class="crft-icon-fix"><span class="badge cart-text" id="cart-web" *ngIf="this.productservice.favorite_count(1) > 0">{{this.productservice.favorite_count(1)}}</span></a>
 						<!-- <a routerLink="/product/cart" *ngIf="this.todoservice.get_user_name() == ''"><i class="material-icons grey-text">shopping_cart</i><span class="badge cart-text">0</span></a> -->
 					</li>
-					<li class="craft relative" *ngIf="this.todoservice.get_user_name() != ''">
+					<li class="craft relative" *ngIf="this.todoservice.get_user_phone() != ''">
 						<a routerLink="/product/favorites"><img src="./assets/images/star.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle"> <br/> <span class="badge" id="favourite-count" *ngIf="this.productservice.favorite_count(2) > 0">{{this.productservice.favorite_count(2)}}</span></a>
 					</li>	
 						
 					<li class="craft relative" >
 						<!-- <a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a> -->
-						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2"><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="./assets/images/noti-black.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
+						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2"><div *ngIf="this.todoservice.get_user_phone() != '' && notification_count"><img src="./assets/images/noti-black.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
 						<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
 							<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
 						</ul> -->
@@ -631,15 +634,15 @@ li.txt-fix-mb span a {
 					</ul>
 					
 				  <ul id="nav-mobile" class="inline-block log-sig right">
-					<li class="clogin" *ngIf="this.todoservice.get_user_name() == ''"><a href="#login-modal" class="logup modal-trigger black-text">Log In/Sign Up </a></li>
+					<li class="clogin" *ngIf="this.todoservice.get_user_phone() == ''"><a href="#login-modal" class="logup modal-trigger black-text" (click)="change_action('login')">Log In/Sign Up </a></li>
 					
-					<li *ngIf="this.todoservice.get_user_name() != ''" class="balance"><a routerLink="/dashboard/add-money" class="white-text"><span class="no-margin font-size-change1 right-align fixed-margin black-text" *ngIf="this.todoservice.get_user_wallet()"> 
+					<li *ngIf="this.todoservice.get_user_phone() != ''" class="balance"><a routerLink="/dashboard/add-money" class="white-text"><span class="no-margin font-size-change1 right-align fixed-margin black-text" *ngIf="this.todoservice.get_user_wallet()"> 
 						<img src="./assets/images/wallet.png" alt="wallet" class="black-text responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span><div class="clearfix"></div><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted orange-text bonus-amount absolute cst-bonus-txt"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></a>
 					</li>
 					<!-- <li>
 						<span class="cst-name">RG</span>
 					</li> -->
-					<li id="user-nav" *ngIf="this.todoservice.get_user_name() != ''">
+					<li id="user-nav" *ngIf="this.todoservice.get_user_phone() != ''">
 						<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
 							<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
 								<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar().includes('data:image/png')"/>
@@ -647,7 +650,7 @@ li.txt-fix-mb span a {
 							</span>
 							<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
 							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() || this.todoservice.get_user_avatar() == 'null'"><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
-							<span *ngIf="this.todoservice.get_user_name() == ''"><img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png"></span>
+							<span *ngIf="this.todoservice.get_user_phone() == ''"><img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png"></span>
 						</a>
 					</li>
 				  </ul>
@@ -706,10 +709,10 @@ li.txt-fix-mb span a {
 	<div id="login-modal" class="modal">
 		<div class="modal-content no-padding">
 			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text close-fx">close</i></a>
-			<div class="row no-margin" style="background-color: #fff;">
+			<div class="row no-margin" style="background-color: #fff;" *ngIf="action == 1">
 				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login-banner.jpg);background-size: cover;">
 					<div class="login-modal">
-						<div class="padd-rem1 login-text" *ngIf="signup != 1">
+						<div class="padd-rem1 login-text">
 							<h2 class="black-text no-margin">LOGIN</h2>
 							<p class="black-text font-size-change1">Welcome Back to libanz, We make sure you enjoy our services!!</p>
 						</div>
@@ -718,24 +721,21 @@ li.txt-fix-mb span a {
 				</div>
 				<div class="col s12 m8 white"> 
 					<div class="tabs-sign-up">
-						<ul id="tabs-swipe-demo" class="tabs">
-							<li class="tab col s6"><a class="active" href="#login" id="login-a" (click)="hide_signup_form()">Login to libanz</a></li>
-							<!-- <li class="tab col s3"><a href="#signup" id="signup-a" (click)="signup_form()">Sign up</a></li> -->
-						</ul>
+						<h3><a class="active" href="javascript:" id="login-a" (click)="hide_signup_form()">Login to libanz</a></h3>
 						<div id="login" class="col s12">
-							<div class="login" *ngIf="step == 1">
+							<div class="login" *ngIf="login.step == 1">
 							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value,this)" id="login-input-form">
 								<div class="row">
 									<div class="input-field col s12">
 										<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}" [(ngModel)]="remember.ph">
+											<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}">
 											<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
-											<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
+											<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter valid Phone Number.</div>
 										</div>
 									
 									<div class="input-field col s12 forget-click">
 										<i class="material-icons prefix margin-top-cart2">lock</i>
-										<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}" [(ngModel)]="remember.pw">
+										<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}">
 										<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
 									</div>
 									<div class="col s12 m6">
@@ -743,7 +743,7 @@ li.txt-fix-mb span a {
 									<label for="remember-me">Remember Me</label>
 									</div>
 									<div class="col s12 m6 right-align">
-										<span class="tab"><a routerLink="/proceed/forgot-password" class="orange-text font-size-change modal-close">Forgot Password?</a></span>
+										<span class="tab"><a href="javascript:" class="orange-text font-size-change" (click)="change_action('reset')">Forgot Password?</a></span>
 									</div>
 									<div class="col s12 center margin-top">
 										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
@@ -752,12 +752,12 @@ li.txt-fix-mb span a {
 								<div class="row no-margin">
 									<div class="col s12 m12 center">
 										<span class="font-size-change">Don't have libanz account?</span>
-										<a routerLink="/proceed/signup" class="orange-text font-size-change font600 modal-close"> REGISTER</a><br>
+										<a href="javascript:" class="orange-text font-size-change font600" (click)="change_action('register')"> REGISTER</a><br>
 									</div>
 								</div>
 							</form>
 							</div>
-							<div class="otp-step margin-top1" *ngIf="step == 2">
+							<div class="otp-step margin-top1" *ngIf="login.step == 2">
 								<form #otpform = "ngForm" (ngSubmit)="login_submit(otpform.value,this)" id="header-login">
 								<div class="upper-text center">
 									<h3>Your Mobile Number is <span class="orange-text">+91-{{phone}}</span></h3>
@@ -768,12 +768,12 @@ li.txt-fix-mb span a {
 											<input id="otp1" (keyup)="keytab($event)" ngModel maxlength="1" name="otp1">
 											<input id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2">
 											<input id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3">
-											<input id="otp4" maxlength="1" ngModel name="otp4" ngModel>
+											<input id="otp4" maxlength="1" ngModel name="otp4">
 									</div>
 									<div class="col s12 center margin-top">
 										<span class="font-size-change1">Don't recieve OTP </span>
 										<!-- <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span> -->
-										<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp('login')" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button>
+										<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp('login')" [disabled]="this.tick > 0">Resend <i *ngIf="this.tick > 0">({{this.tick}})</i></button>
 									</div>			
 								</div>
 								<div class="row">
@@ -788,15 +788,212 @@ li.txt-fix-mb span a {
 				</div>
 			</div>
 		</div>
+		<div class="row no-margin" style="background-color: #fff;" *ngIf="action == 2">
+			<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login-banner.jpg);background-size: cover;">
+				<div class="login-modal">
+					<div class="padd-rem1 login-text">
+						<h2 class="black-text no-margin">SIGNUP</h2>
+						<p class="black-text font-size-change1">Seems you are new.</p>
+					</div>			
+				</div>
+			</div>
+			<div class="col s12 m8 white"> 
+				<div class="tabs-sign-up">
+					<section *ngIf="signup.step == 1">
+						<form [formGroup]="checkphonegroup" class="login-page-form" #checkphoneform = "ngForm" (ngSubmit)="check_phone(checkphoneform.value)" >
+							<h3>Register</h3>
+							<div class="input-field center">
+								<i class="material-icons prefix margin-top-cart2">phone</i>
+								<input id="phn_number" type="number" class="validate icon_prefix" formControlName="phone" autocomplete="off">
+								<label for="phn_number">Phone Number*</label>
+								<div class="center absolute" *ngIf="!checkphonegroup.controls['phone'].valid && checkphonegroup.controls['phone'].touched">
+									<span class="red-text"> Phone Number is not valid.</span>
+								</div>
+							</div>
+							<div class="col s12  margin-top fix-center">
+								<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!checkphonegroup.valid">Continue</button>
+								<p class="ask-login fix-center"> <a href="javascript:" (click)="change_action('login')">Already Have an Account ? Login Now </a> </p>
+								<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
+							</div>
+						</form>
+					</section>
+					<section *ngIf="signup.step == 2">
+						<form #otpform = "ngForm" (ngSubmit)="verify_signup_user(otpform.value)" id="header-signup">
+							<h3>Verify</h3>
+							<div class="container">	
+								<div class="row">
+									<div class="col s12 m12">
+										<div class="card">
+											<div class="card-content">
+												<div class="center">
+													<!-- <div class="col s12">
+														<img src="{{this.todoservice.base_url}}web-app/assets/images/logo.png" class="responsive-img" alt="Libanz-logo">
+													</div> -->
+													<div class="col s12">
+														<div class="upper-text">
+															<h3>Your Mobile Number is <span class="orange-text">{{phone}}</span></h3>
+															<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+														</div>
+													</div>
+													<div class="row">
+														<div class="input-field col s12 center otp-inputa" id="inputs">
+															<input type="number" id="otp1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
+															<input type="number" id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
+															<input type="number" id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
+															<input type="number" id="otp4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
+														</div>
+														<div class="col s12 center margin-top">
+															<span class="font-size-change1">Don't recieve OTP <button (click)="resend_otp('register')" class="btn orange regis-btn-fix fix-center" [disabled]="(this.tick > 0)" type="button">Resend OTP </button><i *ngIf="this.tick > 0">({{this.tick}})</i></span>
+														</div>			
+													</div>
+													<div class="row">
+														<div class="col s12 center">
+															<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
+															<button id="signup-submit" type="Submit" class="btn orange waves-effect waves-light" [disabled]="verifydisabled">Submit</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="clearfix"></div>
+					</section>
+					<section *ngIf="signup.step == 3">
+						<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
+							<h2>Update Details</h2>
+							<div class="row">
+								<div class="input-field col s12 col m12">
+									<i class="material-icons prefix margin-top-cart2">person</i>
+									<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
+									<label for="name">Enter Name*</label>
+									<div class="center absolute" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
+										<span class="red-text ">*Enter Valid Name.</span>
+									</div>
+								</div>
+								<div class="input-field col s12 col m12">
+									<i class="material-icons prefix margin-top-cart2">mail</i>
+									<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
+									<label for="enter_email">Enter Email</label>
+									<div class="center absolute" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
+										<span class="red-text"> Enter Valid Email.</span>
+									</div>
+								
+								</div>
+								<div class="input-field col s12 col m12">
+									<i class="material-icons prefix margin-top-cart2">lock</i>
+									<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
+									<label for="enter_passcode">Enter Password</label>
+									<div class="center absolute" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
+										<span class="red-text">Password is Required.</span> 
+									</div>
+								</div>
+								<div class="input-field col s12 col m12">
+									<i class="material-icons prefix margin-top-cart2">lock</i>
+									<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
+									<label for="confirm_passcode">Confirm Password</label>
+									<div class="center absolute" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
+										<span class="red-text">Check Confirm Password.</span>
+									</div>
+								</div>
+								<div class="col s12 col m12">
+									<div class="term-txt">
+									<!-- <input id="terms-condi" formControlName="terms" type="checkbox" value="1"/> -->
+									<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
+									<div class="cleaarfix"></div>
+								</div>
+								</div>
+								<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 2 : 1"/>
+								<div class="col s12  margin-top fix-center">
+									<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+									<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!signupgroup.valid">Create Account</button>
+									<p class="ask-login fix-center"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
+									<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
+								</div>
+							</div>
+						</form>
+					</section>
+				</div>
+			</div>
+		</div>
+		<div class="row no-margin" style="background-color: #fff;" *ngIf="action == 3">
+			<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login-banner.jpg);background-size: cover;">
+				<div class="login-modal">
+					<div class="padd-rem1 login-text">
+						<h2 class="black-text no-margin">Reset Password</h2>
+					</div>			
+				</div>
+			</div>
+			<div class="col s12 m8 white"> 
+				<div class="tabs-sign-up" *ngIf="reset.step != 3">
+					<form class="login-page-form" id="proceed-reset-form" method="post" [formGroup]="proceedresetgroup" #proceedresetform = "ngForm" (ngSubmit)="process_to_reset(proceedresetform.value,this)">
+						<h3>Reset Password</h3>
+						<div class="row no-margin">
+							<div class="input-field col s12 m12">
+								<i class="material-icons prefix grey-text margin-top-cart2">phone</i>
+								<input id="icon_prefix"  type="number" formControlName="phone">
+								<label for="icon_prefix">Enter Your Phone Number </label>
+								<div class="orange accent-4" *ngIf="!proceedresetgroup.controls['phone'].valid && proceedresetgroup.controls['phone'].touched">Enter a Valid Phone.</div> 
+							</div>
+							<div class="input-field col s12 m9 offset-m1" *ngIf="reset.step == 2">
+								<i class="material-icons prefix grey-text margin-top-cart2">lock</i>
+								<input id="forgot-otp" type="password" formControlName="pin" minlength="4" maxlength="4" autocomplete="off">
+								<label for="icon_prefix">Enter OTP* </label>
+								<div class="orange accent-4" *ngIf="!proceedresetgroup.controls['pin'].valid && proceedresetgroup.controls['pin'].touched">Enter a Valid OTP.</div> 
+							</div>
+							<div class="col s12 center margin-top">
+								<button type="Submit" id="proceed-submit" class="btn waves-effect waves-light orange" [disabled]="!proceedresetgroup.valid">Continue</button>
+								<span *ngIf="reset.step == 2"><button type="button" style="margin-right: 5px;" class="btn waves-effect waves-light grey" (click)="resend_otp('reset')" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button></span>	
+							</div>	
+							<!-- <div class="col s12 center margin-top">
+								<a routerLink="/" class="orange-text font-size-change1"><i class="material-icons">keyboard_arrow_left</i> Back To Home</a>
+							</div> -->
+						</div>
+					</form>		
+			</div>
+			<div class="tabs-sign-up" *ngIf="reset.step == 3">
+				<h3>Create New Password</h3>
+				<form class="login-page-form" id="reset-form" method="post" [formGroup]="resetgroup"  #resetform = "ngForm" (ngSubmit)="reset_password(resetform.value)">
+					<div class="row">
+						<div class="input-field col s12 m9 offset-m1">
+							<i class="material-icons prefix grey-text margin-top-half6">lock</i>
+							<input id="icon_prefix1" type="password" formControlName="password" minlength="5">
+							<label for="icon_prefix">Create New Password* </label>
+							<div class="orange accent-4" *ngIf="!resetgroup.controls['password'].valid && resetgroup.controls['password'].touched">Enter Password with minimum 6 characters.</div> 
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12 m9 offset-m1">
+							<i class="material-icons prefix grey-text margin-top-half6">lock</i>
+							<input id="icon_prefix2" type="password" formControlName="cpassword">
+							<label for="icon_prefix2">Confirm Password* </label>
+							<div class="orange accent-4" *ngIf="!resetgroup.controls['cpassword'].valid && resetgroup.controls['cpassword'].touched">Enter Confirm Password.</div> 
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12 center margin-top">
+							<button type="Submit" id="forgot-submit" class="btn waves-effect waves-light orange" [disabled]="!resetgroup.valid">Continue</button>
+						</div>
+					</div>
+					<div class="col s12 center" *ngIf="back_to_login">
+						<a routerLink="/" class="orange-text font-size-change1"><i class="material-icons">keyboard_arrow_left</i> Back To Home</a>
+					</div>
+				</form>	
+			</div>
+		</div>
+		</div>
 	</div>
 	</div>
+
 	<!-- End Here -->
 	<!-- Side Navigation -->
 	<ul id="slide-out" class="side-nav">
 		<div class="user-view no-padding">
-				<li *ngIf="this.todoservice.get_user_name() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login / Sign Up</a></li>
+				<li *ngIf="this.todoservice.get_user_phone() == ''" class="inline-block issue-menu"><a href="#login-modal" class="logup modal-trigger">Login / Sign Up</a></li>
 			</div>
-		<div class="user-detail" *ngIf="this.todoservice.get_user_name() != ''">
+		<div class="user-detail" *ngIf="this.todoservice.get_user_phone() != ''">
 			<ul class="unique-item">
 				<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
 					<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
@@ -808,7 +1005,7 @@ li.txt-fix-mb span a {
 					<a class="modal-trigger" href="#modal1"><i class="material-icons">photo_camera</i></a>
 				</li>
 					<li class="inline-block user-after-login-text only-txt-name">
-					<p class="no-margin" *ngIf="this.todoservice.get_user_name() != ''"> {{this.todoservice.get_user_name()}}</p>
+					<p class="no-margin" *ngIf="this.todoservice.get_user_phone() != ''"> {{this.todoservice.get_user_name()}}</p>
 					+91-<span >{{this.todoservice.get_user_phone()}}</span> 
 				</li>
 				<!-- <li> <span class="fa fa-user"></span> </li> -->
@@ -822,11 +1019,11 @@ li.txt-fix-mb span a {
 			</ul>
 		</div>
 		<li><div class="divider"></div></li>
-		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
+		<li *ngIf="this.todoservice.get_user_phone() != ''"><a routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-tachometer"></span> &nbsp; Dashboard </a></li>
 		<li><a routerLink="/p/about-us" routerLinkActive="active"><span class="fa fa-edit"></span>&nbsp; About Us</a></li>
 		<li><a routerLink="/help/contact-us" routerLinkActive="active"><span class="fa fa-phone"></span>&nbsp; Contact Us</a></li>
 		
-		<li *ngIf="this.todoservice.get_user_name() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
+		<li *ngIf="this.todoservice.get_user_phone() != ''"><a routerLink="/logout" routerLinkActive="active"><span class="fa fa-edit"></span> &nbsp; Logout</a></li>
 	</ul>
 	<div id="modal1" class="modal">
     <div class="modal-content">

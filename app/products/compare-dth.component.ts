@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 
-import * as $ from 'jquery'; 
+// import * as $ from 'jquery'; 
 @Component({
   selector: 'app-compare-dth',
   templateUrl: './compare-dth.component.html',
@@ -42,7 +42,7 @@ export class CompareDthComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todoservice.back_icon_template('Compare Products',this.todoservice.back())
+    this.todoservice.back_icon_template('Compare Products',this.todoservice.back(1))
     if(this.todoservice.get_param('ref') != '')
       this.referer = this.todoservice.get_param('ref')
     if(this.todoservice.get_param('urls') != '')

@@ -218,6 +218,12 @@ font-size: 10px;
 	<div class="spinner-wrapper">
 		<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 	</div>
+	<section *ngIf="this.no_product">
+		<div class="center no-product">
+			<span class="material-icons orange-text" style="font-size: 80px;">report</span>
+			<h2>No Product Found on this url.</h2>
+		</div>
+	</section>
 	<section class="no-padding grey lighten-2 beard">
 		<div class="container">
 			<div class="row no-margin">
@@ -240,7 +246,7 @@ font-size: 10px;
 	</section>
 	<!-- Flash Deal section -->
 	<section class="flash-deal border-bottom white">
-		<div class="container" id="product-detailed-section">
+		<div class="container" id="product-detailed-section" *ngIf="product">
 			<div class="row no-margin">
 				<div class="col s12 m12 l5" id="sticky-product-img">
 					<div class="images-product relative">
@@ -264,10 +270,10 @@ font-size: 10px;
 							<span *ngIf="product"><a [className]="(this.productservice.exist_in_favourite(product.id) == true)?'wishlist wishlist-'+product.id+' active tooltipped relative': 'wishlist wishlist-'+product.id+' tooltipped relative'" data-position="top" data-delay="50" data-tooltip="Add to Wishlist" (click)="add_to_favorite(product.id);"><i class="material-icons">star</i></a></span>
 
 						</div>
-												<div class="product-btn center mobile-hide">
-													<a href="javascript:" (click)="add_to_cart(product.id)" class="btn red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
-													<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left orange btn-large font-size-change1 rounded-btn"> SELECT PACKAGE</a>
-												</div>
+						<div class="product-btn center mobile-hide" *ngIf="product">
+							<a href="javascript:" (click)="add_to_cart(product.id)" class="btn red btn-large font-size-change1 rounded-btn"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a>
+							<a href="javascript:" (click)="go_to_channel_section(1)"  class="btn margin-left orange btn-large font-size-change1 rounded-btn"> SELECT PACKAGE</a>
+						</div>
 					</div>
 				</div>
 				<div class="col s12 m12 l7 product-detail" *ngIf="product">
@@ -299,12 +305,12 @@ font-size: 10px;
 							</a> -->
 							
 											
-											<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param1}}</p>
+											<p class="font-size-change1 margin-top" *ngIf="product.param1"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param1}}</p> 
 											<p class="font-size-change1 margin-top" *ngIf="product.param2"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param2}}</p>
 											<p class="font-size-change1 margin-top" *ngIf="product.param3"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param3}}</p>
 											<p class="font-size-change1 margin-top" *ngIf="product.param4"><i class="material-icons green-icon font-size-change1">loyalty</i> {{product.param4}}</p>
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() == 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
-											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.user_cashback_wallet}}</p>								
+											<p class="font-size-change1 margin-top" id="cashback-item"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
+											<!-- <p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}</p>								 -->
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Buy product with Libanz
 												wallet & get extra 3% off.</span>  </p>								
 											
@@ -515,7 +521,7 @@ font-size: 10px;
 					</div>
 				</section>
 	 <section class="flash-deal product-review no-padding border-bottom white scrollspy" id="channel-list">
-		 <div class="container">
+		 <div class="container" *ngIf="product">
 			<div class="row no-margin">
 				<div class="col s12 m8">
 					<div class="center">	
@@ -555,7 +561,7 @@ font-size: 10px;
 									<div class="card-content center" >
 										<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
-										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small *ngIf="product.title.includes('7 Days Freedom')">@ 7 Days</small><small *ngIf="!product.title.includes('7 Days Freedom')">@ {{item.month}} Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 										<br/>
 										<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
@@ -566,7 +572,7 @@ font-size: 10px;
 									<div class="card-content center" >
 										<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
 										<h4 class="grey-text">{{item.title}}</h4>
-										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+										<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small *ngIf="product.title.includes('7 Days Freedom')">@ 7 Days</small><small *ngIf="!product.title.includes('7 Days Freedom')">@ {{item.month}} Month</small></span>
 										<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
 										<br/>
 										<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
@@ -926,15 +932,11 @@ font-size: 10px;
 				<h3 class="center" *ngIf="!this.region">Select Region</h3>
 				<h3 class="center" *ngIf="this.region">Confirm Region</h3>
 				<div *ngFor="let item of circles;let i = index">
-					<div [className]="(this.region == item.circle_id)?'chip black':'chip'">
-						<a href="javascript:" [className]="(this.region == item.circle_id)?'white-text':'black-text'" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
-					</div>
-					<!-- <div class="chip more" *ngIf="i == 5">
-						<a href="javascript:" class="black-text">More <i class="close material-icons">keyboard_arrow_down</i></a>
-					</div>
-					<div class="chip hide" *ngIf="i >= 5">
-					<a href="javascript:" class="black-text btn-contu"(click)="circle_selected(item.circle_id)">{{item.name}}</a>
-					</div> -->
+					<div *ngIf="item.circle_id > 0">
+						<div [className]="(this.region == item.circle_id)?'chip black':'chip'">
+							<a href="javascript:" [className]="(this.region == item.circle_id)?'white-text':'black-text'" (click)="circle_selected(item.circle_id)">{{item.name}}</a>
+						</div>
+					</div> 
 				</div>
 				<div class="overlay-footer right" *ngIf="this.region">
 					<a href="javascript:" class="orange btn" onclick="$('.religon-overlay').hide();">Confirm</a> 

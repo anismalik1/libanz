@@ -11,8 +11,14 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LogoutComponent } from './shared/logout.component';
-import { SplashScreenComponent } from './pages/splash-screen.component';
+import { LogoutComponent } from './shared/logout.component'; 
+import { HomeModule} from './home/home.module';
+import { PagesModule} from './pages/pages.module';
+import {ProductsModule} from './products/products.module';
+import {DashboardModule} from './dashboard/dashboard.module';
+import {PagedataGuard} from './shared/guard/pagedata.guard';
+import { PagesService } from './pages.service';
+// import { SplashScreenComponent } from './pages/splash-screen.component';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 // import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { NgxPaginationModule} from 'ngx-pagination';
@@ -28,7 +34,7 @@ import * as $ from 'jquery';
   declarations: [
     AppComponent,
     LogoutComponent,
-    SplashScreenComponent
+    // SplashScreenComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -49,7 +55,7 @@ import * as $ from 'jquery';
     //platformImports,
     //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [HomeModule,PagesModule,ProductsModule,DashboardModule,PagedataGuard,PagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

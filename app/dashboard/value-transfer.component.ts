@@ -32,7 +32,7 @@ export class ValueTransferComponent implements OnInit{
     private router : Router,private route : ActivatedRoute) {
    }
   ngOnInit() {
-    this.todoservice.back_icon_template('Pay',this.todoservice.back())
+    this.todoservice.back_icon_template('Pay',this.todoservice.back(1))
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -70,9 +70,40 @@ export class ValueTransferComponent implements OnInit{
   }
   user_tobank_submit(form)
   {
-    let surcharge = (3*form.amount)/100;
-    this.user_data = { amount : form.amount,surcharge:surcharge};
-    this.goto_step(4);
+    var amount = form.amount;
+		if(amount == "")
+		{
+			$('#interval-error').text("Enter Amount");
+			return;
+		}
+
+		if(amount > 25000)
+		{
+			$('#interval-error').text("Transfer limit is 25000 INR on single day.");
+			// this.toastr.errorToastr("",'Failed');
+			return;
+		}
+		this.spinner.show();
+		this.todoservice.fetch_wallet_to_bank_calculation({token:this.get_token(),amount : amount})
+		.subscribe( 
+		  data => 
+		  {
+			this.spinner.hide();
+			if(data.status == 'true')
+			{
+				let surcharge = (3*form.amount)/100;
+        this.user_data = { amount : form.amount,surcharge:surcharge};
+        this.goto_step(4);
+			}
+			else
+			{
+				$('#interval-error').text(data.msg);
+				return;
+			}
+		  }
+      ) 
+      
+    
   }
   change_amount(amount : any)
   {

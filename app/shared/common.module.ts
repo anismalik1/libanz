@@ -7,11 +7,12 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule} from '@angular/material/input';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { ToastrModule } from 'ng6-toastr-notifications';
+import {NgxSpinnerModule} from 'ngx-spinner'
 import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { SideNavComponent } from '../shared/side-nav/side-nav.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-
+// import { SanitizeHtmlPipe } from '../shared/sanitizePipe';
 @NgModule({ 
   imports: [CommonModule,
     FormsModule,
@@ -20,6 +21,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     MatAutocompleteModule,
     MatInputModule,
     RouterModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot(),
     NgxDaterangepickerMd.forRoot(),
     ImageCropperModule

@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
-import { stepper } from '../home/splash-animation';
+// import { stepper } from '../home/splash-animation';
 import { Item } from '../item.entities';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
@@ -62,6 +62,8 @@ export class StepCheckoutComponent implements OnInit {
   reg_address : number = 0; 
   tab_address : any;
   ControlFormGroup : FormGroup ;
+  product_calculate_amount : number ;
+  product_bonus : number;
   address : any;
   months : any;
   pack_selected : any;
@@ -106,7 +108,7 @@ export class StepCheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.todoservice.back_icon_template('Checkout',this.todoservice.back())
+  this.todoservice.back_icon_template('Checkout',this.todoservice.back(1))
   if(isPlatformBrowser(this.platformId)) 
     $('.mobile-footer').remove();  
   if(!this.get_token())
@@ -146,6 +148,7 @@ export class StepCheckoutComponent implements OnInit {
   else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'cart')
   {
     this.params.tracker = 'cart'; 
+    this.params.id      = this.todoservice.get_param('id');
   }
   else
   {
@@ -183,7 +186,7 @@ update_user_favourites()
       data => 
       {
         localStorage.setItem('favourite', JSON.stringify(data.favourites));
-        
+        //console.log(data.favourites)
         if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'favorite')
         {
           this.params.tracker = 'favorite';
@@ -202,7 +205,6 @@ update_user_favourites()
           if(data.favourites.items.length > 0)
           {
             var myitems : any = data.favourites.items.filter(item => item.type == 1); 
-            //this.product_items.push({product : [],quantity : 1});
             for(var i = 0;i < myitems.length ; i++)
             {
               this.product_items.push({product : myitems[i].product,quantity : 1});
@@ -289,19 +291,19 @@ check_wallet_content()
   this.checkbox_text = {checkbox : false,radio : false,no_input : false}
   if(this.itemCount() == 1 && this.todoservice.get_user_product_amount() < this.options.how_much_apply_to_product)
   {
-    if(this.calculateAmount() > this.todoservice.get_user_wallet_amount() && this.todoservice.get_user_wallet_amount() > 0)
+    if(this.product_calculate_amount > this.todoservice.get_user_wallet_amount() && this.todoservice.get_user_wallet_amount() > 0)
     {
       this.checkbox_text.checkbox = true;
       return;
     }
-    else if(this.calculateAmount() <= this.todoservice.get_user_wallet_amount())
+    else if(this.product_calculate_amount <= this.todoservice.get_user_wallet_amount())
     {
       this.checkbox_text.radio =  true;
       return;
     }
     this.checkbox_text.no_input =  true;
   }
-  else if(this.calculateAmount() <= this.todoservice.get_user_wallet_amount())
+  else if(this.product_calculate_amount <= this.todoservice.get_user_wallet_amount())
   {
     this.checkbox_text.radio =  true;
   }
@@ -640,19 +642,20 @@ calculate_bonus()
       }
      }
   }
-  return amount;
+  this.product_bonus = amount;
+  return this.product_bonus;
 }
 
 pay_amount()
 {
   var wallet_used = '';
-    if($('[name="include_wallet"]:checked').length > 0)
+    if(isPlatformBrowser(this.platformId) && $('[name="include_wallet"]:checked').length > 0)
       wallet_used = 'wallet';
-    if((this.calculateAmount() > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
+    if((this.product_calculate_amount > this.todoservice.get_user_wallet_amount()) && wallet_used == 'wallet')
     {
-      return Math.ceil(this.calculateAmount() - this.todoservice.get_user_wallet_amount());
+      return Math.ceil(this.product_calculate_amount - this.todoservice.get_user_wallet_amount());
     }
-    return Math.ceil(this.calculateAmount());
+    return Math.ceil(this.product_calculate_amount);
 }
 
 cod_apply()
@@ -780,13 +783,13 @@ set_on_tab(addr)
   this.tab_address = addr;
 }
 
-calculateAmount() : number
+calculateAmount()
 {
 let cart : any = this.product_items;
 let amount : number = 0;
 if(cart == null)
 {
-  return amount;
+  this.product_calculate_amount = amount;
 }
 for(var i =0;i< cart.length;i++)
 {
@@ -817,7 +820,8 @@ for(var i =0;i< cart.length;i++)
   product_amount = product_amount * item.quantity;
   amount += product_amount;
 }
-return amount; 
+  this.product_calculate_amount = amount;
+  return this.product_calculate_amount;
 }
 
 fetch_channels(item : any)
@@ -855,12 +859,12 @@ checkout_items(type)
       arr['subscriber_id'] = this.product_items[i].product.subscriber_id;      
     p_data.push(arr);  
   }
-  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, p_data : p_data,wallet_type : wallet_type ,cart_amount: this.calculateAmount()};
+  let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, p_data : p_data,wallet_type : wallet_type ,cart_amount: this.product_calculate_amount};
   if($('#wallet-type [name="include_wallet"]:checked').length > 0)
     data.include_wallet = 1;
   if(this.region)
     data.region = this.region;  
-  if(this.calculate_bonus() > 0)
+  if(this.product_bonus > 0)
     data.bonus = 1;
   this.disabled = true;  
   data.referer = this.params.tracker;   
@@ -974,7 +978,7 @@ app_version()
       });
     this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
         data => {
-            let response = $.parseJSON(data['_body'])
+            let response : any = data;
             if(response.version && response.alert == 'on')
             {
               if(document.URL.indexOf('android_asset') !== -1)

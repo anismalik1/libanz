@@ -263,7 +263,7 @@ height: 25px;
                 </div>
             </div>
         </mat-step>
-        <mat-step [editable]="false">
+        <mat-step [editable]="false"> 
             <ng-template matStepLabel>Details</ng-template>
             <div class="card" *ngIf="address">
                 <h3 class="text-add">Address</h3>
@@ -340,7 +340,7 @@ height: 25px;
                             <hr class="horizontal">
                 <div class="subtotal payable margin-top">
                     <p class="inline-block font600">Amount Payable :</p>
-                    <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}} </p>
+                    <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{(this.calculateAmount() - this.calculate_bonus())}} </p>
                 </div>
                 <hr>
                 <div class="subtotal margin-top">
@@ -352,7 +352,7 @@ height: 25px;
           </div>
         </div> 
         <div class="footer-button-buy">
-            <div class="left-half"><h3><i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}}</h3>
+            <div class="left-half"><h3><i class="icon-inr"></i>{{this.product_calculate_amount - this.product_bonus}}</h3>
                 <p><a href="javascript:" class="forder-txt" (click)="to_order_summary()">Order Details </a></p>
             </div>
             <div class="right-half">
@@ -408,9 +408,9 @@ height: 25px;
                 </div>  -->
                 <div class="footer-button-buy">
                     <!-- <a href="javascript:" (click)="add_to_cart(product.id)" id="cart-add" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a> -->
-                    <button href="javascript:" class="btn full" type="Submit" id="book-now" (click)="checkout_items(1)">Checkout (<i class="icon-inr"></i>{{pay_amount() - this.calculate_bonus()}})</button>
+                    <button href="javascript:" class="btn full" type="Submit" id="book-now" (click)="checkout_items(1)">Checkout (<i class="icon-inr"></i>{{pay_amount() - this.product_bonus}})</button>
                 </div>
-                <div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.itemCount() > 1 && this.calculateAmount() >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
+                <div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.itemCount() > 1 && this.product_calculate_amount >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
             </div>
             <div class="order-summary">
                     <div class="card">
@@ -446,12 +446,12 @@ height: 25px;
                         </div>				
                         <div class="subtotal ">
                             <p class="inline-block">Delivery Charges :</p>
-                            <p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p>
+                            <p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p> 
                         </div>
                         <hr class="horizontal">
                         <div class="subtotal payable margin-top">
                             <p class="inline-block font600">Amount Payable :</p>
-                            <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{this.calculateAmount() - this.calculate_bonus()}} </p>
+                            <p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{(this.calculateAmount() - this.calculate_bonus())}}</p>
                         </div>
                         <hr>
                         <div class="subtotal margin-top">

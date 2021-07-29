@@ -10,7 +10,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 @Component({ 
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
@@ -45,7 +45,7 @@ export class ContactUsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.todoservice.back_icon_template('Contact Us',this.todoservice.back())
+    this.todoservice.back_icon_template('Contact Us',this.todoservice.back(1))
     if(this.page == null)
     {
       this.page = 'contact-us'
@@ -72,7 +72,8 @@ fetch_page_data()
             if(isPlatformBrowser(this.platformId))
               $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);
           }
-          $('#page-content').html(this.todoservice.get_page().description);
+          if(isPlatformBrowser(this.platformId))
+            $('#page-content').html(this.todoservice.get_page().description);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
@@ -103,7 +104,8 @@ fetch_page_data()
           this.contactgroup.controls['subject'].setValue(null);
           this.contactgroup.controls['message'].setValue(null);
           this.contactgroup.markAsUntouched()
-          $('[href="#modal-success"]')[0].click();
+          if(isPlatformBrowser(this.platformId))
+            $('[href="#modal-success"]')[0].click();
           //this.toastr.error("Successful! We Have Received Your Query And will be back to you soon.");
         }
         else

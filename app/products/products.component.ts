@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit{
       ProductsComponent.isBrowser.next(isPlatformBrowser(platformId));
     }
   ngOnInit() {
-    this.todoservice.back_icon_template('Products',this.todoservice.back())
+    this.todoservice.back_icon_template('Products',this.todoservice.back(1))
     this.data = {cat_id : '',page_index:0};
     this.route.params.subscribe(params => {
       this.data.cat_id = params['name'];
@@ -95,6 +95,14 @@ export class ProductsComponent implements OnInit{
                   
   }
  
+  filter_url(url)
+  {
+    if(window.screen.width < 767)
+    {
+      return '/product/amp/'+url.trim()
+    }  
+    return '/product/'+url.trim();
+  }
   filter_cat()
   {
     var array : any = ''; 

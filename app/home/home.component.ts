@@ -2,43 +2,25 @@ import { Component, OnInit ,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import {Location} from '@angular/common';
 import { FormBuilder } from '@angular/forms'; 
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { Title, Meta, makeStateKey } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { DOCUMENT} from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Params } from '../shared/config/params.service';
 import { Observable} from 'rxjs';
-import { Router ,ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Package } from '../packages.entities.service';
-import { HttpHeaders,HttpClient } from '@angular/common/http';
-import { stepper } from './splash-animation';
+// import { stepper } from './splash-animation';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
-declare var $: any;
+// import { exists } from 'fs';
 // import * as $ from 'jquery';
 
 declare var window : any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  animations: [stepper],
-  styles: [`
-        .splash-box{position: absolute;
-            top: 40%;width:100%} 
-        .splash-box img{border-radius: 50%;}       
-        .splash-screen {
-            background : #fff;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 9999; 
-        }
-        .splash-footer{position: absolute;width: 100%;bottom: 0;}
-        .splash-footer span{font-size: 20px;color: #a9a6a6;}   
-    `],
 })
 export class HomeComponent implements OnInit {
   static isBrowser = new BehaviorSubject<boolean>(null!);
@@ -113,7 +95,6 @@ export class HomeComponent implements OnInit {
      private fb: FormBuilder,
      private spinner: NgxSpinnerService,
      public params : Params,
-      private http: HttpClient
   ) {
     HomeComponent.isBrowser.next(isPlatformBrowser(platformId));
     this.spinner.hide();
@@ -132,7 +113,7 @@ export class HomeComponent implements OnInit {
         this.authservice.authenticate();
     }, 4000);
     }  
-  this.fetch_home_data();
+  this.fetch_home_data(); 
   if(!this.get_token())
   {
     this.todoservice.set_user_data({name:''});
@@ -171,6 +152,16 @@ export class HomeComponent implements OnInit {
     this.check_local();
     this.app_version();
   }
+
+  filter_url(url)
+  {
+    if(window.screen.width < 767)
+    {
+      return '/product/amp/'+url.trim()
+    }  
+    return '/product/'+url.trim();
+  }
+  
   animationDone(ele)
   {
       $('.splash-box').css({top:'40%'});
@@ -268,10 +259,8 @@ export class HomeComponent implements OnInit {
             this.bottombanners = this.filter_banners('mobile_bottom_banner',0, 0);
             let banner_data : any = { main : this.mainbanners,bottom : this.bottombanners} 
             this.todoservice.set_data('b_d',banner_data);
-            if(!isPlatformBrowser(this.platformId)) {
-              return;
-            }
-            if(!this.webTemplate)
+            
+            if(!this.webTemplate && isPlatformBrowser(this.platformId))
             {
               setTimeout(()=>{   
                 this.make_slider();
@@ -282,7 +271,7 @@ export class HomeComponent implements OnInit {
               this.init_page();
             }
             
-            this.fetch_home_products(); 
+            this.fetch_home_products();
             if(isPlatformBrowser(this.platformId)) {
               $('#mobile').css('display','');  
               $('#select-item').css('display',''); 
@@ -382,10 +371,14 @@ export class HomeComponent implements OnInit {
       this.dishtv_slides      = data.products.filter(x => x.category_id == 4);
       this.videcone_slides    = data.products.filter(x => x.category_id == 2);
       this.recommended      = this.filter_recommended(data.products); 
-      if(this.webTemplate)
-        this.web_sliders();
-      else
-        this.init_products();
+      if(isPlatformBrowser(this.platformId))
+      {
+        if(this.webTemplate )
+          this.web_sliders();
+        else
+          this.init_products();
+      }
+      
       let product_data : any = { ratings : this.ratings, tata : this.tata_slides,airtel : this.airtel_slides,dish : this.dishtv_slides,videocon : this.videcone_slides} 
       this.todoservice.set_data('p_d',product_data);
     }
@@ -407,11 +400,15 @@ export class HomeComponent implements OnInit {
   }
   add_to_favorite(product)
   {
+    if(!isPlatformBrowser(this.platformId))
+    {
+      return ;
+    }
     if(!this.get_token())
     {
       $('.logup.modal-trigger')[0].click();
       this.toastr.errorToastr("Please Login to proceed", 'Failed! ');
-      return;
+      return ;
     }
     $('.favorite-'+product.id).addClass('active');
     this.spinner.show() 
@@ -461,15 +458,27 @@ export class HomeComponent implements OnInit {
     //console.log(this.product_ratings);
   }
   
-  check_cashback(product_id)
+  check_cashback(product_array)
   {
+    var product_id = product_array.id
     //console.log(product_id);
     //console.log(this.user_cashback);
     if(!this.user_cashback)
-      return true;
+      return false;
     let exist = this.user_cashback.filter(x => x.services_id == product_id);
-    //console.log(exist);
-    if(exist.length > 0 )
+    if(this.todoservice.get_user_type() == 1)
+    {
+      if(exist.length > 0 && exist[0].user_id > 2)
+      {
+        return exist;
+      }
+      else
+      {
+        exist = [{amount:product_array.user_cashback_wallet}]
+      }
+    }
+    
+    if(exist.length > 0)
     {
       return exist;
     }

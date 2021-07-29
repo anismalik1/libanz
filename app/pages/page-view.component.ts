@@ -1,5 +1,6 @@
 import { Component, OnInit,PLATFORM_ID,Inject } from '@angular/core';
 import { TodoService } from '../todo.service';
+import { PagesService } from '../pages.service';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { Meta ,Title} from '@angular/platform-browser';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -22,6 +23,7 @@ export class PageViewComponent implements OnInit {
   form_enable : boolean = false;
   public ref : any;
 constructor(private title: Title, public todoservice : TodoService,
+  public pageservice : PagesService,
   @Inject(PLATFORM_ID) private platformId: any ,
   private spinner: NgxSpinnerService,private router : Router,
   private fb: FormBuilder,
@@ -44,7 +46,14 @@ constructor(private title: Title, public todoservice : TodoService,
 
  }
 
- 
+ page_content()
+ {
+  var content = ''; 
+  if(this.pageservice.page_data)
+    content = this.pageservice.page_data.description;
+   return content;
+ }
+
  fetch_page_data()
  {
   let page = {page : this.page}; 
@@ -58,35 +67,26 @@ constructor(private title: Title, public todoservice : TodoService,
       {
         if(data.PAGEDATA)
         {
+          this.spinner.hide();
           this.todoservice.set_page_data(data.PAGEDATA[0]);
+          this.pageservice.page_data = data.PAGEDATA[0];
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
           
-          if(data.PAGEDATA[0].image != '' && data.PAGEDATA[0].image != undefined)
-          {
-            if(isPlatformBrowser(this.platformId)) 
-              $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
-          }
-          else
-          {
-            if(isPlatformBrowser(this.platformId)) 
-              $('.hero').remove(); 
-          }
-          this.todoservice.back_icon_template(this.todoservice.get_page().title,this.todoservice.back())
-          //$('#page-title').text(this.todoservice.get_page().title);
-          if(isPlatformBrowser(this.platformId)) 
-            $('#page-content').html(this.todoservice.get_page().description);
-          
+          // if(data.PAGEDATA[0].image != '' && data.PAGEDATA[0].image != undefined)
+          // {
+          //   if(isPlatformBrowser(this.platformId)) 
+          //     $('.hero img').attr('src',this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image);           
+          // }
+          // else
+          // {
+          //   if(isPlatformBrowser(this.platformId)) 
+          //     $('.hero').remove(); 
+          // }
+          this.todoservice.back_icon_template(this.todoservice.get_page().title,this.todoservice.back(1))
           if(isPlatformBrowser(this.platformId))  
             window.scroll(0,0);
-          
-          // $( "#page-content .testimonial-text blockquote" ).each(function( index ) {
-          //   if(  $( this ).html().length > 300)
-          //   {
-          //     $(this).html("<span class='partial-testimnial'>"+$.trim($(this).html()).substring(0, 300).split(" ").slice(0, -1).join(" ") + "</span><a href='javascript:' onclick=\"$(this).remove();$(this).html($(this).html())\" class='blue-text'>...Load More</a>");
-          //   }
-          // }); 
         }
         this.spinner.hide();  
       }

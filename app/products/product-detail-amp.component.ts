@@ -14,7 +14,7 @@ import { Package } from '../packages.entities.service';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 
-import * as $ from 'jquery'; 
+// import * as $ from 'jquery'; 
 
 
 @Component({
@@ -27,6 +27,7 @@ export class ProductDetailAmpComponent implements OnInit {
   fta_price : number;
   hide : boolean = true;
   region : any;
+  no_product :boolean = false;
   pack_selected : any = [];
   fta_pack : any = {};
   all_packs : any = [];
@@ -92,6 +93,7 @@ export class ProductDetailAmpComponent implements OnInit {
    }
    
   ngOnInit() {
+    this.spinner.hide();
     if(this.todoservice.get_param('id'))
     {
       this.pack_id = Number(this.todoservice.get_param('id'));
@@ -169,12 +171,6 @@ export class ProductDetailAmpComponent implements OnInit {
       {
         this.fetch_options()
       }
-    }
-    if(isPlatformBrowser(this.platformId)) 
-    {
-      $('.cst-back').delegate('.bredcum-title','click',function(){
-        window.history.go(-1)
-      });
     }
     
   }
@@ -367,17 +363,22 @@ export class ProductDetailAmpComponent implements OnInit {
 		  .subscribe(
 			data => 
 			{
-        
+        if(data.status == false)
+        {
+          this.spinner.hide();
+          this.no_product = true;
+          return;
+        }
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
         this.product_features = data.specification;
         this.ratings          = data.rating;
-        this.spinner.hide();
+        
         let b = this.htmlToPlaintext(JSON.stringify(data));
         this.channels_packs = data.package;
         this.fta_pack = {};
         
         this.product = data.PRODUCTDATA;
-        this.todoservice.back_icon_template(this.product.title,this.todoservice.back());
+        this.todoservice.back_icon_template(this.product.title,this.todoservice.back(2));
         this.recommended = data.RECOMMENDED; 
         this.calculate_ratings();
         this.filter_channel_subpack();
@@ -386,7 +387,18 @@ export class ProductDetailAmpComponent implements OnInit {
         if(data.cashback && data.cashback.length > 0 )
         {
           let user_cashback = this.check_cashback(data.cashback);
-          this.product.partnerwalletamount = user_cashback[0].amount;
+          // this.product.partnerwalletamount = user_cashback[0].amount;
+          if(this.todoservice.get_user_type() == 1)
+          {
+            if(user_cashback[0].user_id > 2)
+              this.product.partnerwalletamount = user_cashback[0].amount;
+            else
+              this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet; 
+          }
+          else
+          {
+            this.product.partnerwalletamount = user_cashback[0].amount;
+          }
         }
         else
         {
@@ -409,9 +421,13 @@ export class ProductDetailAmpComponent implements OnInit {
         }
         if(this.circles && this.todoservice.get_param('tracker') != 'circle_selected')
         {
-          setTimeout(()=>{    //<<<---    using ()=> syntax
-            $('.religon-overlay').show();
-          }, 2000);
+          // setTimeout(()=>{    //<<<---    using ()=> syntax
+          //   if(isPlatformBrowser(this.platformId)) 
+          //   {
+          //     $('.religon-overlay').show();
+          //   }
+            
+          // }, 2000);
 
           if(this.productservice.get_region())
           {
@@ -443,11 +459,14 @@ export class ProductDetailAmpComponent implements OnInit {
         this.grouped_rating = data.GROUPED_RATING;
         this.packages     = data.product_packages; 
         this.display      = 1;
-        setTimeout(()=>{    
-          $('#product-description').html(this.product.description);
-          $('#offer-price').text(this.product.offer_price);
-         }, 1000);
-         
+        if(isPlatformBrowser(this.platformId)) 
+        {
+          setTimeout(()=>{    
+            $('#product-description').html(this.product.description);
+            $('#offer-price').text(this.product.offer_price);
+           }, 1000);
+        }
+        
         if(typeof data.PACKAGEMONTH != 'undefined' )
         {
           this.package_month = data.PACKAGEMONTH;

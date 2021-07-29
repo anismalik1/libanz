@@ -54,7 +54,7 @@ export class ChannelPackComponent implements OnInit {
     });
     if(isPlatformBrowser(this.platformId)) 
       this.init_script();
-    this.todoservice.back_icon_template('Channel',this.todoservice.back())
+    this.todoservice.back_icon_template('Channel',this.todoservice.back(1))
   }
 
   init_script()

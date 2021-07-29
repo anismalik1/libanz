@@ -226,7 +226,7 @@ left:5%;
 		.mb-txt {
     font-size: 15px;
     padding: 12px 0px 0px 12px;
-    font-weight: 600;
+    font-weight: 600; 
 }
 		
 	}
@@ -288,7 +288,7 @@ left:5%;
 								<label for="credit-card" class="black-text"> <span class="fa fa-gift cst-gift"></span> <span class="txt-bonus"> Bonus  Rs. </span> <span class="orange-text">{{this.options.how_much_apply_to_recharge}}</span> is Applied.</label>
 							</div> 
 							<div class="col m3 s12 recharge-content-box">
-								<input [type]="(this.options.apply_minimum_recharge <= 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())?'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(this.options.apply_minimum_recharge <= 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="((this.options.apply_minimum_recharge > 0 && this.rechargeData.recharge_amount * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1) ?false:true" [disabled]="((this.options.apply_minimum_recharge > 0 && this.rechargeData.recharge_amount * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)?true:false"/>
+								<input [type]="( this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount() )? 'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(this.todoservice.get_user_recharge_amount() == 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="((this.todoservice.get_user_recharge_amount() == 0 && (this.rechargeData.recharge_amount * 1 +this.rechargeData.commission *1) > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1) ? false:true" [disabled]="((this.todoservice.get_user_recharge_amount() > 0 && this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)?true:false"/>
 								<label for="instant-recharge" class="black-text font600">LIBANZ Wallet </label><span class="grey-text font-size-change">&nbsp; <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}} </span>   				
 							</div> 
 							<div class="col s12 m3 recharge-content-box">
@@ -296,8 +296,8 @@ left:5%;
 								<label for="credit-card" class="black-text">Cards & Netbanking</label>
 							</div> 
 							<div class="col s12 m3 recharge-content-box">
-									<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-								<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet" style="    width: 70%;
+								<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
+								<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet" style="width: 70%;
 									float: left;"></label>
 							</div>
 							
@@ -337,7 +337,7 @@ left:5%;
 				<div class=" mobile no-margin cst-border">
 				<form id="mobile-form" [formGroup]="mobilegroup" #mobileform = "ngForm" (ngSubmit)="recharge_init('mobile',mobileform.value)" *ngIf="this.recharge_type.mobile">
 					<div class="row no-margin">
-						<h4 class="mb-txt">Mobile Recharge & Bill Payments	</h4>
+						<h4 class="mb-txt">Mobile Recharge and Bill Payments	</h4>
 						<div class="col s12 m12 margin-top1 cst-label-hover">
 							<input name="group1" class="with-gap mobile-recharge-type" type="radio" id="prepaid-radio"  value="1" [checked]="!url_name.includes('postpaid')"  (click)="navigate_to('mobile')"/>
 							<label for="prepaid-radio" class="cst-label" routerLink="/recharge/for/mobile">Prepaid</label>
@@ -399,15 +399,15 @@ left:5%;
 							<div class="orange-text" *ngIf="this.todoservice.get_user_recharge_amount() > 0 && !url_name.includes('postpaid')">Avail Your Offer With Minimum Recharge Of <br/> <span class="green white-text cst-cashback">Rs {{options.apply_minimum_recharge}}</span>.</div>   
 						</div>
 						
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 									<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									<label class="label-txt">Instant payment from your wallet </label>
 								</p>
-						</div> 
+						</div>  -->
 						<div class="col s12 m12 continue no-padding orange">
-							<button type="submit" class="btn-flat white-text">Proceed to Pay<i class="material-icons" *ngIf="this.todoservice.get_user_recharge_amount() > 0 && this.options.apply_minimum_recharge <= mobilegroup.controls['amount'].value && !url_name.includes('postpaid')">redeem</i></button>
+							<button type="submit" class="btn-flat white-text proceed-to-step2">Proceed to Pay<i class="material-icons" *ngIf="this.todoservice.get_user_recharge_amount() > 0 && this.options.apply_minimum_recharge <= mobilegroup.controls['amount'].value && !url_name.includes('postpaid')">redeem</i></button>
 						</div>
 					</div>
 				</form>
@@ -435,20 +435,20 @@ left:5%;
 							<div class="green-text">{{validationtext}}</div> 	
 						</div>
 						<div class="input-field col s12 m12">
-							<input placeholder="Enter Amount" type="text" class="validate no-margin" formControlName="amount">
+							<input placeholder="Enter Amount" type="number" class="validate no-margin" formControlName="amount">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!dthgroup.controls['amount'].valid && dthgroup.controls['amount'].touched"><i class="material-icons">close</i></span>
 							<div class="red-text" *ngIf="!dthgroup.controls['amount'].valid && dthgroup.controls['amount'].touched">Enter a Valid Amount.</div>
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								
 								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									<label class="label-txt">Instant payment from your wallet </label>
 							</p>
-						</div> 
+						</div>  -->
 						<div class="col s12 m12 continue no-padding orange">
-							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+							<button type="submit" class="btn-flat white-text proceed-to-step2">Proceed to Pay</button>
 						</div>
 					</div>
 				</form>
@@ -512,24 +512,24 @@ left:5%;
 							<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Amount" id="mobid" *ngIf="!datacardgroup.controls['amount'].valid && datacardgroup.controls['amount'].touched"><i class="material-icons">close</i></span> 
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								<label class="label-txt">Instant payment from your wallet </label>
 								<br/>
 							</p>
-						</div> 
+						</div>  -->
 						
 						<div class="col s12 m12 continue no-padding orange">
-							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+							<button type="submit" class="btn-flat white-text proceed-to-step2">Proceed to Pay</button>
 						</div>
 					</div>
 				</form>
 				<form method="post" id="landline-form" [formGroup]="landlinegroup" #landlineform = "ngForm" (ngSubmit)="recharge_init('landline',landlineform.value)" *ngIf="this.recharge_type.landline">
 					<div class="row no-margin">
 						<div class="input-field col s12 m12 electric-cls1">
-							<h4 class="dth-txt-1">Pay Landline OR Broadband Bill	</h4>
+							<h4 class="dth-txt-1">Pay Landline Bill</h4>
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'landline')" formControlName="operator">
 									<span *ngFor="let item of filter_operators(62);">
@@ -542,31 +542,21 @@ left:5%;
 							<span class="wrong-detail" id="mobid" *ngIf="!landlinegroup.controls['operator'].valid && landlinegroup.controls['operator'].touched"><i class="material-icons">close</i></span> 
 						</div>
 						<div class="input-field col s12 m12 electric-cls2">
-							<input placeholder="Telephone Number (With ISD Code)" formControlName="recharge_id" pattern="[0-9]+" type="number" class="validate no-margin"><img src="{{this.todoservice.base_url}}web-app/assets/images/bharat-icon.png" style="width: 40px;position: absolute;right: 14px;top: 9px;">
+							<input [placeholder]="(this.bill_data && this.bill_data.params.length > 0) ? this.bill_data.params[0].placeholder : 'Telephone Number (With ISD Code)'" formControlName="recharge_id" pattern="[0-9]+" type="number" class="validate no-margin"><img src="{{this.todoservice.base_url}}web-app/assets/images/bharat-icon.png" style="width: 40px;position: absolute;right: 14px;top: 9px;">
 							<span class="orange-text" *ngIf="showstd == 1">Use STD Codes as 011 for Delhi etc.</span>      
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Telephone Number (With ISD Code)" id="mobid" *ngIf="!landlinegroup.controls['recharge_id'].valid && landlinegroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
 						</div>
 						
-						<div class="col s12 m12 right continue no-padding orange electric-cls-btn" style="margin-right: 20px;" >
+						<!-- <div class="col s12 m12 right continue no-padding orange electric-cls-btn" style="margin-right: 20px;" >
 							<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('landline');">Proceed to Pay</button>
-						</div>
+						</div> -->
 
-						<span class="hide electric-cls3">
-							<div class="input-field col s12 m12">
-								<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+						<span class=" electric-cls3">
+							<div class="input-field col s12 m12"> 
+								<input placeholder="Enter Amount" formControlName="amount" type="number" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!landlinegroup.controls['amount'].valid && landlinegroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
 								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
 							</div>
-							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
-								<p class="inline-block margin-right fast-forwad relative">
-									<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-								</p>
-							</div> -->
-
-							<label for="instant-recharge" class="orange-text mt-bt-20 pt-left-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-							<label class="label-txt pt-left-20">Instant payment from your wallet </label>
-
 							
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
@@ -578,7 +568,7 @@ left:5%;
 					<div class="row no-margin">
 					
 						<div class="input-field col s12 m12">
-							<h4 class="dth-txt-1">Pay Landline OR Broadband Bill	</h4>
+							<h4 class="dth-txt-1">Pay Broadband Bill	</h4>
 
 							<mat-form-field>
 								<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'broadband')" formControlName="operator">
@@ -592,30 +582,31 @@ left:5%;
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['operator'].valid && broadbandgroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
 						</div>
 						<div class="input-field col s12 m12">
-							<input placeholder="Telephone Number (With ISD Code)" formControlName="recharge_id" pattern="[0-9]+"  type="text" class="validate no-margin">
+							<input [placeholder]="(this.bill_data && this.bill_data.params.length > 0) ? this.bill_data.params[0].placeholder : 'Telephone Number (With ISD Code)'" formControlName="recharge_id" pattern="[0-9]+"  type="text" class="validate no-margin">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['recharge_id'].valid && broadbandgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
 						</div>
-						<div class="input-field col s12 m12">
-							<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
-							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['amount'].valid && broadbandgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
-						</div>
-						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
-							<p class="inline-block margin-right fast-forwad relative">
-								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-							</p>
-						</div> -->
-						<div class="input-field col s12 m12 margin-btm no-padding">
-							<p class="inline-block margin-right fast-forwad relative">
-								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
-								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
+						<!-- <div class="col s12 m12 right continue no-padding orange electric-cls-btn" style="margin-right: 20px;" >
+							<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('broadband');">Proceed to Pay</button>
+						</div>	 -->
+						<div class="electric-cls3">
+							<div class="input-field col s12 m12">
+								<input placeholder="Enter Amount" formControlName="amount" maxlength="5" pattern="[0-9]+" type="number" class="validate no-margin">
+								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!broadbandgroup.controls['amount'].valid && broadbandgroup.controls['amount'].touched"><i class="material-icons">close</i></span> 
+								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>      
+							</div>
+	
+							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
+								<p class="inline-block margin-right fast-forwad relative">
+									<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
+									<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									<label class="label-txt">Instant payment from your wallet </label>
-							</p>
-						</div> 
-						<div class="col s12 m12 continue no-padding orange " style="margin-top:20px;">
-							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+								</p>
+							</div>  -->
+							<div class="col s12 m12 continue no-padding orange " style="margin-top:20px;">
+								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
+							</div>
 						</div>
+						
 					</div>
 				</form>	
 				<form id="electricity-form" method="post" [formGroup]="electricitygroup" #electricityform = "ngForm" (ngSubmit)="recharge_init('electricity',electricityform.value)" *ngIf="this.recharge_type.electricity">
@@ -669,9 +660,14 @@ left:5%;
 							</div>
 							<span class="hide electric-cls3">
 								<div class="input-field col s12 m12">
-									<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin"  value="">
+									<input placeholder="Enter Amount" formControlName="amount" type="number" [disabled]="true" class="validate no-margin"  value="">
 									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['amount'].valid && electricitygroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
-									<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+									<div class="bill-detail-box" *ngIf="this.bill_data && this.bill_data.details">
+										<ul>
+											<li class="grey-text">Name: {{bill_data.details.name}}</li>
+											<li class="grey-text">Due Date: {{bill_data.details.duedate}}</li>
+										</ul>
+									</div>
 								</div>
 							 	<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 									<p class="inline-block margin-right fast-forwad relative">
@@ -679,14 +675,14 @@ left:5%;
 										<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									</p>
 								</div> -->
-								<div class="input-field col s12 m12 margin-btm no-padding">
+								<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 									<p class="inline-block margin-right fast-forwad relative">
 										<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
 										<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 										<label class="label-txt">Instant payment from your wallet </label>
 										<br/>
 									</p>
-								</div> 
+								</div>  -->
 								
 								
 								<div class="col s12 m12 continue no-padding orange">
@@ -715,16 +711,8 @@ left:5%;
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!gasgroup.controls['operator'].valid && gasgroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
 						</div>
 						<div class="input-field col s12 m12 electric-cls2">
-							<input placeholder="Customer Account Number" formControlName="recharge_id" type="text" class="validate no-margin"><img src="{{this.todoservice.base_url}}web-app/assets/images/bharat-icon.png" style="width: 40px;position: absolute;right: 14px;top: 9px;">
+							<input [placeholder]="(this.bill_data && this.bill_data.params.length > 0) ? this.bill_data.params[0].placeholder : 'Customer Account Number'" formControlName="recharge_id" type="text" class="validate no-margin"><img src="{{this.todoservice.base_url}}web-app/assets/images/bharat-icon.png" style="width: 40px;position: absolute;right: 14px;top: 9px;">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Customer Account Number" id="mobid" *ngIf="!gasgroup.controls['recharge_id'].valid && gasgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
-						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
-							<p class="inline-block margin-right fast-forwad relative">
-								<input type="checkbox" class="filled-in" id="instant-recharge1"  name="payment_type" value="wallet" />
-								<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
-								<label class="label-txt">Instant payment from your wallet </label>
-								<br/>
-							</p>
 						</div>
 						<div class="col s12 m12 right continue no-padding orange electric-cls-btn" >
 							<button type="button" class="btn-flat white-text calc-amount-btn" (click)="check_amount('gas');">Proceed to Pay</button>
@@ -734,7 +722,13 @@ left:5%;
 							<div class="input-field col s12 m12">
 								<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!gasgroup.controls['amount'].valid && gasgroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
-								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+								<!-- <span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span> -->
+								<div class="bill-detail-box" *ngIf="this.bill_data && this.bill_data.details">
+									<ul>
+										<li class="grey-text">Name: {{bill_data.details.name}}</li>
+										<li class="grey-text">Due Date: {{bill_data.details.duedate}}</li>
+									</ul>
+								</div>
 							</div>
 							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
@@ -742,14 +736,13 @@ left:5%;
 									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								</p>
 							</div> -->
-							<div class="input-field col s12 m12 margin-btm no-padding">
+							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
 									<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-									<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
 									<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 										<label class="label-txt">Instant payment from your wallet </label>
 								</p>
-							</div> 
+							</div>  -->
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 							</div>
@@ -776,14 +769,14 @@ left:5%;
 							<input placeholder="K NO" formControlName="recharge_id"  type="text" class="validate no-margin"><img src="{{this.todoservice.base_url}}web-app/assets/images/bharat-icon.png" style="width: 40px;position: absolute;right: 14px;top: 9px;">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter K NO" id="mobid" *ngIf="!watergroup.controls['recharge_id'].valid && watergroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span>       
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								
 								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									<label class="label-txt">Instant payment from your wallet </label>
 							</p>
-						</div> 
+						</div>  -->
 
 
 						<div class="col s12 m12 right continue no-padding orange electric-cls-btn" >
@@ -792,9 +785,14 @@ left:5%;
 
 						<span class="hide electric-cls3">
 							<div class="input-field col s12 m12">
-								<input placeholder="Enter Amount" formControlName="amount" type="text" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
+								<input placeholder="Enter Amount" formControlName="amount" type="number" [disabled]="true" class="validate no-margin" ([ngModel])="bill_amt" value="{{bill_amt}}">
 								<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!watergroup.controls['amount'].valid && watergroup.controls['amount'].touched"><i class="material-icons">close</i></span>       
-								<span *ngIf="no_dues == 1" class="red-text">{{due_msg}}</span>
+								<div class="bill-detail-box" *ngIf="this.bill_data && this.bill_data.details">
+									<ul>
+										<li class="grey-text">Name: {{bill_data.details.name}}</li>
+										<li class="grey-text">Due Date: {{bill_data.details.duedate}}</li>
+									</ul>
+								</div>
 							</div>
 							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
@@ -802,14 +800,14 @@ left:5%;
 									<label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 								</p>
 							</div> -->
-							<div class="input-field col s12 m12 margin-btm no-padding">
+							<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 								<p class="inline-block margin-right fast-forwad relative">
 									<input type="checkbox" class="filled-in" id="instant-recharge3"  name="payment_type" value="wallet" />
-									<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+									
 									<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 										<label class="label-txt">Instant payment from your wallet </label>
 								</p>
-							</div> 
+							</div>  -->
 
 							<div class="col s12 m12 continue no-padding orange">
 								<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
@@ -840,14 +838,14 @@ left:5%;
 							<input placeholder="Enter Amount" name="amount" type="number" pattern="[0-9]+" class="validate no-margin"  formControlName="amount">
 							<span class="red-text" *ngIf="!cablegroup.controls['amount'].valid && cablegroup.controls['amount'].touched">Enter a Valid Amount</span>
 						</div>
-						<div class="input-field col s12 m12 margin-btm no-padding">
+						<!-- <div class="input-field col s12 m12 margin-btm no-padding">
 							<p class="inline-block margin-right fast-forwad relative">
 								<input type="checkbox" class="filled-in" id="instant-recharge"  name="payment_type" value="wallet" />
-								<!-- <label for="instant-recharge" class="orange-text"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Recharge</span></label>    				 -->
+								
 								<label for="instant-recharge" class="orange-text mt-bt-20"><span class="fast font-size-change1-5"><i class="material-icons">fast_forward</i> Instant Pay</span></label>    				
 									<label class="label-txt">Instant payment from your wallet </label>
 							</p>
-						</div> 
+						</div>  -->
 						<div class="col s12 m12 continue no-padding orange" style="margin-top:20px;">
 							<button type="submit" class="btn-flat white-text">Proceed to Pay</button>
 						</div>
@@ -896,8 +894,8 @@ left:5%;
 
 			<div class="col s12 m7 l9 plans-view-details">
 				<div class="card no-margin cst-border1">
-					<div class="card-content">
-						<div id="short-content"></div>
+					<div class="card-content" *ngIf="page_data">
+						<div id="short-content"  [innerHTML] = "page_data.short_description | sanitizeHtml"></div>
 					</div>	
 					<div class="card-content no-padding-top">
 						<div id="tab-2" [className]="(tab_2 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="plans && plans.length > 0">
@@ -908,9 +906,8 @@ left:5%;
 							<span class="font-size-change1 font600"><a href="javascript:" (click)="show_tab(1)">Promo Code</a></span>
 							<hr class="hr-promo">
 						</div>
-						
 						<div id="promo-content" [className]="(plans.length > 0) ? 'hide':''">
-							<ul class="promo-ul">
+							<ul class="promo-ul" *ngIf="promo_codes">
 								<li class="promo-li" *ngFor="let promo of promo_codes;">
 									<a href="#promo-code-modal" class="modal-trigger" (click)="promoselected(promo)">
 										<h4 class="font600 black-text">{{promo.unique_code}}</h4>
@@ -1010,14 +1007,15 @@ left:5%;
 		</div>
 	</div>
 </div>
-
+<!-- <div class="demo-content" [innerHTML]="this.todoservice.demo() | sanitizeHtml"></div> -->
 <section class="recharge-oprator">
 	<div class="container">
 		<div class="row">
 			<div class="col s12">
 				<div class="card">
 					<div class="card-content hide-mobile-ctr">
-						<div id="long-content"></div>
+						<div id="long-content" [innerHTML] = "(this.pageservice.page_data) ? this.pageservice.page_data.description : '' | sanitizeHtml"></div>
+						<!-- <div id="long-content" [inner]>{{this.content_data()}}</div> -->
 					</div>	
 				</div>
 			</div>

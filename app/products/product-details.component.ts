@@ -13,7 +13,7 @@ import { ProductService } from '../product.service';
 import { Package } from '../packages.entities.service';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
-import * as $ from 'jquery'; 
+// import * as $ from 'jquery'; 
 
 @Component({
   selector: 'app-product-details',
@@ -23,6 +23,7 @@ import * as $ from 'jquery';
 export class ProductDetailsComponent implements OnInit{
   static isBrowser = new BehaviorSubject<boolean>(null!);
   fta_price : number;
+  no_product :boolean = false;
   hide : boolean = true;
   region : any;
   fta_title : string;
@@ -234,13 +235,13 @@ export class ProductDetailsComponent implements OnInit{
     this.kit = 0;
     this.multienable = false;
     if(1 == 1)
-      {
-        this.route.routeReuseStrategy.shouldReuseRoute = function(){
-          return false;
-        }
-      this.route.navigated = false;
-      this.route.navigate(['/product/'+url]);
-      } 
+    {
+      this.route.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+    }
+    this.route.navigated = false;
+    this.route.navigate(['/product/'+url]);
+    } 
   }  
 
   filter_channel_subpack()
@@ -444,6 +445,12 @@ export class ProductDetailsComponent implements OnInit{
 		  .subscribe(
 			data => 
 			{
+        if(data.status == false)
+        {
+          this.spinner.hide();
+          this.no_product = true;
+          return;
+        }
         data.PRODUCTDATA.channel_packages = data.PRODUCTDATA.channel_packages.replace(/"/g, '\'');
         this.product_features = data.specification;
         this.spinner.hide();
@@ -464,7 +471,17 @@ export class ProductDetailsComponent implements OnInit{
         {
           let user_cashback = this.check_cashback(data.cashback);
           //console.log(user_cashback);
-          this.product.partnerwalletamount = user_cashback[0].amount;
+          if(this.todoservice.get_user_type() == 1)
+          {
+            if(user_cashback[0].user_id > 2)
+              this.product.partnerwalletamount = user_cashback[0].amount;
+            else
+              this.product.partnerwalletamount = data.PRODUCTDATA.user_cashback_wallet; 
+          }
+          else
+          {
+            this.product.partnerwalletamount = user_cashback[0].amount;
+          }
         }
         else
         {
@@ -487,10 +504,10 @@ export class ProductDetailsComponent implements OnInit{
         }
         if(this.circles && this.todoservice.get_param('tracker') != 'circle_selected')
         {
-          setTimeout(()=>{    //<<<---    using ()=> syntax
-            if(isPlatformBrowser(this.platformId)) 
-              $('.religon-overlay').show();
-          }, 2000);
+          // setTimeout(()=>{    //<<<---    using ()=> syntax
+          //   if(isPlatformBrowser(this.platformId)) 
+          //     $('.religon-overlay').show();
+          // }, 2000);
 
           if(this.productservice.get_region())
           {

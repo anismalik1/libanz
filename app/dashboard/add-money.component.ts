@@ -1,16 +1,20 @@
-import { Component, OnInit ,ViewContainerRef,Renderer2,Inject} from '@angular/core';
+import { Component, OnInit ,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router ,ActivatedRoute} from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
-
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 @Component({
   selector: 'app-add-money',
   templateUrl: './add-money.component.html',
   styles: []
 })
 export class AddMoneyComponent implements OnInit{
+	static isBrowser = new BehaviorSubject<boolean>(null!);
 	public user = {phone:'loading',name:'loading'};
 	paybankaccount : string = '';
 	yourbankname : string = '';
@@ -20,14 +24,16 @@ export class AddMoneyComponent implements OnInit{
 	previousUrl!: string;
 	add_data : any = {proceed : 1,paymethod : 'FUND TRANSFER',send : 0};
 	add_amount! : number;
-	constructor( private toastr : ToastrManager,private _renderer2: Renderer2, 
+	constructor( private toastr : ToastrManager,private _renderer2: Renderer2,
+		private spinner : NgxSpinnerService, 
+		@Inject(PLATFORM_ID) private platformId: any ,
 		@Inject(DOCUMENT) private _document,private vrc: ViewContainerRef,
 		public todoservice : TodoService,private authservice : AuthService,
 		private router : Router,private route : ActivatedRoute) { 
-    
+			AddMoneyComponent.isBrowser.next(isPlatformBrowser(platformId));
   }
   ngOnInit() {
-		this.todoservice.back_icon_template('Add Money',this.todoservice.back())
+		this.todoservice.back_icon_template('Add Money',this.todoservice.back(1))
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -43,12 +49,13 @@ export class AddMoneyComponent implements OnInit{
 			if(this.order_id > 0)
 				this.fetch_addmoney_order();
 	 });
-		
+	 if(isPlatformBrowser(this.platformId)) 
+	 {
 		$(document).ready(function() {	
-        $('.filter-show').on('click',function(){
-            $('.filter-he').removeClass('hide');
-            $('.filter-he').toggle(500);
-        });
+			$('.filter-show').on('click',function(){
+					$('.filter-he').removeClass('hide');
+					$('.filter-he').toggle(500);
+			});
 			
 		// $('#paymethod').change(function(){
 			
@@ -63,26 +70,55 @@ export class AddMoneyComponent implements OnInit{
 		// 		$('.change-hide').show();
 		// 	}		
 		// });
-    });
-	let script = this._renderer2.createElement('script');
+		});
+		let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.text = `
 			$('select').material_select();
     `;
 		this._renderer2.appendChild(this._document.body, script);
+	 }	
   }
-	
+  hide_err()
+  {
+	$('#interval-error').text(""); 
+  }
 	proceed_to_add()
 	{
 		var amount = $("#enter-amount").val();
 		if(amount == "")
 		{
-			this.toastr.errorToastr("Enter Amount ",'Failed');
+			$('#interval-error').text("Enter Amount");
 			return;
 		}
-			
-		this.add_data.amount = amount;
-		this.add_data.proceed = 2;
+
+		if(amount > 25000)
+		{
+			$('#interval-error').text("Transfer limit is 25000 INR on single day.");
+			// this.toastr.errorToastr("",'Failed');
+			return;
+		}
+		this.spinner.show();
+		this.todoservice.fetch_addmoney_calculation({token:this.get_token(),amount : amount})
+		.subscribe( 
+		  data => 
+		  {
+			this.spinner.hide();
+			if(data.status == 'true')
+			{
+				this.add_data.amount = amount;
+				this.add_data.proceed = 2;
+			}
+			else
+			{
+				// this.toastr.errorToastr(,'Failed');
+				$('#interval-error').text(data.msg);
+				return;
+			}
+		  }
+	  	) 
+		
+		
 	}
 
 	select_method(method : string ,ele : any ,margin: number)

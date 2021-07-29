@@ -52,7 +52,7 @@ export class ForgotPasswordComponent implements OnInit{
   
   ngOnInit() {
     this.fetch_page_data();
-    this.todoservice.back_icon_template('Forget Password',this.todoservice.back())
+    this.todoservice.back_icon_template('Forget Password',this.todoservice.back(1))
   }
   
   process_to_reset(data,me)
@@ -78,14 +78,18 @@ export class ForgotPasswordComponent implements OnInit{
         {
           if(data.status == true)
           {
+            this.toast.successToastr("OTP Successfully Sent!");
             this.step = data.step;
-            if(this.step == 2)
-              this.watch_sms();
+            // if(this.step == 2)
+            //   this.watch_sms();
             this.tick_clock(60);
           }
           else
           {
-            this.toast.errorToastr(data.msg);
+            if(data.status == 'alert')
+            this.toast.errorToastr(data.message,'Alert',{showCloseButton : true,dismiss: 'click'});
+            else  
+              this.toast.errorToastr(data.msg);
           }
         }
       )  
@@ -163,6 +167,7 @@ export class ForgotPasswordComponent implements OnInit{
 
   resend_otp()
   {
+    this.step = 1;
     var data = {phone : this.phone};
     this.process_to_reset(data,this)
   }
@@ -181,7 +186,7 @@ export class ForgotPasswordComponent implements OnInit{
         {
           if(data.status == true)
           {
-            this.toast.successToastr(data.msg);
+            this.toast.successToastr(data.msg,'Success');
             this.back_to_login = true;
             this.router.navigate(['/proceed/login'], { queryParams: { reset: 'true' } });
           }

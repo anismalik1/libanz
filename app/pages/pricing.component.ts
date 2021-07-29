@@ -208,9 +208,9 @@ export class PricingComponent implements OnInit {
     setTimeout(()=>{    //<<<---    using ()=> syntax
       for(var i = 0;i < this.selected_plans.length;i++)
       {
-        $('#plan-rate-'+this.selected_plans[i].plan_code).text(this.selected_plans[i].price);
-        $('#plan-leads-'+this.selected_plans[i].plan_code).text('Number of leads '+this.selected_plans[i].leads_no);
-        $('#plan-days-'+this.selected_plans[i].plan_code).text('Valid for '+this.selected_plans[i].days+' days');
+        // $('#plan-rate-'+this.selected_plans[i].plan_code).text(this.selected_plans[i].price);
+        // $('#plan-leads-'+this.selected_plans[i].plan_code).text('Number of leads '+this.selected_plans[i].leads_no);
+        // $('#plan-days-'+this.selected_plans[i].plan_code).text('Valid for '+this.selected_plans[i].days+' days');
       }
       this.spinner.hide(); 
  }, 1000);

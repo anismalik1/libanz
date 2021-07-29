@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject,PLATFORM_ID } from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -6,6 +6,8 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router,ActivatedRoute } from '@angular/router'
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-complaint-box',
@@ -14,7 +16,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
   providers : [NgxSpinnerService]
 })
 export class ComplaintBoxComponent implements OnInit{
-
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   loop_info : boolean = false;
   complaints : any;
   complaint_info : any ;
@@ -27,9 +29,11 @@ export class ComplaintBoxComponent implements OnInit{
   recent_comments : any = [];
   searched_ticket : boolean = false;
   comment : boolean = false;
-  constructor( private _renderer2: Renderer2,private toastr : ToastrManager,private fb: FormBuilder,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { }
+  constructor( private _renderer2: Renderer2,@Inject(PLATFORM_ID) private platformId: any ,private toastr : ToastrManager,private fb: FormBuilder,  @Inject(DOCUMENT) private _document,private spinner : NgxSpinnerService,public todoservice : TodoService,private authservice : AuthService,private router : Router,private route: ActivatedRoute) { 
+    ComplaintBoxComponent.isBrowser.next(isPlatformBrowser(platformId));
+  }
   ngOnInit() {
-    this.todoservice.back_icon_template('Tickets',this.todoservice.back())
+    this.todoservice.back_icon_template('Tickets',this.todoservice.back(1))
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -54,13 +58,15 @@ export class ComplaintBoxComponent implements OnInit{
       else
         this.fetch_complaints(this.type,1);
     });
-    $(document).ready(function() {
+    if(isPlatformBrowser(this.platformId)) 
+    {
+      $(document).ready(function() {
         $('.filter-show').on('click',function(){
             $('.filter-he').removeClass('hide');
             $('.filter-he').toggle(500);
         });
     });
-    
+
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.text = `
@@ -70,6 +76,8 @@ export class ComplaintBoxComponent implements OnInit{
       });
     `;
     this._renderer2.appendChild(this._document.body, script);
+    }
+   
     this.complaintgroup = this.fb.group({
       'title' : [null,Validators.compose([Validators.required])]
      });

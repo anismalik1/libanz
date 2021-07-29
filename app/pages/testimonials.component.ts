@@ -1,6 +1,7 @@
 import { Component, OnInit,Renderer2 ,PLATFORM_ID,Inject} from '@angular/core';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { PagesService } from '../pages.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DOCUMENT } from "@angular/common";
@@ -24,6 +25,7 @@ export class TestimonialsComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any ,
     private _renderer2: Renderer2,private fb: FormBuilder,
     private authservice : AuthService,
+    public pageservice : PagesService,
     private toastr: ToastrManager,
      @Inject(DOCUMENT) private _document,
     ) { 
@@ -38,29 +40,11 @@ export class TestimonialsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.todoservice.back_icon_template('Testimonials',this.todoservice.back())
+    this.todoservice.back_icon_template('Testimonials',this.todoservice.back(1))
     this.fetch_testimonials();
     this.fetch_page_data();
-  }
-
-  fetch_testimonials()
-  {
-    this.todoservice.fetch_testimonials({})
-    .subscribe(
-      data => 
-      {
-        if(data.testimonials)
-        {
-          this.testimonials = data.testimonials
-          // this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
-          // this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
-          // this.title.setTitle(this.todoservice.get_page().metaTitle);
-          if(isPlatformBrowser(this.platformId)) 
-            this.init_script();
-        }
-        this.spinner.hide();  
-      }
-    )
+    if(isPlatformBrowser(this.platformId)) 
+      this.init_script();
   }
 
   init_script()
@@ -83,6 +67,28 @@ export class TestimonialsComponent implements OnInit {
       });`;
       this._renderer2.appendChild(this._document.body, script); 
   }
+  
+  fetch_testimonials()
+  {
+    this.todoservice.fetch_testimonials({})
+    .subscribe(
+      data => 
+      {
+        if(data.testimonials)
+        {
+          this.testimonials = data.testimonials
+          // this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
+          // this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
+          // this.title.setTitle(this.todoservice.get_page().metaTitle);
+          // if(isPlatformBrowser(this.platformId)) 
+          //   this.init_script();
+        }
+        this.spinner.hide();  
+      }
+    )
+  }
+
+ 
   
   decode_html(html)
   {

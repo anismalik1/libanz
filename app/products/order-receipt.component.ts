@@ -56,10 +56,6 @@ export class OrderReceiptComponent implements OnInit {
         this.display = 1;
         this.spinner.hide();
         this.todoservice.set_user_data(data.user);
-        if(data.order[0].referer == 'cart' && (data.order[0].now - data.order[0].order_date *1)/60 < 5)
-        {
-          this.clearcart();
-        }
       }
 		  ) 
   }

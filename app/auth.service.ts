@@ -1,5 +1,5 @@
 import { Injectable,Inject } from '@angular/core';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import 'rxjs/add/observable/of';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';

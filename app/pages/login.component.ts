@@ -7,18 +7,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { TodoService } from '../todo.service';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
-import {  CordovaService } from '../cordova.service';
+// import {  CordovaService } from '../cordova.service';
 import { Authparams } from '../authparams';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 declare var window : any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styles: [],
-  providers: [TodoService,User,AuthService,CordovaService]
+  providers: []
 })
 export class LoginComponent implements OnInit{
   static isBrowser = new BehaviorSubject<boolean>(null!);
@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit{
 constructor( public todoservice : TodoService,
   @Inject(PLATFORM_ID) private platformId: any ,
   private _renderer2: Renderer2,
-  private cordovaserve : CordovaService, 
    @Inject(DOCUMENT) private _document, 
   private toastr: ToastrManager,
   private authService : AuthService,
@@ -75,7 +74,7 @@ constructor( public todoservice : TodoService,
   
  }
 ngOnInit() {
-  this.todoservice.back_icon_template('Login',this.todoservice.back())
+  this.todoservice.back_icon_template('Login',this.todoservice.back(1))
   if(isPlatformBrowser(this.platformId))
     this.ini_list()
   if(this.todoservice.get_param('reset') && this.todoservice.get_param('reset') == 'true')
@@ -173,7 +172,7 @@ login_submit(login,me)
         if(typeof data.status != 'undefined' && data.status == true)
         {
           let user : any = data.user;
-          me.toastr.successToastr('You are logging in...', 'Success!');
+          me.toastr.successToastr('Successfully logged In!');
           me.authService.AccessToken = me.token_params.accessToken;
           me.authService.storage(data); 
           me.todoservice.set_user_data(user);
@@ -193,10 +192,7 @@ login_submit(login,me)
           }
           else
           {
-            if(login.device == 'android')
-              me.router.navigate(['/mhome']); 
-            else
-              me.router.navigate(['/']);
+            me.router.navigate(['/']);
           }
          
         }
@@ -205,12 +201,12 @@ login_submit(login,me)
           if(typeof data.step != 'undefined' &&  data.step == 'verify')
           {
             me.step = 2;
-            me.watch_sms();
+            // me.watch_sms();
           }
+          else if(data.status == 'alert')
+            me.toastr.errorToastr(data.message,'Alert',{showCloseButton : true,dismiss: 'click'});
           else
-          {
-            me.toastr.errorToastr(data.message, 'Oops!');
-          }
+            me.toastr.errorToastr(data.message,'Failed');
         }
         me.spinner.hide();
       }
@@ -229,7 +225,7 @@ watch_sms()
                     // Here you request server to send the SMS
                     return;
                 }
-                console.log(message);
+                // console.log(message);
                 var otp1 = substring(message,13, 14);
                   var otp2 = substring(message,14, 15);
                   var otp3 = substring(message,15, 16);
@@ -330,12 +326,15 @@ resend_otp()
 get_remember()
 {
   let data : any = this.authService.get_remember();
-  data = $.parseJSON(data);
-  if(data != null)
+  if(isPlatformBrowser(this.platformId))
   {
-    this.remember.rm = true; 
-    this.remember.ph = data.ph; 
-    this.remember.pw = data.pd; 
+    data = $.parseJSON(data);
+    if(data != null)
+    {
+      this.remember.rm = true; 
+      this.remember.ph = data.ph; 
+      this.remember.pw = data.pd; 
+    }
   }
 }
 

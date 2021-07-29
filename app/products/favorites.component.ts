@@ -41,7 +41,7 @@ export class FavoritesComponent implements OnInit {
       this.user_favourites();
   }
   ngOnInit() {
-    this.todoservice.back_icon_template('Favorite(s)',this.todoservice.back())
+    this.todoservice.back_icon_template('Favorite(s)',this.todoservice.back(1))
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');

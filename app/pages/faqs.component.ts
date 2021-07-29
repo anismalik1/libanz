@@ -4,6 +4,7 @@ import { DOCUMENT } from "@angular/common";
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
+import { PagesService } from '../pages.service';
 import { Observable} from 'rxjs';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,7 +12,7 @@ import { PaginationService } from 'ngx-pagination';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 @Component({
   selector: 'app-faqs',
   templateUrl: './faqs.component.html',
@@ -41,6 +42,7 @@ export class FaqsComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any ,
     private fb: FormBuilder,
     public todoservice: TodoService,
+    public pageservice : PagesService,
     private spinner : NgxSpinnerService,
     private toastr: ToastrManager,
     private vcr: ViewContainerRef,
@@ -66,7 +68,7 @@ export class FaqsComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.todoservice.back_icon_template('Frequent Ask Questions',this.todoservice.back())
+    this.todoservice.back_icon_template('Frequent Ask Questions',this.todoservice.back(1))
     if(this.todoservice.get_param('q'))
     {
       this.query_string = this.todoservice.get_param('q');
@@ -90,8 +92,9 @@ export class FaqsComponent implements OnInit {
     if(isPlatformBrowser(this.platformId))
     {
       this.init_script();
-      this.defaut_query();
+      // this.defaut_query();
     } 
+    this.spinner.hide();
   }
   unsatisfied(form)
   {
@@ -285,6 +288,7 @@ export class FaqsComponent implements OnInit {
       }
     ) 
   }
+
   defaut_query()
   {
     let data :any;

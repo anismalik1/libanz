@@ -455,6 +455,9 @@ float: right;
 </style>
 
 <app-header class="hide-on-mobile"></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+	</div>
 <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 <div class="fix-mb-top"></div>
 <section class="flash-deal">
@@ -462,19 +465,6 @@ float: right;
         <div class="row no-margin">
             <div class="col s12 m2">
              
-                <!-- <div class="card">
-              <div class="card-content user-content">
-                  <div class="user-image">
-                      <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
-                      <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
-			                <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
-                  </div>
-                 <div class="user-name">
-                      <span class="fix-welcome">Welcome,</span><br>
-                      <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
-                  </div>
-              </div>
-            </div> -->
                 <app-side-nav></app-side-nav>			    
            
             </div>
@@ -540,8 +530,9 @@ float: right;
                               </div> -->
                               <div class="row bk-fund" *ngIf="this.add_data.proceed == 1">
                                 <div class="input-field col s12 m12 ">
-                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin">
+                                  <input id="enter-amount" name="amount" ngModel type="number" class="validate no-margin" (keyup)="hide_err()">
                                   <label for="enter-amount" class="enter-amt"><span class="fa fa-inr"></span> &nbsp; Amount*</label>
+                                  <div class="red-text" id="interval-error"></div>
                                 </div>
                                 <div class="input-field col s12 m12">
                                     <button type="button" class="btn orange btn-large btn-full wid-100" (click)="proceed_to_add()" [disabled]="(this.add_data.send && this.add_data.send == 1)?true:false">Proceed To Add Money </button>
@@ -586,7 +577,7 @@ float: right;
                                             <label for="imps-1" class="black-text nttf-txt">Cash Deposit </label>
                                           </div>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                           <div class="uwa Online-box">
                                             <input type="radio" id="imps-3" name="payment_type" class="with-gap " value="Paytm" (change)="select_method('Paytm',$event,116)" />
                                             <label for="imps-3" class="black-text nttf-txt"> Paytm Payment </label>
@@ -597,7 +588,7 @@ float: right;
                                             <input type="radio" id="imps-4" name="payment_type" class="with-gap " value="Gateway" (change)="select_method('Gateway',$event,160)"/>
                                             <label for="imps-4" class="black-text nttf-txt"> Gateway</label>
                                           </div>
-                                        </li>
+                                        </li> -->
                                       </ul>
                                     </div>
                                   </div>

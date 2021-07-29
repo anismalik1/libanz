@@ -82,7 +82,7 @@
 							</div>
 							<div class="col s9 m5 margin-top">
 								<a href="javascript:" class="black-text-1">
-									<h4 class="font600" style="font-size: 13px;"><a [routerLink]="['/product/'+item.product.url]" [queryParams]= "{month : item.product.month_pack}" class="black-text">{{item.title}}</a></h4>
+									<h4 class="font600" style="font-size: 13px;"><a [routerLink]="['/product/'+item.product.url]" [queryParams]= "{month : item.product.month_pack}" class="blue-text">{{item.title}}</a></h4>
 									<div class="font-size-change1 black-text inline-block"><i class="icon-inr"></i><span>{{item.offer_price}}</span>&nbsp; <small><del class="grey-text"><i class="icon-inr"></i>{{item.price}}</del></small> <p class="no-margin green-text1 font-size-change inline-block">{{(item.price-item.offer_price)*100/item.price | number : '1.2-2'}}% Off</p></div>
 									<div class="clearfix"></div>
 

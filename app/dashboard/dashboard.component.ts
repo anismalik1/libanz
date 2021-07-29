@@ -1,4 +1,4 @@
-import { Component, OnInit,Renderer2,Inject } from '@angular/core';
+import { Component, OnInit,Renderer2,Inject,PLATFORM_ID } from '@angular/core';
 import { DOCUMENT } from "@angular/common";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -6,6 +6,8 @@ import { ExcelService } from '../export.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router,NavigationExtras } from '@angular/router';
 import * as moment from 'moment';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +15,7 @@ import * as moment from 'moment';
   styles: []
 })
 export class DashboardComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   recharge_obj : any ={total_orders : 0,total_sum : 0}; 
   products_obj : any ={total_orders : 0,total_sum : 0}; 
   registration_obj : any ={total_register : 0}; 
@@ -30,19 +33,26 @@ export class DashboardComponent implements OnInit{
   }
   selected: {start: moment.Moment, end: moment.Moment};
   constructor( private excelService: ExcelService, 
+    @Inject(PLATFORM_ID) private platformId: any ,
     private spinner : NgxSpinnerService, 
     public todoservice : TodoService,
     private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document, 
-    private authservice : AuthService,private router : Router) { }
+    private authservice : AuthService,private router : Router) { 
+      DashboardComponent.isBrowser.next(isPlatformBrowser(platformId));
+    }
   ngOnInit() {
-    this.todoservice.back_icon_template('Dashboard',this.todoservice.back())
-    $('#search').focus(function(){
+    this.todoservice.back_icon_template('Dashboard',this.todoservice.back(1))
+    if(isPlatformBrowser(this.platformId)) 
+    {
+      $('#search').focus(function(){
         $('.search-result').removeClass('hide');
       });
       $('#search').focusout(function(){
         $('.search-result').addClass('hide');
       });
+    }
+    
     
     if(!this.get_token())
     {
@@ -55,8 +65,10 @@ export class DashboardComponent implements OnInit{
       return;
     }
     this.spinner.show();
-    this.fetch_transactions(); 
-    this.recent_orders();  
+    if(isPlatformBrowser(this.platformId)) 
+      this.fetch_transactions(); 
+    if(isPlatformBrowser(this.platformId))   
+      this.recent_orders();  
   }
 
   balance_after(order)

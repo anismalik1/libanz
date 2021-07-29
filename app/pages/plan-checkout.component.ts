@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,PLATFORM_ID,Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -6,6 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Router } from '@angular/router'
 import { Route } from '@angular/compiler/src/core';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-plan-checkout',
@@ -13,14 +15,17 @@ import { Route } from '@angular/compiler/src/core';
   styles: []
 })
 export class PlanCheckoutComponent implements OnInit {
+  static isBrowser = new BehaviorSubject<boolean>(null!);
   checkoutgroup : FormGroup;
   selected_plan : any;
   selected_codes : any;
   step2 : boolean = false;
   plan : any;
   constructor(private fb : FormBuilder,private spinner: NgxSpinnerService,
+    @Inject(PLATFORM_ID) private platformId: any ,
     private router :Router, 
     private authservice : AuthService,public todoservice : TodoService,private toast : ToastrManager) {
+      PlanCheckoutComponent.isBrowser.next(isPlatformBrowser(platformId)); 
     this.checkoutgroup = fb.group({
       'name':[null,Validators.required],
       'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -140,8 +145,8 @@ export class PlanCheckoutComponent implements OnInit {
           if(data.red == 'exist')
           {
             this.toast.successToastr("This Phone Number Already exist. Please Login");
-            $('.logup.modal-trigger')[0].click(); 
-            $('#login #icon_prefix').val(this.checkoutgroup.controls['phone'].value)
+            // $('.logup.modal-trigger')[0].click(); 
+            // $('#login #icon_prefix').val(this.checkoutgroup.controls['phone'].value)
           }
           else
           {

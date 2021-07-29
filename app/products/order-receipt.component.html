@@ -52,7 +52,7 @@ overflow:hidden !important;
 			<div class="card no-margin">
 				<div class="card-content" *ngIf="orders">
 						<div class="col s12 no-padding center">	
-							<span *ngIf="orders[0].payment_status != 2" class="icon" style="background-color: green;
+							<span *ngIf="orders[0].payment_status != 2 && orders[0].status != 'Pending'" class="icon" style="background-color: green;
 								color: #fff;
 								padding: 5px;
 								border-radius: 50%;
@@ -141,7 +141,7 @@ overflow:hidden !important;
 									</div>	
 								</div>								
 								<div class="center"><span class="card-title margin-top orange-text">Your Order Status is {{order.status}}</span></div>								
-								<div class="center"><span class="font-size-change1 margin-top green-text">*Congratulations You Will receive Rs.{{order.cashback * order.qty}} Cashback on your Libanz Wallet After Activation.</span></div>								
+								<div class="center" *ngIf="order.cashback > 0 && (order.status == 'Received' || order.status == 'Booked')"><span class="font-size-change1 margin-top green-text">*Congratulations You Will receive Rs.{{order.cashback * order.qty}} Cashback on your Libanz Wallet After Activation.</span></div>								
 								<!-- <div class="center" *ngIf="order.cashback > 0 && order.payment == 'wallet'"><span class="font-size-change1 margin-top green-text">*Congratulations You Have recieved {{order.cashback}} Cashback on your Libanz Wallet.</span></div>								 -->
 							</div> 
 						</div>

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject,PLATFORM_ID} from '@angular/core';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {isPlatformBrowser} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-topup-request',
@@ -10,15 +12,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styles: []
 })
 export class TopupRequestComponent implements OnInit{
+  static isBrowser = new BehaviorSubject<boolean>(null!);
+  
 	loop : boolean = false;
 	p: number = 1;
 	topup_counts : number = 0; 
   topups : any = {};
   status : 0;
 	loading: boolean;
-  constructor( public todoservice : TodoService,private authservice : AuthService,private router : Router,private spinner : NgxSpinnerService) { }
+  constructor( public todoservice : TodoService,@Inject(PLATFORM_ID) private platformId: any, private authservice : AuthService,private router : Router,private spinner : NgxSpinnerService) {
+    TopupRequestComponent.isBrowser.next(isPlatformBrowser(platformId));
+   }
   ngOnInit() {
-    this.todoservice.back_icon_template('Add Money Request',this.todoservice.back())
+    this.todoservice.back_icon_template('Add Money Request',this.todoservice.back(1))
     if(!this.get_token())
     {
       let full_url = this.router.url.split('/');
@@ -29,17 +35,21 @@ export class TopupRequestComponent implements OnInit{
       this.router.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
       return;
     } 
-	  this.fetch_topup_request(1);
-	  $('table').delegate('.select-all','change',function(){
-		  if($(this).is(":checked"))
-		  {
-			$('table [type="checkbox"]').prop('checked',true);  
-		  }	
-		  else
-		  {
-			  $('table [type="checkbox"]').prop('checked',false);
-		  }  
-	  });
+    this.fetch_topup_request(1);
+    if(isPlatformBrowser(this.platformId)) 
+    {
+      $('table').delegate('.select-all','change',function(){
+        if($(this).is(":checked"))
+        {
+        $('table [type="checkbox"]').prop('checked',true);  
+        }	
+        else
+        {
+          $('table [type="checkbox"]').prop('checked',false);
+        }  
+      });
+    }
+	  
 	this.spinner.show();
   }
 

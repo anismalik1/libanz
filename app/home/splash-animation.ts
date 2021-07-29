@@ -4,7 +4,6 @@ import {
     style,
     query,
     group,
-    animateChild,
     animate,
     keyframes,
   } from '@angular/animations';

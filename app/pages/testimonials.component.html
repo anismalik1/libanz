@@ -60,7 +60,7 @@ width: 35% !important;
 <section class="white">
     <div class="container">
     <div class="row"><!-- Editor Me itna yaha se dalna he -->
-    <div class="col s12 m6" *ngFor="let item of testimonials;let i = index;">
+    <div class="col s12 m6" *ngFor="let item of this.pageservice.testimonials;let i = index;">
     <div [className]="(i >= 6)? 'card testimonial-card hide': 'card testimonial-card'">
     <div class="card-content testimonial-text cst-icon">
     <blockquote [innerHTML]="decode_html(item.description).toString()" class="cst-icon1">
@@ -76,7 +76,7 @@ width: 35% !important;
     </div>
     
     <!-- End Here --></div>
-    <div class="see-more btn-new1 center" *ngIf="testimonials && testimonials.length > 6"><a class="btn cst-btn-plus" href="javascript:" (click)="see_more()">See More+</a></div>
+    <div class="see-more btn-new1 center" *ngIf="this.pageservice.testimonials && this.pageservice.testimonials.length > 6"><a class="btn cst-btn-plus" href="javascript:" (click)="see_more()">See More+</a></div>
     </div>
     </section>
     <section class="middle-part margin-top white no-padding">

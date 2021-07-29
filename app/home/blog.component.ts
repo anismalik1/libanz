@@ -2,6 +2,7 @@ import { Component, OnInit,Inject,PLATFORM_ID} from '@angular/core';
 import { Meta,Title } from "@angular/platform-browser";
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
+import { PagesService } from '../pages.service';
 import { User } from '../user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -28,6 +29,7 @@ export class BlogComponent implements OnInit {
     public todoservice : TodoService,
     private authservice : AuthService,
     private route : Router,
+    public pageservice : PagesService,
     private router : ActivatedRoute,
     private  meta : Meta,
     private title : Title, 
@@ -37,7 +39,7 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todoservice.back_icon_template('Blogs Details',this.todoservice.back())
+    this.todoservice.back_icon_template('Blogs',this.todoservice.back(1))
     this.page = '/blog/all';
     this.start = 0;
     this.fetch_page_data();
@@ -48,7 +50,7 @@ export class BlogComponent implements OnInit {
       $('.blog-tabs li a').removeClass('active'); 
       $('.blog-tabs ').find('#list-item-'+this.category).find('a').addClass('active');
     }
-      this.fetch_blogs(this.category);
+      this.fetch_blogs('all');
     });
   }
   fetch_blogs(category)
@@ -101,12 +103,9 @@ export class BlogComponent implements OnInit {
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
           // $('#page-content').html(this.todoservice.get_page().description);
-          if(isPlatformBrowser(this.platformId)) 
-          {
-            $('.hero').css('background','url('+this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
-            $('.hero').css('background-repeat','no-repeat');
-            window.scroll(0,0);
-          }
+          $('.hero').css('background','url('+this.todoservice.base_url+'accounts/assets/img/cms/'+data.PAGEDATA[0].image+')');
+          $('.hero').css('background-repeat','no-repeat');
+          window.scroll(0,0);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);   

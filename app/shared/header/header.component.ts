@@ -16,6 +16,7 @@ import { filter, pairwise } from 'rxjs/operators';
 import * as $ from 'jquery';
 import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 declare var window: any;
 
 @Component({
@@ -26,9 +27,18 @@ declare var window: any;
 export class HeaderComponent implements OnInit{
   static isBrowser = new BehaviorSubject<boolean>(null!);
   myControl = new FormControl();
+  referer : any;
   logingroup : FormGroup;
+  login : any = {step : 1};
+  signup : any = {step : 1};
+  reset : any = {step : 1};
+  _bonus_offer : any;
   signupgroup : FormGroup;
+  resetgroup : FormGroup;
+  checkphonegroup : FormGroup
+  proceedresetgroup : FormGroup;
   href : string;
+  action : number = 1;
   start : number = 0;
   more_display : boolean = true;
   signupdisabled : boolean= false; 
@@ -45,19 +55,18 @@ export class HeaderComponent implements OnInit{
     public phone1 : string;
     public password : string;
     public otp : number;
-    public step : number = 1; 
-    public signup : number = 0; 
     public otp1 : string;
     public otp2: string;
     public otp3: string;
     public otp4 : string;
     public tick : number = 0;
     private user_type : number;
-    private verify : number;
+    public verify : number;
     public signupverify : number = 0;
     public notifications : any = {};
     public notification_count : any = {count :0};
     public favourites : any;
+    private pin : any;
     public favourite_count : number;
     public offline_alert : boolean = false;
   options: any = [{ title: 'One',id:1},{title:  'Two',id:2},{title: 'Three',id:3}];
@@ -76,6 +85,7 @@ export class HeaderComponent implements OnInit{
     private vcr: ViewContainerRef,
     public router : Router,
     private fb: FormBuilder,
+    private spinner : NgxSpinnerService,
     private http : HttpClient,
     @Inject(PLATFORM_ID) private platformId: any
   ) 
@@ -96,19 +106,29 @@ export class HeaderComponent implements OnInit{
       }
       // this.productservice.cartItemsCount();
       this.logingroup = fb.group({
-        'phone' : [null,Validators.compose([Validators.required])],
-        'password' : [null,Validators.compose([Validators.required])],
+        'phone' : [null,Validators.compose([Validators.required,,Validators.pattern("[0-9]{10}")])],
+        'password' : [null,Validators.compose([Validators.required,Validators.minLength(5)])],
         'remember' : [null],
       });
-      this.signupgroup = fb.group({
-        'name':[null,Validators.required],
+      this.resetgroup = fb.group({
+        'password' : [null,Validators.compose([Validators.required,Validators.minLength(5)])],
+         'cpassword' : [null,Validators.compose([Validators.required,Validators.minLength(5)])]
+       });
+       this.proceedresetgroup = fb.group({
         'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+        'pin'   : [null]
+       });
+       this.checkphonegroup = fb.group({
+        'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+      }); 
+      this.signupgroup = fb.group({
+        'name':[null,Validators.required,Validators.maxLength(15)],
         'email' : [null,Validators.compose([
           Validators.required,
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
         'user_type':[null],
-        'password' : [null,Validators.compose([Validators.required])],
-        'cpassword' : [null,Validators.compose([Validators.required])],
+        'password' : [null,Validators.compose([Validators.required,Validators.minLength(5)])],
+        'cpassword' : [null,Validators.compose([Validators.required,Validators.minLength(5)])],
       });
       this.get_remember();
       this.createForm();
@@ -118,6 +138,196 @@ export class HeaderComponent implements OnInit{
       this.search_me(event.target.value);
     }
 
+    change_action(action)
+    {
+      if(action == 'login')
+        this.action = 1;
+      else if(action == 'register')
+        this.action = 2;
+      else if(action == 'reset')
+        this.action = 3  
+    }
+  process_to_reset(data,me)
+  {
+    if(!me)
+      me = this;
+    if(data.phone == '')
+    {
+      this.toastr.errorToastr("Enter Registered Number");
+      return;
+    }
+    this.phone = data.phone;
+    data.step =  this.reset.step;
+    if(data.pin)
+      this.pin = data.pin
+    if(document.URL.indexOf('android_asset') !== -1)
+    {
+      data.device = 'android';
+    }
+    this.spinner.show();
+      this.todoservice.proceed_to_reset(data)
+      .subscribe(
+        data => 
+        {
+          this.spinner.hide();
+          if(data.status == true)
+          {
+            this.toastr.successToastr(data.msg);
+            this.reset.step = data.step;
+            // if(this.step == 2)
+            //   this.watch_sms();
+            this.tick_clock(60);
+          }
+          else
+          {
+            if(data.status == 'alert')
+            this.toastr.errorToastr(data.message,'Alert',{showCloseButton : true,dismiss: 'click'});
+            else  
+              this.toastr.errorToastr(data.msg);
+          }
+        }
+      )  
+  }
+
+  reset_password(form)
+  {
+    form.phone = this.phone;
+    form.pin  = this.pin;
+    if(form.password != form.cpassword)
+    {
+      this.toastr.errorToastr('Confirm password must be same.');
+      return;
+    }
+    this.todoservice.reset_password(form)
+      .subscribe(
+        data => 
+        {
+          if(data.status == true)
+          {
+            this.toastr.successToastr(data.msg,'Success');
+            this.action = 1;
+            this.logingroup.setValue({phone : this.phone})
+            // this.back_to_login = true;
+            //this.router.navigate(['/proceed/login'], { queryParams: { reset: 'true' } });
+          }
+          else
+          {
+            this.toastr.errorToastr(data.msg);
+          }
+        }
+      )  
+  }
+
+  check_phone(form)
+  {
+    this.phone = form.phone;
+    this.spinner.show();
+    this.todoservice.check_phone(form)
+    .subscribe(
+      data => 
+      {
+        if(data.status == "success")
+        { 
+         this.signup.step = 2;
+         this.tick_clock(60);
+        }       
+        else
+        {
+          this.toastr.errorToastr(data.msg,"Failed");
+        }
+        this.spinner.hide();  
+      }
+    )
+  } 
+
+  verify_signup_user(data)
+  {
+    var me = this;
+
+      var otp1 = $('#header-signup #otp1').val();
+      var otp2 = $('#header-signup #otp2').val();
+      var otp3 = $('#header-signup #otp3').val();
+      var otp4 = $('#header-signup #otp4').val();  
+      data.otp = otp1.toString() + otp2.toString() + otp3.toString() + otp4.toString();
+    data.phone = me.phone;
+    me.verifydisabled = true;
+    this.spinner.show();
+    me.todoservice.verify_user(data)
+      .subscribe(
+        data => 
+        {
+          this.spinner.hide();
+          me.verifydisabled = false;
+          if(data.status == 'true')
+          {
+            me.toastr.successToastr(data.msg, 'Success');
+            
+            localStorage.removeItem('favourite');
+            localStorage.removeItem('cart');
+            this.signup.step = 3;
+          }
+          else
+          {
+            me.toastr.errorToastr(data.msg, 'Failed');
+            return;
+          }
+        }
+      ) 
+  }
+
+  signup_user(formdata)
+  {
+    if(formdata.user_type == null)
+      formdata.user_type = 1;
+    else
+      this.user_type = formdata.user_type ;
+    if(formdata.password != formdata.cpassword)
+    {
+      this.toastr.errorToastr("Password does not match with Confirm Password", 'Failed');
+        return;
+    }
+    formdata.phone = this.phone;
+    this.password = formdata.password;
+    this.signupdisabled = true; 
+    
+    if(this._bonus_offer && this._bonus_offer.valid)
+        formdata.bonus = '_bonus';
+    this.spinner.show();
+    this.todoservice.signup(formdata)
+      .subscribe(
+        data => 
+        {
+          this.spinner.hide();
+          if(data.status == 'success')
+          {
+            this.verify = 1;
+            let store = data.store;
+            this.authService.storage(store,this);
+            this.close_modal();
+            let url = window.location.pathname;
+            if(url == url)
+            {
+                this.router.routeReuseStrategy.shouldReuseRoute = function(){
+                  return false;
+                }
+              this.router.navigated = false;
+              this.router.navigate([url]);
+            } 
+            this.init_page();
+            // this.router.navigate(['/']);
+          }
+          else
+          {
+            this.toastr.errorToastr(data.msg, 'Failed');
+          }
+          this.signupdisabled = false; 
+        }
+      ) 
+  }
+  hide_signup_form()
+    {
+      this.signup.step = 1;
+    }
     ngOnInit()
     { 
       this.todoservice.createOnline$().subscribe(isOnline => 
@@ -127,7 +337,7 @@ export class HeaderComponent implements OnInit{
             if(this.offline_alert == true)
               return;
             this.offline_alert = true;  
-            alert("You Are Offine.");
+            this.toastr.infoToastr("No Internet Connection.");
             return ;
           }
         } 
@@ -343,7 +553,7 @@ export class HeaderComponent implements OnInit{
       login.device_id = window.device.uuid;
       login.device_registered_token = window.device_registered_token ;
     }
-    if(me.step == 2)
+    if(me.login.step == 2)
       {
         var otp1 = $('#header-login #otp1').val();
         var otp2 = $('#header-login #otp2').val();
@@ -368,51 +578,46 @@ export class HeaderComponent implements OnInit{
         me.toastr.errorToastr("Please Enter Valid Details", 'Failed');
         return;
       }
-      //me.spinner.show();
+      this.spinner.show();
       $('#login-controller').text('Please Wait...');
       me.authService.dologin(login)
-      .subscribe(
+      .subscribe( 
         data => 
         {
+          this.spinner.hide();
           $('#login-controller').text('LOGIN');
           me.token_params = data;
           if(typeof data.status != 'undefined' && data.status == true)
           {
             
-            $('.modal-close').click();
-            $('.modal-overlay').css('display','none');
+            this.close_modal(); 
             let user : any = data.user;
-            me.step = 1;
+            me.login.step = 1;
             me.authService.AccessToken = me.token_params.accessToken;
             me.authService.storage(data,me);
             me.todoservice.set_user_data(user);
-            if($('[name="next_action"]').length > 0)
+            if(window.location.pathname.includes("recharge/for"))
+              return;
+            
+            let url = window.location.pathname;
+            if(url == url)
             {
-              let url = window.location.pathname;
-              if(url == url)
-              {
-                me.router.routeReuseStrategy.shouldReuseRoute = function(){
-                  return false;
-               }
-              me.router.navigated = false;
-              me.router.navigate([this.href],{queryParams : {next_action : $('[name="next_action"]').val()}});
-              }
-            }
-            else
-            {
-              let url = window.location.pathname;
-              if(url == url)
-              {
-                me.router.routeReuseStrategy.shouldReuseRoute = function(){
+              me.router.routeReuseStrategy.shouldReuseRoute = function(){
                   return false;
               }
               me.router.navigated = false;
               me.router.navigate([this.href]);
-              }
-            }
-
+              this.init_page();
+            }  
           }
-          else  
+          else if(data.status == 'noexist')
+          {
+            this.action = 2;
+            this.phone = me.phone;
+            this.checkphonegroup.setValue({phone: this.phone});
+            this.toastr.errorToastr(data.message,'Failed');
+          } 
+          else
           {
             if(typeof data.step != 'undefined' &&  data.step == 'verify')
             {
@@ -422,18 +627,40 @@ export class HeaderComponent implements OnInit{
                   $('.otp-step #header-login').append('<input type="hidden" name="next_action" value="recharge_init">');
                 }, 2000);
               }
-              me.step = 2;
+              me.login.step = 2;
               me.tick_clock(60);
-              me.watch_sms('login');
+              // me.watch_sms('login');
             }
+            else if(data.status == 'alert')
+              me.toastr.errorToastr(data.message,'Alert',{showCloseButton : true,dismiss: 'click'});
             else
-            {
-              me.toastr.errorToastr(data.message, 'Oops!');
-            }
+              me.toastr.errorToastr(data.message,'Failed');
           }
          // this.spinner.hide();
         }
       )  
+  }
+
+  close_modal()
+  {
+    $('.login-modal-close')[0].click();
+    $('.modal-overlay').css('display','none');
+    if(window.location.pathname.includes("recharge/for") && $('[name="next_action"]').length > 0)
+    {
+      if($('.calc-amount-btn').length > 0)
+      {
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+          $('.calc-amount-btn')[0].click();
+        }, 500);
+      }
+      else
+      {
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+          $('button.proceed-to-step2')[0].click();
+        }, 500);
+      }
+      return;
+    } 
   }
 
   watch_sms(section)
@@ -555,27 +782,34 @@ export class HeaderComponent implements OnInit{
   }
   back_to_login()
   {
-    this.step = 1;
+    this.login.step = 1;
   }
 
   resend_otp(section)
   {
-    let data : any = {phone : this.phone, password : this.password};
+    let data : any;
+    if(section == 'register')
+      data = {phone : this.phone,step : section};
+    else
+      data = {phone : this.phone, password : this.password};
+    
     if(document.URL.indexOf('android_asset') !== -1)
     {
       data.device = 'android';
     }
+    this.spinner.show();
     this.todoservice.resend_otp(data)
       .subscribe(
         data => 
         {
+          this.spinner.hide();
           if(!jQuery.isEmptyObject(data))
           {
             if(data.status == true)
             {
               this.toastr.successToastr(data.message);
               this.tick_clock(60);
-              this.watch_sms(section);
+              // this.watch_sms(section);
             }
             else
             {
@@ -597,56 +831,43 @@ export class HeaderComponent implements OnInit{
     //   this.remember.pw = data.pd; 
     // }
   }
-
-  signup_form()
-  {
-    this.signup = 1;
-  }
   
-  hide_signup_form()
-  {
-    this.signup = 0;
-  }
-  hide_otp_form()
-  {
-    this.signupverify = 0;
-  }
-  signup_user(formdata)
-  {
-    if(formdata.user_type == null)
-      formdata.user_type = 1;
-    else
-      this.user_type = formdata.user_type ;  
-    if(formdata.password != formdata.cpassword)
-    {
-      this.toastr.errorToastr("Password does not match with Confirm Password", 'Failed');
-        return;
-    }
-    if(document.URL.indexOf('android_asset') !== -1)
-    {
-      formdata.device = 'android';
-    }
-    this.phone = formdata.phone;
-    this.password = formdata.password;
-    this.signupdisabled = true;
-    this.todoservice.signup(formdata)
-      .subscribe(
-        data => 
-        {
-          if(data.status == 'success')
-          {
-            this.signupverify = 1;
-            this.watch_sms('signup');
-          }
-          else
-          {
-            this.toastr.errorToastr(data.msg, 'Failed');
-          }
-          this.signupdisabled = false;
-        }
-      ) 
-  }
-  verify_user(data)
+  // signup_user(formdata)
+  // {
+  //   if(formdata.user_type == null)
+  //     formdata.user_type = 1;
+  //   else
+  //     this.user_type = formdata.user_type ;  
+  //   if(formdata.password != formdata.cpassword)
+  //   {
+  //     this.toastr.errorToastr("Password does not match with Confirm Password", 'Failed');
+  //       return;
+  //   }
+  //   if(document.URL.indexOf('android_asset') !== -1)
+  //   {
+  //     formdata.device = 'android';
+  //   }
+  //   this.phone = formdata.phone;
+  //   this.password = formdata.password;
+  //   this.signupdisabled = true;
+  //   this.todoservice.signup(formdata)
+  //     .subscribe(
+  //       data => 
+  //       {
+  //         if(data.status == 'success')
+  //         {
+  //           this.signupverify = 1;
+  //           this.watch_sms('signup');
+  //         }
+  //         else
+  //         {
+  //           this.toastr.errorToastr(data.msg, 'Failed');
+  //         }
+  //         this.signupdisabled = false;
+  //       }
+  //     ) 
+  // }
+  verify_user(data,me)
   {
     var otp1 = $('#header-login #otp1').val();
     var otp2 = $('#header-login #otp2').val();
@@ -665,7 +886,7 @@ export class HeaderComponent implements OnInit{
             let store = data.store;
             this.authService.storage(store,this);
             
-            $('.login-modal-close').click();
+            $('.login-modal-close')[0].click();
             localStorage.removeItem('favourite');
             setTimeout(()=>{    //<<<---    using ()=> syntax
               this.user_favourites();
@@ -1161,7 +1382,6 @@ export class HeaderComponent implements OnInit{
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'UA-176715754-1');
-  
     `;
     this._renderer2.appendChild(this._document.body, script);
   }

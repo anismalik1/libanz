@@ -7,22 +7,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/observable/of';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';
-import {AppComponent} from './app.component';
 import * as $ from 'jquery';
 
-class LocalStorage implements Storage {
-  length!: number | 0;
-  [name : string] : any;
-
-  clear(): void { }
-  getItem( key : string ): string | null { return null; }
-  key(index: number): string | null { return null; }
-  removeItem(key: string): void {}
-  setItem(key: string, value: string): void {}
-}
 
 @Injectable()
-export class ProductService implements Storage  {
+export class ProductService  {
 
   public server_url : string = "https://www.libanz.com/";
   public base_url : string = 'https://localhost:4200/';
@@ -39,7 +28,7 @@ export class ProductService implements Storage  {
   private storage: Storage;
   constructor(private http : HttpClient, private router : Router )
   {
-    this.storage = new LocalStorage();
+    // this.storage = new LocalStorage();
     // AppComponent.isBrowser.subscribe(isBrowser => {
     //   if (isBrowser) {
     //     this.storage = localStorage;
@@ -49,25 +38,25 @@ export class ProductService implements Storage  {
   } 
   length!: number;
 
-  clear(): void {
-    this.storage.clear();
-  }
+  // clear(): void {
+  //   this.storage.clear();
+  // }
 
-  getItem(key: string): string | null {
-    return this.storage.getItem(key);
-  }
+  // getItem(key: string): string | null {
+  //   return this.storage.getItem(key);
+  // }
 
-  key(index: number): string | null {
-    return this.storage.key(index);
-  }
+  // key(index: number): string | null {
+  //   return this.storage.key(index);
+  // }
 
-  removeItem(key: string): void {
-    return this.storage.removeItem(key);
-  }
+  // removeItem(key: string): void {
+  //   return this.storage.removeItem(key);
+  // }
 
-  setItem(key: string, value: string): void {
-    return this.storage.setItem(key, value);
-  }
+  // setItem(key: string, value: string): void {
+  //   return this.storage.setItem(key, value);
+  // }
   get_user_product_amount()
   {
     if(this.get_user() != null)
@@ -78,7 +67,7 @@ export class ProductService implements Storage  {
   get_user()
   {
     //return this.user.storage;
-    let data = JSON.parse(this.storage.getItem('app_token') || '{}');
+    let data = JSON.parse(localStorage.getItem('app_token') || '{}');
     if(data != null)
     {
       //console.log(this.user)
@@ -89,7 +78,7 @@ export class ProductService implements Storage  {
   is_mboss_enable()
   {
     let airtel_all : number = 0; 
-    let cart = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart = JSON.parse(localStorage.getItem('cart') || '{}');
     if(cart != null)
     {
       for(var i =0;i<Object.keys(cart).length; i++)
@@ -112,11 +101,11 @@ export class ProductService implements Storage  {
    {
     this.cart_items = [];
     let cod_count :number  = 0;
-    if(this.storage.getItem('cart') == null)
+    if(localStorage.getItem('cart') == null)
     {
       return;
     }
-    let cart = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart = JSON.parse(localStorage.getItem('cart') || '{}');
     if(cart != null)
     {
       for(var i =0;i<Object.keys(cart).length; i++)
@@ -162,7 +151,7 @@ export class ProductService implements Storage  {
 
   if_exist_in_cart(push_cart_id : number)
   {
-    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
     let index : number = -1;
     if(cart != null)
     {
@@ -186,7 +175,7 @@ export class ProductService implements Storage  {
 
   selectCartItemById(id : number)
   {
-    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
     let index : number = -1;
     if(cart != null)
     {
@@ -214,7 +203,7 @@ export class ProductService implements Storage  {
       product   : product_item,
       quantity  : 1
     }];
-    this.storage.setItem('purchase',JSON.stringify(item));
+    localStorage.setItem('purchase',JSON.stringify(item));
       // if(push_cart_id)
       // {
        
@@ -254,44 +243,44 @@ export class ProductService implements Storage  {
 
   get_favorites()
   {
-    if( this.storage.getItem('favourite') != null )
+    if( localStorage.getItem('favourite') != null )
     {
-      return JSON.parse(this.storage.getItem('favourite') || '{}');
+      return JSON.parse(localStorage.getItem('favourite') || '{}');
     }
     return null;
   }
 
   set_pincode(pincode : any)
   {
-    this.storage.setItem('pincode',JSON.stringify(pincode));
+    localStorage.setItem('pincode',JSON.stringify(pincode));
   }
 
   get_pincode()
   {
-    if( this.storage.getItem('pincode') != null )
+    if( localStorage.getItem('pincode') != null )
     {
-      return JSON.parse(this.storage.getItem('pincode') || '{}');
+      return JSON.parse(localStorage.getItem('pincode') || '{}');
     }
     return false;
   }
   set_region(region : number)
   {
-    this.storage.setItem('region',JSON.stringify(region));
+    localStorage.setItem('region',JSON.stringify(region));
   }
 
   get_region()
   {
-    if( this.storage.getItem('region') != null )
+    if( localStorage.getItem('region') != null )
     {
-      return JSON.parse(this.storage.getItem('region') || '{}');
+      return JSON.parse(localStorage.getItem('region') || '{}');
     }
     return 0;
   }
   PurchaseItems() 
   {
-    if(this.storage.getItem('purchase') != null)
+    if(localStorage.getItem('purchase') != null)
     {
-      let cart : any = JSON.parse(this.storage.getItem('purchase') || '{}');
+      let cart : any = JSON.parse(localStorage.getItem('purchase') || '{}');
       return cart;
     }
     return null;
@@ -299,9 +288,9 @@ export class ProductService implements Storage  {
 
   favorite_count(type : any)
   {
-    if(this.storage.getItem('favourite') != null)
+    if(localStorage.getItem('favourite') != null)
     {
-      let cart :any = JSON.parse(this.storage.getItem('favourite') || '{}');
+      let cart :any = JSON.parse(localStorage.getItem('favourite') || '{}');
       this.cartItems = cart.items.filter((item: { type: any; }) => item.type == type);;
       this.cartItems =  Object.keys(this.cartItems).length;
       return this.cartItems;
@@ -312,10 +301,10 @@ export class ProductService implements Storage  {
   exist_in_favourite(id : number) : boolean
   {
     //console.log(id);
-    if(this.storage.getItem('favourite') != null)
+    if(localStorage.getItem('favourite') != null)
     {
       let index = -1;
-      let cart :any = JSON.parse(this.storage.getItem('favourite') || '{}');
+      let cart :any = JSON.parse(localStorage.getItem('favourite') || '{}');
       for(var i =0;i< Object.keys(cart.items).length;i++)
       {
         let item = cart.items[i];
@@ -391,7 +380,7 @@ export class ProductService implements Storage  {
   }
 
   calculateCartAmountWithoutOffer() : number{
-    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
     let index : number = -1;
     let amount : number = 0;
     if(cart == null)
@@ -467,7 +456,7 @@ export class ProductService implements Storage  {
     let $all : any = this.get_favorites();
     var favitems = $all.items.filter((item: { type: number; }) => item.type == 2);
     var array : any = {items : favitems,count : favitems.length};
-    this.storage.setItem('favourite', JSON.stringify(array));
+    localStorage.setItem('favourite', JSON.stringify(array));
 
   }
 
@@ -477,7 +466,7 @@ export class ProductService implements Storage  {
       product   : this.product,
       quantity  : 1
     };
-    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
     let index : number = -1;
     
     for(var i =0;i< Object.keys(cart).length;i++)
@@ -493,7 +482,7 @@ export class ProductService implements Storage  {
     if(index == -1)
     {
       cart.push(JSON.stringify(item));
-      this.storage.setItem('cart',JSON.stringify(cart));
+      localStorage.setItem('cart',JSON.stringify(cart));
     }
     else
     {
@@ -513,7 +502,7 @@ export class ProductService implements Storage  {
       }
       $('#update_count'+id).text(item_2.quantity);
       cart[index] = JSON.stringify(item_2);
-      this.storage.setItem('cart',JSON.stringify(cart));
+      localStorage.setItem('cart',JSON.stringify(cart));
     }
     this.loadCart();
   }
@@ -529,7 +518,7 @@ export class ProductService implements Storage  {
     {
       return;
     }
-    let cart :any = JSON.parse(this.storage.getItem('cart') || '{}');
+    let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
     let index : number = -1;
     for(var i =0;i< Object.keys(cart).length;i++)
     {
@@ -540,7 +529,7 @@ export class ProductService implements Storage  {
         cart.splice(index, 1);
       }
     }
-    this.storage.setItem('cart',JSON.stringify(cart));
+    localStorage.setItem('cart',JSON.stringify(cart));
   }
 
   get_param(name : string)

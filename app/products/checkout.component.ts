@@ -226,10 +226,10 @@ update_user_favourites()
         else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'product')
         {
           this.product_items  =  this.productservice.PurchaseItems();
-          // var myitems : any =  data.favourites.items.filter(item => item.prod_id == this.todoservice.get_param('id')); 
-          // myitems[0].product.price = myitems[0].price;
-          // myitems[0].product.offer_price = myitems[0].offer_price;
-          // this.product_items.push({product: myitems[0].product,quantity : 1});
+          var myitems : any =  data.favourites.items.filter(item => item.prod_id == this.todoservice.get_param('id')); 
+          myitems[0].product.price = myitems[0].price;
+          myitems[0].product.offer_price = myitems[0].offer_price;
+          this.product_items.push({product: myitems[0].product,quantity : 1});
         }
       })
   }     
@@ -308,7 +308,7 @@ for(var i =0;i< cart.length;i++)
       product_amount = product_amount - Number(item.product.promos.discount);
     }
   } 
-  product_amount = product_amount * item.quantity;
+  product_amount = product_amount * item.quantity; 
   amount += product_amount;
 }
 return amount; 
@@ -959,7 +959,7 @@ app_version()
       });
     this.http.post(this.todoservice.base_url+'accounts/apis/home/app_version', { }, {headers: Headers_of_api}).subscribe(
         data => {
-            let response = $.parseJSON(data['_body'])
+            let response : any = data;
             if(response.version && response.alert == 'on')
             {
               if(document.URL.indexOf('android_asset') !== -1)

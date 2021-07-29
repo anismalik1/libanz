@@ -222,9 +222,9 @@ left: 25%;
                         </ul>
 
                         <div class="clearfix"></div> <br/>
-                        <!-- <ul class="back-icon desktop-hide">
+                        <ul class="back-icon desktop-hide">
                             <li><a class="btn btn-orange black-text cst-ibtn" href="javascript:" (click)="back_to_transfer()">Back </a></li>
-                        </ul> -->
+                        </ul>
                     </div>
                    
                     <div class="card-content" *ngIf="!order_id">
@@ -301,9 +301,11 @@ left: 25%;
                             <br/>
                             <span>we pay high fees when you add money to wallet , hence we charge 3% when you take this money to your bank account</span>
                             <br/>
-                            <i class="fa fa-info"></i> You can send upto 25000 with in a month.
+                            <i class="fa fa-info"></i> You can send upto 100000 with in a month.
                             <form [formGroup]="user_tobank" class="margin-top sec-7 " #userform = "ngForm" (ngSubmit)="user_tobank_submit(userform.value)">
                                 <input id="first_name" type="number" id="user-amount" placeholder="Enter Amount"  class="validate" formControlName="amount" (keyup)="change_amount($event)">
+                                <label for="enter-amount" class="enter-amt"><span class="fa fa-inr"></span> &nbsp; Amount*</label>
+                                <div class="red-text" id="interval-error"></div>
                                 <span class="error-rtext" *ngIf="this.user_data.amount < 500">Please enter a valid amount between <span class="fa fa-inr"></span> 500 &nbsp; and <span class="fa fa-inr"></span> 25,000  </span>
                                 <button type="submit" class="btn btn-large white-text value-sub orange w-100-btn resp-btn" id="fetch-form" [disabled]="(!this.user_data || this.user_data.amount < 500)?true:false"> Proceed </button>
                             </form>

@@ -90,7 +90,7 @@ export class PackageViewComponent implements OnInit {
       if(isPlatformBrowser(this.platformId))
         this.init_script();
     }, 2000);
-    this.todoservice.back_icon_template(this.package.category+' Packages',this.todoservice.back())
+    this.todoservice.back_icon_template(this.package.category+' Packages',this.todoservice.back(1))
   }
   goto_package()
   {

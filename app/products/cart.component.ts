@@ -56,7 +56,7 @@ export class CartComponent implements OnInit{
       else
         full_url[2] = '#'+full_url[2];
       this.route.navigate(['/proceed/login/ref/'+full_url[1]+full_url[2]]);
-      return false;
+      return;
     }
     if(isPlatformBrowser(this.platformId)) 
     {
@@ -65,9 +65,9 @@ export class CartComponent implements OnInit{
       });
     }
    
-    this.todoservice.back_icon_template('My Cart',this.todoservice.back())
+    this.todoservice.back_icon_template('My Cart',this.todoservice.back(1))
     this.user_favourites();
-    return true;
+    return;
   }
 
   get_token()

@@ -42,9 +42,9 @@
   <div class="container">
     <div class="row">
       <div class="col s12 m7">
-        <div class="card no-box-shadow" *ngIf="post">
+        <div class="card no-box-shadow" *ngIf="this.pageservice.blog_post">
 					<div class="card-image detial-images">
-						<img src="{{this.todoservice.base_url}}accounts/assets/img/cms/{{post[0].image}}" class="responsive-img" alt="{{post[0].title}}">
+						<img src="{{this.todoservice.base_url}}accounts/assets/img/cms/{{this.pageservice.blog_post[0].image}}" class="responsive-img" alt="{{this.pageservice.blog_post[0].title}}">
 					</div>
 					<div class="card-content">
 						<div class="author">
@@ -54,13 +54,13 @@
 							</p>
 							<p class="blog-time">
 								<span><i class="material-icons">access_time</i></span>
-								<time>{{ post[0].c_date | date}}</time>
+								<time>{{this.pageservice.blog_post[0].c_date | date}}</time>
 							</p>
 						</div>
 						<div class="blog-content">
-              <span class="blog-title">{{post[0].title}}</span>
+              <span class="blog-title">{{this.pageservice.blog_post[0].title}}</span>
               <div class="clearfix"></div>
-              <p [innerHTML]="post[0].description"></p>
+              <p [innerHTML]="this.pageservice.blog_post[0].description"></p>
 						</div>
           </div>
           <div class="card-action right-align">
@@ -72,7 +72,7 @@
             <!-- <a href="#"><img src="https://libanz.com/web-app/assets/images/facebook1.png" class="responsive-img"></a> -->
             <!-- <a href="#"><img src="https://libanz.com/web-app/assets/images/linkedin.png" class="responsive-img"></a> -->
             <a class="twitter-share-button"
-              href="https://twitter.com/intent/tweet?text={{this.todoservice.base_url}}blog-detail/{{post[0].url}}">
+              href="https://twitter.com/intent/tweet?text={{this.todoservice.base_url}}blog-detail/{{this.pageservice.blog_post[0].url}}">
              &nbsp; <img src="https://www.libanz.com/web-app/assets/images/twitter.png" class="responsive-img"></a>
               <a class="twitter-share-button" href="#"><img src="https://www.libanz.com/web-app/assets/images/instagram.png" class="responsive-img"></a>
               <a class="twitter-share-button" href="#"><img src="https://www.libanz.com/web-app/assets/images/whatsapp.png" class="responsive-img"></a>
@@ -137,7 +137,7 @@
           <h3>Recent Post</h3>
           <hr class="detail-hr">
           <ul>
-            <li *ngFor="let item of recent_posts;">
+            <li *ngFor="let item of this.pageservice.recent_posts;">
               <a [routerLink]="['/blog-detail/'+item.url]">
                 <div class="post-img">
                   <img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">

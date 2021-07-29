@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Router, RoutesRecognized} from '@angular/router';
+import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { fromEvent, merge ,Observer,of } from 'rxjs';
 import { map, filter, pairwise } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Meta ,Title} from '@angular/platform-browser';
+
 // import { Headers,Http } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Pages } from './pages';
@@ -34,7 +37,8 @@ export class TodoService {
   public login_urls : any = ['/book-order','/booked-order-list','/recharge-status','/order-status',
   '/manage-account','/transaction-history','/commission-structure','/topup-request','/add-money',
   '/complaints','/manage-retailer','/value-transfer','/dashboard','/checkout']; 
-  constructor(private http : HttpClient, private router : Router ,public user : User,private authservice : AuthService)
+  public page_data_urls : any = ['/mobile-postpaid','mobile'];
+  constructor(private http : HttpClient,private meta : Meta,private title : Title,private sanitizer : DomSanitizer, private router : Router ,public user : User,private authservice : AuthService)
   {
     // AppComponent.isBrowser.subscribe(isBrowser => {
     //   if (isBrowser) {
@@ -86,59 +90,72 @@ export class TodoService {
 
   back_icon_template($title : string, $url : string)
   {
-    // let a = document.createElement('div');
-    // a.setAttribute("class", "bredcum-inner");
+    let a = document.createElement('div');
+    a.setAttribute("class", "bredcum-inner");
 
-    // let b = document.createElement('div');
-    // b.setAttribute("class", "left bredcum-top");
+    let b = document.createElement('div');
+    b.setAttribute("class", "left bredcum-top");
     
-    // let c = document.createElement('a');
-    // c.setAttribute("class", "bredcum-title");
+    let c = document.createElement('a');
+    c.setAttribute("class", "bredcum-title");
     // c.id = "previous-event";
-    // c.text =  $title;
-    // b.append(c);
+    c.text =  $title;
+    b.appendChild(c);
     
-    // let b2 = document.createElement('div');
-    // b2.setAttribute("class", "right");
+    let b2 = document.createElement('div');
+    b2.setAttribute("class", "right");
+    b2.id =  "link-this";
+    window.me = this;
+    // b2.addEventListener('click', e => {
+    //   console.log(1);
+    //   window.me.router.navigate(['/product/cart']);
+    // });
+  
 
-    // let c2 = document.createElement('a');
-    // c2.setAttribute("class", "cart-strip-anchor");
-    // // c2.setAttribute("href", "/product/cart");
+    let c2 = document.createElement('a');
+    c2.id ="cart-strip-anchor";
+    // c2.setAttribute("href", "/product/cart");
     
-    // let d2 = document.createElement('img');
-    // d2.setAttribute("src", "https://www.libanz.com/web-app/assets/images/cart.png");
+    let d2 = document.createElement('img');
+    d2.setAttribute("src", 'https://www.libanz.com/web-app/assets/images/cart.png');
 
-    // let e2 = document.createElement('span');
-    // e2.setAttribute("class", "strip-circle");
-    // e2.id = "cart-count-mobile";
-    // e2.innerText = this.cartItemsCount();
+    let e2 = document.createElement('span');
+    e2.setAttribute("class", "strip-circle");
+    e2.id = "cart-count-mobile";
+    e2.innerText = this.cartItemsCount();
     
-    // b2.append(c2);
-    // c2.append(d2,e2);
-    // a.append(b,b2);
+    b2.appendChild(c2);
+    c2.appendChild(d2);
+    c2.appendChild(e2);
 
-    // this.back_link = a.outerHTML;
-    // window.me = this;
-    // setTimeout(function(){
-    //   $('.cst-back').delegate('.bredcum-title','click',function(){
-    //     if(window.location.href.indexOf('/amp/') != -1 || window.location.href.indexOf('step-checkout') != -1)
-    //       window.history.go(-2);
-    //     else
-    //       window.history.go(-1);  
-    //   });
+    a.appendChild(b);
+    a.appendChild(b2);
+
+    this.back_link = a.outerHTML;
+    // console.log(this.back_link);
+
+      setTimeout(function(){
       
-    //   $('.cst-back').delegate('.cart-strip-anchor','click',function(){
-    //     window.me.router.navigate(['/product/cart']);
-    //   });
-
-    // }, 2000);
-    // return this.back_link;
+        $('.cst-back').delegate('.bredcum-title','click',function(){
+          if(window.location.href.includes('/recharge/'))
+            window.me.router.navigate(['/']);
+          else
+            window.history.go(-1);  
+        });
+        
+        $('.cst-back').delegate('#cart-strip-anchor,.right a','click',function(){
+          window.me.router.navigate(['/product/cart']);
+        });
+  
+      }, 2000);
+      
+    return this.back_link;
   }
 
-  back() 
+  back(step) 
   {
     return 'previous';
-    return window.history.go(-1);
+    return window.history.go(-step);
   }
 
   addmoney_paymethod_template($method : number )
@@ -417,6 +434,7 @@ export class TodoService {
   get_user_email()
   {
     let data = JSON.parse(localStorage.getItem('app_token') || '{}');
+    // console.log(data)
     if(data != null)
     {
       return data.user.email; 
@@ -485,7 +503,7 @@ export class TodoService {
   private handleError(error: Response) { 
     //alert("Something Wrong.");
     console.error(error); 
-    $('.spinner-wrapper').hide();
+    // $('.spinner-wrapper').hide();
     return Observable.throw(error.json()); 
  }
   fetch_user_info(data : any)
@@ -587,11 +605,23 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/recharge/recharge_init'; 
     return this.send_post_request(data,url) ;
   }
+  check_operator(data : any)
+  {
+    let url = this.server_url+'accounts/apis/recharge/check_operator'; 
+    return this.send_post_request(data,url) ;
+  }
   recharge_handler(data : any)
   {
     let url = this.server_url+'accounts/apis/recharge/recharge_handler'; 
     return this.send_post_request(data,url) ; 
   }
+
+  fetch_dthorder_id(data : any)
+  {
+    let url = this.server_url+'accounts/apis/recharge/fetch_dthorder_id'; 
+    return this.send_post_request(data,url) ; 
+  }
+
   
   fetch_history(data : any)
   {
@@ -655,9 +685,15 @@ export class TodoService {
     let url = this.server_url+'accounts/apis/orders/checkout_items';
     return this.send_post_request(data,url) ;
   }
+  
   signup(data : any)
   {
-    let url = this.server_url+'accounts/apis/home/signup';
+    let url = this.server_url+'accounts/apis/home/update_signup_details';
+    return this.send_post_request(data,url) ; 
+  }
+  check_phone(data : any)
+  {
+    let url = this.server_url+'accounts/apis/home/check_phone';
     return this.send_post_request(data,url) ; 
   }
   verify_user(data : any)
@@ -781,7 +817,6 @@ export class TodoService {
   }
   fetch_page_data(data : any)
   {
-    
     let url = this.server_url+'accounts/apis/page/fetch_page_data';
     return this.send_post_request(data,url) ; 
   }
@@ -843,7 +878,6 @@ export class TodoService {
 
   fetch_blogs(data : any)
   {
-    
     let url = this.server_url+'accounts/apis/page/fetch_blogs';
     return this.send_post_request(data,url) ;
   }
@@ -1081,6 +1115,17 @@ export class TodoService {
   fetch_addmoney_order(data : any)
   {
     let url = this.server_url+'accounts/apis/orders/fetch_addmoney_order';
+    return this.send_post_request(data,url) ;
+  }
+
+  fetch_addmoney_calculation(data : any)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_addmoney_calculation';
+    return this.send_post_request(data,url) ;
+  }
+  fetch_wallet_to_bank_calculation(data : any)
+  {
+    let url = this.server_url+'accounts/apis/orders/fetch_wallet_to_bank_calculation';
     return this.send_post_request(data,url) ;
   }
   get_last_recharges(data : any)

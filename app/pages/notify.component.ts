@@ -7,7 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../auth.service';
 import { TodoService } from '../todo.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import * as $ from 'jquery'; 
+// import * as $ from 'jquery'; 
 @Component({
   selector: 'app-notify',
   templateUrl: './notify.component.html',
@@ -37,7 +37,7 @@ export class NotifyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.init();
+    // this.init();
     this.user_type = this.activatedroute.snapshot.params['id'];
     this.page = 'notification/user-notify/'+this.user_type;
     this.fetch_page_data();
@@ -57,8 +57,8 @@ export class NotifyComponent implements OnInit {
         if(data.PAGEDATA)
         {
           this.todoservice.set_page_data(data.PAGEDATA[0]);
-           $('#page-content').html(this.todoservice.get_page().description);
-           $('#page-shortcontent').html(this.todoservice.get_page().shortDescription);
+          //  $('#page-content').html(this.todoservice.get_page().description);
+          //  $('#page-shortcontent').html(this.todoservice.get_page().shortDescription);
           this.meta.addTag({ name: 'description', content: this.todoservice.get_page().metaDesc });
           this.meta.addTag({ name: 'keywords', content: this.todoservice.get_page().metaKeyword });
           this.title.setTitle(this.todoservice.get_page().metaTitle);
