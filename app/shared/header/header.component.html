@@ -92,11 +92,16 @@
     height: 45px;
     width: 45px;
 }
+.fix-icn1{
+
+	margin-top:5px !important;
+}
+
 	@media only screen and (max-width: 767px){
 		.mobile-footer-menu ul li a span {
 		display: block;
 		color: #4d4e4e;
-	}
+	} 
 	.fix-input-place label {
     margin-top: -5px;
     padding-left: 35px;
@@ -237,6 +242,83 @@ li.txt-fix-mb span a {
     height: calc(88% - 56px) !important;
     padding: 23px !important;
 }
+.red-text{    
+background-color: #fff3cd;
+    border-color: #ffeeba;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    text-align: left !important;
+}
+
+#login-a{
+
+padding-left: 15px;
+font-weight: bold;
+
+}
+.register-head{
+
+font-weight: bold;
+padding-bottom:15px;
+
+}
+.forget-head{
+
+font-weight: bold;
+padding-bottom:15px;
+
+}
+
+.fix1-txt {
+    padding-left: 30px !important;
+}
+.margin-top.fix-center {
+    padding-top: 30px;
+}
+/* .label-ltxt{
+	
+    color: #9e9e9e;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    font-size: 1rem;
+    cursor: text;
+    transition: transform .2s ease-out;
+    transform-origin: 0% 100%;
+    text-align: initial;
+    transform: translateY(7px) !important;
+    pointer-events: none;
+
+} */
+.fix-ptext{
+	position: relative;
+    top: 0;
+}
+
+.valid-txt {
+	background-color: #fff3cd !important;
+    border-color: #ffeeba;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    text-align: left !important;
+}
+
+#forgot-otp {
+    padding-left: 35px;
+}
+
+#proceed-submit {
+    margin-right: 25px;
+   
+}
+
 		</style>
 	<div class="spinner-wrapper">
 		<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
@@ -801,16 +883,16 @@ li.txt-fix-mb span a {
 				<div class="tabs-sign-up">
 					<section *ngIf="signup.step == 1">
 						<form [formGroup]="checkphonegroup" class="login-page-form" #checkphoneform = "ngForm" (ngSubmit)="check_phone(checkphoneform.value)" >
-							<h3>Register</h3>
-							<div class="input-field center">
-								<i class="material-icons prefix margin-top-cart2">phone</i>
-								<input id="phn_number" type="number" class="validate icon_prefix" formControlName="phone" autocomplete="off">
-								<label for="phn_number">Phone Number*</label>
+							<h3 class="register-head">Register</h3>
+							<div class="input-field center col s12 m12">
+								<i class="material-icons prefix margin-top-cart2 fix-icn1">phone</i>
+								<input id="phn_number" type="number" class="validate icon_prefix fix1-txt" formControlName="phone" autocomplete="off">
+								<label for="phn_number" class="label-ltxt" >Phone Number*</label>
 								<div class="center absolute" *ngIf="!checkphonegroup.controls['phone'].valid && checkphonegroup.controls['phone'].touched">
-									<span class="red-text"> Phone Number is not valid.</span>
+									<span class="red-text fix-ptext"> Phone Number is not valid.</span>
 								</div>
 							</div>
-							<div class="col s12  margin-top fix-center">
+							<div class="col s12 m12  margin-top fix-center">
 								<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!checkphonegroup.valid">Continue</button>
 								<p class="ask-login fix-center"> <a href="javascript:" (click)="change_action('login')">Already Have an Account ? Login Now </a> </p>
 								<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
@@ -865,15 +947,15 @@ li.txt-fix-mb span a {
 						<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
 							<h2>Update Details</h2>
 							<div class="row">
-								<div class="input-field col s12 col m12">
+								<div class="input-field col s12 m12">
 									<i class="material-icons prefix margin-top-cart2">person</i>
-									<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
+									<input id="name" type="text"  minlength = '3' class="validate" maxlength="20" formControlName="name" autocomplete="off">
 									<label for="name">Enter Name*</label>
 									<div class="center absolute" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
 										<span class="red-text ">*Enter Valid Name.</span>
 									</div>
 								</div>
-								<div class="input-field col s12 col m12">
+								<div class="input-field col s12 m12">
 									<i class="material-icons prefix margin-top-cart2">mail</i>
 									<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
 									<label for="enter_email">Enter Email</label>
@@ -882,7 +964,7 @@ li.txt-fix-mb span a {
 									</div>
 								
 								</div>
-								<div class="input-field col s12 col m12">
+								<div class="input-field col s12 m12">
 									<i class="material-icons prefix margin-top-cart2">lock</i>
 									<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
 									<label for="enter_passcode">Enter Password</label>
@@ -890,7 +972,7 @@ li.txt-fix-mb span a {
 										<span class="red-text">Password is Required.</span> 
 									</div>
 								</div>
-								<div class="input-field col s12 col m12">
+								<div class="input-field col s12 m12">
 									<i class="material-icons prefix margin-top-cart2">lock</i>
 									<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
 									<label for="confirm_passcode">Confirm Password</label>
@@ -898,7 +980,7 @@ li.txt-fix-mb span a {
 										<span class="red-text">Check Confirm Password.</span>
 									</div>
 								</div>
-								<div class="col s12 col m12">
+								<div class="col s12 m12">
 									<div class="term-txt">
 									<!-- <input id="terms-condi" formControlName="terms" type="checkbox" value="1"/> -->
 									<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
@@ -929,19 +1011,19 @@ li.txt-fix-mb span a {
 			<div class="col s12 m8 white"> 
 				<div class="tabs-sign-up" *ngIf="reset.step != 3">
 					<form class="login-page-form" id="proceed-reset-form" method="post" [formGroup]="proceedresetgroup" #proceedresetform = "ngForm" (ngSubmit)="process_to_reset(proceedresetform.value,this)">
-						<h3>Reset Password</h3>
+						<h3 class="forget-head">Reset Password</h3>
 						<div class="row no-margin">
-							<div class="input-field col s12 m12">
-								<i class="material-icons prefix grey-text margin-top-cart2">phone</i>
-								<input id="icon_prefix"  type="number" formControlName="phone">
+							<div class="input-field col s11 m11">
+								<i class="material-icons prefix grey-text margin-top-cart2 fix-icn1">phone</i>
+								<input id="icon_prefix "  type="number" formControlName="phone" class="fix1-txt">
 								<label for="icon_prefix">Enter Your Phone Number </label>
-								<div class="orange accent-4" *ngIf="!proceedresetgroup.controls['phone'].valid && proceedresetgroup.controls['phone'].touched">Enter a Valid Phone.</div> 
+								<div class="orange accent-4 valid-txt" *ngIf="!proceedresetgroup.controls['phone'].valid && proceedresetgroup.controls['phone'].touched">Enter a Valid Phone.</div> 
 							</div>
-							<div class="input-field col s12 m9 offset-m1" *ngIf="reset.step == 2">
-								<i class="material-icons prefix grey-text margin-top-cart2">lock</i>
+							<div class="input-field col s11 m11" *ngIf="reset.step == 2">
+								<i class="material-icons prefix grey-text margin-top-cart2 fix-icn1">lock</i>
 								<input id="forgot-otp" type="password" formControlName="pin" minlength="4" maxlength="4" autocomplete="off">
 								<label for="icon_prefix">Enter OTP* </label>
-								<div class="orange accent-4" *ngIf="!proceedresetgroup.controls['pin'].valid && proceedresetgroup.controls['pin'].touched">Enter a Valid OTP.</div> 
+								<div class="accent-4 red-text" *ngIf="!proceedresetgroup.controls['pin'].valid && proceedresetgroup.controls['pin'].touched">Enter a Valid OTP.</div> 
 							</div>
 							<div class="col s12 center margin-top">
 								<button type="Submit" id="proceed-submit" class="btn waves-effect waves-light orange" [disabled]="!proceedresetgroup.valid">Continue</button>
@@ -1054,7 +1136,3 @@ li.txt-fix-mb span a {
     </div>
   </div>
 	<!-- End Here -->
-	
-	
-		
-			

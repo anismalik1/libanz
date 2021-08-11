@@ -122,7 +122,7 @@ export class HeaderComponent implements OnInit{
         'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
       }); 
       this.signupgroup = fb.group({
-        'name':[null,Validators.required,Validators.maxLength(15)],
+        'name':[null,Validators.required],
         'email' : [null,Validators.compose([
           Validators.required,
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
