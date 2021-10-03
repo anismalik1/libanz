@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatSelectModule} from '@angular/material/select';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule} from '@angular/material/input';
+import { MatRadioModule} from '@angular/material/radio';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule ,ReactiveFormsModule,} from '@angular/forms';
@@ -45,6 +47,8 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    MatCheckboxModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,

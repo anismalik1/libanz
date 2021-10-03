@@ -77,23 +77,23 @@ export class ProductService  {
   }
   is_mboss_enable()
   {
-    let airtel_all : number = 0; 
-    let cart = JSON.parse(localStorage.getItem('cart') || '{}');
-    if(cart != null)
-    {
-      for(var i =0;i<Object.keys(cart).length; i++)
-      {
-        let item = JSON.parse(cart[i]);
-        if(item.product.title.toLowerCase().includes('airtel'))
-        {
-          airtel_all++;
-        }
-      }
-      if(Object.keys(cart).length == airtel_all)
-      {
-        return true;
-      }
-    } 
+    // let airtel_all : number = 0; 
+    // let cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    // if(cart != null)
+    // {
+    //   for(var i =0;i<Object.keys(cart).length; i++)
+    //   {
+    //     let item = JSON.parse(cart[i]);
+    //     if(item.product.title.toLowerCase().includes('airtel'))
+    //     {
+    //       airtel_all++;
+    //     }
+    //   }
+    //   if(Object.keys(cart).length == airtel_all)
+    //   {
+    //     return true;
+    //   }
+    // } 
     return false;
   }
 

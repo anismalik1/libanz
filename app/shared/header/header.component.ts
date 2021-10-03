@@ -116,7 +116,10 @@ export class HeaderComponent implements OnInit{
        });
        this.proceedresetgroup = fb.group({
         'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
-        'pin'   : [null]
+        'otp1'   : [null],
+        'otp2'   : [null],
+        'otp3'   : [null],
+        'otp4'   : [null]
        });
        this.checkphonegroup = fb.group({
         'phone' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -158,8 +161,12 @@ export class HeaderComponent implements OnInit{
     }
     this.phone = data.phone;
     data.step =  this.reset.step;
-    if(data.pin)
-      this.pin = data.pin
+    if(data.otp1)
+    {
+      data.pin = data.otp1.toString()+data.otp2.toString()+data.otp3.toString()+data.otp4.toString();
+      this.pin = data.pin;
+    }
+      
     if(document.URL.indexOf('android_asset') !== -1)
     {
       data.device = 'android';

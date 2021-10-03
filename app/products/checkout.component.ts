@@ -24,6 +24,7 @@ export class CheckoutComponent implements OnInit{
   addressformgroup : FormGroup;
   regaddressformgroup : FormGroup;
   rowaddressformgroup : FormGroup;
+  install_type : string = 'Installation by Libanz';
   phone_exist :boolean = false;
   addresses : any ;
   params : any = {};
@@ -88,6 +89,7 @@ constructor( public todoservice : TodoService,
     });
     this.rowaddressformgroup = fb.group({
       'row_address' : [null,Validators.compose([Validators.required])],
+      'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
       'state' : [null,Validators.compose([Validators.required])]
     });
    }
@@ -233,6 +235,11 @@ update_user_favourites()
         }
       })
   }     
+}
+
+changeinstall(i)
+{
+  this.install_type = i
 }
 
 itemCount()
@@ -840,14 +847,16 @@ checkout_items(type)
     if(this.product_items[i].product.pincode)
       arr['pincode'] = this.product_items[i].product.pincode;
     if(this.product_items[i].product.subscriber_id)
-      arr['subscriber_id'] = this.product_items[i].product.subscriber_id;      
+      arr['subscriber_id'] = this.product_items[i].product.subscriber_id;
+
     p_data.push(arr);  
   }
   let data : any = {token : this.get_token(),address_id: address_id, reg : this.reg_address, p_data : p_data,wallet_type : wallet_type ,cart_amount: this.calculateAmount()};
+  data.install_type = this.install_type;
   if($('#wallet-type [name="include_wallet"]:checked').length > 0)
     data.include_wallet = 1;
   if(this.region)
-    data.region = this.region;  
+    data.region = this.region;
   if(this.calculate_bonus() > 0)
     data.bonus = 1;
   this.disabled = true; 

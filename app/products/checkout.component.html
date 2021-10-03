@@ -147,15 +147,15 @@ span.icon-locate {
 								<div class="col s10 m12 ">
 										<div class="name margin-top-cart user-address">
 											<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
-											<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label>
-											<label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() != true">Add Address</label>
+											<!-- <label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label> -->
+											<label for="address-mboss" class="font600 black-text">Add Address</label>
 											
 											<input class="with-gap" name="client_address" type="radio" value="row-address"  id="address-row" (change)="change_addr_form('add-row-address')">
-											<label for="address-row" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">Paste Address</label>
-											<span *ngIf="this.productservice.is_mboss_enable()">
+											<label for="address-row" class="font600 black-text">Paste Address</label>
+											<!-- <span *ngIf="this.productservice.is_mboss_enable()">
 													<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
 													<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
-											</span>	
+											</span>	 -->
 											
 										</div>
 									<div class="add-new-address" id="add-new-address">
@@ -273,7 +273,14 @@ span.icon-locate {
 																	<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
 																		<span class="red-text ">*Enter Address.</span>
 																	</div>
-																	<span class="red-text">Please include phone number, pincode in address.</span>
+																	<span class="red-text">Please include pincode in address.</span>
+																</div>
+																<div class="input-field col s12 m6">
+																	<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+																	<label for="phn-no-reg">Phone Number*</label>
+																	<div class="center" *ngIf="!rowaddressformgroup.controls['contact'].valid && rowaddressformgroup.controls['contact'].touched">
+																		<span class="red-text ">*Enter a Valid Phone Number.</span>
+																	</div>
 																</div>
 																
 															</div>
@@ -362,9 +369,22 @@ span.icon-locate {
           		<div class="divider"></div>
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-								<span><button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button></span>
-								<!-- <span *ngIf="topaybutton"><button class="btn waves-effect waves-light orange right button-two" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span> -->
-							</div>
+					 	<div class="clearfix"></div> 
+					  	<div class="col m6">
+						<mat-form-field>
+							<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
+							<mat-select placeholder="Installation type" value="Installation by Libanz" (selectionChange)="changeinstall($event.value)" >
+								<mat-option value="Installation by Libanz">Installation by Libanz</mat-option>
+								<mat-option value="Self Installation" *ngIf="this.todoservice.get_user_type() == 2">Self Installation</mat-option>
+							</mat-select>
+						</mat-form-field>
+					  </div>	
+					<div class="col m6">
+						<span><button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button></span>
+					</div> 
+					
+					<!-- <span *ngIf="topaybutton"><button class="btn waves-effect waves-light orange right button-two" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span> -->
+				</div>
           	<div class="divider"></div>
         	</div>
 					<!-- End Here -->					
@@ -392,31 +412,31 @@ span.icon-locate {
         		<form class="margin-top">
           		<div class="row">
                 <div class="col s12 m10 offset-m1">
-								<div class="wallet-content left">
-									{{check_wallet_content()}}
-									<!-- <mat-checkbox ></mat-checkbox> -->
-									<span *ngIf="checkbox_text.checkbox ==  true">
-										<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
-									</span>
-									<span *ngIf="checkbox_text.radio == true">
-										<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
-									</span>
-									<span *ngIf="checkbox_text.no_input == true">
-										<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text font600"> LIBANZ Wallet <i class="red-text">*</i></span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span>
-									</span>
-								</div>	
-										<div class="clearfix"></div> 
-								</div>
+					<div class="wallet-content left">
+						{{check_wallet_content()}} 
+						<!-- <mat-checkbox ></mat-checkbox> -->
+						<span *ngIf="checkbox_text.checkbox ==  true">
+							<mat-checkbox (change)="pay_amount()" name="include_wallet" value="wallet" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+						</span>
+						<span *ngIf="checkbox_text.radio == true">
+							<mat-radio-button value="wallet" name="wallet_type" (change)="pay_amount()" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+						</span>
+						<span *ngIf="checkbox_text.no_input == true">
+							<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text font600"> LIBANZ Wallet <i class="red-text">*</i></span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span>
+						</span>
+					</div>	
+							<div class="clearfix"></div> 
+					</div>
               </div>
               <div class="row">
           			<div class="col s12 m10 offset-m1">
-									<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
+						<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
           			</div>
           		</div>
           		<!-- Credit Card -->
           		<div class="row">
           			<div class="col s12 m10 offset-m1">
-									<mat-radio-button value="card" name="wallet_type" id="card" (change)="cod_apply()">Cards & Netbanking</mat-radio-button>
+						<mat-radio-button value="card" name="wallet_type" id="card" (change)="cod_apply()">Cards & Netbanking</mat-radio-button>
           			</div>
 							</div>
 							<div class="row" *ngIf="this.productservice.cod_invalid == false">
@@ -625,26 +645,26 @@ span.icon-locate {
 																	</div>
 																	<!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
 																	<div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
-																			<div class="card-content center" >
-																					<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
-																					<h4 class="grey-text">{{item.title}}</h4>
-																					<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
-																					<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
-																					<br/>
-																					<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
-																					<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
-																			</div>
+																		<div class="card-content center" >
+																			<span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+																			<h4 class="grey-text">{{item.title}}</h4>
+																			<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+																			<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+																			<br/>
+																			<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+																			<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
+																		</div>
 																	</div>
 																	<div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
-																			<div class="card-content center" >
-																					<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
-																					<h4 class="grey-text">{{item.title}}</h4>
-																					<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
-																					<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
-																					<br/>
-																					<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
-																					<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
-																			</div>
+																		<div class="card-content center" >
+																			<span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+																			<h4 class="grey-text">{{item.title}}</h4>
+																			<span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+																			<span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+																			<br/>
+																			<span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
+																			<span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+																		</div>
 																	</div>
 																	</div>
 															</div>

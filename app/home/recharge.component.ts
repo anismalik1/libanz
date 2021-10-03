@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild ,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
+import { Component,AfterViewChecked, OnInit,ViewChild ,ViewContainerRef,Renderer2,Inject,PLATFORM_ID} from '@angular/core';
 import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
 import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
@@ -24,7 +24,7 @@ declare var window: any;
   templateUrl: './recharge.component.html',
   styles: []
 })
-export class RechargeComponent implements OnInit {
+export class RechargeComponent implements OnInit,AfterViewChecked {
   static isBrowser = new BehaviorSubject<boolean>(null!);
   myControl = new FormControl();
   @ViewChild('operator', {static: false}) moperator;                                                        
@@ -43,6 +43,7 @@ export class RechargeComponent implements OnInit {
   public recharge_ini : number = 1;
   public recharge_cart : any;
   promo_selected : number = 0;
+  checkbox_text : any;
   page_data : any;
   no_dues = 0;
   bill_amt : number;
@@ -97,6 +98,7 @@ export class RechargeComponent implements OnInit {
   last_recharges : any;
   dthpattern : string = '';
   get_options : any;
+  proceed_disable : boolean = false;
   services_icons : any = {
     broadband : 'data:image/png;base64,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',
     dth : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkBQwOKTnS6vkVAAAEhklEQVRo3sWZa2wUVRTHfy20dClIWUFSQ0LZSiKJChKRKqRRY6RQCYaokRCJxlBDTGglvsEEot80BhWfCGoCIUbw+UHBoBi1VayQkoJQU5RnldJaAkVLaa8f9szd2dl5pTN3PfNh9zzm/P/3zNznQHwyjC30cZaT7OYt7ufKGHOHklpU1jXIbpZSnD8CsxwE0tdRllHoV7b45CSnGEEPF7mMAm0dwwJq+IEz+asEJKjmOdptdTjPknwSSEsB82i0vRFP558CFLCUbk1itWm4aTxGHXcyKctawV5N4QGT8Cn+0UB7WcUY7RnN12K/wLXmCCxydMBO6nUHHMXPYm1huCkCZfyWMwp8xmjxTqRTbA3mapBgNktYzU8Magot+lHcLZbTlJqjYMl0dmoKX+jh7iux1JsnAAWsYkAAnxFbleit+SAA8KQAnmOCWKxX0UBfmMIGjtHHMTZQqa2fCOCLojeIvjJ84iQb2cVtAVF30Wt793tZKPYUfSgUJ2R6mioRn4aFL6UJhaKPBT5R19mGIGvAuUZ8n4vlBtG7UCjawhL4UKf0o/CxbnmzrsR28dWJ/rDo6empP9xCoC6rVV4UiqT93VQCV/G31CA94lXL3WsdZMuC4a+QVEoX2J1CuaPN20UvByAl2uvi3SR6iBXjej2xXM1xHwolMu61UwIkOIJCMUAJAIX8ikJxn0QvRqE4aFszech4eZr9zAAqfSl8J779vMR++f+9rZIrmGuLrmEF44Pb/6gkel90bwoZj/2qDYbwlz2S6GYXIDsFd/jno8KPlXH8gEdbLQp2y2H5d5h7o8JDjePddafgJJSiisnRwQHqJfGDOR47aEeIQWqI8oKkvsnF53zqBuDhTUl+vavXTiEivNeuTcnvRVdvO7dwIp6WehHold9xHv4MhWK2RamBF4Hj8jvF88525vCHprCQmMXqhut8o/wH6EhSJgPR0YBJYxK/awoxV+FHSXxjQJyxKliT0ZbASEMUkpwnva+fGRhr6EG8KkkbKfp/qpCUFaxiU4hoI1V4SA+4T4SItldhboj4UPKBprA+xL6+ktMSfSBE7lCSkI2JQvENU31jL+ddvS3fExeBTHdML1DfIOUaNYGn+EvHdTAtbPrAxTE7uMNhaeYjWmijCyglxUzmMN92JHuQWpklYpCRsinp4ZzL0jP3GuRlRsZXfpgvid+mnI22gxf3ayez4gQHeEVSLwJgnyd0F68FzhquEtS1agDoZxcAO5gOwFaOUEExYznDn7TRSCsDcbcdYLK071vRbxV9swkwN3lEAK1j5iLOolB0+n0BiFOs043M2tg68wmeIWOQYul6HbbRYrkQeDYfBG4XsPdstoqczbdBsXZHi7Osh1AoLpE0T6BVTjqyDxPWCa17TMNPFKAmh32e2N8xTWCZAK1x2BNcQKE4FWIiiyTbhEBVjudL8Rj89gHD5Yiu2+VA0VohPB4HUKaM1ay0fUhIMBuAHppz7kkyA4COrIXXL6zh36ETGUFPqPne7xpSRQo1gVGRqzku2u0NkWowQNPQPtf/B26nB+ucfYIjAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTA1LTEyVDE0OjQxOjU3KzAwOjAwvfqm3gAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0wNS0xMlQxNDo0MTo1NyswMDowMMynHmIAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC',
@@ -129,6 +131,7 @@ export class RechargeComponent implements OnInit {
     private vcr: ViewContainerRef,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
+
     RechargeComponent.isBrowser.next(isPlatformBrowser(platformId));
       this.url_name = this.activatedroute.snapshot.params['name'];
       
@@ -137,7 +140,8 @@ export class RechargeComponent implements OnInit {
       this.testgroup = this.fb.group({
         'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
       });
-     spinner.show()
+     spinner.show();
+     
     this.ini_script() ;
     if(this.get_token())
       this.get_last_recharges();
@@ -150,6 +154,95 @@ export class RechargeComponent implements OnInit {
       // }
     }
   } 
+  public ngAfterViewChecked(): void {
+    this.check_wallet_content();
+  }
+
+  check_wallet_content()
+  {
+    if(this.rechargeData == null)
+      return;
+    this.checkbox_text = {checkbox : false,radio : false,no_input : false}
+    if( this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())
+    {
+      if(this.todoservice.get_user_recharge_amount() >= this.options.apply_minimum_recharge && this.options.apply_minimum_recharge <= this.rechargeData.recharge_amount * 1)
+        this.checkbox_text.name = 'include_wallet';
+      else
+        this.checkbox_text.name = 'payment_type';  
+      this.checkbox_text.type = 'checkbox';
+      
+    }
+    else
+    {
+      this.checkbox_text.type =  'radio';
+      this.checkbox_text.name = 'payment_type';
+    }
+    if((this.todoservice.get_user_recharge_amount() > 0 && this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)
+    {
+      this.checkbox_text.disabled =  true;
+      if($('[name="payment_type"]:checked').length == 0)
+        this.proceed_disable = true;
+    }
+    else
+    {
+      this.checkbox_text.disabled =  false;
+    }
+    if(this.url_name == 'mobile' && this.options.apply_minimum_recharge <= this.rechargeData.recharge_amount * 1 && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+    {
+      if((this.rechargeData.recharge_amount * 1 +this.rechargeData.commission *1 + this.options.how_much_apply_to_recharge * 1) > this.todoservice.get_user_wallet_amount())
+        this.checkbox_text.checked =  false;
+      else
+        this.checkbox_text.checked =  true; 
+    }
+    else if((this.todoservice.get_user_recharge_amount() == 0 && (this.rechargeData.recharge_amount * 1 +this.rechargeData.commission *1) > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)
+    {
+      this.checkbox_text.checked =  false;
+    }
+    else
+    {
+      this.checkbox_text.checked =  true;
+    }
+  }
+
+  check_to_proceed()
+  {
+    if($('[name="payment_type"]:checked').length > 0)
+    {
+      this.proceed_disable = false;
+    }
+    else
+    {
+      this.proceed_disable = true;
+    }
+  }
+  
+  pay_amount()
+  {
+    var wallet_used = '';
+    if($('[name="include_wallet"]:checked').length > 0)
+      wallet_used = 'wallet';
+    var amount = 0; 
+    if((this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 > Math.floor(this.todoservice.get_user_wallet_amount())) && wallet_used == 'wallet')
+    {
+      amount = Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount()));
+      if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
+      {
+        amount = Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount())) - 1 * this.options.how_much_apply_to_recharge;
+      }  
+    }
+    else
+    {
+      amount = Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
+      if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge && 1 * this.options.apply_minimum_recharge <= this.rechargeData.recharge_amount * 1)
+        amount  = Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1) - 1*this.options.how_much_apply_to_recharge;
+    }
+    
+    if($('[name="include_wallet"]:checked').length > 0)
+      $("#recharge-proceed").text("Add "+amount+" Rs to pay");
+    else
+      $("#recharge-proceed").text("Proceed to pay "+amount);
+    return amount;
+  }
 
   fetch_dthorder_id(id)
   {
@@ -214,33 +307,7 @@ export class RechargeComponent implements OnInit {
     return this.rechargeData.recharge_amount * 1 + this.rechargeData.commission*1 ;
   }
 
-  pay_amount()
-  {
-    var wallet_used = '';
-    if($('[name="include_wallet"]:checked').length > 0)
-      wallet_used = 'wallet';
-    var amount = 0; 
-    if((this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 > Math.floor(this.todoservice.get_user_wallet_amount())) && wallet_used == 'wallet')
-    {
-      amount = Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount()));
-      if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
-      {
-        amount = Math.round(this.rechargeData.recharge_amount * 1 + Math.round(this.rechargeData.commission) * 1 - Math.floor(this.todoservice.get_user_wallet_amount())) - 1*this.options.how_much_apply_to_recharge;
-      }  
-    }
-    else
-    {
-      amount = Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1);
-      if(this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge)
-        amount  = Math.round(this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1) - 1*this.options.how_much_apply_to_recharge;
-    }
-    
-    if($('[name="include_wallet"]:checked').length > 0)
-      $("#recharge-proceed").text("Add "+amount+" Rs to pay");
-    else
-      $("#recharge-proceed").text("Proceed to pay "+amount);
-    return amount;
-  }
+  
 
   
   get_last_recharges()

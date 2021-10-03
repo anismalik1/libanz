@@ -277,28 +277,44 @@ left:5%;
 					<div class="card-content" id="recharge-container">
 					<div class="col s12 l3">
 						<img src="{{this.todoservice.base_url}}accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img margin-right icon-images" alt="airtel" width="50px" style="margin-bottom: -10px;">
-						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{this.rechargeData.recharge_amount * 1 + this.rechargeData.commission*1}}<a content="any text here" *ngIf="rechargeData.commission > 0" title="Inclusive of Tax Rs.{{rechargeData.commission}}"><i class="material-icons">info</i></a></span></h4>
+						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{this.rechargeData.recharge_amount * 1}}<span class="grey-text font-size-change" content="any text here" *ngIf="rechargeData.commission > 0" href="javascript:" title="Inclusive of Tax Rs.{{rechargeData.commission}}">({{this.rechargeData.commission*1}} Processing fees)</span></span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
-					</div>
+					</div> 
 				
 					
 					<div class="col s12 l9 margin-top">
 						<div class="">
-							<div class="col s12 m3 recharge-content-box" *ngIf="this.url_name == 'mobile' && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
+							<div class="col s12 m3 recharge-content-box" *ngIf="this.url_name == 'mobile' && this.options.apply_minimum_recharge <= this.rechargeData.recharge_amount * 1 && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
 								<label for="credit-card" class="black-text"> <span class="fa fa-gift cst-gift"></span> <span class="txt-bonus"> Bonus  Rs. </span> <span class="orange-text">{{this.options.how_much_apply_to_recharge}}</span> is Applied.</label>
 							</div> 
-							<div class="col m3 s12 recharge-content-box">
-								<input [type]="( this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount() )? 'checkbox' : 'radio'" class="with-gap" id="instant-recharge"  [name]="(this.todoservice.get_user_recharge_amount() == 0 && rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount())? 'include_wallet' : 'payment_type'" value="wallet" (change)="pay_amount()" [checked]="((this.todoservice.get_user_recharge_amount() == 0 && (this.rechargeData.recharge_amount * 1 +this.rechargeData.commission *1) > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1) ? false:true" [disabled]="((this.todoservice.get_user_recharge_amount() > 0 && this.rechargeData.recharge_amount * 1 + this.rechargeData.commission * 1 > this.todoservice.get_user_wallet_amount()) || this.todoservice.get_user_wallet_amount() <= 1)?true:false"/>
-								<label for="instant-recharge" class="black-text font600">LIBANZ Wallet </label><span class="grey-text font-size-change">&nbsp; <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}} </span>   				
+
+							<div class="col m3 s12 recharge-content-box" *ngIf="this.checkbox_text">
+								<div *ngIf="this.checkbox_text.disabled">
+									<i class="material-icons red-text" style="font-size: 22px;">error_outline</i>
+									<label for="instant-recharge" class="black-text font600">LIBANZ Wallet <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}} </label><span class="grey-text font-size-change">&nbsp;  </span> 
+								</div>
+								<div *ngIf="!this.checkbox_text.disabled">
+									
+									<span *ngIf="this.checkbox_text.type == 'radio'">
+										<mat-radio-button value="wallet" [name]="this.checkbox_text.name" (change)="pay_amount()" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span><i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}} </mat-radio-button>
+									</span>
+									<span *ngIf="this.checkbox_text.type == 'checkbox'">
+										<mat-checkbox value="wallet" [name]="this.checkbox_text.name" (change)="pay_amount()" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span><i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}} </mat-checkbox>
+									</span>
+									
+									<!-- <input [type]="this.checkbox_text.type" class="with-gap" id="instant-recharge"  [name]="this.checkbox_text.name" value="wallet" (change)="pay_amount()" [checked]="this.checkbox_text.checked"/></div> -->
+
+							</div>
 							</div> 
 							<div class="col s12 m3 recharge-content-box">
-								<input type="radio" class="with-gap" id="credit-card" name="payment_type" value="card" checked/> 
-								<label for="credit-card" class="black-text">Cards & Netbanking</label>
+								<mat-radio-button name="payment_type" id="credit-card" value="card" (change)="check_to_proceed()">Cards & Netbanking</mat-radio-button>
+								<!-- <input type="radio" class="with-gap" id="credit-card"   /> 
+								<label for="credit-card" class="black-text"></label> -->
 							</div> 
 							<div class="col s12 m3 recharge-content-box">
-								<input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm"/>
-								<label for="paytm" class="black-text"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet" style="width: 70%;
-									float: left;"></label>
+								<mat-radio-button id="paytm" name="payment_type" value="paytm" (change)="check_to_proceed()"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
+								<!-- <input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm" />
+								<label for="paytm" class="black-text"></label> -->
 							</div>
 							
 							<div class="col s12 m12 l3 no-proceed red-text center" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
@@ -316,13 +332,15 @@ left:5%;
 										<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
 									</p>	
 								</span>
-								<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()" id="recharge-proceed">Proceed to pay {{pay_amount()}}</button>
+								<button type="submit" class="btn orange btn-large btn-full" (click)="recharge_handle()" id="recharge-proceed" [disabled]="this.proceed_disable">Proceed to pay {{pay_amount()}}</button>
 							</div>
 							
 						</div>
 						<div class="clearfix"></div>	
 					</div>
 					<div class="clearfix"></div>
+					<span class="green-text" *ngIf="this.todoservice.get_user_type() == 1 && (this.url_name == 'mobile' || this.url_name == 'dth' || this.url_name == 'datacard' || this.url_name == 'broadband' || this.url_name == 'landline')">* Congratulations! You will get 1% cashback.</span>
+					<span class="green-text" *ngIf="(this.url_name == 'electricity' || this.url_name == 'gas' || this.url_name == 'water')"><i class="material-icons orange-text">info</i> No Processing fees with wallet Transactions.</span>
 				</div>	
 			</div>
 			</div>
@@ -352,7 +370,7 @@ left:5%;
 								<mat-autocomplete #auto="matAutocomplete">
 									<span *ngIf="filterdList">
 									<mat-option *ngFor="let option of filteredOptions" [value]="option.subcriber_id" (click)="selected_recharge(option)">{{option.subcriber_id}}
-									</mat-option>
+									</mat-option> 
 								</span>
 								</mat-autocomplete>
 							</mat-form-field>
@@ -464,11 +482,6 @@ left:5%;
 							<label for="width2" routerLink="/recharge/for/datacard-postpaid" >Postpaid</label>
 						</div>
 						<div class="input-field col s12 m12">
-					
-
-						
-						
-						
 							<input placeholder="Enter Data Card Number" formControlName="recharge_id" maxlength="10" minlength="10" id="mobile-no" type="text" class="validate no-margin" (keyup)="next_to('datacard','recharge_id',$event)">
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Enter Valid Data Card Number" id="mobid" *ngIf="!datacardgroup.controls['recharge_id'].valid && datacardgroup.controls['recharge_id'].touched"><i class="material-icons">close</i></span> 
 						</div>

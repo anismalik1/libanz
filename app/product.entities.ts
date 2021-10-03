@@ -31,6 +31,7 @@ export class Product {
     otf_pay_type! : number;
     pack_selected : any;
     cashback_data : any;
+    wallet_percent : number;
     promos : any;
     cashback! : number;
     multi! : Number;

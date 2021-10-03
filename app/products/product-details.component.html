@@ -644,7 +644,7 @@ font-size: 10px;
 							</li>
 							<li *ngIf="this.options && this.todoservice.get_user_product_amount() >= this.options.how_much_apply_to_product"><p class="inline-block green-text" >Avail Bonus of Amount <span class="green-text">Rs {{this.options.how_much_apply_to_product}}</span> On Minimum <span>Rs{{this.options.apply_minimum_product}}</span> Purchase.</p></li>
 							<li *ngIf="!this.get_token()"><p class="inline-block green-text" >*To avail more exciting cashback and coupons, just login and continue.</p></li>
-							<li *ngIf="product && product.cashback == 1"><p class="inline-block green-text" ><b>Special offer:</b> Avail extra 3% discount on using Libanz wallet while buying selected product.</p></li>
+							<li *ngIf="product && product.cashback == 1"><p class="inline-block green-text" ><b>Special offer:</b> Avail extra {{product.wallet_percent}}% discount using Libanz wallet on this product.</p></li>
 						</ul>
 					 </div>
 					
