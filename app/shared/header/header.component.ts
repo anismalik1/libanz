@@ -337,6 +337,11 @@ export class HeaderComponent implements OnInit{
     }
     ngOnInit()
     { 
+      setTimeout(()=>{    //<<<---    using ()=> syntax
+       
+        this.open_chatpoup();
+    }, 4000);
+
       this.todoservice.createOnline$().subscribe(isOnline => 
         {
           if(isOnline == false)
@@ -1416,5 +1421,33 @@ export class HeaderComponent implements OnInit{
       var a = false;
     return a;    
   }
+  
+  open_chatpoup()
+  {
+    if(isPlatformBrowser(this.platformId)) {
+      if($('#init-open_model-script'))
+      {
+        $('#init-open_model-script').remove();
+      }
+      let script = this._renderer2.createElement('script');
+      script.type = `text/javascript`;
+      script.id = `init-open_model-script`;
+      script.text = `
+        $(document).ready(function(){
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/616bbe79f7c0440a591e9cc4/1fi6e03bb';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+        }); 
+      `;
+      this._renderer2.appendChild(this._document.body, script);
+    }  
+  }
+  
 }
 

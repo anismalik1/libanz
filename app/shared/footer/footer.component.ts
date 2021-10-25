@@ -1,4 +1,5 @@
-import { Component, OnInit ,Input,ViewContainerRef,PLATFORM_ID,Inject} from '@angular/core';
+import { Component, OnInit ,Renderer2,Input,ViewContainerRef,PLATFORM_ID,Inject} from '@angular/core';
+
 import { TodoService } from '../../todo.service';
 import { AuthService } from '../../auth.service';
 import { FormControl } from '@angular/forms'; 
@@ -28,6 +29,8 @@ export class FooterComponent implements OnInit{
   $mini_footer : boolean = false;
   myControl = new FormControl();
   filteredOptions: Observable<object>;
+  private _document: any;
+  private _renderer2: any;
   constructor( public todoservice : TodoService,
   @Inject(PLATFORM_ID) private platformId: any ,
   private toast : ToastrManager,  
@@ -83,6 +86,9 @@ export class FooterComponent implements OnInit{
       ) 
    }
   ngOnInit() {
+
+    
+  
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -91,6 +97,9 @@ export class FooterComponent implements OnInit{
     {
       this.$mini_footer = true;
     } 
+
+  
+    
   }
   fetch_list(e)
   {
@@ -157,5 +166,6 @@ export class FooterComponent implements OnInit{
   {
 
   }
-}
 
+
+}

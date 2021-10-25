@@ -146,9 +146,14 @@ export class HomeComponent implements OnInit {
     {
       setTimeout(()=>{    //<<<---    using ()=> syntax
         if(isPlatformBrowser(this.platformId))
-          this.open_model()
+          this.open_model();
+          // this.open_enquiry_model();
       }, 4000);
     }
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.open_enquiry_model();
+      
+    }, 4000);
     this.check_local();
     this.app_version();
   }
@@ -354,6 +359,34 @@ export class HomeComponent implements OnInit {
       `;
       this._renderer2.appendChild(this._document.body, script);
     }  
+  }
+
+  
+
+
+  open_enquiry_model()
+  {
+    if(isPlatformBrowser(this.platformId)) {
+      if($('#init-enquiry-script'))
+      {
+        $('#init-enquiry-script').remove();
+      }
+      let script = this._renderer2.createElement('script');
+      script.type = `text/javascript`;
+      script.id = `init-enquiry-script`;
+      script.text = `
+        $(document).ready(function(){
+          $('.modal').modal();
+          $('#modal-enquiry').modal('open');
+        }); 
+      `;
+      this._renderer2.appendChild(this._document.body, script);
+    }  
+  }
+
+  get_data()
+  {
+    alert('hi');
   }
 
   fetch_home_products()

@@ -201,7 +201,7 @@ span.icon-locate {
 																			<span class="red-text ">*City is Required.</span>
 																		</div>
 																	</div>
-																	<div class="input-field col s12 m6 b-fix-top">
+																	<div class="input-field col s12 m12 b-fix-top">
 																		<mat-form-field>
 																			<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
 																				<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
@@ -259,7 +259,7 @@ span.icon-locate {
 										<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
 													<div class="modal-content no-padding">
 															<div class="row no-margin">
-																	<div class="input-field col s12 m6 b-fix-top">
+																	<div class="input-field col s12 m12 b-fix-top">
 																			<mat-form-field>
 																				<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
 																					<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" formControlName="state" >
@@ -267,7 +267,7 @@ span.icon-locate {
 																					</mat-select>
 																			</mat-form-field>
 																		</div>
-																<div class="input-field col s12 m6">
+																<div class="input-field col s12 m12">
 																	<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
 																	<label for="textarea1">Paste Address*</label>
 																	<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
@@ -275,6 +275,14 @@ span.icon-locate {
 																	</div>
 																	<span class="red-text">Please include pincode in address.</span>
 																</div>
+																<div class="input-field col s12 m6">
+																	<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+																	<label for="phn-no-reg">Pin Code *</label>
+																	<div class="center" *ngIf="!rowaddressformgroup.controls['contact'].valid && rowaddressformgroup.controls['contact'].touched">
+																		<span class="red-text ">*Enter a Valid Pincode </span>
+																	</div>
+																</div>
+
 																<div class="input-field col s12 m6">
 																	<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
 																	<label for="phn-no-reg">Phone Number*</label>
@@ -367,15 +375,51 @@ span.icon-locate {
           			</div>
           		</div>
           		<div class="divider"></div>
+				  <div class="follow-txt">
+
+					<div class="row">
+	
+					<div class="col s1"> <div class="green-circle"> </div> </div>
+					<div class="col s6">
+						<h5>  <strong> Need Follow up </strong> </h5>
+						<p> Need Follow up (meaning) <br>
+							It Means you need  Fast installation and Easy  installation Without Facing any unwanted Issue .
+						</p>
+					</div>
+	
+						
+						</div>
+	
+						<div class="row">
+	
+							<div class="col s1"> <div class="red-circle"> </div> </div>
+							<div class="col s6">
+								<h5>  <strong> Need No follow up </strong> </h5>
+								<p> 
+									It means You don't want any support help in  connection installation you, your self Follow up Service centre. If any delay or something happe
+								</p>
+							</div>
+			
+								
+								</div>
+	
+					</div>
+					
+
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-					 	<div class="clearfix"></div> 
+
+					 
+					 
+					  <div class="clearfix"></div> 
 					  	<div class="col m6">
 						<mat-form-field>
 							<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
 							<mat-select placeholder="Installation type" value="Installation by Libanz" (selectionChange)="changeinstall($event.value)" >
-								<mat-option value="Installation by Libanz">Installation by Libanz</mat-option>
-								<mat-option value="Self Installation" *ngIf="this.todoservice.get_user_type() == 2">Self Installation</mat-option>
+								<mat-option value="Installation by Libanz">Need Follow up
+								</mat-option>
+								<mat-option value="Self Installation" *ngIf="this.todoservice.get_user_type() == 2">Need No Follow up
+								</mat-option>
 							</mat-select>
 						</mat-form-field>
 					  </div>	
@@ -386,7 +430,13 @@ span.icon-locate {
 					<!-- <span *ngIf="topaybutton"><button class="btn waves-effect waves-light orange right button-two" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span> -->
 				</div>
           	<div class="divider"></div>
+
+			  
         	</div>
+
+			
+				
+
 					<!-- End Here -->					
         	<!-- Fourth Line -->
           <div class="card fourth-line">

@@ -69,6 +69,14 @@
 		  </div>
 		</div>
 	  </section>
+
+	  <!-- custome -->
+	  <section class="top-free-area">
+	  <div class="row list-sell no-margin">
+		<div class="col s12 m6 l3 center equalize5 border-right"><img alt="b2b-retailler" class="responsive-img" src="https://www.libanz.com/web-app/assets/images/recharge-icon/3.png"><div class="clearfix">&nbsp;</div><p class="font-size-change1 font600">Free Installation</p><div class="clearfix">&nbsp;</div><p class="font-size-change">On All Orders!</p><p>Now go HD, anywhere in India within 6 hours. That too absolutely free - because we have no charges for installation!</p></div><div class="col s12 m6 l3 center equalize5 border-right"><img alt="b2b-retailler" class="responsive-img" src="https://www.libanz.com/web-app/assets/images/recharge-icon/4.png"><div class="clearfix">&nbsp;</div><p class="font-size-change1 font600">Guarantee</p><div class="clearfix">&nbsp;</div><p class="font-size-change">10 Days Money Back*</p><p>Satisfaction Guaranteed or you can get your money back. Any orders that are cancelled within 10&nbsp;days will be refunded.</p></div><div class="col s12 m6 l3 center equalize5 border-right"><img alt="b2b-retailler" class="responsive-img" src="https://www.libanz.com/web-app/assets/images/recharge-icon/5.png"><div class="clearfix">&nbsp;</div><p class="font-size-change1 font600">Payment Secured</p><div class="clearfix">&nbsp;</div><p class="font-size-change">100% Payment Secured</p><p>Your payment is&nbsp;secured, no chance of any breach of information with HDFC Payment Gateway.</p></div><div class="col s12 m6 l3 center equalize5"><img alt="b2b-retailler" class="responsive-img" src="https://www.libanz.com/web-app/assets/images/recharge-icon/6.png"><div class="clearfix">&nbsp;</div><p class="font-size-change1 font600">Support</p><div class="clearfix">&nbsp;</div><p class="font-size-change">We are Available 24x7</p><p>For any Support. You can simply mail your queries/requirements to our help desk.</p><a href="mailto:support@libanz.com">Support@libanz.com</a></div>
+	</div>
+</section>
+	  	<!-- end -->
 	  <section class="flash-deal white margin-top-order sldr-txt">
 		<h2 class="padd border-bottom font600 heading-txt">Tata Sky Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/tata-sky']" target="_blank">View All</a></span></h2>
 		<div class="container-fluid">
@@ -181,6 +189,24 @@
 		</div>
 	</section>
 	<!-- end here -->
+
+		<!-- Reccomended For You -->
+		<section class="white no-padding margin-top-order">
+			<div class="container-fluid">
+				<div class="row no-margin">
+				<ul class="mob-retailer-slider">
+					<li *ngFor="let banner of filter_banners('user-type')">
+					<div class="no-margin">
+						<div class="col s12 m12 l12 no-padding">
+						<a [routerLink]="banner.imageurl.replace('https://www.libanz.com', '')" target="_blank"><img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}" alt="{{banner.imageAlt}}"></a>
+						</div>
+					</div>
+					</li>       
+				</ul>
+				</div>
+			</div>
+		</section>
+
 	<!-- Airtel Dish section -->
 	<section class="flash-deal white margin-top-order sldr-txt">
 		<h2 class="border-bottom font600 padd heading-txt">Airtel DTH Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/airtel']" target="_blank">View All</a></span></h2>
@@ -234,6 +260,8 @@
 			</div>
 	</section>
 	<!-- end here -->
+
+
 	<!-- Videocon D2H section -->
 	<section class="flash-deal white margin-top-order sldr-txt">
 		<h2 class="border-bottom font600 padd heading-txt">Videocon D2H Products <span class="absolute font-size-change view-category"><a class="btn orange" [routerLink]="['/product/listing/videocon']" target="_blank">View All</a></span></h2>
@@ -292,22 +320,12 @@
 		</div>
 	</section>
 	<!-- end here -->
-	<!-- Reccomended For You -->
-	<section class="white no-padding margin-top-order">
-		<div class="container-fluid">
-			<div class="row no-margin">
-			<ul class="mob-retailer-slider">
-				<li *ngFor="let banner of filter_banners('user-type')">
-				<div class="no-margin">
-					<div class="col s12 m12 l12 no-padding">
-					<a [routerLink]="banner.imageurl.replace('https://www.libanz.com', '')" target="_blank"><img src="{{this.todoservice.base_url}}accounts/assets/img/banner/{{banner.image}}" alt="{{banner.imageAlt}}"></a>
-					</div>
-				</div>
-				</li>       
-			</ul>
-			</div>
-		</div>
-	</section>
+
+
+
+
+	
+
 	<section class="flash-deal recomended-wrapper white margin-top-order sldr-txt" *ngIf="this.recommended">
 			<h2 class="border-bottom font600 padd heading-txt center">Largest Selling Products</h2>
 		<div class="container-fluid">
@@ -677,6 +695,15 @@
 			<div class="clearfix"></div>
 			<a href="javascript:" class="btn red white-text modal-close waves-effect waves-orange btn-flat" (click)="goto_market()">Update</a>
 			</div>
+			</div>
+
+			<div id="modal-enquiry" class="modal">
+				<div class="modal-content center white-text orange">
+				<!-- <img class="app-logo" src="./assets/images/white-logo.png" width="95"> -->
+				<h4>hello.</h4>
+				<div class="clearfix"></div>
+				<a href="javascript:" class="btn red white-text modal-close waves-effect waves-orange btn-flat" (click)="get_data()">Update</a>
+				</div>
 			</div>
 				
 		</div>

@@ -328,7 +328,7 @@ padding-bottom:15px;
 		<!-- mobile header start-->
 		<div class="mobile-mask"></div>
 		<header id="mobile-header" class="clearfix {{this.check_to_replace()}}">
-			<div class="mobile-header-left">
+			<div class="mobile-header-left" >
 				<ul>
 					<li class="mobile-bar" id="mobile-bar"><img src="{{this.todoservice.base_url}}web-app/assets/images/mobilr-nav.png" /> </li>
 					<li><img class="app-logo" width="95" src="./assets/images/white-logo.png" /></li>	
@@ -600,6 +600,8 @@ padding-bottom:15px;
 			</div>
 		</div>
 			
+
+		
 	<!--########################## mobile menu #############################-->
 	<header class="navigation header">
 		<div class="header-strip grey lighten-3">
@@ -633,18 +635,19 @@ padding-bottom:15px;
 						</ul>
 					</div>
 				<div class="strip-right-text right">
-					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Live Chat</a> |</span>
-					<span ><a class="grey-text" [routerLink]="['/p/accounts/merchant-on-libanz']" target="_blank"> Merchant on Libanz</a> |</span>
+					<span ><a href="javascript:" (click)="open_chat()" class="grey-text">Online Chat</a> |</span>
+					<span ><a class="grey-text" [routerLink]="['/p/merchant/partner-on-libanz']" target="_blank"> Partner on Libanz</a> |</span>
+					<!-- <span ><a class="grey-text" [routerLink]="['/p/accounts/Partner-on-libanz']" target="_blank"> Partner on Libanz</a> |</span> -->
 					<!-- <span> <a class="grey-text" [routerLink]="['/p/accounts/partner-on-libanz']" target="_blank">Partner on Mydth</a> |</span> -->
 					<span> <a class="grey-text" [routerLink]="['/reviews/testimonials']" target="_blank"> Testimonial</a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/help/faqs']" target="_blank"> FAQ </a> |</span>
 					<span> <a class="grey-text" [routerLink]="['/blog/all']" target="_blank"> Blog</a> |</span>
-					<span><a href="/merchant/kyc" class="grey-text"> KYC</a> |</span>
+					<!-- <span><a href="/Partner/kyc" class="grey-text"> KYC</a> |</span> -->
 					<span><a class="grey-text" [routerLink]="['/help/contact-us']" target="_blank"> Help</a> </span>
-					<!-- <span><a class="grey-text" [routerLink]="['/merchant/pricing']"> Pricing</a> </span> -->
+					<!-- <span><a class="grey-text" [routerLink]="['/Partner/pricing']"> Pricing</a> </span> -->
 					<span id="renew-section" *ngIf="this.todoservice.get_user_type() == 3 && this.todoservice.get_days_left() <= 14"> | {{this.todoservice.get_days_left()}} days left 
-						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() == '10000')" [routerLink] = "['/merchant/pricing']">Upgrade</a>
-						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() != '10000')" [routerLink] = "['/merchant/checkout']" [queryParams]="{plan : this.todoservice.get_active_pack()}">Renew</a>
+						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() == '10000')" [routerLink] = "['/Partner/pricing']">Upgrade</a>
+						<a class="orange white-text" *ngIf="(this.todoservice.get_active_pack() != '10000')" [routerLink] = "['/Partner/checkout']" [queryParams]="{plan : this.todoservice.get_active_pack()}">Renew</a>
 					</span>
 				</div>
 			</div>
@@ -653,7 +656,7 @@ padding-bottom:15px;
 			<div class="container">
 				<nav>
 				<div class="nav-wrapper" id="primary-nav">										
-					<a routerLink="/" href="javascript:" class="brand-logo">
+					<a routerLink="/" href="javascript:" class="brand-logo" >
 						<!-- <img src="{{this.todoservice.base_url}}accounts/assets/img/libanz-logo.png" width="150" class="responsive-img" alt="Libanz Logo">			 -->
 						<img src="./assets/images/logo.png" width="150" class="responsive-img" alt="Libanz Logo">			
 					</a>
@@ -987,7 +990,7 @@ padding-bottom:15px;
 									<div class="cleaarfix"></div>
 								</div>
 								</div>
-								<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 2 : 1"/>
+								<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'Partner')? 2 : 1"/>
 								<div class="col s12  margin-top fix-center">
 									<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
 									<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!signupgroup.valid">Create Account</button>
