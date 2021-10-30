@@ -10,11 +10,12 @@ import { TodoService } from '../todo.service';
 import { AuthService } from '../auth.service';
 import { MatSelectModule} from '@angular/material/select';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatStepperModule } from '@angular/material/stepper';
 import { ProductDetailsComponent } from './product-details.component';
 import { ProductsComponent } from './products.component';
 import { CheckoutComponent } from './checkout.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
     MatSelectModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatTooltipModule,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,

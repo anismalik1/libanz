@@ -7197,7 +7197,6 @@ ul.mad-list .mad-list-text{
     border-radius: 50%;
     background-color: #0ebd0e;
     position: relative;
-    top: 10px;
     left: 10px;
 }
 .red-circle{
@@ -7208,7 +7207,6 @@ ul.mad-list .mad-list-text{
 	border-radius:50%;
 	background-color: #f00;
 	position: relative;
-    top: 10px;
     left: 10px;
 }
 .follow-txt{

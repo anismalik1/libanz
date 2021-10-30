@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit{
   addressformgroup : FormGroup;
   regaddressformgroup : FormGroup;
   rowaddressformgroup : FormGroup;
-  install_type : string = 'Installation by Libanz';
+  install_type : string = 'Need Follow up';
   phone_exist :boolean = false;
   addresses : any ;
   params : any = {};
@@ -88,9 +88,11 @@ constructor( public todoservice : TodoService,
       'pincode' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{6}")])],
     });
     this.rowaddressformgroup = fb.group({
+      'state' : [null,Validators.compose([Validators.required])],
       'row_address' : [null,Validators.compose([Validators.required])],
+      'pincode' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{6}")])],
       'contact' : [null,Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
-      'state' : [null,Validators.compose([Validators.required])]
+      
     });
    }
 ngOnInit() {

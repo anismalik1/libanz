@@ -462,49 +462,47 @@ export class ProductService  {
 
   changeItemCount(id :number, op : string )
   {
-    var item : Item = {
-      product   : this.product,
-      quantity  : 1
-    };
-    let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
-    let index : number = -1;
-    
-    for(var i =0;i< Object.keys(cart).length;i++)
-    {
-      let item :Item = JSON.parse(cart[i]);
-      if(item.product.id == id)
+    //let cart :any = JSON.parse(localStorage.getItem('cart') || '{}');
+    var q = parseInt($('#update_count'+id).text());
+    if(op == 'minus' )
       {
-        index = i;
-        break;
-      }
-    }
-    
-    if(index == -1)
-    {
-      cart.push(JSON.stringify(item));
-      localStorage.setItem('cart',JSON.stringify(cart));
-    }
-    else
-    {
-      var item_2 = JSON.parse(cart[index]);
-      if(op == 'minus' && item_2.quantity > 1)
-      {
-        item_2.quantity -= 1;
+        if(q == 1)
+          return; 
+        q -= 1;
       }
       else if(op == 'add')
       {
-        if(item_2.quantity == 3)
+        if(q == 3)
         {
           //alert("You can not buy more that 3 Multi Box on same Contact Number.");
           return ;
         }  
-        item_2.quantity += 1;
+        q += 1;
       }
-      $('#update_count'+id).text(item_2.quantity);
-      cart[index] = JSON.stringify(item_2);
-      localStorage.setItem('cart',JSON.stringify(cart));
-    }
-    this.loadCart();
+      $('#update_count'+id).text(q);
+    // for(var i =0;i< Object.keys(cart).length;i++)
+    // {
+    //   let item :Item = JSON.parse(cart[i]);
+    //   if(item.product.id == id)
+    //   {
+    //     index = i;
+    //     break;
+    //   }
+    // }
+    
+    // if(index == -1)
+    // {
+    //   //cart.push(JSON.stringify(item));
+    //   //localStorage.setItem('cart',JSON.stringify(cart));
+    // }
+    // else
+    // {
+    //  // var item_2 = JSON.parse(cart[index]);
+      
+    //   //cart[index] = JSON.stringify(item_2);
+    //   //localStorage.setItem('cart',JSON.stringify(cart));
+    // }
+    // this.loadCart();
   }
 
 

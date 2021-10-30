@@ -6,6 +6,7 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule} from '@angular/material/input';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
@@ -47,6 +48,7 @@ import * as $ from 'jquery';
     NgxPaginationModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatTooltipModule,
     MatFormFieldModule,
     MatDatepickerModule,
     ReactiveFormsModule,

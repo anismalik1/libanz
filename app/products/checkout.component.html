@@ -273,12 +273,12 @@ span.icon-locate {
 																	<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
 																		<span class="red-text ">*Enter Address.</span>
 																	</div>
-																	<span class="red-text">Please include pincode in address.</span>
+																	<!-- <span class="red-text">Please include pincode in address.</span> -->
 																</div>
 																<div class="input-field col s12 m6">
-																	<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+																	<input id="phn-no-reg" name="pincode" type="text" class="validate" formControlName="pincode" autocomplete="off">
 																	<label for="phn-no-reg">Pin Code *</label>
-																	<div class="center" *ngIf="!rowaddressformgroup.controls['contact'].valid && rowaddressformgroup.controls['contact'].touched">
+																	<div class="center" *ngIf="!rowaddressformgroup.controls['pincode'].valid && rowaddressformgroup.controls['pincode'].touched">
 																		<span class="red-text ">*Enter a Valid Pincode </span>
 																	</div>
 																</div>
@@ -375,57 +375,40 @@ span.icon-locate {
           			</div>
           		</div>
           		<div class="divider"></div>
-				  <div class="follow-txt">
-
+				  <div class="follow-txt" *ngIf="this.todoservice.get_user_type() == 2">
+					<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
 					<div class="row">
-	
-					<div class="col s1"> <div class="green-circle"> </div> </div>
-					<div class="col s6">
-						<h5>  <strong> Need Follow up </strong> </h5>
-						<p> Need Follow up (meaning) <br>
-							It Means you need  Fast installation and Easy  installation Without Facing any unwanted Issue .
-						</p>
-					</div>
-	
-						
+						<div class="col s1 m1"> <div class="green-circle"> </div> </div>
+						<div class="col s5 m5">
+							<mat-radio-button class="example-radio-button" value="Need Follow up" checked (click)="changeinstall('Need Follow up')"> Need Follow up <i class="material-icons" matTooltip="you need  Fast installation and Easy  installation Without Facing any unwanted Issue">info</i> </mat-radio-button>
 						</div>
 	
-						<div class="row">
-	
-							<div class="col s1"> <div class="red-circle"> </div> </div>
-							<div class="col s6">
-								<h5>  <strong> Need No follow up </strong> </h5>
-								<p> 
-									It means You don't want any support help in  connection installation you, your self Follow up Service centre. If any delay or something happe
-								</p>
+							<div class="col s1 m1"> <div class="red-circle"> </div> </div>
+							<div class="col s5 m5">
+								<mat-radio-button class="example-radio-button" value="Need No Follow up" (click)="changeinstall('Need No Follow up')"> Need No Follow up <i class="material-icons" matTooltip="It means You don't want any support help in  connection installation you, your self Follow up Service centre. If any delay or something happen">info</i> </mat-radio-button>
 							</div>
-			
-								
-								</div>
-	
+						</div>
+					</mat-radio-group>
 					</div>
 					
 
           		<div class="col s12 margin-top-cart">
           			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-
-					 
-					 
-					  <div class="clearfix"></div> 
-					  	<div class="col m6">
+					  <button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button>  	
+					  <!-- <div class="col m6">
 						<mat-form-field>
 							<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
-							<mat-select placeholder="Installation type" value="Installation by Libanz" (selectionChange)="changeinstall($event.value)" >
+							<mat-select placeholder="Installation type" value="Installation by Libanz"  >
 								<mat-option value="Installation by Libanz">Need Follow up
 								</mat-option>
-								<mat-option value="Self Installation" *ngIf="this.todoservice.get_user_type() == 2">Need No Follow up
+								<mat-option value="Self Installation" >Need No Follow up
 								</mat-option>
 							</mat-select>
 						</mat-form-field>
-					  </div>	
-					<div class="col m6">
+					  </div>	 -->
+					<!-- <div class="col m12">
 						<span><button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button></span>
-					</div> 
+					</div>  -->
 					
 					<!-- <span *ngIf="topaybutton"><button class="btn waves-effect waves-light orange right button-two" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.productservice.cartItemsCount() > 0">CONTINUE</button></span> -->
 				</div>

@@ -11,6 +11,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_MOMENT_DATE_FORMATS,MatMomentDateModule } from "@angular/material-moment-adapter";
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -92,6 +93,7 @@ const routes: Routes = [
     NgxPaginationModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatTooltipModule, 
     MatFormFieldModule,
     MatDatepickerModule,
     MatMomentDateModule,

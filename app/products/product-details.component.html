@@ -312,7 +312,7 @@ font-size: 10px;
 											<p class="font-size-change1 margin-top" id="cashback-item"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}<i class="red-text"> *</i></p>								
 											<!-- <p class="font-size-change1 margin-top" id="cashback-item" *ngIf="this.todoservice.get_user_type() != 2"><i class="material-icons green-icon font-size-change1">loyalty</i> Cash Back&nbsp; <i class="icon-inr"></i>{{product.partnerwalletamount}}</p>								 -->
 											<p class="font-size-change1 margin-top" id="cashback-item" *ngIf="product.cashback == 1"><i class="material-icons green-icon font-size-change1">loyalty</i> <span class="green-text "> Buy product with Libanz
-												wallet & get extra 3% off.</span>  </p>								
+												wallet & get extra {{product.wallet_percent}}% off.</span>  </p>								
 											
 											<div class="descripetion-detail margin-top1">
 												<span class="font-size-change1 font600 grey-text">Description</span> 

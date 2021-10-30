@@ -434,7 +434,7 @@ export class TodoService {
   get_user_email()
   {
     let data = JSON.parse(localStorage.getItem('app_token') || '{}');
-    // console.log(data)
+    //console.log(data)
     if(data != null)
     {
       return data.user.email; 
