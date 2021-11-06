@@ -186,7 +186,6 @@ update_user_favourites()
       data => 
       {
         localStorage.setItem('favourite', JSON.stringify(data.favourites));
-        //console.log(data.favourites)
         if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'favorite')
         {
           this.params.tracker = 'favorite';
@@ -213,7 +212,7 @@ update_user_favourites()
         }
         else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'product')
         {
-          this.product_items  =  this.productservice.PurchaseItems(); 
+          this.product_items  =  this.productservice.fetch_single_product_data({token : this.get_token(),product_id : this.todoservice.get_param('id')}); 
         }
       })
   }     

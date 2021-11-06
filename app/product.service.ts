@@ -276,15 +276,6 @@ export class ProductService  {
     }
     return 0;
   }
-  PurchaseItems() 
-  {
-    if(localStorage.getItem('purchase') != null)
-    {
-      let cart : any = JSON.parse(localStorage.getItem('purchase') || '{}');
-      return cart;
-    }
-    return null;
-  }
 
   favorite_count(type : any)
   {
@@ -296,6 +287,19 @@ export class ProductService  {
       return this.cartItems;
     }
     return 0;
+  }
+
+  pack_selected()
+  {
+    if(localStorage.getItem('purchase') != null)
+    {
+      let cart :any = JSON.parse(localStorage.getItem('purchase') || '{}');
+      if(cart.length > 0)
+      {
+        return cart[0].product.pack_selected;
+      }
+      return null;
+    }
   }
 
   exist_in_favourite(id : number) : boolean
@@ -559,6 +563,14 @@ export class ProductService  {
     let url = this.server_url+'accounts/apis/product/fetch_product';
     return this.send_post_request(data,url) ;
   }
+
+  fetch_single_product_data(data : any)
+  {
+    this.request_action = '';
+    let url = this.server_url+'accounts/apis/product/single_product';
+    return this.send_post_request(data,url) ;
+  }
+
   fetch_channels(data : any)
   {
     this.request_action = '';

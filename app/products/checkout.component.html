@@ -375,7 +375,7 @@ span.icon-locate {
           			</div>
           		</div>
           		<div class="divider"></div>
-				  <div class="follow-txt" *ngIf="this.todoservice.get_user_type() == 2">
+				  <!-- <div class="follow-txt" *ngIf="this.todoservice.get_user_type() == 2">
 					<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
 					<div class="row">
 						<div class="col s1 m1"> <div class="green-circle"> </div> </div>
@@ -389,7 +389,7 @@ span.icon-locate {
 							</div>
 						</div>
 					</mat-radio-group>
-					</div>
+					</div> -->
 					
 
           		<div class="col s12 margin-top-cart">
@@ -493,22 +493,16 @@ span.icon-locate {
         	</div>
         	<!-- End Here -->
 				</div>
-				<div class="col s12 m4 order-summary" id="checkout-order-summary" *ngIf="this.product_items.length > 0"> 
+				<div class="col s12 m4 order-summary" id="checkout-order-summary" *ngIf="this.product_items && this.product_items.length > 0"> 
 					<div class="card">
             <div class="card-content black-text no-padding fix-inne-pad">
             	<span class="card-title inline-block">Order Summary</span>
 				<hr>
-				
 				<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
-					<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
+					<!-- <div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div> -->
 					<p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
-					<ng-template #kitblock>
-						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-						<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{(item.product.price - 1000) }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-					</ng-template>
-					<ng-template #nokitblock>
-						<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
-					</ng-template>
+					<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+
 					<br/>
 					<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
 						<p class="font600 left"> <span class="grey-text font500 pack-title" style="width:80%;">{{pack.title}} :</span></p>

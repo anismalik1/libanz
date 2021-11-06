@@ -42,7 +42,7 @@ export class CheckoutComponent implements OnInit{
   msg : string ;
   order_status : boolean;
   cod : boolean = false;
-  public product_items : any = [];
+  public product_items : any = {};
   circles : any;
   pack_id : Number;
   fta_pack : any;
@@ -229,16 +229,42 @@ update_user_favourites()
         }
         else if(this.todoservice.get_param('tracker') && this.todoservice.get_param('tracker') == 'product')
         {
-          this.product_items  =  this.productservice.PurchaseItems();
-          var myitems : any =  data.favourites.items.filter(item => item.prod_id == this.todoservice.get_param('id')); 
-          myitems[0].product.price = myitems[0].price;
-          myitems[0].product.offer_price = myitems[0].offer_price;
-          this.product_items.push({product: myitems[0].product,quantity : 1});
-        }
+           this.fetch_single_product_data({token : this.get_token(),product_id : this.todoservice.get_param('id')});
+          //console.log(this.product_items)
+          //var myitems : any =  data.favourites.items.filter(item => item.prod_id == this.todoservice.get_param('id')); 
+          //myitems[0].product.price = myitems[0].price;
+          //myitems[0].product.offer_price = myitems[0].offer_price;
+          //this.product_items.push({product: myitems[0].product,quantity : 1});
+        } 
       })
   }     
 }
 
+fetch_single_product_data(data)
+{
+  this.productservice.fetch_single_product_data(data)
+  .subscribe(
+    data => 
+    {
+      this.product_items = [data];
+      this.product_items[0].quantity = 1;
+      
+      var $pack = this.productservice.pack_selected();
+      this.product_items[0].product.pack_selected = $pack;
+      if(this.product_items[0].cashback)
+        this.product_items[0].product.partnerwalletamount = this.product_items[0].cashback[0].amount;
+      else
+      {
+        if(this.todoservice.get_user_type() == 2)
+          this.product_items[0].product.partnerwalletamount = this.product_items[0].product.partner_cashback_wallet;
+        else
+          this.product_items[0].product.partnerwalletamount = this.product_items[0].product.user_cashback_wallet;
+      }
+        
+      // console.log(this.product_items);
+    }
+  )
+}
 changeinstall(i)
 {
   this.install_type = i
