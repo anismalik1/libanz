@@ -53,6 +53,7 @@ export class CheckoutComponent implements OnInit{
   region : any;
   reg_address : number = 0; 
   tab_address : any;
+  promos : any;
   ControlFormGroup : FormGroup ;
   address : any;
   months : any;
@@ -260,6 +261,11 @@ fetch_single_product_data(data)
         else
           this.product_items[0].product.partnerwalletamount = this.product_items[0].product.user_cashback_wallet;
       }
+      if(data.PROMOS && data.PROMOS.length > 0)
+        {
+          this.promos = data.PROMOS[0];
+          this.product_items[0].product.promos = this.promos;
+        }
         
       // console.log(this.product_items);
     }
@@ -610,7 +616,6 @@ select_pack(pack)
     let amount : number = 0;
     if(!this.product)
       return 0;
-    //console.log(this.pack_selected)
     for(var i = 0;i < this.pack_selected.length;i++)
     {
       if(this.multienable)

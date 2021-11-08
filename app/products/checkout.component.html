@@ -375,7 +375,7 @@ span.icon-locate {
           			</div>
           		</div>
           		<div class="divider"></div>
-				  <!-- <div class="follow-txt" *ngIf="this.todoservice.get_user_type() == 2">
+				  <div class="follow-txt" *ngIf="this.todoservice.get_user_type() == 2">
 					<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
 					<div class="row">
 						<div class="col s1 m1"> <div class="green-circle"> </div> </div>
@@ -389,7 +389,7 @@ span.icon-locate {
 							</div>
 						</div>
 					</mat-radio-group>
-					</div> -->
+					</div>
 					
 
           		<div class="col s12 margin-top-cart">
@@ -475,7 +475,7 @@ span.icon-locate {
 							<div class="row" *ngIf="this.productservice.cod_invalid == false">
 								<div class="col s12 m10 offset-m1">
 									<span *ngIf="!this.productservice.check_cashon_delivery(this.product_items)">
-											<mat-radio-button value="cod" name="wallet_type" id="cod" (change)="cod_apply()"> Cash on Delivery / ( COD )</mat-radio-button>
+										<mat-radio-button value="cod" name="wallet_type" id="cod" (change)="cod_apply()"> Cash on Delivery / ( COD )</mat-radio-button>
 									</span>
 									<span *ngIf="this.productservice.check_cashon_delivery(this.product_items)"><i class="material-icons red-text" style="font-size: 22px;">error_outline</i><label> Cash on Delivery / ( COD )</label></span>
 									<div class="clearfix"></div>
