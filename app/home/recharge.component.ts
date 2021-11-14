@@ -160,6 +160,15 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
 
   check_wallet_content()
   {
+    if($('[name="payment_type"]:checked').length > 0)
+    {
+      this.proceed_disable = false;
+    }
+    else
+    {
+      this.proceed_disable = true;
+    }
+    
     if(this.rechargeData == null)
       return;
     this.checkbox_text = {checkbox : false,radio : false,no_input : false}
