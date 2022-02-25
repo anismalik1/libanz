@@ -104,7 +104,7 @@ top:-5px;
   </div>
 </section>  -->
 
-<section class="white no-padding new-faq-mar">
+<section class="white no-padding new-faq-mar m-0 py-5">
   
   <div class="container">
     <div class="row no-margin">
@@ -131,7 +131,7 @@ top:-5px;
         <div class="col s12 margin-top faq1"> 
           <p class="grey-text center stop-txt">Stop Worrying! We Will Solve All Your Queries</p> 
           <ul class="collapsible no-box-shadow" data-collapsible="accordion">
-            <li class="search-accordin relative">
+            <li class="search-accordin relative new-text-fixes">
 
                 <mat-form-field class="example-full-width">
                   <button type="Submit" class="btn-flat search-btn" (click)="go_to_search();" ><i class="material-icons search">search</i></button>
@@ -283,33 +283,35 @@ top:-5px;
         </ul> -->
         </div>
         <div class="col s12 ask-question">
-          <div class="card">
-            <div class="card-content center">
-              <span class="card-title">Ask Your Questions</span>
+          <div class="card new-card-design">
+            <div class="card-content center p-0">
+              <div class="first-text-new">
+                <h2 class="padd mb-0 font600 heading-txt relative">Ask Your Questions </h2>
+              </div>		
               <form id="contact-form" [formGroup]="faqsgroup" #faqsform = "ngForm" (ngSubmit)="faqs_submit(faqsform.value)">
                 <div class="row no-margin">
-                  <div class="input-field col s12">
+                  <div class="input-field col s12 new-input-design-fixes">
                     <input id="name" type="text" class="validate" formControlName="name">
                     <label for="name">Name*</label>
-                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['name'].valid && faqsgroup.controls['name'].touched">Enter Name*.</div>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['name'].valid && faqsgroup.controls['name'].touched">Enter Name*.</div>
                   </div>
-                  <div class="input-field col s12">
+                  <div class="input-field col s12 new-input-design-fixes">
                     <input id="memail" type="email" class="validate" formControlName="email">
                     <label for="email">Email*</label>
-                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
                   </div>
-                  <div class="input-field col s12">
+                  <div class="input-field col s12 new-input-design-fixes">
                     <input id="mphone" type="number" class="validate" formControlName="phone">
                     <label for="email">Phone*</label>
-                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['phone'].valid && faqsgroup.controls['phone'].touched">Enter Valid Phone No.*.</div>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['phone'].valid && faqsgroup.controls['phone'].touched">Enter Valid Phone No.*.</div>
                   </div>
-                  <div class="input-field col s12">
+                  <div class="input-field col s12 new-input-design-fixes">
                     <textarea id="textarea11" class="materialize-textarea" formControlName="message"></textarea>
                     <label for="textarea11">Type Your Question*</label>
-                    <div class="red-text accent-4 center" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
                   </div>
                   <div class="col s12 center">
-                    <button type="Submit" class="btn orange" [disabled]="!faqsgroup.valid">Submit</button>
+                    <button type="Submit" class="btn new-btn-theme" [disabled]="!faqsgroup.valid">Submit</button>
                   </div>
                 </div>
               </form>

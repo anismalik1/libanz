@@ -354,6 +354,8 @@ export class TodoService {
 
   get_user_recharge_amount()
   {
+    if(this.get_user().recharge_bonus_wallet == 0)
+      return 0;
     if(this.get_user() != null)
       return Number(this.get_user().recharge_bonus_wallet.replace(/\,/g,""));
     else
@@ -362,6 +364,8 @@ export class TodoService {
 
   get_user_product_amount()
   {
+    if(this.get_user().product_bonus_wallet == 0)
+      return 0;
     if(this.get_user() != null)
       return Number(this.get_user().product_bonus_wallet.replace(/\,/g,""));
     else

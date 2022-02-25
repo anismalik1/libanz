@@ -628,7 +628,7 @@ export class HomeComponent implements OnInit {
         }
       });
       $('#recommended-items').lightSlider({
-        item: 4,
+        item: 2,
         auto: false,
         loop: false,
         pause: 3000,
@@ -658,6 +658,7 @@ export class HomeComponent implements OnInit {
       $('.slider-5').lightSlider({
         item: 4,
         auto: false,
+        slideMargin: 15,
         loop: false,
         pause: 3000,
         controls: true,
@@ -783,7 +784,7 @@ export class HomeComponent implements OnInit {
     script.text = `
       $(document).ready(function(){
         $('#recommended-items').lightSlider({
-          item: 4,
+          item: 2,
           auto: false,
           loop: false,
           pause: 3000,
@@ -813,6 +814,7 @@ export class HomeComponent implements OnInit {
         $('.slider-5').lightSlider({
           item: 4,
           auto: false,
+          slideMargin: 15,
           loop: false,
           pause: 3000,
           controls: true,

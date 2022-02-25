@@ -86,7 +86,7 @@ label.font-size-change.active {
 							<span id="page-content"></span>
 							<form [formGroup]="logingroup" class="margin-top sec-7 " #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value,this)">
 								<div class="row">
-									<div class="input-field col s12 m9 offset-m1 fix-align">
+									<div class="input-field col s12 m9 offset-m1 fix-align new-input-design-fixes">
 										<i class="material-icons prefix margin-top-cart2">phone</i>
 										<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}">
 										<label for="icon_prefix" class="font-size-change">Enter Phone No.</label>
@@ -94,7 +94,7 @@ label.font-size-change.active {
 
 									</div> 
 								</div> 
-								<div class="input-field col s12 m9 offset-m1 fix-align">
+								<div class="input-field col s12 m9 offset-m1 fix-align new-input-design-fixes">
 									<i class="material-icons prefix margin-top-cart2">lock</i>
 									<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}">
 									<label for="password" class="font-size-change">Enter Password</label>

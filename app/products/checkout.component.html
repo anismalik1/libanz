@@ -70,19 +70,19 @@ span.icon-locate {
 			<div class="row no-margin">
 				<div class="col s12 m8">
 					<!-- First Line -->
-					<div class="card first-line">
-            <div class="card-content black-text padd-only no-margin">
+					<div class="card first-line new-card-design-checkout">
+            <div class="card-content black-text p-0 no-margin">
             	<div class="row no-margin">
             		<div class="col s1 number center margin-top-cart1">
             			<span>1</span>
             		</div>
             		<div class="col s8 my-cart">
-									<span class="font-size-change1 inline-block margin-checkout left grey-text white-rec">LOGIN <i class="material-icons blue-text" *ngIf="this.todoservice.get_user_name() != ''">check</i></span> <br>
+									<span class="font-size-change1 inline-block left grey-text white-rec">LOGIN <i class="material-icons blue-text" *ngIf="this.todoservice.get_user_name() != ''">check</i></span> <br>
 									<div class="clearfix"></div>
             			<span class="font600 naam1">{{this.todoservice.get_user_name()}}</span>&nbsp;
             			<span class="grey-text email1">{{this.todoservice.get_user_email()}}</span>
             		</div>
-            		<div class="col s3 right-align margin-top-cart chng">
+            		<div class="col s3 right-align chng">
             			<a href="javascript:" class="btn btn-flat right" (click)="call_change_section('to_login')">Change</a>
             		</div>
             	</div>
@@ -126,200 +126,198 @@ span.icon-locate {
         	<!-- End Here -->
 					<!-- Second Line -->
 					<!-- Third Line -->
-          <div class="card second-line">
-							<div class="card-content black-text padd-only no-margin">
-								<div class="row no-margin">
-									<div class="col s1 number center margin-top-cart1">
-										<span>2</span>
-									</div>
-									<div class="col s8 my-cart" >
-										<span class="font-size-change1 inline-block margin-checkout left grey-text">DELIVERY ADDRESS <i class="material-icons blue-text" *ngIf="this.tab_address">check</i></span>
-										<div class="clearfix"></div>
-										<span class="font600 naam2" *ngIf="address"><span >{{address.name}}-</span>{{address.contact}}&nbsp;(<span *ngIf="address">{{address.address}},</span> {{ address.pin}})</span>
-									</div>
-									<div class="col s3 right-align margin-top-cart chng">
-										<a href="javascript:" class="btn btn-flat right chngs2 hide" (click)="call_change_section('to_address')">Change</a>
-									</div>
+          <div class="card second-line new-card-design-checkout">
+						<div class="card-content black-text no-margin p-0">
+							<div class="row no-margin">
+								<div class="col s1 number center margin-top-cart1">
+									<span>2</span>
+								</div>
+								<div class="col s8 my-cart" >
+									<span class="font-size-change1 inline-block left grey-text">DELIVERY ADDRESS <i class="material-icons blue-text" *ngIf="this.tab_address">check</i></span>
+									<div class="clearfix"></div>
+									<span class="font600 naam2" *ngIf="address"><span >{{address.name}}-</span>{{address.contact}}&nbsp;(<span *ngIf="address">{{address.address}},</span> {{ address.pin}})</span>
+								</div>
+								<div class="col s3 right-align chng">
+									<a href="javascript:" class="btn btn-flat right chngs2 hide" (click)="call_change_section('to_address')">Change</a>
 								</div>
 							</div>
-						</div>    
-						<div class="row no-margin white login-checkout checkout_2" *ngIf="gosection_data.to_address == true">
-								<div class="col s10 m12 ">
-										<div class="name margin-top-cart user-address">
-											<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
-											<!-- <label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label> -->
-											<label for="address-mboss" class="font600 black-text">Add Address</label>
-											
-											<input class="with-gap" name="client_address" type="radio" value="row-address"  id="address-row" (change)="change_addr_form('add-row-address')">
-											<label for="address-row" class="font600 black-text">Paste Address</label>
-											<!-- <span *ngIf="this.productservice.is_mboss_enable()">
-													<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
-													<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
-											</span>	 -->
-											
-										</div>
-									<div class="add-new-address" id="add-new-address">
-											<form  [formGroup]="addressformgroup" class="location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
-													<div class="modal-content no-padding">
-															<div class="row no-margin">
-																	<div class="input-field col s12 m6">
-																		<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
-																		<label for="name">Name*</label>
-																		<div class="center" *ngIf="!addressformgroup.controls['name'].valid && addressformgroup.controls['name'].touched">
-																			<span class="red-text ">*Name is Required.</span>
-																		</div>
-																	</div>
-																	<div class="input-field col s12 m6">
-																		<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off" (keyup)="verify_phone($event);">
-																		<label for="phn-no">Phone Number*</label>
-																		<div class="center" *ngIf="!addressformgroup.controls['contact'].valid && addressformgroup.controls['contact'].touched">
-																			<span class="red-text ">*Enter a Valid Phone Number.</span>
-																		</div>
-																		<div class="center" *ngIf="phone_exist">
-																			<span class="red-text ">Phone Number is already exist.</span>
-																		</div>
-																	</div>
-																</div>
-																<div class="row no-margin">
-																	<div class="input-field col s12 m6">
-																		<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" [(value)]="this.pincode" value="{{this.pincode}}">
-																		<label for="pincode" [className]="(this.pincode)?'active':''">Pincode*</label>
-																		<div class="center" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
-																			<span class="red-text ">*Enter a Valid Pincode.</span>
-																		</div>
-																	</div>
-																	<div class="input-field col s12 m6">
-																		<input id="locality" name="locality" type="text" class="validate" formControlName="locality" autocomplete="off">
-																		<label for="locality">Locality</label>
-																	</div>
-																</div>
-																<div class="row no-margin">
-																	<div class="input-field col s12 m6">
-																		<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
-																		<label for="city">City/District/Town*</label>
-																		<div class="center" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
-																			<span class="red-text ">*City is Required.</span>
-																		</div>
-																	</div>
-																	<div class="input-field col s12 m12 b-fix-top">
-																		<mat-form-field>
-																			<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
-																				<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
-																					<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
-																				</mat-select>
-																		</mat-form-field>
-																	</div>
-																	
-																</div>
-																<div class="row no-margin">
-																	<div class="input-field col s12 add-fix">
-																		<input name="address" id="land" type="text" class="validate" formControlName="address">
-																		<label for="land">Address*</label>
-																		<div class="center" *ngIf="!addressformgroup.controls['address'].valid && addressformgroup.controls['address'].touched">
-																			<span class="red-text ">*Enter Delivery Address.</span>
-																		</div>
-																	</div>
-																</div>
-													</div>
-													<div class="modal-footer">
-														<button type="Submit" class="modal-action btn orange btn-large check-btn" [disabled]="!addressformgroup.valid || phone_exist">Save and Continue</button>
-														<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
-													</div>
-											</form>
-									</div>
-									<div class="add-new-address" id="reg-address" style="display:none;">
-										<form  [formGroup]="regaddressformgroup" class="location-add1" #regaddress = "ngForm" (ngSubmit)="reg_addr(regaddress.value)">
-												<div class="modal-content no-padding">
-														<div class="row no-margin">
-																<div class="input-field col s12 m6">
-																	<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
-																	<label for="phn-no-reg">Phone Number*</label>
-																	<div class="center" *ngIf="!regaddressformgroup.controls['contact'].valid && regaddressformgroup.controls['contact'].touched">
-																		<span class="red-text ">*Enter a Valid Phone Number.</span>
-																	</div>
-																</div>
-																<div class="input-field col s12 m6">
-																	<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
-																	<label for="pincode-reg" [className]="(this.pincode)?'active':''">Pincode*</label>
-																	<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
-																		<span class="red-text ">*Enter a Valid Pincode.</span>
-																	</div>
-																</div>
-																
-															</div>
-													</div>
-													<div class="modal-footer">
-															<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!regaddressformgroup.valid">Save and Deliver Here</button>
-															<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
-														</div>
-											</form>
-									</div>
-									<div class="add-row-address" id="add-row-address" style="display:none;">
-												
-										<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
-													<div class="modal-content no-padding">
-															<div class="row no-margin">
-																	<div class="input-field col s12 m12 b-fix-top">
-																			<mat-form-field>
-																				<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
-																					<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" formControlName="state" >
-																						<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
-																					</mat-select>
-																			</mat-form-field>
-																		</div>
-																<div class="input-field col s12 m12">
-																	<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
-																	<label for="textarea1">Paste Address*</label>
-																	<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
-																		<span class="red-text ">*Enter Address.</span>
-																	</div>
-																	<!-- <span class="red-text">Please include pincode in address.</span> -->
-																</div>
-																<div class="input-field col s12 m6">
-																	<input id="phn-no-reg" name="pincode" type="text" class="validate" formControlName="pincode" autocomplete="off">
-																	<label for="phn-no-reg">Pin Code *</label>
-																	<div class="center" *ngIf="!rowaddressformgroup.controls['pincode'].valid && rowaddressformgroup.controls['pincode'].touched">
-																		<span class="red-text ">*Enter a Valid Pincode </span>
-																	</div>
-																</div>
-
-																<div class="input-field col s12 m6">
-																	<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
-																	<label for="phn-no-reg">Phone Number*</label>
-																	<div class="center" *ngIf="!rowaddressformgroup.controls['contact'].valid && rowaddressformgroup.controls['contact'].touched">
-																		<span class="red-text ">*Enter a Valid Phone Number.</span>
-																	</div>
-																</div>
-																
-															</div>
-														</div>
-														<div class="modal-footer">
-																<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!rowaddressformgroup.valid">Save and Deliver Here</button>
-														</div>
-												</form>
-										</div>
-									<div class="card" *ngIf="address">
-										<div class="card-content">
-												{{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	
-												<button type="button" class="btn orange btn-large check-btn" (click)="call_change_section('to_order_summary')">Continue</button>
-										</div>
-									</div>						
+						</div>
+					</div>    
+					<div class="row no-margin white login-checkout checkout_2" *ngIf="gosection_data.to_address == true">
+						<div class="col s10 m12 radion-btn-fixes">
+								<div class="name margin-top-cart user-address mb-3">
+									<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
+									<!-- <label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label> -->
+									<label for="address-mboss" class="font600 black-text">Add Address</label>
+									
+									<input class="with-gap" name="client_address" type="radio" value="row-address"  id="address-row" (change)="change_addr_form('add-row-address')">
+									<label for="address-row" class="font600 black-text">Paste Address</label>
+									<!-- <span *ngIf="this.productservice.is_mboss_enable()">
+											<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
+											<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
+									</span>	 -->
+									
 								</div>
-							</div>      
-						<!-- End Here -->
+							<div id="add-new-address">
+									<form  [formGroup]="addressformgroup" class="location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
+											<div class="modal-content no-padding">
+													<div class="row no-margin">
+															<div class="input-field col s12 m6 new-input-design-fixes">
+																<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
+																<label for="name">Name*</label>
+																<div class="error-fixes" *ngIf="!addressformgroup.controls['name'].valid && addressformgroup.controls['name'].touched">
+																	<span class="red-text ">*Name is Required.</span>
+																</div>
+															</div>
+															<div class="input-field col s12 m6 new-input-design-fixes">
+																<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off" (keyup)="verify_phone($event);">
+																<label for="phn-no">Phone Number*</label>
+																<div class="error-fixes" *ngIf="!addressformgroup.controls['contact'].valid && addressformgroup.controls['contact'].touched">
+																	<span class="red-text ">*Enter a Valid Phone Number.</span>
+																</div>
+																<div class="error-fixes" *ngIf="phone_exist">
+																	<span class="red-text ">Phone Number is already exist.</span>
+																</div>
+															</div>
+														</div>
+														<div class="row no-margin">
+															<div class="input-field col s12 m6 new-input-design-fixes">
+																<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" [(value)]="this.pincode" value="{{this.pincode}}">
+																<label for="pincode" [className]="(this.pincode)?'active':''">Pincode*</label>
+																<div class="error-fixes" *ngIf="!addressformgroup.controls['pincode'].valid && addressformgroup.controls['pincode'].touched">
+																	<span class="red-text ">*Enter a Valid Pincode.</span>
+																</div>
+															</div>
+															<div class="input-field col s12 m6 new-input-design-fixes">
+																<input id="locality" name="locality" type="text" class="validate" formControlName="locality" autocomplete="off">
+																<label for="locality">Locality</label>
+															</div>
+														</div>
+														<div class="row no-margin">
+															<div class="input-field col s12 m6 new-input-design-fixes">
+																<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
+																<label for="city">City/District/Town*</label>
+																<div class="error-fixes" *ngIf="!addressformgroup.controls['city'].valid && addressformgroup.controls['city'].touched">
+																	<span class="red-text ">*City is Required.</span>
+																</div>
+															</div>
+															<div class="input-field col s12 m6 b-fix-top select-new-designs mt-3px">
+																<mat-form-field>
+																	<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
+																		<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
+																			<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																		</mat-select>
+																</mat-form-field>
+															</div>
+															
+														</div>
+														<div class="row no-margin">
+															<div class="input-field col s12 add-fix new-input-design-fixes">
+																<input name="address" id="land" type="text" class="validate" formControlName="address">
+																<label for="land">Address*</label>
+																<div class="error-fixes" *ngIf="!addressformgroup.controls['address'].valid && addressformgroup.controls['address'].touched">
+																	<span class="red-text ">*Enter Delivery Address.</span>
+																</div>
+															</div>
+														</div>
+											</div>
+											<div class="modal-footer">
+												<button type="Submit" class="modal-action btn new-btn-theme check-btn" [disabled]="!addressformgroup.valid || phone_exist">Save and Continue</button>
+												<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
+											</div>
+									</form>
+							</div>
+							<div id="reg-address" style="display:none;">
+								<form  [formGroup]="regaddressformgroup" class="location-add1" #regaddress = "ngForm" (ngSubmit)="reg_addr(regaddress.value)">
+										<div class="modal-content no-padding">
+												<div class="row no-margin">
+														<div class="input-field col s12 m6">
+															<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+															<label for="phn-no-reg">Phone Number*</label>
+															<div class="center" *ngIf="!regaddressformgroup.controls['contact'].valid && regaddressformgroup.controls['contact'].touched">
+																<span class="red-text ">*Enter a Valid Phone Number.</span>
+															</div>
+														</div>
+														<div class="input-field col s12 m6">
+															<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
+															<label for="pincode-reg" [className]="(this.pincode)?'active':''">Pincode*</label>
+															<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
+																<span class="red-text ">*Enter a Valid Pincode.</span>
+															</div>
+														</div>
+														
+													</div>
+											</div>
+											<div class="modal-footer">
+													<button type="Submit" class="modal-action btn new-btn-theme" [disabled]="!regaddressformgroup.valid">Save and Deliver Here</button>
+													<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
+												</div>
+									</form>
+							</div>
+							<div class="add-row-address" id="add-row-address" style="display:none;">										
+								<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
+											<div class="modal-content no-padding">
+													<div class="row no-margin">
+															<div class="input-field col s12 m12 b-fix-top">
+																	<mat-form-field>
+																		<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
+																			<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" formControlName="state" >
+																				<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																			</mat-select>
+																	</mat-form-field>
+																</div>
+														<div class="input-field col s12 m12">
+															<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
+															<label for="textarea1">Paste Address*</label>
+															<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
+																<span class="red-text ">*Enter Address.</span>
+															</div>
+															<!-- <span class="red-text">Please include pincode in address.</span> -->
+														</div>
+														<div class="input-field col s12 m6">
+															<input id="phn-no-reg" name="pincode" type="text" class="validate" formControlName="pincode" autocomplete="off">
+															<label for="phn-no-reg">Pin Code *</label>
+															<div class="center" *ngIf="!rowaddressformgroup.controls['pincode'].valid && rowaddressformgroup.controls['pincode'].touched">
+																<span class="red-text ">*Enter a Valid Pincode </span>
+															</div>
+														</div>
 
-          <div class="card third-line">
-            <div class="card-content black-text padd-only no-margin">
+														<div class="input-field col s12 m6">
+															<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+															<label for="phn-no-reg">Phone Number*</label>
+															<div class="center" *ngIf="!rowaddressformgroup.controls['contact'].valid && rowaddressformgroup.controls['contact'].touched">
+																<span class="red-text ">*Enter a Valid Phone Number.</span>
+															</div>
+														</div>
+														
+													</div>
+												</div>
+												<div class="modal-footer">
+														<button type="Submit" class="modal-action btn new-btn-theme" [disabled]="!rowaddressformgroup.valid">Save and Deliver Here</button>
+												</div>
+										</form>
+								</div>
+							<div class="card border-0 no-shadow" *ngIf="address">
+								<div class="card-content flex-classes">
+									<p class="h5 m-0">{{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	</p>										
+									<button type="button" class="btn new-btn-theme check-btn" (click)="call_change_section('to_order_summary')">Continue</button>
+								</div>
+							</div>						
+						</div>
+					</div>      
+					<!-- End Here -->
+          <div class="card third-line new-card-design-checkout">
+            <div class="card-content black-text p-0 no-margin">
             	<div class="row no-margin">
             		<div class="col s1 number center margin-top-cart1">
             			<span>3</span>
             		</div>
             		<div class="col s8 my-cart">
-									<span class="font-size-change1 inline-block margin-checkout left grey-text">ORDER SUMMARY <i class="material-icons blue-text">check</i></span>
+									<span class="font-size-change1 inline-block left grey-text">ORDER SUMMARY <i class="material-icons blue-text">check</i></span>
 									<div class="clearfix"></div>
             			<span class="font600 naam3">{{this.itemCount()}} Items</span>&nbsp;
             		</div>
-            		<div class="col s3 right-align margin-top-cart chng">
+            		<div class="col s3 right-align chng">
             			<a href="javascript:" class="btn btn-flat right chngs3 hide" (click)="call_change_section('to_order_summary')">Change</a> 
             		</div>
             	</div>
@@ -392,9 +390,9 @@ span.icon-locate {
 					</div>
 					
 
-          		<div class="col s12 margin-top-cart">
-          			<span>Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
-					  <button class="btn waves-effect waves-light orange right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button>  	
+          		<div class="col s12 margin-top-cart flex-classes">
+          			<span class="m-0">Order conformation email will be sent to <strong class="font600">{{this.todoservice.get_user_email()}}</strong></span>
+					  <button class="btn new-btn-theme right button-one" type="Submit" (click)="call_change_section('to_payment')" *ngIf="this.product_items.length > 0">CONTINUE</button>  	
 					  <!-- <div class="col m6">
 						<mat-form-field>
 							<span class="icon-locate"><i class="material-icons" >location_on</i> </span>
@@ -416,24 +414,20 @@ span.icon-locate {
 
 			  
         	</div>
-
-			
-				
-
 					<!-- End Here -->					
         	<!-- Fourth Line -->
-          <div class="card fourth-line">
-            <div class="card-content black-text padd-only no-margin">
+          <div class="card fourth-line new-card-design-checkout">
+            <div class="card-content black-text p-0 no-margin">
             	<div class="row no-margin">
             		<div class="col s1 number center margin-top-cart1 payment-number">
             			<span>4</span>
             		</div>
             		<div class="col s8 my-cart">
-									<span class="font-size-change1 inline-block margin-checkout left grey-text">PAYMENT OPTIONS <i class="material-icons blue-text">check</i></span>
+									<span class="font-size-change1 inline-block left grey-text">PAYMENT OPTIONS <i class="material-icons blue-text">check</i></span>
 									<div class="clearfix"></div>
             			<span class="font600 naam4">Wallet</span>&nbsp;
             		</div>
-            		<div class="col s3 right-align margin-top-cart chng">
+            		<div class="col s3 right-align chng">
             			<a href="javascript:" class="btn btn-flat right chngs4 hide" (click)="call_change_section('to_payment')">Change</a>
             		</div>
             	</div>
@@ -485,7 +479,7 @@ span.icon-locate {
 				</form>
 				<div class="col s12 m10 offset-m1">
 					<div class="name margin-checkout">
-						<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout <i class="icon-inr"></i> ({{pay_amount() - this.calculate_bonus()}})</button></span>
+						<span><button href="javascript:" class="btn new-btn-theme" (click)="checkout_items(1)" [disabled]="disabled"> Checkout &nbsp;<i class="icon-inr"></i> ({{pay_amount() - this.calculate_bonus()}})</button></span>
 					</div>
 					
 				</div>
@@ -494,8 +488,8 @@ span.icon-locate {
         	<!-- End Here -->
 				</div>
 				<div class="col s12 m4 order-summary" id="checkout-order-summary" *ngIf="this.product_items && this.product_items.length > 0"> 
-					<div class="card">
-            <div class="card-content black-text no-padding fix-inne-pad">
+					<div class="card new-card-design">
+            <div class="card-content black-text no-padding fix-inne-pad p-0">
             	<span class="card-title inline-block">Order Summary</span>
 				<hr>
 				<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">

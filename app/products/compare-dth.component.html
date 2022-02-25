@@ -117,9 +117,9 @@ ul#dropdown2 li {
 <div class="fix-mb-top"></div>
 
 <section class="compare-dth white">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-        <div class="compare-top-row hide">
+        <!-- <div class="compare-top-row hide">
             <div class="col s12 l2 m2 my-compair feature-image-wrapper">
                 <i class="material-icons">format_list_bulleted</i>
                 <h3>Feature Options</h3>
@@ -132,11 +132,11 @@ ul#dropdown2 li {
                 <a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a><br/>
                 <i class="icon-inr font-size-change1">{{item.offer_price}}</i>
                 <div class="clearfix"></div>
-                <div class="btn-new1 center"><a class="btn" [routerLink]="['/product/'+item.url]">Book Now</a></div>
+                <div class="btn-new1 center"><a class="new-btn-theme white-text" [routerLink]="['/product/'+item.url]">Book Now</a></div>
               </div>
             </div>
             <div class="col s12 m3 padd" *ngIf="!disable_compare">
-              <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Add Set Top Box</a>
+              <a href="#" class="font-size-change1 chng-set dropdown-button orange-text" data-activates='dropdown1'>Add Set Top Box</a>
               <ul id='dropdown1' class='dropdown-content'>
                 <li *ngFor="let item of product_category_list;">
                   <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
@@ -144,41 +144,42 @@ ul#dropdown2 li {
               </ul>
             </div>
             <div class="clearfix"></div>
-          </div>
+          </div> -->
       <div class="col s12 m12 center">
         <h2 class="font600" id="compare-title">Compare Your DTH Box Plans</h2>
         <p class="web-view-display" style="margin-bottom: 30px;font-size: 15px;"> Delete Anyone to add Another Product To Compare.</p>
       </div>      
       <div class="row my-compair hide-on-mobile">
+				<div class="col s12 m1"></div>
           <div class="col l2 m2 my-compair">
-          <div class="compare-table features">
-          <table class="table centered bordered ">
-              <tbody>
-                <tr>
-                  <td>
-                      <div class="feature-image-wrapper">
-                        <i class="material-icons">format_list_bulleted</i>
-                        <h3>Feature Options</h3>
-                      </div>
-                  </td>
-                  
-                </tr>
-                <tr *ngFor="let feature of all_specifications;">
-                  <td>
-                    <span title="{{feature.title}}">{{trim_text(feature.title)}}</span>
+						<div class="compare-table features">
+							<table class="table centered bordered ">
+									<tbody>
+										<tr>
+											<td>
+													<div class="feature-image-wrapper">
+														<i class="material-icons">format_list_bulleted</i>
+														<h3>Feature Options</h3>
+													</div>
+											</td>
+											
+										</tr>
+										<tr *ngFor="let feature of all_specifications;">
+											<td>
+												<span title="{{feature.title}}">{{trim_text(feature.title)}}</span>
 
-                   
-                  </td>
-                </tr>
-                <tr style="line-height: 75px !important;">
-                  <td><span class="font-size-change-order font600 inline-block margin-top-order"> Channel Available</span></td>
-                </tr> 
-              </tbody>
-            </table>
-        </div>
-      </div>
+											
+											</td>
+										</tr>
+										<tr style="line-height: 75px !important;">
+											<td><span class="font-size-change-order font600 inline-block margin-top-order"> Channel Available</span></td>
+										</tr> 
+									</tbody>
+							</table>
+						</div>
+      		</div>
 
-        <div [className]="i == 0 ? 'col m3 l3 my-compair no-padding':'col m2 l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
+        <div [className]="i == 0 ? 'col m2 l2 my-compair no-padding':'col m2 l2 my-compair no-padding'" *ngFor="let item of compare_products;let i = index;">
           
           <div class="compare-text left">
             <span>{{item.title}}</span>
@@ -190,10 +191,10 @@ ul#dropdown2 li {
             <tr>
               <td>
                 <div class="image-wrapper">
-                    <a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a><br/>
-                    <i class="icon-inr font-size-change1">{{item.offer_price}}</i>
+										<a [routerLink]="['/product/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}"></a><br/>
+										<h4 class="h4"><i class="icon-inr font-size-change1">{{item.offer_price}}</i></h4>                    
                     <div class="clearfix"></div>
-                    <div class="btn-new1 center"><a class="btn" [routerLink]="['/product/'+item.url]">Book Now</a></div>
+                    <div class="btn-new1 center"><a class="btn new-btn-theme" [routerLink]="['/product/'+item.url]">Book Now</a></div>
                 </div>
               </td>
               
@@ -210,14 +211,15 @@ ul#dropdown2 li {
         </table>
 		</div>
   </div>
-      <div class="col s12 m3" *ngIf="!disable_compare">
+      <div class="col s12 m2" *ngIf="!disable_compare">
         <a href="#" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Add Set Top Box</a>
         <ul id='dropdown1' class='dropdown-content'>
           <li *ngFor="let item of product_category_list;">
             <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
           </li>
         </ul>
-      </div>
+			</div>
+			<div class="col s12 m1"></div>
 			</div>	
     </div>
 
@@ -257,17 +259,18 @@ ul#dropdown2 li {
   </div>
 </section>
 <!-- Compare Modal -->
-<div id="tata-sky-modal" class="modal modal-fixed-footer">
+<div id="tata-sky-modal" class="modal fixes-file-modal">
     <div class="modal-content">
-      <h4>Choose Set Up Box </h4>
-      <div class="row" *ngIf="product_list">
-        <div class="col s6 m3" *ngFor="let item of product_list">
+			<h3 class="font600">Choose Set Up Box </h3>
+			<a href="javascript:" class="modal-close login-modal-close close-cjanges"><i class="material-icons black-text">close</i></a>
+      <div class="row m-0" *ngIf="product_list">
+        <div class="col s6 m4 l4" *ngFor="let item of product_list">
           <a href="javascript:" class="black-text modal-close" (click)="continue_to_change(item.url)">
-            <div class="card choose-set-up-box center">
+            <div class="card choose-set-up-box center new-card-design transform-scale-1 p--10 h-auto">
               <div class="card-image">
                 <img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
               </div>
-              <div class="card-content">
+              <div class="card-content p-0">
                 <span>{{item.title}}</span>
               </div>
             </div>
@@ -276,11 +279,7 @@ ul#dropdown2 li {
       </div>
       <div class="row" *ngIf="!product_list">
         Loading Products
-      </div>
-      
-    </div>
-    <div class="modal-footer">
-      <a href="javascript:" class="modal-action btn red modal-close">Close</a>
+      </div>      
     </div>
   </div>
 <app-footer></app-footer>

@@ -63,7 +63,7 @@
 	<div class="container">
 	</div>
 </section> -->
-<section class="no-padding grey lighten-2 beard">
+<section class="no-padding pt-5 beard">
 	<div class="container">
 		<div class="row no-margin">
 			<div class="col s12">
@@ -83,7 +83,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col s12">
-				<ul class="tabs blog-tabs">
+				<ul class="tabs blog-tabs new-tabs-design">
 					<li class="tab col s12 m3" id="list-item-all"><a [className]="(this.category == 'all')? 'active':''" href="javascript:" (click)="fetch_data('all')">Miscellaneous</a></li>
 					<li class="tab col s12 m3" *ngFor="let item of categories;" id="list-item-{{item.id}}"><a [className]="(this.category == item.id)? 'active':''" href="javascript:" (click)="fetch_data(item.id)">{{item.title}}</a></li>
 				</ul>
@@ -91,12 +91,12 @@
 		</div>
 		<div class="row" *ngIf="this.pageservice.blogs">  
 			<div class="col s12 m4" *ngFor="let item of this.pageservice.blogs;">
-				<div class="card blog-min-hei">
+				<div class="card blog-min-hei new-card-design p-0">
 					<div class="card-image">
 						<a [routerLink]="['/blog-detail/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
 					</div>
-					<div class="card-content">
-						<div class="author">
+					<div class="card-content p-3">
+						<div class="author pt-0 pb-3 px-0 border-0">
 							<p class="author-name">
 								<span><i class="material-icons">person</i></span>
 								<span>Libanz</span>
@@ -106,14 +106,12 @@
 								<time>{{ item.c_date | date}}</time>
 							</p>
 						</div>
-						<div class="blog-content"> 
-						<span class="blog-title" title="{{item.title}}"><a [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
+						<div class="blog-content p-0 no-box-shadow"> 
+						<span class="blog-title" title="{{item.title}}"><a class="new-card-title-design" [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
 						<div class="clearfix"></div>
-						<p class="blog-description-{{item.id}} cst-blog-fix cstm-height" [innerHTML]="decode_html(item.shortDescription)"> </p>
+						<p class="blog-description-{{item.id}} pt-0 cst-blog-fix cstm-height" [innerHTML]="decode_html(item.shortDescription)"> </p>
+						<a [routerLink]="['/blog-detail/'+item.url]" class="orange-text font-size-change1">Read More >> </a>
 						</div>
-					</div>
-					<div class="card-action center">
-						<a [routerLink]="['/blog-detail/'+item.url]" class="orange-text font-size-change1">Read More</a>
 					</div>
 				</div>
 			</div>

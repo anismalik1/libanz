@@ -252,7 +252,7 @@ fetch_single_product_data(data)
       
       var $pack = this.productservice.pack_selected();
       this.product_items[0].product.pack_selected = $pack;
-      if(this.product_items[0].cashback)
+      if(this.product_items[0].cashback.length > 0)
         this.product_items[0].product.partnerwalletamount = this.product_items[0].cashback[0].amount;
       else
       {
@@ -877,6 +877,8 @@ checkout_items(type)
       arr['pr_id'] = this.product_items[i].product.promos.id;
     if(this.product_items[i].product.month_pack)
       arr['month_pack'] = this.product_items[i].product.month_pack;
+    else
+      arr['month_pack'] = 1; 
     if(this.product_items[i].product.pincode)
       arr['pincode'] = this.product_items[i].product.pincode;
     if(this.product_items[i].product.subscriber_id)

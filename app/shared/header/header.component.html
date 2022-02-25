@@ -473,7 +473,7 @@ padding-bottom:15px;
 				<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() || this.todoservice.get_user_avatar() == 'null'">{{this.todoservice.get_user_characters()}}</span>
 				<div class="user-name-mb">
 				<h3><a routerLink="/dashboard/edit-profile">{{this.todoservice.get_user_name()}}</a></h3>
-				<p>{{this.todoservice.get_user_phone()}}</p>
+				<p>{{this.todoservice.get_user_phone()}}</p> 
 
 				</div>
 				<div class="clearfix"></div>
@@ -719,7 +719,7 @@ padding-bottom:15px;
 					</ul>
 					
 				  <ul id="nav-mobile" class="inline-block log-sig right">
-					<li class="clogin" *ngIf="this.todoservice.get_user_phone() == ''"><a href="#login-modal" class="logup modal-trigger black-text" (click)="change_action('login')">Log In/Sign Up </a></li>
+					<li class="clogin" *ngIf="this.todoservice.get_user_phone() == ''"><a href="#login-modal" class="logup modal-trigger black-text new-btn-theme" (click)="change_action('login')">Log In/Sign Up </a></li>
 					
 					<li *ngIf="this.todoservice.get_user_phone() != ''" class="balance"><a routerLink="/dashboard/add-money" class="white-text"><span class="no-margin font-size-change1 right-align fixed-margin black-text" *ngIf="this.todoservice.get_user_wallet()"> 
 						<img src="./assets/images/wallet.png" alt="wallet" class="black-text responsive-img vertical-align-middle wllt"> <span>RS {{this.todoservice.get_user_wallet()}}</span></span><div class="clearfix"></div><span *ngIf="(this.todoservice.get_user_recharge_amount() + this.todoservice.get_user_product_amount() > 0)" class="ng-star-inserted orange-text bonus-amount absolute cst-bonus-txt"> Bonus <i class="fa fa-inr"></i>{{this.todoservice.get_user_recharge_amount()+this.todoservice.get_user_product_amount()}}</span></a>
@@ -728,10 +728,11 @@ padding-bottom:15px;
 						<span class="cst-name">RG</span>
 					</li> -->
 					<li id="user-nav" *ngIf="this.todoservice.get_user_phone() != ''">
-						<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>
+						<a href="javascript:" data-activates="slide-out" class="button-collapse no-margin no-padding black-text"><span style="padding-right: 5px; font-weight:600;"><span style="display: none;">{{this.todoservice.get_user_name()}} </span></span>							
+							<img class="responsive-img vertical-align-middle" width="35px" src="./assets/images/hamburger.png" alt="user-icon" id="change-icon"/>							
 							<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
-								<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar().includes('data:image/png')"/>
-								<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar().includes('data:image/png')"/>
+								<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar().includes('data:image/png')"/>
+								<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar().includes('data:image/png')"/> -->
 							</span>
 							<!-- <img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}/web-app/assets/images/avatars/menu-icon.png" alt="user-icon" id="change-icon" *ngIf="!this.todoservice.get_user_avatar()"/> -->
 							<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar() || this.todoservice.get_user_avatar() == 'null'"><span *ngIf="this.todoservice.get_user_characters() !=''">{{this.todoservice.get_user_characters()}}</span></span>
@@ -791,9 +792,9 @@ padding-bottom:15px;
 </div>
 	<!-- End Here -->
 	<!-- Login Modal -->
-	<div id="login-modal" class="modal">
+	<div id="login-modal" class="modal max-width-new">
 		<div class="modal-content no-padding">
-			<a href="javascript:" class="modal-close login-modal-close"><i class="material-icons black-text close-fx">close</i></a>
+			<a href="javascript:" class="modal-close login-modal-close close-cjanges"><i class="material-icons black-text">close</i></a>
 			<div class="row no-margin" style="background-color: #fff;" *ngIf="action == 1">
 				<div class="col s12 m4 no-padding hide-on-med-and-down" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login-banner.jpg);background-size: cover;">
 					<div class="login-modal">
@@ -811,17 +812,15 @@ padding-bottom:15px;
 							<div class="login" *ngIf="login.step == 1">
 							<form class="login-step" [formGroup]="logingroup" #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value,this)" id="login-input-form">
 								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix margin-top-cart2">phone</i>
-											<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}">
-											<label for="icon_prefix" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
+									<div class="input-field col s12 new-input-design-fixes">
+											<input id="icon_prefixss" type="number" class="validate" formControlName="phone" value="{{remember.ph}}">
+											<label for="icon_prefixss" class="font-size-change" [ngClass]=" remember.ph ? 'active' : ''">Enter Phone No.</label>
 											<div class="red-text accent-4 center" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter valid Phone Number.</div>
 										</div>
 									
-									<div class="input-field col s12 forget-click">
-										<i class="material-icons prefix margin-top-cart2">lock</i>
-										<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}">
-										<label for="password" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
+									<div class="input-field col s12 forget-click new-input-design-fixes">
+										<input id="passwords" type="password" formControlName="password" class="validate" value="{{remember.pw}}">
+										<label for="passwords" class="font-size-change" [ngClass]=" remember.pw ? 'active' : ''">Enter Password</label>
 									</div>
 									<div class="col s12 m6">
 										<input type="checkbox" id="remember-me" formControlName="remember" [checked]="remember.rm" class="filled-in" />
@@ -831,7 +830,7 @@ padding-bottom:15px;
 										<span class="tab"><a href="javascript:" class="orange-text font-size-change" (click)="change_action('reset')">Forgot Password?</a></span>
 									</div>
 									<div class="col s12 center margin-top">
-										<button type="submit" id="login-controller" class="btn orange waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
+										<button type="submit" id="login-controller" class="btn new-btn-theme w-100 waves-effect full-width otp-btn round-btn" [disabled]="!logingroup.valid">Submit</button>
 									</div>
 								</div>
 								<div class="row no-margin">
@@ -858,13 +857,13 @@ padding-bottom:15px;
 									<div class="col s12 center margin-top">
 										<span class="font-size-change1">Don't recieve OTP </span>
 										<!-- <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span> -->
-										<button type="button" class="btn waves-effect waves-light grey" (click)="resend_otp('login')" [disabled]="this.tick > 0">Resend <i *ngIf="this.tick > 0">({{this.tick}})</i></button>
+										<button type="button" class="orange-text fix-center transparent-btn" (click)="resend_otp('login')" [disabled]="this.tick > 0">Resend <i *ngIf="this.tick > 0">({{this.tick}})</i></button>
 									</div>			
 								</div>
 								<div class="row">
 									<div class="col s12 center">
-										<a href="javascript:" class="btn waves-effect waves-light grey lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
-										<button id="login-submit" type="Submit" class="btn waves-effect waves-light orange">Submit</button>
+										<a href="javascript:" class="btn waves-effect waves-light grey new-btn-theme lighten-3 black-text otp-to-login-back" (click)="back_to_login()"><< Back</a>
+										<button id="login-submit" type="Submit" class="btn waves-effect waves-light new-btn-theme">Submit</button>
 									</div>
 								</div>
 							</form>
@@ -887,29 +886,28 @@ padding-bottom:15px;
 					<section *ngIf="signup.step == 1">
 						<form [formGroup]="checkphonegroup" class="login-page-form" #checkphoneform = "ngForm" (ngSubmit)="check_phone(checkphoneform.value)" >
 							<h3 class="register-head">Register</h3>
-							<div class="input-field center col s12 m12">
-								<i class="material-icons prefix margin-top-cart2 fix-icn1">phone</i>
-								<input id="phn_number" type="number" class="validate icon_prefix fix1-txt" formControlName="phone" autocomplete="off">
-								<label for="phn_number" class="label-ltxt" >Phone Number*</label>
+							<div class="input-field center col s12 m12 new-input-design-fixes">
+								<input id="phn_numberss" type="number" class="validate icon_prefix" formControlName="phone" autocomplete="off">
+								<label for="phn_numberss" class="label-ltxt" >Phone Number*</label>
 								<div class="center absolute" *ngIf="!checkphonegroup.controls['phone'].valid && checkphonegroup.controls['phone'].touched">
 									<span class="red-text fix-ptext"> Phone Number is not valid.</span>
 								</div>
 							</div>
 							<div class="col s12 m12  margin-top fix-center">
-								<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!checkphonegroup.valid">Continue</button>
-								<p class="ask-login fix-center"> <a href="javascript:" (click)="change_action('login')">Already Have an Account ? Login Now </a> </p>
+								<button type="submit" class="btn  new-btn-theme w-100  regis-btn-fix fix-center" [disabled]="!checkphonegroup.valid">Continue</button>
+								<p class="ask-login fix-center"> <a href="javascript:" class="black-text" (click)="change_action('login')">Already Have an Account ? Login Now </a> </p>
 								<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
 							</div>
 						</form>
 					</section>
 					<section *ngIf="signup.step == 2">
 						<form #otpform = "ngForm" (ngSubmit)="verify_signup_user(otpform.value)" id="header-signup">
-							<h3>Verify</h3>
+							<h3 class="register-head">Verify</h3>
 							<div class="container">	
 								<div class="row">
 									<div class="col s12 m12">
-										<div class="card">
-											<div class="card-content">
+										<div class="card border-0 no-box-shadow">
+											<div class="card-content p-0">
 												<div class="center">
 													<!-- <div class="col s12">
 														<img src="{{this.todoservice.base_url}}web-app/assets/images/logo.png" class="responsive-img" alt="Libanz-logo">
@@ -928,13 +926,13 @@ padding-bottom:15px;
 															<input type="number" id="otp4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
 														</div>
 														<div class="col s12 center margin-top">
-															<span class="font-size-change1">Don't recieve OTP <button (click)="resend_otp('register')" class="btn orange regis-btn-fix fix-center" [disabled]="(this.tick > 0)" type="button">Resend OTP </button><i *ngIf="this.tick > 0">({{this.tick}})</i></span>
+															<span class="font-size-change1">Don't recieve OTP <button (click)="resend_otp('register')" class="orange-text fix-center transparent-btn" [disabled]="(this.tick > 0)" type="button">Resend OTP </button><i *ngIf="this.tick > 0">({{this.tick}})</i></span>
 														</div>			
 													</div>
 													<div class="row">
 														<div class="col s12 center">
-															<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
-															<button id="signup-submit" type="Submit" class="btn orange waves-effect waves-light" [disabled]="verifydisabled">Submit</button>
+															<a href="javascript:" class="back-to-retailer-page new-btn-theme mr-3 grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
+															<button id="signup-submit" type="Submit" class="btn new-btn-theme waves-effect waves-light" [disabled]="verifydisabled">Submit</button>
 														</div>
 													</div>
 												</div>
@@ -948,20 +946,18 @@ padding-bottom:15px;
 					</section>
 					<section *ngIf="signup.step == 3">
 						<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
-							<h2>Update Details</h2>
+							<h3>Update Details</h3>
 							<div class="row">
-								<div class="input-field col s12 m12">
-									<i class="material-icons prefix margin-top-cart2">person</i>
-									<input id="name" type="text"  minlength = '3' class="validate pt-left-30" maxlength="20" formControlName="name" autocomplete="off">
-									<label for="name">Enter Name*</label>
+								<div class="input-field col s12 m12 new-input-design-fixes">
+									<input id="names" type="text"  minlength = '3' class="validate" maxlength="20" formControlName="name" autocomplete="off">
+									<label for="names">Enter Name*</label>
 									<div class="center absolute" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
 										<span class="red-text ">*Enter Valid Name.</span>
 									</div>
 								</div>
-								<div class="input-field col s12 m12">
-									<i class="material-icons prefix margin-top-cart2">mail</i>
-									<input id="enter_email" type="text" class="validate pt-left-30" formControlName="email" autocomplete="off">
-									<label for="enter_email">Enter Email</label>
+								<div class="input-field col s12 m12 new-input-design-fixes">
+									<input id="enter_emails" type="text" class="validate" formControlName="email" autocomplete="off">
+									<label for="enter_emails">Enter Email</label>
 									<div class="center absolute" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
 										<span class="red-text"> Enter Valid Email.</span>
 									</div>
@@ -969,16 +965,15 @@ padding-bottom:15px;
 								</div>
 								<div class="input-field col s12 m12">
 									<i class="material-icons prefix margin-top-cart2">lock</i>
-									<input id="enter_passcode" type="password" class="validate pt-left-30" formControlName="password" autocomplete="off">
+									<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
 									<label for="enter_passcode">Enter Password</label>
 									<div class="center absolute" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
 										<span class="red-text">Password is Required.</span> 
 									</div>
 								</div>
-								<div class="input-field col s12 m12">
-									<i class="material-icons prefix margin-top-cart2">lock</i>
-									<input id="confirm_passcode" type="password" class="validate pt-left-30" formControlName="cpassword" autocomplete="off">
-									<label for="confirm_passcode">Confirm Password</label>
+								<div class="input-field col s12 m12 new-input-design-fixes">									
+									<input id="confirm_passcodes" type="password" class="validate" formControlName="cpassword" autocomplete="off">
+									<label for="confirm_passcodes">Confirm Password</label>
 									<div class="center absolute" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
 										<span class="red-text">Check Confirm Password.</span>
 									</div>
@@ -994,7 +989,7 @@ padding-bottom:15px;
 								<div class="col s12  margin-top fix-center">
 									<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
 									<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!signupgroup.valid">Create Account</button>
-									<p class="ask-login fix-center"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
+									<p class="ask-login fix-center"> <a class="black-text" routerLink="/proceed/login">Already Have an Account ? <span class="orange-text">Login Now</span> </a> </p>
 									<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
 								</div>
 							</div>
@@ -1016,13 +1011,12 @@ padding-bottom:15px;
 					<form class="login-page-form" id="proceed-reset-form" method="post" [formGroup]="proceedresetgroup" #proceedresetform = "ngForm" (ngSubmit)="process_to_reset(proceedresetform.value,this)">
 						<h3 class="forget-head">Reset Password</h3>
 						<div class="row no-margin">
-							<div class="input-field col s11 m11">
-								<i class="material-icons prefix grey-text margin-top-cart2 fix-icn1">phone</i>
-								<input id="icon_prefix "  type="number" formControlName="phone" class="fix1-txt">
-								<label for="icon_prefix">Enter Your Phone Number </label>
+							<div class="input-field col s12 m12 new-input-design-fixes">
+								<input id="icon_prefixss"  type="number" formControlName="phone" class="">
+								<label for="icon_prefixss">Enter Your Phone Number </label>
 								<div class="orange accent-4 valid-txt" *ngIf="!proceedresetgroup.controls['phone'].valid && proceedresetgroup.controls['phone'].touched">Enter a Valid Phone.</div> 
 							</div>
-							<div class="input-field col s11 m11" *ngIf="reset.step == 2">
+							<div class="input-field col s12 m12" *ngIf="reset.step == 2">
 								<div class="col s12">
 									<div class="upper-text">
 										<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
@@ -1041,7 +1035,7 @@ padding-bottom:15px;
 								<div class="accent-4 red-text" *ngIf="!proceedresetgroup.controls['pin'].valid && proceedresetgroup.controls['pin'].touched">Enter a Valid OTP.</div>  -->
 							</div>
 							<div class="col s12 center margin-top">
-								<button type="Submit" id="proceed-submit" class="btn waves-effect waves-light orange" [disabled]="!proceedresetgroup.valid">Continue</button>
+								<button type="Submit" id="proceed-submit" class="btn waves-effect waves-light new-btn-theme w-100" [disabled]="!proceedresetgroup.valid">Continue</button>
 								<span *ngIf="reset.step == 2"><button type="button" style="margin-right: 5px;" class="btn waves-effect waves-light grey" (click)="resend_otp('reset')" [disabled]="this.tick > 0">Resend <span *ngIf="this.tick > 0">({{this.tick}})</span></button></span>	
 							</div>	
 							<!-- <div class="col s12 center margin-top">
@@ -1054,24 +1048,22 @@ padding-bottom:15px;
 				<h3>Create New Password</h3>
 				<form class="login-page-form" id="reset-form" method="post" [formGroup]="resetgroup"  #resetform = "ngForm" (ngSubmit)="reset_password(resetform.value)">
 					<div class="row">
-						<div class="input-field col s12 m9 offset-m1">
-							<i class="material-icons prefix grey-text margin-top-half6">lock</i>
-							<input id="icon_prefix1" class="fix1-txt" type="password" formControlName="password" minlength="5">
-							<label for="icon_prefix">Create New Password* </label>
+						<div class="input-field col s12 new-input-design-fixes">
+							<input id="icon_prefix1s" class="" type="password" formControlName="password" minlength="5">
+							<label for="icon_prefixs">Create New Password* </label>
 							<div class="orange accent-4" *ngIf="!resetgroup.controls['password'].valid && resetgroup.controls['password'].touched">Enter Password with minimum 6 characters.</div> 
 						</div>
 					</div>
 					<div class="row">
-						<div class="input-field col s12 m9 offset-m1">
-							<i class="material-icons prefix grey-text margin-top-half6">lock</i>
-							<input id="icon_prefix2" class="fix1-txt" type="password" formControlName="cpassword">
-							<label for="icon_prefix2">Confirm Password* </label>
+						<div class="input-field col s12 new-input-design-fixes">
+							<input id="icon_prefix2s" class="" type="password" formControlName="cpassword">
+							<label for="icon_prefix2s">Confirm Password* </label>
 							<div class="orange accent-4" *ngIf="!resetgroup.controls['cpassword'].valid && resetgroup.controls['cpassword'].touched">Enter Confirm Password.</div> 
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s12 center margin-top">
-							<button type="Submit" id="forgot-submit" class="btn waves-effect waves-light orange" [disabled]="!resetgroup.valid">Continue</button>
+							<button type="Submit" id="forgot-submit" class="btn waves-effect waves-light new-btn-theme mr-3" [disabled]="!resetgroup.valid">Continue</button>
 						</div>
 					</div>
 					<div class="col s12 center" *ngIf="back_to_login">
@@ -1092,6 +1084,7 @@ padding-bottom:15px;
 			</div>
 		<div class="user-detail" *ngIf="this.todoservice.get_user_phone() != ''">
 			<ul class="unique-item">
+				<a class="sidenav-close" href="#!" style="position: absolute; right:20px;"><img class="responsive-img vertical-align-middle" width="25px" src="./assets/images/close.png" alt="close-icon"/></a>
 				<li class="inline-block "><a class="no-padding" routerLink="/dashboard/edit-profile">
 					<span *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar() != 'null'">
 						<img class="responsive-img vertical-align-middle" width="43px" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf=" !this.todoservice.get_user_avatar().includes('data:image/png')"/>
