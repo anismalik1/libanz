@@ -1,0 +1,634 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<style>
+   
+    
+  
+@media (max-width: 767px){
+    .address-location {
+        font-size: 16px;
+}
+
+#wallet-type {
+    background: #fff;
+    box-shadow: 1px 1px 5px #ececec;
+    padding: 10px;
+}
+
+    .forder-txt{
+
+position: relative;
+top: -15px;
+font-size: 11px;
+left: 4px;
+}
+.bt-border{
+    margin-top: -12px;
+    border-bottom:1px solid #ececec;
+}
+.bx-shad{
+    padding: 5px;
+    background: #fff;
+    box-shadow:1px 1px 6px #ececec;
+}
+    .text-add{
+
+padding: 10px 0px 0px 12px;
+height: 25px;
+}
+.fix-ht{
+    padding-top: 15px;
+}
+.mat-step-header .mat-step-header-ripple {
+    top: 0;
+    background: transparent !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:first-child)::before, .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:last-child)::after, [dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:first-child)::after, [dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:last-child)::before {
+    border-top-width: 1px;
+    border-top-style: solid;
+    content: '';
+    display: inline-block;
+    height: 0;
+    position: absolute;
+    top: 36px;
+    width: calc(50% - 20px);
+    background: #3f51b5 !important;
+}
+.mat-horizontal-stepper-header::after, .mat-horizontal-stepper-header::before, .mat-stepper-horizontal-line {
+    border-top-color: rgb(63 81 181) !important;
+}
+
+.mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {
+    background-color: transparent!important;
+}
+
+    .add-new-address {
+    padding: 0px !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+
+    .mobile-footer {
+    display: none!important;
+}
+.pt-top-10{
+
+    padding-top:10px;
+}
+}
+
+.footer-button-buy{
+	position: fixed;
+    bottom: 0;
+    z-index: 999999;
+    left: 0;
+    text-align: center;
+    box-shadow: 1px 1px 5px #8c8c8c;
+    right: 0;
+    /* background: #ff6a00; */
+}
+.footer-button-buy .left-half{background: #fff;height: 65px;}
+.footer-button-buy .right-half,.footer-button-buy .full{background: #ff6a00 !important;height: 65px;}
+.footer-button-buy .left-half{width: 50%;
+    float: left;}
+.footer-button-buy .full{width: 100%;}
+.footer-button-buy .right-half{width: 50%;
+    float: right;}
+.footer-button-buy button{
+    height: 65px;
+    background: #ff6a00 !important;
+    border: none;
+    border-radius: 0;
+    font-size: 18px;
+    color: #fff;
+    box-shadow: none;
+    }
+
+</style>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>	
+ 
+<section class="beard" id="checkout-section">
+    <mat-horizontal-stepper #stepper labelPosition="bottom">
+			<mat-step>
+					<ng-template matStepLabel>Address</ng-template>
+					<div class="name margin-top-cart user-address">
+							<input class="with-gap" name="client_address" type="radio" value="m-boss"  id="address-mboss" checked (change)="change_addr_form('add-new-address')">
+							<!-- <label for="address-mboss" class="font600 black-text" *ngIf="this.productservice.is_mboss_enable() == true"> <span *ngIf="this.todoservice.get_user_type() != 1">M-Boss</span> <span *ngIf="this.todoservice.get_user_type() == 1">Add Address</span></label> -->
+							<label for="address-mboss" class="font600 black-text">Add Address</label>
+							
+							<input class="with-gap" name="client_address" type="radio" value="row-address"  id="address-row" (change)="change_addr_form('add-row-address')">
+							<label for="address-row" class="font600 black-text">Paste Address</label>
+							<!-- <span *ngIf="this.productservice.is_mboss_enable()">
+									<input class="with-gap" name="client_address" type="radio" value="0"  id="address-0"  (change)="change_addr_form('reg-address')">
+									<label for="address-0" class="font600 black-text" *ngIf="this.todoservice.get_user_type() != 1">REG</label>
+							</span>	 -->
+					</div>
+					<div class="add-new-address" id="add-new-address">
+							<form  [formGroup]="addressformgroup" class="location-add1" #edtaddress = "ngForm" (ngSubmit)="add_new_addr(edtaddress.value)">
+									<div class="modal-content no-padding">
+											<div class="row no-margin">
+													<div class="input-field col s12 m6">
+															<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
+															<label for="name">Name*</label>
+															<div class="center" *ngIf="!this.addressformgroup.controls['name'].valid && this.addressformgroup.controls['name'].touched">
+																	<span class="red-text ">*Name is Required.</span>
+															</div>
+													</div>
+													<div class="input-field col s12 m6">
+															<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+															<label for="phn-no">Phone Number*</label>
+															<div class="center" *ngIf="!this.addressformgroup.controls['contact'].valid && this.addressformgroup.controls['contact'].touched">
+																	<span class="red-text ">*Enter a Valid Phone Number.</span>
+															</div>
+													</div>
+											</div>
+											<div class="row no-margin">
+													<div class="input-field col s12 m6">
+															<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" [(value)]="this.pincode" value="{{this.pincode}}">
+															<label for="pincode" [className]="(this.pincode)?'active':''">Pincode*</label>
+															<div class="center" *ngIf="!this.addressformgroup.controls['pincode'].valid && this.addressformgroup.controls['pincode'].touched">
+																	<span class="red-text ">*Enter a Valid Pincode.</span>
+															</div>
+													</div>
+													<div class="input-field col s12 m6">
+															<input id="locality" name="locality" type="text" class="validate" formControlName="locality" autocomplete="off">
+															<label for="locality">Locality</label>
+													</div>
+											</div>
+											<div class="row no-margin">
+													<div class="input-field col s12 m6">
+															<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
+															<label for="city">City/District/Town*</label>
+															<div class="center" *ngIf="!this.addressformgroup.controls['city'].valid && this.addressformgroup.controls['city'].touched">
+																	<span class="red-text ">*City is Required.</span>
+															</div>
+													</div>
+													<div class="input-field col s12 m6 b-fix-top">
+															<mat-form-field>
+																	<span class="icon-locate address-location"><i class="material-icons" >location_on</i> </span>
+																	<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" name="state" formControlName="state">
+																			<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																	</mat-select>
+															</mat-form-field>
+													</div>
+													
+											</div>
+											<div class="row no-margin">
+													<div class="input-field col s12 add-fix">
+															<input name="address" id="land" type="text" class="validate" formControlName="address">
+															<label for="land">Address*</label>
+															<div class="center" *ngIf="!this.addressformgroup.controls['address'].valid && this.addressformgroup.controls['address'].touched">
+																	<span class="red-text ">*Enter Delivery Address.</span>
+															</div>
+													</div>
+											</div>
+					</div>
+					<div class="footer-button-buy">
+							<button type="Submit" class="btn full" [disabled]="!this.addressformgroup.valid">Save and Continue</button>
+							<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
+					</div>
+	</form>
+					</div>
+					<div class="add-row-address" id="add-row-address" style="display:none;">
+							<form [formGroup]="rowaddressformgroup" class="location-add1" #rowaddress = "ngForm" (ngSubmit)="reg_addr(rowaddress.value)">
+									<div class="modal-content no-padding">
+											<div class="row no-margin">
+													<div class="input-field col s12 m6 b-fix-top">
+															<mat-form-field>
+																	<span class="icon-locate address-location"><i class="material-icons" >location_on</i> </span>
+																			<mat-select placeholder="Choose your Circle*" [(value)]="this.region" (selectionChange)="changeState($event.value)" formControlName="state" >
+																					<mat-option [value]="item.circle_id" *ngFor="let item of circles;">{{item.name}}</mat-option>
+																			</mat-select>
+															</mat-form-field>
+													</div>
+													<div class="input-field col s12 m6">
+															<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
+															<label for="textarea1">Paste Address*</label>
+															<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
+																	<span class="red-text ">*Enter Address.</span>
+															</div>
+															<span class="red-text">Please include phone number, pincode in address.</span>
+													</div>
+													
+											</div>
+											</div> 
+											<div class="footer-button-buy">
+													<button type="Submit" class="btn full" [disabled]="!rowaddressformgroup.valid">Save and Continue</button>
+											</div>
+							</form>
+					</div>
+					<div class="add-new-address" id="reg-address" style="display:none;">
+							<form  [formGroup]="regaddressformgroup" class="location-add1" #regaddress = "ngForm" (ngSubmit)="reg_addr(regaddress.value)">
+									<div class="modal-content no-padding">
+											<div class="row no-margin">
+													<div class="input-field col s12 m6">
+															<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
+															<label for="phn-no-reg">Phone Number*</label>
+															<div class="center" *ngIf="!regaddressformgroup.controls['contact'].valid && regaddressformgroup.controls['contact'].touched">
+																	<span class="red-text ">*Enter a Valid Phone Number.</span>
+															</div>
+													</div>
+													<div class="input-field col s12 m6">
+															<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
+															<label for="pincode-reg" [className]="(this.pincode)?'active':''">Pincode*</label>
+															<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
+																	<span class="red-text ">*Enter a Valid Pincode.</span>
+															</div>
+													</div>
+													
+											</div>
+									</div>
+									<div class="footer-button-buy">
+											<!-- <a href="javascript:" (click)="add_to_cart(product.id)" id="cart-add" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a> -->
+											<button href="javascript:" class="btn full" type="Submit" id="book-now" [disabled]="!regaddressformgroup.valid"> Save and Continue</button>
+									</div>
+									<!-- <div class="modal-footer">
+											<button type="Submit" class="modal-action btn orange btn-large" [disabled]="!regaddressformgroup.valid">Save and Continue</button>
+									</div> -->
+							</form>
+					</div>
+					<div class="card" *ngIf="address">
+							<div class="card-content">
+									{{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	
+							</div>
+					</div>
+			</mat-step>
+			<mat-step [editable]="false"> 
+					<ng-template matStepLabel>Details</ng-template>
+					<div class="card" *ngIf="address">
+							<h3 class="text-add">Address</h3>
+							<div class="card-content">
+									{{address.address}}, {{address.city}}, {{filter_circle(address.state)}}, {{address.pin}}	
+							</div>
+					</div>
+					<div class="order-details bx-shad">
+							<div class="row bt-border" *ngFor="let item of this.product_items;let i = index;">
+									<div class="col s3 m3 center">
+											<div class="cart-product-image fix-ht"> 
+													<img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.product.image}}" class="responsive-img" alt="hd-tata-sky"><br>
+													<div class="product-quantity less-add-btn">
+															<!-- <div class="" *ngIf="item.product.title.toLowerCase().includes('multi')">
+																	<button type="button" class="count-down" id="lessButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'minus')"><i class="material-icons">remove</i></button>
+																	<span class="updateCount" id="update_count{{item.product.id}}">{{item.quantity}}</span>&nbsp;
+																	<button type="button" class="count-up" id="addButton-{{item.product.id}}" (click)="this.productservice.changeItemCount(item.product.id,'add')"><i class="material-icons">add</i></button>
+															</div> -->
+													</div>
+											</div>
+									</div>
+									<div class="col s9 m5 margin-top" id="item-detail-section-{{i}}">
+											<a href="javascript:" class="black-text">
+													<h4 class="font600"><a routerLink="/product/{{item.product.url}}">{{item.product.title}}</a></h4>
+													<!-- <span class="font-size-change grey-text">Seller : Libanz</span> -->
+													<!-- <span class="font-size-change grey-text" *ngIf="item.product.cod_available == 1"><br>Cash On Delivery Available</span><br/> -->
+													
+											</a>
+											
+													<!-- <a href="javascript:" class="font-size-change margin-top inline-block grey remove-btn"  onclick="Materialize.toast('Product removed from the cart ', 4000);" (click)="this.productservice.removeItem(item.product.id)">Remove</a> -->
+									</div>
+									<!-- <div class="col s12 m4 margin-top padd">
+											<strong class="font600">Go Easy on your Pocket – Online Instant Recharge and Bill Payments with Unlimited Offers !!</strong><br>
+									</div> -->
+							</div>
+							<!-- <button type="Submit" class="modal-action btn orange btn-large" matStepperNext>Continue</button> -->
+					</div> 
+					<div class="order-summary">
+					<div class="card">
+					<div class="card-content black-text no-padding fix-inne-pad pt-top-10">
+							<span class="card-title inline-block">Order Summary</span>
+							<hr>
+							<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
+									<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
+									<p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
+									<ng-template #kitblock>
+											<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+											<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{(item.product.price - 1000) }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+									</ng-template>
+									<ng-template #nokitblock>
+											<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+									</ng-template>
+									<br/>
+									<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
+											<p class="font600 left"> <span class="grey-text font500 pack-title" style="width:80%;">{{pack.title}} :</span></p>
+											<p class="right font-size-change" *ngIf="item.product.multi != 1"> <i class="icon-inr"></i>{{pack.price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+											<p class="right font-size-change" *ngIf="item.product.multi == 1"> <i class="icon-inr"></i>{{pack.multi_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+											<div class="clearfix"></div>
+									</div>
+									<div style="padding-top: 10px;" *ngIf="item.product.promos">
+											<p class="inline-block font600" style="width:80%;"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
+											<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
+											<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
+									</div> 
+											<div style="padding-top: 10px;" *ngIf="this.bonus_quantity(i) > 0">
+													<p class="inline-block grey-text"> Product Bonus Applied :</p>
+													<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} x {{bonus_quantity(i)}} </p>
+											</div>	
+							</div>				
+							<div class="subtotal">
+									<p class="inline-block">Delivery Charges :</p>
+									<p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p>
+													</div>
+													<hr class="horizontal">
+							<div class="subtotal payable margin-top">
+									<p class="inline-block font600">Amount Payable :</p>
+									<p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{(this.calculateAmount() - this.calculate_bonus())}} </p>
+							</div>
+							<hr>
+							<div class="subtotal margin-top">
+									<p class="inline-block green-text" *ngIf="this.cashback_amount() > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+									<p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.product_items)}}</p><div class="clearfix"></div>
+							</div>
+							
+					</div>
+				</div>
+			</div> 
+			<div class="footer-button-buy">
+					<div class="left-half"><h3><i class="icon-inr"></i>{{this.product_calculate_amount - this.product_bonus}}</h3>
+							<p><a href="javascript:" class="forder-txt" (click)="to_order_summary()">Order Details </a></p>
+					</div>
+					<div class="right-half">
+							<button type="button" class="btn" matStepperNext>Continue</button>
+					</div>
+					<!-- <a href="javascript:" class="modal-action modal-close waves-effect btn grey lighten-3 black-text btn-large">Close</a> -->
+			</div>  
+			</mat-step>
+			<mat-step [editable]="false">
+					<ng-template matStepLabel>Payment</ng-template>
+							<div class="payments-method" id="wallet-type">
+							<div class="row">
+									<div class="col s12 m10 offset-m1">
+											<div class="wallet-content left">
+													{{check_wallet_content()}}
+													<!-- <mat-checkbox ></mat-checkbox> -->
+													<span *ngIf="checkbox_text.checkbox ==  true">
+															<mat-checkbox name="include_wallet" value="wallet" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span> </mat-checkbox>
+													</span>
+													<span *ngIf="checkbox_text.radio == true">
+															<mat-radio-button value="wallet" name="wallet_type" [checked]="true"><span class="black-text font600"> LIBANZ Wallet</span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span></mat-radio-button>
+													</span>
+													<span *ngIf="checkbox_text.no_input == true">
+															<i class="material-icons red-text" style="font-size: 22px;">error_outline</i> <span class="grey-text font600"> LIBANZ Wallet<span class="red-text">*</span></span> <span class="grey-text" style="margin-left: 5px;"> <i class="icon-inr"></i>{{this.todoservice.get_user_wallet_amount()}}</span>
+													</span>
+											</div>	
+											<div class="clearfix"></div>
+											<!-- <div class="red-text pt-left-35" *ngIf="this.productservice.cartItemsCount() > 1 && this.productservice.calculateCartAmount() >= this.todoservice.get_user_wallet_amount()">Partial Wallet Amount Can be used in single Product Only.</div>  -->
+											</div>
+									</div>
+							<div class="row">
+									<div class="col s12 m10 offset-m1">
+											<mat-radio-button value="paytm" name="wallet_type" id="paytm" (change)="cod_apply()" [checked]="(checkbox_text.no_input == true || checkbox_text.checkbox ==  true)?true:false"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
+									</div>
+							</div>
+							<div class="row">
+									<div class="col s12 m10 offset-m1">
+											<mat-radio-button value="card" name="wallet_type" id="card" (change)="cod_apply()">Cards & Netbanking</mat-radio-button>
+									</div>
+							</div>
+							<div class="row" *ngIf="this.productservice.cod_invalid == false">
+									<div class="col s12 m10 offset-m1">
+											<span *ngIf="!this.productservice.check_cashon_delivery(this.product_items)">
+															<mat-radio-button value="cod" name="wallet_type" id="cod" (change)="cod_apply()"> Cash on Delivery / ( COD )</mat-radio-button>
+											</span>
+											<span *ngIf="this.productservice.check_cashon_delivery(this.product_items)"><i class="material-icons red-text" style="font-size: 22px;">error_outline</i><label> Cash on Delivery / ( COD )</label></span>
+											<div class="clearfix"></div>
+											<span class="red-text pt-left-35" *ngIf="this.productservice.check_cashon_delivery(this.product_items)"> Not Available On Selected item(s).</span>
+									</div>
+							</div>
+							<!-- <div class="col name margin-checkout offset-m1">
+									<span><button href="javascript:" class="btn orange btn-large" (click)="checkout_items(1)" [disabled]="disabled"> Checkout Rs. ({{pay_amount() - this.calculate_bonus()}})</button></span>
+							</div>  -->
+							<div class="footer-button-buy">
+									<!-- <a href="javascript:" (click)="add_to_cart(product.id)" id="cart-add" class="btn orange btn-large font-size-change1 rounded-btn fix-btnd2"><i class="material-icons white-text">shopping_cart</i>  Add To Cart</a> -->
+									<button href="javascript:" class="btn full" type="Submit" id="book-now" (click)="checkout_items(1)">Checkout (<i class="icon-inr"></i>{{pay_amount() - this.product_bonus}})</button>
+							</div>
+							<div class="red-text col s12 m10 offset-m1 margin-top" *ngIf="this.itemCount() > 1 && this.product_calculate_amount >= this.todoservice.get_user_wallet_amount()">*Partial Wallet Amount Can be used in single Product Only.</div>
+					</div>
+					<div class="order-summary">
+									<div class="card">
+									<div class="card-content black-text no-padding fix-inne-pad">
+											<span class="card-title inline-block">Order Summary</span>
+											<hr>
+											<div class="subtotal" style="border-bottom: 1px dotted #eee;" *ngFor="let item of this.product_items;let i = index;">
+													<div *ngIf="item && ( item.product.tsk_kit == 2 || item.product.tsk_kit == 3) ; then kitblock else nokitblock"></div>
+													<p class="inline-block font600 " style="width:80%;"> <span class="grey-text font500 pack-title">{{item.product.title}} :</span></p>
+													<ng-template #kitblock>
+															<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 2"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+															<p class="inline-block right font-size-change green-text" *ngIf="item.product.tsk_kit == 3"> <i class="icon-inr"></i> {{(item.product.price - 1000) }} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+													</ng-template>
+													<ng-template #nokitblock>
+															<p class="inline-block right font-size-change green-text"> <i class="icon-inr"></i> {{item.product.offer_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+													</ng-template>
+													<br/>
+													<div style="padding-top: 10px;" *ngFor="let pack of item.product.pack_selected">
+															<p class="font600 left"> <span class="grey-text font500 pack-title" style="width:80%;">{{pack.title}} :</span></p>
+															<p class="right font-size-change" *ngIf="item.product.multi != 1"> <i class="icon-inr"></i>{{pack.price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+															<p class="right font-size-change" *ngIf="item.product.multi == 1"> <i class="icon-inr"></i>{{pack.multi_price}} <span class="no-padding" *ngIf="item.quantity > 1">x {{item.quantity}}</span></p>
+															<div class="clearfix"></div>
+													</div>
+													<div style="padding-top: 10px;" *ngIf="item.product.promos">
+															<p class="inline-block font600" style="width:80%;"> Promocode {{item.product.promos.unique_code}} is applied  :</p>
+															<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 0" style="padding-top:7px;"> <i class="icon-inr"></i> -{{item.product.promos.discount}} </p>
+															<p class="inline-block green-text right font-size-change" *ngIf="item.product.promos.amount_calc_type == 1"  style="padding-top:7px;"> <i class="icon-inr"></i> -{{(item.product.promos.discount / product.offer_price)*100}} </p>
+													</div> 
+															<div style="padding-top: 10px;" *ngIf="this.bonus_quantity(i) > 0">
+																	<p class="inline-block grey-text"> Product Bonus Applied :</p>
+																	<p class="inline-block green-text right font-size-change" *ngIf="this.options"> <i class="icon-inr"></i> -{{this.options.how_much_apply_to_product}} x {{bonus_quantity(i)}} </p>
+															</div>	
+											</div>				
+											<div class="subtotal ">
+													<p class="inline-block">Delivery Charges :</p>
+													<p class="inline-block green-text right font-size-change"  style="padding-top:7px;"> Free </p> 
+											</div>
+											<hr class="horizontal">
+											<div class="subtotal payable margin-top">
+													<p class="inline-block font600">Amount Payable :</p>
+													<p class="inline-block right font-size-change"  style="padding-top:7px;"> <i class="icon-inr"></i>{{(this.calculateAmount() - this.calculate_bonus())}}</p>
+											</div>
+											<hr>
+											<div class="subtotal margin-top">
+													<p class="inline-block green-text" *ngIf="this.productservice.cashback_amount(this.product_items) > 0"><b>Cashback:</b> Amount of <i class="icon-inr"></i>{{this.productservice.cashback_amount(this.product_items)}} Will be added to your wallet after product activation.</p><div class="clearfix"></div>
+													<p class="inline-block green-text">Your Total Savings on this order <i class="icon-inr"></i>{{this.productservice.total_savings(this.product_items)}}</p><div class="clearfix"></div>
+											</div>
+											
+									</div>
+									</div>
+							</div>
+			</mat-step>
+		</mat-horizontal-stepper>
+    
+</section>
+<div id="modal-packages" class="modal">
+        <div class="modal-content">
+                <span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
+            <div class="row">
+                <!-- <h3>Selected</h3> -->
+                <div class="col s12 m8">
+                    <div class="center">	
+                        <h2 class="center font600 text-orange">Select Package </h2>
+                        <div class="clearfix"></div>
+                        <h3 class="text-center" *ngIf="!channels_packs">Loading...</h3>
+                        <ul class="monthly-packages" id="monthly-packages" *ngIf="months">
+                            <li *ngFor="let item of months;let i = index">
+                                <a id="month-{{item.id}}" [className]="(1*item.total_month == 1*this.month) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.total_month,this.selectedCartItem.product.id)">{{item.month_label}}</a>
+                            </li>
+                        </ul>
+                        <!-- <span class="chip green white-text">Please Select Your Basic Pack</span> -->
+                    </div>
+                </div>
+                <div class="col s12 m6 l8 channel-list-box">				
+                    <div class="channels-accoriadn">
+                        <ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
+                            <li *ngFor="let packs of channels_packs;let j = index" class="active">
+                                <div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
+                                <div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
+                                    <div class="row">
+                                        <div class="col s12 m4" *ngFor="let item of packs.child;let i = index;">
+                                        <!--<div *ngIf="packs.title.includes('FTA') || packs.title.includes('Airtel Internet Tv') ; then activeblock else noactiveblock"></div> -->
+                                        <div class="card product-new" *ngIf="item.default_selected == 2">
+                                            <div class="card-content center">
+                                                <span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
+                                                <h4 class="grey-text">{{item.title}}</h4>
+                                                <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
+                                                <span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+                                                <br/>
+                                                <a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
+                                            
+                                            </div>
+                                            
+                                        </div>
+                                        <!-- <li class="grey-txt-package" style="list-style-type: circle; font-weight:bold; white-space: nowrap;">FTA Pack is mandatory, you cannot remove it.</li> -->
+                                        <div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
+                                            <div class="card-content center" >
+                                                <span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+                                                <h4 class="grey-text">{{item.title}}</h4>
+                                                <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+                                                <span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+                                                <br/>
+                                                <span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+                                                <span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
+                                            <div class="card-content center" >
+                                                <span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+                                                <h4 class="grey-text">{{item.title}}</h4>
+                                                <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+                                                <span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+                                                <br/>
+                                                <span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a></span>
+                                                <span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+            
+                        <ul class="pt-all-10">
+                            <li class="grey-txt-package" style="list-style-type: circle;">The Package Price & Channels are subject to change at the discretion of the Service Provider, if the additional package is choosen, then your current package validity will be reduced. Libanz is in no way responsible for that and shall not be liable in any way for the same.</li>
+                            <li class="grey-txt-package" style="list-style-type: circle;">Do Not Choose HD channels with Standard Box. If you do the same LibanzSHOP is in no way responsible for that and shall not be liable in any way.</li>
+                            <li class="grey-txt-package" style="list-style-type: circle;">FTA Pack is mandatory, you cannot remove it.</li>
+                        </ul>
+                        <hr class="horizontal">
+                          
+                      </div>
+                  </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:" class="modal-close blue-text">DONE</a>
+        </div>
+    </div>
+  <!-- <div id="select-pack" class="modal modal-fixed-footer">
+        <div class="container modal-header fixed">
+            <div class="modal-close right-align"><i class="material-icons">close</i></div>
+            <h3>Pack Selected</h3>
+            <ul class="monthly-packages" *ngIf="this.selectedCartItem">
+                <li *ngFor="let item of this.selectedCartItem.product.pack_selected;let i = index">
+                    <a id="pack" class="white-text font-size-change1 active-kp" href="javascript:">{{item.title}}(<span *ngIf="this.selectedCartItem.product.title.includes('multi')">{{item.multi_price}}</span><span *ngIf="!this.selectedCartItem.product.title.includes('multi')">{{item.price}}</span>)</a>
+                </li>
+            </ul>
+            <div class="right" id="total-amount">
+                Total : {{this.productservice.calculateCartAmount()}}
+            </div>
+        </div>
+		<div class="modal-content">
+			<div class="row" *ngIf="this.months">
+                <ul class="monthly-packages" id="monthly-packages">
+                    <li>
+                        <span class="font-size-change1 font600 grey-text">Select Month</span>
+                    </li>
+                    <br/>
+                    <li *ngFor="let item of months;let i = index">
+                        <a id="month-{{item.id}}" [className]="(to_number(item.total_month) == to_number(this.month)) ? 'white-text font-size-change1 active-kp' : 'black-text font-size-change1 grey lighten-2'"href="javascript:" (click)="select_month(item.total_month,this.product.id)">{{item.month_label}}</a>
+                    </li>
+                </ul>
+
+                <h3>Select Package</h3>
+                <div class="channels-accoriadn">
+                <ul class="collapsible" data-collapsible="expandable" *ngIf="channels_packs">
+                    <li *ngFor="let packs of channels_packs;let j = index" class="active">
+                        <div class="collapsible-header" id="collapse-header-{{packs.id}}">{{packs.title}}<i class="material-icons">keyboard_arrow_right</i></div>
+                        <div [className]="(packs.default_selected == 1 || check_child_exist(pack_id,packs.child)) ? 'collapsible-body lSAction' : 'collapsible-body'">
+                            <div class="row">
+                                <div class="col s6 m4" *ngFor="let item of packs.child;let i = index;">
+                                
+                                <div class="card product-new" *ngIf="item.default_selected == 2">
+                                    <div class="card-content center">
+                                        <span class="when-check" id="check-pack-{{item.id}}"><i class="material-icons">check_circle</i></span>
+                                        <h4 class="grey-text">{{item.title}}</h4>
+                                        <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span>  <small>@ {{item.month}} Month</small></span>
+                                        <span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+                                        <br/>
+                                        <a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" (click)="fetch_channels(item)" title="{{item.title}}">Channels</a>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="card" *ngIf="item.default_selected == 0 && item.id != pack_id">
+                                    <div class="card-content center" >
+                                        <span class="when-check grey-text" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+                                        <h4 class="grey-text">{{item.title}}</h4>
+                                        <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+                                        <span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+                                        <br/>
+                                        <span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+                                        <span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger rounded-btn">Channels</a></span>
+                                    </div>
+                                </div> 
+                                <div class="card" *ngIf="item.default_selected == 1 || (item.id == pack_id && item.default_selected != 2)">
+                                    <div class="card-content center" >
+                                        <span class="when-check" id="check-pack-{{item.id}}" (click)="select_pack(item)"><i class="material-icons">check_circle</i></span>
+                                        <h4 class="grey-text">{{item.title}}</h4>
+                                        <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{item.price}}</span><span *ngIf="multienable">{{item.multi_price}}</span> <small>@ {{item.month}} Month</small></span>
+                                        <span class="font-size-change1" [innerHTML] = "remove_new_line(item.short_description)"></span>
+                                        <br/>
+                                        <span *ngIf="item.is_active == 1"><a [routerLink]="['/product/channel-pack/'+item.id]" [queryParams]= "{month : month}" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+                                        <span *ngIf="item.is_active == 0"><a href="#channel-list-modal" class="font-size-change1 chng-set modal-trigger" title="{{item.title}}">Channels</a></span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+            </div>
+            <div class="loading" *ngIf="!channels_packs">Loading...</div>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:" class="modal-close waves-effect waves-green btn-flat">Done</a>   
+        </div>
+	</div> -->
+   <app-footer></app-footer>	

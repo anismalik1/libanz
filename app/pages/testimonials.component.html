@@ -1,0 +1,138 @@
+<style>
+
+
+.testimonial-card .testimonial-text {
+    padding: 1rem 3rem 10px;
+    border-top: 4px solid #ff6a00;
+    border-radius: 7px;
+}
+
+blockquote.cst-icon1 p::after {
+    content: '"';
+    font-size: 25px;
+}
+.testimonial-text blockquote p {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8em;
+    text-align: justify;
+    color: #000000 !important;
+}
+.card .card-content p::before {
+  content: '" ' !important;
+    font-size: 30px !important;
+}
+
+@media only screen and (max-width: 767px){
+
+  .cst-btn-plus{
+
+width: 35% !important;
+  height: 28px;
+  line-height: 29px;
+  font-size: 10px !important;
+  text-align: center;
+  padding-left: 23px;
+}
+}
+@media only screen and (max-width: 767px){
+.beard {
+    padding-top: 66px !important;
+}
+}
+
+</style>
+
+<app-header class="hide-on-mobile"></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+<section class="hero">
+    <img src="" class="responsive-img w-100">
+    <div class="container"> 
+        <h2 class="center font600 white-text margin-top"></h2>
+    </div>
+</section>
+<section class="white">
+    <div class="container">
+    <div class="row"><!-- Editor Me itna yaha se dalna he -->
+    <div class="col s12 m6" *ngFor="let item of this.pageservice.testimonials;let i = index;">
+      <div class="new-card-design">
+        <div [className]="(i >= 6)? 'card border-0 no-box-shadow testimonial-card hide': 'card border-0 no-box-shadow'">
+        <div class="card-content testimonial-text cst-icon px-0 pt-0">
+        <blockquote [innerHTML]="decode_html(item.description).toString()" class="cst-icon1">
+          <span>"</span>
+        </blockquote> 
+        </div>
+        
+        <div class="card-image testimonial-card-image"><img class="responsive-img" src="{{this.todoservice.base_url}}web-app/assets/images/recharge-icon/user.svg" />&nbsp;<i>{{item.title}}</i>
+        
+        <p>{{item.user_type}}</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- End Here --></div>
+    <div class="see-more center my-4" *ngIf="this.pageservice.testimonials && this.pageservice.testimonials.length > 6"><a class="btn new-btn-theme" href="javascript:" (click)="see_more()">See More+</a></div>
+    </div>
+    </section>
+    <section class="middle-part margin-top white no-padding m-0">
+            <div class="container-fluid">              
+              <div class="row m-0">
+                <div class="col m6 no-padding">
+                  <img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/Business-india.jpg">
+                </div>
+                <div class="col s12 m6">
+                  <form id="contact-form" [formGroup]="contactgroup" #contactform = "ngForm" (ngSubmit)="contact_submit(contactform.value)">
+                    <div class="first-text-new">
+                      <h2 class="padd font600 heading-txt relative">Solve Your Query </h2>
+                      <span class="horizontal-line-fixes ml-0"></span>			
+                    </div>		
+                    <div class="row no-margin padding-form">
+                      <div class="input-field col s12 m6 new-input-design-fixes">
+                        <input id="first_name" name="name" type="text" class="validate" formControlName="name">
+                        <label for="first_name">Name*</label>
+                        <div class="red-text accent-4 center error-fixes" *ngIf="!contactgroup.controls['name'].valid && contactgroup.controls['name'].touched">Enter Name*.</div>
+                      </div>
+                      <div class="input-field col s12 m6 new-input-design-fixes">
+                        <input id="email" name="email" type="email" class="validate"  formControlName="email">
+                        <label for="email">Email*</label>
+                        <div class="red-text accent-4 center error-fixes" *ngIf="!contactgroup.controls['email'].valid && contactgroup.controls['email'].touched">Enter a Valid Email*.</div>
+                      </div>            
+                      <div class="input-field col s12 m6 new-input-design-fixes">
+                        <input id="phone" name="phone" type="number" class="validate"  formControlName="phone">
+                        <label for="phone">Phone No.*</label>
+                        <div class="red-text accent-4 center error-fixes" *ngIf="!contactgroup.controls['phone'].valid && contactgroup.controls['phone'].touched">Enter a Valid Phone*.</div>
+                      </div>                        
+                      <div class="input-field col s12 m6 new-input-design-fixes">
+                        <input id="company-name" name="company-name" type="text" class="validate"  formControlName="subject">
+                        <label for="company-name">Company Name</label>
+                      </div>                                    
+                      <!-- <div class="input-field col s12 m6">
+                        <input id="company-address" name="company-address" type="text" class="validate">
+                        <label for="company-address">Company Address</label>
+                      </div>                                    
+                      <div class="input-field col s12 m6">
+                        <input id="company-phone" name="company-phone" type="number" class="validate">
+                        <label for="company-phone">Company Phone No.</label>
+                      </div>             -->
+                      <div class="input-field col s12 new-input-design-fixes">
+                        <input id="home-address" name="home-address" type="text" class="validate"  formControlName="message">
+                        <label for="home-address">Address</label>
+                      </div>
+                      <div class="center col s12">
+                        <button type="submit" class="btn new-btn-theme" [disabled]="!contactgroup.valid">Register Now <i class="fa fa-angle-double-right vertical	-align-middle right" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+    <app-footer></app-footer>
+    

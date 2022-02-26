@@ -1,0 +1,276 @@
+<style>
+
+    .cst-table tr:nth-child(odd) {
+        background-color: rgba(242,242,242,0.5);
+    }
+    .theader-cst{
+        background: #ececec;
+        white-space: nowrap;
+       
+    }
+    .cst-table tr td {
+        border: 1px solid #e2e2e2;
+    }
+    .fix-welcome{
+        padding: 10px;
+        font-size: 16px;
+        color: #7b7a7a;
+      }
+      .user-image{
+          padding:9px;
+      }
+      
+      label.lbl-num {
+        line-height: 33px;
+        font-size: 16px !important;
+        }
+        .cst-dname{
+      
+      font-size: 16px !important;
+        padding: 10px;
+        text-transform: capitalize;
+      }
+      .heading-txt-1{
+        font-weight: bold;
+        color: #424242 !important;
+        line-height: 0 !important;
+        margin: 6px;
+      }
+      .complain a.right.inline-block.margin-top-cart {
+    margin: 0 5px 10px 0px;
+}
+.complaint-modal {
+    width: 45%;
+    border-radius: 5px;
+}
+.order-date.margin-top-cart {
+    margin-bottom: -3px;
+}
+    
+      @media only screen and (max-width: 767px){
+    
+    .btn-mb-respo{
+        width: 100%;
+    border-radius: 20px;
+    }
+    .pt-top-mb{
+        padding-top:22px !important;
+        white-space: nowrap;
+    font-size: 19px !important;
+    }
+    .button-block{
+
+        display: flex;
+    }
+    .item{
+        padding: 0px 10px 0px 12px !important;
+    }
+   
+    }
+    
+        </style>
+
+<app-header class="hide-on-mobile"></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+
+<section class="flash-deal">
+    <div class="container-fluid">
+        <div class="row no-margin">
+            <div class="col s12 m2">
+                <!-- <div class="card">
+              <div class="card-content user-content">
+                    <div class="user-image">
+                        <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                        <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                        <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+                    </div>
+                    <div class="user-name">
+                        <span class="fix-welcome">Welcome,</span><br>
+                        <span class="font-size-change font600  cst-dname" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user_name()}}</span>
+                    </div>
+              </div>
+            </div> -->
+                <app-side-nav></app-side-nav>		    
+            </div>
+            <div class="col s12 m10">
+               
+              <div class="card fix-top-bg">
+                    <div class="card-content complain">
+                        <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-envelope"></span> &nbsp; Tickets</h3>
+                        <div class="right">
+                            <span>Search Ticket: </span><input type="text" placeholder="Enter Order Id/Subscriber Id" id="ticket-id"><a href="javascript:" class="search-link" (click)="seach_ticket()"><i class="material-icons">search</i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="left inline-block" id="search-record"></div>
+                        <div class=" right inline-block" style="margin-bottom:15px;">
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/all')" class=" margin-top-cart "><button type="button" [className]="(type == 'all' || type == '')?'btn orange no-box-shadow':'btn grey no-box-shadow item' ">All</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/0')" class=" margin-top-cart "><button type="button" [className]="(type == '0')?'btn orange no-box-shadow':'btn grey no-box-shadow item light-btn'">In Progress</button></a>
+                            <a href="javascript:" (click)="navigate_to('/dashboard/complaints/1')" class=" margin-top-cart "><button type="button" [className]="(type == '1')?'btn orange no-box-shadow':'btn grey no-box-shadow item light-btn'">Resolved</button></a>
+                        </div>
+                       
+                        <div class="overflow-scroll cst-table responsive-table" >							 
+                            <table id="datatable" class="display  datatable-example">
+                                <thead class="thead-bg">
+                                    <tr>
+                                        <th >S.No.</th>
+                                        <th >Ticket ID</th>
+                                        <th >Order ID</th>
+                                        <th >Order Type</th>
+                                        <th >Subcriber ID/Recharge No</th>
+                                        <th >Amount</th>
+                                        <th >Complaint</th>
+                                        <th >Recent Comment/Remark</th>
+                                        <th >Created</th>
+                                        <th >Last Update</th>
+                                        <th>Complaint Status</th>
+                                        <th >Order Status</th>
+                                        <th >Option</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody *ngIf="complaints && complaints_counts > 0">
+                                    <tr *ngFor="let complaint of complaints | paginate: { id: 'server', itemsPerPage: this.todoservice.page_per_items(), currentPage: p, totalItems: complaints_counts };let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{complaint.complaint_id}}</td>
+                                        <td>{{complaint.order_id}}</td>
+                                        <td><span *ngIf="complaint.activity_type == 5">{{decode_json(complaint.order_data).product_title}}</span><span *ngIf="complaint.activity_type == 1">{{decode_json(complaint.order_data).operator_title}}</span></td>
+                                        
+                                        <td>{{complaint.subcriber_id}}</td>
+                                        <td><i class="fa fa-inr"></i> {{complaint.grand_total}}</td>
+                                        <td>{{complaint.comment}}</td>
+                                        <td>{{complaint.remark}} <span *ngIf="complaint.comment_count > 1"><a href="#complaints" class="modal-trigger blue-text" (click)="show_all_comment(complaint.order_id)">+{{complaint.comment_count*1 - 1}} more</a></span><div class="clearfix"></div><a href="#complaints" class="modal-trigger blue-text" *ngIf="(searched_ticket ==true && i == 0 && complaint.v_o == 'o') || (searched_ticket == false && complaint.v_o == 'o')" (click)="init_complaint(complaint.order_id)">reply</a></td>
+                                        <td><span>{{complaint.history_time | date: 'dd M, Y'}} <time>{{complaint.history_time | date:'h:mm a'}}</time></span></td>
+                                        <td><span>{{complaint.last_update | date: 'dd M, Y'}} <time>{{complaint.last_update | date:'h:mm a'}}</time></span></td>
+                                        
+                                        <td><i class="fa fa-circle orange-text" aria-hidden="true" *ngIf="complaint.seen == 0 || complaint.seen == 1"></i><i class="fa fa-circle green-text" aria-hidden="true" *ngIf="complaint.seen == 2 || complaint.seen == 3"></i></td>
+                                        <td><span [innerHTML]="this.todoservice.order_template(complaint.status)"></span></td>
+                                        <td class="center">
+                                            <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" ><span class="fa fa-eye cst-eye"></span> </a>
+                                            <!-- <a href="#view-more" (click)="complaint_invoice(complaint.order_id)" class="btn tooltipped btn-icon orange modal-trigger icon-blast" data-position="top" data-delay="40" data-tooltip="View"><i class="material-icons font-size-change eye">visibility</i></a> -->
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="complaints_counts == 0">
+                                    <tr>
+                                        <td colspan="12" class="center">No Active Ticket</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                            <div class="has-text-centered right-align">
+								<pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="view-more" class="modal complaint-modal">
+    <div class="modal-content" *ngIf="loop_info == true">
+      <h3 class="font600">Order Invoice</h3>
+      <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+      <div class="row" >
+      	<div class="col s12 m6">
+      		<span class="font-size-change">Order #{{complaint_info[0].id}}</span>
+      		
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Order Date : </span>
+      			<span>{{complaint_info[0].created | date: 'dd M, Y h:i a'}}</span>
+              </div>
+            <div class="order-date margin-top-cart">
+                <span class="font600">Payment Mode : </span>
+                <div [innerHTML]="this.todoservice.paymethod_template(complaint_info[0].paymethod)"></div>
+            </div>
+      		<div class="order-date margin-top-cart">
+                <span class="font600">Payment Status : </span>
+                <div [innerHTML]="this.todoservice.payment_template(complaint_info[0].payment_status)"></div>
+      		</div>
+      		<div class="order-date margin-top-cart">
+                  <span class="font600">Order Status : </span>
+                  <div [innerHTML]="this.todoservice.order_template(complaint_info[0].status)"></div>
+            </div>
+            
+      	</div>
+      
+      </div>
+      <hr>
+      <div class="row">
+      	<div class="col s12">
+      		<table class="responsive-table bordered striped highlight">
+                <thead class="thead-bg">
+		          <tr>
+	              <th>Subscriber/Customer No.</th>
+	              <th>Operator</th>
+	              <th>Recharge Amount</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <tr>
+		            <td>{{complaint_info[0].subcriber_id}}</td>
+		            <td>{{complaint_info[0].operator}}</td>
+		            <td class="center"><i class="fa fa-inr"></i>{{complaint_info[0].grand_total}}</td>
+		          </tr>
+		        </tbody>
+		      </table>
+      	</div>
+      </div>
+      <hr>
+      <div class="row margin-top">
+      	<div class="col s12 right-align">
+      		<span>Order Totals</span>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Grand Total : </span>
+      			<span><i class="fa fa-inr"></i> {{complaint_info[0].grand_total}}</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Use Wallet Amount : </span>
+      			<span><i class="fa fa-inr"></i> {{complaint_info[0].grand_total}}</span>
+      		</div>
+      		<div class="order-date margin-top-cart">
+      			<span class="font600">Total Amount : </span>
+                  <span><i class="fa fa-inr"></i> {{complaint_info[0].grand_total}}</span>
+                  <br/>
+              </div>
+              
+            
+      	</div>
+      </div>
+    </div>
+  </div>
+  <div id="complaints" class="modal complaint-modal">
+         
+  <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="reply_complaint(complaintform.value)">
+  <div class="modal-content">
+    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>  
+    <div class="recent-comments" *ngIf="recent_comments.length > 0">
+       <h4>Recent Comments</h4>
+       <ul>
+           <li *ngFor="let item of recent_comments;"><span class="date-span">[{{item.created | date: 'dd M, Y h:i A'}}] </span><span class="user font600" *ngIf="item.v_o == 'v'">You:</span> <span class="user font600" *ngIf="item.v_o == 'o'">Libanz:</span> <span class="comment"> {{item.comment}}</span></li>
+       </ul> 
+    </div>
+    <a href="javascript:" *ngIf="this.recent_comments.length > 0 && this.recent_comments[this.recent_comments.length-1].v_o =='o' && this.comment == false" (click)="open_comment()">ADD COMMENT</a>
+    <div *ngIf="this.comment == true">
+        <h3 class="font600">Reply Comment</h3>
+        <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
+        <div class="row no-margin">
+            <div class="input-field col s12">
+                <input type="text" placeholder="Enter Query" formControlName="title" value="">
+                <div class="red-text accent-4" *ngIf="!complaintgroup.controls['title'].valid && complaintgroup.controls['title'].touched">Enter Comment.</div> 
+            </div>
+        </div>
+        <div class="modal-footer orange center">
+            <button type="submit" class="modal-action btn-flat white-text font-size-change" [disabled]="!complaintgroup.valid">Comment</button>
+        </div>
+    </div>
+   
+  </div>
+  
+</form>
+</div>
+<app-footer-min></app-footer-min>

@@ -1,0 +1,405 @@
+<style>
+  .link-faqs h5 {
+    background: #ececec;
+    padding: 7px 7px 7px 9px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 17px !important;
+    /* content: '>>'; */
+}
+button.btn-flat.search-btn {
+    position: absolute;
+    left: 16px;
+    padding-right: 20px;
+    top: 24px !important;
+}
+#faq_key {
+  padding-left:30px;
+}
+p.grey-text.center.stop-txt {
+  color: #f36c21 !important;
+    font-size: 22px !important;
+}
+.dis-none {
+  color: #f47c3a;
+    text-align: center;
+    position: absolute;
+    justify-content: center;
+    left: 33%;
+    top: 46px;
+    font-size: 23px;
+    font-weight: bold;
+}
+.icon-fix{
+
+  font-size: 45px;
+    background: #ececec;
+    border-radius: 50%;
+    padding: 10px;
+}
+div#modal-speak {
+    height: 250px;
+    border-radius: 10px;
+}
+.cst-color{
+
+  color:#8c8c8c;
+  font-size: 20px;;
+}
+.faq-btn{
+
+  margin-right: 20px;
+    width: 100px;
+}
+@media only screen and (max-width :767px){
+
+    .dis-none{
+
+      display: none;
+    }
+    .faq-btn{
+
+margin-right: 20px;
+  width: 100px;
+  margin-bottom: 50px;
+}
+
+}
+@media only screen and (max-width: 767px){
+  .cart-strip {
+    margin-right: 18px;
+    position: absolute;
+    right: 0;
+    margin-top: -24px;
+}
+.cst-back .black-text {
+    font-size: 16px !important;
+    margin-top: -5px;
+}
+}
+.pk-list{
+
+
+position:relative;
+top:-5px;
+
+}
+
+</style>
+<h2 class="dis-none">Help Centre</h2> 
+<app-header></app-header>
+<title></title>
+
+<div class="spinner-wrapper">
+  <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+<!-- <p class="grey-text center stop-txt">Stop Worrying! We Will Solve All Your Queries</p>  -->
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+	
+<!-- <section class="hero" style="background-image: url({{this.todoservice.base_url}}accounts/assets/img/banner/faq1.jpg)">
+  <div class="container">
+    <h2 class="center font600 white-text margin-top">FAQ'S</h2>
+  </div>
+</section>  -->
+
+<section class="white no-padding new-faq-mar m-0 py-5">
+  
+  <div class="container">
+    <div class="row no-margin">
+      <!-- <div class="col s12 m3 queries-faq">
+        <div class="card side-nav-faqs grey lighten-2">
+          <div class="card-content" *ngIf="faqs">
+              <span class="card-title center">Queries</span>
+            <ul class="collapsible" data-collapsible="accordion">
+              <li *ngFor="let item of faqs.list;">
+                <div class="collapsible-header font600 active">{{item.title}} <i class="material-icons">
+                  keyboard_arrow_right</i></div>
+                <div class="collapsible-body">
+                  <ul>
+                    <li><a class="queries-active" href="javascript:void(0);" *ngFor="let link of item.records"  (click)="print_faq(link.url)"><i class="material-icons ques">question_answer</i>{{link.question}} </a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="col s12 m8">
+        
+        <div class="col s12 margin-top faq1"> 
+          <p class="grey-text center stop-txt">Stop Worrying! We Will Solve All Your Queries</p> 
+          <ul class="collapsible no-box-shadow" data-collapsible="accordion">
+            <li class="search-accordin relative new-text-fixes">
+
+                <mat-form-field class="example-full-width">
+                  <button type="Submit" class="btn-flat search-btn" (click)="go_to_search();" ><i class="material-icons search">search</i></button>
+										<input type="text" id="faq_key"  class="no-margin black-text"  aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="search_me($event)" (keyup.enter)="go_to_search()" > 
+										<mat-autocomplete #auto="matAutocomplete">
+											<span *ngIf="filterdList">
+											<mat-option *ngFor="let option of filteredOptions" [value]="option">
+												<a href="javascript:" class="black-text" (click)="find(option)">{{option}}</a>
+											</mat-option>
+										</span>
+								    </mat-autocomplete>
+								</mat-form-field>
+            
+              <button type="Submit" class="btn-flat modal-trigger" onclick="speech.start()" style="right: 10%;" id="search-on" href="#modal-speak"><i id="mic-icon" class="material-icons ">mic</i></button>
+              <!-- <button type="button" class="btn-flat" id="search-ico" style="right: 20px!important;" (click)="go_to_search()"> <i class="material-icons">search</i></button> -->
+              <!-- <button type="Submit" class="btn-flat" onclick="speech.stop()" style="right: 7%;" id="search-off"><i class="material-icons">clear</i></button> -->
+            </li>
+          </ul>
+          <div id="modal-speak" class="modal">
+              <div class="modal-header">
+                  <a href="javascript:" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="speech.stop()" style="visibility:hidden;">close</a>
+                </div>
+            <div class="modal-content">
+              <h1 class="left speak-txt"> Speak Now ...</h1> 
+              <p class="left" style="float:right !important;"><i id="mic-icon" class="large material-icons " style="font-size: 50px;
+              font-size: 55px;
+                background: #fff;
+                border-radius: 50%;
+                padding: 10px;
+                color: #f74747;
+    box-shadow: 1px 1px 10px #ececec;">mic</i></p>
+            </div>
+            
+          </div>
+          <ul class="news-tabs" *ngIf="this.query_string != ''">
+            <li><a routerLink="/blog/all">
+              <span class="icons-news"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 11h6v2h-6v-2zm-6 6h12v-2H6v2zm0-4h4V7H6v6zm16-7.22v12.44c0 1.54-1.34 2.78-3 2.78H5c-1.64 0-3-1.25-3-2.78V5.78C2 4.26 3.36 3 5 3h14c1.64 0 3 1.25 3 2.78zM19.99 12V5.78c0-.42-.46-.78-1-.78H5c-.54 0-1 .36-1 .78v12.44c0 .42.46.78 1 .78h14c.54 0 1-.36 1-.78V12zM12 9h6V7h-6v2z"></path></svg>
+              </span>News</a></li>
+            <li><a href="https://www.youtube.com/channel/UCaIDgIvn8kEMe2vevaTAPFw/search?query={{this.query_string}}">
+              <span class="icons-news"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M0 0h24v24H0z" fill="none"></path><path clip-rule="evenodd" d="M10 16.5l6-4.5-6-4.5v9zM5 20h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1zm14.5 2H5a3 3 0 0 1-3-3V4.4A2.4 2.4 0 0 1 4.4 2h15.2A2.4 2.4 0 0 1 22 4.4v15.1a2.5 2.5 0 0 1-2.5 2.5z" fill-rule="evenodd"></path></svg>
+              </span>Videos</a></li>
+          </ul> 
+          <div *ngIf="searched && search_list.length == 0">
+              <h4 class="red-text center margin-top1">No Records. Please fill up the form <a href="javascript:" (click)="go_to_form()">here</a> to find your Solution.</h4>
+          </div> 
+          <div class="faqs-text link-faqs" *ngIf="single">
+            <h2>{{single.question}}</h2>
+            <hr>
+            <p [innerHTML]="single.answer"></p>
+            <h4 class="font600 margin-top1">Was this information helpful?</h4>
+            <a href="javascript:void(0);" class="btn green faq-btn rounded-btn" (click)="thanks()">Yes</a>
+            <a href="#no-faq" class="btn red modal-trigger faq-btn rounded-btn">No</a>
+          </div>        
+          <div class="faqs-text" *ngIf="searched && search_list.length > 0">
+            <!-- <h2>Searched Query</h2> -->
+            <span class="grey-text">Showing {{search_list.length}} Of {{search_count}} Results</span>
+            <ul>
+              <li *ngFor="let item of search_list | paginate: { id: 'order-p', itemsPerPage: 10, currentPage: o_p, totalItems: search_count };let i=index">
+                <div class="link-faqs">
+                  <a routerLink="'/help/faqs/'+{{item.url}}" (click)="print_faq(item.url)">{{item.question}}</a>
+                  <span>{{this.todoservice.base_url}}help/faqs/{{item.url}}</span>
+                  <p [innerHTML]="item.meta_description"></p>
+                </div>
+                
+              </li>
+            </ul>
+            <div class="has-text-centered right-align">
+                <pagination-controls (pageChange)="getPage($event)" id="order-p"></pagination-controls>
+            </div>
+          </div>
+          <div class="faqs-new-format left-align" *ngIf="!searched">
+            <h2 class="font600 center no-margin">Popular Ask Queries</h2>
+            
+            <p class="grey-text center most-top" *ngIf="this.pageservice.default_queries">Top {{this.pageservice.default_queries.length}} Question</p>
+            <hr>
+            <ul>
+              <li *ngFor="let item of this.pageservice.default_queries;">
+                <div class="link-faqs">
+                  <a [routerLink]="'/help/faqs/'+item.url">
+                    <h5 class="font600">{{item.meta_title}}</h5>
+                    <span class="orange-clr">{{this.todoservice.base_url}}help/faqs/{{item.url}}</span>
+                    <p class="grey-text">{{item.meta_description}}</p>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="images-faqs-new">
+          <!-- <img src="{{this.todoservice.base_url}}accounts/assets/img/banner/faq1.jpg" class="responsive-img" alt="Faqs"> -->
+          <div class="recommended-section" *ngIf="suggested_product && suggested_product.length > 0">
+              <h2>Suggested Products</h2>
+              <div class="col m4 s12" *ngFor="let item of suggested_product">
+                  <div class="card">
+                      <div class="card-image padd center">
+                        <img alt="images" class="responsive-img" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}">
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                            <a class="blue-text" href="/product/{{item.url}}" title="{{item.title}}">{{item.title | slice:0:26}}<span *ngIf="item.title.length>26">...</span></a>
+                          <!-- <span class="card-title blue-text font-size-change1"></span> -->
+                          <div class="row no-margin">
+                              <div class="col s12 m12">
+                                <span class="black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+                                <span class="grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>                                                   
+                              </div>
+                              <div class="col s12 m12">
+                                <span class="green-text white-spc-txt" *ngIf="item.cod_available == 1">COD Available</span>
+                                <span class="green-text" *ngIf="item.cod_available != 1">Free Home Delivery</span>
+                              </div>
+                            </div> 									 
+                            
+                        </div>
+                      </div>
+                    </div>
+              </div>
+          </div>
+          
+        <!-- <ul class="faq-new-lider" *ngIf="product_images && product_images.length > 0">
+          <li *ngFor="let item of product_images">
+            <div class="card">
+              <div class="card-image padd center">
+                <img alt="images" class="responsive-img" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}">
+              </div>
+              <div class="clearfix"></div>
+              <div class="card-stacked">
+                <div class="card-content no-padding">
+                  <span class="card-title white-text font-size-change1">{{item.title}}</span>
+                  <div class="row center">
+                      <div class="col s12 m12">
+                        <span class="font-16 black-text font600"><i class="icon-inr"></i>{{item.offer_price}}</span>
+                        <span class="font-16 grey-text del-pri"><i class="icon-inr"></i>{{item.price}}</span>                          
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="col s12 m12 ">
+                        <a class="blue-text font-16" target="_blank" href="/product/compare-box?urls={{item.url}}&ref={{item.url}}">Compare <i class="material-icons">compare</i></a><div class="clearfix"></div>
+                      </div>
+                    </div> 									 
+                    <div class="btn-new1 center">
+                      <a class="btn" target="_blank" href="/product/{{item.url}}">Book Now</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </li>					
+        </ul> -->
+        </div>
+        <div class="col s12 ask-question">
+          <div class="card new-card-design">
+            <div class="card-content center p-0">
+              <div class="first-text-new">
+                <h2 class="padd mb-0 font600 heading-txt relative">Ask Your Questions </h2>
+              </div>		
+              <form id="contact-form" [formGroup]="faqsgroup" #faqsform = "ngForm" (ngSubmit)="faqs_submit(faqsform.value)">
+                <div class="row no-margin">
+                  <div class="input-field col s12 new-input-design-fixes">
+                    <input id="name" type="text" class="validate" formControlName="name">
+                    <label for="name">Name*</label>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['name'].valid && faqsgroup.controls['name'].touched">Enter Name*.</div>
+                  </div>
+                  <div class="input-field col s12 new-input-design-fixes">
+                    <input id="memail" type="email" class="validate" formControlName="email">
+                    <label for="email">Email*</label>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['email'].valid && faqsgroup.controls['email'].touched">Enter Valid Email*.</div>
+                  </div>
+                  <div class="input-field col s12 new-input-design-fixes">
+                    <input id="mphone" type="number" class="validate" formControlName="phone">
+                    <label for="email">Phone*</label>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['phone'].valid && faqsgroup.controls['phone'].touched">Enter Valid Phone No.*.</div>
+                  </div>
+                  <div class="input-field col s12 new-input-design-fixes">
+                    <textarea id="textarea11" class="materialize-textarea" formControlName="message"></textarea>
+                    <label for="textarea11">Type Your Question*</label>
+                    <div class="red-text accent-4 center error-fixes" *ngIf="!faqsgroup.controls['message'].valid && faqsgroup.controls['message'].touched">Enter Query*.</div>
+                  </div>
+                  <div class="col s12 center">
+                    <button type="Submit" class="btn new-btn-theme" [disabled]="!faqsgroup.valid">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="no-faq" class="modal">
+  <div class="modal-content">
+    <h4 class="font600 center">Suggest Us For Better Way</h4>
+    <form [formGroup]="unsatisfiedformgroup" #unsatisfiedform = "ngForm" (ngSubmit)="unsatisfied(unsatisfiedform.value)">
+      <div class="row no-margin">
+        <div class="col s12 m6">
+          <p>
+            <input type="checkbox" id="test1" formControlName="hint" value="1"/>
+            <label for="test1">Fix typos or links</label>
+          </p>
+        </div>
+        <div class="col s12 m6">
+          <p>
+            <input type="checkbox" id="test2"  formControlName="hint" value="2"/>
+            <label for="test2">Fix incorrect or incomplete information</label>
+          </p>
+        </div>
+        <div class="col s12 m6">
+          <p>
+            <input type="checkbox" id="test3" formControlName="hint" value="3" />
+            <label for="test3">I have a question</label>
+          </p>
+        </div>
+        <div class="col s12 m6">
+          <p>
+            <input type="checkbox" id="test4" formControlName="hint" value="4" />
+            <label for="test4">Article too long</label>
+          </p>
+        </div>
+        <div class="input-field col s12 m12">
+          <textarea id="textarea1" class="materialize-textarea" formControlName="comment"></textarea>
+            <label for="textarea1">Comment</label>
+        </div>
+        <div class="input-field col s12"> 
+          <input id="input_text" type="text" formControlName="email">
+          <label for="input_text">Email</label>
+          <div class="red-text accent-4 center" *ngIf="!unsatisfiedformgroup.controls['email'].valid && unsatisfiedformgroup.controls['email'].touched">Enter Valid Email*.</div>
+        </div>
+        <div class="input-field col s12 m12 right-align">
+          <button type="submit" class="btn orange" [disabled]="!unsatisfiedformgroup.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+  <!-- KYC Design -->
+  <!-- <section class="kyc">
+    <div class="container">
+      <h2 class="center">Fill Your Details For KYC/E-KYC</h2>
+      <form>
+        <div class="row">
+          <div class="input-field col s12 m4">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Name</label>
+          </div>
+          <div class="input-field col s12 m4">
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+          </div>            
+          <div class="input-field col s12 m4">
+            <input id="phn" type="number" class="validate">
+            <label for="phn">Phone No.</label>
+          </div>            
+          <div class="input-field col s12 m4">
+            <input id="father" type="text" class="validate">
+            <label for="father">Father Name</label>
+          </div>            
+          <div class="input-field col s12 m4">
+            <input id="mother-name" type="text" class="validate">
+            <label for="mother-name">Mother Name</label>
+          </div>            
+          <div class="input-field col s12 m4">
+            <input id="dob" type="text" class="validate datepicker">
+            <label for="dob">Date of Birth (DOB)</label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section> -->
+  <!-- End Here -->
+<app-footer></app-footer>

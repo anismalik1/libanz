@@ -1,0 +1,267 @@
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+	</div>
+	
+	<div class="fix-mb-top"></div>
+<section class="flash-deal">
+		<div class="container">
+			<div class="row no-margin">
+				<div class="col s12 m3">
+					<!-- <div class="card">
+			      <div class="card-content user-content">
+								<div class="user-image">
+										<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+										<img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+										<span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+								</div>
+			      	<div class="user-name">
+			      		<span>Welcome,</span><br>
+			      		<span class="font-size-change font600">{{this.todoservice.get_user_name()}}</span>
+			      	</div>
+			      </div>
+			    </div> -->
+					<app-side-nav></app-side-nav>			    
+				</div>
+				<div class="work" *ngIf="step==1;then orderform else thanksmsg"></div>
+				<ng-template #orderform>
+				<div class="col s12 m9">
+					<div class="card">
+							<br/>
+							<div class="middle-align" *ngIf="display_chip == true">
+							<div class="chip green" *ngIf="book_status.status == true">
+									<span class="white-text font-size-change">{{book_status.msg}}! Order Id ({{book_status.order_id}})</span><i class="close material-icons white-text">close</i>
+								</div><div class="chip red" *ngIf="book_status.status == false">
+										<span class="white-text font-size-change">{{book_status.msg}}</span><i class="close material-icons white-text">close</i>
+									</div>
+
+							</div>	
+						<div class="card-content">
+							<h3 class="font600 inline-block">Book DTH Order (Customer Details)</h3>
+							<div class="row sec-7">
+								<div class="col s12">
+									<form id="book-form" [formGroup]="bookformgroup" class="margin-top sec-7" #bookform = "ngForm">
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+							          <input id="fname" formControlName="fname" type="text" class="validate">
+							          <label for="fname">First Name</label>
+							        </div>
+							        <div class="input-field col s12 m6">
+							          <input id="lname" formControlName="lname" type="text" class="validate">
+							          <label for="lname">Last Name</label>
+							        </div>
+							      </div>
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+							          <input id="rmnumber" formControlName="rmnumber" type="number" class="validate">
+							          <label for="rmnumber">Registered Mobile No.</label>
+							        </div>
+							        <div class="input-field col s12 m6">
+							          <input id="amnumber" formControlName="amnumber" type="number" class="validate">
+							          <label for="amnumber">Alternative Mobile No.</label>
+							        </div>
+							      </div>
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+							          <input id="address" formControlName="address" type="text" class="validate">				
+							          <label for="address">Address</label>
+							        </div>
+							        <div class="input-field col s12 m6">
+							          <input id="remark" formControlName="remark" type="text" class="validate">
+							          <label for="remark">Remark</label>
+							        </div>
+							      </div>							      
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+							          <input id="city" formControlName="city" type="text" class="validate">				
+							          <label for="city">City</label>
+							        </div>
+							        <div class="input-field col s12 m6">
+							          <input id="state" formControlName="state" type="text" class="validate">
+							          <label for="state">State/Provider</label>
+							        </div>
+							      </div>							      
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+							          <input id="pincode" formControlName="pincode" type="number" class="validate">			
+							          <label for="pincode">Pincode</label>
+							        </div>
+							        <div class="input-field col s12 m6">
+							          <input id="state" formControlName="subid" type="text" class="validate" id="subid">
+							          <label for="state">Subscriber Id(If Secondary)</label>
+							        </div>
+							      </div>
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+												<a href="javascript:" class="font-size-change1 chng-set dropdown-button" data-activates='dropdown1'>Select Category</a>
+                        <ul id='dropdown1' class='dropdown-content'>
+                          <li *ngFor="let item of categories;">
+                            <a href="#tata-sky-modal" class="modal-trigger" (click)="category_selected(item.id)">{{item.title}}</a>
+                          </li>
+                        </ul>
+											</div>	
+							        <div class="input-field col s12 m6">
+											<!-- <mat-form-field id="select-quality">
+													<mat-select placeholder="Select Dth Quality SD/HD/HD PLUS/4K HD" formControlName="category_quality" [disabled]="quallitydisabled" (change)="enable_plan($event)">
+															<span *ngFor="let item of categories_quality">
+																	<mat-option [value]="item.id">
+																			<span class="operator-name">{{ item.title }}</span>
+																	</mat-option>
+															</span>
+													</mat-select>
+											</mat-form-field> -->
+							        </div>
+							      </div>
+							      <div class="row no-margin">
+							        <div class="input-field col s12 m6">
+											<!-- <mat-form-field>
+															<mat-select placeholder="Select Plans" formControlName="category_plans" [disabled]="plandisabled" (change)="get_products($event)" >
+																	<span *ngFor="let item of product_plans">
+																			<mat-option [value]="item.id">
+																					<span class="operator-name">{{ item.title }}</span>
+																			</mat-option>
+																	</span>
+															</mat-select>
+													</mat-form-field> -->
+													</div>
+							        <div class="input-field col s12 m6">
+											<!-- <mat-form-field>
+													<mat-select placeholder="Select Product" formControlName="category_products" [disabled]="disabled_products" (change)="get_product_info($event.value)">
+															<span *ngFor="let item of category_products">
+																	<mat-option [value]="item">
+																			<span class="operator-name">{{ item.title }}</span>
+																	</mat-option>
+															</span>
+													</mat-select>
+											</mat-form-field> -->
+							        </div>
+							      </div>
+							      <div class="row no-margin">
+							        <div class="input-field col s6 m6 hide" id="tsk-margin">
+												<!-- <mat-form-field>
+														<mat-select placeholder="Select TSK Kit" formControlName="tsk_kit" (change)="apply_tsk_margin($event.value)">
+																<mat-option value="1">
+																		<span class="operator-name">Rs.999 TSK</span>
+																</mat-option>
+																<mat-option value="2">
+																				<span class="operator-name">Rs.599 TSK</span>
+																		</mat-option>
+														</mat-select> 
+												</mat-form-field>-->
+												<span class="tsk_margin"></span>
+												<div class="tsk-margin"></div>
+											</div>
+											<div class="input-field col s12 m6 hide" id="price-box">
+												<div class="col s6 m3">
+														<span>Offer Price</span> <span *ngIf="selected_item.offer_price!=''"><i class="icon-inr"></i>{{selected_item.display_price}}</span>
+												</div>
+												<div class="col s6 m3">
+														<span>Actual Price</span> <span *ngIf="selected_item.price!=''"><i class="icon-inr"></i>{{selected_item.price}}</span>
+												</div>	 
+											</div>
+							      </div>
+							      <div class="row">
+							        <div class="input-field col s12 m10 center">
+							          <button href="#confirm-modal" class="btn btn-large modal-trigger orange white-text" [disabled]="!bookformgroup.valid">Proceed Booking</button>
+							        </div>
+							      </div>
+							    </form>
+								</div>
+							</div>
+            </div>
+            <div id="tata-sky-modal" class="modal modal-fixed-footer">
+              <div class="modal-content">
+                <h4>Choose Set Up Box </h4>
+                <div class="row" *ngIf="product_list">
+                  <div class="col s6 m3" *ngFor="let item of product_list">
+                    <a href="javascript:" class="black-text" (click)="continue_to_change(item.id)">
+                      <div class="card choose-set-up-box center">
+                        <div class="card-image">
+                          <img src="{{this.todoservice.base_url}}accounts/assets/img/product-img/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}">
+                        </div>
+                        <div class="card-content">
+                          <span>{{item.title}}</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="row" *ngIf="!product_list && product_selected">
+                  Loading Products
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <a href="javascript:" class="modal-action btn red modal-close">Close</a>
+              </div>
+            </div>
+						<div id="confirm-modal" class="modal complaint-modal">
+							<div class="modal-content">
+								<h3 class="font600">Confirm Order</h3>
+								<span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+								<div class="card no-box-shadow">
+									<div class="card-content">
+										<table class="bordered responsive-table">
+											<thead>
+												<tr>
+													<th>Customer Name</th>
+													<th>Product </th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{todoservice.get_user_name()}}</td>
+													<td>{{selected_item.title}}</td>
+													<td>{{selected_item.display_price}}</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="right-align margin-top">
+											<div class="cod1" *ngIf="selected_item.cod_available==1">
+												<input type="radio" id="cod" name="payment_type" value="cod" checked/>
+												<label for="cod" class="black-text">Cash On Delivery</label>
+											</div>
+											<div class="uwa margin-top" *ngIf="this.todoservice.get_user_wallet_amount() >= selected_item.display_price">
+												<input type="radio" id="uwa" name="payment_type" value="wallet"/>
+												<label for="uwa" class="black-text">Use Wallet Amount</label>
+											</div>
+										</div>
+									</div>
+									<div class="card-action right-align">
+										<button type="submit" class="btn orange modal-close" (click)="book_order(bookform.value)" *ngIf="this.todoservice.get_user_wallet_amount() >= selected_item.display_price || selected_item.cod_available == 1">Order Place</button>
+										<h4 class="left red-text" *ngIf="this.todoservice.get_user_wallet_amount() < selected_item.display_price && selected_item.cod_available != 1">Sorry! You do not have sufficient balance in your wallet.</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+					<!-- End Here -->
+			</ng-template>
+			<ng-template #thanksmsg>
+				<div class="col s8 m4 offset-m2">
+					<div class="card">
+						<div class="card-content center green" *ngIf="book_status.status == true">
+							<span class="card-title white-text">{{book_status.msg}}</span>
+							<span class="white-text">Order Id :</span>
+							<span class="white-text">{{book_status.order_id}}</span>							
+						</div>
+						<div class="card-content center red"  *ngIf="book_status.status == false">
+							<span class="card-title white-text">{{book_status.msg}}</span>							
+						</div>
+						<div class="card-action right-align grey lighten-3">
+							<a href="javascript:" class="btn font-size-change orange" (click)="back_to_form()"><< Back</a>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+			</div>
+		</div>
+	</section>
+	
+ <!-- Complaint Modal Structure -->
+ <app-footer-min></app-footer-min>
+
+	

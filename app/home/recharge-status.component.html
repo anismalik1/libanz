@@ -1,0 +1,164 @@
+
+<style>
+.cs-fix-img-1{
+
+width:58px;
+float:right;
+}
+a.back-to-retailer-page.grey.lighten-3.btn.black-text {
+    padding: 10px 0px !important;
+    font-weight: bold;
+    height: 45px;
+    width: 100% !important;
+    border-radius: 20px;
+    font-size: 14px !important;
+    background: #ff6a00 !important;
+    color: #fff !important;
+    /* margin: 0 auto !important; */
+}
+	@media only screen and (max-width: 767px){
+
+		.border {
+    border: 1px solid #e0e0e0;
+    padding: 7px;
+    border-radius: 10%;
+}
+
+.cs-fix-img-1{
+
+	width:50px;
+	float:right;
+}
+.font-size-change-order {
+    font-size: 1.35rem !important;
+    text-transform: capitalize;
+}
+
+a.back-to-retailer-page.grey.lighten-3.btn.black-text {
+    padding: 10px !important;
+    font-weight: bold;
+    width: 100% !important;
+    border-radius: 20px;
+    font-size: 13px !important;
+}
+.mb-style{
+
+	font-weight: bold;
+    margin-top:5px;
+    text-align: center;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 10px;
+}
+
+.cst-clr-btn{
+
+    background-color: #ff6a00!important;
+    color: #fff !important;
+}
+
+.grey-text {
+    color: #424141 !important;
+}
+
+a img {
+    width: 50px;
+}
+
+
+	}
+	a.back-to-retailer-page.grey.lighten-3.btn.black-text {
+		padding: 5px;
+    font-weight: bold;
+    width: 35%;
+    border-radius: 20px;
+    font-size: 14px !important;
+}
+.mb-style{
+
+font-weight: bold;
+margin-top:0px;
+text-align: center;
+border-bottom: 1px solid #ececec;
+padding-bottom: 10px;
+}
+</style>
+<app-header class="hide-on-mobile"></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>	
+<!-- End Here -->
+<section class="middle white">
+	<div class="container">
+		<div class="row no-margin">
+			<div class="col s12 m10 l6 offset-l3">
+				<div class="card no-margin">
+					<div class="card-content center" *ngIf="spin_show">
+						<span class="large material-icons orange-text"><img width="30" src="{{this.todoservice.base_url}}web-app/assets/images/timer-2.gif"/></span>
+						<div class="clearfix"></div>
+						<span>Processing...{{this.tick_clock}}</span>
+					</div>
+					<div class="card-content" *ngIf="order">
+						<div class="row no-margin border-on-bottom padd-bottom">
+							<h3 class="mb-style">Invoice </h3>
+							<div class="col s8 no-padding">
+							
+								<span class="font-size-change-order font600" >{{order.status}}</span><br/>
+								<span class="font-size-change-order font600"><i class="icon-inr"></i> {{order.grand_total}}</span> <span class="font-size-change-order grey-text" *ngIf="order.bonus_amount > 0"> <span class="orange-text">(<i class="icon-inr"></i>{{order.bonus_amount}} Bonus Included)</span></span><br/>
+								<span class="font-size-change1 grey-text">{{order.history_time | date: 'MMM d, y'}} {{order.history_time | date: 'h:mm a'}}</span>
+							</div>
+							<div class="col s4  no-padding">
+								<img src="{{this.todoservice.base_url}}web-app/assets/images/success.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase().includes('success')"/>
+								<img src="{{this.todoservice.base_url}}web-app/assets/images/pending.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase().includes('pending')"/>
+								<img src="{{this.todoservice.base_url}}web-app/assets/images/close.gif" class="responsive-img cs-fix-img-1" *ngIf="order.status.toLowerCase().includes('fail')"/>
+								<!-- <i class="material-icons right-align green-text font-size-change3" *ngIf="order.status.toLowerCase() == 'successful'">check_circle_outline</i>
+								<i class="material-icons right-align orange-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Pending'">error</i>
+								<i class="material-icons right-align red-text font-size-change3" *ngIf="order.status.toLowerCase() == 'Failed'">close</i> -->
+							</div>
+						</div>
+						<div class="row border-on-bottom padd-bottom margin-top">						
+							<div class="col s8 m10 no-padding">
+								<span class="font-size-change grey-text">PAID AT</span><br>
+								<span class="font600 font-size-change-order margin-top-cart1">{{operator(order.order_data,'title')}} ON {{order.subcriber_id}}</span><br>
+								<p class="font-size-change grey-text margin-top-cart1">Order ID: {{order.id}}</p>
+							</div>
+							<div class="col s4 m2 right-align">
+								<a href="javascript:">
+									<img src="{{this.todoservice.base_url}}accounts/assets/img/operators/{{operator(order.order_data,'image')}}" class="responsive-img vertical-align-middle border" alt="Airtel logo">
+								</a>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="row padd-bottom margin-top">						
+							<div class="col s8 m10 no-padding">
+								<span class="font-size-change grey-text">PAID FROM</span><br>
+								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 1">Libanz Wallet</span><br>
+								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 4">Paytm Wallet</span>
+								<span class="font600 font-size-change-order margin-top-cart1" *ngIf="order.paymethod == 2">Gateway</span><br>
+								
+								<div class="clearfix"></div>
+								<span class="margin-top-cart1 green-text" *ngIf="order.payment_status == 1">Successful</span><br>
+								<span class="margin-top-cart1 green-text" *ngIf="order.payment_status == 2">Failed</span><br>
+								<span class="margin-top-cart1 green-text" *ngIf="order.payment_status == 3">Pending</span><br>
+								<span class="margin-top-cart1 green-text" *ngIf="order.payment_status == 4">Payment Refunded to your wallet</span><br>
+
+								<p class="font-size-change grey-text margin-top-cart1">Wallet Txn ID: {{order.transaction_id}}</p>
+							</div>
+							<div class="col s4 m2 right-align">
+								<a href="javascript:">
+									<img src="{{this.todoservice.base_url}}web-app/assets/images/recharge-icon/wallet-with-money.png" class="responsive-img vertical-align-middle border operator-img" alt="Airtel logo">
+								</a>
+							</div>
+							<div class="clearfix"></div><br/>
+							<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text cst-clr-btn" (click)="back_to_home()"> Go Back To Home &nbsp; <span class="fa fa-home"></span> </a>
+						</div>
+						<p class="grey-text center">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>						
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</section>
+<!-- Middle Section End Here -->
+<app-footer></app-footer>
