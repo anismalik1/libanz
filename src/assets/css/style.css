@@ -3663,7 +3663,7 @@ canvas {
  .header-strip span a,.header-strip span{color: #777777 !important; transition: .3s all linear;}
  .tabs::-webkit-scrollbar { width: 0 !important }
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
- .banner-slider1 .full-width{height: 448px;object-fit: fill;}
+ .banner-slider1 .full-width{height: 448px; object-fit: fill;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
  #wallet-type .mydth-wallet img{width:59px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
