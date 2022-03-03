@@ -344,147 +344,146 @@ p.ask-login {
 <!-- Header End Here -->
 <!-- <div class="work" *ngIf="verify==0;then signup else otpverify"></div> -->
 
-	<section class="login-page no-padding">
-		<div class="row">
-			<div class="col s12 m12 l6 no-padding login-side-image1">
-				<img src="{{this.todoservice.base_url}}web-app/assets/images/signup.jpg" class="responsive-img">
-  			</div>
-			<div class="col s12 m12 l6" style="padding:0;margin-top:-10px;">
-				<div class="card">
-					<div class="card-content cst-merchant-bx">
-						<div class="upper-text ">
-							<h4 class="merchant-txt">Register Here </h4>
-							<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Bill Payment</p>
-							<span class="green-text text-center" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
+	<section class="login-page no-padding py-5">
+		<div class="container">
+			<div class="new-card-design transform-scale-1 p-0">
+				<div class="row m-0">
+					<div class="col s12 m12 l6 no-padding">
+						<img src="{{this.todoservice.base_url}}web-app/assets/images/signup.jpg" class="responsive-img w-100">
 						</div>
-						<br/>
-						<div *ngIf="signupverify == 0">
-							<mat-horizontal-stepper #stepper labelPosition="bottom">
-								<mat-step>
-									<ng-template matStepLabel>Phone Number</ng-template>
-									<section *ngIf="verify == 0">
-										<form [formGroup]="checkphonegroup" class="login-page-form" #checkphoneform = "ngForm" (ngSubmit)="check_phone(checkphoneform.value)" >
-											<div class="input-field center">
-												<i class="material-icons prefix margin-top-cart2">phone</i>
-												<input id="phn_number" type="text" class="validate" formControlName="phone" autocomplete="off">
-												<label for="phn_number">Phone Number*</label>
-												<div class="center absolute" *ngIf="!checkphonegroup.controls['phone'].valid && checkphonegroup.controls['phone'].touched">
-													<span class="red-text"> Phone Number is not valid.</span>
-												</div>
-											</div>
-											<div class="col s12  margin-top fix-center">
-												<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!checkphonegroup.valid">Proceed</button>
-												<p class="ask-login fix-center"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
-												<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
-											</div>
-										</form>
-									</section>	
-									<section *ngIf="verify != 0">
-										<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value,this)" id="header-signup">
-											<div class="container">	
-												<div class="row">
-													<div class="col s12 m12">
-														<div class="card">
-															<div class="card-content">
-																<div class="center">
-																	<!-- <div class="col s12">
-																		<img src="{{this.todoservice.base_url}}web-app/assets/images/logo.png" class="responsive-img" alt="Libanz-logo">
-																	</div> -->
-																	<div class="col s12">
-																		<div class="upper-text">
-																			<h3>Your Mobile Number is <span class="orange-text">{{phone}}</span></h3>
-																			<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
-																		</div>
-																	</div>
-																	<div class="row">
-																		<div class="input-field col s12 center otp-inputa" id="inputs">
-																			<input type="number" id="otp1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
-																			<input type="number" id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
-																			<input type="number" id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
-																			<input type="number" id="otp4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
-																		</div> 
-																		<div class="col s12 center margin-top">
-																			<span class="font-size-change1">Don't recieve OTP <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
-																		</div>			
-																	</div>
-																	<div class="row">
-																		<div class="col s12 center">
-																			<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a>
-																			<button id="signup-submit" type="Submit" class="btn orange waves-effect waves-light" [disabled]="verifydisabled">Submit</button>
+					<div class="col s12 m12 l6">
+						<div class="card no-box-shadow">
+							<div class="card-content">
+								<div class="upper-text ">
+									<h4 class="merchant-txt">Register Here </h4>
+									<p class="sub-txt">India No.1 Platform for DTH , Mobile Recharge & Instant Bill Payment</p>
+									<span class="green-text text-center" *ngIf="_bonus_offer && _bonus_offer.valid">Congratulations! Instant Flat INR. {{_bonus_offer.amount_text}} is just after the login, Register Now! </span>
+								</div>
+								<br/>
+								<div *ngIf="signupverify == 0">
+									<mat-horizontal-stepper #stepper labelPosition="bottom">
+										<mat-step>
+											<ng-template matStepLabel>Phone Number</ng-template>
+											<section *ngIf="verify == 0">
+												<form [formGroup]="checkphonegroup" class="login-page-form" #checkphoneform = "ngForm" (ngSubmit)="check_phone(checkphoneform.value)" >
+													<div class="input-field col s12 new-input-design-fixes">
+														<input id="phn_numbers" type="text" class="validate" formControlName="phone" autocomplete="off">
+														<label for="phn_numbers">Phone Number*</label>
+														<div class="" *ngIf="!checkphonegroup.controls['phone'].valid && checkphonegroup.controls['phone'].touched">
+															<span class="red-text accent-4 error-fixes"> Phone Number is not valid.</span>
+														</div>
+													</div>
+													<div class="col s12  margin-top fix-center">
+														<button type="submit" class="btn  new-btn-theme" [disabled]="!checkphonegroup.valid">Proceed</button>
+														<p class="ask-login fix-center mt-3"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
+														<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
+													</div>
+												</form>
+											</section>	
+											<section *ngIf="verify != 0" class="p-0">
+												<form #otpform = "ngForm" (ngSubmit)="verify_user(otpform.value,this)" id="header-signup">
+													<div class="container">	
+														<div class="row m-0">
+															<div class="col s12 m12 p-0">
+																<div class="card no-box-shadow p-0">
+																	<div class="card-content p-0">
+																		<div class="center">
+																			<!-- <div class="col s12">
+																				<img src="{{this.todoservice.base_url}}web-app/assets/images/logo.png" class="responsive-img" alt="Libanz-logo">
+																			</div> -->
+																			<div class="col s12 p-0">
+																				<div class="upper-text">
+																					<h3>Your Mobile Number is <span class="orange-text">{{phone}}</span></h3>
+																					<p class="font-size-change1">You will receive One Time Password (OTP) via SMS. kindly Enter Below</p>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="input-field col s12 center otp-inputa" id="inputs">
+																					<input type="number" id="otp1" (keyup)="keytab($event)" ngModel maxlength="1"  name="otp1" autocomplete="off">
+																					<input type="number" id="otp2" (keyup)="keytab($event)" ngModel maxlength="1" name="otp2" autocomplete="off">
+																					<input type="number" id="otp3" (keyup)="keytab($event)" ngModel maxlength="1" name="otp3" autocomplete="off">
+																					<input type="number" id="otp4" (keyup)="keytab($event)" ngModel maxlength="1" name="otp4" autocomplete="off">
+																				</div> 
+																				<div class="col s12 center margin-top">
+																					<span class="font-size-change1">Don't recieve OTP <a href="javascript:" (click)="resend_otp()" class="orange-text">Resend OTP?</a></span>
+																				</div>			
+																			</div>
+																			<div class="row">
+																				<div class="col s12 center">
+																					<a href="javascript:" class="back-to-retailer-page grey lighten-3 mr-3 new-btn-theme btn black-text" (click)="hide_signup_form()"> << Back</a>
+																					<button id="signup-submit" type="Submit" class="btn new-btn-theme" [disabled]="verifydisabled">Submit</button>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
+												</form>
+												<div class="clearfix"></div>
+											</section>
+										</mat-step>
+										<mat-step [editable]="false">
+											<ng-template matStepLabel>Detail</ng-template>
+											<section>
+											<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
+												<div class="row m-0">
+													<div class="input-field col s12 new-input-design-fixes">
+														<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
+														<label for="name">Enter Name*</label>
+														<div class="center absolute" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
+															<span class="red-text error-fixes accent-4">*Name is Required.</span>
+														</div>
+													</div>
+													<div class="input-field col s12 new-input-design-fixes">
+														<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
+														<label for="enter_email">Enter Email</label>
+														<div class="center absolute" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
+															<span class="red-text error-fixes accent-4"> Email is not valid.</span>
+														</div>
+													
+													</div>
+													<div class="input-field col s12 new-input-design-fixes">
+														<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
+														<label for="enter_passcode">Enter Password</label>
+														<div class="center absolute" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
+															<span class="red-text error-fixes accent-4">Password is Required.</span> 
+														</div>
+													</div>
+													<div class="input-field col s12 col m12 new-input-design-fixes">
+														<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
+														<label for="confirm_passcode">Confirm Password</label>
+														<div class="center absolute" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
+															<span class="red-text error-fixes accent-4">Check Confirm Password.</span>
+														</div>
+													</div>
+													<div class="col s12 col m12">
+														<div class="term-txt">
+														<!-- <input id="terms-condi" formControlName="terms" type="checkbox" value="1"/> -->
+														<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
+														<div class="cleaarfix"></div>
+													</div>
+													</div>
+													<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 2 : 1"/>
+													<div class="col s12  margin-top fix-center">
+														<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+														<button type="submit" class="btn new-btn-theme" [disabled]="!signupgroup.valid">Create Account</button>
+														<p class="ask-login fix-center"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
+														<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
+													</div>
 												</div>
-											</div>
-										</form>
-										<div class="clearfix"></div>
-									</section>
-								</mat-step>
-								<mat-step [editable]="false">
-									<ng-template matStepLabel>Detail</ng-template>
-									<section>
-									<form [formGroup]="signupgroup" class="login-page-form" #signupform = "ngForm" (ngSubmit)="signup_user(signupform.value)" >
-										<div class="row">
-											<div class="input-field col s12 col m12">
-												<i class="material-icons prefix margin-top-cart2">person</i>
-												<input id="name" type="text"  minlength = '3' class="validate" formControlName="name" autocomplete="off">
-												<label for="name">Enter Name*</label>
-												<div class="center absolute" *ngIf="!signupgroup.controls['name'].valid && signupgroup.controls['name'].touched">
-													<span class="red-text ">*Name is Required.</span>
-												</div>
-											</div>
-											<div class="input-field col s12 col m12">
-												<i class="material-icons prefix margin-top-cart2">mail</i>
-												<input id="enter_email" type="text" class="validate" formControlName="email" autocomplete="off">
-												<label for="enter_email">Enter Email</label>
-												<div class="center absolute" *ngIf="!signupgroup.controls['email'].valid && signupgroup.controls['email'].touched">
-													<span class="red-text"> Email is not valid.</span>
-												</div>
-											
-											</div>
-											<div class="input-field col s12 col m12">
-												<i class="material-icons prefix margin-top-cart2">lock</i>
-												<input id="enter_passcode" type="password" class="validate" formControlName="password" autocomplete="off">
-												<label for="enter_passcode">Enter Password</label>
-												<div class="center absolute" *ngIf="!signupgroup.controls['password'].valid && signupgroup.controls['password'].touched">
-													<span class="red-text">Password is Required.</span> 
-												</div>
-											</div>
-											<div class="input-field col s12 col m12">
-												<i class="material-icons prefix margin-top-cart2">lock</i>
-												<input id="confirm_passcode" type="password" class="validate" formControlName="cpassword" autocomplete="off">
-												<label for="confirm_passcode">Confirm Password</label>
-												<div class="center absolute" *ngIf="!signupgroup.controls['cpassword'].valid && signupgroup.controls['cpassword'].touched">
-													<span class="red-text">Check Confirm Password.</span>
-												</div>
-											</div>
-											<div class="col s12 col m12">
-												<div class="term-txt">
-												<!-- <input id="terms-condi" formControlName="terms" type="checkbox" value="1"/> -->
-												<label for="terms-condi">By Signing up you agree to our <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Privacy Policy</a> and <a routerLink="/p/libanz-terms-and-conditions" [queryParams]= "{ref : '/proceed/signup'}">Terms and Condition</a></label>
-												<div class="cleaarfix"></div>
-											</div>
-											</div>
-											<input class="with-gap" formControlName="user_type" type="hidden" [value]="(this.referer && this.referer == 'merchant')? 2 : 1"/>
-											<div class="col s12  margin-top fix-center">
-												<!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
-												<button type="submit" class="btn  orange  regis-btn-fix fix-center" [disabled]="!signupgroup.valid">Create Account</button>
-												<p class="ask-login fix-center"> <a routerLink="/proceed/login">Already Have an Account ? Login Now </a> </p>
-												<!-- <button type="submit" class="btn  orange btn-bt-30" [disabled]="!signupgroup.valid || signupdisabled">Submit</button> -->
-											</div>
-										</div>
-									</form>
-								</section>
-								</mat-step>
-							</mat-horizontal-stepper>
-								
-						</div>	
+											</form>
+										</section>
+										</mat-step>
+									</mat-horizontal-stepper>
+										
+								</div>	
+							</div>
+							<div class="clearfix"></div>
+						</div>			
 					</div>
-					<div class="clearfix"></div>
-				</div>			
+				</div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
