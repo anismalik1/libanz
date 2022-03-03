@@ -1,0 +1,178 @@
+<style>
+    .fll-checkout {
+    background: #fff;
+}
+div#selected-plan {
+    padding-top: 22px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.cstm-table {
+    border:1px solid #ececec;
+    text-align: center;
+    /* text-align: center; */
+    width: 100%;
+    overflow:auto;
+
+}
+tr.theader-txt th {
+    border: 1px solid #d4d2d2;
+}
+
+tr.theader-txt th {
+    text-align: center;
+}
+.cstm-table tr td {
+    text-align: center;
+}
+.cstm-table .theader-txt {
+
+background-color:#ececec;
+}
+table.table.cstm-table tr td {
+    border: 1px solid #dadada;
+}
+.regis-txt1 {
+    font-size: 22px;
+    font-weight: 500;
+    color: rgb(34, 34, 34);
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0px !important;
+   
+
+}
+.in-txt1{
+
+font-size: 15px;
+font-weight: 300;
+color: #8c8c8c;
+margin-bottom: 10px;
+line-height: 22px;
+text-align: left;
+margin-top: 5px;
+}
+
+@media only screen and (max-width: 767px){
+
+    button.btn.orange.waves-effect {
+    width: 100%;
+    border-radius: 20px;
+}
+}
+
+</style>
+
+<app-header></app-header>
+<section class="login-page no-padding">
+		        <div class="fll-checkout">
+            <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col m6 s12">
+                <img src="{{this.todoservice.base_url}}web-app/assets/images/checkou-banner.png" class="responsive-img" />
+            </div>
+            <div class="col m6 s12">
+
+                <h3 class="regis-txt1"> <strong>  Checkout Plan </strong> </h3>
+                <h4 class="in-txt1">Now Its Time to Upgrade Your Package With Multiple Benifits </h4>
+                <div id="selected-plan" *ngIf="this.selected_plan && this.selected_plan.length > 0" class="row">
+                        <table class="table cstm-table">
+                            <tr class="theader-txt">
+                                <th>PACKAGE </th>
+                                <th>PRICE </th>
+                                <th>NO. OF LEADS </th>
+                                <th>VALIDITY </th>
+                            </tr>
+
+                            <tr>
+                                <td> {{get_code(this.selected_plan[0].plan_code)}}</td>
+                                <td> {{this.selected_plan[0].price}}</td>
+                                <td> {{this.selected_plan[0].leads_no}}</td>
+                                <td> {{this.selected_plan[0].days}}</td>
+                            </tr>
+                        </table>
+
+                    <!-- <span class="plan-price col s3"></span>
+                    <span class="plan-price col s3">Price: </span>
+                    <span class="plan-price col s3">Number of Leads: </span>
+                    <span class="plan-price col s3">Valid for: </span> -->
+                </div>
+
+                <form [formGroup]="checkoutgroup" class="login-page-form" #checkoutform = "ngForm" (ngSubmit)="plan_checkout(checkoutform.value)" >
+                    <div class="row">
+                       <div class="customer-box">
+                        <!-- <h3>Customer Detail</h3> -->
+                        <div class="input-field col m12 s12">
+                            <i class="material-icons prefix margin-top-cart2">person</i>
+                            <input id="name" type="text" value="{{this.todoservice.get_user_name()}}" formControlName="name" class="validate" autocomplete="off">
+                            <label for="name" [className]="(this.todoservice.get_user_name() != '')? 'active':''">Enter Name*</label>
+                            <div class="center absolute" *ngIf="!checkoutgroup.controls['name'].valid && checkoutgroup.controls['name'].touched">
+                                <span class="red-text ">*Enter Valid Name.</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="input-field col m12 s12">
+                            <i class="material-icons prefix margin-top-cart2">phone</i>
+                            <input id="phn_number" type="text" class="validate" value="{{this.todoservice.get_user_phone()}}" formControlName="phone" placeholder="Enter 10 digits Mobile Number." autocomplete="off" (keyup)="check_if_user_exist()">
+                            <label for="phn_number" [className]="(this.todoservice.get_user_phone() != '')? 'active':''"></label>
+                            <div class="center absolute" *ngIf="!checkoutgroup.controls['phone'].valid && checkoutgroup.controls['phone'].touched">
+                                <span class="red-text ">*Enter Valid Phone.</span>
+                            </div>
+                            <div class="center absolute" *ngIf="step2">
+                                <span class="green-text ">OTP Sent to this Phone Number.</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="input-field col m12 s12">
+                            <i class="material-icons prefix margin-top-cart2">mail</i>
+                            <input id="email-input" type="text" class="validate" value="{{this.todoservice.get_user_email()}}" formControlName="email" autocomplete="off">
+                            <label for="email-input" [className]="(this.todoservice.get_user_email() != '')? 'active':''">Email</label>
+                            <div class="center absolute" *ngIf="!checkoutgroup.controls['email'].valid && checkoutgroup.controls['email'].touched">
+                                <span class="red-text">*Enter Valid Email.</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="input-field col m12 s12" *ngIf="step2">
+                            <i class="material-icons prefix margin-top-cart2">lock</i>
+                            <input id="enter_address" type="password" class="validate" formControlName="password" autocomplete="off">
+                            <label for="enter_address">Choose Password</label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="input-field col m8 s12" *ngIf="step2">
+                            <i class="material-icons prefix margin-top-cart2">lock</i>
+                            <input id="enter_address" type="text" class="validate" formControlName="pin" autocomplete="off">
+                            <label for="enter_address">Enter OTP</label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="payment-methods" *ngIf="this.plan != 'trial' ">
+                            <div class="col s12 m10 offset-m1" *ngIf="this.todoservice.get_user_name() != '' && this.selected_plan && this.todoservice.get_user_wallet_amount() >= this.selected_plan[0].price">
+                                <input formControlName="payment_type" value="wallet" class="with-gap" type="radio" id="wallet" [disabled]="(this.todoservice.get_user_wallet_amount() >= this.selected_plan[0].price)? false: true"/>
+                                <label for="wallet" class="font-size-change black-text mydth-wallet"> <img width="80" src="{{this.todoservice.base_url}}web-app/assets/images/final-logo.png" alt="Libanz Wallet"> </label>
+                                <span class="red-text" *ngIf="(this.todoservice.get_user_wallet_amount() < this.selected_plan[0].price)">Not Enough Balance</span>
+                            </div>
+                            <div class="col s12 m10 offset-m1">
+                                <input formControlName="payment_type" class="with-gap" value="paytm" type="radio" id="paytm" />
+                                <label for="paytm" class="font-size-change black-text paytm-wallet"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"> </label>
+                            </div>
+                            <div class="col s12 m10 offset-m1">
+                                <input formControlName="payment_type" class="with-gap" value="card" type="radio" id="card"/>
+                                <label for="card" class="font-size-change black-text">Cards & Netbanking</label>
+                            </div>
+                        </div>
+                        <div class="col s12 margin-top">
+                            <!-- <a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text" (click)="hide_signup_form()"> << Back</a> -->
+                            <button type="submit" class="btn orange waves-effect fix-btn-responsive" >Continue</button>
+                        </div>
+                    </div>
+                </div>
+                </form>	
+               
+
+                </div>
+            </div>
+        </div>
+            </div>
+		<div class="clearfix"></div>
+    </section>
+    <app-footer></app-footer>

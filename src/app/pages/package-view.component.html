@@ -1,0 +1,263 @@
+<style>
+  .bg-color{
+   background-color:#f1f3f6 !important;
+  }
+  .card .card-content .card-title {
+    line-height: 22px !important;
+    /* opacity: 0.8; */
+}
+.ct-btn{
+  background: #ff6a00;
+    color: #fff !IMPORTANT;
+    padding: 5px;
+    }
+    .list-data{
+	padding-top:6px;
+	padding-bottom:10px; font-size:16px; color:#333;
+	z-index:99999;
+}
+.list-data a{
+
+color: #333;
+font-size: 12px;
+font-weight: bold;
+border: 1px solid #ececec;
+padding: 2px 10px;
+border-radius: 5px;
+z-index: 99999;
+}
+
+@media only screen and (max-width: 767px){
+  .cart-strip {
+    margin-right: 60px;
+    position: absolute;
+    right: 0;
+    margin-top: -29px;
+}
+.cst-back .black-text {
+    font-size: 16px !important;
+    margin-top: -5px;
+}
+}
+.pk-list {
+    position: relative;
+    top: -5px;
+}
+</style>
+
+<app-header></app-header>
+<title></title>
+<div class="spinner-wrapper">
+  <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+<!-- <div class="fix-mb-top" style="padding-top:65px !important;"></div> -->
+<div id="fb-root"></div>
+<section class="channels-basic new-packages on-mobile">
+  <div class="row">
+    <div class="center">
+        <div class="card">
+          <div class="card-content no-padding">
+              <ul class="package-list all-packages no-padding">
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/tata-sky']" (click)="go_to_nav('/package-list/tata-sky')"><span class="icon-home"></span><span class="mobile-footer-text">Tata Sky Packages</span></a></li>
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/airtel']" (click)="go_to_nav('/package-list/airtel')"><span class="icon-products"></span><span class="mobile-footer-text">Airtel Packages</span></a></li>
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/videocon']" (click)="go_to_nav('/package-list/videocon')"><span class="icon-packages"></span><span class="mobile-footer-text">Videocon Packages</span></a></li>
+                  <li routerLinkActive="active"><i class="material-icons"> stars</i>&nbsp;<a [routerLink]="['/package-list/dish-tv']" (click)="go_to_nav('/package-list/dish-tv')"><span class="icon-faqs"></span><span class="mobile-footer-text">DishTv Packages</span></a></li>
+                </ul>
+          </div>
+          
+        </div>    
+      </div>
+  </div>
+</section>  
+<section class="channels-basic py-5">
+    <div class="container center">
+      <h1 class="no-margin" *ngIf="details == false">{{this.package.category}} Packages 
+         
+        <span >
+        <a href="javascript:void(0);" class="btn-floating btn-large orange dropdown-button white-text" data-activates='dropdown1'><i class="material-icons">share</i></a>
+        <ul id='dropdown1' class='dropdown-content'>
+          <li class="border-bottom3">
+              <a target="_blank" class="grey-text" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/{{this.url}}">Share On Facebook</a>        
+          </li>
+          <li class="border-bottom3">
+              <a  href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin"> Share on Whatsapp</a> 
+            <!-- <a target="_blank" href="https://api.whatsapp.com/send?phone=918010339339&text={{this.todoservice.base_url}}package-list/{{this.url}}" class="grey-text modal-trigger no-margin"> Share on WhatsApp</a> -->
+          </li>
+          <li class="border-bottom3">
+            <a  href="#sharemail-modal" class="grey-text modal-trigger no-margin"> Share on Gmail</a>
+          </li>
+          <li>
+          <a href="{{this.todoservice.base_url}}accounts/apis/export/export_category_packages/{{this.url}}" class="grey-text no-margin"> Download All Packages</a>
+          </li>
+        </ul>
+      </span>      
+    </h1>
+    <h1 *ngIf="details == true"> 
+      <span *ngFor="let item of package_list;">{{item.title}}</span>      
+    </h1>
+    <div class="row">
+        <div class="col s12 new-share" *ngIf="details == true">
+            <ul class="share-us-on center">
+              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/{{this.url}}/{{this.pack_id}}" ><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png"></a></li>
+              <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
+              <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url={{this.todoservice.base_url}}package-list/{{this.url}}/{{this.pack_id}}"><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png"></a></li>
+              <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/gmail.png" alt="gmail"></a></li>
+              <li><a href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp"><img src="{{this.todoservice.base_url}}web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
+              <li><a href="{{this.todoservice.base_url}}accounts/apis/export/export_package_category/{{this.pack_id}}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="{{this.todoservice.base_url}}web-app/assets/images/down-arrow.png" alt="download"></a></li>
+            </ul>
+          </div>
+    </div>
+    
+    </div>
+  </section>
+<section class="new-packages white packages-channels-download">
+  <div class="container">
+    <div class="row no-margin">
+      <div class="col s12 m12 l9 mb-3">
+        <div class="card no-shadow" *ngFor="let item of package_list;">
+          <div class="card-header mb-3" *ngIf="details == false">
+            <div class="col s12">
+              <h2 class="font600 no-margin"><a routerLink="/package-list/{{this.url}}/{{item.id}}">{{item.title}}</a></h2>
+              <ul class="share-us-on">
+                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{this.todoservice.base_url}}package-list/{{this.url}}/{{item.id}}" ><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/facebook1.png"></a></li>
+                <!-- <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Linkedin" href="javascript:void(0);"><img alt="facebook" src="https://mydthshop.com/web-app/assets/images/linkedin.png"></a></li> -->
+                <li><a class="tooltipped" data-delay="50" data-position="top" data-tooltip="Share on Twitter" href="http://twitter.com/share?url={{this.todoservice.base_url}}package-list/{{this.url}}/{{item.id}}"><img alt="facebook" src="{{this.todoservice.base_url}}web-app/assets/images/twitter.png"></a></li>
+                <li><a class="tooltipped modal-trigger" data-position="top" data-delay="50" data-tooltip="Share on Gmail" href="#sharemail-modal"><img src="{{this.todoservice.base_url}}web-app/assets/images/gmail.png" alt="gmail" (click)="ini_pack(item.id)"></a></li>
+                <li><a href="#sharewhatsapp-modal" class="grey-text modal-trigger no-margin tooltipped" data-position="top" data-delay="50" data-tooltip="Share on Whatsapp" (click)="init_id(item.id)"><img src="{{this.todoservice.base_url}}web-app/assets/images/whatsapp.png" alt="whatsapp"></a></li>
+                <li><a href="{{this.todoservice.base_url}}accounts/apis/export/export_package_category/{{item.id }}" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Download"><img src="{{this.todoservice.base_url}}web-app/assets/images/down-arrow.png" alt="download"></a></li>
+              </ul>
+            </div>            
+          </div>
+          <div class="card-content p-0">
+		  <div class="packages-channels packages-channels-new">
+		  <div class="row">
+				<div class="col l3 s12 m4 smart-packs" *ngFor="let channel_pack of item.child">
+				<div class="smart-inner new-card-design transform-scale-1">
+					<!-- <span class="when-check" id="check-pack-{{channel_pack.id}}"><i class="material-icons">check_circle</i></span> -->
+          <div class="title-wrapper">
+              <h4 class="grey-text">{{channel_pack.title}}</h4>
+          </div>
+          <span class="card-title"><i class="icon-inr"></i> <span *ngIf="!multienable">{{channel_pack.price}}</span><span *ngIf="multienable">{{channel_pack.multi_price}}</span>  <small>@ {{channel_pack.month}} Month</small></span>
+          <span class="font-size-change1" [innerHTML] = "remove_new_line(channel_pack.short_description)"></span>
+          <!-- <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="font-size-change1 chng-set">Channels</a> -->
+          <a [routerLink]="['/product/channel-pack/'+channel_pack.id]" [queryParams]= "{month : month,category : this.category}" class="new-btn-theme white-text">View Channels</a>
+          <!-- <a href="#choosebox-modal" target="_blank" class="font-size-change1 chng-set grey lighten-3 black-text modal-trigger cst-btn" (click)="choose_box_for_this_pack(item.id,channel_pack.id)"><i class="material-icons white-text">flash_on</i> Buy Now</a> -->
+				  
+				  </div>
+				</div>
+				</div>
+		  </div>
+	
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4 l3 on-web">
+        <div class="card grey lighten-3 bg-color new-card-design transform-scale-1">          
+          <div class="card-content p-0">
+            <h3 class="card-title no-margin">All Packages</h3>
+            <ul class="all-packages">
+              <li routerLinkActive="active"><a routerLink="/package-list/tata-sky" (click)="goto_package()"><i class="material-icons">
+                  stars</i> Tata Sky Packages</a></li>
+              <li routerLinkActive="active"><a routerLink="/package-list/airtel" (click)="goto_package()"><i class="material-icons">
+                      stars</i> Airtel Packages</a></li>
+              <li routerLinkActive="active"><a routerLink="/package-list/videocon" (click)="goto_package()"><i class="material-icons">
+                  stars</i> Videocon Packages</a></li>
+              <li routerLinkActive="active"><a routerLink="/package-list/dish-tv" (click)="goto_package()"><i class="material-icons">
+                  stars</i> Dish Tv Packages</a></li>
+              <!-- <li><a routerLink="/package-list/dish-tv" class="black-text"><i class="material-icons">
+                  stars</i> Jio Fiber</a></li>
+              <li><a routerLink="/package-list/dish-tv" class="black-text"><i class="material-icons">
+                  stars</i> Airtel Xtream</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="choosebox-modal" class="modal white" style="width:40%;height:100%">
+    <div class="modal-content">
+      <span class="modal-close close-btn multi-close"><i class="material-icons font-size-change2">close</i></span>
+      <h2 class="center">Choose box</h2>
+      <div class="clearfix"></div>
+      <div class="row" *ngIf="pack_box">
+        <div class="col s12 m12" *ngFor="let item of pack_box">
+          <div class="card center">
+              <!-- <span class="when-check" id="check-multi-1"><i class="material-icons grey-text">check_circle</i></span> -->
+              <div class="include-multi-box">
+                <div class="col s12 m3">
+                  <div class="card-image">
+                    <img height="90" src="{{this.todoservice.base_url}}accounts/assets/img/product-img/100x100{{item.image}}" alt="{{item.title}}">
+                  </div>
+                </div>
+                <div class="col s12 m6">
+                  <div class="card-content">
+                    <span>{{item.title}}</span>
+                  </div>
+                </div>
+                <div class="col s12 m3">
+                  <div class="card-content">
+                    <span >Rs. {{item.offer_price}} </span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <a class="modal-close btn right orange" routerLink="/product/{{item.url}}" [queryParams]= "{ref : 'pack',id: this.pack_id}">Select</a>
+                </div>
+                <div class="clearfix"></div>
+              </div> 
+            </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+</div>
+<div id="sharewhatsapp-modal" class="modal white max-width-new">
+		<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
+		<div class="modal-content">
+		<div class="modal-header">
+		<h4>Share Url To Whatsapp</h4>
+		<div class="modal-close login-modal-close right-align" style="top: 10px !important;"><i class="material-icons">close</i></div>
+    </div>
+    <form [formGroup]="sharwhatsappgroup" class="login-page-form" #sharewhatsappform = "ngForm" (ngSubmit)="share_to_whatsapp(sharewhatsappform.value)">
+      <div class="input-field col s12 new-input-design-fixes">
+        <input id="icon_prefixss" type="text" class="validate share-email" formControlName="phone">
+        <label for="icon_prefixss" class="font-size-change">Enter Phone</label>
+        <div class="center" *ngIf="!sharwhatsappgroup.controls['phone'].valid && sharwhatsappgroup.controls['phone'].touched">
+            <span class="red-text"> Phone is not valid.</span>
+          </div>
+      </div>	
+      <div class="row">
+        <div class="col s12 center">
+          <button type="submit" [disabled]="!sharwhatsappgroup.controls['phone'].valid" class="btn new-btn-theme">Submit</button>
+        </div>
+      </div>	
+    </form>							
+		<!-- <div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div> -->
+		</div>
+</div>
+<div id="sharemail-modal" class="modal white max-width-new" style="width:40%;height:100%">
+		<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
+		<div class="modal-content">
+		<div class="modal-header">
+		<h4>Share Url To Email</h4>
+		<div class="modal-close login-modal-close right-align"><i class="material-icons">close</i></div>
+    </div>
+    <form [formGroup]="sharemailgroup" class="login-page-form" #sharemailform = "ngForm" (ngSubmit)="share_to_mail(sharemailform.value)">
+      <div class="input-field col s12 new-input-design-fixes">
+        <input id="icon_prefixss" type="email" class="validate share-email" formControlName="email">
+        <label for="icon_prefixss" class="font-size-change">Enter Email</label>
+        <div class="center" *ngIf="!sharemailgroup.controls['email'].valid && sharemailgroup.controls['email'].touched">
+            <span class="red-text"> Email is not valid.</span>
+          </div>
+      </div>	
+      <div class="row">
+        <div class="col s12 center">
+          <button type="submit" [disabled]="!sharemailgroup.controls['email'].valid" class="btn new-btn-theme">Submit</button>
+        </div>
+      </div>	
+    </form>							
+		<!-- <div class="center" *ngIf="more_display"><a class="view-more blue-text" id="more-display" href="javascript:" (click)="load_more_notification();">View More+</a></div> -->
+		</div>
+</div>
+<app-footer></app-footer>

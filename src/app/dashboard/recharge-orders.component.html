@@ -1,0 +1,274 @@
+<style>
+
+.cst-table tr:nth-child(odd) {
+    background-color: rgba(242,242,242,0.5);
+}
+.theader-cst{
+    background: #ececec;
+    white-space: nowrap;
+   
+}
+.cst-table tr td {
+    border: 1px solid #e2e2e2;
+}
+.fix-welcome{
+    padding: 10px;
+    font-size: 16px;
+    color: #7b7a7a;
+  }
+  .user-image{
+      padding:9px;
+  }
+  
+  label.lbl-num {
+    line-height: 33px;
+    font-size: 16px !important;
+    }
+    .cst-dname{
+  
+  font-size: 16px !important;
+    padding: 10px;
+    text-transform: capitalize;
+  }
+  .heading-txt-1{
+    font-weight: bold;
+    color: #424242 !important;
+    line-height: 0 !important;
+    margin: 6px;
+  }
+
+  @media only screen and (max-width: 767px){
+
+.btn-mb-respo{
+    width: 100%;
+border-radius: 20px;
+}
+.pt-top-mb{
+    padding-top:22px !important;
+    white-space: nowrap;
+font-size: 19px !important;
+}
+
+
+
+
+
+}
+    </style>
+<app-header class="hide-on-mobile"></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>
+
+<section class="flash-deal">
+  <div class="container-fluid">
+      <div class="row no-margin">
+          <div class="col s12 m2">
+              <app-side-nav></app-side-nav>			    
+          </div>
+        <div class="col s12 m10"> 
+            <div class="fix-top">
+            <div class="chip m12 s12" *ngIf="ticket_generated == true">
+                <span >Your Ticket has been generated. To check your ticket status click <a routerLink="/dashboard/complaints">here</a></span>
+                <i class="close material-icons">close</i>
+            </div>   
+          <div id="recharge" style="margin-top:-12px;">
+            <div class="card export-and-import">
+                <div class="card-content">
+
+                    <form class="date-export">
+                        <div class="row no-margin">
+                            <div class="col s12 m4">
+                                <h4 class="heading-txt-1"><span class="fa fa-calendar"></span> &nbsp; Please Choose Data Range :</h4>
+                            </div>
+                            <div class="col s12 m3">
+                                <input placeholder="Choose date range" endKey="end" [locale]="{ separator: ' To ',format: 'DD-MM-YYYY'}" [ranges]="ranges" type="text" autocomplete="off" ngxDaterangepickerMd [(ngModel)]="selected" name="daterange" class="form-control"/>
+                            </div>
+                            <div class="col s12 m2">
+                                <button type="Search" class="btn orange no-box-shadow"(click)="export_recharge()">Export</button>
+                            </div>
+                            
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- start -->
+
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="font600 inline-block pt-top-mb" style="margin-top:-15px;"><span class="fa fa-edit"></span> &nbsp; My Order History</h3>
+                    <div class="right">
+                        <span>Search Order: </span><input type="text" placeholder="Enter Order Id/Subscriber Id" id="order-id"><a href="javascript:" class="search-link" (click)="seach_order()"><i class="material-icons">search</i></a>
+                    </div>
+                    <div class="overflow-scroll responsive-table cst-table">	
+
+                        <table class="table table-bordered">
+                            <thead class="thead-bg">
+                            <tr >
+                            <th >S.No.</th>
+                          <th >Order No.</th>
+                          <th >SubscriberID</th>
+                          <th  >TXNID/REFID</th>
+                          <th  >Provider/ Brand</th>
+                          <th >Deliver to</th>
+                          <th >Amount</th>
+                          <!-- <th >Balance Before</th> -->
+                          <th style="width:80px">Order Date</th>
+                          <th >Payment Method</th>
+                          <th >Payment Status</th>
+                          <th >Order Status</th>
+                          
+                          <!-- <th >Remark</th> -->
+                          <th >Action</th>
+                          <th> View </th>
+                            </tr>
+                            </thead>
+
+
+                            <tr *ngFor="let recharge of recharges| paginate: { id: 'recharge-p', itemsPerPage: this.todoservice.page_per_items(), currentPage: r_p, totalItems: recharge_counts };let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{recharge.id}}</td>
+                                <td>{{recharge.subcriber_id}}</td>
+                                <td>{{recharge.transaction_id}}</td>
+                                <td><span *ngIf="this.decode_data(recharge.order_data) ==''">{{recharge.recharge_name}}</span><span *ngIf="this.decode_data(recharge.order_data) !=''">{{this.decode_data(recharge.order_data)}}</span></td>
+                                <td>{{recharge.deliver_to}}</td>
+                                <!-- <td><img src="https://mydthshop.com/media/uploads/api_catimages/{{recharge.api_img}}" width="35px" class="responsive-img" alt="{{recharge.recharge_name}}"></td> -->
+                                <td><i class="icon-inr"></i>{{recharge.grand_total }}</td>
+                                <!-- <td> <i class="icon-inr"></i>{{recharge.balance_before}}</td> -->
+                                <td>{{recharge.order_date * 1000 | date }}<br><time>{{recharge.order_date *1000 |date : 'h:mm a' }}</time></td>
+                                <td><div [innerHTML]="this.todoservice.paymethod_template(recharge.paymethod)"></div></td>
+                                <td>
+                                    <div [innerHTML]="this.todoservice.payment_template(recharge.payment_status)"></div>
+                                </td>
+                                <td>
+                                    <div [innerHTML]="this.todoservice.order_template(recharge.status)"></div>
+                                </td>
+                                
+                                  <!-- <td>{{recharge.remark}}</td> -->
+                                <td>
+                                  <div *ngIf="recharge.complaint_id == null">
+                                      <span class="orange white-text" *ngIf="check_delay(recharge.order_date) == 2">Please Wait...</span>
+                                      <span *ngIf="check_delay(recharge.order_date) == 1"><a href="#complaints" class="modal-trigger com link-border" (click)="do_complaint(recharge)" *ngIf="recharge.complaint_id == null;">Ticket</a></span>
+                                  </div>
+                                  <div *ngIf="recharge.complaint_id != null">
+                                      <span class="orange white-text" *ngIf="recharge.status == 1">In Progress</span>
+                                      <span class="orange white-text" *ngIf="recharge.status == 0">Resolved</span>
+                                  </div>
+                                  <span *ngIf="recharge.status == 'Received'"><a href="#cancel-popup" class="modal-trigger com blue-text link-border" (click)="open_cancel_modal(recharge.id)">cancel</a></span>
+                                 
+                                </td>
+                                <td>  <a routerLink="/orders/recharge-receipt/{{recharge.id}}" *ngIf="recharge.activity_type == 1"><span class="fa fa-eye cst-eye"></span></a><a routerLink="/product/order-receipt/{{recharge.activity_id}}" *ngIf="recharge.activity_type == 5"><span class="fa fa-eye cst-eye"></span></a></td>
+                            </tr>
+                        </table>
+
+                        <div class="has-text-centered right-align">
+                            <pagination-controls (pageChange)="getPage($event,'r')" id="recharge-p"></pagination-controls>
+                        </div>
+
+                        </div>
+                        </div>
+                        </div>
+           
+      </div>
+    </div>
+    </div>
+</div>
+</div>
+<!-- <a href="#complaints" class="modal-trigger com" (click)="do_complaint(1)">Complaint</a> -->
+<div id="complaints" class="modal complaint-modal">
+    <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+    <div class="modal-content" *ngIf="go_to_complaint == 0">
+        <h3>Please Wait...</h3>
+    </div>
+    <div class="modal-content" *ngIf="go_to_complaint == 2">
+        <!-- <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span> -->
+        <p>Ticket for this Order is Already been Registered. For more detail goto <a routerLink="/dashboard/complaints/{{this.complaint_id}}" class="blue-text">ticket</a></p>
+    </div>      
+  <form [formGroup]="complaintgroup" #complaintform = "ngForm" (ngSubmit)="add_complaint(complaintform.value)" *ngIf="go_to_complaint == 1">
+  <div class="modal-content">
+    <h3 class="font600">Create Ticket</h3>
+    <!-- <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span> -->
+    <p>We are only able to process the recharge dispute that is raised within 48 hours of transaction.</p>
+    
+      <div class="row no-margin">
+        <div class="input-field col s12" *ngIf="recharge_order">
+            <mat-form-field *ngIf="display == 1">
+                <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
+                    <mat-option value="Balance did not receive by customer">
+                        Balance did not receive by customer
+                    </mat-option>
+                    <mat-option value="Wrong Opreater but correct recharge No/ID">
+                        Wrong Opreater but correct recharge No/ID
+                    </mat-option>
+                    <mat-option value="Wrong Recharge No/ID but correct opreater">
+                        Wrong Recharge No/ID but correct opreater
+                    </mat-option>
+                    <mat-option value=""> 
+                        Other
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <input type="text" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
+        </div>
+        <div class="input-field col s12" *ngIf="!recharge_order">
+            <mat-form-field *ngIf="display == 1">
+                <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
+                    <mat-option value="Payment is deducted but my Order is Failed.">
+                        Payment is deducted but my Order is Failed.
+                    </mat-option>
+                    <mat-option value="I am not interested.">
+                        I am not interested. 
+                    </mat-option>
+                    <mat-option value=""> 
+                        Other
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+                <input type="text" placeholder="Enter Query" formControlName="title" *ngIf="display == 2" value="">
+        </div>
+      </div>
+    
+  </div>
+  <div class="modal-footer orange center">
+    <button type="submit" class="modal-action btn-flat white-text font-size-change">Register</button>
+  </div>
+</form>
+</div>
+<div id="cancel-popup" class="modal complaint-modal">
+      <form [formGroup]="cancelgroup" #complaintform = "ngForm" (ngSubmit)="cancel_order(complaintform.value)">
+      <div class="modal-content">
+        <h3 class="font600">Cancel Order</h3>
+        <span class="modal-close close-mode"><i class="material-icons font-size-change1">close</i></span>
+        <p>We will respond your action within 24 hrs after cancellation.</p>
+            <div class="row no-margin">
+            <div class="input-field col s12">
+                <mat-form-field *ngIf="display == 1">
+                    <mat-select placeholder="Select reason" formControlName="title" (selectionChange)="check_val($event.value)">
+                        <mat-option [value]="'Product Not Required Anymore'">
+                            Product Not Required Anymore
+                        </mat-option>
+                        <mat-option [value]="'I am not satisfied with your service'">
+                            I am not satisfied with your service
+                        </mat-option>
+                        <mat-option [value]=""> 
+                            Other
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <input type="text" formControlName="title" placeholder="Reason" *ngIf="display == 2" value="">
+            </div>
+          </div>
+        
+      </div>
+      <div class="modal-footer orange center">
+        <button type="submit" class="modal-action btn-flat white-text font-size-change">Confirm</button>
+      </div>
+    </form>
+    </div>
+</section>
+
+<app-footer-min></app-footer-min>

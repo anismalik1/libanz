@@ -1,0 +1,184 @@
+<style>
+
+    .cst-table tr:nth-child(odd) {
+        background-color: rgba(242,242,242,0.5);
+    }
+    .theader-cst{
+        background: #ececec;
+        white-space: nowrap;
+       
+    }
+    .cst-table tr td {
+        border: 1px solid #e2e2e2;
+    }
+    .cst-table{
+        white-space: nowrap;
+    }
+
+    @media only screen and (max-width: 767px){
+
+        .responsive-table {
+    width: 100%;
+    overflow: auto;
+}
+.cst-h3{
+
+    padding-top: 25px;
+}
+    }
+</style>
+
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+
+<section class="flash-deal">
+    <div class="container-fluid">
+        <div class="row no-margin">
+            <div class="col s12 m2">
+                <!-- <div class="card">
+              <div class="card-content user-content">
+                    <div class="user-image">
+                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                            <img class="responsive-img vertical-align-middle profile" src="{{this.todoservice.server_url}}{{this.todoservice.get_user_avatar()}}" alt="user-icon" id="change-icon" *ngIf="this.todoservice.get_user_avatar() && !this.todoservice.get_user_avatar().includes('data:image/png')"/>
+                                  <span alt="user-icon" id="name-characters" *ngIf="!this.todoservice.get_user_avatar()">{{this.todoservice.get_user_characters()}}</span>
+                        </div>
+                  <div class="user-name">
+                      <span>Welcome,</span><br>
+                      <span class="font-size-change font600" *ngIf="this.todoservice.get_user()">{{this.todoservice.get_user().name}}</span>
+                  </div>
+              </div>
+            </div> -->
+                <app-side-nav></app-side-nav>			    
+            </div>
+            <div class="col s12 m10">
+                <div class="fix-top">
+                <div class="recharge-section show-on-medium-and-down hide-on-med-and-up cst-bg-color">
+                    <div class="container">
+                        <div class="col s12">
+                        <ul class="back-icon">
+                            <li> <a class="black-text" href="javascript:" (click)="this.todoservice.back(1)"><span class="fa fa-arrow-left left-icn-mb1"></span>&nbsp; <span id="page-title">Commision Structure</span></a> <a class="right cart-strip" routerLink="/product/cart"><img src="{{this.todoservice.base_url}}web-app/assets/images/cart.png"><span class="strip-circle">{{this.todoservice.cartItemsCount()}}</span></a></li>
+                        </ul>
+                        </div>	
+                        <div class="clearfix"></div>
+                    </div>
+                    </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="font600 inline-block cst-h3" style="margin-top:-15px;">Commision Structure</h3>
+                  <ul class="tabs commision">
+                    <li class="tab col s12 m4"><a href="#test1" class="black-text">DTH</a></li>
+                    <li class="tab col s12 m4"><a href="#test2" class="black-text">Recharge &amp; Bill Payments </a></li>
+                    <li class="tab col s12 m4"><a href="#test3" class="black-text">Libanz Values</a></li>
+                  </ul>
+                    <div id="test1" class="margin-top responsive-table">
+                        <table id="datatable" class="display datatable-example cst-table">
+                                <thead class="thead-bg">
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </thead>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </tfoot> -->
+                                <tbody *ngIf="dthcommissions">
+                                    <tr *ngFor="let commission of dthcommissions;let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{commission.title}}</td>
+                                        <td>{{commission.commission}}</td>
+                                        <td *ngIf="commission.commission_type=='1'">Commission</td>
+                                        <td *ngIf="commission.commission_type=='2'">Surcharge</td>
+                                        <td *ngIf="commission.commission_type=='3'">Cashback</td>
+                                        <td *ngIf="commission.amount_type=='1'">Percent</td>
+                                        <td *ngIf="commission.amount_type=='2'">Cashback</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                    </div>
+                    <div id="test2" class="margin-top responsive-table">
+                        <table id="datatable1" class="display  datatable-example cst-table">
+                                <thead>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </thead>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </tfoot> -->
+                                <tbody *ngIf="billcommissions">
+                                    <tr *ngFor="let commission of billcommissions;let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{commission.title}}</td>
+                                        <td>{{commission.commission}}</td>
+                                        <td *ngIf="commission.commission_type=='1'">Commission</td>
+                                        <td *ngIf="commission.commission_type=='2'">Surcharge</td>
+                                        <td *ngIf="commission.commission_type=='3'">Cashback</td>
+                                        <td *ngIf="commission.amount_type=='1'">Percent</td>
+                                        <td *ngIf="commission.amount_type=='2'">Cashback</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                    </div>
+                    <div id="test3" class="margin-top responsive-table">
+                        <table id="datatable2" class="display responsive-table datatable-example cst-table">
+                                <thead>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator Code</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </thead>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th nowrap="nowrap">S.No.</th>
+                                        <th nowrap="nowrap">Operator Code</th>
+                                        <th nowrap="nowrap">Operator</th>
+                                        <th nowrap="nowrap">Receive Commission</th>
+                                        <th nowrap="nowrap">Commission Type</th>
+                                        <th nowrap="nowrap">Amount Type</th>
+                                    </tr>
+                                </tfoot> -->
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>0PC</td>
+                                        <td>Libanz VALUE</td>
+                                        <td>0</td>
+                                        <td>Commission</td>
+                                        <td>p</td>
+                                    </tr>
+                                </tbody>	
+                            </table>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer-min></app-footer-min>

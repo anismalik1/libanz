@@ -1,0 +1,126 @@
+<style>
+
+
+	.card .card-image img {
+    display: block;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    min-height: 200px;
+    width: 100%;
+}
+.breadcrumb:before {
+    
+    margin:-4px 10px 0 8px;
+  
+}
+.tabs {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 60px;
+    padding-top: 6px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+	white-space: nowrap;
+}
+
+.blog-min-hei {
+    min-height: 470px !important;
+    overflow: auto;
+}
+</style>
+<app-header></app-header>
+<div class="spinner-wrapper">
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+<div class="fix-mb-top"></div>	
+<!-- <section class="compare-dth white">
+<div class="container"> 
+	<div class="row">
+		<div class="col m3 s6" *ngFor="let item of blogs;">
+				<div class="card">
+						<div class="card-content">
+							<img class="img-responsive" src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" alt="{{item.title}}"/>
+							<h3 class="center"><a href="{{this.todoservice.base_url}}p/{{item.url}}" class="blue-text">{{item.title}}</a></h3>
+							<div class="blog-desc" [innerHTML]="item.shortDescription"></div>
+							<div class=""><strong class="orange-text">Mydthshop</strong>- <span class="grey-text">{{ item.c_date | date}}</span></div>
+						</div>
+				</div>      
+		</div>
+	</div>
+</div>
+</section>       -->
+
+<!-- Blog Page New Design -->
+<!-- <section class="hero">
+	<div class="container">
+	</div>
+</section> -->
+<section class="no-padding pt-5 beard">
+	<div class="container">
+		<div class="row no-margin">
+			<div class="col s12">
+				<nav>
+					<div class="nav-wrapper">
+						<div class="col s12">
+							<a routerLink="/" class="breadcrumb black-text">Home</a>
+							<a class="breadcrumb black-text" routerLink="/blog/all">Blog</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="blog-page grey lighten-3">
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<ul class="tabs blog-tabs new-tabs-design">
+					<li class="tab col s12 m3" id="list-item-all"><a [className]="(this.category == 'all')? 'active':''" href="javascript:" (click)="fetch_data('all')">Miscellaneous</a></li>
+					<li class="tab col s12 m3" *ngFor="let item of categories;" id="list-item-{{item.id}}"><a [className]="(this.category == item.id)? 'active':''" href="javascript:" (click)="fetch_data(item.id)">{{item.title}}</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row" *ngIf="this.pageservice.blogs">  
+			<div class="col s12 m4" *ngFor="let item of this.pageservice.blogs;">
+				<div class="card blog-min-hei new-card-design p-0">
+					<div class="card-image">
+						<a [routerLink]="['/blog-detail/'+item.url]"><img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image == ''"><img src="{{this.todoservice.base_url}}accounts/assets/img/cms/270x270{{item.thumb_image}}" class="responsive-img" alt="{{item.title}}" *ngIf="item.thumb_image != ''"></a>
+					</div>
+					<div class="card-content p-3">
+						<div class="author pt-0 pb-3 px-0 border-0">
+							<p class="author-name">
+								<span><i class="material-icons">person</i></span>
+								<span>Libanz</span>
+							</p>
+							<p class="blog-time">
+								<span><i class="material-icons">access_time</i></span>
+								<time>{{ item.c_date | date}}</time>
+							</p>
+						</div>
+						<div class="blog-content p-0 no-box-shadow"> 
+						<span class="blog-title" title="{{item.title}}"><a class="new-card-title-design" [routerLink]="['/blog-detail/'+item.url]">{{item.title | slice:0:32}}</a><span *ngIf="item.title.length>32">...</span></span>
+						<div class="clearfix"></div>
+						<p class="blog-description-{{item.id}} pt-0 cst-blog-fix cstm-height" [innerHTML]="decode_html(item.shortDescription)"> </p>
+						<a [routerLink]="['/blog-detail/'+item.url]" class="orange-text font-size-change1">Read More >> </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="center" *ngIf="this.pageservice.blogs.length == 0">No Records</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="margin-top center" *ngIf="more_display" id="more-display">
+			<a href="javascript:" class="font-size-change1 new-btn-theme white-text" (click)="load_more_blogs();">View More +</a>
+		</div>
+	</div>
+</section>
+<app-footer></app-footer>

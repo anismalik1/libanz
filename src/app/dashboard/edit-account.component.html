@@ -1,0 +1,144 @@
+<style>
+  @media screen and (max-width: 767px){
+
+    .user-name {
+    font-size: 22px;
+    padding-left: 30px;
+    text-transform: capitalize;
+    position: absolute;
+    top: 11px;
+}
+.btn-w100{
+
+  width:100%;
+}
+.img-space{
+  padding:10px;
+}
+  }
+ 
+</style>
+<app-header class="hide-on-mobile"></app-header>
+<div class="spinner-wrapper">
+  <ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+</div>
+<div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
+  <div class="fix-mb-top"></div>
+<!-- End Here -->
+<section class="flash-deal">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col s12 m2">
+               
+            <app-side-nav></app-side-nav>
+            </div>
+            <div class="col s12 m10">
+               <div class="card fix-top-bg">
+                    <div class="card-content">
+                        <h3 class="font600 inline-block">Account Dashboard </h3>
+                        <!-- <a href="javascript:" class="font-size-change inline-block margin-left1 edit-click" (click)="edituser()">Edit</a> -->
+                        <a href="#change-password" class="font-size-change modal-trigger inline-block margin-left1">Change Password</a>
+                        <form [formGroup]="form" #manageform1 = "ngForm" (ngSubmit)="onSubmit()">
+                            <div class="row edit-acc no-margin">
+                                <div class="input-field col s12 m6 l8">
+                                  <input placeholder="Name" id="name" name="name" value="{{userinfo.name}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.name" formControlName="name" [disabled]="!isvalid">
+                                </div>
+                              </div>  
+                          
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Distrbutor No." id="distributer_id" value="Libanz{{userinfo.id}}" type="text" class="validate no-margin" disabled>
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Primary Mobile Number" id="phone" value="{{userinfo.phone}}" type="number" class="validate no-margin" disabled>
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="City" id="city" name="city" value="{{userinfo.city}}" type="text" class="validate no-margin" ngModel [disabled]="!isvalid" formControlName="city">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Pincode" id="pincode" name="pincode" value="{{userinfo.pincode}}" type="number" class="validate no-margin" [(ngModel)]="userinfo.pincode" formControlName="pincode" [disabled]="!isvalid">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="State" id="state" name="state" value="{{userinfo.state}}" type="text" class="validate no-margin" [(ngModel)]="userinfo.state" formControlName="state" [disabled]="!isvalid">
+                        </div>
+                        <div class="input-field col s12 m6 l4">
+                          <input placeholder="Enter Email" id="email" name="email" value="{{userinfo.email}}" formControlName="email" type="email" class="validate no-margin" [(ngModel)]="userinfo.email" [disabled]="!isvalid">
+                        </div>
+                      </div>
+                      <div class="row edit-acc no-margin">
+                        <div class="input-field col s12 m12 l8">
+                          <textarea id="textarea1" [disabled]="!isvalid" [(ngModel)]="userinfo.shipping_address" name="shipping_address" formControlName="shipping_address" class="materialize-textarea" placeholder="C.S.C No.-1, Unit No.-9,10,11, 1st Floor Sector-3, Rohini, New Delhi-110085">{{userinfo.shipping_address}}</textarea>
+                        </div>
+                      </div>
+                      <div class="row edit-acc">
+                        <span class="left grey-text margin-left1 margin-right font600">Your Gender</span>
+                        <p class="inline">
+                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" formControlName="gender" class="with-gap" type="radio" value="1" id="male" [disabled]="!isvalid">
+                              <label for="male">Male</label>
+                            </p>
+                            <p class="inline">
+                              <input name="gender" [(ngModel)]="userinfo.gender" name="gender" class="with-gap" formControlName="gender" type="radio" id="female" value="2" [disabled]="!isvalid">
+                              <label for="female">Female</label>
+                            </p>
+                      </div>
+                     
+                      <div class="row edit-acc">
+                          <div class="col s12 m12 l8 ">
+                              <!-- <button type="Submit" class="btn orange btn-large" [disabled]="!isvalid">Update Details</button> -->
+                              <button type="submit" [disabled]="form.invalid || loading" class="btn orange btn-large btn-w100">Save <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+                              <br/>
+                             </div>
+                      </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end here -->
+<div id="change-password" class="modal">
+  <div class="modal-content nopadding">
+    <span class="modal-close close-then"><i class="material-icons font-size-change1">close</i></span>
+    <form method="post" class="p-v-xs padd11" #updatepassform = "ngForm" (ngSubmit)="update_password(updatepassform.value)">
+      <div class="row">
+        <div class="col s12 m6">
+          <span class="font600 font-size-change">Your new password must:</span>
+          <ul class="list-password">
+            <li>Be at least 4 characters in length</li>
+            <li>Not be same as your current password</li>
+            <li>Not contain common passwords.</li>
+          </ul>
+        </div>
+        <div class="col s12 m6">
+          <h4 class="font600">Change Password</h4>
+          <div class="input-field sec-7">
+            <input type="password" name="cpassword" ngModel id="password">
+            <label for="password">Type Current Password</label>
+          </div>	
+          <div class="input-field sec-7">
+            <input type="password" name="newpassword" ngModel id="new-password">
+            <label for="new-password">Type New Password</label>
+          </div>	
+          <div class="input-field sec-7">
+            <input type="password" name="cnewpassword"ngModel id="re-password">
+            <label for="re-password">Re-type New Password</label>
+          </div>						
+          <button type="Submit" name="change-password" class="modal-action margin-top orange btn-large">Change Password</button>
+        </div>																												
+      </div>
+    </form>	
+   </div>
+</div>
+<div id="remove-avatar" class="modal">
+    <div class="modal-content nopadding">
+      <span class="modal-close close-then"><i class="material-icons font-size-change1">close</i></span>
+          <h3>Are You Sure You Want to Remove Avatar?</h3>
+          <input class="btn orange modal-close" type="button" value="Yes" (click)="remove_avatar();">
+     </div>
+  </div>
+<app-footer-min></app-footer-min>
