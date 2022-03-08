@@ -150,17 +150,17 @@ export class HomeComponent implements OnInit {
           // this.open_enquiry_model();
       }, 4000);
     }
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-        this.open_enquiry_model();
+    // setTimeout(()=>{    //<<<---    using ()=> syntax
+    //     this.open_enquiry_model();
       
-    }, 4000);
+    // }, 4000);
     this.check_local();
     this.app_version();
   }
 
   filter_url(url)
   {
-    if(window.screen.width < 767)
+    if(window.screen && window.screen.width < 767)
     {
       return '/product/amp/'+url.trim()
     }  
