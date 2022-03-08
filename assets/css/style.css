@@ -3033,9 +3033,14 @@ tbody img{
 .promo-li h4{
 	margin: 5px 0;
 }
+ul.cut-images{
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
 .cut-images li{
 	display: inline-block;
-	width: 10%;
+	margin: 0 1.5rem;
 }
 .cut-images{margin-bottom: 3.5rem;}
 .cut-images li img{
@@ -3493,8 +3498,8 @@ canvas {
 #tata-sky-modal .card-image img{
 	max-height: 100px;
 	min-height: 100px;
-	
-    width: 65%;
+	object-fit: contain;
+    width: 100%;
 }
 .retailer-slider img,.retailer-slider .col{
 	max-height:300px;
@@ -7609,5 +7614,9 @@ ul.mad-list .mad-list-text{
 }
 .justify-content-between{
 	justify-content: space-between !important;
+}
+.py-0{
+	padding-top:0 !important;
+	padding-bottom:- 0 !important;
 }
 /* End Here */

@@ -70,57 +70,61 @@ label.font-size-change.active {
 
 <div class="work" *ngIf="step==1;then loginform else otpverify"></div>
 <ng-template #loginform>
-	<section class="login-form no-padding white">
-		<div class="row no-margin">
-			<!-- <div class="col s12 m12 l6 no-padding login-side-image" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login.jpg);"> -->
-				<!-- <img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images"> -->
-				<div class="col s12 m12 l6 no-padding login-side-image" style="background-image: url(../../assets/images/login-banner.png);">
-			</div>
-			<div class="col s12 m12 l6 no-padding">
-				<div class="card no-box-shadow ">
-					<div class="card-content"> 
-						<div class="center">
-					<span class="fa fa-lock fa-4x"  style="color: #8c8c8c;padding-top:30px;"></span>
-							<h3 class="font600 orange-text">Welcome back!</h3>
-							<div class="notification-text green-text" *ngIf="notification != ''">{{notification}}</div>
-							<span id="page-content"></span>
-							<form [formGroup]="logingroup" class="margin-top sec-7 " #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value,this)">
-								<div class="row">
-									<div class="input-field col s12 m9 offset-m1 fix-align new-input-design-fixes">
-										<i class="material-icons prefix margin-top-cart2">phone</i>
-										<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}">
-										<label for="icon_prefix" class="font-size-change">Enter Phone No.</label>
-										<div class="red-text accent-4" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>
-
-									</div> 
-								</div> 
-								<div class="input-field col s12 m9 offset-m1 fix-align new-input-design-fixes">
-									<i class="material-icons prefix margin-top-cart2">lock</i>
-									<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}">
-									<label for="password" class="font-size-change">Enter Password</label>
-									<div class="red-text accent-4" *ngIf="!logingroup.controls['password'].valid && logingroup.controls['password'].touched">Enter Password*.</div> 
-								</div>
-								<div class="row">
-									<div class="col s6 m4 offset-m1">
-										<input type="checkbox" class="filled-in" id="filled-in-box" formControlName="remember" [checked]="remember.rm"/>
-										<label for="filled-in-box" class="font-size-change">Remember me</label>
+	<section class="login-form no-padding white py-5">
+		<div class="container">
+			<div class="new-card-design transform-scale-1 p-0">
+				<div class="row no-margin">
+					<!-- <div class="col s12 m12 l6 no-padding login-side-image" style="background-image: url({{this.todoservice.base_url}}web-app/assets/images/login.jpg);"> -->
+						<!-- <img src="https://mydthshop.com/web-app/assets/images/login.jpg" class="responsive-img full-width" alt="login-images"> -->
+						<div class="col s12 m12 l6 no-padding">
+							<img src="../../assets/images/login-banner.png" alt="login" class="w-100">
+						</div>
+					<div class="col s12 m12 l6 no-padding">
+						<div class="card no-box-shadow m-0">
+							<div class="card-content py-0"> 
+								<div class="">
+									<div class="center">
+										<span class="fa fa-lock fa-4x"  style="color: #8c8c8c;padding-top:30px;"></span>
+										<h3 class="font600 orange-text">Welcome back!</h3>
+										<div class="notification-text green-text" *ngIf="notification != ''">{{notification}}</div>
+										<span id="page-content"></span>
 									</div>
-									<div class="col s6 m5">
-										<a routerLink="/proceed/forgot-password" class="orange-text font-size-change right">Forgot Password?</a>
-									</div>
+									<form [formGroup]="logingroup" class="margin-top sec-7 " #loginform = "ngForm" (ngSubmit)="login_submit(loginform.value,this)">
+										<div class="row">
+											<div class="input-field col s12 new-input-design-fixes">
+												<input id="icon_prefix" type="number" class="validate" formControlName="phone" value="{{remember.ph}}">
+												<label for="icon_prefix" class="font-size-change p-0">Enter Phone No.</label>
+												<div class="red-text error-fixes accent-4" *ngIf="!logingroup.controls['phone'].valid && logingroup.controls['phone'].touched">Enter Phone Number*.</div>		
+											</div> 
+											<div class="input-field col s12 new-input-design-fixes">
+												<input id="password" type="password" formControlName="password" class="validate" value="{{remember.pw}}">
+												<label for="password" class="font-size-change p-0">Enter Password</label>
+												<div class="red-text accent-4 error-fixes" *ngIf="!logingroup.controls['password'].valid && logingroup.controls['password'].touched">Enter Password*.</div> 
+											</div>
+										</div> 
+										<div class="row m-0">
+											<div class="col s6 m6">
+												<input type="checkbox" class="filled-in" id="filled-in-box" formControlName="remember" [checked]="remember.rm"/>
+												<label for="filled-in-box" class="font-size-change">Remember me</label>
+											</div>
+											<div class="col s6 m6">
+												<a routerLink="/proceed/forgot-password" class="orange-text font-size-change right">Forgot Password?</a>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col s12 m12 center">
+												<button type="Submit" class="btn orange login-btn new-btn-theme" [disabled]="!logingroup.valid">Login</button>
+											</div>
+										</div>
+										<div class="row no-margin">
+											<div class="col s12 m12 center">
+												<span class="font-size-change">Don't have Libanz account?</span>
+												<a routerLink="/proceed/signup" href="javascript:" class="orange-text font-size-change font600"> REGISTER</a><br>
+											</div>
+										</div>
+									</form>
 								</div>
-								<div class="row">
-									<div class="col s12 m9 offset-m1">
-										<button type="Submit" class="btn orange login-btn rounded-btn" [disabled]="!logingroup.valid">Login</button>
-									</div>
-								</div>
-								<div class="row no-margin">
-									<div class="col s12 m9 offset-m1">
-										<span class="font-size-change">Don't have Libanz account?</span>
-										<a routerLink="/proceed/signup" href="javascript:" class="orange-text font-size-change font600"> REGISTER</a><br>
-									</div>
-								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
