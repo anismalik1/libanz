@@ -141,14 +141,14 @@ height: 25px;
 															<input name="name" id="name" type="text" class="validate"  formControlName="name" autocomplete="off">
 															<label for="name">Name*</label>
 															<div class="center" *ngIf="!this.addressformgroup.controls['name'].valid && this.addressformgroup.controls['name'].touched">
-																	<span class="red-text ">*Name is Required.</span>
+																	<span class="red-text error-fixes">*Name is Required.</span>
 															</div>
 													</div>
 													<div class="input-field col s12 m6">
 															<input id="phn-no" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
 															<label for="phn-no">Phone Number*</label>
 															<div class="center" *ngIf="!this.addressformgroup.controls['contact'].valid && this.addressformgroup.controls['contact'].touched">
-																	<span class="red-text ">*Enter a Valid Phone Number.</span>
+																	<span class="red-text error-fixes">*Enter a Valid Phone Number.</span>
 															</div>
 													</div>
 											</div>
@@ -157,7 +157,7 @@ height: 25px;
 															<input name="pincode" id="pincode" type="number" class="validate" formControlName="pincode" autocomplete="off" [(value)]="this.pincode" value="{{this.pincode}}">
 															<label for="pincode" [className]="(this.pincode)?'active':''">Pincode*</label>
 															<div class="center" *ngIf="!this.addressformgroup.controls['pincode'].valid && this.addressformgroup.controls['pincode'].touched">
-																	<span class="red-text ">*Enter a Valid Pincode.</span>
+																	<span class="red-text error-fixes">*Enter a Valid Pincode.</span>
 															</div>
 													</div>
 													<div class="input-field col s12 m6">
@@ -170,7 +170,7 @@ height: 25px;
 															<input name="city" id="city" type="text" class="validate" formControlName="city" autocomplete="off">
 															<label for="city">City/District/Town*</label>
 															<div class="center" *ngIf="!this.addressformgroup.controls['city'].valid && this.addressformgroup.controls['city'].touched">
-																	<span class="red-text ">*City is Required.</span>
+																	<span class="red-text error-fixes">*City is Required.</span>
 															</div>
 													</div>
 													<div class="input-field col s12 m6 b-fix-top">
@@ -188,7 +188,7 @@ height: 25px;
 															<input name="address" id="land" type="text" class="validate" formControlName="address">
 															<label for="land">Address*</label>
 															<div class="center" *ngIf="!this.addressformgroup.controls['address'].valid && this.addressformgroup.controls['address'].touched">
-																	<span class="red-text ">*Enter Delivery Address.</span>
+																	<span class="red-text error-fixes">*Enter Delivery Address.</span>
 															</div>
 													</div>
 											</div>
@@ -215,7 +215,7 @@ height: 25px;
 															<textarea id="textarea1" name="row_address" formControlName="row_address" autocomplete="off" class="materialize-textarea"></textarea>
 															<label for="textarea1">Paste Address*</label>
 															<div class="center" *ngIf="!rowaddressformgroup.controls['row_address'].valid && rowaddressformgroup.controls['row_address'].touched">
-																	<span class="red-text ">*Enter Address.</span>
+																	<span class="red-text error-fixes">*Enter Address.</span>
 															</div>
 															<span class="red-text">Please include phone number, pincode in address.</span>
 													</div>
@@ -235,14 +235,14 @@ height: 25px;
 															<input id="phn-no-reg" name="contact" type="text" class="validate" formControlName="contact" autocomplete="off">
 															<label for="phn-no-reg">Phone Number*</label>
 															<div class="center" *ngIf="!regaddressformgroup.controls['contact'].valid && regaddressformgroup.controls['contact'].touched">
-																	<span class="red-text ">*Enter a Valid Phone Number.</span>
+																	<span class="red-text error-fixes">*Enter a Valid Phone Number.</span>
 															</div>
 													</div>
 													<div class="input-field col s12 m6">
 															<input name="pincode" id="pincode-reg" type="number" class="validate" formControlName="pincode" autocomplete="off" value="{{this.pincode}}">
 															<label for="pincode-reg" [className]="(this.pincode)?'active':''">Pincode*</label>
 															<div class="center" *ngIf="!regaddressformgroup.controls['pincode'].valid && regaddressformgroup.controls['pincode'].touched">
-																	<span class="red-text ">*Enter a Valid Pincode.</span>
+																	<span class="red-text error-fixes">*Enter a Valid Pincode.</span>
 															</div>
 													</div>
 													

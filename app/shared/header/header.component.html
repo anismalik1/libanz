@@ -694,7 +694,7 @@ padding-bottom:15px;
 						
 					<li class="craft relative" >
 						<!-- <a href="javascript:" class="dropdown-button" data-beloworigin="true" data-activates='dropdown-notice'><div *ngIf="this.todoservice.get_user_name() != '' && notification_count"><img src="https://mydthshop.com/web-app/assets/images/new-icons/notification.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a> -->
-						<a class="modal-trigger" data-target="loadmore-modal2" href="#loadmore-modal2"><div *ngIf="this.todoservice.get_user_phone() != '' && notification_count"><img src="./assets/images/noti-black.png" width="24px" alt="wallet" class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
+						<a class="modal-trigger notification-modal-click" data-target="loadmore-modal2" href="#loadmore-modal2"><div *ngIf="this.todoservice.get_user_phone() != '' && notification_count"><img src="./assets/images/noti-black.png" width="24px" alt="wallet"  class="responsive-img vertical-align-middle" > <span class="badge" *ngIf="notification_count.count > 0">{{notification_count.count}}</span></div></a>
 						<!-- <ul id='dropdown-notice' class='dropdown-content' style="width: 400px !important">
 							<li *ngFor="let item of notifications;"><*ngIf="this.todoservice.get_user_name() != ''"a href="#"[className]="(item.read == 1)?'grey-text':''" [innerHTML]="item.comment"></a></li>
 						</ul> -->
@@ -745,12 +745,12 @@ padding-bottom:15px;
 			</div>		
 						
 	</header>
-	<div id="loadmore-modal2" class="modal white" style="width:40%;height:100%">
+	<div id="loadmore-modal2" class="modal white notification-new-design">
 		<!-- <div class="modal-content" layout="column" (scroll)="onScroll($event)" style="height: 100%; overflow: auto;">	 -->
 		<div class="modal-content">
-		<div class="modal-header">
-		<h4>Notifications</h4>
-		<div class="modal-close right-align"><i class="material-icons">close</i></div>
+		<div class="modal-header border-bottom d-flex align-items-center justify-content-between">
+			<h4>Notifications</h4>
+			<h5 class="black-text right-align font600 m-0 pointer-cursor">Mark All Read</h5>
 		</div>
 		
 		<ul *ngIf="notifications  && notifications.length > 0" class="cst-list-view">

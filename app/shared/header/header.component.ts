@@ -1124,9 +1124,9 @@ export class HeaderComponent implements OnInit{
     script.type = `text/javascript`;
     script.id = `side-nav-script`;
     script.text = ` 
-    $(document).ready(function(){
-      
+    $(document).ready(function(){      
       $('select').material_select();
+      $('.modal-overlay').addClass('hide');
       $('.modal').modal();
       //$(".side-menu").swipe( {fingers:1} );
       // $('#mobile-dashboard-menus').lightSlider({

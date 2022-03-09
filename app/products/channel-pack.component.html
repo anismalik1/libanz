@@ -73,22 +73,20 @@
 	</div>
 </section>
 
-<div id="sendmail-modal" class="modal">
+<div id="sendmail-modal" class="modal modal white max-width-new">
 	<div class="modal-content">
-		<h3 class="center">Enter Email</h3>
-		<a href="javascript:" class="modal-action modal-close"><i class="material-icons">
-			close</i></a>
+		<h4 class="center">Enter Email</h4>
+		<div class="modal-close login-modal-close right-align" style="top: 10px !important;"><i class="material-icons">close</i></div>
 		<div class="row">
-			<div class="col s12 m8 offset-m1">
-				<div class="input-field">
-				<i class="material-icons prefix margin-top-cart2">mail</i>
+			<div class="col s12">
+				<div class="input-field new-input-design-fixes">
 					<input class="validate" id="pack-email" type="text" >
 					<label class="font-size-change active" for="pack-email" >Email.</label>
 				</div>
 			</div>
-			<div class="col s12 m2">
+			<div class="col s12">
 				<div class="input-field">
-					<input type="submit" class="btn orange" value="send" (click)="share_pack_to_mail()">
+					<input type="submit" class="btn btn-new-theme" value="send" (click)="share_pack_to_mail()">
 				</div>
 			</div>
 		</div>	

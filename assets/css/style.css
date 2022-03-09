@@ -134,7 +134,7 @@ flex-direction: row;
 .feature-image-wrapper{min-height: 217px;padding-top: 5rem;}
 .feature-image-wrapper i{font-size: 6rem!important;}
 .compare-text.left {
-	font-size: 15px;
+	font-size: 13px;
     padding: 3rem 10px 0;
     font-weight: bold;
     color: #ff6a00;
@@ -3120,7 +3120,7 @@ ul.cut-images{
 	width: 100%;
 }
 .flash-deal-slider{
-	max-height: 450px;
+	max-height: 390px;
 }
 .image-size-chng .card-image img{
 	width: 60%;
@@ -3668,7 +3668,7 @@ canvas {
  .header-strip span a,.header-strip span{color: #777777 !important; transition: .3s all linear;}
  .tabs::-webkit-scrollbar { width: 0 !important }
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
- .banner-slider1 .full-width{height: 448px; object-fit: fill;}
+ .banner-slider1 .full-width{height: 390px; object-fit: fill;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
  #wallet-type .mydth-wallet img{width:59px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
@@ -5032,6 +5032,18 @@ li.clogin.ng-star-inserted {
 
 	box-shadow: 1px 1px 10px #8c8c8c;
 }
+.new-jio-fiber1{
+	position: relative !important;
+    background-color: #fff;
+    background-clip: border-box;
+    transform: scale(1) ;
+    transition: all 0.3s !important;
+    box-shadow: 0px 4px 12px #00000029 !important;
+    padding: 25px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    border: none !important;
+}
 input:not([type]), input[type=date]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=email]:not(.browser-default), input[type=number]:not(.browser-default), input[type=password]:not(.browser-default), input[type=search]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=text]:not(.browser-default), input[type=time]:not(.browser-default), input[type=url]:not(.browser-default), textarea.materialize-textarea {
     background-color: transparent;
     /* border: none; */
@@ -5316,7 +5328,6 @@ a.modal-trigger i {
 .address-location {position: absolute;top: 5px;}
 	@media only screen and (max-width: 767px){
 		.circle-dotss {
-    margin-top: -46px !important;
     height: 13px !important;
     width: 13px !important;
     background: #ff6a00;
@@ -6876,7 +6887,7 @@ span.grey-text.wallet-txt {
 .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
     background-color: #ff6a00 !important;
 }
-#loadmore-modal2.modal{width:100%;height:100%;top:0!important;bottom: 0;max-height: 100%;}
+#loadmore-modal2.modal{width:100%;height:100%;bottom: 0;max-height: 100%;}
 #loadmore-modal.modal{width:100%;height:100%;top:0!important;padding-bottom: 80px;max-height: 100%;}
 
 span.libanz-wallet {
@@ -7005,14 +7016,20 @@ padding-left: 7px;
 	left: 20px;} */
 
 .circle-dotss {
-    margin-top: -42px;
     height: 15px;
     width: 15px;
-    background: #ff6a00;
+    background: green;
     border-radius: 50%;
     position: absolute;
-	right: 30px;
+	right: 10px;
+	top:10px;
 	
+}
+.notification-drop-text p{
+	padding-right:3rem;
+}
+.notification-drop-text{
+	position:relative;
 }
 .mat-step-header:hover {
     background-color: #fff !important;
@@ -7365,6 +7382,9 @@ ul.mad-list .mad-list-text{
     width: 100% !important;
     transition: border-color 0.2s ease !important;
 }
+.new-input-design-fixes textarea{
+	padding-top: 1.5rem !important;
+}
 .select-new-designs .mat-select{
 	font-size: 1rem !important;
     border: 2px solid #A8A9AC;
@@ -7618,5 +7638,45 @@ ul.mad-list .mad-list-text{
 .py-0{
 	padding-top:0 !important;
 	padding-bottom:- 0 !important;
+}
+.notification-new-design{
+	width: 450px !important;
+	max-height: 500px !important;
+	min-height: 450px !important;
+    top: 105px!important;
+    left: 16% !important;
+    border-radius: 12px !important;
+    margin: 0 auto !important;
+	box-shadow: 0 4px 12px rgb(0 0 0 / 16%) !important;
+	overflow: auto;
+}
+.notification-new-design .modal-header{
+	background: transparent !important;
+}
+.notification-new-design#loadmore-modal2 .modal-header h4{
+	color: #000 !important;
+	font-size: 16px !important;
+	text-align:left !important;
+}
+.notification-new-design ul li a{
+	display: flex;
+    align-items: center;
+	justify-content: space-between;
+	padding: 0 10px;
+}
+.notification-new-design ul li .notification-drop-text{
+	padding: 0 0 3px 15px !important;
+}
+.new-airtel-frame{
+	margin-top: 5rem;
+}
+.new-airtel-frame img{
+	width: 100%;
+}
+.ml-5{
+	margin-left: 5rem !important;
+}
+.pointer-cursor{
+	cursor: pointer;
 }
 /* End Here */
