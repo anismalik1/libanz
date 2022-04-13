@@ -89,11 +89,11 @@ padding-bottom: 10px;
 <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 <div class="fix-mb-top"></div>	
 <!-- End Here -->
-<section class="middle white">
+<section class="middle white py-5">
 	<div class="container">
 		<div class="row no-margin">
 			<div class="col s12 m10 l6 offset-l3">
-				<div class="card no-margin">
+				<div class="card no-margin new-card-design transform-scale-1">
 					<div class="card-content center" *ngIf="spin_show">
 						<span class="large material-icons orange-text"><img width="30" src="{{this.todoservice.base_url}}web-app/assets/images/timer-2.gif"/></span>
 						<div class="clearfix"></div>
@@ -151,7 +151,9 @@ padding-bottom: 10px;
 								</a>
 							</div>
 							<div class="clearfix"></div><br/>
-							<a href="javascript:" class="back-to-retailer-page grey lighten-3 btn black-text cst-clr-btn" (click)="back_to_home()"> Go Back To Home &nbsp; <span class="fa fa-home"></span> </a>
+							<div class="center">
+								<a href="javascript:" class="back-to-retailer-page new-btn-theme cst-clr-btn" (click)="back_to_home()"> Go Back To Home &nbsp; <span class="fa fa-home"></span> </a>
+							</div>
 						</div>
 						<p class="grey-text center">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>						
 					</div>

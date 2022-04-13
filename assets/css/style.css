@@ -3668,7 +3668,7 @@ canvas {
  .header-strip span a,.header-strip span{color: #777777 !important; transition: .3s all linear;}
  .tabs::-webkit-scrollbar { width: 0 !important }
  .header-strip span a:hover,.header-strip span:hover{color: #000 !important;}
- .banner-slider1 .full-width{height: 390px; object-fit: fill;}
+ .banner-slider1 .full-width{height: 338px; object-fit: fill;}
  #wallet-type label img{vertical-align: middle;width: 60px;}
  #wallet-type .mydth-wallet img{width:59px; margin-top:3px;}
  .blog-page{padding: 2rem 0;}
@@ -7644,7 +7644,7 @@ ul.mad-list .mad-list-text{
 	max-height: 500px !important;
 	min-height: 450px !important;
     top: 105px!important;
-    left: 16% !important;
+    left: 130px !important;
     border-radius: 12px !important;
     margin: 0 auto !important;
 	box-shadow: 0 4px 12px rgb(0 0 0 / 16%) !important;
