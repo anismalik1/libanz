@@ -579,7 +579,7 @@ export class ProductDetailAmpComponent implements OnInit {
         $('html, body').animate({
           scrollTop: $("#monthly-packages").offset().top
         }, 1000);
-        $('[name="pincode"]').css("border-bottom", "1px solid #ff6a00");
+        $('[name="pincode"]').css("border-bottom", "1px solid #dc6802");
         return;
       }
     }
@@ -723,7 +723,7 @@ export class ProductDetailAmpComponent implements OnInit {
         $('html, body').animate({
           scrollTop: $("#monthly-packages").offset().top
         }, 1000);
-        $('[name="pincode"]').css("border-bottom", "1px solid #ff6a00");
+        $('[name="pincode"]').css("border-bottom", "1px solid #dc6802");
         return;
       }
       this.product.pincode = pincode;
@@ -739,7 +739,7 @@ export class ProductDetailAmpComponent implements OnInit {
         $('html, body').animate({
           scrollTop: $("#monthly-packages").offset().top
         }, 1000);
-        $('[name="subscriber_id"]').css("border-bottom", "1px solid #ff6a00");
+        $('[name="subscriber_id"]').css("border-bottom", "1px solid #dc6802");
         return;
       }
       this.product.subscriber_id =sub_id;
