@@ -7724,4 +7724,7 @@ ul.mad-list .mad-list-text{
 .mh-400{
 	height: 390px !important;
 }
+.h-auto{
+	height:auto;
+}
 /* End Here */
