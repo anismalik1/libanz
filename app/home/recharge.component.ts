@@ -704,6 +704,7 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
             this.alloperators = data.ALLOPERATORS;
             this.operators = data.ALLOPERATORS;
             this.circles  = data.CIRCLES;
+            this.circles = this.circles.slice(1);
             this.spinner.hide();
             
             // if(recharge_data && !recharge_data.operator_id )

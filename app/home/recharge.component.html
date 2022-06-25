@@ -622,7 +622,7 @@ left:5%;
 				<form id="electricity-form" method="post" [formGroup]="electricitygroup" #electricityform = "ngForm" (ngSubmit)="recharge_init('electricity',electricityform.value)" *ngIf="this.recharge_type.electricity">
 					<div class="row no-margin">
 						<h4 class="dth-txt-1 text-changes-fix">Pay Electricity Bill	</h4>
-						<!-- <div class="input-field col s12 m12 electric-cls1 select-new-designs pr-13px">
+						<div class="input-field col s12 m12 electric-cls1 select-new-designs pr-13px">
 							<mat-form-field>
 								<mat-select placeholder="Select Circle" (selectionChange)="filter_operator($event.value)" formControlName="circle">
 									<span *ngFor="let item of circles;">
@@ -633,7 +633,7 @@ left:5%;
 								</mat-select>
 							</mat-form-field>
 							<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Select Operator" id="mobid" *ngIf="!electricitygroup.controls['operator'].valid && electricitygroup.controls['operator'].touched"><i class="material-icons">close</i></span>       
-						</div> -->
+						</div>
 						<div class="inner-electricity select-new-designs">
 							<div class="input-field col s12 m12 electric-cls1" >
 								<mat-form-field>
