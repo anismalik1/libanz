@@ -152,7 +152,7 @@
 
 font-size: 23px;
 padding-right: 7px;
-color: #ff6a00;
+color: #dc6802;
 }
 	
 	@media only screen and (max-width: 767px){
@@ -166,7 +166,7 @@ color: #ff6a00;
 
 font-size: 23px;
 padding-right: 7px;
-color: #ff6a00;
+color: #dc6802;
 }
 	.electric-cls-btn {
 		width: 90% !important;
@@ -233,7 +233,7 @@ left:5%;
 	</style>
 <app-header></app-header>
 <div class="spinner-wrapper">
-	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#dc6802" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
 <div class="cst-back" [innerHTML] ="this.todoservice.back_link"></div>
 <div class="fix-mb-top"></div>
@@ -321,7 +321,7 @@ left:5%;
 							</div>
 							
 							<div class="col s12 m12 l3 center" *ngIf="!rechargeData.record_exist">
-								<span *ngIf="this.todoservice.get_user_recharge_amount() == 0">
+								<!-- <span *ngIf="this.todoservice.get_user_recharge_amount() == 0">
 									<p class="recharge-content-box" *ngIf="promo_selected == 0 && this.url_name == 'mobile'">
 										<a href="#promo-code-apply" class="modal-trigger">Have A Promocode</a>
 									</p>
@@ -330,7 +330,7 @@ left:5%;
 									<p class="recharge-content-box" *ngIf="promo_selected == 1">
 										<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
 									</p>	
-								</span>
+								</span> -->
 								<button type="submit" class="btn new-btn-theme p-0 w-100" (click)="recharge_handle()" id="recharge-proceed" [disabled]="this.proceed_disable">Proceed to pay {{pay_amount()}}</button>
 							</div>
 							
@@ -900,18 +900,18 @@ left:5%;
 
 
 			<div class="col s12 m7 l8 plans-view-details m-0">
-				<div class="card no-margin cst-border1 new-card-design transform-scale-1 max-height-400">
-					<div class="card-content p-0" *ngIf="page_data">
+				<div class="card no-margin cst-border1 new-card-design transform-scale-1 p-0 h-auto">
+					<!-- <div class="card-content p-0" *ngIf="page_data">
 						<div id="short-content"  [innerHTML] = "page_data.short_description | sanitizeHtml"></div>
-					</div>	
+					</div>	 -->
 					<div class="card-content p-0">
-						<div id="tab-2" [className]="(tab_2 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="plans && plans.length > 0">
+						<!-- <div id="tab-2" [className]="(tab_2 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="plans && plans.length > 0">
 							<span class="h3 font600 black-text" ><a href="javascript:" class="black-text" (click)="show_tab(2)">Plans</a></span>
 						</div>
 						<div id="tab-1" [className]="(tab_1 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="promo_codes && promo_codes.length > 0">
 							<span class="h3 font600 mb-3 d-block"><a href="javascript:" class="h3 black-text" (click)="show_tab(1)">Promo Code</a></span>
-						</div>
-						<div id="promo-content" [className]="(plans.length > 0) ? 'hide':''">
+						</div> -->
+						<!-- <div id="promo-content" [className]="(plans.length > 0) ? 'hide':''">
 							<ul class="promo-ul" *ngIf="promo_codes">
 								<li class="promo-li" *ngFor="let promo of promo_codes;">
 									<a href="#promo-code-modal" class="modal-trigger" (click)="promoselected(promo)">
@@ -950,8 +950,8 @@ left:5%;
 							</div>
 							<div class="clearfix"></div>
 						
-						</div>
-						
+						</div> -->
+						<img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/Business-india.jpg">
 					</div>
 					
 				</div>

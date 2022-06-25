@@ -43,13 +43,13 @@ overflow:hidden !important;
 </style>
 <app-header class="hide-on-mobile"></app-header>
 <div class="spinner-wrapper">
-	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#ff6a00" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
+	<ngx-spinner bdColor = "rgba(255,255,255,0.6)" size = "medium" color = "#dc6802" type = "ball-beat" [fullScreen] = "true"></ngx-spinner>
 </div>
 <!-- End Here -->
-<section class="middle white fix-top-box">
+<section class="middle white fix-top-box py-5">
 	<div class="row no-margin">
 		<div class="col s12 m10 l6 offset-l3 fix-padding">
-			<div class="card no-margin">
+			<div class="card no-margin new-card-design transform-scale-1">
 				<div class="card-content" *ngIf="orders">
 						<div class="col s12 no-padding center">	
 							<span *ngIf="orders[0].payment_status != 2 && orders[0].status != 'Pending'" class="icon" style="background-color: green;
@@ -145,7 +145,7 @@ overflow:hidden !important;
 								<!-- <div class="center" *ngIf="order.cashback > 0 && order.payment == 'wallet'"><span class="font-size-change1 margin-top green-text">*Congratulations You Have recieved {{order.cashback}} Cashback on your Libanz Wallet.</span></div>								 -->
 							</div> 
 						</div>
-						<div class="center"><a href="javascript:" class="btn orange white-text full-width rounded-btn" (click)="back_to_home()">Continue Shopping</a></div>
+						<div class="center mt-3"><a href="javascript:" class="btn new-btn-theme" (click)="back_to_home()">Continue Shopping</a></div>
 						<p class="red-text center margin-checkout">*This Order Invoice Also Send on Your Registered e-Mail Id.</p>
 					</div>
 				</div>

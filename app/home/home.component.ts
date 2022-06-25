@@ -628,7 +628,7 @@ export class HomeComponent implements OnInit {
         }
       });
       $('#recommended-items').lightSlider({
-        item: 2,
+        item: 4,
         auto: false,
         loop: false,
         pause: 3000,
@@ -784,7 +784,7 @@ export class HomeComponent implements OnInit {
     script.text = `
       $(document).ready(function(){
         $('#recommended-items').lightSlider({
-          item: 2,
+          item: 4,
           auto: false,
           loop: false,
           pause: 3000,
