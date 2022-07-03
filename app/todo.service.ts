@@ -511,6 +511,14 @@ export class TodoService {
     // $('.spinner-wrapper').hide();
     return Observable.throw(error.json()); 
  }
+
+ fetch_dth_order_plan(data : any)
+ {
+   
+   let url = this.server_url+'accounts/apis/plan_api/dth_plans';
+   return this.send_post_request(data,url) ; 
+ }
+
   fetch_user_info(data : any)
   {
     

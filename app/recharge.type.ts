@@ -1,5 +1,6 @@
  export class RechargeType {
 	mobile!: boolean;
+	postpaidmobile!: boolean;
 	dth! : boolean;
 	electricity! : boolean;
 	water! :boolean;

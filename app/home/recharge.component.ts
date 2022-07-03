@@ -65,6 +65,7 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
   viewrange : number = 0;
   showstd : number = 0;
   mobilegroup : FormGroup;
+  postpaidmobilegroup : FormGroup;
   dthgroup : FormGroup;
   datacardgroup : FormGroup;
   landlinegroup : FormGroup;
@@ -380,6 +381,7 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
     this.show_tab(1)
     this.spinner.show(); 
     this.recharge_type.mobile = false;
+    this.recharge_type.postpaidmobile = false;
     this.recharge_type.dth = false;
     this.recharge_type.electricity = false;
     this.recharge_type.water = false;
@@ -390,14 +392,24 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
     this.recharge_type.landline = false;
 
     this.plans = [];
-      if(tab == 'mobile' || tab == 'mobile-postpaid')
+      if(tab == 'mobile')
       {
         this.pagetitle = "Mobile Recharge & Bill Payments";
         this.recharge_type.mobile = true;
 
         if(this.operator_id > 0 && this.region > 0)
         {
-          this.get_plans(this.region,this.operator_id);
+          //this.get_plans(this.region,this.operator_id);
+        }
+      }
+      else if(tab == 'mobile-postpaid')
+      {
+        this.pagetitle = "Bill Payments";
+        this.recharge_type.postpaidmobile = true;
+
+        if(this.operator_id > 0 && this.region > 0)
+        {
+          //this.get_plans(this.region,this.operator_id);
         }
       }
       else if(tab == 'dth-recharge')
@@ -446,6 +458,14 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
       this.get_last_recharges();
       this.todoservice.back_icon_template(this.pagetitle,'');
       this.mobilegroup = this.fb.group({
+        'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
+        // 'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
+         'operator' : [null,Validators.compose([Validators.required])],
+         recharge_id: new FormControl('', [Validators.required,Validators.minLength(10)]),
+        // 'recharge_id' : [null,Validators.compose([Validators.required])], //[null,[Validators.required,Validators.minLength(10),Validators.pattern("[0-9]{10}$")]],
+         'circle_area' : [null,Validators.compose([Validators.required])]
+       });
+      this.postpaidmobilegroup = this.fb.group({
         'amount' : [null,[Validators.required,Validators.min(10),Validators.max(19999),Validators.pattern("[0-9]{2,5}$")]],
         // 'test_id' : [null,Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
          'operator' : [null,Validators.compose([Validators.required])],
@@ -613,23 +633,25 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
     }
     else if(s == 'dth')
     {
-      if(data == 68)
+      this.fetch_dth_order_plan(data);
+      var $op_id = data.op;
+      if($op_id == 68)
       {
         this.validationtext = "Please Enter Registered Mobile No./ Viewing Card No.";
         this.dthpattern = "[6-9][0-9]{9}$|[0][0-9]{10}$";
-      }else if(data == 69)
+      }else if($op_id == 69)
       {
         this.validationtext = "Please Enter 11 digits long Smart Card Number .";
         this.dthpattern = "[0-9]{11}$";
-      }else if(data == 71)
+      }else if($op_id == 71)
       {
         this.dthpattern = "[1][0-9]{9}$";
         this.validationtext = "Subscriber ID starts with 1 and 10 digits long. To locate it, press the home button on remote.";
-      }else if(data == 72)
+      }else if($op_id == 72)
       {
         this.dthpattern = "[0-9]{6,11}$";
         this.validationtext = "Know your Customer ID SMS 'ID' to 566777 from your registered mobile number.";
-      }else if(data == 74)
+      }else if($op_id == 74)
       {
         this.dthpattern = "[3][0-9]{9}$";
         this.validationtext = "Customer ID starts with 3 and is 10 digits long. To locate it, press the MENU button on remote";
@@ -651,6 +673,21 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
       this.check_operator(this.selectedOperator,s);
     }
 
+  }
+
+  fetch_dth_order_plan(data)
+  {
+    this.todoservice.fetch_dth_order_plan({operator: data.provider})
+		.subscribe(
+			data => 
+			{
+        if(data.status == 0)
+        {
+          this.print_dth_plan(data);
+        }
+        
+			}
+		  );
   }
 
   check_operator(operator,s)
@@ -960,7 +997,7 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
         if(data.status == 'false')
         {
           this.toastr.errorToastr(data.msg);
-          return;
+          return;0
         }
         if(data.status == 'Invalid Token')
 			  {
@@ -1196,7 +1233,11 @@ check_amount(s)
               if(data.amount > 0)
               {
                 this.bill_amt = data.amount;
-                if(s == 'landline')
+                if(s == 'postpaidmobile')
+                {
+                  this.postpaidmobilegroup.controls['amount'].setValue(Math.round(this.bill_amt));
+                }
+                else if(s == 'landline')
                 {
                   this.landlinegroup.controls['amount'].setValue(Math.round(this.bill_amt));
                 }
@@ -1315,7 +1356,7 @@ check_amount(s)
  }
  selected_recharge(recharge_data)
  {
-   //console.log(recharge_data)
+  console.log(recharge_data)
   this.region  = recharge_data.address_id;
   var decode_data = JSON.parse(recharge_data.order_data);
   this.mobilegroup.controls['recharge_id'].setValue(recharge_data.subcriber_id);
@@ -1326,7 +1367,7 @@ check_amount(s)
   this.selectedOperator = Number(recharge_data.operator_id);
   this.filter_operator_name(recharge_data.operator_id);
   this.filter_circle_name(Number(recharge_data.circle_id));
-  if(this.region > 0 && recharge_data.operator_id > 0)
+  if(this.region > 0 && decode_data.operator_id > 0)
   {
   if(this.activity != recharge_data.activity_id)
     this.get_plans(this.region,decode_data.api_id);
@@ -1339,7 +1380,7 @@ check_amount(s)
 
  get_plans(circle,operator)
  {
-   //console.log(operator);
+   console.log(operator);
   if(this.url_name != 'mobile')
     return; 
   if(operator == 'get')
@@ -1367,6 +1408,17 @@ check_amount(s)
       }    
 		  );
  } 
+
+ print_dth_plan(data)
+ {
+    this.plans = data.data.Plan;
+  var plan_list = '';
+    for(var i=0;i<this.plans.length;i++)
+    {
+      plan_list += '<tr><td>'+this.plans[i].desc+'</td><td>'+this.plans[i].plan_name+'</td><td><a class="pack-price" href="javascript:">'+this.plans[i].rs['1 MONTHS']+'</a></td></tr>';
+    }
+    $('#print-data').html(plan_list);
+ }
 
  print_plan(data,id)
   {
