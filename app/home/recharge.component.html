@@ -277,11 +277,11 @@ left:5%;
 					<div class="card-content" id="recharge-container">
 					<div class="col s12">
 						<img src="{{this.todoservice.base_url}}accounts/assets/img/operators/{{rechargeData.api_img}}" class="responsive-img margin-right icon-images" alt="airtel" width="50px" style="margin-bottom: -10px;">
-						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{this.rechargeData.recharge_amount * 1}}<span class="grey-text font-size-change" content="any text here" *ngIf="rechargeData.commission > 0" href="javascript:" title="Inclusive of Tax Rs.{{rechargeData.commission}}">({{this.rechargeData.commission*1}} Processing fees)</span></span></h4>
+						<h4 class="inline-block">Recharge of {{rechargeData.recharge_id}} <br/> <span class="font600 cst-flb">Rs. {{this.rechargeData.recharge_amount * 1}}</span></h4>
 						<!-- <a href="#promocode-modal" class="modal-trigger font-size-change" style="margin-left: 3rem;">Have a Promocode?</a> -->
-						<div class="recharge-content-box ml-5" *ngIf="this.url_name == 'mobile' && this.options.apply_minimum_recharge <= this.rechargeData.recharge_amount * 1 && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
+						<!-- <div class="recharge-content-box ml-5" *ngIf="this.url_name == 'mobile' && this.options.apply_minimum_recharge <= this.rechargeData.recharge_amount * 1 && this.todoservice.get_user_recharge_amount() >= this.options.how_much_apply_to_recharge">
 							<label for="credit-card" class="black-text"> <span class="fa fa-gift cst-gift"></span> <span class="txt-bonus"> Bonus  Rs. </span> <span class="orange-text">{{this.options.how_much_apply_to_recharge}}</span> is Applied.</label>
-						</div> 
+						</div>  -->
 					</div>					
 					<div class="col s12 margin-top">
 						<div class="">							
@@ -308,12 +308,13 @@ left:5%;
 								<!-- <input type="radio" class="with-gap" id="credit-card"   /> 
 								<label for="credit-card" class="black-text"></label> -->
 							</div> 
-							<div class="col s12 recharge-content-box my-3">
+							<!-- <div class="col s12 recharge-content-box my-3">
 								<mat-radio-button id="paytm" name="payment_type" value="paytm" (change)="check_to_proceed()"><img src="{{this.todoservice.base_url}}web-app/assets/images/paytm-logo.png" alt="paytm-wallet"></mat-radio-button>
-								<!-- <input type="radio" class="with-gap" id="paytm" name="payment_type" value="paytm" />
-								<label for="paytm" class="black-text"></label> -->
+								
+							</div> -->
+							<div class="info-message green-text">
+								<span class="grey-text font-size-change" content="any text here" *ngIf="rechargeData.commission > 0" href="javascript:" title="Inclusive of Tax Rs.{{rechargeData.commission}}">({{this.rechargeData.commission*1}} Processing fees)</span>
 							</div>
-							
 							<div class="col s12 m12 no-proceed red-text center" *ngIf="rechargeData.record_exist && rechargeData.record_exist.length > 0">
 								You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 							</div>
@@ -329,7 +330,7 @@ left:5%;
 										<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
 									</p>	
 								</span> -->
-								<span class="green-text h5 font600">* Congratulations! You will get 1% cashback.</span>
+								<span class="green-text h5 font600" *ngIf="this.todoservice.get_user_type() == 1 ">* Congratulations! You will get 1% cashback.</span>
 								<button type="submit" class="btn new-btn-theme p-0 w-100 mt-3" (click)="recharge_handle()" id="recharge-proceed" [disabled]="this.proceed_disable">Proceed to pay {{pay_amount()}}</button>
 							</div>
 							
@@ -1063,17 +1064,20 @@ left:5%;
 							<div class="clearfix"></div>
 						
 						</div>
-						<div id="circles-content" *ngIf="plans.length > 0 && this.url_name == 'dth-recharge'">
+						<div id="circles-content" *ngIf="plans.Plan && this.url_name == 'dth-recharge'">
 							<!-- <div class="col m4">
 								<ul class="tabs">
 								  <li [className]="(i == 0)?'tab active':'tab'" *ngFor="let item of plans;let i = index" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>
 								</ul>
 							</div> -->
+							<ul class="tabs">
+								<li class="tab active" id="list-1"><a href="javascript:" (click)="print_dth_plan(this.plans.Plan,1);">Plans</a></li>
+								<li class="tab" id="list-2"><a href="javascript:" (click)="print_dth_plan(this.plans['Add-On Pack'],2);">Add On Pack</a></li>
+							  </ul>
 							<div class="col m12">
 								<div class="responsive-table">
 
 								<table class="bordered responsive-table">
-									
 									<tbody id="print-data">
 									</tbody>
 								</table>
@@ -1087,7 +1091,15 @@ left:5%;
 						
 						</div>
 						<div class="offer-banner" *ngIf="this.plans.length == 0">
-							<img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/Business-india.jpg">
+							<div class="b2b-recharge-banner" *ngIf="this.todoservice.get_user_type() == 2 && (this.url_name == 'mobile' || this.url_name == 'dth-recharge')">
+								<img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/b2b-banner.jpeg">
+							</div>
+							<div class="b2c-recharge-banner" *ngIf="(this.todoservice.get_user_type() == '' || this.todoservice.get_user_type() == 1) && (this.url_name == 'mobile' || this.url_name == 'dth-recharge')">
+								<img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/b2c-banner.jpeg">
+							</div>
+							<div class="bill-pay-banner" *ngIf="this.url_name != 'mobile' && this.url_name != 'dth-recharge'">
+								<img class="responsive-img full-width" src="{{this.todoservice.base_url}}accounts/assets/img/billpay-banner.jpeg">
+							</div>
 						</div>
 						
 					</div>

@@ -922,7 +922,7 @@ export class TodoService {
   }
   get_plans(data : any)
   {
-    let url = this.server_url+'accounts/apis/plan_api/plans';
+    let url = this.server_url+'accounts/apis/plan_api/mobile_plans';
     return this.send_post_request(data,url) ;
   }
 

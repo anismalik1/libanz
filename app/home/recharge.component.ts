@@ -683,7 +683,9 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
 			{
         if(data.status == 0)
         {
-          this.print_dth_plan(data);
+          this.spinner.show();
+          this.plans = data.data;
+          this.print_dth_plan(this.plans.Plan,1);
         }
         
 			}
@@ -874,7 +876,6 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
   }
   recharge_init(s,formdata)
   {
-    // console.log(formdata)
     if(s == 'mobile' && !this.mobilegroup.valid)
     {
       Object.keys(this.mobilegroup.controls).forEach(field => { // {1}
@@ -987,6 +988,7 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
 			{
         this.spinner.hide();
         window.scroll(0,0);
+        console.log(data);
         if(data.comm_p)
           this.rechargeData.commission = data.comm_p;
         else
@@ -1356,7 +1358,6 @@ check_amount(s)
  }
  selected_recharge(recharge_data)
  {
-  console.log(recharge_data)
   this.region  = recharge_data.address_id;
   var decode_data = JSON.parse(recharge_data.order_data);
   this.mobilegroup.controls['recharge_id'].setValue(recharge_data.subcriber_id);
@@ -1380,7 +1381,6 @@ check_amount(s)
 
  get_plans(circle,operator)
  {
-   console.log(operator);
   if(this.url_name != 'mobile')
     return; 
   if(operator == 'get')
@@ -1388,7 +1388,7 @@ check_amount(s)
     // console.log(this.operator_id)
     operator = this.operator_id;
    }
-    
+   this.spinner.show();
     this.todoservice.get_plans({circle:circle,operator:operator})
 		.subscribe(
 			data => 
@@ -1398,41 +1398,44 @@ check_amount(s)
         {
           this.show_tab(2);
           this.print_plan(this.plans[0].records,0);
-          
           setTimeout(()=>{    //<<<---    using ()=> syntax
             if($('#list-0 a'))
               $('#list-0 a')[0].click();
-       }, 600);
+       }, 200);
         }
           
       }    
 		  );
  } 
 
- print_dth_plan(data)
+ print_dth_plan(data,id)
  {
-    this.plans = data.data.Plan;
-  var plan_list = '';
-    for(var i=0;i<this.plans.length;i++)
+    var plandata = data;
+    var plan_list = '';
+    $("#circles-content li").removeClass('active');
+    $("#list-"+id).addClass('active');
+    for(var i=0;i<plandata.length;i++)
     {
-      plan_list += '<tr><td>'+this.plans[i].desc+'</td><td>'+this.plans[i].plan_name+'</td><td><a class="pack-price" href="javascript:">'+this.plans[i].rs['1 MONTHS']+'</a></td></tr>';
+      plan_list += '<tr><td>'+plandata[i].desc+'</td><td>'+plandata[i].plan_name+'</td><td><a class="pack-price" href="javascript:">'+plandata[i].rs['1 MONTHS']+'</a></td></tr>';
     }
-    $('#print-data').html(plan_list);
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      $('#print-data').html(plan_list);
+ }, 100);
+ this.spinner.hide();  
  }
 
  print_plan(data,id)
   {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
+    var datalist : any = data;
     $("#circles-content li").removeClass('active');
     $("#list-"+id).addClass('active');
     var plan_list = '';
-    for(var i=0;i<data.length;i++)
+    for(var i=0;i < datalist.length;i++)
     {
-      plan_list += '<tr><td>'+data[i].desc+'</td><td>'+data[i].validity+'</td><td><a class="pack-price" href="javascript:" onclick="pack_price('+data[i].rs+')">'+data[i].rs+'</a></td></tr>';
+      plan_list += '<tr><td>'+datalist[i].desc+'</td><td>'+datalist[i].validity+'</td><td><a class="pack-price" href="javascript:" onclick="pack_price('+datalist[i].rs+')">'+datalist[i].rs+'</a></td></tr>';
     }
     $('#print-data').html(plan_list);
+    this.spinner.hide();
   }
 
  filter_circle_name(id)
