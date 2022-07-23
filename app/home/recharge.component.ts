@@ -228,6 +228,14 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
   
   pay_amount()
   {
+    if($('[name="payment_type"]:checked').val() == 'card')
+    {
+      $('.cashback-section').hide();
+    }
+    else
+    {
+      $('.cashback-section').show();
+    }
     var wallet_used = '';
     if($('[name="include_wallet"]:checked').length > 0)
       wallet_used = 'wallet';
@@ -988,11 +996,11 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
 			{
         this.spinner.hide();
         window.scroll(0,0);
-        console.log(data);
         if(data.comm_p)
           this.rechargeData.commission = data.comm_p;
-        else
-          this.rechargeData.commission = 0;  
+        else if(data.comm_c)
+          this.rechargeData.commission_c = data.comm_c;
+        this.rechargeData.commission = 0;  
         this.rechargeData.operator_api_id = data.recharge_id;
         this.rechargeData.recharge_type = s;
        

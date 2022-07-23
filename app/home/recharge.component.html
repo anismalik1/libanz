@@ -300,7 +300,6 @@ left:5%;
 									</span>
 									
 									<!-- <input [type]="this.checkbox_text.type" class="with-gap" id="instant-recharge"  [name]="this.checkbox_text.name" value="wallet" (change)="pay_amount()" [checked]="this.checkbox_text.checked"/></div> -->
-
 							</div>
 							</div> 
 							<div class="col s12 recharge-content-box my-3">
@@ -319,7 +318,7 @@ left:5%;
 								You Have Recharged this ID Just Few Minutes Ago. Please Try Later. 
 							</div>
 							
-							<div class="col s12 m12 center mt-3" *ngIf="!rechargeData.record_exist">
+							<div class="col s12 m12 center mt-3" *ngIf="!rechargeData.record_exist" >
 								<!-- <span *ngIf="this.todoservice.get_user_recharge_amount() == 0">
 									<p class="recharge-content-box" *ngIf="promo_selected == 0 && this.url_name == 'mobile'">
 										<a href="#promo-code-apply" class="modal-trigger">Have A Promocode</a>
@@ -330,7 +329,9 @@ left:5%;
 										<span class="green-text" *ngIf="this.selected_promo"><i class="material-icons orange-text">local_offer</i> Promo {{this.selected_promo.unique_code}} <a href="#promo-code-apply" class="modal-trigger">change</a></span> 
 									</p>	
 								</span> -->
-								<span class="green-text h5 font600" *ngIf="this.todoservice.get_user_type() == 1 ">* Congratulations! You will get 1% cashback.</span>
+								<span class="green-text h5 font600 cashback-section" *ngIf="this.todoservice.get_user_type() == 2 && this.rechargeData.commission_c*1">* Congratulations! You will get {{this.rechargeData.commission_c*1}} cashback.</span>
+								<span class="green-text cashback-section" *ngIf="this.todoservice.get_user_type() == 1 && (this.url_name == 'mobile' || this.url_name == 'dth' || this.url_name == 'datacard' || this.url_name == 'broadband' || this.url_name == 'landline')">* Congratulations! You will get 1% cashback.</span>
+								<span class="green-text cashback-section" *ngIf="(this.url_name == 'electricity' || this.url_name == 'gas' || this.url_name == 'water')"><i class="material-icons orange-text">info</i> No Processing fees with wallet Transactions.</span>
 								<button type="submit" class="btn new-btn-theme p-0 w-100 mt-3" (click)="recharge_handle()" id="recharge-proceed" [disabled]="this.proceed_disable">Proceed to pay {{pay_amount()}}</button>
 							</div>
 							
@@ -338,8 +339,7 @@ left:5%;
 						<div class="clearfix"></div>	
 					</div>
 					<div class="clearfix"></div>
-					<span class="green-text" *ngIf="this.todoservice.get_user_type() == 1 && (this.url_name == 'mobile' || this.url_name == 'dth' || this.url_name == 'datacard' || this.url_name == 'broadband' || this.url_name == 'landline')">* Congratulations! You will get 1% cashback.</span>
-					<span class="green-text" *ngIf="(this.url_name == 'electricity' || this.url_name == 'gas' || this.url_name == 'water')"><i class="material-icons orange-text">info</i> No Processing fees with wallet Transactions.</span>
+					
 				</div>	
 			</div>
 			</div>
