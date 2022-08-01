@@ -268,6 +268,7 @@ left:5%;
 <!-- Responsive icon -->
 
 <!-- End Here -->
+<!-- <button (click)="do_recharge()">check me</button> -->
 <div class="fix-mb-top"></div>
 <section *ngIf="recharge_ini == 2" class="relative">
 	<div class="container">
@@ -395,18 +396,7 @@ left:5%;
 									</mat-form-field>
 									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Opreater" id="opid-1" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span> 
 								</div>
-								<div class="input-field col s12 m12 select-new-designs pr-13px" *ngIf="url_name.includes('postpaid')" id="postpaid-list">
-									<mat-form-field >
-										<mat-select placeholder="Select Operator" (selectionChange)="changeOperator($event.value,'mobile')" formControlName="operator" #postoperator [(value)]="selected_operator">
-											<span *ngFor="let item of filter_operators(76);">
-												<mat-option [value]="item.id">
-													<span *ngIf="item.api_img != ''"><img class="operator-img" src="{{this.todoservice.base_url}}accounts/assets/img/operators/{{item.api_img}}"></span><span class="operator-name">{{ item.title }}</span>
-												</mat-option>
-											</span>
-										</mat-select>
-									</mat-form-field>
-									<span class="wrong-detail tooltipped" data-position="top" data-delay="50" data-tooltip="Please Select Circle" id="opid-2" *ngIf="!mobilegroup.controls['operator'].valid && mobilegroup.controls['operator'].touched"><i class="material-icons">close</i></span>
-								</div>
+								
 								<div class="input-field col s12 m12 select-new-designs pr-13px">
 									<mat-form-field>
 										<mat-select placeholder="Select Circle" #mcircle [(value)]="region" formControlName="circle_area" (selectionChange)="get_plans($event.value,'get')">

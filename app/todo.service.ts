@@ -512,6 +512,12 @@ export class TodoService {
     return Observable.throw(error.json()); 
  }
 
+ do_recharge(data : any)
+ {
+   
+   let url = this.server_url+'accounts/apis/response/do_recharge';
+   return this.send_post_request(data,url) ; 
+ }
  fetch_dth_order_plan(data : any)
  {
    

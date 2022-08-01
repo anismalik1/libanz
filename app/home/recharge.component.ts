@@ -683,19 +683,29 @@ export class RechargeComponent implements OnInit,AfterViewChecked {
 
   }
 
+  do_recharge()
+  {
+    this.todoservice.do_recharge({})
+		.subscribe(
+			data => 
+			{
+        console.log(data);
+			}
+		  );
+  }
   fetch_dth_order_plan(data)
   {
+    this.spinner.show();
     this.todoservice.fetch_dth_order_plan({operator: data.provider})
 		.subscribe(
 			data => 
 			{
-        if(data.status == 0)
+        if(data.data && data.data.Plan.length > 0 && data.status == 0)
         {
-          this.spinner.show();
           this.plans = data.data;
           this.print_dth_plan(this.plans.Plan,1);
         }
-        
+        this.spinner.hide();
 			}
 		  );
   }
@@ -1366,6 +1376,7 @@ check_amount(s)
  }
  selected_recharge(recharge_data)
  {
+   console
   this.region  = recharge_data.address_id;
   var decode_data = JSON.parse(recharge_data.order_data);
   this.mobilegroup.controls['recharge_id'].setValue(recharge_data.subcriber_id);
@@ -1379,7 +1390,10 @@ check_amount(s)
   if(this.region > 0 && decode_data.operator_id > 0)
   {
   if(this.activity != recharge_data.activity_id)
-    this.get_plans(this.region,decode_data.api_id);
+    if(decode_data.api_id)
+      this.get_plans(this.region,decode_data.api_id);
+    else
+      this.get_plans(this.region,recharge_data.operator_id); 
   } 
   this.operator_id = decode_data.api_id;
   this.activity = recharge_data.activity_id;
@@ -1390,10 +1404,11 @@ check_amount(s)
  get_plans(circle,operator)
  {
   if(this.url_name != 'mobile')
-    return; 
+    return;  
+  if(circle == null|| operator == null)
+    return;  
   if(operator == 'get')
    {
-    // console.log(this.operator_id)
     operator = this.operator_id;
    }
    this.spinner.show();
@@ -1411,7 +1426,7 @@ check_amount(s)
               $('#list-0 a')[0].click();
        }, 200);
         }
-          
+        this.spinner.hide();  
       }    
 		  );
  } 
@@ -1443,7 +1458,7 @@ check_amount(s)
       plan_list += '<tr><td>'+datalist[i].desc+'</td><td>'+datalist[i].validity+'</td><td><a class="pack-price" href="javascript:" onclick="pack_price('+datalist[i].rs+')">'+datalist[i].rs+'</a></td></tr>';
     }
     $('#print-data').html(plan_list);
-    this.spinner.hide();
+    
   }
 
  filter_circle_name(id)
