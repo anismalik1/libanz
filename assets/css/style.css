@@ -7733,4 +7733,8 @@ ul.mad-list .mad-list-text{
 .h-auto{
 	height:auto;
 }
+.plans-for-design{
+	height: 275px;
+	overflow: auto;
+}
 /* End Here */

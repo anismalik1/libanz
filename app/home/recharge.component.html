@@ -978,10 +978,17 @@ left:5%;
 					<!-- <div class="card-content p-0" *ngIf="page_data">
 						<div id="short-content"  [innerHTML] = "page_data.short_description | sanitizeHtml"></div>
 					</div>	 -->
-					<div class="card-content p-0">
+					<div class="card-header" style="
+					padding: 10px;
+					text-transform: uppercase;
+					background: #f3f7f8;
+					border-bottom: 1px solid #babbbc;
+					">
 						<div id="tab-2" [className]="(tab_2 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="plans && plans.length > 0">
 							<span class="h3 font600 black-text" ><a href="javascript:" class="black-text" (click)="show_tab(2)">Plans</a></span>
 						</div>
+					</div>
+					<div class="card-content p-0">
 						<!--<div id="tab-1" [className]="(tab_1 == true)?'inline-block promo-chng active':'inline-block promo-chng'" *ngIf="promo_codes && promo_codes.length > 0">
 							<span class="h3 font600 mb-3 d-block"><a href="javascript:" class="h3 black-text" (click)="show_tab(1)">Promo Code</a></span>
 						</div> -->
@@ -1026,12 +1033,12 @@ left:5%;
 						
 						</div> -->
 						<div id="circles-content" *ngIf="plans.length > 0 && this.url_name == 'mobile'">
-							<div class="col m4">
+							<div class="col m4 p-0">
 								<ul class="tabs">
 								  <li [className]="(i == 0)?'tab active':'tab'" *ngFor="let item of plans;let i = index" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>
 								</ul>
 							</div>
-							<div class="col m8">
+							<div class="col m8 p-0">
 								<div class="responsive-table">
 
 								<table class="bordered responsive-table">
@@ -1048,11 +1055,11 @@ left:5%;
 
 								</div>
 
-								<p class="cst-desc"><strong>Disclaimer : </strong> While we support most recharges, we request you to verify with your operator once before proceeding. ' Best Offers For You ' are offers available for a class of Mobile Operators .</p>
 								
 							</div>
 							<div class="clearfix"></div>
-						
+							
+							<p class="cst-desc"><strong>Disclaimer : </strong> While we support most recharges, we request you to verify with your operator once before proceeding. ' Best Offers For You ' are offers available for a class of Mobile Operators .</p>
 						</div>
 						<div id="circles-content" *ngIf="plans.Plan && this.url_name == 'dth-recharge'">
 							<!-- <div class="col m4">
@@ -1060,23 +1067,20 @@ left:5%;
 								  <li [className]="(i == 0)?'tab active':'tab'" *ngFor="let item of plans;let i = index" id="list-{{item.id}}"><a href="javascript:" (click)="print_plan(item.records,item.id);">{{item.plan}}</a></li>
 								</ul>
 							</div> -->
-							<ul class="tabs">
+							<ul class="tabs d-flex align-items-center">
 								<li class="tab active" id="list-1"><a href="javascript:" (click)="print_dth_plan(this.plans.Plan,1);">Plans</a></li>
 								<li class="tab" id="list-2"><a href="javascript:" (click)="print_dth_plan(this.plans['Add-On Pack'],2);">Add On Pack</a></li>
 							  </ul>
 							<div class="col m12">
-								<div class="responsive-table">
+								<div class="responsive-table plans-for-design">
 
 								<table class="bordered responsive-table">
 									<tbody id="print-data">
 									</tbody>
 								</table>
-
-								</div>
-
-								<p class="cst-desc"><strong>Disclaimer : </strong> While we support most recharges, we request you to verify with your operator once before proceeding. ' Best Offers For You ' are offers available for a class of Mobile Operators .</p>
-								
+								</div>								
 							</div>
+							<p class="cst-desc"><strong>Disclaimer : </strong> While we support most recharges, we request you to verify with your operator once before proceeding. ' Best Offers For You ' are offers available for a class of Mobile Operators .</p>
 							<div class="clearfix"></div>
 						
 						</div>
